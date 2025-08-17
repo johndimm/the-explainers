@@ -10,6 +10,10 @@ export interface ProfileData {
   age: number | null
   language: Language
   educationLevel: EducationLevel
+  firstLogin?: Date
+  totalExplanations?: number
+  todayExplanations?: number
+  availableCredits?: number
 }
 
 interface ProfileProps {

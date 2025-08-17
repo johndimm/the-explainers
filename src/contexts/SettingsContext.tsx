@@ -1,7 +1,7 @@
 'use client'
 
 import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react'
-import { SettingsData, LLMProvider, ResponseLength, FontFamily } from '../components/Settings'
+import { SettingsData, LLMProvider, ResponseLength, FontFamily, ExplanationStyle } from '../components/Settings'
 
 interface SettingsContextType {
   settings: SettingsData
@@ -15,7 +15,8 @@ const DEFAULT_SETTINGS: SettingsData = {
   llmProvider: 'openai',
   responseLength: 'medium',
   textFont: 'serif',
-  chatFont: 'sans-serif'
+  chatFont: 'sans-serif',
+  explanationStyle: 'neutral'
 }
 
 const SettingsContext = createContext<SettingsContextType | undefined>(undefined)
