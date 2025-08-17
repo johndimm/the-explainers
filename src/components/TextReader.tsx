@@ -28,6 +28,62 @@ const TextReader: React.FC<TextReaderProps> = ({ text, bookTitle = 'Romeo and Ju
   const [showChatInterface, setShowChatInterface] = useState(false)
   const [textToExplain, setTextToExplain] = useState('')
   const [contextInfo, setContextInfo] = useState<any>(null)
+  const [showFirstTimeInstructions, setShowFirstTimeInstructions] = useState(false)
+  const [hasUserScrolled, setHasUserScrolled] = useState(false)
+
+  // Check for first-time user and restore bookmark
+  useEffect(() => {
+    const bookmarkKey = `bookmark-${bookTitle}-${author}`
+    const firstTimeKey = 'explainer-first-time'
+    
+    // Check if this is a first-time user
+    const hasUsedBefore = localStorage.getItem(firstTimeKey)
+    if (!hasUsedBefore) {
+      setShowFirstTimeInstructions(true)
+      localStorage.setItem(firstTimeKey, 'true')
+    }
+    
+    // Restore bookmark position
+    const savedPosition = localStorage.getItem(bookmarkKey)
+    if (savedPosition && textContentRef.current) {
+      const position = parseInt(savedPosition)
+      setTimeout(() => {
+        if (textContentRef.current) {
+          textContentRef.current.scrollTop = position
+        }
+      }, 100)
+    }
+  }, [text, bookTitle, author])
+
+  // Save bookmark when user scrolls
+  useEffect(() => {
+    const handleScroll = () => {
+      if (textContentRef.current && hasUserScrolled) {
+        const bookmarkKey = `bookmark-${bookTitle}-${author}`
+        const scrollPosition = textContentRef.current.scrollTop
+        localStorage.setItem(bookmarkKey, scrollPosition.toString())
+      }
+    }
+
+    const textElement = textContentRef.current
+    if (textElement) {
+      textElement.addEventListener('scroll', handleScroll)
+      return () => textElement.removeEventListener('scroll', handleScroll)
+    }
+  }, [bookTitle, author, hasUserScrolled])
+
+  // Track when user starts scrolling
+  useEffect(() => {
+    const handleUserScroll = () => {
+      setHasUserScrolled(true)
+    }
+
+    const textElement = textContentRef.current
+    if (textElement) {
+      textElement.addEventListener('scroll', handleUserScroll, { once: true })
+      return () => textElement.removeEventListener('scroll', handleUserScroll)
+    }
+  }, [])
 
   const extractContextInfo = (selectedText: string, fullText: string) => {
     const selectedIndex = fullText.indexOf(selectedText)
@@ -282,6 +338,48 @@ const TextReader: React.FC<TextReaderProps> = ({ text, bookTitle = 'Romeo and Ju
 
   return (
     <div className={styles.textReader}>
+      {showFirstTimeInstructions && (
+        <div style={{
+          position: 'fixed',
+          top: '50%',
+          left: '50%',
+          transform: 'translate(-50%, -50%)',
+          background: '#8b5cf6',
+          color: 'white',
+          border: 'none',
+          borderRadius: '12px',
+          padding: '24px',
+          boxShadow: '0 8px 20px rgba(139, 92, 246, 0.3)',
+          zIndex: 2000,
+          maxWidth: '400px',
+          textAlign: 'center'
+        }}>
+          <h3 style={{ margin: '0 0 16px 0', fontSize: '18px' }}>Welcome to The Explainers!</h3>
+          <p style={{ margin: '0 0 20px 0', lineHeight: '1.5' }}>
+            To get started, simply <strong>highlight any confusing passage</strong> in the text below. 
+            We'll provide an AI explanation to help you understand it better.
+          </p>
+          <p style={{ margin: '0 0 20px 0', fontSize: '14px', opacity: '0.9' }}>
+            Try selecting a line from Romeo and Juliet that seems difficult to understand.
+          </p>
+          <button 
+            onClick={() => setShowFirstTimeInstructions(false)}
+            style={{
+              padding: '10px 20px',
+              border: '2px solid white',
+              borderRadius: '6px',
+              background: 'transparent',
+              color: 'white',
+              cursor: 'pointer',
+              fontSize: '14px',
+              fontWeight: 'bold'
+            }}
+          >
+            Got it!
+          </button>
+        </div>
+      )}
+      
       <div 
         ref={textContentRef}
         className={styles.textContent}
