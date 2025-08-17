@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Explainers - User Guide</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f9f9f9;
+        }
+        .container {
+            background: white;
+            border-radius: 8px;
+            padding: 40px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #8b5cf6;
+            border-bottom: 3px solid #8b5cf6;
+            padding-bottom: 10px;
+            margin-bottom: 30px;
+        }
+        h2 {
+            color: #10b981;
+            margin-top: 30px;
+            margin-bottom: 15px;
+        }
+        h3 {
+            color: #007bff;
+            margin-top: 25px;
+            margin-bottom: 10px;
+        }
+        h4 {
+            color: #666;
+            margin-top: 20px;
+            margin-bottom: 8px;
+        }
+        .highlight {
+            background-color: #fff3cd;
+            border: 1px solid #ffeaa7;
+            border-radius: 4px;
+            padding: 15px;
+            margin: 15px 0;
+        }
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin: 20px 0;
+        }
+        .feature-box {
+            background: #f8f9fa;
+            border-radius: 6px;
+            padding: 20px;
+            border-left: 4px solid #8b5cf6;
+        }
+        .feature-box h4 {
+            margin-top: 0;
+            color: #8b5cf6;
+        }
+        .step-list {
+            background: #e8f5e8;
+            border-radius: 6px;
+            padding: 20px;
+            margin: 15px 0;
+        }
+        .step-list ol {
+            margin: 0;
+            padding-left: 20px;
+        }
+        .personality-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 10px;
+            margin: 15px 0;
+        }
+        .personality {
+            background: #f1f3f4;
+            padding: 8px 12px;
+            border-radius: 4px;
+            font-size: 14px;
+        }
+        .back-button {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: #8b5cf6;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 6px;
+            cursor: pointer;
+            text-decoration: none;
+            font-size: 14px;
+        }
+        .back-button:hover {
+            background: #7c3aed;
+        }
+        ul, ol {
+            margin-bottom: 15px;
+        }
+        li {
+            margin-bottom: 5px;
+        }
+        code {
+            background: #f4f4f4;
+            padding: 2px 4px;
+            border-radius: 3px;
+            font-family: monospace;
+        }
+        .warning {
+            background: #fff3cd;
+            border: 1px solid #ffeaa7;
+            border-radius: 4px;
+            padding: 10px;
+            margin: 10px 0;
+        }
+    </style>
+</head>
+<body>
+    <a href="/" class="back-button">← Back to App</a>
+    
+    <div class="container">
+        <h1>The Explainers - User Guide</h1>
+
+        <div class="highlight">
+            <strong>Welcome to The Explainers!</strong> This app helps you understand difficult texts by providing AI-powered explanations of selected passages. Whether you're tackling Shakespeare, philosophy, or classic literature, we make challenging texts accessible.
+        </div>
+
+        <h2>Getting Started</h2>
+
+        <div class="step-list">
+            <h3>Quick Start</h3>
+            <ol>
+                <li>Open the application (it loads with "Romeo and Juliet" by default)</li>
+                <li>Simply select any text passage you find confusing</li>
+                <li>Get an instant AI explanation tailored to your needs</li>
+                <li>Ask follow-up questions in the chat interface</li>
+            </ol>
+        </div>
+
+        <h3>First-Time Setup</h3>
+        <p>For the best experience, configure your profile and preferences:</p>
+
+        <div class="feature-grid">
+            <div class="feature-box">
+                <h4>Profile Setup</h4>
+                <p>Click the <strong>green "Profile"</strong> button to set:</p>
+                <ul>
+                    <li>Your age (for age-appropriate vocabulary)</li>
+                    <li>Preferred language (12 languages supported)</li>
+                    <li>Education level (elementary to graduate school)</li>
+                </ul>
+            </div>
+            <div class="feature-box">
+                <h4>Settings Configuration</h4>
+                <p>Click the <strong>blue "Settings"</strong> button to customize:</p>
+                <ul>
+                    <li>AI model provider (GPT-4, Claude, DeepSeek, Gemini)</li>
+                    <li>Response length (brief, medium, long)</li>
+                    <li>Text and chat fonts</li>
+                    <li>Explanation style (50+ personalities!)</li>
+                </ul>
+            </div>
+        </div>
+
+        <h2>Core Features</h2>
+
+        <h3>Text Reader</h3>
+        <ul>
+            <li><strong>Clean Interface</strong>: Distraction-free reading environment</li>
+            <li><strong>Text Selection</strong>: Highlight passages with mouse or touch</li>
+            <li><strong>Auto-Bookmarks</strong>: Your reading position is automatically saved</li>
+            <li><strong>Search Function</strong>: Find specific words or phrases</li>
+        </ul>
+
+        <h3>AI Explanations</h3>
+        <p>When you select text, get comprehensive explanations including:</p>
+        <ul>
+            <li><strong>Vocabulary Help</strong>: Definitions and contextual meanings</li>
+            <li><strong>Structure Analysis</strong>: Breaking down complex sentences</li>
+            <li><strong>Plot Context</strong>: What's happening in the story</li>
+            <li><strong>Character Insights</strong>: Who's speaking and their motivations</li>
+            <li><strong>Historical Background</strong>: Relevant historical context</li>
+        </ul>
+
+        <h3>Library</h3>
+        <p>Access hundreds of classic texts organized by category:</p>
+
+        <div class="feature-grid">
+            <div class="feature-box">
+                <h4>Built-in Collections</h4>
+                <ul>
+                    <li>Shakespeare (complete works)</li>
+                    <li>English Literature</li>
+                    <li>Philosophy</li>
+                    <li>Poetry</li>
+                    <li>International Literature</li>
+                    <li>Historical Documents</li>
+                    <li>Project Gutenberg Classics</li>
+                </ul>
+            </div>
+            <div class="feature-box">
+                <h4>Custom Content</h4>
+                <ul>
+                    <li>Import from any web URL</li>
+                    <li>Upload your own .txt files</li>
+                    <li>Support for plain text and HTML</li>
+                    <li>Automatic format detection</li>
+                </ul>
+            </div>
+        </div>
+
+        <h2>Explanation Styles</h2>
+        <p>Choose from 50+ unique personalities, each bringing their own voice and perspective:</p>
+
+        <h4>Literary & Intellectual</h4>
+        <div class="personality-grid">
+            <div class="personality"><strong>Harold Bloom</strong> - Passionate literary criticism</div>
+            <div class="personality"><strong>David Foster Wallace</strong> - Hyper-detailed analysis</div>
+            <div class="personality"><strong>Joan Didion</strong> - Precise, evocative insight</div>
+            <div class="personality"><strong>T.S. Eliot</strong> - Modernist interpretation</div>
+            <div class="personality"><strong>Oscar Wilde</strong> - Witty, paradoxical</div>
+        </div>
+
+        <h4>Scientific & Educational</h4>
+        <div class="personality-grid">
+            <div class="personality"><strong>Carl Sagan</strong> - Cosmic wonder</div>
+            <div class="personality"><strong>Neil deGrasse Tyson</strong> - Scientific accessibility</div>
+            <div class="personality"><strong>Bill Bryson</strong> - Humorous information</div>
+        </div>
+
+        <h4>Comedic Perspectives</h4>
+        <div class="personality-grid">
+            <div class="personality"><strong>Jerry Seinfeld</strong> - "What's the deal with..."</div>
+            <div class="personality"><strong>John Mulaney</strong> - Precise storytelling</div>
+            <div class="personality"><strong>Dave Chappelle</strong> - Sharp social commentary</div>
+            <div class="personality"><strong>George Carlin</strong> - Philosophical subversion</div>
+            <div class="personality"><strong>Douglas Adams</strong> - Absurdist wit</div>
+        </div>
+
+        <h4>Media Personalities</h4>
+        <div class="personality-grid">
+            <div class="personality"><strong>Oprah Winfrey</strong> - Inspiring, empathetic</div>
+            <div class="personality"><strong>Anthony Bourdain</strong> - Worldly, irreverent</div>
+            <div class="personality"><strong>Stephen Fry</strong> - Erudite, charming</div>
+            <div class="personality"><strong>Conan O'Brien</strong> - Absurdist Harvard smart</div>
+        </div>
+
+        <h2>How to Use</h2>
+
+        <div class="step-list">
+            <h3>Reading a Text</h3>
+            <ol>
+                <li><strong>Select a Book</strong>: Click "Library" to browse available texts</li>
+                <li><strong>Navigate</strong>: Scroll through the text reader</li>
+                <li><strong>Select Passages</strong>: Highlight any confusing text</li>
+                <li><strong>Get Explanations</strong>: Chat interface appears automatically</li>
+                <li><strong>Ask Follow-ups</strong>: Continue the conversation</li>
+            </ol>
+        </div>
+
+        <div class="step-list">
+            <h3>Customizing Explanations</h3>
+            <ol>
+                <li><strong>Change AI Provider</strong>: Select GPT-4, Claude, DeepSeek, or Gemini</li>
+                <li><strong>Adjust Length</strong>: Brief (2-3 sentences), medium (1-2 paragraphs), or long (detailed)</li>
+                <li><strong>Pick a Style</strong>: Choose from dozens of explanation personalities</li>
+                <li><strong>Update Defaults</strong>: Save preferences for future sessions</li>
+            </ol>
+        </div>
+
+        <h2>Advanced Features</h2>
+
+        <h3>Context-Aware Analysis</h3>
+        <p>The app provides enhanced context for structured texts:</p>
+        <ul>
+            <li><strong>Plays</strong>: Auto-detects acts, scenes, speakers, and characters on stage</li>
+            <li><strong>Poetry</strong>: Recognizes verse structure and literary devices</li>
+            <li><strong>Novels</strong>: Identifies chapters and narrative structure</li>
+        </ul>
+
+        <h3>Multi-Language Support</h3>
+        <ul>
+            <li>Explanations available in 12 languages</li>
+            <li>Age-appropriate vocabulary based on your profile</li>
+            <li>Education-level appropriate explanations</li>
+        </ul>
+
+        <h3>Flexible Content Sources</h3>
+        <ul>
+            <li><strong>Built-in Library</strong>: Hundreds of classic texts</li>
+            <li><strong>Custom URLs</strong>: Import any publicly accessible text</li>
+            <li><strong>File Upload</strong>: Use your own documents</li>
+            <li><strong>Format Support</strong>: Plain text and HTML files</li>
+        </ul>
+
+        <h2>Tips for Best Results</h2>
+
+        <div class="feature-grid">
+            <div class="feature-box">
+                <h4>Profile Setup</h4>
+                <ul>
+                    <li>Provide accurate age and education level</li>
+                    <li>Set your native language</li>
+                    <li>Update preferences as needed</li>
+                </ul>
+            </div>
+            <div class="feature-box">
+                <h4>Text Selection</h4>
+                <ul>
+                    <li>Select complete phrases or sentences</li>
+                    <li>Include enough context</li>
+                    <li>Experiment with selection sizes</li>
+                </ul>
+            </div>
+            <div class="feature-box">
+                <h4>Explanation Styles</h4>
+                <ul>
+                    <li>Match style to content type</li>
+                    <li>Try different voices for varied perspectives</li>
+                    <li>Switch styles within the same text</li>
+                </ul>
+            </div>
+            <div class="feature-box">
+                <h4>Follow-up Questions</h4>
+                <ul>
+                    <li>Ask specific questions about unclear aspects</li>
+                    <li>Build on previous explanations</li>
+                    <li>Explore broader themes and connections</li>
+                </ul>
+            </div>
+        </div>
+
+        <h2>Available Content</h2>
+
+        <h3>Pre-loaded Collections</h3>
+        <div class="feature-grid">
+            <div class="feature-box">
+                <h4>Shakespeare</h4>
+                <p>Complete works including all plays and sonnets</p>
+            </div>
+            <div class="feature-box">
+                <h4>Classic Literature</h4>
+                <p>English, French, German, Italian, and Spanish classics</p>
+            </div>
+            <div class="feature-box">
+                <h4>Philosophy</h4>
+                <p>Major philosophical works and treatises</p>
+            </div>
+            <div class="feature-box">
+                <h4>Poetry</h4>
+                <p>Collections from various periods and styles</p>
+            </div>
+            <div class="feature-box">
+                <h4>Historical Documents</h4>
+                <p>Important historical texts and documents</p>
+            </div>
+            <div class="feature-box">
+                <h4>Project Gutenberg</h4>
+                <p>Most popular public domain books</p>
+            </div>
+        </div>
+
+        <h2>Technical Information</h2>
+
+        <h3>System Requirements</h3>
+        <ul>
+            <li>Modern web browser (Chrome, Firefox, Safari, Edge)</li>
+            <li>JavaScript enabled</li>
+            <li>Internet connection for AI explanations</li>
+        </ul>
+
+        <h3>Device Optimization</h3>
+        <ul>
+            <li><strong>Desktop</strong>: Full-screen with side-by-side text and chat</li>
+            <li><strong>Mobile</strong>: Touch-friendly with sliding chat overlay</li>
+            <li><strong>Tablet</strong>: Responsive design adapts to screen size</li>
+        </ul>
+
+        <h2>Troubleshooting</h2>
+
+        <h3>Common Issues</h3>
+        <div class="warning">
+            <p><strong>Text Won't Load</strong>: Check internet connection or try a different text</p>
+        </div>
+        <div class="warning">
+            <p><strong>Selection Not Working</strong>: Ensure you're selecting complete words or phrases</p>
+        </div>
+        <div class="warning">
+            <p><strong>AI Not Responding</strong>: Verify internet connection and try again</p>
+        </div>
+        <div class="warning">
+            <p><strong>Wrong Language</strong>: Check Profile settings for language preferences</p>
+        </div>
+
+        <h3>Getting Help</h3>
+        <ul>
+            <li>Use the chat interface to ask questions about the app</li>
+            <li>Try different AI providers if one isn't working</li>
+            <li>Adjust response length if explanations are too long or short</li>
+        </ul>
+
+        <h2>AI Models Available</h2>
+        <div class="feature-grid">
+            <div class="feature-box">
+                <h4>GPT-4 (OpenAI)</h4>
+                <p>Comprehensive and well-rounded explanations</p>
+            </div>
+            <div class="feature-box">
+                <h4>Claude (Anthropic)</h4>
+                <p>Thoughtful, nuanced literary analysis</p>
+            </div>
+            <div class="feature-box">
+                <h4>DeepSeek</h4>
+                <p>Efficient and accurate explanations</p>
+            </div>
+            <div class="feature-box">
+                <h4>Gemini (Google)</h4>
+                <p>Creative and contextual interpretations</p>
+            </div>
+        </div>
+
+        <div class="highlight">
+            <h3>Pro Tip</h3>
+            <p>Try different explanation styles for the same passage to get multiple perspectives! Harold Bloom might focus on literary significance while Jerry Seinfeld will find the humor in any situation.</p>
+        </div>
+
+        <hr style="margin: 40px 0; border: none; border-top: 1px solid #e0e0e0;">
+        
+        <p style="text-align: center; color: #666; font-size: 14px;">
+            The Explainers - Making difficult texts accessible through AI-powered explanations
+        </p>
+    </div>
+</body>
+</html>

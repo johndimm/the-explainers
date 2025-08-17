@@ -133,6 +133,24 @@ function HomeContent() {
           gap: '6px',
           flexShrink: 0
         }}>
+        <a 
+          href="/user-guide.html"
+          target="_blank"
+          rel="noopener noreferrer"
+          style={{
+            padding: '6px 10px',
+            background: '#6b7280',
+            color: 'white',
+            border: 'none',
+            borderRadius: '4px',
+            cursor: 'pointer',
+            fontSize: '12px',
+            textDecoration: 'none',
+            display: 'inline-block'
+          }}
+        >
+          Guide
+        </a>
         <button 
           onClick={() => setShowLibrary(true)}
           style={{
