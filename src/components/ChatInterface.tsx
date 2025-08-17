@@ -4,6 +4,7 @@ import React, { useState, useRef, useEffect } from 'react'
 import styles from './ChatInterface.module.css'
 import { SettingsData, LLMProvider, ResponseLength, ExplanationStyle } from './Settings'
 import { ProfileData } from './Profile'
+import { useProfile } from '../contexts/ProfileContext'
 
 interface Message {
   id: string
@@ -31,9 +32,11 @@ interface ChatInterfaceProps {
   profile: ProfileData
   onClose: () => void
   onSettingsChange: (settings: SettingsData) => void
+  bookTitle: string
+  author: string
 }
 
-const ChatInterface: React.FC<ChatInterfaceProps> = ({ selectedText, contextInfo, settings, profile, onClose, onSettingsChange }) => {
+const ChatInterface: React.FC<ChatInterfaceProps> = ({ selectedText, contextInfo, settings, profile, onClose, onSettingsChange, bookTitle, author }) => {
   const [messages, setMessages] = useState<Message[]>([])
   const [inputValue, setInputValue] = useState('')
   const [isLoading, setIsLoading] = useState(false)
@@ -41,9 +44,11 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ selectedText, contextInfo
   const [currentStyle, setCurrentStyle] = useState<ExplanationStyle>(settings.explanationStyle)
   const [currentResponseLength, setCurrentResponseLength] = useState<ResponseLength>(settings.responseLength)
   const [hasChanges, setHasChanges] = useState(false)
+  const [showPaymentPrompt, setShowPaymentPrompt] = useState(false)
   const messagesEndRef = useRef<HTMLDivElement>(null)
   const inputRef = useRef<HTMLInputElement>(null)
   const initializedRef = useRef(false)
+  const { canUseExplanation, useExplanation, getBookExplanationsUsed } = useProfile()
 
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' })
@@ -274,6 +279,14 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ selectedText, contextInfo
   }
 
   const handleExplainText = async (text: string) => {
+    const useCustomLLM = selectedProvider === 'custom'
+    
+    // Check if user can use explanation
+    if (!canUseExplanation(bookTitle, author, useCustomLLM)) {
+      setShowPaymentPrompt(true)
+      return
+    }
+
     const promptText = createContextualPrompt(text, contextInfo)
     
     console.log('Full prompt sent to LLM:')
@@ -300,6 +313,14 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ selectedText, contextInfo
     setIsLoading(true)
 
     try {
+      // Use the explanation (deduct credits if needed)
+      const success = useExplanation(bookTitle, author, useCustomLLM)
+      if (!success) {
+        setShowPaymentPrompt(true)
+        setIsLoading(false)
+        return
+      }
+
       const response = await callLLM([llmMessage])
       const assistantMessage: Message = {
         id: (Date.now() + 1).toString(),
@@ -371,7 +392,24 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ selectedText, contextInfo
     <div className={styles.chatOverlay}>
       <div className={styles.chatContainer}>
         <div className={styles.chatHeader}>
-          <h3>Text Explanation</h3>
+          <div>
+            <h3>Text Explanation</h3>
+            <div style={{ fontSize: '12px', color: '#666', marginTop: '2px' }}>
+              {(() => {
+                const useCustomLLM = selectedProvider === 'custom'
+                const bookExplanationsUsed = getBookExplanationsUsed(bookTitle, author)
+                const bookKey = `${bookTitle}-${author}`.toLowerCase().replace(/[^a-z0-9-]/g, '-')
+                const isBookPurchased = profile.purchasedBooks?.includes(bookKey)
+                const hasUnlimited = profile.hasUnlimitedAccess && profile.unlimitedAccessExpiry && new Date() < new Date(profile.unlimitedAccessExpiry)
+                
+                if (useCustomLLM) return 'Free with your own LLM'
+                if (hasUnlimited) return 'Unlimited access active'
+                if (isBookPurchased) return 'Book purchased - unlimited explanations'
+                if (bookExplanationsUsed < 3) return `${3 - bookExplanationsUsed} free explanations left for this book`
+                return `${profile.availableCredits || 0} credits remaining`
+              })()}
+            </div>
+          </div>
           <div className={styles.headerControls}>
             <div className={styles.providerSelector}>
               <select 
@@ -537,6 +575,97 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ selectedText, contextInfo
           </button>
         </div>
       </div>
+      
+      {showPaymentPrompt && (
+        <div style={{
+          position: 'fixed',
+          top: '50%',
+          left: '50%',
+          transform: 'translate(-50%, -50%)',
+          background: 'white',
+          border: '2px solid #8b5cf6',
+          borderRadius: '12px',
+          padding: '24px',
+          boxShadow: '0 8px 20px rgba(0,0,0,0.3)',
+          zIndex: 3000,
+          maxWidth: '400px',
+          textAlign: 'center'
+        }}>
+          <h3 style={{ margin: '0 0 16px 0', color: '#8b5cf6' }}>More Explanations Available</h3>
+          <p style={{ margin: '0 0 20px 0', lineHeight: '1.5' }}>
+            You've used your free explanations for this book. Choose an option to continue:
+          </p>
+          
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '12px', marginBottom: '20px' }}>
+            <div style={{ 
+              background: '#f8f9fa', 
+              padding: '16px', 
+              borderRadius: '8px',
+              border: '2px solid #10b981'
+            }}>
+              <strong style={{ color: '#10b981' }}>Unlimited Book Access - $5</strong>
+              <div style={{ fontSize: '14px', color: '#666', marginTop: '4px' }}>
+                All explanations for "{bookTitle}" forever
+              </div>
+            </div>
+            
+            <div style={{ 
+              background: '#f8f9fa', 
+              padding: '16px', 
+              borderRadius: '8px',
+              border: '1px solid #ddd'
+            }}>
+              <strong>100 Credits - $5</strong>
+              <div style={{ fontSize: '14px', color: '#666', marginTop: '4px' }}>
+                Use across any books (1 credit per explanation)
+              </div>
+            </div>
+            
+            <div style={{ 
+              background: '#fff3cd', 
+              padding: '16px', 
+              borderRadius: '8px',
+              border: '1px solid #ffeaa7'
+            }}>
+              <strong>Bring Your Own LLM - Free!</strong>
+              <div style={{ fontSize: '14px', color: '#666', marginTop: '4px' }}>
+                Use your own API key in Settings
+              </div>
+            </div>
+          </div>
+          
+          <div style={{ display: 'flex', gap: '10px', justifyContent: 'center' }}>
+            <button 
+              onClick={() => setShowPaymentPrompt(false)}
+              style={{
+                padding: '10px 20px',
+                border: '1px solid #ccc',
+                borderRadius: '6px',
+                background: 'white',
+                cursor: 'pointer'
+              }}
+            >
+              Maybe Later
+            </button>
+            <button 
+              onClick={() => {
+                setShowPaymentPrompt(false)
+                alert('Payment processing coming soon! For now, try using your own LLM in Settings.')
+              }}
+              style={{
+                padding: '10px 20px',
+                border: 'none',
+                borderRadius: '6px',
+                background: '#8b5cf6',
+                color: 'white',
+                cursor: 'pointer'
+              }}
+            >
+              Get More Access
+            </button>
+          </div>
+        </div>
+      )}
     </div>
   )
 }

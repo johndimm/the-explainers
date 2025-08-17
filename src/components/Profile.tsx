@@ -14,6 +14,10 @@ export interface ProfileData {
   totalExplanations?: number
   todayExplanations?: number
   availableCredits?: number
+  bookExplanations?: { [bookKey: string]: number }
+  purchasedBooks?: string[]
+  hasUnlimitedAccess?: boolean
+  unlimitedAccessExpiry?: Date
 }
 
 interface ProfileProps {
@@ -51,6 +55,50 @@ const Profile: React.FC<ProfileProps> = ({ isOpen, onClose, profile, onProfileCh
         </div>
 
         <div className={styles.content}>
+          <div className={styles.section}>
+            <h3>Usage & Credits</h3>
+            <div style={{ 
+              background: '#f8f9fa', 
+              padding: '16px', 
+              borderRadius: '8px', 
+              marginBottom: '20px',
+              border: '1px solid #e9ecef'
+            }}>
+              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '16px' }}>
+                <div>
+                  <div style={{ fontSize: '24px', fontWeight: 'bold', color: '#8b5cf6' }}>
+                    {profile.availableCredits || 0}
+                  </div>
+                  <div style={{ fontSize: '12px', color: '#666' }}>Available Credits</div>
+                </div>
+                <div>
+                  <div style={{ fontSize: '24px', fontWeight: 'bold', color: '#10b981' }}>
+                    {profile.totalExplanations || 0}
+                  </div>
+                  <div style={{ fontSize: '12px', color: '#666' }}>Total Explanations</div>
+                </div>
+                <div>
+                  <div style={{ fontSize: '24px', fontWeight: 'bold', color: '#f59e0b' }}>
+                    {profile.todayExplanations || 0}
+                  </div>
+                  <div style={{ fontSize: '12px', color: '#666' }}>Today</div>
+                </div>
+                <div>
+                  <div style={{ fontSize: '24px', fontWeight: 'bold', color: '#ef4444' }}>
+                    {profile.purchasedBooks?.length || 0}
+                  </div>
+                  <div style={{ fontSize: '12px', color: '#666' }}>Books Owned</div>
+                </div>
+              </div>
+              
+              {profile.firstLogin && (
+                <div style={{ marginTop: '12px', fontSize: '12px', color: '#666' }}>
+                  Member since: {new Date(profile.firstLogin).toLocaleDateString()}
+                </div>
+              )}
+            </div>
+          </div>
+
           <div className={styles.section}>
             <h3>Personal Information</h3>
             <p className={styles.subtitle}>Help us customize explanations for your needs</p>

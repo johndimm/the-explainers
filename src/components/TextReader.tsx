@@ -30,9 +30,14 @@ const TextReader: React.FC<TextReaderProps> = ({ text, bookTitle = 'Romeo and Ju
   const [contextInfo, setContextInfo] = useState<any>(null)
   const [showFirstTimeInstructions, setShowFirstTimeInstructions] = useState(false)
   const [hasUserScrolled, setHasUserScrolled] = useState(false)
+  const textReaderRef = useRef<HTMLDivElement>(null)
+  const scrollTimeoutRef = useRef<NodeJS.Timeout | null>(null)
 
   // Check for first-time user and restore bookmark
   useEffect(() => {
+    // Only run after text has loaded and matches the current book
+    if (!text || text.length < 100) return
+    
     const bookmarkKey = `bookmark-${bookTitle}-${author}`
     const firstTimeKey = 'explainer-first-time'
     
@@ -45,45 +50,64 @@ const TextReader: React.FC<TextReaderProps> = ({ text, bookTitle = 'Romeo and Ju
     
     // Restore bookmark position
     const savedPosition = localStorage.getItem(bookmarkKey)
-    if (savedPosition && textContentRef.current) {
+    if (savedPosition) {
       const position = parseInt(savedPosition)
+      console.log(`Restoring bookmark for ${bookTitle} by ${author}: position ${position}`)
+      
+      // Wait for DOM to be ready, then restore position
       setTimeout(() => {
-        if (textContentRef.current) {
-          textContentRef.current.scrollTop = position
+        if (textReaderRef.current) {
+          console.log(`Setting scrollTop to ${position} for ${bookTitle}`)
+          textReaderRef.current.scrollTop = position
+          
+          // Verify the scroll actually happened
+          setTimeout(() => {
+            if (textReaderRef.current) {
+              console.log(`Actual scrollTop after restoration: ${textReaderRef.current.scrollTop}`)
+            }
+          }, 50)
         }
-      }, 100)
+      }, 300)
+    } else {
+      console.log(`No saved bookmark found for ${bookTitle} by ${author}`)
     }
   }, [text, bookTitle, author])
 
-  // Save bookmark when user scrolls
+  // Save bookmark when user stops scrolling (debounced)
   useEffect(() => {
     const handleScroll = () => {
-      if (textContentRef.current && hasUserScrolled) {
-        const bookmarkKey = `bookmark-${bookTitle}-${author}`
-        const scrollPosition = textContentRef.current.scrollTop
-        localStorage.setItem(bookmarkKey, scrollPosition.toString())
+      if (textReaderRef.current) {
+        const scrollPosition = textReaderRef.current.scrollTop
+        setHasUserScrolled(true)
+        
+        // Clear existing timeout
+        if (scrollTimeoutRef.current) {
+          clearTimeout(scrollTimeoutRef.current)
+        }
+        
+        // Set new timeout to save after user stops scrolling
+        scrollTimeoutRef.current = setTimeout(() => {
+          const bookmarkKey = `bookmark-${bookTitle}-${author}`
+          console.log(`Saving bookmark for ${bookTitle}: position ${scrollPosition}`)
+          localStorage.setItem(bookmarkKey, scrollPosition.toString())
+        }, 500) // Save 500ms after user stops scrolling
       }
     }
 
-    const textElement = textContentRef.current
+    const textElement = textReaderRef.current
     if (textElement) {
-      textElement.addEventListener('scroll', handleScroll)
-      return () => textElement.removeEventListener('scroll', handleScroll)
+      setTimeout(() => {
+        textElement.addEventListener('scroll', handleScroll)
+      }, 100)
+      
+      return () => {
+        textElement.removeEventListener('scroll', handleScroll)
+        if (scrollTimeoutRef.current) {
+          clearTimeout(scrollTimeoutRef.current)
+        }
+      }
     }
-  }, [bookTitle, author, hasUserScrolled])
-
-  // Track when user starts scrolling
-  useEffect(() => {
-    const handleUserScroll = () => {
-      setHasUserScrolled(true)
-    }
-
-    const textElement = textContentRef.current
-    if (textElement) {
-      textElement.addEventListener('scroll', handleUserScroll, { once: true })
-      return () => textElement.removeEventListener('scroll', handleUserScroll)
-    }
-  }, [])
+  }, [bookTitle, author, text])
 
   const extractContextInfo = (selectedText: string, fullText: string) => {
     const selectedIndex = fullText.indexOf(selectedText)
@@ -337,7 +361,7 @@ const TextReader: React.FC<TextReaderProps> = ({ text, bookTitle = 'Romeo and Ju
   }
 
   return (
-    <div className={styles.textReader}>
+    <div ref={textReaderRef} className={styles.textReader}>
       {showFirstTimeInstructions && (
         <div style={{
           position: 'fixed',
@@ -455,6 +479,8 @@ const TextReader: React.FC<TextReaderProps> = ({ text, bookTitle = 'Romeo and Ju
           profile={profile}
           onClose={handleCloseChatInterface}
           onSettingsChange={onSettingsChange}
+          bookTitle={bookTitle}
+          author={author}
         />
       )}
     </div>

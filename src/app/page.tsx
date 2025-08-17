@@ -5,37 +5,60 @@ import TextReader from '@/components/TextReader'
 import Settings from '@/components/Settings'
 import Profile from '@/components/Profile'
 import Library from '@/components/Library'
+import Pricing from '@/components/Pricing'
+import PWAInstaller from '@/components/PWAInstaller'
 import { SettingsProvider, useSettings } from '@/contexts/SettingsContext'
 import { ProfileProvider, useProfile } from '@/contexts/ProfileContext'
 
 function HomeContent() {
   const [bookText, setBookText] = useState('')
   const [loading, setLoading] = useState(true)
-  const [currentBook, setCurrentBook] = useState({ title: 'Romeo and Juliet', author: 'William Shakespeare' })
-  const [showLibrary, setShowLibrary] = useState(false)
+  const [currentBook, setCurrentBook] = useState({ title: '', author: '' })
+  const [showLibrary, setShowLibrary] = useState(true)
+  const [showPricing, setShowPricing] = useState(false)
   const { settings, updateSettings, isSettingsOpen, openSettings, closeSettings } = useSettings()
   const { profile, updateProfile, isProfileOpen, openProfile, closeProfile } = useProfile()
 
   useEffect(() => {
-    loadDefaultBook()
+    // Check if there's a saved current book
+    const savedBook = localStorage.getItem('current-book')
+    if (savedBook) {
+      try {
+        const parsedBook = JSON.parse(savedBook)
+        console.log('Restoring saved book:', parsedBook)
+        
+        // We need to reconstruct the URL - for now, just handle a few key books
+        let url = ''
+        if (parsedBook.title === 'Hamlet') {
+          url = 'https://www.gutenberg.org/cache/epub/1524/pg1524.txt'
+        } else if (parsedBook.title === 'Romeo and Juliet') {
+          url = '/public-domain-texts/shakespeare-romeo-and-juliet.txt'
+        }
+        
+        if (url) {
+          // Use the same handleBookSelect logic
+          handleBookSelect(parsedBook.title, parsedBook.author, url)
+        } else {
+          console.log('No URL mapping for saved book, showing library')
+          setLoading(false)
+        }
+      } catch (error) {
+        console.error('Error loading saved book:', error)
+        setLoading(false)
+      }
+    } else {
+      // No saved book - library is already shown by default
+      setLoading(false)
+    }
   }, [])
-
-  const loadDefaultBook = () => {
-    fetch('/public-domain-texts/shakespeare-romeo-and-juliet.txt')
-      .then(response => response.text())
-      .then(text => {
-        setBookText(text)
-        setLoading(false)
-      })
-      .catch(error => {
-        console.error('Error loading text:', error)
-        setLoading(false)
-      })
-  }
 
   const handleBookSelect = async (title: string, author: string, url: string) => {
     setLoading(true)
-    setCurrentBook({ title, author })
+    const newBook = { title, author }
+    setCurrentBook(newBook)
+    
+    // Save current book to localStorage
+    localStorage.setItem('current-book', JSON.stringify(newBook))
     
     try {
       let text: string
@@ -86,7 +109,7 @@ function HomeContent() {
   }
 
   if (loading) {
-    return <div>Loading {currentBook.title}...</div>
+    return <div>Loading{currentBook.title ? ` ${currentBook.title}` : ''}...</div>
   }
 
   if (showLibrary) {
@@ -166,6 +189,20 @@ function HomeContent() {
           Library
         </button>
         <button 
+          onClick={() => setShowPricing(true)}
+          style={{
+            padding: '6px 10px',
+            background: '#f59e0b',
+            color: 'white',
+            border: 'none',
+            borderRadius: '4px',
+            cursor: 'pointer',
+            fontSize: '12px'
+          }}
+        >
+          Credits ({profile.availableCredits || 0})
+        </button>
+        <button 
           onClick={openProfile}
           style={{
             padding: '6px 10px',
@@ -220,6 +257,15 @@ function HomeContent() {
         settings={settings}
         onSettingsChange={updateSettings}
       />
+      
+      <Pricing
+        isOpen={showPricing}
+        onClose={() => setShowPricing(false)}
+        bookTitle={currentBook.title}
+        author={currentBook.author}
+      />
+      
+      <PWAInstaller />
     </div>
   )
 }

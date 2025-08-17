@@ -90,9 +90,15 @@ const Library: React.FC<LibraryProps> = ({ onBookSelect }) => {
     return `https://www.gutenberg.org/cache/epub/${book.id}/pg${book.id}.txt`
   }
 
-  const handleBookClick = (book: Book) => {
+  const handleBookClick = (book: Book, categoryName: string) => {
     const url = getBookUrl(book)
-    const author = book.author || 'Unknown Author'
+    let author = book.author || 'Unknown Author'
+    
+    // Special case for Shakespeare category
+    if (categoryName.toLowerCase().includes('shakespeare')) {
+      author = 'William Shakespeare'
+    }
+    
     onBookSelect(book.title, author, url)
   }
 
@@ -167,7 +173,7 @@ const Library: React.FC<LibraryProps> = ({ onBookSelect }) => {
                 <div 
                   key={`${category.name}-${book.id}`}
                   className={styles.bookItem}
-                  onClick={() => handleBookClick(book)}
+                  onClick={() => handleBookClick(book, category.name)}
                 >
                   <span className={styles.bookTitle}>{book.title}</span>
                   {book.author && (

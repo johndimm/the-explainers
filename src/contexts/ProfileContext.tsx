@@ -10,6 +10,11 @@ interface ProfileContextType {
   openProfile: () => void
   closeProfile: () => void
   incrementExplanations: () => void
+  canUseExplanation: (bookTitle: string, author: string, useCustomLLM: boolean) => boolean
+  useExplanation: (bookTitle: string, author: string, useCustomLLM: boolean) => boolean
+  getBookExplanationsUsed: (bookTitle: string, author: string) => number
+  addCredits: (amount: number) => void
+  purchaseBook: (bookTitle: string, author: string) => void
 }
 
 const DEFAULT_PROFILE: ProfileData = {
@@ -19,7 +24,11 @@ const DEFAULT_PROFILE: ProfileData = {
   firstLogin: new Date(),
   totalExplanations: 0,
   todayExplanations: 0,
-  availableCredits: 3
+  availableCredits: 100,
+  bookExplanations: {},
+  purchasedBooks: [],
+  hasUnlimitedAccess: false,
+  unlimitedAccessExpiry: undefined
 }
 
 const ProfileContext = createContext<ProfileContextType | undefined>(undefined)
@@ -74,6 +83,114 @@ export const ProfileProvider: React.FC<ProfileProviderProps> = ({ children }) =>
     })
   }
 
+  const getBookKey = (bookTitle: string, author: string) => {
+    return `${bookTitle}-${author}`.toLowerCase().replace(/[^a-z0-9-]/g, '-')
+  }
+
+  const canUseExplanation = (bookTitle: string, author: string, useCustomLLM: boolean) => {
+    // Free if using custom LLM
+    if (useCustomLLM) return true
+    
+    // Free if has unlimited access
+    if (profile.hasUnlimitedAccess && profile.unlimitedAccessExpiry && new Date() < new Date(profile.unlimitedAccessExpiry)) {
+      return true
+    }
+    
+    const bookKey = getBookKey(bookTitle, author)
+    
+    // Free if book is purchased
+    if (profile.purchasedBooks?.includes(bookKey)) {
+      return true
+    }
+    
+    // Check if under 3 free explanations for this book
+    const bookExplanations = profile.bookExplanations?.[bookKey] || 0
+    if (bookExplanations < 3) {
+      return true
+    }
+    
+    // Check if has available credits
+    return (profile.availableCredits || 0) > 0
+  }
+
+  const useExplanation = (bookTitle: string, author: string, useCustomLLM: boolean) => {
+    if (!canUseExplanation(bookTitle, author, useCustomLLM)) {
+      return false
+    }
+
+    setProfile(prev => {
+      const bookKey = getBookKey(bookTitle, author)
+      const bookExplanations = prev.bookExplanations?.[bookKey] || 0
+      
+      let newProfile = { ...prev }
+      
+      // If using custom LLM, no cost
+      if (useCustomLLM) {
+        return prev
+      }
+      
+      // If unlimited access, no cost
+      if (prev.hasUnlimitedAccess && prev.unlimitedAccessExpiry && new Date() < new Date(prev.unlimitedAccessExpiry)) {
+        return prev
+      }
+      
+      // If book is purchased, no cost
+      if (prev.purchasedBooks?.includes(bookKey)) {
+        return prev
+      }
+      
+      // If under 3 free explanations for this book, use free
+      if (bookExplanations < 3) {
+        newProfile = {
+          ...prev,
+          bookExplanations: {
+            ...prev.bookExplanations,
+            [bookKey]: bookExplanations + 1
+          }
+        }
+      } else {
+        // Use a credit
+        newProfile = {
+          ...prev,
+          availableCredits: Math.max(0, (prev.availableCredits || 0) - 1)
+        }
+      }
+      
+      localStorage.setItem('explainer-profile', JSON.stringify(newProfile))
+      return newProfile
+    })
+    
+    return true
+  }
+
+  const getBookExplanationsUsed = (bookTitle: string, author: string) => {
+    const bookKey = getBookKey(bookTitle, author)
+    return profile.bookExplanations?.[bookKey] || 0
+  }
+
+  const addCredits = (amount: number) => {
+    setProfile(prev => {
+      const newProfile = {
+        ...prev,
+        availableCredits: (prev.availableCredits || 0) + amount
+      }
+      localStorage.setItem('explainer-profile', JSON.stringify(newProfile))
+      return newProfile
+    })
+  }
+
+  const purchaseBook = (bookTitle: string, author: string) => {
+    setProfile(prev => {
+      const bookKey = getBookKey(bookTitle, author)
+      const newProfile = {
+        ...prev,
+        purchasedBooks: [...(prev.purchasedBooks || []), bookKey]
+      }
+      localStorage.setItem('explainer-profile', JSON.stringify(newProfile))
+      return newProfile
+    })
+  }
+
   const openProfile = () => setIsProfileOpen(true)
   const closeProfile = () => setIsProfileOpen(false)
 
@@ -84,7 +201,12 @@ export const ProfileProvider: React.FC<ProfileProviderProps> = ({ children }) =>
       isProfileOpen,
       openProfile,
       closeProfile,
-      incrementExplanations
+      incrementExplanations,
+      canUseExplanation,
+      useExplanation,
+      getBookExplanationsUsed,
+      addCredits,
+      purchaseBook
     }}>
       {children}
     </ProfileContext.Provider>
