@@ -153,37 +153,41 @@ function HomeContent() {
         </div>
         <div style={{ 
           display: 'flex',
-          gap: '6px',
-          flexShrink: 0
+          gap: '3px',
+          flexShrink: 0,
+          flexWrap: 'wrap'
         }}>
         <a 
           href="/user-guide.html"
           target="_blank"
           rel="noopener noreferrer"
           style={{
-            padding: '6px 10px',
+            padding: '4px 6px',
             background: '#6b7280',
             color: 'white',
             border: 'none',
-            borderRadius: '4px',
+            borderRadius: '3px',
             cursor: 'pointer',
-            fontSize: '12px',
+            fontSize: '10px',
             textDecoration: 'none',
-            display: 'inline-block'
+            display: 'inline-block',
+            minWidth: '35px',
+            textAlign: 'center'
           }}
         >
-          Guide
+          📖
         </a>
         <button 
           onClick={() => setShowLibrary(true)}
           style={{
-            padding: '6px 10px',
+            padding: '4px 6px',
             background: '#8b5cf6',
             color: 'white',
             border: 'none',
-            borderRadius: '4px',
+            borderRadius: '3px',
             cursor: 'pointer',
-            fontSize: '12px'
+            fontSize: '10px',
+            minWidth: '45px'
           }}
         >
           Library
@@ -191,27 +195,29 @@ function HomeContent() {
         <button 
           onClick={() => setShowPricing(true)}
           style={{
-            padding: '6px 10px',
+            padding: '4px 6px',
             background: '#f59e0b',
             color: 'white',
             border: 'none',
-            borderRadius: '4px',
+            borderRadius: '3px',
             cursor: 'pointer',
-            fontSize: '12px'
+            fontSize: '10px',
+            minWidth: '35px'
           }}
         >
-          Credits ({profile.availableCredits || 0})
+          💳{profile.availableCredits || 0}
         </button>
         <button 
           onClick={openProfile}
           style={{
-            padding: '6px 10px',
+            padding: '4px 6px',
             background: '#10b981',
             color: 'white',
             border: 'none',
-            borderRadius: '4px',
+            borderRadius: '3px',
             cursor: 'pointer',
-            fontSize: '12px'
+            fontSize: '10px',
+            minWidth: '40px'
           }}
         >
           Profile
@@ -219,13 +225,14 @@ function HomeContent() {
         <button 
           onClick={openSettings}
           style={{
-            padding: '6px 10px',
+            padding: '4px 6px',
             background: '#007bff',
             color: 'white',
             border: 'none',
-            borderRadius: '4px',
+            borderRadius: '3px',
             cursor: 'pointer',
-            fontSize: '12px'
+            fontSize: '10px',
+            minWidth: '45px'
           }}
         >
           Settings
@@ -233,7 +240,7 @@ function HomeContent() {
         </div>
       </header>
       
-      <div style={{ marginTop: '60px' }}>
+      <div style={{ marginTop: '50px' }}>
         <TextReader 
           text={bookText} 
           bookTitle={currentBook.title}

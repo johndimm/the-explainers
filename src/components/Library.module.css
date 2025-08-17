@@ -186,25 +186,69 @@
 
 @media (max-width: 768px) {
   .library {
-    padding: 15px;
+    padding: 10px;
   }
   
   .categories {
     grid-template-columns: 1fr;
-    gap: 20px;
+    gap: 15px;
   }
   
   .customSection {
     flex-direction: column;
-    gap: 15px;
+    gap: 10px;
+    padding: 15px;
+    margin-bottom: 20px;
   }
   
   .urlInput {
     min-width: auto;
     width: 100%;
+    flex-direction: column;
+    gap: 8px;
+  }
+  
+  .loadButton {
+    padding: 8px 16px;
+    font-size: 14px;
+  }
+  
+  .fileLabel {
+    padding: 8px 16px;
+    font-size: 14px;
+    text-align: center;
+  }
+  
+  .header {
+    margin-bottom: 20px;
   }
   
   .header h1 {
-    font-size: 2rem;
+    font-size: 1.8rem;
+  }
+  
+  .header p {
+    font-size: 1rem;
+  }
+  
+  .categoryTitle {
+    padding: 15px 15px 10px 15px;
+    font-size: 1.1rem;
+  }
+  
+  .bookList {
+    padding: 0 15px 15px 15px;
+  }
+  
+  .bookItem {
+    padding: 10px 0;
+  }
+  
+  .bookTitle {
+    font-size: 0.95rem;
+  }
+  
+  .bookAuthor {
+    font-size: 0.8rem;
   }
 }
