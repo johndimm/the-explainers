@@ -1,0 +1,19 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm init:*)",
+      "Bash(npm install:*)",
+      "Bash(npm run lint)",
+      "Bash(npm run build:*)",
+      "Bash(pkill:*)",
+      "Bash(mkdir:*)",
+      "WebSearch",
+      "WebSearch",
+      "WebSearch",
+      "WebFetch(domain:commons.wikimedia.org)",
+      "WebFetch(domain:commons.wikimedia.org)"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}

@@ -1,0 +1,248 @@
+.settingsOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 2000;
+}
+
+.settingsContainer {
+  background: white;
+  border-radius: 12px;
+  width: 90%;
+  max-width: 500px;
+  max-height: 90vh;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+}
+
+.settingsHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 24px;
+  border-bottom: 1px solid #e0e0e0;
+  background: #f8f9fa;
+  border-radius: 12px 12px 0 0;
+}
+
+.settingsHeader h2 {
+  margin: 0;
+  color: #333;
+  font-size: 24px;
+}
+
+.closeButton {
+  background: none;
+  border: none;
+  font-size: 28px;
+  cursor: pointer;
+  color: #666;
+  padding: 0;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 4px;
+  transition: background-color 0.2s;
+}
+
+.closeButton:hover {
+  background: #e0e0e0;
+}
+
+.settingsContent {
+  flex: 1;
+  overflow-y: auto;
+  padding: 24px;
+}
+
+.settingGroup {
+  margin-bottom: 32px;
+}
+
+.settingGroup h3 {
+  margin: 0 0 16px 0;
+  color: #333;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.radioGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.radioLabel {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  padding: 8px 12px;
+  border-radius: 6px;
+  transition: background-color 0.2s;
+}
+
+.radioLabel:hover {
+  background: #f8f9fa;
+}
+
+.radioLabel input[type="radio"] {
+  margin-right: 12px;
+  width: 16px;
+  height: 16px;
+}
+
+.radioLabel span {
+  font-size: 14px;
+  color: #333;
+}
+
+.explainerOption {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.explainerPhoto {
+  width: 32px;
+  height: 32px;
+  border-radius: 4px;
+  object-fit: cover;
+  border: 2px solid #e0e0e0;
+  transition: transform 0.3s ease, border-radius 0.3s ease;
+  cursor: pointer;
+}
+
+.explainerPhoto:hover {
+  transform: scale(3);
+  z-index: 1000;
+  position: relative;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+  border-radius: 8px;
+}
+
+.customFields {
+  margin-top: 16px;
+  padding: 16px;
+  background: #f8f9fa;
+  border-radius: 8px;
+  border: 1px solid #e0e0e0;
+}
+
+.inputGroup {
+  margin-bottom: 16px;
+}
+
+.inputGroup:last-child {
+  margin-bottom: 0;
+}
+
+.inputGroup label {
+  display: block;
+  margin-bottom: 6px;
+  font-size: 14px;
+  font-weight: 500;
+  color: #333;
+}
+
+.textInput {
+  width: 100%;
+  padding: 8px 12px;
+  border: 1px solid #d0d7de;
+  border-radius: 6px;
+  font-size: 14px;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.textInput:focus {
+  border-color: #007bff;
+}
+
+.settingsFooter {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 24px;
+  border-top: 1px solid #e0e0e0;
+  background: #f8f9fa;
+  border-radius: 0 0 12px 12px;
+}
+
+.resetButton {
+  padding: 10px 16px;
+  background: #6c757d;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background-color 0.2s;
+}
+
+.resetButton:hover {
+  background: #5a6268;
+}
+
+.buttonGroup {
+  display: flex;
+  gap: 12px;
+}
+
+.cancelButton {
+  padding: 10px 20px;
+  background: white;
+  color: #333;
+  border: 1px solid #d0d7de;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: all 0.2s;
+}
+
+.cancelButton:hover {
+  background: #f6f8fa;
+}
+
+.saveButton {
+  padding: 10px 20px;
+  background: #007bff;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background-color 0.2s;
+}
+
+.saveButton:hover {
+  background: #0056b3;
+}
+
+@media (max-width: 768px) {
+  .settingsContainer {
+    width: 95%;
+    margin: 20px;
+  }
+  
+  .settingsHeader,
+  .settingsFooter {
+    padding: 16px 20px;
+  }
+  
+  .settingsContent {
+    padding: 20px;
+  }
+  
+  .settingGroup {
+    margin-bottom: 24px;
+  }
+}

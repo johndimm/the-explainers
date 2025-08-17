@@ -1,0 +1,223 @@
+<goal>
+Create Explainer, a react/nextjs progressive app that includes a database to store user data, authentication, and a system of credits.  There is also a library of plain text classic literature from Project Gutenberg.
+</goal>
+
+<description>
+Explainer helps users understand difficult texts by providing explanations of selected passages using a large language model (LLM). It is designed for users who struggle with reading comprehension, whether due to language barriers, unfamiliar vocabulary, or complex sentence structures.
+</description>
+
+<use_pattern>
+You read a book using the app's text reader, and when you find a confusing passage you select it, either with a mouse on the desktop version or your finger on the mobile version.  The simple act of selecting text causes the system to submit it as the body of a prompt to a large language model.  The chat interface appears on screen and the model response explains the passage in language you understand.
+</use_pattern>
+
+<prompt>
+The prompt specifically requests information about unfamiliar words, familiar words used in unfamiliar ways, and what is going on at this point in the story.  
+
+If you tell the app your age, language, and educational level, it will formulate responses in your native language that use appropriate vocabulary.
+
+The LLM does not receive the entire text of the book.   The client does have the complete text and it helps the LLM by providing structural clues about the context of a quote.  For plays, it parses the input text to provide the act, the scene, the speaker, and the characters on stage at the time of the quote.
+</prompt>
+
+<module name="text reader">
+Works initially for plain text files.  The text reader displays the input text and allows the user to select passages.  When a passage is selected, it posts the selected text to the chat interface.
+
+The app saves your position (bookmark) in each source file and returns to that position when you come back to it.
+
+About input formats:  plain text is simple.  In a later iteration, the app should also handle html and pdf.  It seems to be very difficult to extract plain text from a pdf so we may need third party apps or modules. 
+
+The user picks a book from the Library and the app downloads the text to the client.  The LLM does not see the entire text, only the passages provided by the user.  
+
+You select some text and the text reader pops up a confirmation dialog and checks your available credits.  You click "explain" and it posts the quote to the chat interface API, where it is submitted to the LLM for response.   
+
+If the text has sufficient strctural clues, the app creates a table of contents that is linked to the source text.  For example, Shakespeare's play have a clear structure and start with a list of scenes.
+
+There is an input box to search the currently loaded source text.  There is currently no way to search the full text of the entire Library.
+
+Text files should be rendered as pre-formatted to retain carriage returns.  Text should be in a single div, rather than creating a div for each line. For performance reasons, it may be useful to break the text into paragraphs.
+</module>
+
+<module name="chat interface"> 
+A standard chat. There is a text input box for follow-up questions.  You can save chat history.  You can search it.  The important thing is it has an API that accepts a passage of text from the text reader which it submits to an LLM for explanation.  
+</module>
+
+<module name="the library">
+A list of books available in plain text for free, mostly from Project Gutenberg.  The list is contained in a set of json files in the /src/data/library directory.  Create sections of the page for each category, using the filename to determine the category name.  Fill the page with multiple columns.  The title of each book is a link that causes it to be downloaded and displayed in the text reader.  No need for a separate "read" button on each line.  
+
+Display the book in a single line.  Do not create cards, which would result in only a few books being visible on a phone screen.
+
+See the file explainer-screenshot.png to see a good way of displaying it.  Notice that the list of books in a category is one column, and the categories are presented in multiple columns.
+
+The library page also lets the user provide their own URL for a text file, or use a file on their computer as text.
+
+For lines in the json files like this:
+
+      { "id": "15462", "title": "Alcools", "author": "Apollinaire" },
+    
+the URL to download the text is 
+
+   https://www.gutenberg.org/cache/epub/15462/pg15462.txt
+
+For lines like this:
+
+   { "id": "tractatus", "title": "Tractatus Logico-Philosophicus", "author": "Ludwig Wittgenstein", "localPath": "/public-domain-texts/tractatus.txt" }
+
+the text is local in the /public directory.
+
+For each category, show only 10 books and a more button.  When the user clicks the more button, retrieve the next 10 books from the json file.  
+
+Do not convert the json to javascript source code.  Instead, read the json files at runtime and generate the html on the fly.  It may be necessary to list the json files in the javascript source code, since scanning the directory may not be possible.
+</module>
+
+
+<module name="profile">
+Gather some optional information about the user. The purpose is to customize the LLM responses to the user's language, age, and educational level.
+
+  - age
+  - education level
+  - language
+  - does not require email since we get that from Google Auth.
+
+Also, show some usage data:
+  - total available credits
+  - History
+    - first login
+    - total explanations
+    - today
+</module>
+
+<module name="settings">
+  - LLM model selection
+    - some models are paid by me for now
+    - use the providers defined in .env.local
+    - by default, use the new chatGPT 5.0
+    - you can also bring your own LLM and key (BYOLLM)
+  - short, medium, or long explanations
+  - font choices for text and chat
+</module>
+
+<module name="how to pay">
+You can pay by the book.  You get 3 free explanations when you open a new book.  After that, for $5 you get all the explanations you want from that book.  Covers books from the Library but also any other source.
+
+You can buy unlimited use for an hour ($1), a month ($5), a year ($25).
+
+You can buy credits for explanations, at $5 for 100 explanations.
+
+If you Bring Your Own Language Model (BYOLLM) it's free!
+</module>
+
+<module name="users_guide">
+A guide showing how to use all features.
+<module>
+
+<page_layout>
+The layout should by default adapt to different devices without styling that depends on mobile vs desktop.  The text reader is full screen on startup.  The chat interface is off-screen to the right.  When the user select text, it slides left to appear full screen and completely cover the text reader.  There are handles to slide the chat interface on and off-screen.  
+
+When there is enough horizontal space, the chat interface will be displayed next to the text reader.  That's a nice layout when you have a big screen. The chat interface doesn't know if it is on-screen or off.  The switch from off-screen to on-screen is immediate and will happen when you expand the window's width.  If you then shrink it back, the chat interface operates as before, sliding on and off.
+
+For a wide window, the text reader and chat are both visible.  But they scroll independently.  Otherwise , the chat interface would scroll off the top.
+</page_layout>
+
+<prompt>
+The javascript client provides more to the LLM than the input quote.  Without hints it may attribute the quote to the wrong character, or get the speaker right but fail to find the correct listener.  The client can help by scanning the input text for ways of breaking it up into smaller chunks of text.   
+
+When the chat interface receives text from the text reader, it displays only the quote, not the rest of the prompt that is sent to the LLM.
+
+The client provides to the LLM:
+
+  - book title and author
+    - from the URL or filename
+    - from the text content
+  - where does the quote appear?
+    - in plays, specify Act n, Scene m
+    - structural clues that can be extracted from the text, such as chapter headings
+  - who is the speaker?
+    - in plays of Shakespeare, the speaker is always identified 
+  - which characters are on stage?
+    - in Shakespeare, the list is announced at the start of each scene
+    - follow stage directions like "exit Romeo"
+
+The client also provides some information about the user:
+
+  - language (LLM should respond in this language)
+  - age (LLM should use an age-appopriate vocabulary)
+  - educational level achieved
+
+Instructions to the LLM:
+
+  - explain unfamiliar terms
+  - explain known terms used in unfamiliar ways
+  - why are they saying this?
+  - what is going on at this time?
+  - is this an important moment?
+
+The LLM is not required to cover all those requests on each quote.  Do not format the response as a list of answers to those specific questions.  Instead, formulate a readable  narrative that flows logically.  
+</prompt>
+
+<requirements>
+The app is built using Next.js and React, with a focus on modular components. The code is structured to allow easy addition of new features and customization.
+
+The app uses TypeScript for type safety and clarity. 
+
+The code follows best practices for React development, including functional components and hooks.
+
+The app uses the latest Next.js features, including API routes for server-side functionality and static generation for performance.
+
+The app uses the OpenAI, Anthropic, Deepseek, or Gemini API for LLM functionality. The API keys are stored securely in environment variables.
+
+The app uses Google OAuth for authentication, allowing users to sign in with their Google account. User profiles are stored in a PostgreSQL database.   
+
+The app uses CSS modules for styling, avoiding global styles and ensuring styles are scoped to components.  Don't use tailwind.  Do use css modules.
+
+The app uses a PostgreSQL database for user profiles and chat history, with a connection string stored in environment variables.  A postgres database has been configured with a DATABASE_URL, defined in .env.local. 
+
+Use a backend function to download the text of a URL, to avoid CORS errors.
+
+The app uses the pg library for database access, with a connection pool for efficient queries. The database schema is defined in a migration file.
+The app uses the pg-promise library for database queries, with a focus on modular query files for organization.
+
+It is a progressive webapp. The icons are in /public.
+</requirements>
+
+<suggestions>
+Avoid code duplication.
+Test.
+</suggestions>
+
+<resource>
+The LLM's can be accessed using the keys in .env.local.  Here they are:
+
+OPENAI_API_KEY
+ANTHROPIC_API_KEY
+DEEPSEEK_API_KEY
+GEMINI_API_KEY
+</resource>
+
+<iteration name="desktop text reader">
+Start by making the text reader.   The books are plain text files and can be rendered in a single <div> with a <pre> tag.  For better performance, we might break up the text into paragraphs. The user will select passages and request explanations of them.  
+
+For this iteration, use Romeo and Juliet.  Later, we will build the Library to select other texts.  That book is available using this url:
+
+  https://www.gutenberg.org/cache/epub/1513/pg1513.txt
+
+Desktop is simple since native select works.  The user selects text in the normal way, and when they lift the mouse button, the text is displayed in a confirmation dialog and then optionally sent to the chat interface.   For this iteration, the chat interface does not exist yet so the submit does nothing.  
+</iteraction>
+
+<iteration name="mobile text reader">
+Mobile presents new problems.  Native select results in a system popup menu and a google search bar with the selected text.  These two events get in the way of selection for our purposes.  We want one thing to happen when you select text, so native select cannot be used.
+<iteration>
+
+<iteration name="chat interface">
+The chat interface is a fixed-width screen overlay that slides in from the right when the user selects text.  It displays the selected text as a prompt and allows the user to ask follow-up questions.  The selected text, aka the quote, is repeated in the chat window as the user input.  Later there will be other data to pass to the model that will not be printed to the chat window.   The chat interface can be dismissed by sliding it back to the right.  If the window is wide enough, the text reader and the chat interface are onscreen at once.
+</iteration>
+
+<iteration name="settings">
+The user can select the language model from a list of models, the length of the response (brief, small, medium, large), and the font for the reader.  Verify that changes made here control run-time action.
+<iteration>
+
+<iteration name="profile">
+The user can set their profile information, including age, language, and educational level.  This information is used to tailor the LLM's responses to the user's needs.  Find a good way to present this information to the model.
+</iteration>
+
+<iteraction name="credits">
+The user can see their available credits and buy more if needed.  Credits are used to pay for LLM responses.  The app should keep track of the user's credit balance and deduct credits when a response is requested.
+</iteration>

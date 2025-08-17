@@ -1,0 +1,21 @@
+.textReader {
+  width: 100%;
+  height: 100vh;
+  overflow-y: auto;
+  padding: 20px;
+  background: #ffffff;
+}
+
+.textContent {
+  max-width: 800px;
+  margin: 0 auto;
+  font-family: 'Georgia', 'Times New Roman', serif;
+  font-size: 16px;
+  line-height: 1.6;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+}
+
+.selectedText {
+  background-color: #b3d9ff;
+}
