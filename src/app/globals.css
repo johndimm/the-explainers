@@ -15,3 +15,22 @@ body {
   background: #ffffff;
   color: #000000;
 }
+
+/* Responsive navigation */
+@media (max-width: 768px) {
+  .desktop-only { 
+    display: none !important; 
+  }
+  .mobile-only { 
+    display: block; 
+  }
+}
+
+@media (min-width: 769px) {
+  .desktop-only { 
+    display: flex !important; 
+  }
+  .mobile-only { 
+    display: none; 
+  }
+}

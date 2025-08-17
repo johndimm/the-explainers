@@ -6,7 +6,7 @@ import styles from './Settings.module.css'
 export type LLMProvider = 'openai' | 'anthropic' | 'deepseek' | 'gemini' | 'custom'
 export type ResponseLength = 'brief' | 'medium' | 'long'
 export type FontFamily = 'serif' | 'sans-serif' | 'monospace'
-export type ExplanationStyle = 'neutral' | 'harold-bloom' | 'carl-sagan' | 'louis-ck' | 'david-foster-wallace' | 'neil-degrasse-tyson' | 'oscar-wilde' | 'stephen-fry' | 'bill-bryson' | 'maya-angelou' | 'anthony-bourdain' | 'douglas-adams' | 'terry-pratchett' | 'joan-didion' | 'jerry-seinfeld' | 'andrew-dice-clay' | 'howard-stern' | 'tina-fey' | 'dave-chappelle' | 'amy-poehler' | 'ricky-gervais' | 'sarah-silverman' | 'john-mulaney' | 'ali-wong' | 'bo-burnham' | 'oprah-winfrey' | 'david-letterman' | 'conan-obrien' | 'stephen-colbert' | 'jimmy-fallon' | 'ellen-degeneres' | 'trevor-noah' | 'john-oliver' | 'jon-stewart' | 'david-sedaris' | 'mark-twain' | 'ts-eliot' | 'rudyard-kipling' | 'tom-wolfe' | 'flannery-oconnor' | 'humphrey-bogart' | 'anthony-jeselnik' | 'doug-stanhope' | 'jim-norton' | 'jim-jefferies' | 'daniel-tosh' | 'andy-andrist' | 'bill-burr' | 'lewis-black' | 'george-carlin' | 'sam-kinison' | 'paul-mooney' | 'bill-hicks' | 'bob-saget'
+export type ExplanationStyle = 'neutral' | 'harold-bloom' | 'carl-sagan' | 'louis-ck' | 'david-foster-wallace' | 'neil-degrasse-tyson' | 'oscar-wilde' | 'stephen-fry' | 'bill-bryson' | 'maya-angelou' | 'anthony-bourdain' | 'douglas-adams' | 'terry-pratchett' | 'joan-didion' | 'jerry-seinfeld' | 'andrew-dice-clay' | 'howard-stern' | 'tina-fey' | 'dave-chappelle' | 'amy-poehler' | 'ricky-gervais' | 'sarah-silverman' | 'john-mulaney' | 'ali-wong' | 'bo-burnham' | 'oprah-winfrey' | 'david-letterman' | 'conan-obrien' | 'stephen-colbert' | 'jimmy-fallon' | 'ellen-degeneres' | 'trevor-noah' | 'john-oliver' | 'jon-stewart' | 'david-sedaris' | 'mark-twain' | 'ts-eliot' | 'rudyard-kipling' | 'tom-wolfe' | 'flannery-oconnor' | 'humphrey-bogart' | 'anthony-jeselnik' | 'doug-stanhope' | 'jim-norton' | 'jim-jefferies' | 'daniel-tosh' | 'andy-andrist' | 'bill-burr' | 'lewis-black' | 'george-carlin' | 'sam-kinison' | 'paul-mooney' | 'bill-hicks' | 'bob-saget' | 'norm-macdonald'
 
 export interface SettingsData {
   llmProvider: LLMProvider
@@ -1241,6 +1241,24 @@ const Settings: React.FC<SettingsProps> = ({ isOpen, onClose, settings, onSettin
                     onError={(e) => { e.currentTarget.style.display = 'none' }}
                   />
                   <span>Bob Saget - Clean vs dirty contrast</span>
+                </div>
+              </label>
+              <label className={styles.radioLabel}>
+                <input
+                  type="radio"
+                  name="explanationStyle"
+                  value="norm-macdonald"
+                  checked={localSettings.explanationStyle === 'norm-macdonald'}
+                  onChange={(e) => setLocalSettings(prev => ({ ...prev, explanationStyle: e.target.value as ExplanationStyle }))}
+                />
+                <div className={styles.explainerOption}>
+                  <img 
+                    src="/explainer-photos/norm-macdonald.jpg" 
+                    alt="Norm MacDonald"
+                    className={styles.explainerPhoto}
+                    onError={(e) => { e.currentTarget.style.display = 'none' }}
+                  />
+                  <span>Norm MacDonald - Deadpan anti-comedy genius</span>
                 </div>
               </label>
             </div>

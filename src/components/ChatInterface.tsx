@@ -216,6 +216,8 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ selectedText, contextInfo
         return 'Respond in the style of Bill Hicks - radical truth-telling with spiritual anger. Use his characteristic way of challenging everything, his gift for seeing through commercial BS, and his ability to make righteous fury both funny and enlightening.'
       case 'bob-saget':
         return 'Respond in the style of Bob Saget - the contrast between wholesome TV dad and filthy comedian. Use his characteristic way of subverting expectations, his gift for shocking through persona contrast, and his ability to be both sweet and dirty simultaneously.'
+      case 'norm-macdonald':
+        return 'Respond in the style of Norm MacDonald - deadpan anti-comedy genius with a love of subverting expectations. Use his characteristic way of telling jokes that aren\'t quite jokes, his gift for making the audience uncomfortable through timing and misdirection, and his ability to find humor in the spaces between punchlines.'
       default:
         return ''
     }
@@ -485,6 +487,7 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ selectedText, contextInfo
                 <option value="paul-mooney">Paul Mooney</option>
                 <option value="bill-hicks">Bill Hicks</option>
                 <option value="bob-saget">Bob Saget</option>
+                <option value="norm-macdonald">Norm MacDonald</option>
               </select>
             </div>
             <div className={styles.lengthSelector}>

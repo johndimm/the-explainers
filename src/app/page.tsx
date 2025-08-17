@@ -16,6 +16,7 @@ function HomeContent() {
   const [currentBook, setCurrentBook] = useState({ title: '', author: '' })
   const [showLibrary, setShowLibrary] = useState(true)
   const [showPricing, setShowPricing] = useState(false)
+  const [showMobileMenu, setShowMobileMenu] = useState(false)
   const { settings, updateSettings, isSettingsOpen, openSettings, closeSettings } = useSettings()
   const { profile, updateProfile, isProfileOpen, openProfile, closeProfile } = useProfile()
 
@@ -141,102 +142,226 @@ function HomeContent() {
           }}>
             The Explainers
           </h1>
-          <p style={{ 
-            margin: 0, 
-            fontSize: '11px', 
-            fontStyle: 'italic',
-            color: '#666',
-            lineHeight: '1.2'
-          }}>
-            understand difficult texts
-          </p>
+          {currentBook.title ? (
+            <p style={{ 
+              margin: 0, 
+              fontSize: '11px', 
+              color: '#666',
+              lineHeight: '1.2'
+            }}>
+              {currentBook.title} by {currentBook.author}
+            </p>
+          ) : (
+            <p style={{ 
+              margin: 0, 
+              fontSize: '11px', 
+              fontStyle: 'italic',
+              color: '#666',
+              lineHeight: '1.2'
+            }}>
+              understand difficult texts
+            </p>
+          )}
         </div>
+        {/* Desktop buttons */}
         <div style={{ 
-          display: 'flex',
-          gap: '3px',
-          flexShrink: 0,
-          flexWrap: 'wrap'
-        }}>
-        <a 
-          href="/user-guide.html"
-          target="_blank"
-          rel="noopener noreferrer"
-          style={{
-            padding: '4px 6px',
-            background: '#6b7280',
-            color: 'white',
-            border: 'none',
-            borderRadius: '3px',
-            cursor: 'pointer',
-            fontSize: '10px',
-            textDecoration: 'none',
-            display: 'inline-block',
-            minWidth: '35px',
-            textAlign: 'center'
-          }}
-        >
-          📖
-        </a>
-        <button 
-          onClick={() => setShowLibrary(true)}
-          style={{
-            padding: '4px 6px',
-            background: '#8b5cf6',
-            color: 'white',
-            border: 'none',
-            borderRadius: '3px',
-            cursor: 'pointer',
-            fontSize: '10px',
-            minWidth: '45px'
-          }}
-        >
-          Library
-        </button>
-        <button 
-          onClick={() => setShowPricing(true)}
-          style={{
-            padding: '4px 6px',
-            background: '#f59e0b',
-            color: 'white',
-            border: 'none',
-            borderRadius: '3px',
-            cursor: 'pointer',
-            fontSize: '10px',
-            minWidth: '35px'
-          }}
-        >
-          💳{profile.availableCredits || 0}
-        </button>
-        <button 
-          onClick={openProfile}
-          style={{
-            padding: '4px 6px',
-            background: '#10b981',
-            color: 'white',
-            border: 'none',
-            borderRadius: '3px',
-            cursor: 'pointer',
-            fontSize: '10px',
-            minWidth: '40px'
-          }}
-        >
-          Profile
-        </button>
-        <button 
-          onClick={openSettings}
-          style={{
-            padding: '4px 6px',
-            background: '#007bff',
-            color: 'white',
-            border: 'none',
-            borderRadius: '3px',
-            cursor: 'pointer',
-            fontSize: '10px',
-            minWidth: '45px'
-          }}
-        >
-          Settings
-        </button>
+          display: 'none',
+          gap: '6px',
+          flexShrink: 0
+        }}
+        className="desktop-only">
+          <a 
+            href="/user-guide.html"
+            target="_blank"
+            rel="noopener noreferrer"
+            style={{
+              padding: '6px 10px',
+              background: '#6b7280',
+              color: 'white',
+              border: 'none',
+              borderRadius: '4px',
+              cursor: 'pointer',
+              fontSize: '12px',
+              textDecoration: 'none',
+              display: 'inline-block'
+            }}
+          >
+            Guide
+          </a>
+          <button 
+            onClick={() => setShowLibrary(true)}
+            style={{
+              padding: '6px 10px',
+              background: '#8b5cf6',
+              color: 'white',
+              border: 'none',
+              borderRadius: '4px',
+              cursor: 'pointer',
+              fontSize: '12px'
+            }}
+          >
+            Library
+          </button>
+          <button 
+            onClick={() => setShowPricing(true)}
+            style={{
+              padding: '6px 10px',
+              background: '#f59e0b',
+              color: 'white',
+              border: 'none',
+              borderRadius: '4px',
+              cursor: 'pointer',
+              fontSize: '12px'
+            }}
+          >
+            Credits ({profile.availableCredits || 0})
+          </button>
+          <button 
+            onClick={openProfile}
+            style={{
+              padding: '6px 10px',
+              background: '#10b981',
+              color: 'white',
+              border: 'none',
+              borderRadius: '4px',
+              cursor: 'pointer',
+              fontSize: '12px'
+            }}
+          >
+            Profile
+          </button>
+          <button 
+            onClick={openSettings}
+            style={{
+              padding: '6px 10px',
+              background: '#007bff',
+              color: 'white',
+              border: 'none',
+              borderRadius: '4px',
+              cursor: 'pointer',
+              fontSize: '12px'
+            }}
+          >
+            Settings
+          </button>
+        </div>
+
+        {/* Mobile hamburger menu */}
+        <div style={{ position: 'relative' }} className="mobile-only">
+          <button 
+            onClick={() => setShowMobileMenu(!showMobileMenu)}
+            style={{
+              padding: '8px',
+              background: 'none',
+              border: 'none',
+              cursor: 'pointer',
+              fontSize: '18px',
+              color: '#333'
+            }}
+          >
+            ☰
+          </button>
+          
+          {showMobileMenu && (
+            <div style={{
+              position: 'absolute',
+              top: '100%',
+              right: 0,
+              background: 'white',
+              border: '1px solid #e0e0e0',
+              borderRadius: '8px',
+              boxShadow: '0 4px 12px rgba(0,0,0,0.15)',
+              minWidth: '160px',
+              zIndex: 1000
+            }}>
+              <a 
+                href="/user-guide.html"
+                target="_blank"
+                rel="noopener noreferrer"
+                style={{
+                  display: 'block',
+                  padding: '12px 16px',
+                  color: '#333',
+                  textDecoration: 'none',
+                  borderBottom: '1px solid #f0f0f0'
+                }}
+                onClick={() => setShowMobileMenu(false)}
+              >
+                📖 User Guide
+              </a>
+              <button 
+                onClick={() => {
+                  setShowLibrary(true)
+                  setShowMobileMenu(false)
+                }}
+                style={{
+                  display: 'block',
+                  width: '100%',
+                  padding: '12px 16px',
+                  background: 'none',
+                  border: 'none',
+                  textAlign: 'left',
+                  cursor: 'pointer',
+                  borderBottom: '1px solid #f0f0f0'
+                }}
+              >
+                📚 Library
+              </button>
+              <button 
+                onClick={() => {
+                  setShowPricing(true)
+                  setShowMobileMenu(false)
+                }}
+                style={{
+                  display: 'block',
+                  width: '100%',
+                  padding: '12px 16px',
+                  background: 'none',
+                  border: 'none',
+                  textAlign: 'left',
+                  cursor: 'pointer',
+                  borderBottom: '1px solid #f0f0f0'
+                }}
+              >
+                💳 Credits ({profile.availableCredits || 0})
+              </button>
+              <button 
+                onClick={() => {
+                  openProfile()
+                  setShowMobileMenu(false)
+                }}
+                style={{
+                  display: 'block',
+                  width: '100%',
+                  padding: '12px 16px',
+                  background: 'none',
+                  border: 'none',
+                  textAlign: 'left',
+                  cursor: 'pointer',
+                  borderBottom: '1px solid #f0f0f0'
+                }}
+              >
+                👤 Profile
+              </button>
+              <button 
+                onClick={() => {
+                  openSettings()
+                  setShowMobileMenu(false)
+                }}
+                style={{
+                  display: 'block',
+                  width: '100%',
+                  padding: '12px 16px',
+                  background: 'none',
+                  border: 'none',
+                  textAlign: 'left',
+                  cursor: 'pointer'
+                }}
+              >
+                ⚙️ Settings
+              </button>
+            </div>
+          )}
         </div>
       </header>
       
