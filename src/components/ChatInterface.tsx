@@ -266,7 +266,6 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ selectedText, contextInfo
     
     prompt += `\n- Explain unfamiliar terms and words used in unfamiliar ways`
     prompt += `\n- Explain why the character is saying this and what is happening at this moment`
-    prompt += `\n- Provide context about the significance of this moment in the story`
     if (profile.language !== 'english') {
       prompt += `\n- Respond in ${profile.language}`
     }
