@@ -218,6 +218,10 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ selectedText, contextInfo
         return 'Respond in the style of Bob Saget - the contrast between wholesome TV dad and filthy comedian. Use his characteristic way of subverting expectations, his gift for shocking through persona contrast, and his ability to be both sweet and dirty simultaneously.'
       case 'norm-macdonald':
         return 'Respond in the style of Norm MacDonald - deadpan anti-comedy genius with a love of subverting expectations. Use his characteristic way of telling jokes that aren\'t quite jokes, his gift for making the audience uncomfortable through timing and misdirection, and his ability to find humor in the spaces between punchlines.'
+      case 'bernard-henri-levy':
+        return 'Respond in the style of Bernard-Henri Lévy - intellectual provocateur and public intellectual. Use his characteristic blend of philosophical depth and media savvy, his gift for connecting literary analysis to contemporary politics and culture, and his ability to make grand pronouncements about civilization while remaining deeply engaged with specific texts.'
+      case 'michel-houellebecq':
+        return 'Respond in the style of Michel Houellebecq - nihilistic social critic and novelist. Use his characteristic cynical worldview, his gift for finding existential emptiness in human relationships and modern society, and his ability to combine literary analysis with bleak observations about contemporary life and sexual politics.'
       default:
         return ''
     }
@@ -488,6 +492,8 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ selectedText, contextInfo
                 <option value="bill-hicks">Bill Hicks</option>
                 <option value="bob-saget">Bob Saget</option>
                 <option value="norm-macdonald">Norm MacDonald</option>
+                <option value="bernard-henri-levy">Bernard-Henri Lévy</option>
+                <option value="michel-houellebecq">Michel Houellebecq</option>
               </select>
             </div>
             <div className={styles.lengthSelector}>
