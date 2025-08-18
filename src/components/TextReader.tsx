@@ -123,12 +123,13 @@ const TextReader: React.FC<TextReaderProps> = ({ text, bookTitle = 'Romeo and Ju
     let speaker: string | null = null
     let charactersOnStage: string[] = []
 
-    // Look backwards for Act/Scene markers
-    const actMatch = beforeText.match(/ACT\s+([IVXLC]+)/i)
-    if (actMatch) act = actMatch[1]
+    // Look backwards for Act/Scene markers - check both before text and full text up to selection
+    const searchText = fullText.substring(0, selectedIndex + selectedText.length)
+    const actMatch = searchText.match(/ACT\s+([IVXLC]+)/gi)
+    if (actMatch) act = actMatch[actMatch.length - 1].match(/([IVXLC]+)/i)?.[1] || null
     
-    const sceneMatch = beforeText.match(/SCENE\s+([IVXLC]+)/i)
-    if (sceneMatch) scene = sceneMatch[1]
+    const sceneMatch = searchText.match(/SCENE\s+([IVXLC]+)/gi)
+    if (sceneMatch) scene = sceneMatch[sceneMatch.length - 1].match(/([IVXLC]+)/i)?.[1] || null
 
     // Look for speaker (name in caps followed by period)
     const speakerMatch = beforeText.match(/\n([A-Z][A-Z\s]+)\.\s*$/)
@@ -137,30 +138,43 @@ const TextReader: React.FC<TextReaderProps> = ({ text, bookTitle = 'Romeo and Ju
     }
 
     // Track characters entering and exiting to build current stage list
-    const stageDirections = beforeText.match(/(?:Enter|Exit|Exeunt)\s+[^\.]+\./gi) || []
+    // Look for stage directions in the entire text up to this point
+    const textBeforeSelection = fullText.substring(0, selectedIndex)
+    const stageDirections = textBeforeSelection.match(/\s+Enter\s+[^\r\n]+|Exit\s+[^\r\n]+|Exeunt[^\r\n]*/gi) || []
     const currentCharacters = new Set<string>()
     
     // Process all stage directions in order
     stageDirections.forEach(direction => {
-      const isEnter = /^Enter/i.test(direction)
-      const isExit = /^Exit/i.test(direction)
-      const isExeunt = /^Exeunt/i.test(direction)
+      const trimmedDirection = direction.trim()
+      const isEnter = /^Enter/i.test(trimmedDirection)
+      const isExit = /^Exit/i.test(trimmedDirection)
+      const isExeunt = /^Exeunt/i.test(trimmedDirection)
       
-      // Extract character names
-      const characterMatch = direction.match(/(?:Enter|Exit|Exeunt)\s+([^\.]+)\./i)
-      if (characterMatch) {
-        const characterList = characterMatch[1]
-        const characters = characterList
-          .split(/\s+and\s+|,\s*/)
-          .map(c => c.trim().replace(/\.$/, ''))
-          .filter(c => c.length > 0 && !c.toLowerCase().includes('servant') && !c.toLowerCase().includes('page'))
-        
-        if (isEnter) {
+      if (isEnter) {
+        // Extract character names after "Enter"
+        const characterMatch = trimmedDirection.match(/Enter\s+(.+)/i)
+        if (characterMatch) {
+          const characterList = characterMatch[1].replace(/\.$/, '')
+          const characters = characterList
+            .split(/\s+and\s+|,\s*/)
+            .map(c => c.trim().toUpperCase())
+            .filter(c => c.length > 0 && !c.includes('SERVANT') && !c.includes('PAGE'))
+          
           characters.forEach(char => currentCharacters.add(char))
-        } else if (isExit || isExeunt) {
-          if (characterList.toLowerCase().includes('all') || isExeunt) {
-            currentCharacters.clear()
-          } else {
+        }
+      } else if (isExit || isExeunt) {
+        if (isExeunt && trimmedDirection.toLowerCase().includes('all')) {
+          currentCharacters.clear()
+        } else {
+          // Extract specific characters exiting
+          const characterMatch = trimmedDirection.match(/(?:Exit|Exeunt)\s+(.+)/i)
+          if (characterMatch) {
+            const characterList = characterMatch[1].replace(/\.$/, '')
+            const characters = characterList
+              .split(/\s+and\s+|,\s*/)
+              .map(c => c.trim().toUpperCase())
+              .filter(c => c.length > 0)
+            
             characters.forEach(char => currentCharacters.delete(char))
           }
         }
