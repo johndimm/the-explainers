@@ -28,19 +28,12 @@ function HomeContent() {
         const parsedBook = JSON.parse(savedBook)
         console.log('Restoring saved book:', parsedBook)
         
-        // We need to reconstruct the URL - for now, just handle a few key books
-        let url = ''
-        if (parsedBook.title === 'Hamlet') {
-          url = 'https://www.gutenberg.org/cache/epub/1524/pg1524.txt'
-        } else if (parsedBook.title === 'Romeo and Juliet') {
-          url = '/public-domain-texts/shakespeare-romeo-and-juliet.txt'
-        }
-        
-        if (url) {
-          // Use the same handleBookSelect logic
-          handleBookSelect(parsedBook.title, parsedBook.author, url)
+        // Check if URL is saved with the book (new format)
+        if (parsedBook.url) {
+          handleBookSelect(parsedBook.title, parsedBook.author, parsedBook.url)
         } else {
-          console.log('No URL mapping for saved book, showing library')
+          // Legacy format without URL - just show library
+          console.log('Legacy saved book without URL, showing library')
           setLoading(false)
         }
       } catch (error) {
@@ -55,10 +48,10 @@ function HomeContent() {
 
   const handleBookSelect = async (title: string, author: string, url: string) => {
     setLoading(true)
-    const newBook = { title, author }
-    setCurrentBook(newBook)
+    const newBook = { title, author, url }
+    setCurrentBook({ title, author })
     
-    // Save current book to localStorage
+    // Save current book to localStorage with URL
     localStorage.setItem('current-book', JSON.stringify(newBook))
     
     try {
