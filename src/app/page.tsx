@@ -107,7 +107,10 @@ function HomeContent() {
   }
 
   if (showLibrary) {
-    return <Library onBookSelect={handleBookSelect} />
+    return <Library 
+      onBookSelect={handleBookSelect} 
+      onBackToCurrentBook={() => setShowLibrary(false)}
+    />
   }
 
   return (

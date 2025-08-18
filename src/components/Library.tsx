@@ -19,6 +19,7 @@ interface LibraryCategory {
 
 interface LibraryProps {
   onBookSelect: (title: string, author: string, url: string) => void
+  onBackToCurrentBook?: () => void
 }
 
 const CATEGORY_FILES = [
@@ -34,7 +35,7 @@ const CATEGORY_FILES = [
   'gutenberg-top.json'
 ]
 
-const Library: React.FC<LibraryProps> = ({ onBookSelect }) => {
+const Library: React.FC<LibraryProps> = ({ onBookSelect, onBackToCurrentBook }) => {
   const [categories, setCategories] = useState<LibraryCategory[]>([])
   const [loading, setLoading] = useState(true)
   const [customUrl, setCustomUrl] = useState('')
@@ -129,8 +130,32 @@ const Library: React.FC<LibraryProps> = ({ onBookSelect }) => {
     return <div className={styles.loading}>Loading library...</div>
   }
 
+  // Check if there's a current book
+  const getCurrentBook = () => {
+    try {
+      const savedBook = localStorage.getItem('current-book')
+      if (savedBook) {
+        const book = JSON.parse(savedBook)
+        return book.title ? book : null
+      }
+    } catch (error) {
+      console.error('Error loading current book:', error)
+    }
+    return null
+  }
+
+  const currentBook = getCurrentBook()
+
   return (
     <div className={styles.library}>
+      {currentBook && onBackToCurrentBook && (
+        <div className={styles.currentBookLink}>
+          <button onClick={onBackToCurrentBook} className={styles.backButton}>
+            ← Back to "{currentBook.title}"
+          </button>
+        </div>
+      )}
+      
       <div className={styles.header}>
         <h1>Library</h1>
         <p>Choose a book to read and explore</p>
