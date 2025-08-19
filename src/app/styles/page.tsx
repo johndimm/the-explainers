@@ -13,11 +13,10 @@ function StylesContent() {
   return (
     <ExplainerStyles
       isOpen={true}
-      onClose={() => router.push('/reader')}
+      onClose={() => router.push('/library')}
       selectedStyle={settings.explanationStyle}
       onStyleChange={(style) => {
         updateSettings({ ...settings, explanationStyle: style })
-        router.push('/reader')
       }}
     />
   )

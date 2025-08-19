@@ -21,7 +21,7 @@ const DEFAULT_PROFILE: ProfileData = {
   age: null,
   language: 'english',
   educationLevel: 'high-school',
-  firstLogin: new Date(),
+  firstLogin: undefined,
   totalExplanations: 0,
   todayExplanations: 0,
   availableCredits: 100,
@@ -40,22 +40,31 @@ interface ProfileProviderProps {
 export const ProfileProvider: React.FC<ProfileProviderProps> = ({ children }) => {
   const [profile, setProfile] = useState<ProfileData>(DEFAULT_PROFILE)
   const [isProfileOpen, setIsProfileOpen] = useState(false)
+  const [isHydrated, setIsHydrated] = useState(false)
 
   useEffect(() => {
+    // Mark as hydrated and only then access localStorage
+    setIsHydrated(true)
     const savedProfile = localStorage.getItem('explainer-profile')
+    console.log('ProfileContext: Loading profile from localStorage:', savedProfile)
+    
     if (savedProfile) {
       try {
         const parsed = JSON.parse(savedProfile)
+        console.log('ProfileContext: Parsed saved profile:', parsed)
         // Convert date strings back to Date objects
         if (parsed.firstLogin) {
           parsed.firstLogin = new Date(parsed.firstLogin)
         }
-        setProfile({ ...DEFAULT_PROFILE, ...parsed })
+        const restoredProfile = { ...DEFAULT_PROFILE, ...parsed }
+        console.log('ProfileContext: Restoring profile:', restoredProfile)
+        setProfile(restoredProfile)
       } catch (error) {
         console.error('Error loading profile:', error)
       }
     } else {
       // First time user - set first login date
+      console.log('ProfileContext: No saved profile found, creating new one')
       const newProfile = { ...DEFAULT_PROFILE, firstLogin: new Date() }
       setProfile(newProfile)
       localStorage.setItem('explainer-profile', JSON.stringify(newProfile))
@@ -63,8 +72,10 @@ export const ProfileProvider: React.FC<ProfileProviderProps> = ({ children }) =>
   }, [])
 
   const updateProfile = (newProfile: ProfileData) => {
+    console.log('ProfileContext: updateProfile called with:', newProfile)
     setProfile(newProfile)
     localStorage.setItem('explainer-profile', JSON.stringify(newProfile))
+    console.log('ProfileContext: Profile updated in localStorage')
   }
 
   const incrementExplanations = () => {

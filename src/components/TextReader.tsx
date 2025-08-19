@@ -123,16 +123,36 @@ const TextReader: React.FC<TextReaderProps> = ({ text, bookTitle = 'Romeo and Ju
 
     // Look backwards for Act/Scene markers - check both before text and full text up to selection
     const searchText = fullText.substring(0, selectedIndex + selectedText.length)
-    const actMatch = searchText.match(/ACT\s+([IVXLC]+)/gi)
-    if (actMatch) act = actMatch[actMatch.length - 1].match(/([IVXLC]+)/i)?.[1] || null
     
-    const sceneMatch = searchText.match(/SCENE\s+([IVXLC]+)/gi)
-    if (sceneMatch) scene = sceneMatch[sceneMatch.length - 1].match(/([IVXLC]+)/i)?.[1] || null
+    // Extract Act number - match "ACT" followed by whitespace and Roman numerals
+    const actMatches = searchText.match(/\bACT\s+([IVXLCDM]+)\b/gi)
+    if (actMatches) {
+      const lastActMatch = actMatches[actMatches.length - 1]
+      act = lastActMatch.replace(/\bACT\s+/i, '').trim()
+    }
+    
+    // Extract Scene number - match "SCENE" followed by whitespace and Roman numerals  
+    const sceneMatches = searchText.match(/\bSCENE\s+([IVXLCDM]+)\b/gi)
+    if (sceneMatches) {
+      const lastSceneMatch = sceneMatches[sceneMatches.length - 1]
+      scene = lastSceneMatch.replace(/\bSCENE\s+/i, '').trim()
+    }
 
     // Look for speaker (name in caps followed by period)
-    const speakerMatch = beforeText.match(/\n([A-Z][A-Z\s]+)\.\s*$/)
-    if (speakerMatch) {
-      speaker = speakerMatch[1].trim()
+    // Find all speaker names in the text leading up to the selection
+    const speakerMatches = beforeText.match(/\n([A-Z][A-Z\s&']+)\./g)
+    if (speakerMatches && speakerMatches.length > 0) {
+      // Get the last speaker name before the selected text
+      const lastSpeakerMatch = speakerMatches[speakerMatches.length - 1]
+      const speakerName = lastSpeakerMatch.replace(/^\n/, '').replace(/\.$/, '').trim()
+      
+      // Clean up speaker name (remove stage directions in brackets)
+      speaker = speakerName.replace(/\[.*?\]/g, '').trim()
+      
+      // Handle special cases like "[_Aside._]" or multiple speakers
+      if (speaker.includes('_') || speaker.length < 2) {
+        speaker = null
+      }
     }
 
     // Track characters entering and exiting to build current stage list

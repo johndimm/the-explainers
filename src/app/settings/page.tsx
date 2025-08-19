@@ -13,11 +13,10 @@ function SettingsContent() {
   return (
     <Settings
       isOpen={true}
-      onClose={() => router.push('/reader')}
+      onClose={() => router.push('/library')}
       settings={settings}
       onSettingsChange={(newSettings) => {
         updateSettings(newSettings)
-        router.push('/reader')
       }}
     />
   )

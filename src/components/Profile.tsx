@@ -31,8 +31,18 @@ interface ProfileProps {
 const Profile: React.FC<ProfileProps> = ({ isOpen, onClose, profile, onProfileChange }) => {
   const [localProfile, setLocalProfile] = useState<ProfileData>(profile)
   const [showMobileMenu, setShowMobileMenu] = useState(false)
+  const [isSyncing, setIsSyncing] = useState(false)
   const menuRef = useRef<HTMLDivElement>(null)
   const router = useRouter()
+
+  // Sync localProfile when profile prop changes (e.g., when restored from localStorage)
+  useEffect(() => {
+    console.log('Profile: Syncing localProfile with profile prop:', profile)
+    setIsSyncing(true)
+    setLocalProfile(profile)
+    // Reset syncing flag after a short delay
+    setTimeout(() => setIsSyncing(false), 100)
+  }, [profile])
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -50,16 +60,24 @@ const Profile: React.FC<ProfileProps> = ({ isOpen, onClose, profile, onProfileCh
     }
   }, [showMobileMenu])
 
-  // Auto-save when profile changes
+  // Auto-save when profile changes (but only for user-initiated changes)
   useEffect(() => {
+    // Don't auto-save when syncing with restored profile
+    if (isSyncing) {
+      console.log('Profile: Skipping auto-save during sync')
+      return
+    }
+    
     if (JSON.stringify(localProfile) !== JSON.stringify(profile)) {
+      console.log('Profile changes detected, auto-saving...', localProfile)
       const timeoutId = setTimeout(() => {
         onProfileChange(localProfile)
+        console.log('Profile saved to localStorage')
       }, 500) // Debounce auto-save by 500ms
       
       return () => clearTimeout(timeoutId)
     }
-  }, [localProfile, profile, onProfileChange])
+  }, [localProfile, profile, onProfileChange, isSyncing])
 
   if (!isOpen) return null
 
@@ -135,24 +153,6 @@ const Profile: React.FC<ProfileProps> = ({ isOpen, onClose, profile, onProfileCh
               minWidth: '160px',
               zIndex: 1000
             }}>
-              <button 
-                onClick={() => {
-                  router.push('/guide')
-                  setShowMobileMenu(false)
-                }}
-                style={{
-                  display: 'block',
-                  width: '100%',
-                  padding: '12px 16px',
-                  background: 'none',
-                  border: 'none',
-                  textAlign: 'left',
-                  cursor: 'pointer',
-                  borderBottom: '1px solid #f0f0f0'
-                }}
-              >
-                📖 User Guide
-              </button>
               <button 
                 onClick={() => {
                   router.push('/reader')
@@ -271,10 +271,28 @@ const Profile: React.FC<ProfileProps> = ({ isOpen, onClose, profile, onProfileCh
                   background: 'none',
                   border: 'none',
                   textAlign: 'left',
-                  cursor: 'pointer'
+                  cursor: 'pointer',
+                  borderBottom: '1px solid #f0f0f0'
                 }}
               >
                 ⚙️ Settings
+              </button>
+              <button 
+                onClick={() => {
+                  router.push('/guide')
+                  setShowMobileMenu(false)
+                }}
+                style={{
+                  display: 'block',
+                  width: '100%',
+                  padding: '12px 16px',
+                  background: 'none',
+                  border: 'none',
+                  textAlign: 'left',
+                  cursor: 'pointer'
+                }}
+              >
+                📖 User Guide
               </button>
             </div>
           )}

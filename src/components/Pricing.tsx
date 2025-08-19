@@ -118,24 +118,6 @@ const Pricing: React.FC<PricingProps> = ({ isOpen, onClose, bookTitle, author })
             }}>
               <button 
                 onClick={() => {
-                  router.push('/guide')
-                  setShowMobileMenu(false)
-                }}
-                style={{
-                  display: 'block',
-                  width: '100%',
-                  padding: '12px 16px',
-                  background: 'none',
-                  border: 'none',
-                  textAlign: 'left',
-                  cursor: 'pointer',
-                  borderBottom: '1px solid #f0f0f0'
-                }}
-              >
-                📖 User Guide
-              </button>
-              <button 
-                onClick={() => {
                   router.push('/reader')
                   setShowMobileMenu(false)
                 }}
@@ -252,10 +234,28 @@ const Pricing: React.FC<PricingProps> = ({ isOpen, onClose, bookTitle, author })
                   background: 'none',
                   border: 'none',
                   textAlign: 'left',
-                  cursor: 'pointer'
+                  cursor: 'pointer',
+                  borderBottom: '1px solid #f0f0f0'
                 }}
               >
                 ⚙️ Settings
+              </button>
+              <button 
+                onClick={() => {
+                  router.push('/guide')
+                  setShowMobileMenu(false)
+                }}
+                style={{
+                  display: 'block',
+                  width: '100%',
+                  padding: '12px 16px',
+                  background: 'none',
+                  border: 'none',
+                  textAlign: 'left',
+                  cursor: 'pointer'
+                }}
+              >
+                📖 User Guide
               </button>
             </div>
           )}
@@ -312,7 +312,11 @@ const Pricing: React.FC<PricingProps> = ({ isOpen, onClose, bookTitle, author })
           
           {profile.firstLogin && (
             <div style={{ textAlign: 'center', fontSize: '14px', color: '#666', paddingTop: '16px', borderTop: '1px solid #e9ecef' }}>
-              Member since: {new Date(profile.firstLogin).toLocaleDateString()}
+              Member since: {new Date(profile.firstLogin).toLocaleDateString('en-US', { 
+                year: 'numeric', 
+                month: 'long', 
+                day: 'numeric' 
+              })}
             </div>
           )}
         </div>

@@ -110,24 +110,6 @@ function ChatContent() {
             }}>
               <button 
                 onClick={() => {
-                  router.push('/guide')
-                  setShowMobileMenu(false)
-                }}
-                style={{
-                  display: 'block',
-                  width: '100%',
-                  padding: '12px 16px',
-                  background: 'none',
-                  border: 'none',
-                  textAlign: 'left',
-                  cursor: 'pointer',
-                  borderBottom: '1px solid #f0f0f0'
-                }}
-              >
-                📖 User Guide
-              </button>
-              <button 
-                onClick={() => {
                   router.push('/reader')
                   setShowMobileMenu(false)
                 }}
@@ -244,10 +226,28 @@ function ChatContent() {
                   background: 'none',
                   border: 'none',
                   textAlign: 'left',
-                  cursor: 'pointer'
+                  cursor: 'pointer',
+                  borderBottom: '1px solid #f0f0f0'
                 }}
               >
                 ⚙️ Settings
+              </button>
+              <button 
+                onClick={() => {
+                  router.push('/guide')
+                  setShowMobileMenu(false)
+                }}
+                style={{
+                  display: 'block',
+                  width: '100%',
+                  padding: '12px 16px',
+                  background: 'none',
+                  border: 'none',
+                  textAlign: 'left',
+                  cursor: 'pointer'
+                }}
+              >
+                📖 User Guide
               </button>
             </div>
           )}
@@ -266,9 +266,41 @@ function ChatContent() {
           display: 'flex',
           flexDirection: 'column'
         }}>
-          <h2 style={{ margin: '0 0 20px 0', fontSize: '24px', fontWeight: '600', color: '#1a1a1a' }}>
-            Chat with AI
-          </h2>
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '20px' }}>
+            <div style={{ flex: 1 }}>
+              <h2 style={{ margin: '0 0 8px 0', fontSize: '24px', fontWeight: '600', color: '#1a1a1a' }}>
+                Chat with AI
+              </h2>
+              {contextData?.bookTitle && (
+                <p style={{ margin: '0', color: '#8b5cf6', fontSize: '14px', fontWeight: '500' }}>
+                  Discussing: {contextData.bookTitle} by {contextData.author}
+                </p>
+              )}
+            </div>
+            {contextData && (
+              <button
+                onClick={() => router.push('/reader')}
+                style={{
+                  background: '#8b5cf6',
+                  color: 'white',
+                  border: 'none',
+                  padding: '10px 16px',
+                  borderRadius: '8px',
+                  cursor: 'pointer',
+                  fontSize: '14px',
+                  fontWeight: '600',
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: '8px',
+                  transition: 'background 0.2s'
+                }}
+                onMouseOver={(e) => e.currentTarget.style.background = '#7c3aed'}
+                onMouseOut={(e) => e.currentTarget.style.background = '#8b5cf6'}
+              >
+                ← Back to Reader
+              </button>
+            )}
+          </div>
           <p style={{ margin: '0 0 24px 0', color: '#666', fontSize: '16px' }}>
             Ask questions or get explanations about any text. Chat history is preserved during your session.
           </p>
