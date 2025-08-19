@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect, useRef } from 'react'
+import { useState, useEffect, useRef, Suspense } from 'react'
 import TextReader from '@/components/TextReader'
 import { useSettings, SettingsProvider } from '@/contexts/SettingsContext'
 import { useProfile, ProfileProvider } from '@/contexts/ProfileContext'
@@ -215,8 +215,8 @@ function ReaderContent() {
                   transition: 'background-color 0.15s ease',
                   borderBottom: '1px solid rgba(0, 0, 0, 0.06)'
                 }}
-                onMouseEnter={(e) => e.target.style.backgroundColor = 'rgba(59, 130, 246, 0.04)'}
-                onMouseLeave={(e) => e.target.style.backgroundColor = 'transparent'}
+                onMouseEnter={(e) => (e.target as HTMLElement).style.backgroundColor = 'rgba(59, 130, 246, 0.04)'}
+                onMouseLeave={(e) => (e.target as HTMLElement).style.backgroundColor = 'transparent'}
               >
                 📖 User Guide
               </button>
@@ -257,8 +257,8 @@ function ReaderContent() {
                   transition: 'background-color 0.15s ease',
                   borderBottom: '1px solid rgba(0, 0, 0, 0.06)'
                 }}
-                onMouseEnter={(e) => e.target.style.backgroundColor = 'rgba(59, 130, 246, 0.04)'}
-                onMouseLeave={(e) => e.target.style.backgroundColor = 'transparent'}
+                onMouseEnter={(e) => (e.target as HTMLElement).style.backgroundColor = 'rgba(59, 130, 246, 0.04)'}
+                onMouseLeave={(e) => (e.target as HTMLElement).style.backgroundColor = 'transparent'}
               >
                 💬 Chat
               </button>
@@ -281,8 +281,8 @@ function ReaderContent() {
                   transition: 'background-color 0.15s ease',
                   borderBottom: '1px solid rgba(0, 0, 0, 0.06)'
                 }}
-                onMouseEnter={(e) => e.target.style.backgroundColor = 'rgba(59, 130, 246, 0.04)'}
-                onMouseLeave={(e) => e.target.style.backgroundColor = 'transparent'}
+                onMouseEnter={(e) => (e.target as HTMLElement).style.backgroundColor = 'rgba(59, 130, 246, 0.04)'}
+                onMouseLeave={(e) => (e.target as HTMLElement).style.backgroundColor = 'transparent'}
               >
                 📚 Library
               </button>
@@ -305,8 +305,8 @@ function ReaderContent() {
                   transition: 'background-color 0.15s ease',
                   borderBottom: '1px solid rgba(0, 0, 0, 0.06)'
                 }}
-                onMouseEnter={(e) => e.target.style.backgroundColor = 'rgba(59, 130, 246, 0.04)'}
-                onMouseLeave={(e) => e.target.style.backgroundColor = 'transparent'}
+                onMouseEnter={(e) => (e.target as HTMLElement).style.backgroundColor = 'rgba(59, 130, 246, 0.04)'}
+                onMouseLeave={(e) => (e.target as HTMLElement).style.backgroundColor = 'transparent'}
               >
                 🎭 Styles
               </button>
@@ -329,8 +329,8 @@ function ReaderContent() {
                   transition: 'background-color 0.15s ease',
                   borderBottom: '1px solid rgba(0, 0, 0, 0.06)'
                 }}
-                onMouseEnter={(e) => e.target.style.backgroundColor = 'rgba(59, 130, 246, 0.04)'}
-                onMouseLeave={(e) => e.target.style.backgroundColor = 'transparent'}
+                onMouseEnter={(e) => (e.target as HTMLElement).style.backgroundColor = 'rgba(59, 130, 246, 0.04)'}
+                onMouseLeave={(e) => (e.target as HTMLElement).style.backgroundColor = 'transparent'}
               >
                 💳 Credits
               </button>
@@ -353,8 +353,8 @@ function ReaderContent() {
                   transition: 'background-color 0.15s ease',
                   borderBottom: '1px solid rgba(0, 0, 0, 0.06)'
                 }}
-                onMouseEnter={(e) => e.target.style.backgroundColor = 'rgba(59, 130, 246, 0.04)'}
-                onMouseLeave={(e) => e.target.style.backgroundColor = 'transparent'}
+                onMouseEnter={(e) => (e.target as HTMLElement).style.backgroundColor = 'rgba(59, 130, 246, 0.04)'}
+                onMouseLeave={(e) => (e.target as HTMLElement).style.backgroundColor = 'transparent'}
               >
                 👤 Profile
               </button>
@@ -398,7 +398,9 @@ export default function ReaderPage() {
   return (
     <ProfileProvider>
       <SettingsProvider>
-        <ReaderContent />
+        <Suspense fallback={<div>Loading...</div>}>
+          <ReaderContent />
+        </Suspense>
       </SettingsProvider>
     </ProfileProvider>
   )

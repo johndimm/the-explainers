@@ -13,11 +13,10 @@ function ProfileContent() {
   return (
     <Profile
       isOpen={true}
-      onClose={() => router.push('/reader')}
+      onClose={() => router.push('/library')}
       profile={profile}
       onProfileChange={(newProfile) => {
         updateProfile(newProfile)
-        router.push('/reader')
       }}
     />
   )

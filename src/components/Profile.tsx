@@ -303,6 +303,7 @@ const Profile: React.FC<ProfileProps> = ({ isOpen, onClose, profile, onProfileCh
                 value={localProfile.age || ''}
                 onChange={(e) => updateField('age', e.target.value ? parseInt(e.target.value) : null)}
                 placeholder="Enter your age"
+                className={styles.field}
               />
             </div>
 
@@ -312,6 +313,7 @@ const Profile: React.FC<ProfileProps> = ({ isOpen, onClose, profile, onProfileCh
                 id="language"
                 value={localProfile.language}
                 onChange={(e) => updateField('language', e.target.value as Language)}
+                className={styles.field}
               >
                 <option value="english">English</option>
                 <option value="spanish">Spanish</option>
@@ -334,6 +336,7 @@ const Profile: React.FC<ProfileProps> = ({ isOpen, onClose, profile, onProfileCh
                 id="education"
                 value={localProfile.educationLevel}
                 onChange={(e) => updateField('educationLevel', e.target.value as EducationLevel)}
+                className={styles.field}
               >
                 <option value="elementary">Elementary School</option>
                 <option value="middle-school">Middle School</option>
