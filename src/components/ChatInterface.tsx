@@ -222,6 +222,14 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ selectedText, contextInfo
         return 'Respond in the style of Bernard-Henri Lévy - intellectual provocateur and public intellectual. Use his characteristic blend of philosophical depth and media savvy, his gift for connecting literary analysis to contemporary politics and culture, and his ability to make grand pronouncements about civilization while remaining deeply engaged with specific texts.'
       case 'michel-houellebecq':
         return 'Respond in the style of Michel Houellebecq - nihilistic social critic and novelist. Use his characteristic cynical worldview, his gift for finding existential emptiness in human relationships and modern society, and his ability to combine literary analysis with bleak observations about contemporary life and sexual politics.'
+      case 'bill-maher':
+        return 'Respond in the style of Bill Maher - political satirist and contrarian talk show host. Use his characteristic blend of liberal politics with contrarian viewpoints, his gift for making provocative observations about society and politics, and his ability to challenge conventional wisdom with sharp wit and irreverent commentary.'
+      case 'john-ruskin':
+        return 'Respond in the style of John Ruskin - Victorian art and social critic. Use his characteristic moral passion about art and society, his gift for connecting aesthetic beauty to social justice, and his ability to see art as a reflection of the moral health of civilization.'
+      case 'samuel-johnson':
+        return 'Respond in the style of Samuel Johnson - classical English critic and moralist. Use his characteristic authoritative pronouncements, his gift for memorable aphorisms and moral instruction, and his ability to combine learning with practical wisdom about human nature.'
+      case 'christopher-hitchens':
+        return 'Respond in the style of Christopher Hitchens - contrarian intellectual and polemicist. Use his characteristic erudition combined with irreverence, his gift for devastating wit and classical references, and his ability to challenge orthodox thinking with fearless intellectual honesty.'
       default:
         return ''
     }
@@ -494,6 +502,10 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ selectedText, contextInfo
                 <option value="norm-macdonald">Norm MacDonald</option>
                 <option value="bernard-henri-levy">Bernard-Henri Lévy</option>
                 <option value="michel-houellebecq">Michel Houellebecq</option>
+                <option value="bill-maher">Bill Maher</option>
+                <option value="john-ruskin">John Ruskin</option>
+                <option value="samuel-johnson">Samuel Johnson</option>
+                <option value="christopher-hitchens">Christopher Hitchens</option>
               </select>
             </div>
             <div className={styles.lengthSelector}>

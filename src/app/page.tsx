@@ -7,6 +7,7 @@ import Profile from '@/components/Profile'
 import Library from '@/components/Library'
 import Pricing from '@/components/Pricing'
 import PWAInstaller from '@/components/PWAInstaller'
+import ExplainerStyles from '@/components/ExplainerStyles'
 import { SettingsProvider, useSettings } from '@/contexts/SettingsContext'
 import { ProfileProvider, useProfile } from '@/contexts/ProfileContext'
 
@@ -16,6 +17,7 @@ function HomeContent() {
   const [currentBook, setCurrentBook] = useState({ title: '', author: '' })
   const [showLibrary, setShowLibrary] = useState(true)
   const [showPricing, setShowPricing] = useState(false)
+  const [showExplainerStyles, setShowExplainerStyles] = useState(false)
   const [showMobileMenu, setShowMobileMenu] = useState(false)
   const { settings, updateSettings, isSettingsOpen, openSettings, closeSettings } = useSettings()
   const { profile, updateProfile, isProfileOpen, openProfile, closeProfile } = useProfile()
@@ -113,6 +115,40 @@ function HomeContent() {
     />
   }
 
+  if (showExplainerStyles) {
+    return (
+      <div>
+        <div style={{ padding: '20px 20px 10px 20px', background: '#f8fafc', borderBottom: '1px solid #e5e7eb' }}>
+          <button 
+            onClick={() => setShowExplainerStyles(false)}
+            style={{
+              padding: '6px 12px',
+              background: 'none',
+              border: 'none',
+              cursor: 'pointer',
+              fontSize: '14px',
+              color: '#6b7280',
+              display: 'flex',
+              alignItems: 'center',
+              gap: '4px'
+            }}
+          >
+            ← Back
+          </button>
+        </div>
+        <ExplainerStyles
+          isOpen={true}
+          onClose={() => setShowExplainerStyles(false)}
+          selectedStyle={settings.explanationStyle}
+          onStyleChange={(style) => {
+            updateSettings({ ...settings, explanationStyle: style })
+            setShowExplainerStyles(false)
+          }}
+        />
+      </div>
+    )
+  }
+
   return (
     <div>
       <header style={{
@@ -197,6 +233,20 @@ function HomeContent() {
             }}
           >
             Library
+          </button>
+          <button 
+            onClick={() => setShowExplainerStyles(true)}
+            style={{
+              padding: '6px 10px',
+              background: '#ec4899',
+              color: 'white',
+              border: 'none',
+              borderRadius: '4px',
+              cursor: 'pointer',
+              fontSize: '12px'
+            }}
+          >
+            Styles
           </button>
           <button 
             onClick={() => setShowPricing(true)}
@@ -302,6 +352,24 @@ function HomeContent() {
                 }}
               >
                 📚 Library
+              </button>
+              <button 
+                onClick={() => {
+                  setShowExplainerStyles(true)
+                  setShowMobileMenu(false)
+                }}
+                style={{
+                  display: 'block',
+                  width: '100%',
+                  padding: '12px 16px',
+                  background: 'none',
+                  border: 'none',
+                  textAlign: 'left',
+                  cursor: 'pointer',
+                  borderBottom: '1px solid #f0f0f0'
+                }}
+              >
+                🎭 Styles
               </button>
               <button 
                 onClick={() => {
