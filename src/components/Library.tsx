@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import styles from './Library.module.css'
 
 interface Book {
@@ -41,10 +41,27 @@ const Library: React.FC<LibraryProps> = ({ onBookSelect, onBackToCurrentBook }) 
   const [customUrl, setCustomUrl] = useState('')
   const [fileInput, setFileInput] = useState<File | null>(null)
   const [showMobileMenu, setShowMobileMenu] = useState(false)
+  const menuRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
     loadLibraryData()
   }, [])
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (menuRef.current && !menuRef.current.contains(event.target as Node)) {
+        setShowMobileMenu(false)
+      }
+    }
+
+    if (showMobileMenu) {
+      document.addEventListener('mousedown', handleClickOutside)
+    }
+
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside)
+    }
+  }, [showMobileMenu])
 
   const loadLibraryData = async () => {
     try {
@@ -183,7 +200,7 @@ const Library: React.FC<LibraryProps> = ({ onBookSelect, onBackToCurrentBook }) 
           </p>
         </div>
         {/* Hamburger menu for all devices */}
-        <div style={{ position: 'relative' }}>
+        <div ref={menuRef} style={{ position: 'relative' }}>
           <button 
             onClick={() => setShowMobileMenu(!showMobileMenu)}
             style={{

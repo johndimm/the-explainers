@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import TextReader from '@/components/TextReader'
 import Settings from '@/components/Settings'
 import Profile from '@/components/Profile'
@@ -19,6 +19,7 @@ function HomeContent() {
   const [showPricing, setShowPricing] = useState(false)
   const [showExplainerStyles, setShowExplainerStyles] = useState(false)
   const [showMobileMenu, setShowMobileMenu] = useState(false)
+  const menuRef = useRef<HTMLDivElement>(null)
   const { settings, updateSettings, isSettingsOpen, openSettings, closeSettings } = useSettings()
   const { profile, updateProfile, isProfileOpen, openProfile, closeProfile } = useProfile()
 
@@ -47,6 +48,22 @@ function HomeContent() {
       setLoading(false)
     }
   }, [])
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (menuRef.current && !menuRef.current.contains(event.target as Node)) {
+        setShowMobileMenu(false)
+      }
+    }
+
+    if (showMobileMenu) {
+      document.addEventListener('mousedown', handleClickOutside)
+    }
+
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside)
+    }
+  }, [showMobileMenu])
 
   const handleBookSelect = async (title: string, author: string, url: string) => {
     setLoading(true)
@@ -196,7 +213,7 @@ function HomeContent() {
           )}
         </div>
         {/* Hamburger menu for all devices */}
-        <div style={{ position: 'relative' }}>
+        <div ref={menuRef} style={{ position: 'relative' }}>
           <button 
             onClick={() => setShowMobileMenu(!showMobileMenu)}
             style={{

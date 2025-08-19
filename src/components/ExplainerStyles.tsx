@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useState } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import { ExplanationStyle } from './Settings'
 import stylesCss from './ExplainerStyles.module.css'
 
@@ -97,6 +97,23 @@ const ExplainerStyles: React.FC<ExplainerStylesProps> = ({
   onStyleChange 
 }) => {
   const [showMobileMenu, setShowMobileMenu] = useState(false)
+  const menuRef = useRef<HTMLDivElement>(null)
+  
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (menuRef.current && !menuRef.current.contains(event.target as Node)) {
+        setShowMobileMenu(false)
+      }
+    }
+
+    if (showMobileMenu) {
+      document.addEventListener('mousedown', handleClickOutside)
+    }
+
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside)
+    }
+  }, [showMobileMenu])
   
   if (!isOpen) return null
 
@@ -167,7 +184,7 @@ const ExplainerStyles: React.FC<ExplainerStylesProps> = ({
           </p>
         </div>
         {/* Hamburger menu for all devices */}
-        <div style={{ position: 'relative' }}>
+        <div ref={menuRef} style={{ position: 'relative' }}>
           <button 
             onClick={() => setShowMobileMenu(!showMobileMenu)}
             style={{
