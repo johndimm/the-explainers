@@ -1,6 +1,7 @@
 'use client'
 
 import React, { useState, useEffect, useRef } from 'react'
+import { useRouter } from 'next/navigation'
 import { ExplanationStyle } from './Settings'
 import stylesCss from './ExplainerStyles.module.css'
 
@@ -98,6 +99,7 @@ const ExplainerStyles: React.FC<ExplainerStylesProps> = ({
 }) => {
   const [showMobileMenu, setShowMobileMenu] = useState(false)
   const menuRef = useRef<HTMLDivElement>(null)
+  const router = useRouter()
   
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -211,24 +213,63 @@ const ExplainerStyles: React.FC<ExplainerStylesProps> = ({
               minWidth: '160px',
               zIndex: 1000
             }}>
-              <a 
-                href="/user-guide.html"
-                target="_blank"
-                rel="noopener noreferrer"
-                style={{
-                  display: 'block',
-                  padding: '12px 16px',
-                  color: '#333',
-                  textDecoration: 'none',
-                  borderBottom: '1px solid #f0f0f0'
-                }}
-                onClick={() => setShowMobileMenu(false)}
-              >
-                📖 User Guide
-              </a>
               <button 
                 onClick={() => {
-                  window.location.href = '/?library=true'
+                  router.push('/guide')
+                  setShowMobileMenu(false)
+                }}
+                style={{
+                  display: 'block',
+                  width: '100%',
+                  padding: '12px 16px',
+                  background: 'none',
+                  border: 'none',
+                  textAlign: 'left',
+                  cursor: 'pointer',
+                  borderBottom: '1px solid #f0f0f0'
+                }}
+              >
+                📖 User Guide
+              </button>
+              <button 
+                onClick={() => {
+                  router.push('/reader')
+                  setShowMobileMenu(false)
+                }}
+                style={{
+                  display: 'block',
+                  width: '100%',
+                  padding: '12px 16px',
+                  background: 'none',
+                  border: 'none',
+                  textAlign: 'left',
+                  cursor: 'pointer',
+                  borderBottom: '1px solid #f0f0f0'
+                }}
+              >
+                📖 Reader
+              </button>
+              <button 
+                onClick={() => {
+                  router.push('/chat')
+                  setShowMobileMenu(false)
+                }}
+                style={{
+                  display: 'block',
+                  width: '100%',
+                  padding: '12px 16px',
+                  background: 'none',
+                  border: 'none',
+                  textAlign: 'left',
+                  cursor: 'pointer',
+                  borderBottom: '1px solid #f0f0f0'
+                }}
+              >
+                💬 Chat
+              </button>
+              <button 
+                onClick={() => {
+                  router.push('/library')
                   setShowMobileMenu(false)
                 }}
                 style={{
@@ -262,7 +303,7 @@ const ExplainerStyles: React.FC<ExplainerStylesProps> = ({
               </button>
               <button 
                 onClick={() => {
-                  window.location.href = '/?pricing=true'
+                  router.push('/credits')
                   setShowMobileMenu(false)
                 }}
                 style={{
@@ -280,7 +321,7 @@ const ExplainerStyles: React.FC<ExplainerStylesProps> = ({
               </button>
               <button 
                 onClick={() => {
-                  window.location.href = '/?profile=true'
+                  router.push('/profile')
                   setShowMobileMenu(false)
                 }}
                 style={{
@@ -298,7 +339,7 @@ const ExplainerStyles: React.FC<ExplainerStylesProps> = ({
               </button>
               <button 
                 onClick={() => {
-                  window.location.href = '/?settings=true'
+                  router.push('/settings')
                   setShowMobileMenu(false)
                 }}
                 style={{
@@ -321,7 +362,7 @@ const ExplainerStyles: React.FC<ExplainerStylesProps> = ({
     <div className={stylesCss.overlay} style={{ position: 'static', background: 'white', padding: '0', marginTop: '50px' }}>
       <div className={stylesCss.container} style={{ maxHeight: 'none', overflow: 'visible', boxShadow: 'none' }}>
         <div className={stylesCss.header}>
-          <h2>Choose Your Explainer Style</h2>
+          <h2>In the style of...</h2>
         </div>
         
         <div className={stylesCss.content} style={{ maxHeight: 'none', overflow: 'visible' }}>

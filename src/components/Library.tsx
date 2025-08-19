@@ -1,6 +1,7 @@
 'use client'
 
 import React, { useState, useEffect, useRef } from 'react'
+import { useRouter } from 'next/navigation'
 import styles from './Library.module.css'
 
 interface Book {
@@ -42,6 +43,7 @@ const Library: React.FC<LibraryProps> = ({ onBookSelect, onBackToCurrentBook }) 
   const [fileInput, setFileInput] = useState<File | null>(null)
   const [showMobileMenu, setShowMobileMenu] = useState(false)
   const menuRef = useRef<HTMLDivElement>(null)
+  const router = useRouter()
 
   useEffect(() => {
     loadLibraryData()
@@ -227,21 +229,60 @@ const Library: React.FC<LibraryProps> = ({ onBookSelect, onBackToCurrentBook }) 
               minWidth: '160px',
               zIndex: 1000
             }}>
-              <a 
-                href="/user-guide.html"
-                target="_blank"
-                rel="noopener noreferrer"
+              <button 
+                onClick={() => {
+                  router.push('/guide')
+                  setShowMobileMenu(false)
+                }}
                 style={{
                   display: 'block',
+                  width: '100%',
                   padding: '12px 16px',
-                  color: '#333',
-                  textDecoration: 'none',
+                  background: 'none',
+                  border: 'none',
+                  textAlign: 'left',
+                  cursor: 'pointer',
                   borderBottom: '1px solid #f0f0f0'
                 }}
-                onClick={() => setShowMobileMenu(false)}
               >
                 📖 User Guide
-              </a>
+              </button>
+              <button 
+                onClick={() => {
+                  router.push('/reader')
+                  setShowMobileMenu(false)
+                }}
+                style={{
+                  display: 'block',
+                  width: '100%',
+                  padding: '12px 16px',
+                  background: 'none',
+                  border: 'none',
+                  textAlign: 'left',
+                  cursor: 'pointer',
+                  borderBottom: '1px solid #f0f0f0'
+                }}
+              >
+                📖 Reader
+              </button>
+              <button 
+                onClick={() => {
+                  router.push('/chat')
+                  setShowMobileMenu(false)
+                }}
+                style={{
+                  display: 'block',
+                  width: '100%',
+                  padding: '12px 16px',
+                  background: 'none',
+                  border: 'none',
+                  textAlign: 'left',
+                  cursor: 'pointer',
+                  borderBottom: '1px solid #f0f0f0'
+                }}
+              >
+                💬 Chat
+              </button>
               <button 
                 onClick={() => setShowMobileMenu(false)}
                 style={{
@@ -260,7 +301,7 @@ const Library: React.FC<LibraryProps> = ({ onBookSelect, onBackToCurrentBook }) 
               </button>
               <button 
                 onClick={() => {
-                  window.location.href = '/?styles=true'
+                  router.push('/styles')
                   setShowMobileMenu(false)
                 }}
                 style={{
@@ -278,7 +319,7 @@ const Library: React.FC<LibraryProps> = ({ onBookSelect, onBackToCurrentBook }) 
               </button>
               <button 
                 onClick={() => {
-                  window.location.href = '/?pricing=true'
+                  router.push('/credits')
                   setShowMobileMenu(false)
                 }}
                 style={{
@@ -296,7 +337,7 @@ const Library: React.FC<LibraryProps> = ({ onBookSelect, onBackToCurrentBook }) 
               </button>
               <button 
                 onClick={() => {
-                  window.location.href = '/?profile=true'
+                  router.push('/profile')
                   setShowMobileMenu(false)
                 }}
                 style={{
@@ -314,7 +355,7 @@ const Library: React.FC<LibraryProps> = ({ onBookSelect, onBackToCurrentBook }) 
               </button>
               <button 
                 onClick={() => {
-                  window.location.href = '/?settings=true'
+                  router.push('/settings')
                   setShowMobileMenu(false)
                 }}
                 style={{

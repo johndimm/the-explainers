@@ -1,6 +1,7 @@
 'use client'
 
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
+import { useRouter } from 'next/navigation'
 import styles from './Settings.module.css'
 import ExplainerStyles from './ExplainerStyles'
 
@@ -39,21 +40,47 @@ const Settings: React.FC<SettingsProps> = ({ isOpen, onClose, settings, onSettin
   const [localSettings, setLocalSettings] = useState<SettingsData>(settings)
   const [showCustomFields, setShowCustomFields] = useState(settings.llmProvider === 'custom')
   const [showExplainerStyles, setShowExplainerStyles] = useState(false)
+  const [showMobileMenu, setShowMobileMenu] = useState(false)
+  const menuRef = useRef<HTMLDivElement>(null)
+  const router = useRouter()
 
   useEffect(() => {
     setLocalSettings(settings)
     setShowCustomFields(settings.llmProvider === 'custom')
   }, [settings])
 
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (menuRef.current && !menuRef.current.contains(event.target as Node)) {
+        setShowMobileMenu(false)
+      }
+    }
+
+    if (showMobileMenu) {
+      document.addEventListener('mousedown', handleClickOutside)
+    }
+
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside)
+    }
+  }, [showMobileMenu])
+
+  // Auto-save when settings change
+  useEffect(() => {
+    if (JSON.stringify(localSettings) !== JSON.stringify(settings)) {
+      const timeoutId = setTimeout(() => {
+        onSettingsChange(localSettings)
+      }, 500) // Debounce auto-save by 500ms
+      
+      return () => clearTimeout(timeoutId)
+    }
+  }, [localSettings, settings, onSettingsChange])
+
   const handleProviderChange = (provider: LLMProvider) => {
     setLocalSettings(prev => ({ ...prev, llmProvider: provider }))
     setShowCustomFields(provider === 'custom')
   }
 
-  const handleSave = () => {
-    onSettingsChange(localSettings)
-    onClose()
-  }
 
   const handleReset = () => {
     setLocalSettings(DEFAULT_SETTINGS)
@@ -63,14 +90,221 @@ const Settings: React.FC<SettingsProps> = ({ isOpen, onClose, settings, onSettin
   if (!isOpen) return null
 
   return (
-    <div className={styles.settingsOverlay}>
-      <div className={styles.settingsContainer}>
-        <div className={styles.settingsHeader}>
-          <h2>Settings</h2>
-          <button onClick={onClose} className={styles.closeButton}>×</button>
+    <div>
+      <header style={{
+        position: 'fixed',
+        top: 0,
+        left: 0,
+        right: 0,
+        background: 'white',
+        borderBottom: '1px solid #e0e0e0',
+        padding: '8px 12px',
+        zIndex: 100,
+        display: 'flex',
+        justifyContent: 'space-between',
+        alignItems: 'center'
+      }}>
+        <div style={{ flex: 1 }}>
+          <h1 style={{ 
+            margin: 0, 
+            fontSize: '18px', 
+            fontWeight: 'bold',
+            color: '#333',
+            lineHeight: '1.2'
+          }}>
+            The Explainers
+          </h1>
+          <p style={{ 
+            margin: 0, 
+            fontSize: '11px', 
+            color: '#666',
+            fontStyle: 'italic',
+            lineHeight: '1.2'
+          }}>
+            understand difficult texts
+          </p>
         </div>
+        {/* Hamburger menu for all devices */}
+        <div ref={menuRef} style={{ position: 'relative' }}>
+          <button 
+            onClick={() => setShowMobileMenu(!showMobileMenu)}
+            style={{
+              padding: '8px',
+              background: 'none',
+              border: 'none',
+              cursor: 'pointer',
+              fontSize: '18px',
+              color: '#333'
+            }}
+          >
+            ☰
+          </button>
+          
+          {showMobileMenu && (
+            <div style={{
+              position: 'absolute',
+              top: '100%',
+              right: 0,
+              background: 'white',
+              border: '1px solid #e0e0e0',
+              borderRadius: '8px',
+              boxShadow: '0 4px 12px rgba(0,0,0,0.15)',
+              minWidth: '160px',
+              zIndex: 1000
+            }}>
+              <button 
+                onClick={() => {
+                  router.push('/guide')
+                  setShowMobileMenu(false)
+                }}
+                style={{
+                  display: 'block',
+                  width: '100%',
+                  padding: '12px 16px',
+                  background: 'none',
+                  border: 'none',
+                  textAlign: 'left',
+                  cursor: 'pointer',
+                  borderBottom: '1px solid #f0f0f0'
+                }}
+              >
+                📖 User Guide
+              </button>
+              <button 
+                onClick={() => {
+                  router.push('/reader')
+                  setShowMobileMenu(false)
+                }}
+                style={{
+                  display: 'block',
+                  width: '100%',
+                  padding: '12px 16px',
+                  background: 'none',
+                  border: 'none',
+                  textAlign: 'left',
+                  cursor: 'pointer',
+                  borderBottom: '1px solid #f0f0f0'
+                }}
+              >
+                📖 Reader
+              </button>
+              <button 
+                onClick={() => {
+                  router.push('/chat')
+                  setShowMobileMenu(false)
+                }}
+                style={{
+                  display: 'block',
+                  width: '100%',
+                  padding: '12px 16px',
+                  background: 'none',
+                  border: 'none',
+                  textAlign: 'left',
+                  cursor: 'pointer',
+                  borderBottom: '1px solid #f0f0f0'
+                }}
+              >
+                💬 Chat
+              </button>
+              <button 
+                onClick={() => {
+                  router.push('/library')
+                  setShowMobileMenu(false)
+                }}
+                style={{
+                  display: 'block',
+                  width: '100%',
+                  padding: '12px 16px',
+                  background: 'none',
+                  border: 'none',
+                  textAlign: 'left',
+                  cursor: 'pointer',
+                  borderBottom: '1px solid #f0f0f0'
+                }}
+              >
+                📚 Library
+              </button>
+              <button 
+                onClick={() => {
+                  router.push('/styles')
+                  setShowMobileMenu(false)
+                }}
+                style={{
+                  display: 'block',
+                  width: '100%',
+                  padding: '12px 16px',
+                  background: 'none',
+                  border: 'none',
+                  textAlign: 'left',
+                  cursor: 'pointer',
+                  borderBottom: '1px solid #f0f0f0'
+                }}
+              >
+                🎭 Styles
+              </button>
+              <button 
+                onClick={() => {
+                  router.push('/credits')
+                  setShowMobileMenu(false)
+                }}
+                style={{
+                  display: 'block',
+                  width: '100%',
+                  padding: '12px 16px',
+                  background: 'none',
+                  border: 'none',
+                  textAlign: 'left',
+                  cursor: 'pointer',
+                  borderBottom: '1px solid #f0f0f0'
+                }}
+              >
+                💳 Credits
+              </button>
+              <button 
+                onClick={() => {
+                  router.push('/profile')
+                  setShowMobileMenu(false)
+                }}
+                style={{
+                  display: 'block',
+                  width: '100%',
+                  padding: '12px 16px',
+                  background: 'none',
+                  border: 'none',
+                  textAlign: 'left',
+                  cursor: 'pointer',
+                  borderBottom: '1px solid #f0f0f0'
+                }}
+              >
+                👤 Profile
+              </button>
+              <button 
+                onClick={() => setShowMobileMenu(false)}
+                style={{
+                  display: 'block',
+                  width: '100%',
+                  padding: '12px 16px',
+                  background: 'none',
+                  border: 'none',
+                  textAlign: 'left',
+                  cursor: 'pointer',
+                  color: '#666'
+                }}
+              >
+                ⚙️ Settings (current)
+              </button>
+            </div>
+          )}
+        </div>
+      </header>
+      
+      <div style={{ marginTop: '50px' }}>
+        <div className={styles.settingsContainer} style={{ margin: '20px auto', maxWidth: '600px', boxShadow: 'none', border: 'none', overflow: 'visible', maxHeight: 'none' }}>
+          <div className={styles.settingsHeader}>
+            <h2>Settings</h2>
+          </div>
 
-        <div className={styles.settingsContent}>
+        <div className={styles.settingsContent} style={{ overflow: 'visible', maxHeight: 'none' }}>
           <div className={styles.settingGroup}>
             <h3>Language Model</h3>
             <div className={styles.radioGroup}>
@@ -305,14 +539,10 @@ const Settings: React.FC<SettingsProps> = ({ isOpen, onClose, settings, onSettin
           <button onClick={handleReset} className={styles.resetButton}>
             Reset to Defaults
           </button>
-          <div className={styles.buttonGroup}>
-            <button onClick={onClose} className={styles.cancelButton}>
-              Cancel
-            </button>
-            <button onClick={handleSave} className={styles.saveButton}>
-              Save Settings
-            </button>
+          <div style={{ fontSize: '14px', color: '#666', textAlign: 'center', padding: '16px' }}>
+            Changes are saved automatically
           </div>
+        </div>
         </div>
       </div>
       

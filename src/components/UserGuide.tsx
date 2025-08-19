@@ -2,34 +2,8 @@
 
 import React, { useState, useEffect, useRef } from 'react'
 import { useRouter } from 'next/navigation'
-import styles from './Profile.module.css'
 
-export type EducationLevel = 'elementary' | 'middle-school' | 'high-school' | 'college' | 'graduate'
-export type Language = 'english' | 'spanish' | 'french' | 'german' | 'italian' | 'portuguese' | 'chinese' | 'japanese' | 'korean' | 'arabic' | 'hindi' | 'russian'
-
-export interface ProfileData {
-  age: number | null
-  language: Language
-  educationLevel: EducationLevel
-  firstLogin?: Date
-  totalExplanations?: number
-  todayExplanations?: number
-  availableCredits?: number
-  bookExplanations?: { [bookKey: string]: number }
-  purchasedBooks?: string[]
-  hasUnlimitedAccess?: boolean
-  unlimitedAccessExpiry?: Date
-}
-
-interface ProfileProps {
-  isOpen: boolean
-  onClose: () => void
-  profile: ProfileData
-  onProfileChange: (profile: ProfileData) => void
-}
-
-const Profile: React.FC<ProfileProps> = ({ isOpen, onClose, profile, onProfileChange }) => {
-  const [localProfile, setLocalProfile] = useState<ProfileData>(profile)
+const UserGuide: React.FC = () => {
   const [showMobileMenu, setShowMobileMenu] = useState(false)
   const menuRef = useRef<HTMLDivElement>(null)
   const router = useRouter()
@@ -49,28 +23,6 @@ const Profile: React.FC<ProfileProps> = ({ isOpen, onClose, profile, onProfileCh
       document.removeEventListener('mousedown', handleClickOutside)
     }
   }, [showMobileMenu])
-
-  // Auto-save when profile changes
-  useEffect(() => {
-    if (JSON.stringify(localProfile) !== JSON.stringify(profile)) {
-      const timeoutId = setTimeout(() => {
-        onProfileChange(localProfile)
-      }, 500) // Debounce auto-save by 500ms
-      
-      return () => clearTimeout(timeoutId)
-    }
-  }, [localProfile, profile, onProfileChange])
-
-  if (!isOpen) return null
-
-  const handleCancel = () => {
-    setLocalProfile(profile)
-    onClose()
-  }
-
-  const updateField = <K extends keyof ProfileData>(field: K, value: ProfileData[K]) => {
-    setLocalProfile(prev => ({ ...prev, [field]: value }))
-  }
 
   return (
     <div>
@@ -136,10 +88,7 @@ const Profile: React.FC<ProfileProps> = ({ isOpen, onClose, profile, onProfileCh
               zIndex: 1000
             }}>
               <button 
-                onClick={() => {
-                  router.push('/guide')
-                  setShowMobileMenu(false)
-                }}
+                onClick={() => setShowMobileMenu(false)}
                 style={{
                   display: 'block',
                   width: '100%',
@@ -148,10 +97,11 @@ const Profile: React.FC<ProfileProps> = ({ isOpen, onClose, profile, onProfileCh
                   border: 'none',
                   textAlign: 'left',
                   cursor: 'pointer',
-                  borderBottom: '1px solid #f0f0f0'
+                  borderBottom: '1px solid #f0f0f0',
+                  color: '#666'
                 }}
               >
-                📖 User Guide
+                📖 User Guide (current)
               </button>
               <button 
                 onClick={() => {
@@ -244,7 +194,10 @@ const Profile: React.FC<ProfileProps> = ({ isOpen, onClose, profile, onProfileCh
                 💳 Credits
               </button>
               <button 
-                onClick={() => setShowMobileMenu(false)}
+                onClick={() => {
+                  router.push('/profile')
+                  setShowMobileMenu(false)
+                }}
                 style={{
                   display: 'block',
                   width: '100%',
@@ -253,11 +206,10 @@ const Profile: React.FC<ProfileProps> = ({ isOpen, onClose, profile, onProfileCh
                   border: 'none',
                   textAlign: 'left',
                   cursor: 'pointer',
-                  borderBottom: '1px solid #f0f0f0',
-                  color: '#666'
+                  borderBottom: '1px solid #f0f0f0'
                 }}
               >
-                👤 Profile (current)
+                👤 Profile
               </button>
               <button 
                 onClick={() => {
@@ -281,80 +233,84 @@ const Profile: React.FC<ProfileProps> = ({ isOpen, onClose, profile, onProfileCh
         </div>
       </header>
       
-      <div style={{ marginTop: '50px' }}>
-        <div className={styles.modal} style={{ margin: '20px auto', maxWidth: '600px', boxShadow: 'none', border: 'none', position: 'static', transform: 'none', overflow: 'visible', maxHeight: 'none' }}>
-          <div className={styles.header}>
-            <h2>Profile Settings</h2>
+      <div style={{ marginTop: '50px', fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, sans-serif', lineHeight: '1.6', color: '#333', maxWidth: '800px', margin: '70px auto 0', padding: '20px', backgroundColor: '#f9f9f9' }}>
+        <div style={{ background: 'white', borderRadius: '8px', padding: '40px', boxShadow: '0 2px 10px rgba(0,0,0,0.1)' }}>
+          <h1 style={{ color: '#8b5cf6', borderBottom: '3px solid #8b5cf6', paddingBottom: '10px', marginBottom: '30px' }}>
+            The Explainers - User Guide
+          </h1>
+
+          <div style={{ background: '#fff3cd', border: '1px solid #ffeaa7', borderRadius: '4px', padding: '15px', margin: '15px 0' }}>
+            <strong>Welcome to The Explainers!</strong> This app helps you understand difficult texts by providing AI-powered explanations of selected passages. Whether you're tackling Shakespeare, philosophy, or classic literature, we make challenging texts accessible.
           </div>
 
-        <div className={styles.content}>
+          <h2 style={{ color: '#10b981', marginTop: '30px', marginBottom: '15px' }}>Getting Started</h2>
 
-          <div className={styles.section}>
-            <h3>Personal Information</h3>
-            <p className={styles.subtitle}>Help us customize explanations for your needs</p>
-            
-            <div className={styles.field}>
-              <label htmlFor="age">Age</label>
-              <input
-                id="age"
-                type="number"
-                min="1"
-                max="120"
-                value={localProfile.age || ''}
-                onChange={(e) => updateField('age', e.target.value ? parseInt(e.target.value) : null)}
-                placeholder="Enter your age"
-              />
+          <h3 style={{ color: '#007bff', marginTop: '25px', marginBottom: '10px' }}>Quick Start</h3>
+          <ol style={{ marginBottom: '15px' }}>
+            <li style={{ marginBottom: '5px' }}>Open the application (it loads with "Romeo and Juliet" by default)</li>
+            <li style={{ marginBottom: '5px' }}>Simply select any text passage you find confusing</li>
+            <li style={{ marginBottom: '5px' }}>Get an instant AI explanation tailored to your needs</li>
+            <li style={{ marginBottom: '5px' }}>Ask follow-up questions in the chat interface</li>
+          </ol>
+
+          <h3 style={{ color: '#007bff', marginTop: '25px', marginBottom: '10px' }}>First-Time Setup</h3>
+          <p>For the best experience, configure your profile and preferences:</p>
+
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '20px', margin: '20px 0' }}>
+            <div style={{ background: '#f8f9fa', padding: '20px', borderRadius: '8px', border: '1px solid #e9ecef' }}>
+              <h4 style={{ color: '#666', marginTop: '0', marginBottom: '8px' }}>Profile Setup</h4>
+              <p>Click the <strong>hamburger menu → Profile</strong> to set:</p>
+              <ul>
+                <li style={{ marginBottom: '5px' }}>Your age (for age-appropriate vocabulary)</li>
+                <li style={{ marginBottom: '5px' }}>Preferred language (12 languages supported)</li>
+                <li style={{ marginBottom: '5px' }}>Education level (elementary to graduate school)</li>
+              </ul>
             </div>
-
-            <div className={styles.field}>
-              <label htmlFor="language">Language</label>
-              <select
-                id="language"
-                value={localProfile.language}
-                onChange={(e) => updateField('language', e.target.value as Language)}
-              >
-                <option value="english">English</option>
-                <option value="spanish">Spanish</option>
-                <option value="french">French</option>
-                <option value="german">German</option>
-                <option value="italian">Italian</option>
-                <option value="portuguese">Portuguese</option>
-                <option value="chinese">Chinese</option>
-                <option value="japanese">Japanese</option>
-                <option value="korean">Korean</option>
-                <option value="arabic">Arabic</option>
-                <option value="hindi">Hindi</option>
-                <option value="russian">Russian</option>
-              </select>
-            </div>
-
-            <div className={styles.field}>
-              <label htmlFor="education">Education Level</label>
-              <select
-                id="education"
-                value={localProfile.educationLevel}
-                onChange={(e) => updateField('educationLevel', e.target.value as EducationLevel)}
-              >
-                <option value="elementary">Elementary School</option>
-                <option value="middle-school">Middle School</option>
-                <option value="high-school">High School</option>
-                <option value="college">College</option>
-                <option value="graduate">Graduate School</option>
-              </select>
+            <div style={{ background: '#f8f9fa', padding: '20px', borderRadius: '8px', border: '1px solid #e9ecef' }}>
+              <h4 style={{ color: '#666', marginTop: '0', marginBottom: '8px' }}>Settings Configuration</h4>
+              <p>Click the <strong>hamburger menu → Settings</strong> to customize:</p>
+              <ul>
+                <li style={{ marginBottom: '5px' }}>AI model provider (GPT-4, Claude, DeepSeek, Gemini)</li>
+                <li style={{ marginBottom: '5px' }}>Response length (brief, medium, long)</li>
+                <li style={{ marginBottom: '5px' }}>Text and chat fonts</li>
+                <li style={{ marginBottom: '5px' }}>Explanation style (50+ personalities!)</li>
+              </ul>
             </div>
           </div>
 
-        </div>
+          <h2 style={{ color: '#10b981', marginTop: '30px', marginBottom: '15px' }}>Core Features</h2>
 
-        <div className={styles.footer}>
-          <div style={{ fontSize: '14px', color: '#666', textAlign: 'center', padding: '16px' }}>
-            Changes are saved automatically
-          </div>
-        </div>
+          <h3 style={{ color: '#007bff', marginTop: '25px', marginBottom: '10px' }}>Text Reader</h3>
+          <ul>
+            <li style={{ marginBottom: '5px' }}><strong>Clean Interface</strong>: Distraction-free reading environment</li>
+            <li style={{ marginBottom: '5px' }}><strong>Text Selection</strong>: Highlight passages with mouse or touch</li>
+            <li style={{ marginBottom: '5px' }}><strong>Auto-Bookmarks</strong>: Your reading position is automatically saved</li>
+            <li style={{ marginBottom: '5px' }}><strong>Smart Context</strong>: AI understands which character is speaking and the scene context</li>
+          </ul>
+
+          <h3 style={{ color: '#007bff', marginTop: '25px', marginBottom: '10px' }}>AI Chat Interface</h3>
+          <ul>
+            <li style={{ marginBottom: '5px' }}><strong>Instant Explanations</strong>: Get immediate help with difficult passages</li>
+            <li style={{ marginBottom: '5px' }}><strong>Follow-up Questions</strong>: Ask for clarification or deeper analysis</li>
+            <li style={{ marginBottom: '5px' }}><strong>Context Awareness</strong>: AI knows exactly where you are in the text</li>
+            <li style={{ marginBottom: '5px' }}><strong>Multiple Personalities</strong>: Choose from 50+ explanation styles</li>
+          </ul>
+
+          <h3 style={{ color: '#007bff', marginTop: '25px', marginBottom: '10px' }}>Library</h3>
+          <ul>
+            <li style={{ marginBottom: '5px' }}><strong>Curated Collection</strong>: Hundreds of classic texts organized by category</li>
+            <li style={{ marginBottom: '5px' }}><strong>Custom URLs</strong>: Load any text from the web</li>
+            <li style={{ marginBottom: '5px' }}><strong>File Upload</strong>: Upload your own .txt files</li>
+            <li style={{ marginBottom: '5px' }}><strong>Quick Return</strong>: Easy navigation back to your current book</li>
+          </ul>
+
+          <p style={{ marginTop: '30px', padding: '15px', background: '#e3f2fd', borderRadius: '6px', borderLeft: '4px solid #2196f3' }}>
+            <strong>Tip:</strong> The hamburger menu (☰) in the top right provides access to all app features from any page.
+          </p>
         </div>
       </div>
     </div>
   )
 }
 
-export default Profile
+export default UserGuide

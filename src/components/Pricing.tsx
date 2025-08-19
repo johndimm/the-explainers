@@ -1,6 +1,7 @@
 'use client'
 
-import React from 'react'
+import React, { useState, useEffect, useRef } from 'react'
+import { useRouter } from 'next/navigation'
 import { useProfile } from '../contexts/ProfileContext'
 
 interface PricingProps {
@@ -12,6 +13,25 @@ interface PricingProps {
 
 const Pricing: React.FC<PricingProps> = ({ isOpen, onClose, bookTitle, author }) => {
   const { profile, addCredits, purchaseBook } = useProfile()
+  const [showMobileMenu, setShowMobileMenu] = useState(false)
+  const menuRef = useRef<HTMLDivElement>(null)
+  const router = useRouter()
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (menuRef.current && !menuRef.current.contains(event.target as Node)) {
+        setShowMobileMenu(false)
+      }
+    }
+
+    if (showMobileMenu) {
+      document.addEventListener('mousedown', handleClickOutside)
+    }
+
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside)
+    }
+  }, [showMobileMenu])
 
   if (!isOpen) return null
 
@@ -34,49 +54,271 @@ const Pricing: React.FC<PricingProps> = ({ isOpen, onClose, bookTitle, author })
   }
 
   return (
-    <div style={{
-      position: 'fixed',
-      top: 0,
-      left: 0,
-      right: 0,
-      bottom: 0,
-      background: 'rgba(0,0,0,0.5)',
-      display: 'flex',
-      alignItems: 'center',
-      justifyContent: 'center',
-      zIndex: 3000,
-      padding: '20px'
-    }}>
-      <div style={{
+    <div>
+      <header style={{
+        position: 'fixed',
+        top: 0,
+        left: 0,
+        right: 0,
         background: 'white',
-        borderRadius: '16px',
-        padding: '32px',
-        maxWidth: '600px',
-        width: '100%',
-        maxHeight: '90vh',
-        overflow: 'auto'
+        borderBottom: '1px solid #e0e0e0',
+        padding: '8px 12px',
+        zIndex: 100,
+        display: 'flex',
+        justifyContent: 'space-between',
+        alignItems: 'center'
       }}>
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '24px' }}>
-          <h2 style={{ margin: 0, color: '#8b5cf6' }}>Get More Explanations</h2>
+        <div style={{ flex: 1 }}>
+          <h1 style={{ 
+            margin: 0, 
+            fontSize: '18px', 
+            fontWeight: 'bold',
+            color: '#333',
+            lineHeight: '1.2'
+          }}>
+            The Explainers
+          </h1>
+          <p style={{ 
+            margin: 0, 
+            fontSize: '11px', 
+            color: '#666',
+            fontStyle: 'italic',
+            lineHeight: '1.2'
+          }}>
+            understand difficult texts
+          </p>
+        </div>
+        {/* Hamburger menu for all devices */}
+        <div ref={menuRef} style={{ position: 'relative' }}>
           <button 
-            onClick={onClose}
+            onClick={() => setShowMobileMenu(!showMobileMenu)}
             style={{
+              padding: '8px',
               background: 'none',
               border: 'none',
-              fontSize: '24px',
               cursor: 'pointer',
-              color: '#666'
+              fontSize: '18px',
+              color: '#333'
             }}
           >
-            ×
+            ☰
           </button>
+          
+          {showMobileMenu && (
+            <div style={{
+              position: 'absolute',
+              top: '100%',
+              right: 0,
+              background: 'white',
+              border: '1px solid #e0e0e0',
+              borderRadius: '8px',
+              boxShadow: '0 4px 12px rgba(0,0,0,0.15)',
+              minWidth: '160px',
+              zIndex: 1000
+            }}>
+              <button 
+                onClick={() => {
+                  router.push('/guide')
+                  setShowMobileMenu(false)
+                }}
+                style={{
+                  display: 'block',
+                  width: '100%',
+                  padding: '12px 16px',
+                  background: 'none',
+                  border: 'none',
+                  textAlign: 'left',
+                  cursor: 'pointer',
+                  borderBottom: '1px solid #f0f0f0'
+                }}
+              >
+                📖 User Guide
+              </button>
+              <button 
+                onClick={() => {
+                  router.push('/reader')
+                  setShowMobileMenu(false)
+                }}
+                style={{
+                  display: 'block',
+                  width: '100%',
+                  padding: '12px 16px',
+                  background: 'none',
+                  border: 'none',
+                  textAlign: 'left',
+                  cursor: 'pointer',
+                  borderBottom: '1px solid #f0f0f0'
+                }}
+              >
+                📖 Reader
+              </button>
+              <button 
+                onClick={() => {
+                  router.push('/chat')
+                  setShowMobileMenu(false)
+                }}
+                style={{
+                  display: 'block',
+                  width: '100%',
+                  padding: '12px 16px',
+                  background: 'none',
+                  border: 'none',
+                  textAlign: 'left',
+                  cursor: 'pointer',
+                  borderBottom: '1px solid #f0f0f0'
+                }}
+              >
+                💬 Chat
+              </button>
+              <button 
+                onClick={() => {
+                  router.push('/library')
+                  setShowMobileMenu(false)
+                }}
+                style={{
+                  display: 'block',
+                  width: '100%',
+                  padding: '12px 16px',
+                  background: 'none',
+                  border: 'none',
+                  textAlign: 'left',
+                  cursor: 'pointer',
+                  borderBottom: '1px solid #f0f0f0'
+                }}
+              >
+                📚 Library
+              </button>
+              <button 
+                onClick={() => {
+                  router.push('/styles')
+                  setShowMobileMenu(false)
+                }}
+                style={{
+                  display: 'block',
+                  width: '100%',
+                  padding: '12px 16px',
+                  background: 'none',
+                  border: 'none',
+                  textAlign: 'left',
+                  cursor: 'pointer',
+                  borderBottom: '1px solid #f0f0f0'
+                }}
+              >
+                🎭 Styles
+              </button>
+              <button 
+                onClick={() => setShowMobileMenu(false)}
+                style={{
+                  display: 'block',
+                  width: '100%',
+                  padding: '12px 16px',
+                  background: 'none',
+                  border: 'none',
+                  textAlign: 'left',
+                  cursor: 'pointer',
+                  borderBottom: '1px solid #f0f0f0',
+                  color: '#666'
+                }}
+              >
+                💳 Credits (current)
+              </button>
+              <button 
+                onClick={() => {
+                  router.push('/profile')
+                  setShowMobileMenu(false)
+                }}
+                style={{
+                  display: 'block',
+                  width: '100%',
+                  padding: '12px 16px',
+                  background: 'none',
+                  border: 'none',
+                  textAlign: 'left',
+                  cursor: 'pointer',
+                  borderBottom: '1px solid #f0f0f0'
+                }}
+              >
+                👤 Profile
+              </button>
+              <button 
+                onClick={() => {
+                  router.push('/settings')
+                  setShowMobileMenu(false)
+                }}
+                style={{
+                  display: 'block',
+                  width: '100%',
+                  padding: '12px 16px',
+                  background: 'none',
+                  border: 'none',
+                  textAlign: 'left',
+                  cursor: 'pointer'
+                }}
+              >
+                ⚙️ Settings
+              </button>
+            </div>
+          )}
+        </div>
+      </header>
+      
+      <div style={{ marginTop: '50px' }}>
+        <div style={{
+          background: 'white',
+          borderRadius: '16px',
+          padding: '32px',
+          maxWidth: '600px',
+          width: '100%',
+          margin: '20px auto',
+          boxShadow: '0 2px 10px rgba(0,0,0,0.1)'
+        }}>
+          <div style={{ marginBottom: '24px' }}>
+            <h2 style={{ margin: 0, color: '#8b5cf6' }}>Usage & Credits</h2>
+          </div>
+
+        <div style={{ 
+          background: '#f8f9fa', 
+          padding: '20px', 
+          borderRadius: '12px', 
+          marginBottom: '24px',
+          border: '1px solid #e9ecef'
+        }}>
+          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '20px', marginBottom: '16px' }}>
+            <div style={{ textAlign: 'center' }}>
+              <div style={{ fontSize: '28px', fontWeight: 'bold', color: '#8b5cf6' }}>
+                {profile.availableCredits || 0}
+              </div>
+              <div style={{ fontSize: '14px', color: '#666' }}>Available Credits</div>
+            </div>
+            <div style={{ textAlign: 'center' }}>
+              <div style={{ fontSize: '28px', fontWeight: 'bold', color: '#10b981' }}>
+                {profile.totalExplanations || 0}
+              </div>
+              <div style={{ fontSize: '14px', color: '#666' }}>Total Explanations</div>
+            </div>
+            <div style={{ textAlign: 'center' }}>
+              <div style={{ fontSize: '28px', fontWeight: 'bold', color: '#f59e0b' }}>
+                {profile.todayExplanations || 0}
+              </div>
+              <div style={{ fontSize: '14px', color: '#666' }}>Today</div>
+            </div>
+            <div style={{ textAlign: 'center' }}>
+              <div style={{ fontSize: '28px', fontWeight: 'bold', color: '#ef4444' }}>
+                {profile.purchasedBooks?.length || 0}
+              </div>
+              <div style={{ fontSize: '14px', color: '#666' }}>Books Owned</div>
+            </div>
+          </div>
+          
+          {profile.firstLogin && (
+            <div style={{ textAlign: 'center', fontSize: '14px', color: '#666', paddingTop: '16px', borderTop: '1px solid #e9ecef' }}>
+              Member since: {new Date(profile.firstLogin).toLocaleDateString()}
+            </div>
+          )}
         </div>
 
-        <div style={{ marginBottom: '24px', textAlign: 'center' }}>
-          <div style={{ fontSize: '32px', fontWeight: 'bold', color: '#8b5cf6' }}>
-            {profile.availableCredits || 0}
-          </div>
-          <div style={{ color: '#666' }}>Credits Remaining</div>
+        <div style={{ marginBottom: '24px' }}>
+          <h3 style={{ margin: '0 0 16px 0', color: '#1a1a1a' }}>Get More Explanations</h3>
         </div>
 
         {bookTitle && author && (
@@ -227,6 +469,7 @@ const Pricing: React.FC<PricingProps> = ({ isOpen, onClose, bookTitle, author })
         }}>
           <p>💡 Each book gives you 3 free explanations to try before purchasing</p>
           <p>🔒 All purchases are currently in demo mode</p>
+        </div>
         </div>
       </div>
     </div>

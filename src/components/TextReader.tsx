@@ -1,8 +1,8 @@
 'use client'
 
 import React, { useState, useRef, useEffect } from 'react'
+import { useRouter } from 'next/navigation'
 import styles from './TextReader.module.css'
-import ChatInterface from './ChatInterface'
 import { SettingsData } from './Settings'
 import { ProfileData } from './Profile'
 
@@ -25,11 +25,9 @@ const TextReader: React.FC<TextReaderProps> = ({ text, bookTitle = 'Romeo and Ju
   const [currentSelection, setCurrentSelection] = useState('')
   const [selectionRange, setSelectionRange] = useState<Range | null>(null)
   const [highlightedText, setHighlightedText] = useState<string>('')
-  const [showChatInterface, setShowChatInterface] = useState(false)
-  const [textToExplain, setTextToExplain] = useState('')
-  const [contextInfo, setContextInfo] = useState<any>(null)
   const [showFirstTimeInstructions, setShowFirstTimeInstructions] = useState(false)
   const [hasUserScrolled, setHasUserScrolled] = useState(false)
+  const router = useRouter()
   const textReaderRef = useRef<HTMLDivElement>(null)
   const scrollTimeoutRef = useRef<NodeJS.Timeout | null>(null)
 
@@ -350,18 +348,19 @@ const TextReader: React.FC<TextReaderProps> = ({ text, bookTitle = 'Romeo and Ju
   }
 
   const handleExplain = () => {
+    // Store the selected text and context in sessionStorage for the chat page
     const context = extractContextInfo(selectedText, text)
-    setContextInfo(context)
-    setTextToExplain(selectedText)
-    setShowChatInterface(true)
+    sessionStorage.setItem('chatContext', JSON.stringify({
+      selectedText,
+      contextInfo: context,
+      bookTitle,
+      author
+    }))
+    
+    // Navigate to chat page
+    router.push('/chat')
     setShowConfirmDialog(false)
     setSelectedText('')
-  }
-
-  const handleCloseChatInterface = () => {
-    setShowChatInterface(false)
-    setTextToExplain('')
-    setContextInfo(null)
   }
 
   const handleCancel = () => {
@@ -485,18 +484,6 @@ const TextReader: React.FC<TextReaderProps> = ({ text, bookTitle = 'Romeo and Ju
         </div>
       )}
       
-      {showChatInterface && (
-        <ChatInterface 
-          selectedText={textToExplain}
-          contextInfo={contextInfo}
-          settings={settings}
-          profile={profile}
-          onClose={handleCloseChatInterface}
-          onSettingsChange={onSettingsChange}
-          bookTitle={bookTitle}
-          author={author}
-        />
-      )}
     </div>
   )
 }

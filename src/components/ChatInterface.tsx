@@ -34,9 +34,10 @@ interface ChatInterfaceProps {
   onSettingsChange: (settings: SettingsData) => void
   bookTitle: string
   author: string
+  isPageMode?: boolean
 }
 
-const ChatInterface: React.FC<ChatInterfaceProps> = ({ selectedText, contextInfo, settings, profile, onClose, onSettingsChange, bookTitle, author }) => {
+const ChatInterface: React.FC<ChatInterfaceProps> = ({ selectedText, contextInfo, settings, profile, onClose, onSettingsChange, bookTitle, author, isPageMode = false }) => {
   const [messages, setMessages] = useState<Message[]>([])
   const [inputValue, setInputValue] = useState('')
   const [isLoading, setIsLoading] = useState(false)
@@ -58,6 +59,29 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ selectedText, contextInfo
     scrollToBottom()
   }, [messages])
 
+  // Load chat history from sessionStorage
+  useEffect(() => {
+    const savedMessages = sessionStorage.getItem('chatHistory')
+    if (savedMessages && isPageMode) {
+      try {
+        const parsedMessages = JSON.parse(savedMessages)
+        setMessages(parsedMessages.map((msg: any) => ({
+          ...msg,
+          timestamp: new Date(msg.timestamp)
+        })))
+      } catch (error) {
+        console.error('Error loading chat history:', error)
+      }
+    }
+  }, [isPageMode])
+
+  // Save chat history to sessionStorage
+  useEffect(() => {
+    if (isPageMode && messages.length > 0) {
+      sessionStorage.setItem('chatHistory', JSON.stringify(messages))
+    }
+  }, [messages, isPageMode])
+
   useEffect(() => {
     if (selectedText && !initializedRef.current) {
       initializedRef.current = true
@@ -76,16 +100,24 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ selectedText, contextInfo
     setHasChanges(hasProviderChange || hasStyleChange || hasLengthChange)
   }, [selectedProvider, currentStyle, currentResponseLength, settings])
 
-  const handleUpdateDefaults = () => {
-    const updatedSettings: SettingsData = {
-      ...settings,
-      llmProvider: selectedProvider,
-      explanationStyle: currentStyle,
-      responseLength: currentResponseLength
+  // Auto-save settings changes after a delay
+  useEffect(() => {
+    if (hasChanges) {
+      const timeoutId = setTimeout(() => {
+        const updatedSettings: SettingsData = {
+          ...settings,
+          llmProvider: selectedProvider,
+          explanationStyle: currentStyle,
+          responseLength: currentResponseLength
+        }
+        onSettingsChange(updatedSettings)
+        setHasChanges(false)
+      }, 1000) // Auto-save after 1 second of no changes
+      
+      return () => clearTimeout(timeoutId)
     }
-    onSettingsChange(updatedSettings)
-    setHasChanges(false)
-  }
+  }, [hasChanges, selectedProvider, currentStyle, currentResponseLength, settings, onSettingsChange])
+
 
   const callLLM = async (messages: Message[]): Promise<string> => {
     const response = await fetch('/api/chat', {
@@ -403,8 +435,8 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ selectedText, contextInfo
   }
 
   return (
-    <div className={styles.chatOverlay}>
-      <div className={styles.chatContainer}>
+    <div className={isPageMode ? '' : styles.chatOverlay}>
+      <div className={isPageMode ? '' : styles.chatContainer} style={isPageMode ? { height: '100%', display: 'flex', flexDirection: 'column' } : {}}>
         <div className={styles.chatHeader}>
           <div>
             <h3>Text Explanation</h3>
@@ -529,16 +561,12 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ selectedText, contextInfo
               Re-explain
             </button>
             {hasChanges && (
-              <button 
-                onClick={handleUpdateDefaults}
-                className={styles.updateDefaultsButton}
-                title="Save these settings as defaults"
-              >
-                Update Defaults
-              </button>
+              <div style={{ fontSize: '12px', color: '#666', padding: '8px' }}>
+                Saving changes...
+              </div>
             )}
           </div>
-          <button onClick={onClose} className={styles.closeButton}>×</button>
+{!isPageMode && <button onClick={onClose} className={styles.closeButton}>×</button>}
         </div>
         
         <div className={styles.messagesContainer}>

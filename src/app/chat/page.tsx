@@ -1,38 +1,20 @@
 'use client'
 
-import React, { useState, useEffect, useRef } from 'react'
+import { useState, useRef, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
-import styles from './Profile.module.css'
+import { SettingsProvider } from '@/contexts/SettingsContext'
+import { ProfileProvider } from '@/contexts/ProfileContext'
+import ChatInterface from '@/components/ChatInterface'
+import { useSettings } from '@/contexts/SettingsContext'
+import { useProfile } from '@/contexts/ProfileContext'
 
-export type EducationLevel = 'elementary' | 'middle-school' | 'high-school' | 'college' | 'graduate'
-export type Language = 'english' | 'spanish' | 'french' | 'german' | 'italian' | 'portuguese' | 'chinese' | 'japanese' | 'korean' | 'arabic' | 'hindi' | 'russian'
-
-export interface ProfileData {
-  age: number | null
-  language: Language
-  educationLevel: EducationLevel
-  firstLogin?: Date
-  totalExplanations?: number
-  todayExplanations?: number
-  availableCredits?: number
-  bookExplanations?: { [bookKey: string]: number }
-  purchasedBooks?: string[]
-  hasUnlimitedAccess?: boolean
-  unlimitedAccessExpiry?: Date
-}
-
-interface ProfileProps {
-  isOpen: boolean
-  onClose: () => void
-  profile: ProfileData
-  onProfileChange: (profile: ProfileData) => void
-}
-
-const Profile: React.FC<ProfileProps> = ({ isOpen, onClose, profile, onProfileChange }) => {
-  const [localProfile, setLocalProfile] = useState<ProfileData>(profile)
+function ChatContent() {
+  const { settings, updateSettings } = useSettings()
+  const { profile } = useProfile()
+  const router = useRouter()
   const [showMobileMenu, setShowMobileMenu] = useState(false)
   const menuRef = useRef<HTMLDivElement>(null)
-  const router = useRouter()
+  const [contextData, setContextData] = useState<any>(null)
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -50,27 +32,20 @@ const Profile: React.FC<ProfileProps> = ({ isOpen, onClose, profile, onProfileCh
     }
   }, [showMobileMenu])
 
-  // Auto-save when profile changes
+  // Check for context data from text selection
   useEffect(() => {
-    if (JSON.stringify(localProfile) !== JSON.stringify(profile)) {
-      const timeoutId = setTimeout(() => {
-        onProfileChange(localProfile)
-      }, 500) // Debounce auto-save by 500ms
-      
-      return () => clearTimeout(timeoutId)
+    const storedContext = sessionStorage.getItem('chatContext')
+    if (storedContext) {
+      try {
+        const parsedContext = JSON.parse(storedContext)
+        setContextData(parsedContext)
+        // Clear it so it doesn't persist on refresh
+        sessionStorage.removeItem('chatContext')
+      } catch (error) {
+        console.error('Error parsing chat context:', error)
+      }
     }
-  }, [localProfile, profile, onProfileChange])
-
-  if (!isOpen) return null
-
-  const handleCancel = () => {
-    setLocalProfile(profile)
-    onClose()
-  }
-
-  const updateField = <K extends keyof ProfileData>(field: K, value: ProfileData[K]) => {
-    setLocalProfile(prev => ({ ...prev, [field]: value }))
-  }
+  }, [])
 
   return (
     <div>
@@ -101,13 +76,11 @@ const Profile: React.FC<ProfileProps> = ({ isOpen, onClose, profile, onProfileCh
             margin: 0, 
             fontSize: '11px', 
             color: '#666',
-            fontStyle: 'italic',
             lineHeight: '1.2'
           }}>
-            understand difficult texts
+            Chat with AI
           </p>
         </div>
-        {/* Hamburger menu for all devices */}
         <div ref={menuRef} style={{ position: 'relative' }}>
           <button 
             onClick={() => setShowMobileMenu(!showMobileMenu)}
@@ -172,10 +145,7 @@ const Profile: React.FC<ProfileProps> = ({ isOpen, onClose, profile, onProfileCh
                 📖 Reader
               </button>
               <button 
-                onClick={() => {
-                  router.push('/chat')
-                  setShowMobileMenu(false)
-                }}
+                onClick={() => setShowMobileMenu(false)}
                 style={{
                   display: 'block',
                   width: '100%',
@@ -184,10 +154,11 @@ const Profile: React.FC<ProfileProps> = ({ isOpen, onClose, profile, onProfileCh
                   border: 'none',
                   textAlign: 'left',
                   cursor: 'pointer',
-                  borderBottom: '1px solid #f0f0f0'
+                  borderBottom: '1px solid #f0f0f0',
+                  color: '#666'
                 }}
               >
-                💬 Chat
+                💬 Chat (current)
               </button>
               <button 
                 onClick={() => {
@@ -244,7 +215,10 @@ const Profile: React.FC<ProfileProps> = ({ isOpen, onClose, profile, onProfileCh
                 💳 Credits
               </button>
               <button 
-                onClick={() => setShowMobileMenu(false)}
+                onClick={() => {
+                  router.push('/profile')
+                  setShowMobileMenu(false)
+                }}
                 style={{
                   display: 'block',
                   width: '100%',
@@ -253,11 +227,10 @@ const Profile: React.FC<ProfileProps> = ({ isOpen, onClose, profile, onProfileCh
                   border: 'none',
                   textAlign: 'left',
                   cursor: 'pointer',
-                  borderBottom: '1px solid #f0f0f0',
-                  color: '#666'
+                  borderBottom: '1px solid #f0f0f0'
                 }}
               >
-                👤 Profile (current)
+                👤 Profile
               </button>
               <button 
                 onClick={() => {
@@ -281,80 +254,48 @@ const Profile: React.FC<ProfileProps> = ({ isOpen, onClose, profile, onProfileCh
         </div>
       </header>
       
-      <div style={{ marginTop: '50px' }}>
-        <div className={styles.modal} style={{ margin: '20px auto', maxWidth: '600px', boxShadow: 'none', border: 'none', position: 'static', transform: 'none', overflow: 'visible', maxHeight: 'none' }}>
-          <div className={styles.header}>
-            <h2>Profile Settings</h2>
-          </div>
-
-        <div className={styles.content}>
-
-          <div className={styles.section}>
-            <h3>Personal Information</h3>
-            <p className={styles.subtitle}>Help us customize explanations for your needs</p>
-            
-            <div className={styles.field}>
-              <label htmlFor="age">Age</label>
-              <input
-                id="age"
-                type="number"
-                min="1"
-                max="120"
-                value={localProfile.age || ''}
-                onChange={(e) => updateField('age', e.target.value ? parseInt(e.target.value) : null)}
-                placeholder="Enter your age"
-              />
-            </div>
-
-            <div className={styles.field}>
-              <label htmlFor="language">Language</label>
-              <select
-                id="language"
-                value={localProfile.language}
-                onChange={(e) => updateField('language', e.target.value as Language)}
-              >
-                <option value="english">English</option>
-                <option value="spanish">Spanish</option>
-                <option value="french">French</option>
-                <option value="german">German</option>
-                <option value="italian">Italian</option>
-                <option value="portuguese">Portuguese</option>
-                <option value="chinese">Chinese</option>
-                <option value="japanese">Japanese</option>
-                <option value="korean">Korean</option>
-                <option value="arabic">Arabic</option>
-                <option value="hindi">Hindi</option>
-                <option value="russian">Russian</option>
-              </select>
-            </div>
-
-            <div className={styles.field}>
-              <label htmlFor="education">Education Level</label>
-              <select
-                id="education"
-                value={localProfile.educationLevel}
-                onChange={(e) => updateField('educationLevel', e.target.value as EducationLevel)}
-              >
-                <option value="elementary">Elementary School</option>
-                <option value="middle-school">Middle School</option>
-                <option value="high-school">High School</option>
-                <option value="college">College</option>
-                <option value="graduate">Graduate School</option>
-              </select>
-            </div>
-          </div>
-
-        </div>
-
-        <div className={styles.footer}>
-          <div style={{ fontSize: '14px', color: '#666', textAlign: 'center', padding: '16px' }}>
-            Changes are saved automatically
-          </div>
-        </div>
+      <div style={{ marginTop: '60px', minHeight: 'calc(100vh - 60px)', padding: '20px', background: '#fafafa' }}>
+        <div style={{
+          maxWidth: '800px',
+          margin: '0 auto',
+          background: 'white',
+          borderRadius: '16px',
+          padding: '24px',
+          boxShadow: '0 1px 3px rgba(0, 0, 0, 0.1), 0 1px 2px rgba(0, 0, 0, 0.06)',
+          minHeight: '600px',
+          display: 'flex',
+          flexDirection: 'column'
+        }}>
+          <h2 style={{ margin: '0 0 20px 0', fontSize: '24px', fontWeight: '600', color: '#1a1a1a' }}>
+            Chat with AI
+          </h2>
+          <p style={{ margin: '0 0 24px 0', color: '#666', fontSize: '16px' }}>
+            Ask questions or get explanations about any text. Chat history is preserved during your session.
+          </p>
+          
+          <ChatInterface
+            selectedText={contextData?.selectedText || ""}
+            contextInfo={contextData?.contextInfo || null}
+            settings={settings}
+            profile={profile}
+            onClose={() => router.push('/reader')}
+            onSettingsChange={updateSettings}
+            bookTitle={contextData?.bookTitle || ""}
+            author={contextData?.author || ""}
+            isPageMode={true}
+          />
         </div>
       </div>
     </div>
   )
 }
 
-export default Profile
+export default function ChatPage() {
+  return (
+    <ProfileProvider>
+      <SettingsProvider>
+        <ChatContent />
+      </SettingsProvider>
+    </ProfileProvider>
+  )
+}
