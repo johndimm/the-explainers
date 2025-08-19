@@ -356,8 +356,10 @@ const TextReader: React.FC<TextReaderProps> = ({ text, bookTitle = 'Romeo and Ju
       Math.pow(touch.clientX - touchStartPos.x, 2) + Math.pow(touch.clientY - touchStartPos.y, 2)
     )
     
-    // If we're in selection mode, extend the selection
+    // If we're in selection mode, extend the selection and prevent scrolling
     if (isInSelectionMode) {
+      e.preventDefault() // Prevent scrolling during text selection
+      e.stopPropagation()
       const text = handleLongPress(touchStartPos.x, touchStartPos.y, touch.clientX, touch.clientY)
       setCurrentSelection(text || '')
     } else if (longPressTimer && distance > 10) {
@@ -446,10 +448,11 @@ const TextReader: React.FC<TextReaderProps> = ({ text, bookTitle = 'Romeo and Ju
         onTouchMove={handleTouchMove}
         onContextMenu={(e) => e.preventDefault()}
         style={{
-          WebkitUserSelect: window.ontouchstart !== undefined ? 'none' : 'text',
-          userSelect: window.ontouchstart !== undefined ? 'none' : 'text',
+          WebkitUserSelect: isInSelectionMode ? 'text' : (window.ontouchstart !== undefined ? 'none' : 'text'),
+          userSelect: isInSelectionMode ? 'text' : (window.ontouchstart !== undefined ? 'none' : 'text'),
           WebkitTouchCallout: 'none',
           WebkitTapHighlightColor: 'transparent',
+          touchAction: isInSelectionMode ? 'none' : 'auto', // Prevent all touch gestures during selection
           fontFamily: settings.textFont
         }}
       >
