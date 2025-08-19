@@ -40,6 +40,7 @@ const Library: React.FC<LibraryProps> = ({ onBookSelect, onBackToCurrentBook }) 
   const [loading, setLoading] = useState(true)
   const [customUrl, setCustomUrl] = useState('')
   const [fileInput, setFileInput] = useState<File | null>(null)
+  const [showMobileMenu, setShowMobileMenu] = useState(false)
 
   useEffect(() => {
     loadLibraryData()
@@ -147,19 +148,188 @@ const Library: React.FC<LibraryProps> = ({ onBookSelect, onBackToCurrentBook }) 
   const currentBook = getCurrentBook()
 
   return (
-    <div className={styles.library}>
-      {currentBook && onBackToCurrentBook && (
-        <div className={styles.currentBookLink}>
-          <button onClick={onBackToCurrentBook} className={styles.backButton}>
-            ← Back to "{currentBook.title}"
-          </button>
+    <div>
+      <header style={{
+        position: 'fixed',
+        top: 0,
+        left: 0,
+        right: 0,
+        background: 'white',
+        borderBottom: '1px solid #e0e0e0',
+        padding: '8px 12px',
+        zIndex: 100,
+        display: 'flex',
+        justifyContent: 'space-between',
+        alignItems: 'center'
+      }}>
+        <div style={{ flex: 1 }}>
+          <h1 style={{ 
+            margin: 0, 
+            fontSize: '18px', 
+            fontWeight: 'bold',
+            color: '#333',
+            lineHeight: '1.2'
+          }}>
+            The Explainers
+          </h1>
+          <p style={{ 
+            margin: 0, 
+            fontSize: '11px', 
+            color: '#666',
+            fontStyle: 'italic',
+            lineHeight: '1.2'
+          }}>
+            understand difficult texts
+          </p>
         </div>
-      )}
+        {/* Hamburger menu for all devices */}
+        <div style={{ position: 'relative' }}>
+          <button 
+            onClick={() => setShowMobileMenu(!showMobileMenu)}
+            style={{
+              padding: '8px',
+              background: 'none',
+              border: 'none',
+              cursor: 'pointer',
+              fontSize: '18px',
+              color: '#333'
+            }}
+          >
+            ☰
+          </button>
+          
+          {showMobileMenu && (
+            <div style={{
+              position: 'absolute',
+              top: '100%',
+              right: 0,
+              background: 'white',
+              border: '1px solid #e0e0e0',
+              borderRadius: '8px',
+              boxShadow: '0 4px 12px rgba(0,0,0,0.15)',
+              minWidth: '160px',
+              zIndex: 1000
+            }}>
+              <a 
+                href="/user-guide.html"
+                target="_blank"
+                rel="noopener noreferrer"
+                style={{
+                  display: 'block',
+                  padding: '12px 16px',
+                  color: '#333',
+                  textDecoration: 'none',
+                  borderBottom: '1px solid #f0f0f0'
+                }}
+                onClick={() => setShowMobileMenu(false)}
+              >
+                📖 User Guide
+              </a>
+              <button 
+                onClick={() => setShowMobileMenu(false)}
+                style={{
+                  display: 'block',
+                  width: '100%',
+                  padding: '12px 16px',
+                  background: 'none',
+                  border: 'none',
+                  textAlign: 'left',
+                  cursor: 'pointer',
+                  borderBottom: '1px solid #f0f0f0',
+                  color: '#666'
+                }}
+              >
+                📚 Library (current)
+              </button>
+              <button 
+                onClick={() => {
+                  window.location.href = '/?styles=true'
+                  setShowMobileMenu(false)
+                }}
+                style={{
+                  display: 'block',
+                  width: '100%',
+                  padding: '12px 16px',
+                  background: 'none',
+                  border: 'none',
+                  textAlign: 'left',
+                  cursor: 'pointer',
+                  borderBottom: '1px solid #f0f0f0'
+                }}
+              >
+                🎭 Styles
+              </button>
+              <button 
+                onClick={() => {
+                  window.location.href = '/?pricing=true'
+                  setShowMobileMenu(false)
+                }}
+                style={{
+                  display: 'block',
+                  width: '100%',
+                  padding: '12px 16px',
+                  background: 'none',
+                  border: 'none',
+                  textAlign: 'left',
+                  cursor: 'pointer',
+                  borderBottom: '1px solid #f0f0f0'
+                }}
+              >
+                💳 Credits
+              </button>
+              <button 
+                onClick={() => {
+                  window.location.href = '/?profile=true'
+                  setShowMobileMenu(false)
+                }}
+                style={{
+                  display: 'block',
+                  width: '100%',
+                  padding: '12px 16px',
+                  background: 'none',
+                  border: 'none',
+                  textAlign: 'left',
+                  cursor: 'pointer',
+                  borderBottom: '1px solid #f0f0f0'
+                }}
+              >
+                👤 Profile
+              </button>
+              <button 
+                onClick={() => {
+                  window.location.href = '/?settings=true'
+                  setShowMobileMenu(false)
+                }}
+                style={{
+                  display: 'block',
+                  width: '100%',
+                  padding: '12px 16px',
+                  background: 'none',
+                  border: 'none',
+                  textAlign: 'left',
+                  cursor: 'pointer'
+                }}
+              >
+                ⚙️ Settings
+              </button>
+            </div>
+          )}
+        </div>
+      </header>
       
-      <div className={styles.header}>
-        <h1>Library</h1>
-        <p>Choose a book to read and explore</p>
-      </div>
+      <div className={styles.library} style={{ marginTop: '50px' }}>
+        {currentBook && onBackToCurrentBook && (
+          <div className={styles.currentBookLink}>
+            <button onClick={onBackToCurrentBook} className={styles.backButton}>
+              ← Back to "{currentBook.title}"
+            </button>
+          </div>
+        )}
+        
+        <div className={styles.header}>
+          <h1>Library</h1>
+          <p>Choose a book to read and explore</p>
+        </div>
 
       <div className={styles.customSection}>
         <div className={styles.urlInput}>
@@ -219,6 +389,7 @@ const Library: React.FC<LibraryProps> = ({ onBookSelect, onBackToCurrentBook }) 
           </div>
         ))}
       </div>
+    </div>
     </div>
   )
 }

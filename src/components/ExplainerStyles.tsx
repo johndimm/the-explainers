@@ -1,6 +1,6 @@
 'use client'
 
-import React from 'react'
+import React, { useState } from 'react'
 import { ExplanationStyle } from './Settings'
 import stylesCss from './ExplainerStyles.module.css'
 
@@ -96,6 +96,8 @@ const ExplainerStyles: React.FC<ExplainerStylesProps> = ({
   selectedStyle, 
   onStyleChange 
 }) => {
+  const [showMobileMenu, setShowMobileMenu] = useState(false)
+  
   if (!isOpen) return null
 
   const handleStyleSelect = (style: ExplanationStyle) => {
@@ -130,7 +132,176 @@ const ExplainerStyles: React.FC<ExplainerStylesProps> = ({
   )
 
   return (
-    <div className={stylesCss.overlay} style={{ position: 'static', background: 'white', padding: '0' }}>
+    <div>
+      <header style={{
+        position: 'fixed',
+        top: 0,
+        left: 0,
+        right: 0,
+        background: 'white',
+        borderBottom: '1px solid #e0e0e0',
+        padding: '8px 12px',
+        zIndex: 100,
+        display: 'flex',
+        justifyContent: 'space-between',
+        alignItems: 'center'
+      }}>
+        <div style={{ flex: 1 }}>
+          <h1 style={{ 
+            margin: 0, 
+            fontSize: '18px', 
+            fontWeight: 'bold',
+            color: '#333',
+            lineHeight: '1.2'
+          }}>
+            The Explainers
+          </h1>
+          <p style={{ 
+            margin: 0, 
+            fontSize: '11px', 
+            color: '#666',
+            fontStyle: 'italic',
+            lineHeight: '1.2'
+          }}>
+            understand difficult texts
+          </p>
+        </div>
+        {/* Hamburger menu for all devices */}
+        <div style={{ position: 'relative' }}>
+          <button 
+            onClick={() => setShowMobileMenu(!showMobileMenu)}
+            style={{
+              padding: '8px',
+              background: 'none',
+              border: 'none',
+              cursor: 'pointer',
+              fontSize: '18px',
+              color: '#333'
+            }}
+          >
+            ☰
+          </button>
+          
+          {showMobileMenu && (
+            <div style={{
+              position: 'absolute',
+              top: '100%',
+              right: 0,
+              background: 'white',
+              border: '1px solid #e0e0e0',
+              borderRadius: '8px',
+              boxShadow: '0 4px 12px rgba(0,0,0,0.15)',
+              minWidth: '160px',
+              zIndex: 1000
+            }}>
+              <a 
+                href="/user-guide.html"
+                target="_blank"
+                rel="noopener noreferrer"
+                style={{
+                  display: 'block',
+                  padding: '12px 16px',
+                  color: '#333',
+                  textDecoration: 'none',
+                  borderBottom: '1px solid #f0f0f0'
+                }}
+                onClick={() => setShowMobileMenu(false)}
+              >
+                📖 User Guide
+              </a>
+              <button 
+                onClick={() => {
+                  window.location.href = '/?library=true'
+                  setShowMobileMenu(false)
+                }}
+                style={{
+                  display: 'block',
+                  width: '100%',
+                  padding: '12px 16px',
+                  background: 'none',
+                  border: 'none',
+                  textAlign: 'left',
+                  cursor: 'pointer',
+                  borderBottom: '1px solid #f0f0f0'
+                }}
+              >
+                📚 Library
+              </button>
+              <button 
+                onClick={() => setShowMobileMenu(false)}
+                style={{
+                  display: 'block',
+                  width: '100%',
+                  padding: '12px 16px',
+                  background: 'none',
+                  border: 'none',
+                  textAlign: 'left',
+                  cursor: 'pointer',
+                  borderBottom: '1px solid #f0f0f0',
+                  color: '#666'
+                }}
+              >
+                🎭 Styles (current)
+              </button>
+              <button 
+                onClick={() => {
+                  window.location.href = '/?pricing=true'
+                  setShowMobileMenu(false)
+                }}
+                style={{
+                  display: 'block',
+                  width: '100%',
+                  padding: '12px 16px',
+                  background: 'none',
+                  border: 'none',
+                  textAlign: 'left',
+                  cursor: 'pointer',
+                  borderBottom: '1px solid #f0f0f0'
+                }}
+              >
+                💳 Credits
+              </button>
+              <button 
+                onClick={() => {
+                  window.location.href = '/?profile=true'
+                  setShowMobileMenu(false)
+                }}
+                style={{
+                  display: 'block',
+                  width: '100%',
+                  padding: '12px 16px',
+                  background: 'none',
+                  border: 'none',
+                  textAlign: 'left',
+                  cursor: 'pointer',
+                  borderBottom: '1px solid #f0f0f0'
+                }}
+              >
+                👤 Profile
+              </button>
+              <button 
+                onClick={() => {
+                  window.location.href = '/?settings=true'
+                  setShowMobileMenu(false)
+                }}
+                style={{
+                  display: 'block',
+                  width: '100%',
+                  padding: '12px 16px',
+                  background: 'none',
+                  border: 'none',
+                  textAlign: 'left',
+                  cursor: 'pointer'
+                }}
+              >
+                ⚙️ Settings
+              </button>
+            </div>
+          )}
+        </div>
+      </header>
+    
+    <div className={stylesCss.overlay} style={{ position: 'static', background: 'white', padding: '0', marginTop: '50px' }}>
       <div className={stylesCss.container} style={{ maxHeight: 'none', overflow: 'visible', boxShadow: 'none' }}>
         <div className={stylesCss.header}>
           <h2>Choose Your Explainer Style</h2>
@@ -168,6 +339,7 @@ const ExplainerStyles: React.FC<ExplainerStylesProps> = ({
           {renderCategory('Other', STYLE_CATEGORIES.other)}
         </div>
       </div>
+    </div>
     </div>
   )
 }
