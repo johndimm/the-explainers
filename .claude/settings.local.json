@@ -11,7 +11,8 @@
       "WebSearch",
       "WebSearch",
       "WebFetch(domain:commons.wikimedia.org)",
-      "WebFetch(domain:commons.wikimedia.org)"
+      "WebFetch(domain:commons.wikimedia.org)",
+      "Bash(curl:*)"
     ],
     "deny": [],
     "ask": []

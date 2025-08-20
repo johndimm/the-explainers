@@ -53,9 +53,6 @@ async function callAnthropic(messages: ChatMessage[], responseLength: string): P
     ? 'You are a helpful literary and text analysis assistant. Provide clear, insightful explanations of text passages.'
     : 'You are a helpful assistant.'
 
-  const userMessages = messages.filter(m => m.role === 'user')
-  const lastUserMessage = userMessages[userMessages.length - 1]?.content || ''
-
   const response = await anthropic.messages.create({
     model: 'claude-3-haiku-20240307',
     max_tokens: maxTokens,
@@ -96,9 +93,16 @@ async function callGemini(messages: ChatMessage[], responseLength: string): Prom
     }
   })
   
-  const lastUserMessage = messages[messages.length - 1]?.content || ''
+  // Start chat session with conversation history
+  const chat = model.startChat({
+    history: messages.slice(0, -1).map(msg => ({
+      role: msg.role === 'user' ? 'user' : 'model',
+      parts: [{ text: msg.content }]
+    }))
+  })
   
-  const result = await model.generateContent(lastUserMessage)
+  const lastUserMessage = messages[messages.length - 1]?.content || ''
+  const result = await chat.sendMessage(lastUserMessage)
   const response = await result.response
   return response.text()
 }

@@ -11,6 +11,8 @@ interface Message {
   content: string
   role: 'user' | 'assistant'
   timestamp: Date
+  provider?: LLMProvider
+  style?: ExplanationStyle
 }
 
 interface ContextInfo {
@@ -372,7 +374,9 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ selectedText, contextInfo
         id: (Date.now() + 1).toString(),
         content: response,
         role: 'assistant',
-        timestamp: new Date()
+        timestamp: new Date(),
+        provider: selectedProvider,
+        style: currentStyle
       }
       setMessages(prev => [...prev, assistantMessage])
     } catch (error) {
@@ -381,7 +385,9 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ selectedText, contextInfo
         id: (Date.now() + 1).toString(),
         content: 'Sorry, I encountered an error while trying to explain this text. Please try again.',
         role: 'assistant',
-        timestamp: new Date()
+        timestamp: new Date(),
+        provider: selectedProvider,
+        style: currentStyle
       }
       setMessages(prev => [...prev, errorMessage])
     } finally {
@@ -410,7 +416,9 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ selectedText, contextInfo
         id: (Date.now() + 1).toString(),
         content: response,
         role: 'assistant',
-        timestamp: new Date()
+        timestamp: new Date(),
+        provider: selectedProvider,
+        style: currentStyle
       }
       setMessages(prev => [...prev, assistantMessage])
     } catch (error) {
@@ -419,7 +427,9 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ selectedText, contextInfo
         id: (Date.now() + 1).toString(),
         content: 'Sorry, I encountered an error while processing your message. Please try again.',
         role: 'assistant',
-        timestamp: new Date()
+        timestamp: new Date(),
+        provider: selectedProvider,
+        style: currentStyle
       }
       setMessages(prev => [...prev, errorMessage])
     } finally {
@@ -575,6 +585,35 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ selectedText, contextInfo
               key={message.id} 
               className={`${styles.message} ${styles[message.role]}`}
             >
+              {message.role === 'assistant' && message.provider && (
+                <div className={styles.messageInfo}>
+                  <span className={styles.providerBadge}>
+                    {message.provider === 'openai' ? 'GPT-4o Mini' : 
+                     message.provider === 'anthropic' ? 'Claude Haiku' :
+                     message.provider === 'deepseek' ? 'DeepSeek Chat' :
+                     message.provider === 'gemini' ? 'Gemini Flash' :
+                     message.provider}
+                  </span>
+                  {message.style && message.style !== 'neutral' && (
+                    <span className={styles.styleBadge}>
+                      in the style of {
+                        message.style === 'harold-bloom' ? 'Harold Bloom' :
+                        message.style === 'jerry-seinfeld' ? 'Jerry Seinfeld' :
+                        message.style === 'david-foster-wallace' ? 'David Foster Wallace' :
+                        message.style === 'oscar-wilde' ? 'Oscar Wilde' :
+                        message.style === 'maya-angelou' ? 'Maya Angelou' :
+                        message.style === 'douglas-adams' ? 'Douglas Adams' :
+                        message.style === 'terry-pratchett' ? 'Terry Pratchett' :
+                        message.style === 'joan-didion' ? 'Joan Didion' :
+                        message.style === 'david-sedaris' ? 'David Sedaris' :
+                        message.style === 'mark-twain' ? 'Mark Twain' :
+                        // Add more style mappings as needed
+                        message.style.replace(/-/g, ' ').replace(/\b\w/g, l => l.toUpperCase())
+                      }
+                    </span>
+                  )}
+                </div>
+              )}
               <div className={styles.messageContent}>
                 <pre 
                   className={styles.messageText}

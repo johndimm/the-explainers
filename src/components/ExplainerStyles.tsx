@@ -24,6 +24,9 @@ const STYLE_CATEGORIES = {
     { value: 'ts-eliot', name: 'T.S. Eliot', description: 'Modernist and allusive' },
     { value: 'john-ruskin', name: 'John Ruskin', description: 'Victorian art and social critic' },
     { value: 'samuel-johnson', name: 'Samuel Johnson', description: 'Classical English criticism' },
+    { value: 'christopher-marlowe', name: 'Christopher Marlowe', description: 'Dramatic and poetic' },
+    { value: 'ben-jonson', name: 'Ben Jonson', description: 'Satirical and classical' },
+    { value: 'francis-bacon', name: 'Francis Bacon', description: 'Philosophical and aphoristic' },
   ],
   writers: [
     { value: 'david-foster-wallace', name: 'David Foster Wallace', description: 'Hyper-detailed and verbose' },
@@ -43,6 +46,8 @@ const STYLE_CATEGORIES = {
     { value: 'bernard-henri-levy', name: 'Bernard-Henri Lévy', description: 'Intellectual provocateur' },
     { value: 'michel-houellebecq', name: 'Michel Houellebecq', description: 'Nihilistic social critic' },
     { value: 'christopher-hitchens', name: 'Christopher Hitchens', description: 'Contrarian and erudite' },
+    { value: 'charles-dickens', name: 'Charles Dickens', description: 'Victorian and social realist' },
+    { value: 'cormac-mccarthy', name: 'Cormac McCarthy', description: 'Sparse and haunting' },
   ],
   comedians: [
     { value: 'jerry-seinfeld', name: 'Jerry Seinfeld', description: 'What\'s the deal with...' },
@@ -169,6 +174,11 @@ const ExplainerStyles: React.FC<ExplainerStylesProps> = ({
                 placeholder.innerHTML = style.value === 'neutral' ? '⚖️' : '👤'
                 e.currentTarget.parentNode?.insertBefore(placeholder, e.currentTarget)
               }}
+            />
+            <img 
+              src={`/explainer-photos/${style.value}.jpg`}
+              alt={`${style.name} - Large View`}
+              className={stylesCss.hoverImage}
             />
             <div className={stylesCss.styleInfo}>
               <div className={stylesCss.styleName}>{style.name}</div>
@@ -409,7 +419,7 @@ const ExplainerStyles: React.FC<ExplainerStylesProps> = ({
             onClick={() => handleStyleSelect('neutral')}
           >
             <img 
-              src="/explainer-photos/neutral.jpg"
+              src="/explainer-photos/neutral.svg"
               alt="Neutral"
               className={stylesCss.stylePhoto}
               onError={(e) => { 
@@ -428,6 +438,11 @@ const ExplainerStyles: React.FC<ExplainerStylesProps> = ({
                 placeholder.innerHTML = '⚖️'
                 e.currentTarget.parentNode?.insertBefore(placeholder, e.currentTarget)
               }}
+            />
+            <img 
+              src="/explainer-photos/neutral.svg"
+              alt="Neutral - Large View"
+              className={stylesCss.hoverImage}
             />
             <div className={stylesCss.styleInfo}>
               <div className={stylesCss.styleName}>Neutral</div>

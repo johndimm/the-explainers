@@ -106,11 +106,17 @@
   cursor: pointer;
   transition: all 0.2s ease;
   background: white;
+  position: relative;
 }
 
 .styleOption:hover {
   border-color: #3b82f6;
   background: #f8fafc;
+}
+
+.stylePhoto:hover + .hoverImage {
+  opacity: 1;
+  transform: scale(1);
 }
 
 .styleOption.selected {
@@ -125,6 +131,41 @@
   object-fit: cover;
   flex-shrink: 0;
   border: 2px solid #e5e7eb;
+  position: relative;
+  transition: transform 0.3s ease;
+  background: #f8f9fa;
+  padding: 8px;
+}
+
+.stylePhoto[src$=".svg"] {
+  background: #f8f9fa;
+  padding: 12px;
+}
+
+.stylePhoto:hover {
+  transform: scale(1.05);
+}
+
+.hoverImage {
+  position: absolute;
+  top: -20px;
+  left: -20px;
+  width: 200px;
+  height: 200px;
+  border-radius: 12px;
+  object-fit: cover;
+  border: 3px solid white;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+  z-index: 100;
+  pointer-events: none;
+  opacity: 0;
+  transform: scale(0.8);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.hoverImage[src$=".svg"] {
+  background: #f8f9fa;
+  padding: 40px;
 }
 
 .styleInfo {
