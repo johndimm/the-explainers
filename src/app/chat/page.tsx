@@ -49,6 +49,17 @@ function ChatContent() {
 
   return (
     <div>
+      <style jsx>{`
+        @media (max-width: 768px) {
+          .mobile-padding {
+            padding: 8px !important;
+          }
+          .mobile-card {
+            border-radius: 12px !important;
+            padding: 16px !important;
+          }
+        }
+      `}</style>
       <header style={{
         position: 'fixed',
         top: 0,
@@ -254,7 +265,12 @@ function ChatContent() {
         </div>
       </header>
       
-      <div style={{ marginTop: '60px', minHeight: 'calc(100vh - 60px)', padding: '20px', background: '#fafafa' }}>
+      <div style={{ 
+        marginTop: '60px', 
+        minHeight: 'calc(100vh - 60px)', 
+        padding: '20px', 
+        background: '#fafafa' 
+      }} className="mobile-padding">
         <div style={{
           maxWidth: '800px',
           margin: '0 auto',
@@ -265,7 +281,7 @@ function ChatContent() {
           minHeight: '600px',
           display: 'flex',
           flexDirection: 'column'
-        }}>
+        }} className="mobile-card">
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '20px' }}>
             <div style={{ flex: 1 }}>
               <h2 style={{ margin: '0 0 8px 0', fontSize: '24px', fontWeight: '600', color: '#1a1a1a' }}>
