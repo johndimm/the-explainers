@@ -5,6 +5,7 @@ import styles from './ChatInterface.module.css'
 import { SettingsData, LLMProvider, ResponseLength, ExplanationStyle } from './Settings'
 import { ProfileData } from './Profile'
 import { useProfile } from '../contexts/ProfileContext'
+import { STYLE_CATEGORIES } from './ExplainerStyles'
 
 interface Message {
   id: string
@@ -37,6 +38,20 @@ interface ChatInterfaceProps {
   bookTitle: string
   author: string
   isPageMode?: boolean
+}
+
+// Generate ordered list of all styles
+const getAllStyles = () => {
+  const allStyles = [
+    { value: 'neutral' as const, name: 'Neutral' }
+  ]
+  
+  // Add all categories in the same order as ExplainerStyles page
+  Object.values(STYLE_CATEGORIES).flat().forEach(style => {
+    allStyles.push({ value: style.value, name: style.name })
+  })
+  
+  return allStyles
 }
 
 const ChatInterface: React.FC<ChatInterfaceProps> = ({ selectedText, contextInfo, settings, profile, onClose, onSettingsChange, bookTitle, author, isPageMode = false }) => {
@@ -119,6 +134,17 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ selectedText, contextInfo
       return () => clearTimeout(timeoutId)
     }
   }, [hasChanges, selectedProvider, currentStyle, currentResponseLength, settings, onSettingsChange])
+
+  const handleUpdateDefaults = () => {
+    const updatedSettings: SettingsData = {
+      ...settings,
+      llmProvider: selectedProvider,
+      explanationStyle: currentStyle,
+      responseLength: currentResponseLength
+    }
+    onSettingsChange(updatedSettings)
+    setHasChanges(false)
+  }
 
 
   const callLLM = async (messages: Message[]): Promise<string> => {
@@ -264,6 +290,16 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ selectedText, contextInfo
         return 'Respond in the style of Samuel Johnson - classical English critic and moralist. Use his characteristic authoritative pronouncements, his gift for memorable aphorisms and moral instruction, and his ability to combine learning with practical wisdom about human nature.'
       case 'christopher-hitchens':
         return 'Respond in the style of Christopher Hitchens - contrarian intellectual and polemicist. Use his characteristic erudition combined with irreverence, his gift for devastating wit and classical references, and his ability to challenge orthodox thinking with fearless intellectual honesty.'
+      case 'christopher-marlowe':
+        return 'Respond in the style of Christopher Marlowe - dramatic and poetic with Renaissance flair. Use his characteristic passion for grand themes, his gift for ambitious characters and cosmic questions, and his ability to blend classical learning with theatrical power and Elizabethan vigor.'
+      case 'ben-jonson':
+        return 'Respond in the style of Ben Jonson - satirical and classical with moral purpose. Use his characteristic wit in exposing human folly, his gift for social satire and classical allusions, and his ability to combine learning with sharp observation of contemporary manners and morals.'
+      case 'francis-bacon':
+        return 'Respond in the style of Francis Bacon - philosophical and aphoristic with scientific method. Use his characteristic precise reasoning, his gift for memorable maxims and systematic thinking, and his ability to combine empirical observation with moral wisdom and practical judgment.'
+      case 'charles-dickens':
+        return 'Respond in the style of Charles Dickens - Victorian social realist with humanitarian passion. Use his characteristic concern for the poor and oppressed, his gift for vivid character portraits and social criticism, and his ability to combine melodrama with moral purpose and reformist zeal.'
+      case 'cormac-mccarthy':
+        return 'Respond in the style of Cormac McCarthy - sparse and haunting with biblical undertones. Use his characteristic stripped-down prose, his gift for finding beauty in desolation, and his ability to explore profound themes of violence, survival, and human nature with minimal but powerful language.'
       default:
         return ''
     }
@@ -487,67 +523,11 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ selectedText, contextInfo
                 className={styles.styleSelect}
                 disabled={isLoading}
               >
-                <option value="neutral">Neutral</option>
-                <option value="harold-bloom">Harold Bloom</option>
-                <option value="carl-sagan">Carl Sagan</option>
-                <option value="louis-ck">Louis C.K.</option>
-                <option value="david-foster-wallace">David Foster Wallace</option>
-                <option value="neil-degrasse-tyson">Neil deGrasse Tyson</option>
-                <option value="oscar-wilde">Oscar Wilde</option>
-                <option value="stephen-fry">Stephen Fry</option>
-                <option value="bill-bryson">Bill Bryson</option>
-                <option value="maya-angelou">Maya Angelou</option>
-                <option value="anthony-bourdain">Anthony Bourdain</option>
-                <option value="douglas-adams">Douglas Adams</option>
-                <option value="terry-pratchett">Terry Pratchett</option>
-                <option value="joan-didion">Joan Didion</option>
-                <option value="jerry-seinfeld">Jerry Seinfeld</option>
-                <option value="andrew-dice-clay">Andrew Dice Clay</option>
-                <option value="howard-stern">Howard Stern</option>
-                <option value="tina-fey">Tina Fey</option>
-                <option value="dave-chappelle">Dave Chappelle</option>
-                <option value="amy-poehler">Amy Poehler</option>
-                <option value="ricky-gervais">Ricky Gervais</option>
-                <option value="sarah-silverman">Sarah Silverman</option>
-                <option value="john-mulaney">John Mulaney</option>
-                <option value="ali-wong">Ali Wong</option>
-                <option value="bo-burnham">Bo Burnham</option>
-                <option value="oprah-winfrey">Oprah Winfrey</option>
-                <option value="david-letterman">David Letterman</option>
-                <option value="conan-obrien">Conan O'Brien</option>
-                <option value="stephen-colbert">Stephen Colbert</option>
-                <option value="jimmy-fallon">Jimmy Fallon</option>
-                <option value="ellen-degeneres">Ellen DeGeneres</option>
-                <option value="trevor-noah">Trevor Noah</option>
-                <option value="john-oliver">John Oliver</option>
-                <option value="jon-stewart">Jon Stewart</option>
-                <option value="david-sedaris">David Sedaris</option>
-                <option value="mark-twain">Mark Twain</option>
-                <option value="ts-eliot">T.S. Eliot</option>
-                <option value="rudyard-kipling">Rudyard Kipling</option>
-                <option value="tom-wolfe">Tom Wolfe</option>
-                <option value="flannery-oconnor">Flannery O'Connor</option>
-                <option value="humphrey-bogart">Humphrey Bogart</option>
-                <option value="anthony-jeselnik">Anthony Jeselnik</option>
-                <option value="doug-stanhope">Doug Stanhope</option>
-                <option value="jim-norton">Jim Norton</option>
-                <option value="jim-jefferies">Jim Jefferies</option>
-                <option value="daniel-tosh">Daniel Tosh</option>
-                <option value="andy-andrist">Andy Andrist</option>
-                <option value="bill-burr">Bill Burr</option>
-                <option value="lewis-black">Lewis Black</option>
-                <option value="george-carlin">George Carlin</option>
-                <option value="sam-kinison">Sam Kinison</option>
-                <option value="paul-mooney">Paul Mooney</option>
-                <option value="bill-hicks">Bill Hicks</option>
-                <option value="bob-saget">Bob Saget</option>
-                <option value="norm-macdonald">Norm MacDonald</option>
-                <option value="bernard-henri-levy">Bernard-Henri Lévy</option>
-                <option value="michel-houellebecq">Michel Houellebecq</option>
-                <option value="bill-maher">Bill Maher</option>
-                <option value="john-ruskin">John Ruskin</option>
-                <option value="samuel-johnson">Samuel Johnson</option>
-                <option value="christopher-hitchens">Christopher Hitchens</option>
+                {getAllStyles().map((style) => (
+                  <option key={style.value} value={style.value}>
+                    {style.name}
+                  </option>
+                ))}
               </select>
             </div>
             <div className={styles.lengthSelector}>
@@ -570,6 +550,15 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ selectedText, contextInfo
             >
               Re-explain
             </button>
+            {hasChanges && (
+              <button 
+                onClick={handleUpdateDefaults}
+                className={styles.updateDefaultsButton}
+                title="Save current settings as defaults"
+              >
+                Update Defaults
+              </button>
+            )}
             {hasChanges && (
               <div style={{ fontSize: '12px', color: '#666', padding: '8px' }}>
                 Saving changes...

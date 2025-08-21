@@ -18,7 +18,7 @@ interface StyleOption {
   description: string
 }
 
-const STYLE_CATEGORIES = {
+export const STYLE_CATEGORIES = {
   critics: [
     { value: 'harold-bloom', name: 'Harold Bloom', description: 'Literary critic style' },
     { value: 'ts-eliot', name: 'T.S. Eliot', description: 'Modernist and allusive' },
@@ -418,32 +418,9 @@ const ExplainerStyles: React.FC<ExplainerStylesProps> = ({
             className={`${stylesCss.styleOption} ${selectedStyle === 'neutral' ? stylesCss.selected : ''}`}
             onClick={() => handleStyleSelect('neutral')}
           >
-            <img 
-              src="/explainer-photos/neutral.svg"
-              alt="Neutral"
-              className={stylesCss.stylePhoto}
-              onError={(e) => { 
-                e.currentTarget.style.display = 'none'
-                // Show a placeholder icon when image fails to load
-                const placeholder = document.createElement('div')
-                placeholder.style.width = '60px'
-                placeholder.style.height = '60px' 
-                placeholder.style.backgroundColor = '#f3f4f6'
-                placeholder.style.borderRadius = '50%'
-                placeholder.style.display = 'flex'
-                placeholder.style.alignItems = 'center'
-                placeholder.style.justifyContent = 'center'
-                placeholder.style.fontSize = '24px'
-                placeholder.style.flexShrink = '0'
-                placeholder.innerHTML = '⚖️'
-                e.currentTarget.parentNode?.insertBefore(placeholder, e.currentTarget)
-              }}
-            />
-            <img 
-              src="/explainer-photos/neutral.svg"
-              alt="Neutral - Large View"
-              className={stylesCss.hoverImage}
-            />
+            <div className={stylesCss.neutralIcon}>
+              ⚖️
+            </div>
             <div className={stylesCss.styleInfo}>
               <div className={stylesCss.styleName}>Neutral</div>
               <div className={stylesCss.styleDescription}>Standard explanations</div>
