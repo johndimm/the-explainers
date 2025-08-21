@@ -27,9 +27,14 @@ const TextReader: React.FC<TextReaderProps> = ({ text, bookTitle = 'Romeo and Ju
   const [highlightedText, setHighlightedText] = useState<string>('')
   const [showFirstTimeInstructions, setShowFirstTimeInstructions] = useState(false)
   const [hasUserScrolled, setHasUserScrolled] = useState(false)
+  const [searchQuery, setSearchQuery] = useState('')
+  const [searchResults, setSearchResults] = useState<{index: number, length: number}[]>([])
+  const [currentSearchIndex, setCurrentSearchIndex] = useState(-1)
+  const [showSearchBar, setShowSearchBar] = useState(false)
   const router = useRouter()
   const textReaderRef = useRef<HTMLDivElement>(null)
   const scrollTimeoutRef = useRef<NodeJS.Timeout | null>(null)
+  const searchInputRef = useRef<HTMLInputElement>(null)
 
   // Check for first-time user and restore bookmark
   useEffect(() => {
@@ -240,24 +245,66 @@ const TextReader: React.FC<TextReaderProps> = ({ text, bookTitle = 'Romeo and Ju
   }
 
   const renderTextWithHighlight = () => {
-    if (!isInSelectionMode || !highlightedText) {
-      return text
+    let textToRender = text
+    
+    // Handle search highlighting
+    if (searchResults.length > 0 && searchQuery.trim()) {
+      const parts = []
+      let lastIndex = 0
+      
+      searchResults.forEach((result, index) => {
+        // Add text before this search result
+        if (result.index > lastIndex) {
+          parts.push(textToRender.slice(lastIndex, result.index))
+        }
+        
+        // Add the highlighted search result
+        const isCurrentResult = index === currentSearchIndex
+        const searchText = textToRender.slice(result.index, result.index + result.length)
+        parts.push(
+          <span 
+            key={`search-${index}`}
+            style={{
+              backgroundColor: isCurrentResult ? '#8b5cf6' : '#ffeb3b',
+              color: isCurrentResult ? 'white' : 'black',
+              padding: '1px 2px',
+              borderRadius: '2px'
+            }}
+          >
+            {searchText}
+          </span>
+        )
+        
+        lastIndex = result.index + result.length
+      })
+      
+      // Add remaining text
+      if (lastIndex < textToRender.length) {
+        parts.push(textToRender.slice(lastIndex))
+      }
+      
+      return <>{parts}</>
     }
     
-    const index = text.indexOf(highlightedText)
-    if (index === -1) return text
+    // Handle selection highlighting (when in selection mode)
+    if (isInSelectionMode && highlightedText) {
+      const index = textToRender.indexOf(highlightedText)
+      if (index !== -1) {
+        const before = textToRender.slice(0, index)
+        const highlighted = textToRender.slice(index, index + highlightedText.length)
+        const after = textToRender.slice(index + highlightedText.length)
+        
+        return (
+          <>
+            {before}
+            <span className={styles.selectedText}>{highlighted}</span>
+            {after}
+          </>
+        )
+      }
+    }
     
-    const before = text.slice(0, index)
-    const highlighted = text.slice(index, index + highlightedText.length)
-    const after = text.slice(index + highlightedText.length)
-    
-    return (
-      <>
-        {before}
-        <span className={styles.selectedText}>{highlighted}</span>
-        {after}
-      </>
-    )
+    return textToRender
   }
 
   const expandToWordBoundaries = (range: Range): Range => {
@@ -414,6 +461,81 @@ const TextReader: React.FC<TextReaderProps> = ({ text, bookTitle = 'Romeo and Ju
     window.getSelection()?.removeAllRanges()
   }
 
+  const handleSearch = (query: string) => {
+    if (!query.trim()) {
+      setSearchResults([])
+      setCurrentSearchIndex(-1)
+      return
+    }
+
+    const results: {index: number, length: number}[] = []
+    const searchTerm = query.toLowerCase()
+    const textLower = text.toLowerCase()
+    
+    let startIndex = 0
+    while (startIndex < textLower.length) {
+      const foundIndex = textLower.indexOf(searchTerm, startIndex)
+      if (foundIndex === -1) break
+      
+      results.push({
+        index: foundIndex,
+        length: query.length
+      })
+      startIndex = foundIndex + 1
+    }
+    
+    setSearchResults(results)
+    setCurrentSearchIndex(results.length > 0 ? 0 : -1)
+    
+    // Scroll to first result
+    if (results.length > 0) {
+      scrollToSearchResult(0, results)
+    }
+  }
+
+  const scrollToSearchResult = (resultIndex: number, results: {index: number, length: number}[]) => {
+    if (resultIndex < 0 || resultIndex >= results.length || !textContentRef.current) return
+    
+    const result = results[resultIndex]
+    const textElement = textContentRef.current
+    
+    // Calculate approximate scroll position based on character position
+    const textLength = text.length
+    const scrollHeight = textElement.scrollHeight
+    const scrollPosition = (result.index / textLength) * scrollHeight
+    
+    if (textReaderRef.current) {
+      textReaderRef.current.scrollTop = scrollPosition - 100 // Offset to show context
+    }
+  }
+
+  const nextSearchResult = () => {
+    if (searchResults.length === 0) return
+    const newIndex = (currentSearchIndex + 1) % searchResults.length
+    setCurrentSearchIndex(newIndex)
+    scrollToSearchResult(newIndex, searchResults)
+  }
+
+  const prevSearchResult = () => {
+    if (searchResults.length === 0) return
+    const newIndex = currentSearchIndex <= 0 ? searchResults.length - 1 : currentSearchIndex - 1
+    setCurrentSearchIndex(newIndex)
+    scrollToSearchResult(newIndex, searchResults)
+  }
+
+  const toggleSearch = () => {
+    setShowSearchBar(!showSearchBar)
+    if (!showSearchBar) {
+      // Focus search input when showing
+      setTimeout(() => searchInputRef.current?.focus(), 100)
+    } else {
+      // Clear search when hiding
+      setSearchQuery('')
+      setSearchResults([])
+      setCurrentSearchIndex(-1)
+    }
+  }
+
   return (
     <div ref={textReaderRef} className={styles.textReader}>
       {showFirstTimeInstructions && (
@@ -456,6 +578,128 @@ const TextReader: React.FC<TextReaderProps> = ({ text, bookTitle = 'Romeo and Ju
             Got it!
           </button>
         </div>
+      )}
+      
+      {/* Search Bar */}
+      {showSearchBar && (
+        <div style={{
+          position: 'sticky',
+          top: 0,
+          backgroundColor: 'white',
+          borderBottom: '1px solid #e0e0e0',
+          padding: '12px',
+          zIndex: 100,
+          boxShadow: '0 2px 4px rgba(0,0,0,0.1)'
+        }}>
+          <div style={{
+            display: 'flex',
+            alignItems: 'center',
+            gap: '8px',
+            maxWidth: '600px',
+            margin: '0 auto'
+          }}>
+            <input
+              ref={searchInputRef}
+              type="text"
+              placeholder="Search in text..."
+              value={searchQuery}
+              onChange={(e) => {
+                setSearchQuery(e.target.value)
+                handleSearch(e.target.value)
+              }}
+              style={{
+                flex: 1,
+                padding: '8px 12px',
+                border: '1px solid #d0d7de',
+                borderRadius: '6px',
+                fontSize: '14px',
+                outline: 'none'
+              }}
+              onFocus={(e) => e.target.style.borderColor = '#8b5cf6'}
+              onBlur={(e) => e.target.style.borderColor = '#d0d7de'}
+            />
+            {searchResults.length > 0 && (
+              <div style={{ 
+                display: 'flex', 
+                alignItems: 'center', 
+                gap: '8px',
+                fontSize: '14px',
+                color: '#666',
+                whiteSpace: 'nowrap'
+              }}>
+                <span>{currentSearchIndex + 1} of {searchResults.length}</span>
+                <button
+                  onClick={prevSearchResult}
+                  style={{
+                    padding: '4px 8px',
+                    border: '1px solid #d0d7de',
+                    borderRadius: '4px',
+                    background: 'white',
+                    cursor: 'pointer',
+                    fontSize: '12px'
+                  }}
+                >
+                  ↑
+                </button>
+                <button
+                  onClick={nextSearchResult}
+                  style={{
+                    padding: '4px 8px',
+                    border: '1px solid #d0d7de',
+                    borderRadius: '4px',
+                    background: 'white',
+                    cursor: 'pointer',
+                    fontSize: '12px'
+                  }}
+                >
+                  ↓
+                </button>
+              </div>
+            )}
+            <button
+              onClick={toggleSearch}
+              style={{
+                padding: '8px',
+                border: '1px solid #d0d7de',
+                borderRadius: '4px',
+                background: 'white',
+                cursor: 'pointer',
+                fontSize: '14px'
+              }}
+            >
+              ✕
+            </button>
+          </div>
+        </div>
+      )}
+      
+      {/* Search Toggle Button */}
+      {!showSearchBar && (
+        <button
+          onClick={toggleSearch}
+          style={{
+            position: 'fixed',
+            top: '80px',
+            right: '20px',
+            padding: '12px',
+            background: '#8b5cf6',
+            color: 'white',
+            border: 'none',
+            borderRadius: '50%',
+            cursor: 'pointer',
+            fontSize: '16px',
+            zIndex: 50,
+            boxShadow: '0 2px 8px rgba(0,0,0,0.2)',
+            width: '48px',
+            height: '48px',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center'
+          }}
+          title="Search in text"
+        >
+          🔍
+        </button>
       )}
       
       <div 

@@ -15,8 +15,8 @@ async function searchYouTube(searchQuery: string) {
     
     // Extract video IDs from the HTML response
     // YouTube embeds video data in JSON within the HTML
-    const videoIds = []
-    const videoTitles = []
+    const videoIds: string[] = []
+    const videoTitles: string[] = []
     
     // Look for video IDs in the HTML (they appear in various patterns)
     const videoIdMatches = html.match(/\/watch\?v=([a-zA-Z0-9_-]{11})/g)
