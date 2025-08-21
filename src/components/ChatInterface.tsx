@@ -117,34 +117,19 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ selectedText, contextInfo
     setHasChanges(hasProviderChange || hasStyleChange || hasLengthChange)
   }, [selectedProvider, currentStyle, currentResponseLength, settings])
 
-  // Auto-save settings changes after a delay
+  // Auto-save settings changes immediately
   useEffect(() => {
     if (hasChanges) {
-      const timeoutId = setTimeout(() => {
-        const updatedSettings: SettingsData = {
-          ...settings,
-          llmProvider: selectedProvider,
-          explanationStyle: currentStyle,
-          responseLength: currentResponseLength
-        }
-        onSettingsChange(updatedSettings)
-        setHasChanges(false)
-      }, 1000) // Auto-save after 1 second of no changes
-      
-      return () => clearTimeout(timeoutId)
+      const updatedSettings: SettingsData = {
+        ...settings,
+        llmProvider: selectedProvider,
+        explanationStyle: currentStyle,
+        responseLength: currentResponseLength
+      }
+      onSettingsChange(updatedSettings)
+      setHasChanges(false)
     }
   }, [hasChanges, selectedProvider, currentStyle, currentResponseLength, settings, onSettingsChange])
-
-  const handleUpdateDefaults = () => {
-    const updatedSettings: SettingsData = {
-      ...settings,
-      llmProvider: selectedProvider,
-      explanationStyle: currentStyle,
-      responseLength: currentResponseLength
-    }
-    onSettingsChange(updatedSettings)
-    setHasChanges(false)
-  }
 
 
   const callLLM = async (messages: Message[]): Promise<string> => {
@@ -393,7 +378,7 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ selectedText, contextInfo
       timestamp: new Date()
     }
 
-    setMessages([userMessage])
+    setMessages(prev => [...prev, userMessage])
     setIsLoading(true)
 
     try {
@@ -550,20 +535,6 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ selectedText, contextInfo
             >
               Re-explain
             </button>
-            {hasChanges && (
-              <button 
-                onClick={handleUpdateDefaults}
-                className={styles.updateDefaultsButton}
-                title="Save current settings as defaults"
-              >
-                Update Defaults
-              </button>
-            )}
-            {hasChanges && (
-              <div style={{ fontSize: '12px', color: '#666', padding: '8px' }}>
-                Saving changes...
-              </div>
-            )}
           </div>
 {!isPageMode && <button onClick={onClose} className={styles.closeButton}>×</button>}
         </div>
