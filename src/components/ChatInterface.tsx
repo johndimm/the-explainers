@@ -63,17 +63,30 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ selectedText, contextInfo
   const [currentResponseLength, setCurrentResponseLength] = useState<ResponseLength>(settings.responseLength)
   const [hasChanges, setHasChanges] = useState(false)
   const [showPaymentPrompt, setShowPaymentPrompt] = useState(false)
-  const messagesEndRef = useRef<HTMLDivElement>(null)
+  const [showFullHistory, setShowFullHistory] = useState(false)
+  const [originalSelectedText, setOriginalSelectedText] = useState(selectedText)
+  const latestResponseRef = useRef<HTMLDivElement>(null)
   const inputRef = useRef<HTMLInputElement>(null)
   const initializedRef = useRef(false)
   const { canUseExplanation, useExplanation, getBookExplanationsUsed } = useProfile()
 
-  const scrollToBottom = () => {
-    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' })
+  const scrollToLatestResponse = () => {
+    latestResponseRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+  }
+
+  const getDisplayedMessages = () => {
+    if (showFullHistory || messages.length <= 2) {
+      return messages
+    }
+    // Show only the last 2 messages (current quote and response)
+    return messages.slice(-2)
   }
 
   useEffect(() => {
-    scrollToBottom()
+    if (messages.length > 0 && messages[messages.length - 1].role === 'assistant') {
+      // Only scroll when a new assistant message is added
+      setTimeout(() => scrollToLatestResponse(), 100)
+    }
   }, [messages])
 
   // Load chat history from sessionStorage
@@ -101,10 +114,18 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ selectedText, contextInfo
 
   useEffect(() => {
     if (selectedText && !initializedRef.current) {
+      setOriginalSelectedText(selectedText)
       initializedRef.current = true
       handleExplainText(selectedText)
     }
   }, [selectedText])
+
+  // Update original selected text when selectedText changes
+  useEffect(() => {
+    if (selectedText && selectedText !== originalSelectedText) {
+      setOriginalSelectedText(selectedText)
+    }
+  }, [selectedText, originalSelectedText])
 
   useEffect(() => {
     inputRef.current?.focus()
@@ -528,8 +549,8 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ selectedText, contextInfo
               </select>
             </div>
             <button 
-              onClick={() => handleExplainText(selectedText)}
-              disabled={isLoading}
+              onClick={() => handleExplainText(originalSelectedText)}
+              disabled={isLoading || !originalSelectedText}
               className={styles.reexplainButton}
               title="Re-explain in selected style"
             >
@@ -540,10 +561,35 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ selectedText, contextInfo
         </div>
         
         <div className={styles.messagesContainer}>
-          {messages.map((message) => (
+          {!showFullHistory && messages.length > 2 && (
+            <div style={{ textAlign: 'center', marginBottom: '16px' }}>
+              <button 
+                onClick={() => setShowFullHistory(true)}
+                className={styles.historyToggle}
+                title="Show full conversation history"
+              >
+                Show Chat History ({messages.length - 2} earlier messages)
+              </button>
+            </div>
+          )}
+          {showFullHistory && messages.length > 2 && (
+            <div style={{ textAlign: 'center', marginBottom: '16px' }}>
+              <button 
+                onClick={() => setShowFullHistory(false)}
+                className={styles.historyToggle}
+                title="Show only current exchange"
+              >
+                Hide Chat History
+              </button>
+            </div>
+          )}
+          {getDisplayedMessages().map((message, index) => {
+            const isLatestAssistantMessage = message.role === 'assistant' && index === getDisplayedMessages().length - 1
+            return (
             <div 
               key={message.id} 
               className={`${styles.message} ${styles[message.role]}`}
+              ref={isLatestAssistantMessage ? latestResponseRef : null}
             >
               {message.role === 'assistant' && message.provider && (
                 <div className={styles.messageInfo}>
@@ -586,7 +632,7 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ selectedText, contextInfo
                 {message.timestamp.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
               </div>
             </div>
-          ))}
+          )})}
           
           {isLoading && (
             <div className={`${styles.message} ${styles.assistant}`}>
@@ -599,8 +645,6 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ selectedText, contextInfo
               </div>
             </div>
           )}
-          
-          <div ref={messagesEndRef} />
         </div>
         
         <div className={styles.inputContainer}>

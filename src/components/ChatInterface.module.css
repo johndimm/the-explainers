@@ -361,3 +361,22 @@
 .updateDefaultsButton:hover {
   background: #7c3aed;
 }
+
+.historyToggle {
+  padding: 8px 16px;
+  background: #f8f9fa;
+  color: #374151;
+  border: 1px solid #e5e7eb;
+  border-radius: 20px;
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 500;
+  transition: all 0.2s ease;
+  margin: 0 auto;
+}
+
+.historyToggle:hover {
+  background: #e5e7eb;
+  border-color: #d1d5db;
+  transform: translateY(-1px);
+}

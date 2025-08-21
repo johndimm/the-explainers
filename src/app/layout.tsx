@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from 'next'
 import './globals.css'
+import ClientLayout from './ClientLayout'
 
 export const metadata: Metadata = {
   title: 'The Explainers',
@@ -47,7 +48,11 @@ export default function RootLayout({
         <meta name="msapplication-TileColor" content="#8b5cf6" />
         <meta name="msapplication-tap-highlight" content="no" />
       </head>
-      <body>{children}</body>
+      <body>
+        <ClientLayout>
+          {children}
+        </ClientLayout>
+      </body>
     </html>
   )
 }

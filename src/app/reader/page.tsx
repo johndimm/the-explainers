@@ -2,8 +2,8 @@
 
 import { useState, useEffect, useRef, Suspense } from 'react'
 import TextReader from '@/components/TextReader'
-import { useSettings, SettingsProvider } from '@/contexts/SettingsContext'
-import { useProfile, ProfileProvider } from '@/contexts/ProfileContext'
+import { useSettings } from '@/contexts/SettingsContext'
+import { useProfile } from '@/contexts/ProfileContext'
 import { useRouter, useSearchParams } from 'next/navigation'
 
 function ReaderContent() {
@@ -396,12 +396,8 @@ function ReaderContent() {
 
 export default function ReaderPage() {
   return (
-    <ProfileProvider>
-      <SettingsProvider>
-        <Suspense fallback={<div>Loading...</div>}>
-          <ReaderContent />
-        </Suspense>
-      </SettingsProvider>
-    </ProfileProvider>
+    <Suspense fallback={<div>Loading...</div>}>
+      <ReaderContent />
+    </Suspense>
   )
 }

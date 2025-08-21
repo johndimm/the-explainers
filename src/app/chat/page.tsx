@@ -2,8 +2,6 @@
 
 import { useState, useRef, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
-import { SettingsProvider } from '@/contexts/SettingsContext'
-import { ProfileProvider } from '@/contexts/ProfileContext'
 import ChatInterface from '@/components/ChatInterface'
 import { useSettings } from '@/contexts/SettingsContext'
 import { useProfile } from '@/contexts/ProfileContext'
@@ -339,11 +337,5 @@ function ChatContent() {
 }
 
 export default function ChatPage() {
-  return (
-    <ProfileProvider>
-      <SettingsProvider>
-        <ChatContent />
-      </SettingsProvider>
-    </ProfileProvider>
-  )
+  return <ChatContent />
 }
