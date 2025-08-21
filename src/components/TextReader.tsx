@@ -617,7 +617,7 @@ const TextReader: React.FC<TextReaderProps> = ({ text, bookTitle = 'Romeo and Ju
         position: 'sticky',
         top: '0px',
         padding: '8px 20px',
-        margin: '-20px -20px 0 -20px',
+        margin: '-30px -20px 0 -20px',
         backgroundColor: 'white',
         borderBottom: '1px solid #e0e0e0',
         zIndex: 50,
