@@ -65,7 +65,7 @@ export async function POST(req: NextRequest) {
     console.log('YouTube search request:', { query, bookTitle, author })
     
     // Create a comprehensive search query for better results
-    const searchTerms = `"${query}" ${bookTitle} ${author} performance scene`
+    const searchTerms = `"${query}" ${bookTitle} Shakespeare performance scene`
     
     console.log('YouTube search terms:', searchTerms)
     
@@ -91,11 +91,54 @@ export async function POST(req: NextRequest) {
           title: 'Macbeth - "Is this a dagger..." - Patrick Stewart',
           description: 'The dagger soliloquy from Macbeth by William Shakespeare'
         }]
+      } else if (bookTitle.toLowerCase().includes('julius caesar') &&
+                 (query.toLowerCase().includes('brutus') || query.toLowerCase().includes('et tu'))) {
+        videos = [{
+          id: 'kAF6-mMDY4M',
+          title: 'Et Tu, Brute? - Julius Caesar',
+          description: 'The famous betrayal scene from Julius Caesar by William Shakespeare'
+        }]
+      } else if (bookTitle.toLowerCase().includes('king henry iv')) {
+        videos = [{
+          id: 'JW21UIlkwF0',
+          title: 'King Henry IV, Part 1 by William Shakespeare',
+          description: 'Full performance of King Henry IV, Part 1 by William Shakespeare'
+        }]
       }
       
-      // If still no videos, try one more simplified search
+      // If still no videos, try searching for general book content
       if (videos.length === 0) {
-        videos = await searchYouTube(`${bookTitle} ${author} ${query.substring(0, 20)}`)
+        console.log('No quote-specific videos found, trying general book search...')
+        const bookVideos = await searchYouTube(`${bookTitle} ${author} performance scene`)
+        
+        // Only show book videos if they seem relevant (contain book title AND Shakespeare)
+        const relevantVideos = bookVideos.filter(video => {
+          const titleLower = video.title.toLowerCase()
+          const hasShakespeare = titleLower.includes('shakespeare')
+          
+          // For "King Henry IV" type titles, be more specific
+          let hasBookTitle = false
+          if (bookTitle.toLowerCase().includes('king henry')) {
+            hasBookTitle = titleLower.includes('king henry') || 
+                          titleLower.includes('henry iv') || 
+                          titleLower.includes('henry 4') ||
+                          titleLower.includes('henry part') ||
+                          titleLower.includes('1 henry') ||
+                          titleLower.includes('2 henry')
+          } else {
+            hasBookTitle = titleLower.includes(bookTitle.toLowerCase().split(' ')[0])
+          }
+          
+          return hasBookTitle && hasShakespeare
+        })
+        
+        if (relevantVideos.length > 0) {
+          console.log(`Found ${relevantVideos.length} relevant videos for ${bookTitle}`)
+          videos = relevantVideos.slice(0, 1) // Take just the first relevant one
+        } else {
+          // Last resort: try a very short excerpt
+          videos = await searchYouTube(`${bookTitle} ${author} ${query.substring(0, 20)}`)
+        }
       }
     }
     
