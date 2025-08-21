@@ -42,13 +42,13 @@ interface ChatInterfaceProps {
 
 // Generate ordered list of all styles
 const getAllStyles = () => {
-  const allStyles = [
-    { value: 'neutral' as const, name: 'Neutral' }
+  const allStyles: { value: ExplanationStyle, name: string }[] = [
+    { value: 'neutral', name: 'Neutral' }
   ]
   
   // Add all categories in the same order as ExplainerStyles page
   Object.values(STYLE_CATEGORIES).flat().forEach(style => {
-    allStyles.push({ value: style.value, name: style.name })
+    allStyles.push({ value: style.value as ExplanationStyle, name: style.name })
   })
   
   return allStyles
