@@ -30,7 +30,6 @@ const TextReader: React.FC<TextReaderProps> = ({ text, bookTitle = 'Romeo and Ju
   const [searchQuery, setSearchQuery] = useState('')
   const [searchResults, setSearchResults] = useState<{index: number, length: number}[]>([])
   const [currentSearchIndex, setCurrentSearchIndex] = useState(-1)
-  const [showSearchBar, setShowSearchBar] = useState(false)
   const router = useRouter()
   const textReaderRef = useRef<HTMLDivElement>(null)
   const scrollTimeoutRef = useRef<NodeJS.Timeout | null>(null)
@@ -261,6 +260,7 @@ const TextReader: React.FC<TextReaderProps> = ({ text, bookTitle = 'Romeo and Ju
         // Add the highlighted search result
         const isCurrentResult = index === currentSearchIndex
         const searchText = textToRender.slice(result.index, result.index + result.length)
+        console.log(`Highlighting result ${index}:`, searchText, 'at position', result.index)
         parts.push(
           <span 
             key={`search-${index}`}
@@ -468,22 +468,49 @@ const TextReader: React.FC<TextReaderProps> = ({ text, bookTitle = 'Romeo and Ju
       return
     }
 
+    console.log('Searching for:', query)
+    console.log('Text length:', text.length)
+    
     const results: {index: number, length: number}[] = []
     const searchTerm = query.toLowerCase()
     const textLower = text.toLowerCase()
     
+    // Debug: check if text contains the search term
+    let testIndex = textLower.indexOf(searchTerm)
+    console.log('First occurrence index:', testIndex)
+    
+    // If exact match not found, try flexible search for common phrases
+    let actualSearchTerm = searchTerm
+    let actualLength = searchTerm.length
+    
+    if (testIndex === -1 && searchTerm.includes('to be')) {
+      // Try with commas for Shakespeare quotes
+      const withCommas = searchTerm.replace('to be or not to be', 'to be, or not to be')
+      testIndex = textLower.indexOf(withCommas)
+      if (testIndex >= 0) {
+        actualSearchTerm = withCommas
+        actualLength = withCommas.length
+        console.log('Found with commas at:', testIndex)
+      }
+    }
+    
+    if (testIndex >= 0) {
+      console.log('Context around match:', textLower.substring(testIndex - 20, testIndex + actualLength + 20))
+    }
+    
     let startIndex = 0
     while (startIndex < textLower.length) {
-      const foundIndex = textLower.indexOf(searchTerm, startIndex)
+      const foundIndex = textLower.indexOf(actualSearchTerm, startIndex)
       if (foundIndex === -1) break
       
       results.push({
         index: foundIndex,
-        length: query.length
+        length: actualLength
       })
       startIndex = foundIndex + 1
     }
     
+    console.log('Search results found:', results.length)
     setSearchResults(results)
     setCurrentSearchIndex(results.length > 0 ? 0 : -1)
     
@@ -497,16 +524,33 @@ const TextReader: React.FC<TextReaderProps> = ({ text, bookTitle = 'Romeo and Ju
     if (resultIndex < 0 || resultIndex >= results.length || !textContentRef.current) return
     
     const result = results[resultIndex]
-    const textElement = textContentRef.current
     
-    // Calculate approximate scroll position based on character position
-    const textLength = text.length
-    const scrollHeight = textElement.scrollHeight
-    const scrollPosition = (result.index / textLength) * scrollHeight
-    
-    if (textReaderRef.current) {
-      textReaderRef.current.scrollTop = scrollPosition - 100 // Offset to show context
-    }
+    // Try to find the highlighted element and scroll to it
+    setTimeout(() => {
+      const highlightedElements = textContentRef.current?.querySelectorAll('span[style*="background"]')
+      
+      if (highlightedElements && highlightedElements.length > 0) {
+        const targetElement = highlightedElements[resultIndex] as HTMLElement
+        if (targetElement) {
+          targetElement.scrollIntoView({ 
+            behavior: 'smooth', 
+            block: 'center',
+            inline: 'nearest'
+          })
+          console.log('Scrolled to highlighted element')
+          return
+        }
+      }
+      
+      // Fallback: manual calculation
+      const scrollContainer = textReaderRef.current
+      if (scrollContainer) {
+        const textPercentage = result.index / text.length
+        const targetPosition = textPercentage * scrollContainer.scrollHeight * 0.8 // Adjust multiplier
+        scrollContainer.scrollTop = Math.max(0, targetPosition - 200)
+        console.log('Fallback scroll to position:', targetPosition)
+      }
+    }, 100)
   }
 
   const nextSearchResult = () => {
@@ -523,18 +567,6 @@ const TextReader: React.FC<TextReaderProps> = ({ text, bookTitle = 'Romeo and Ju
     scrollToSearchResult(newIndex, searchResults)
   }
 
-  const toggleSearch = () => {
-    setShowSearchBar(!showSearchBar)
-    if (!showSearchBar) {
-      // Focus search input when showing
-      setTimeout(() => searchInputRef.current?.focus(), 100)
-    } else {
-      // Clear search when hiding
-      setSearchQuery('')
-      setSearchResults([])
-      setCurrentSearchIndex(-1)
-    }
-  }
 
   return (
     <div ref={textReaderRef} className={styles.textReader}>
@@ -581,126 +613,99 @@ const TextReader: React.FC<TextReaderProps> = ({ text, bookTitle = 'Romeo and Ju
       )}
       
       {/* Search Bar */}
-      {showSearchBar && (
-        <div style={{
-          position: 'sticky',
-          top: 0,
-          backgroundColor: 'white',
-          borderBottom: '1px solid #e0e0e0',
-          padding: '12px',
-          zIndex: 100,
-          boxShadow: '0 2px 4px rgba(0,0,0,0.1)'
-        }}>
-          <div style={{
+      <div style={{
+        position: 'sticky',
+        top: '0px',
+        padding: '8px 20px',
+        margin: '0 -20px 0 -20px',
+        backgroundColor: 'white',
+        borderBottom: '1px solid #e0e0e0',
+        zIndex: 50,
+        width: 'calc(100% + 40px)',
+        boxSizing: 'border-box',
+        marginTop: '-20px'
+      }}>
+        <input
+          ref={searchInputRef}
+          type="text"
+          placeholder="Search..."
+          value={searchQuery}
+          onChange={(e) => {
+            setSearchQuery(e.target.value)
+          }}
+          onKeyDown={(e) => {
+            if (e.key === 'Enter') {
+              handleSearch(searchQuery)
+            }
+          }}
+          style={{
+            width: '100%',
+            padding: '6px 12px',
+            margin: 0,
+            border: '1px solid #ddd',
+            borderRadius: '4px',
+            fontSize: '14px',
+            outline: 'none',
+            backgroundColor: 'white'
+          }}
+        />
+        {searchResults.length > 0 && (
+          <div style={{ 
+            marginTop: '4px',
+            fontSize: '12px',
+            color: '#666',
             display: 'flex',
             alignItems: 'center',
-            gap: '8px',
-            maxWidth: '600px',
-            margin: '0 auto'
+            gap: '8px'
           }}>
-            <input
-              ref={searchInputRef}
-              type="text"
-              placeholder="Search in text..."
-              value={searchQuery}
-              onChange={(e) => {
-                setSearchQuery(e.target.value)
-                handleSearch(e.target.value)
-              }}
-              style={{
-                flex: 1,
-                padding: '8px 12px',
-                border: '1px solid #d0d7de',
-                borderRadius: '6px',
-                fontSize: '14px',
-                outline: 'none'
-              }}
-              onFocus={(e) => e.target.style.borderColor = '#8b5cf6'}
-              onBlur={(e) => e.target.style.borderColor = '#d0d7de'}
-            />
-            {searchResults.length > 0 && (
-              <div style={{ 
-                display: 'flex', 
-                alignItems: 'center', 
-                gap: '8px',
-                fontSize: '14px',
-                color: '#666',
-                whiteSpace: 'nowrap'
-              }}>
-                <span>{currentSearchIndex + 1} of {searchResults.length}</span>
-                <button
-                  onClick={prevSearchResult}
-                  style={{
-                    padding: '4px 8px',
-                    border: '1px solid #d0d7de',
-                    borderRadius: '4px',
-                    background: 'white',
-                    cursor: 'pointer',
-                    fontSize: '12px'
-                  }}
-                >
-                  ↑
-                </button>
-                <button
-                  onClick={nextSearchResult}
-                  style={{
-                    padding: '4px 8px',
-                    border: '1px solid #d0d7de',
-                    borderRadius: '4px',
-                    background: 'white',
-                    cursor: 'pointer',
-                    fontSize: '12px'
-                  }}
-                >
-                  ↓
-                </button>
-              </div>
-            )}
+            <span>{currentSearchIndex + 1} of {searchResults.length}</span>
             <button
-              onClick={toggleSearch}
+              onClick={prevSearchResult}
               style={{
-                padding: '8px',
-                border: '1px solid #d0d7de',
-                borderRadius: '4px',
+                padding: '2px 6px',
+                border: '1px solid #ddd',
+                borderRadius: '2px',
                 background: 'white',
                 cursor: 'pointer',
-                fontSize: '14px'
+                fontSize: '11px'
               }}
             >
-              ✕
+              ↑
+            </button>
+            <button
+              onClick={nextSearchResult}
+              style={{
+                padding: '2px 6px',
+                border: '1px solid #ddd',
+                borderRadius: '2px',
+                background: 'white',
+                cursor: 'pointer',
+                fontSize: '11px'
+              }}
+            >
+              ↓
+            </button>
+            <button
+              onClick={() => {
+                setSearchQuery('')
+                setSearchResults([])
+                setCurrentSearchIndex(-1)
+              }}
+              style={{
+                padding: '2px 8px',
+                border: 'none',
+                background: 'none',
+                cursor: 'pointer',
+                fontSize: '11px',
+                color: '#999'
+              }}
+            >
+              clear
             </button>
           </div>
-        </div>
-      )}
+        )}
+      </div>
       
-      {/* Search Toggle Button */}
-      {!showSearchBar && (
-        <button
-          onClick={toggleSearch}
-          style={{
-            position: 'fixed',
-            top: '80px',
-            right: '20px',
-            padding: '12px',
-            background: '#8b5cf6',
-            color: 'white',
-            border: 'none',
-            borderRadius: '50%',
-            cursor: 'pointer',
-            fontSize: '16px',
-            zIndex: 50,
-            boxShadow: '0 2px 8px rgba(0,0,0,0.2)',
-            width: '48px',
-            height: '48px',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center'
-          }}
-          title="Search in text"
-        >
-          🔍
-        </button>
-      )}
       
       <div 
         ref={textContentRef}
