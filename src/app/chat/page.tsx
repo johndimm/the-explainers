@@ -32,13 +32,16 @@ function ChatContent() {
 
   // Check for context data from text selection
   useEffect(() => {
+    console.log('Chat page: Checking for chatContext in sessionStorage')
     const storedContext = sessionStorage.getItem('chatContext')
+    console.log('Chat page: storedContext:', storedContext)
     if (storedContext) {
       try {
         const parsedContext = JSON.parse(storedContext)
+        console.log('Chat page: parsedContext:', parsedContext)
         setContextData(parsedContext)
-        // Clear it so it doesn't persist on refresh
-        sessionStorage.removeItem('chatContext')
+        // Don't clear it immediately - let it persist for refreshes
+        // It will be cleared when navigating to a new selection
       } catch (error) {
         console.error('Error parsing chat context:', error)
       }
@@ -320,7 +323,11 @@ function ChatContent() {
           </p>
           
           <ChatInterface
-            selectedText={contextData?.selectedText || ""}
+            selectedText={(() => {
+              const text = contextData?.selectedText || "";
+              console.log('Chat page: Passing selectedText to ChatInterface:', text);
+              return text;
+            })()}
             contextInfo={contextData?.contextInfo || null}
             settings={settings}
             profile={profile}

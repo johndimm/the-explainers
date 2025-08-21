@@ -64,7 +64,7 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ selectedText, contextInfo
   const [hasChanges, setHasChanges] = useState(false)
   const [showPaymentPrompt, setShowPaymentPrompt] = useState(false)
   const [showFullHistory, setShowFullHistory] = useState(false)
-  const [originalSelectedText, setOriginalSelectedText] = useState(selectedText)
+  const [originalSelectedText, setOriginalSelectedText] = useState("")
   const latestResponseRef = useRef<HTMLDivElement>(null)
   const inputRef = useRef<HTMLInputElement>(null)
   const initializedRef = useRef(false)
@@ -75,11 +75,31 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ selectedText, contextInfo
   }
 
   const getDisplayedMessages = () => {
-    if (showFullHistory || messages.length <= 2) {
+    if (showFullHistory) {
       return messages
     }
-    // Show only the last 2 messages (current quote and response)
-    return messages.slice(-2)
+    
+    if (messages.length <= 2) {
+      return messages
+    }
+    
+    // Find the index of the last user message (most recent quote)
+    let lastUserMessageIndex = -1
+    for (let i = messages.length - 1; i >= 0; i--) {
+      if (messages[i].role === 'user') {
+        lastUserMessageIndex = i
+        break
+      }
+    }
+    
+    // If we found a user message, show it and all assistant messages that follow
+    // This allows multiple re-explanations of the same quote to all be visible
+    if (lastUserMessageIndex >= 0) {
+      return messages.slice(lastUserMessageIndex)
+    }
+    
+    // Fallback to showing all messages if no user message found
+    return messages
   }
 
   useEffect(() => {
@@ -120,12 +140,26 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ selectedText, contextInfo
     }
   }, [selectedText])
 
-  // Update original selected text when selectedText changes
+  // Set original selected text when it becomes available (from props or chat history)
   useEffect(() => {
-    if (selectedText && selectedText !== originalSelectedText) {
-      setOriginalSelectedText(selectedText)
+    console.log('ChatInterface: selectedText changed:', selectedText)
+    console.log('ChatInterface: originalSelectedText:', originalSelectedText)
+    console.log('ChatInterface: messages:', messages)
+    
+    if (!originalSelectedText) {
+      if (selectedText) {
+        console.log('ChatInterface: Setting originalSelectedText from selectedText:', selectedText)
+        setOriginalSelectedText(selectedText)
+      } else if (messages.length > 0) {
+        // If no selectedText but we have chat history, use the first user message as the text to re-explain
+        const firstUserMessage = messages.find(m => m.role === 'user')
+        if (firstUserMessage) {
+          console.log('ChatInterface: Setting originalSelectedText from chat history:', firstUserMessage.content)
+          setOriginalSelectedText(firstUserMessage.content)
+        }
+      }
     }
-  }, [selectedText, originalSelectedText])
+  }, [selectedText, originalSelectedText, messages])
 
   useEffect(() => {
     inputRef.current?.focus()
@@ -368,6 +402,66 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ selectedText, contextInfo
     return prompt
   }
 
+  const handleReExplain = async (text: string) => {
+    const useCustomLLM = selectedProvider === 'custom'
+    
+    // Check if user can use explanation
+    if (!canUseExplanation(bookTitle, author, useCustomLLM)) {
+      setShowPaymentPrompt(true)
+      return
+    }
+
+    const promptText = createContextualPrompt(text, contextInfo)
+    
+    console.log('Re-explain prompt sent to LLM:')
+    console.log(promptText)
+    console.log('Context info:', contextInfo)
+
+    // For re-explain, we don't add a user message, just get a new assistant response
+    const llmMessage: Message = {
+      id: 'llm-prompt-reexplain',
+      role: 'user',
+      content: promptText,
+      timestamp: new Date()
+    }
+
+    setIsLoading(true)
+
+    try {
+      // Use the explanation (deduct credits if needed)
+      const success = useExplanation(bookTitle, author, useCustomLLM)
+      if (!success) {
+        setShowPaymentPrompt(true)
+        setIsLoading(false)
+        return
+      }
+
+      const response = await callLLM([llmMessage])
+      const assistantMessage: Message = {
+        id: (Date.now() + 1).toString(),
+        content: response,
+        role: 'assistant',
+        timestamp: new Date(),
+        provider: selectedProvider,
+        style: currentStyle
+      }
+      setMessages(prev => [...prev, assistantMessage])
+    } catch (error) {
+      console.error('Error calling LLM:', error)
+      const errorMessage: Message = {
+        id: (Date.now() + 1).toString(),
+        content: 'Sorry, I encountered an error while trying to re-explain this text. Please try again.',
+        role: 'assistant',
+        timestamp: new Date(),
+        provider: selectedProvider,
+        style: currentStyle
+      }
+      setMessages(prev => [...prev, errorMessage])
+    } finally {
+      setIsLoading(false)
+    }
+  }
+
   const handleExplainText = async (text: string) => {
     const useCustomLLM = selectedProvider === 'custom'
     
@@ -549,7 +643,7 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ selectedText, contextInfo
               </select>
             </div>
             <button 
-              onClick={() => handleExplainText(originalSelectedText)}
+              onClick={() => handleReExplain(originalSelectedText)}
               disabled={isLoading || !originalSelectedText}
               className={styles.reexplainButton}
               title="Re-explain in selected style"

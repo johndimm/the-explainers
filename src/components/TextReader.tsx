@@ -215,11 +215,28 @@ const TextReader: React.FC<TextReaderProps> = ({ text, bookTitle = 'Romeo and Ju
   }
 
   const handleTextSelection = () => {
-    const selection = window.getSelection()
-    if (selection && selection.toString().trim()) {
-      setSelectedText(selection.toString().trim())
-      setShowConfirmDialog(true)
-    }
+    // Small delay to ensure selection is fully registered
+    setTimeout(() => {
+      const selection = window.getSelection()
+      console.log('handleTextSelection called, selection:', selection)
+      console.log('selection text:', selection?.toString())
+      console.log('selection range count:', selection?.rangeCount)
+      
+      if (selection && selection.rangeCount > 0) {
+        const selectedText = selection.toString().trim()
+        console.log('Selected text:', selectedText)
+        
+        if (selectedText && selectedText.length > 0) {
+          setSelectedText(selectedText)
+          setShowConfirmDialog(true)
+          console.log('Setting selectedText and showing dialog')
+        } else {
+          console.log('No text selected or empty selection')
+        }
+      } else {
+        console.log('No selection or no ranges')
+      }
+    }, 10) // Very small delay to let selection register
   }
 
   const renderTextWithHighlight = () => {
