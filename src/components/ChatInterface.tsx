@@ -12,8 +12,10 @@ interface Message {
   content: string
   role: 'user' | 'assistant'
   timestamp: Date
-  provider?: LLMProvider
+  provider?: LLMProvider | 'youtube'
   style?: ExplanationStyle
+  videoId?: string
+  videoTitle?: string
 }
 
 interface ContextInfo {
@@ -388,7 +390,7 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ selectedText, contextInfo
     
     prompt += `\n- Explain unfamiliar terms and words used in unfamiliar ways`
     prompt += `\n- Explain why the character is saying this and what is happening at this moment`
-    prompt += `\n- Explain things people reading this at time of publication would know that we do not`
+    prompt += `\n- Explain references that contemporary audiences would understand`
     if (profile.language !== 'english') {
       prompt += `\n- Respond in ${profile.language}`
     }
@@ -401,6 +403,76 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ selectedText, contextInfo
     
     return prompt
   }
+
+  const searchAndEmbedVideo = async (text: string) => {
+    console.log('Automatically searching for video with quote:', text)
+    console.log('Using context info:', contextInfo)
+    
+    try {
+      // Build a richer search query using context information
+      let searchTerms = [`"${text}"`] // Start with the exact quote
+      
+      // Add book and author
+      if (bookTitle) searchTerms.push(bookTitle)
+      if (author) searchTerms.push(author)
+      
+      // Add speaker information if available
+      if (contextInfo?.speaker) {
+        searchTerms.push(contextInfo.speaker)
+      }
+      
+      // Add act/scene information for plays
+      if (contextInfo?.act && contextInfo?.scene) {
+        searchTerms.push(`Act ${contextInfo.act}`)
+        searchTerms.push(`Scene ${contextInfo.scene}`)
+      }
+      
+      // Add performance/scene keywords
+      searchTerms.push('performance', 'scene')
+      
+      const searchQuery = searchTerms.join(' ').trim()
+      console.log('Enhanced YouTube search query:', searchQuery)
+      
+      const response = await fetch('/api/youtube-search', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ 
+          query: searchQuery,
+          bookTitle,
+          author 
+        })
+      })
+      
+      if (!response.ok) {
+        console.log('YouTube search failed, skipping video')
+        return // Silently fail - no video embedded
+      }
+      
+      const data = await response.json()
+      console.log('Auto YouTube search results:', data)
+      
+      if (data.videos && data.videos.length > 0) {
+        // Add video message to chat automatically
+        const videoMessage: Message = {
+          id: (Date.now() + 2).toString(),
+          content: `🎬 Found related video`,
+          role: 'assistant',
+          timestamp: new Date(),
+          provider: 'youtube',
+          style: 'neutral',
+          videoId: data.videos[0].id,
+          videoTitle: data.videos[0].title
+        }
+        setMessages(prev => [...prev, videoMessage])
+      }
+      // If no videos found, do nothing (no error message)
+      
+    } catch (error) {
+      console.error('Auto video search error (ignored):', error)
+      // Silently ignore errors - don't interrupt the user experience
+    }
+  }
+
 
   const handleReExplain = async (text: string) => {
     const useCustomLLM = selectedProvider === 'custom'
@@ -446,6 +518,15 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ selectedText, contextInfo
         style: currentStyle
       }
       setMessages(prev => [...prev, assistantMessage])
+      
+      // Also automatically search for video after re-explain (but only if there's no video already for this quote)
+      setTimeout(() => {
+        const hasVideoForThisQuote = messages.some(msg => msg.videoId && msg.provider === 'youtube')
+        if (!hasVideoForThisQuote) {
+          searchAndEmbedVideo(text)
+        }
+      }, 500)
+      
     } catch (error) {
       console.error('Error calling LLM:', error)
       const errorMessage: Message = {
@@ -515,6 +596,11 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ selectedText, contextInfo
         style: currentStyle
       }
       setMessages(prev => [...prev, assistantMessage])
+      
+      // Automatically search for video after getting explanation
+      setTimeout(() => {
+        searchAndEmbedVideo(text)
+      }, 500) // Small delay to let the explanation render first
     } catch (error) {
       console.error('Error calling LLM:', error)
       const errorMessage: Message = {
@@ -692,6 +778,7 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ selectedText, contextInfo
                      message.provider === 'anthropic' ? 'Claude Haiku' :
                      message.provider === 'deepseek' ? 'DeepSeek Chat' :
                      message.provider === 'gemini' ? 'Gemini Flash' :
+                     message.provider === 'youtube' ? '🎬 YouTube' :
                      message.provider}
                   </span>
                   {message.style && message.style !== 'neutral' && (
@@ -715,12 +802,46 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ selectedText, contextInfo
                 </div>
               )}
               <div className={styles.messageContent}>
-                <pre 
-                  className={styles.messageText}
-                  style={{ fontFamily: settings.chatFont }}
-                >
-                  {message.content}
-                </pre>
+                {message.videoId ? (
+                  <div>
+                    <div style={{ marginBottom: '12px' }}>
+                      <pre 
+                        className={styles.messageText}
+                        style={{ fontFamily: settings.chatFont }}
+                      >
+                        {message.content}
+                      </pre>
+                    </div>
+                    <div style={{ position: 'relative', paddingBottom: '56.25%', height: 0, overflow: 'hidden', maxWidth: '100%', background: '#000' }}>
+                      <iframe
+                        src={`https://www.youtube.com/embed/${message.videoId}`}
+                        title={message.videoTitle || 'YouTube video'}
+                        style={{
+                          position: 'absolute',
+                          top: 0,
+                          left: 0,
+                          width: '100%',
+                          height: '100%'
+                        }}
+                        frameBorder="0"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        allowFullScreen
+                      />
+                    </div>
+                    {message.videoTitle && (
+                      <div style={{ marginTop: '8px', fontSize: '14px', color: '#666', fontStyle: 'italic' }}>
+                        {message.videoTitle}
+                      </div>
+                    )}
+                  </div>
+                ) : (
+                  <pre 
+                    className={styles.messageText}
+                    style={{ fontFamily: settings.chatFont }}
+                  >
+                    {message.content}
+                  </pre>
+                )}
               </div>
               <div className={styles.messageTime}>
                 {message.timestamp.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}

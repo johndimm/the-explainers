@@ -326,7 +326,6 @@ const TextReader: React.FC<TextReaderProps> = ({ text, bookTitle = 'Romeo and Ju
   }
 
   const handleTouchStart = (e: React.TouchEvent) => {
-    e.preventDefault()
     const touch = e.touches[0]
     const pos = { x: touch.clientX, y: touch.clientY }
     setTouchStartPos(pos)
@@ -345,13 +344,16 @@ const TextReader: React.FC<TextReaderProps> = ({ text, bookTitle = 'Romeo and Ju
   }
 
   const handleTouchEnd = (e: React.TouchEvent) => {
-    e.preventDefault()
-    e.stopPropagation()
-    
-    // If we were in selection mode, finalize the selection
-    if (isInSelectionMode && currentSelection) {
-      setSelectedText(currentSelection)
-      setShowConfirmDialog(true)
+    // Only prevent default if we were in selection mode
+    if (isInSelectionMode) {
+      e.preventDefault()
+      e.stopPropagation()
+      
+      // Finalize the selection
+      if (currentSelection) {
+        setSelectedText(currentSelection)
+        setShowConfirmDialog(true)
+      }
       setIsInSelectionMode(false)
       setCurrentSelection('')
     }
