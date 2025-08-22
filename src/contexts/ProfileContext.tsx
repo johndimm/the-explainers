@@ -15,6 +15,7 @@ interface ProfileContextType {
   getBookExplanationsUsed: (bookTitle: string, author: string) => number
   addCredits: (amount: number) => void
   purchaseBook: (bookTitle: string, author: string) => void
+  grantUnlimitedAccess: (duration: 'hour' | 'month' | 'year') => void
 }
 
 const DEFAULT_PROFILE: ProfileData = {
@@ -24,7 +25,7 @@ const DEFAULT_PROFILE: ProfileData = {
   firstLogin: undefined,
   totalExplanations: 0,
   todayExplanations: 0,
-  availableCredits: 100,
+  availableCredits: 5,
   bookExplanations: {},
   purchasedBooks: [],
   hasUnlimitedAccess: false,
@@ -56,7 +57,17 @@ export const ProfileProvider: React.FC<ProfileProviderProps> = ({ children }) =>
         if (parsed.firstLogin) {
           parsed.firstLogin = new Date(parsed.firstLogin)
         }
-        const restoredProfile = { ...DEFAULT_PROFILE, ...parsed }
+        let restoredProfile = { ...DEFAULT_PROFILE, ...parsed }
+        
+        // Migration: Reset credits for users who had the old 100 credit default
+        // Handle users with 100 credits (unused) or 97-99 credits (used some)
+        if (restoredProfile.availableCredits && restoredProfile.availableCredits >= 95) {
+          console.log(`ProfileContext: Migrating user from ${restoredProfile.availableCredits} to 5 credits`)
+          restoredProfile.availableCredits = 5
+          // Save the migrated profile
+          localStorage.setItem('explainer-profile', JSON.stringify(restoredProfile))
+        }
+        
         console.log('ProfileContext: Restoring profile:', restoredProfile)
         setProfile(restoredProfile)
       } catch (error) {
@@ -202,6 +213,35 @@ export const ProfileProvider: React.FC<ProfileProviderProps> = ({ children }) =>
     })
   }
 
+  const grantUnlimitedAccess = (duration: 'hour' | 'month' | 'year') => {
+    setProfile(prev => {
+      const now = new Date()
+      let expiryTime: Date
+      
+      switch (duration) {
+        case 'hour':
+          expiryTime = new Date(now.getTime() + 60 * 60 * 1000) // 1 hour
+          break
+        case 'month':
+          expiryTime = new Date(now.getTime() + 30 * 24 * 60 * 60 * 1000) // 30 days
+          break
+        case 'year':
+          expiryTime = new Date(now.getTime() + 365 * 24 * 60 * 60 * 1000) // 365 days
+          break
+        default:
+          expiryTime = new Date(now.getTime() + 60 * 60 * 1000) // Default to 1 hour
+      }
+      
+      const newProfile = {
+        ...prev,
+        hasUnlimitedAccess: true,
+        unlimitedAccessExpiry: expiryTime
+      }
+      localStorage.setItem('explainer-profile', JSON.stringify(newProfile))
+      return newProfile
+    })
+  }
+
   const openProfile = () => setIsProfileOpen(true)
   const closeProfile = () => setIsProfileOpen(false)
 
@@ -217,7 +257,8 @@ export const ProfileProvider: React.FC<ProfileProviderProps> = ({ children }) =>
       useExplanation,
       getBookExplanationsUsed,
       addCredits,
-      purchaseBook
+      purchaseBook,
+      grantUnlimitedAccess
     }}>
       {children}
     </ProfileContext.Provider>

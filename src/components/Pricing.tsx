@@ -12,7 +12,7 @@ interface PricingProps {
 }
 
 const Pricing: React.FC<PricingProps> = ({ isOpen, onClose, bookTitle, author }) => {
-  const { profile, addCredits, purchaseBook } = useProfile()
+  const { profile, addCredits, purchaseBook, grantUnlimitedAccess } = useProfile()
   const [showMobileMenu, setShowMobileMenu] = useState(false)
   const menuRef = useRef<HTMLDivElement>(null)
   const router = useRouter()
@@ -49,8 +49,9 @@ const Pricing: React.FC<PricingProps> = ({ isOpen, onClose, bookTitle, author })
     onClose()
   }
 
-  const handleUnlimitedAccess = (duration: string) => {
-    alert(`Unlimited ${duration} access coming soon! For now, try using your own LLM in Settings for free access.`)
+  const handleUnlimitedAccess = (duration: 'hour' | 'month' | 'year') => {
+    grantUnlimitedAccess(duration)
+    onClose()
   }
 
   return (
@@ -272,6 +273,25 @@ const Pricing: React.FC<PricingProps> = ({ isOpen, onClose, bookTitle, author })
           margin: '20px auto',
           boxShadow: '0 2px 10px rgba(0,0,0,0.1)'
         }}>
+          {/* Free Demo Banner */}
+          <div style={{
+            background: 'linear-gradient(135deg, #10b981, #059669)',
+            color: 'white',
+            padding: '20px',
+            borderRadius: '12px',
+            marginBottom: '24px',
+            textAlign: 'center',
+            boxShadow: '0 4px 12px rgba(16, 185, 129, 0.3)'
+          }}>
+            <div style={{ fontSize: '24px', marginBottom: '8px' }}>🎉 Currently FREE!</div>
+            <div style={{ fontSize: '16px', marginBottom: '8px', fontWeight: '600' }}>
+              All explanations are free during our demo period
+            </div>
+            <div style={{ fontSize: '14px', opacity: '0.9' }}>
+              No actual payments will be processed • Try unlimited explanations now
+            </div>
+          </div>
+
           <div style={{ marginBottom: '24px' }}>
             <h2 style={{ margin: 0, color: '#8b5cf6' }}>Usage & Credits</h2>
           </div>

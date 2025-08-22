@@ -592,7 +592,7 @@ const TextReader: React.FC<TextReaderProps> = ({ text, bookTitle = 'Romeo and Ju
             We'll provide an AI explanation to help you understand it better.
           </p>
           <p style={{ margin: '0 0 20px 0', fontSize: '14px', opacity: '0.9' }}>
-            Try selecting a line from Romeo and Juliet that seems difficult to understand.
+            Try selecting any passage in the text that seems difficult to understand.
           </p>
           <button 
             onClick={() => setShowFirstTimeInstructions(false)}

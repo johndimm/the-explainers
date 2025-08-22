@@ -247,7 +247,7 @@ const UserGuide: React.FC = () => {
 
           <h3 style={{ color: '#007bff', marginTop: '25px', marginBottom: '10px' }}>Quick Start</h3>
           <ol style={{ marginBottom: '15px' }}>
-            <li style={{ marginBottom: '5px' }}>Open the application (it loads with "Romeo and Juliet" by default)</li>
+            <li style={{ marginBottom: '5px' }}>Open the application and select a book from the library</li>
             <li style={{ marginBottom: '5px' }}>Simply select any text passage you find confusing</li>
             <li style={{ marginBottom: '5px' }}>Get an instant AI explanation tailored to your needs</li>
             <li style={{ marginBottom: '5px' }}>Ask follow-up questions in the chat interface</li>

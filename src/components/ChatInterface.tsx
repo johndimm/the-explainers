@@ -60,6 +60,7 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ selectedText, contextInfo
   const [messages, setMessages] = useState<Message[]>([])
   const [inputValue, setInputValue] = useState('')
   const [isLoading, setIsLoading] = useState(false)
+  const [currentTime, setCurrentTime] = useState(new Date())
   const [selectedProvider, setSelectedProvider] = useState<LLMProvider>(settings.llmProvider)
   const [currentStyle, setCurrentStyle] = useState<ExplanationStyle>(settings.explanationStyle)
   const [currentResponseLength, setCurrentResponseLength] = useState<ResponseLength>(settings.responseLength)
@@ -165,6 +166,15 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ selectedText, contextInfo
 
   useEffect(() => {
     inputRef.current?.focus()
+  }, [])
+
+  // Update current time every minute for countdown display
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCurrentTime(new Date())
+    }, 60000) // Update every minute
+
+    return () => clearInterval(timer)
   }, [])
 
   useEffect(() => {
@@ -672,7 +682,7 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ selectedText, contextInfo
         <div className={styles.chatHeader}>
           <div>
             <h3>Text Explanation</h3>
-            <div style={{ fontSize: '12px', color: '#666', marginTop: '2px' }}>
+            <div style={{ fontSize: '13px', color: '#8b5cf6', marginTop: '4px', fontWeight: '500' }}>
               {(() => {
                 const useCustomLLM = selectedProvider === 'custom'
                 const bookExplanationsUsed = getBookExplanationsUsed(bookTitle, author)
@@ -681,7 +691,18 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ selectedText, contextInfo
                 const hasUnlimited = profile.hasUnlimitedAccess && profile.unlimitedAccessExpiry && new Date() < new Date(profile.unlimitedAccessExpiry)
                 
                 if (useCustomLLM) return 'Free with your own LLM'
-                if (hasUnlimited) return 'Unlimited access active'
+                if (hasUnlimited) {
+                  const expiry = new Date(profile.unlimitedAccessExpiry!)
+                  const msRemaining = expiry.getTime() - currentTime.getTime()
+                  const minutesRemaining = Math.ceil(msRemaining / (1000 * 60))
+                  
+                  if (minutesRemaining > 60) {
+                    const hoursRemaining = Math.ceil(minutesRemaining / 60)
+                    return `Unlimited access: ${hoursRemaining} hour${hoursRemaining !== 1 ? 's' : ''} left`
+                  } else {
+                    return `Unlimited access: ${minutesRemaining} minute${minutesRemaining !== 1 ? 's' : ''} left`
+                  }
+                }
                 if (isBookPurchased) return 'Book purchased - unlimited explanations'
                 if (bookExplanationsUsed < 3) return `${3 - bookExplanationsUsed} free explanations left for this book`
                 return `${profile.availableCredits || 0} credits remaining`
@@ -852,10 +873,13 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ selectedText, contextInfo
           {isLoading && (
             <div className={`${styles.message} ${styles.assistant}`}>
               <div className={styles.messageContent}>
-                <div className={styles.loadingDots}>
-                  <span></span>
-                  <span></span>
-                  <span></span>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '8px', color: '#666' }}>
+                  <span style={{ fontSize: '14px' }}>AI is thinking</span>
+                  <div className={styles.loadingDots}>
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                  </div>
                 </div>
               </div>
             </div>
@@ -898,9 +922,21 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ selectedText, contextInfo
           maxWidth: '400px',
           textAlign: 'center'
         }}>
-          <h3 style={{ margin: '0 0 16px 0', color: '#8b5cf6' }}>More Explanations Available</h3>
+          {/* Free Demo Banner */}
+          <div style={{
+            background: 'linear-gradient(135deg, #10b981, #059669)',
+            color: 'white',
+            padding: '16px',
+            borderRadius: '8px',
+            marginBottom: '16px'
+          }}>
+            <div style={{ fontSize: '18px', fontWeight: 'bold', marginBottom: '4px' }}>🎉 Currently FREE!</div>
+            <div style={{ fontSize: '14px', opacity: '0.9' }}>All options below are free during our demo period</div>
+          </div>
+
+          <h3 style={{ margin: '0 0 16px 0', color: '#8b5cf6' }}>Continue Reading</h3>
           <p style={{ margin: '0 0 20px 0', lineHeight: '1.5' }}>
-            You've used your free explanations for this book. Choose an option to continue:
+            You've used your trial explanations for this book. Choose how to continue:
           </p>
           
           <div style={{ display: 'flex', flexDirection: 'column', gap: '12px', marginBottom: '20px' }}>
@@ -929,14 +965,14 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ selectedText, contextInfo
             </div>
             
             <div style={{ 
-              background: '#fff3cd', 
+              background: '#e8f4fd', 
               padding: '16px', 
               borderRadius: '8px',
-              border: '1px solid #ffeaa7'
+              border: '1px solid #b3d9ff'
             }}>
-              <strong>Bring Your Own LLM - Free!</strong>
+              <strong style={{ color: '#0066cc' }}>Unlimited Access - $1/hour</strong>
               <div style={{ fontSize: '14px', color: '#666', marginTop: '4px' }}>
-                Use your own API key in Settings
+                Unlimited explanations for all books
               </div>
             </div>
           </div>
@@ -957,7 +993,9 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ selectedText, contextInfo
             <button 
               onClick={() => {
                 setShowPaymentPrompt(false)
-                alert('Payment processing coming soon! For now, try using your own LLM in Settings.')
+                if (typeof window !== 'undefined') {
+                  window.location.href = '/credits'
+                }
               }}
               style={{
                 padding: '10px 20px',
