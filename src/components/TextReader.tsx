@@ -295,20 +295,64 @@ const TextReader: React.FC<TextReaderProps> = ({ text, bookTitle = 'Romeo and Ju
     
     // Handle selection highlighting (when in selection mode)
     if (isInSelectionMode && highlightedText) {
-      const index = textToRender.indexOf(highlightedText)
-      if (index !== -1) {
-        const before = textToRender.slice(0, index)
-        const highlighted = textToRender.slice(index, index + highlightedText.length)
-        const after = textToRender.slice(index + highlightedText.length)
-        
-        return (
-          <>
-            {before}
-            <span className={styles.selectedText}>{highlighted}</span>
-            {after}
-          </>
-        )
+      // Try multiple search strategies to find the text
+      const strategies = [
+        // Exact match
+        () => {
+          const index = textToRender.indexOf(highlightedText)
+          if (index !== -1) return { index, text: highlightedText }
+          return null
+        },
+        // Case-insensitive match
+        () => {
+          const lowerText = textToRender.toLowerCase()
+          const lowerHighlight = highlightedText.toLowerCase()
+          const index = lowerText.indexOf(lowerHighlight)
+          if (index !== -1) return { index, text: textToRender.slice(index, index + highlightedText.length) }
+          return null
+        },
+        // Try without punctuation (for speaker names like "THESEUS.")
+        () => {
+          const cleanHighlight = highlightedText.replace(/[.,:;!?]/g, '')
+          const index = textToRender.indexOf(cleanHighlight)
+          if (index !== -1) return { index, text: cleanHighlight }
+          return null
+        },
+        // Fuzzy match - try to find the core word
+        () => {
+          const coreWord = highlightedText.replace(/[^a-zA-Z]/g, '').toUpperCase()
+          if (coreWord.length < 2) return null
+          
+          const regex = new RegExp(`\\b${coreWord}\\b`, 'i')
+          const match = textToRender.match(regex)
+          if (match) {
+            const index = textToRender.indexOf(match[0])
+            return { index, text: match[0] }
+          }
+          return null
+        }
+      ]
+      
+      // Try each strategy until one works
+      for (const strategy of strategies) {
+        const result = strategy()
+        if (result) {
+          const before = textToRender.slice(0, result.index)
+          const highlighted = result.text
+          const after = textToRender.slice(result.index + highlighted.length)
+          
+          return (
+            <>
+              {before}
+              <span className={styles.selectedText}>{highlighted}</span>
+              {after}
+            </>
+          )
+        }
       }
+      
+      // If no strategy works, fall back to native browser selection visual
+      // The text is selected but we can't highlight it in our custom way
     }
     
     return textToRender
@@ -386,10 +430,21 @@ const TextReader: React.FC<TextReaderProps> = ({ text, bookTitle = 'Romeo and Ju
         }
       }
       
-      // Create a range spanning from start to end
+      // Create a range spanning from start to end, but handle reverse selections
       const range = document.createRange()
-      range.setStart(startRange.startContainer, startRange.startOffset)
-      range.setEnd(endRange.startContainer, endRange.startOffset)
+      
+      // Determine which point comes first in document order
+      const comparison = startRange.compareBoundaryPoints(Range.START_TO_START, endRange)
+      
+      if (comparison <= 0) {
+        // Normal selection: start comes before or equals end
+        range.setStart(startRange.startContainer, startRange.startOffset)
+        range.setEnd(endRange.startContainer, endRange.startOffset)
+      } else {
+        // Reverse selection: end comes before start, so swap them
+        range.setStart(endRange.startContainer, endRange.startOffset)
+        range.setEnd(startRange.startContainer, startRange.startOffset)
+      }
       
       // Expand to word boundaries
       const expandedRange = expandToWordBoundaries(range)
@@ -436,7 +491,25 @@ const TextReader: React.FC<TextReaderProps> = ({ text, bookTitle = 'Romeo and Ju
       
       console.log('Long press triggered')
       
-      const initialText = handleLongPress(pos.x, pos.y, pos.x, pos.y)
+      // Get the word at the long press position
+      const startRange = document.caretRangeFromPoint?.(pos.x, pos.y)
+      if (!startRange) {
+        console.log('Long press found no text - not entering selection mode')
+        return
+      }
+      
+      console.log('Long press startRange:', startRange)
+      console.log('Start container:', startRange.startContainer.textContent?.substring(Math.max(0, startRange.startOffset - 10), startRange.startOffset + 10))
+      
+      // Expand to word boundaries for initial selection
+      const initialRange = document.createRange()
+      initialRange.setStart(startRange.startContainer, startRange.startOffset)
+      initialRange.setEnd(startRange.startContainer, startRange.startOffset)
+      const expandedRange = expandToWordBoundaries(initialRange)
+      const initialText = expandedRange.toString().trim()
+      
+      console.log('Initial expanded text:', initialText)
+      console.log('Expanded range:', expandedRange)
       
       // Only enter selection mode if we actually found text
       if (!initialText || initialText.length === 0) {
@@ -446,18 +519,39 @@ const TextReader: React.FC<TextReaderProps> = ({ text, bookTitle = 'Romeo and Ju
       
       setIsInSelectionMode(true)
       
-      // Clear any native selections again
-      window.getSelection()?.removeAllRanges()
-      
-      // Prevent any scrolling once we enter selection mode
+      // Prevent any scrolling once we enter selection mode - more aggressive approach
+      const scrollY = window.scrollY
       document.body.style.overflow = 'hidden'
       document.body.style.position = 'fixed'
-      document.body.style.top = `-${window.scrollY}px`
+      document.body.style.top = `-${scrollY}px`
+      document.body.style.left = '0'
+      document.body.style.right = '0'
       document.body.style.width = '100%'
+      document.body.style.height = '100%'
+      
+      // Also prevent scrolling on the text container itself
+      if (textReaderRef.current) {
+        textReaderRef.current.style.overflow = 'hidden'
+      }
       
       setCurrentSelection(initialText)
-      // Show highlighting immediately
+      // Show highlighting immediately - both custom and native selection
+      console.log('Setting highlighted text to:', initialText)
       setHighlightedText(initialText)
+      
+      // Force a re-render to ensure highlighting appears immediately
+      setTimeout(() => {
+        setHighlightedText(initialText)
+      }, 0)
+      
+      // Create native visual selection for immediate feedback (but don't clear it)
+      const selection = window.getSelection()
+      if (selection) {
+        console.log('Creating native selection for text:', initialText)
+        selection.removeAllRanges()
+        selection.addRange(expandedRange.cloneRange())
+        console.log('Native selection created, selected text:', selection.toString())
+      }
       
       // Provide haptic feedback if available
       if (navigator.vibrate) {
@@ -484,7 +578,18 @@ const TextReader: React.FC<TextReaderProps> = ({ text, bookTitle = 'Romeo and Ju
       document.body.style.overflow = ''
       document.body.style.position = ''
       document.body.style.top = ''
+      document.body.style.left = ''
+      document.body.style.right = ''
       document.body.style.width = ''
+      document.body.style.height = ''
+      
+      // Restore text container scrolling
+      if (textReaderRef.current) {
+        textReaderRef.current.style.overflow = 'auto'
+      }
+      
+      // No event listeners to clean up
+      
       window.scrollTo(0, parseInt(scrollY || '0') * -1)
       
       // Finalize the selection
