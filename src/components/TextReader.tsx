@@ -75,38 +75,6 @@ const TextReader: React.FC<TextReaderProps> = ({ text, bookTitle = 'Romeo and Ju
     }
   }, [text, bookTitle, author])
 
-  // Listen for selection changes (more reliable than just mouseUp)
-  useEffect(() => {
-    let selectionTimeout: NodeJS.Timeout
-
-    const handleSelectionChange = () => {
-      // Clear any existing timeout
-      if (selectionTimeout) {
-        clearTimeout(selectionTimeout)
-      }
-      
-      // Wait for selection to stabilize before showing dialog
-      selectionTimeout = setTimeout(() => {
-        const selection = window.getSelection()
-        if (selection && selection.rangeCount > 0 && !selection.isCollapsed) {
-          const selectedText = selection.toString().trim()
-          if (selectedText && selectedText.length > 2) { // Only show for meaningful selections
-            console.log('Selection stabilized, showing dialog')
-            handleTextSelection()
-          }
-        }
-      }, 500) // Wait 500ms after selection stops changing
-    }
-
-    document.addEventListener('selectionchange', handleSelectionChange)
-    
-    return () => {
-      document.removeEventListener('selectionchange', handleSelectionChange)
-      if (selectionTimeout) {
-        clearTimeout(selectionTimeout)
-      }
-    }
-  }, [])
 
   // Save bookmark when user stops scrolling (debounced)
   useEffect(() => {
@@ -412,33 +380,82 @@ const TextReader: React.FC<TextReaderProps> = ({ text, bookTitle = 'Romeo and Ju
   }
 
   const handleTouchStart = (e: React.TouchEvent) => {
+    // Clear any existing native selections
+    window.getSelection()?.removeAllRanges()
+    
     const touch = e.touches[0]
     const pos = { x: touch.clientX, y: touch.clientY }
     setTouchStartPos(pos)
     
-    // Start long press timer
+    // Start long press timer - longer delay to avoid accidental selection during scrolling
     const timer = setTimeout(() => {
+      // Only trigger if finger is still in roughly the same place (not scrolling)
+      if (touchStartPos) {
+        const currentDistance = Math.sqrt(
+          Math.pow(touch.clientX - touchStartPos.x, 2) + Math.pow(touch.clientY - touchStartPos.y, 2)
+        )
+        
+        // If finger has moved more than 15px, user is probably scrolling, not selecting
+        if (currentDistance > 15) {
+          console.log('Long press cancelled - finger moved too much (scrolling)')
+          return
+        }
+      }
+      
       console.log('Long press triggered')
       setIsInSelectionMode(true)
+      
+      // Clear any native selections again
+      window.getSelection()?.removeAllRanges()
+      
+      // Prevent any scrolling once we enter selection mode
+      document.body.style.overflow = 'hidden'
+      document.body.style.position = 'fixed'
+      document.body.style.top = `-${window.scrollY}px`
+      document.body.style.width = '100%'
+      
       const initialText = handleLongPress(pos.x, pos.y, pos.x, pos.y)
       setCurrentSelection(initialText)
       // Show highlighting immediately
       setHighlightedText(initialText)
-    }, 500) // 500ms long press
+      
+      // Provide haptic feedback if available
+      if (navigator.vibrate) {
+        navigator.vibrate(50)
+      }
+    }, 400) // Increased delay to 400ms to reduce accidental triggering
     
     setLongPressTimer(timer)
   }
 
   const handleTouchEnd = (e: React.TouchEvent) => {
-    // Only prevent default if we were in selection mode
+    // Only prevent default if we were actually in selection mode
     if (isInSelectionMode) {
       e.preventDefault()
       e.stopPropagation()
+    }
+    
+    // Clear any native selections that might trigger browser search
+    window.getSelection()?.removeAllRanges()
+    
+    if (isInSelectionMode) {
+      // Restore scrolling
+      const scrollY = document.body.style.top
+      document.body.style.overflow = ''
+      document.body.style.position = ''
+      document.body.style.top = ''
+      document.body.style.width = ''
+      window.scrollTo(0, parseInt(scrollY || '0') * -1)
       
       // Finalize the selection
-      if (currentSelection) {
+      if (currentSelection && currentSelection.length > 2) {
+        // Clear highlighted text before showing dialog
+        setHighlightedText('')
         setSelectedText(currentSelection)
         setShowConfirmDialog(true)
+        console.log('Touch selection completed:', currentSelection)
+      } else {
+        console.log('Touch selection too short or empty:', currentSelection)
       }
       setIsInSelectionMode(false)
       setCurrentSelection('')
@@ -465,12 +482,18 @@ const TextReader: React.FC<TextReaderProps> = ({ text, bookTitle = 'Romeo and Ju
     if (isInSelectionMode) {
       e.preventDefault() // Prevent scrolling during text selection
       e.stopPropagation()
+      
+      // Always update selection, even for small movements
       const text = handleLongPress(touchStartPos.x, touchStartPos.y, touch.clientX, touch.clientY)
-      setCurrentSelection(text || '')
-    } else if (longPressTimer && distance > 10) {
-      // Cancel long press if moved too much before selection started
+      if (text && text.length > 0) {
+        setCurrentSelection(text)
+        setHighlightedText(text)
+      }
+    } else if (longPressTimer && distance > 10) { 
+      // Cancel long press early if user is clearly scrolling (reduced back to 10px)
       clearTimeout(longPressTimer)
       setLongPressTimer(null)
+      console.log('Long press cancelled - user is scrolling')
     }
   }
 
@@ -754,11 +777,11 @@ const TextReader: React.FC<TextReaderProps> = ({ text, bookTitle = 'Romeo and Ju
         onTouchMove={handleTouchMove}
         onContextMenu={(e) => e.preventDefault()}
         style={{
-          WebkitUserSelect: window.ontouchstart !== undefined ? 'none' : 'text',
-          userSelect: window.ontouchstart !== undefined ? 'none' : 'text',
+          WebkitUserSelect: 'none',
+          userSelect: 'none', 
           WebkitTouchCallout: 'none',
           WebkitTapHighlightColor: 'transparent',
-          touchAction: isInSelectionMode ? 'none' : 'auto', // Prevent all touch gestures during selection
+          touchAction: isInSelectionMode ? 'none' : 'pan-y',
           fontFamily: settings.textFont
         }}
       >
