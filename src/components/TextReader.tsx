@@ -357,8 +357,33 @@ const TextReader: React.FC<TextReaderProps> = ({ text, bookTitle = 'Romeo and Ju
       const endRange = document.caretRangeFromPoint?.(endX, endY)
       
       if (!startRange || !endRange) {
-        console.log('Could not create ranges')
+        console.log('Could not create ranges - likely clicked on whitespace or outside text')
         return ''
+      }
+      
+      // Check if we're actually hitting text content, not just whitespace
+      const startContainer = startRange.startContainer
+      if (startContainer.nodeType === Node.TEXT_NODE) {
+        const textContent = startContainer.textContent || ''
+        const charAtStart = textContent[startRange.startOffset]
+        
+        // If we hit pure whitespace or empty content, don't proceed
+        if (!charAtStart || /^\s+$/.test(charAtStart)) {
+          // Try to find nearby text within a small radius
+          let foundText = false
+          for (let offset = 1; offset <= 5 && startRange.startOffset + offset < textContent.length; offset++) {
+            if (/\w/.test(textContent[startRange.startOffset + offset])) {
+              foundText = true
+              startRange.setStart(startContainer, startRange.startOffset + offset)
+              break
+            }
+          }
+          
+          if (!foundText) {
+            console.log('Long press on whitespace - no nearby text found')
+            return ''
+          }
+        }
       }
       
       // Create a range spanning from start to end
@@ -370,6 +395,13 @@ const TextReader: React.FC<TextReaderProps> = ({ text, bookTitle = 'Romeo and Ju
       const expandedRange = expandToWordBoundaries(range)
       
       const text = expandedRange.toString().trim()
+      
+      // Final validation - make sure we got actual text, not just whitespace
+      if (!text || text.length === 0 || /^\s+$/.test(text)) {
+        console.log('Long press resulted in empty or whitespace-only selection')
+        return ''
+      }
+      
       setHighlightedText(text)
       console.log('Long press selection:', text)
       return text
@@ -403,6 +435,15 @@ const TextReader: React.FC<TextReaderProps> = ({ text, bookTitle = 'Romeo and Ju
       }
       
       console.log('Long press triggered')
+      
+      const initialText = handleLongPress(pos.x, pos.y, pos.x, pos.y)
+      
+      // Only enter selection mode if we actually found text
+      if (!initialText || initialText.length === 0) {
+        console.log('Long press found no text - not entering selection mode')
+        return
+      }
+      
       setIsInSelectionMode(true)
       
       // Clear any native selections again
@@ -414,7 +455,6 @@ const TextReader: React.FC<TextReaderProps> = ({ text, bookTitle = 'Romeo and Ju
       document.body.style.top = `-${window.scrollY}px`
       document.body.style.width = '100%'
       
-      const initialText = handleLongPress(pos.x, pos.y, pos.x, pos.y)
       setCurrentSelection(initialText)
       // Show highlighting immediately
       setHighlightedText(initialText)

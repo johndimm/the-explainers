@@ -1,7 +1,6 @@
 'use client'
 
-import React, { useState, useEffect, useRef } from 'react'
-import { useRouter } from 'next/navigation'
+import React from 'react'
 import { useProfile } from '../contexts/ProfileContext'
 
 interface PricingProps {
@@ -13,25 +12,6 @@ interface PricingProps {
 
 const Pricing: React.FC<PricingProps> = ({ isOpen, onClose, bookTitle, author }) => {
   const { profile, addCredits, purchaseBook, grantUnlimitedAccess } = useProfile()
-  const [showMobileMenu, setShowMobileMenu] = useState(false)
-  const menuRef = useRef<HTMLDivElement>(null)
-  const router = useRouter()
-
-  useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
-      if (menuRef.current && !menuRef.current.contains(event.target as Node)) {
-        setShowMobileMenu(false)
-      }
-    }
-
-    if (showMobileMenu) {
-      document.addEventListener('mousedown', handleClickOutside)
-    }
-
-    return () => {
-      document.removeEventListener('mousedown', handleClickOutside)
-    }
-  }, [showMobileMenu])
 
   if (!isOpen) return null
 
@@ -55,20 +35,39 @@ const Pricing: React.FC<PricingProps> = ({ isOpen, onClose, bookTitle, author })
   }
 
   return (
-    <div>
-      <header style={{
-        position: 'fixed',
-        top: 0,
-        left: 0,
-        right: 0,
+    <div style={{
+      position: 'fixed',
+      top: 0,
+      left: 0,
+      right: 0,
+      bottom: 0,
+      background: 'rgba(0, 0, 0, 0.5)',
+      zIndex: 1000,
+      display: 'flex',
+      justifyContent: 'center',
+      alignItems: 'center',
+      padding: '20px'
+    }}>
+      <div style={{
         background: 'white',
-        borderBottom: '1px solid #e0e0e0',
-        padding: '8px 12px',
-        zIndex: 100,
+        borderRadius: '16px',
+        width: '100%',
+        maxWidth: '500px',
+        maxHeight: '90vh',
         display: 'flex',
-        justifyContent: 'space-between',
-        alignItems: 'center'
+        flexDirection: 'column',
+        boxShadow: '0 10px 25px rgba(0,0,0,0.2)'
       }}>
+        <header style={{
+          display: 'flex',
+          justifyContent: 'space-between',
+          alignItems: 'center',
+          padding: '16px 20px',
+          borderBottom: '1px solid #e0e0e0',
+          borderRadius: '16px 16px 0 0',
+          background: '#f8f9fa',
+          flexShrink: 0
+        }}>
         <div style={{ flex: 1 }}>
           <h1 style={{ 
             margin: 0, 
@@ -77,201 +76,32 @@ const Pricing: React.FC<PricingProps> = ({ isOpen, onClose, bookTitle, author })
             color: '#333',
             lineHeight: '1.2'
           }}>
-            The Explainers
+            Credits & Usage
           </h1>
-          <p style={{ 
-            margin: 0, 
-            fontSize: '11px', 
+        </div>
+        <button 
+          onClick={onClose}
+          style={{
+            background: 'none',
+            border: 'none',
+            fontSize: '24px',
+            cursor: 'pointer',
             color: '#666',
-            fontStyle: 'italic',
-            lineHeight: '1.2'
-          }}>
-            understand difficult texts
-          </p>
-        </div>
-        {/* Hamburger menu for all devices */}
-        <div ref={menuRef} style={{ position: 'relative' }}>
-          <button 
-            onClick={() => setShowMobileMenu(!showMobileMenu)}
-            style={{
-              padding: '8px',
-              background: 'none',
-              border: 'none',
-              cursor: 'pointer',
-              fontSize: '18px',
-              color: '#333'
-            }}
-          >
-            ☰
-          </button>
-          
-          {showMobileMenu && (
-            <div style={{
-              position: 'absolute',
-              top: '100%',
-              right: 0,
-              background: 'white',
-              border: '1px solid #e0e0e0',
-              borderRadius: '8px',
-              boxShadow: '0 4px 12px rgba(0,0,0,0.15)',
-              minWidth: '160px',
-              zIndex: 1000
-            }}>
-              <button 
-                onClick={() => {
-                  router.push('/reader')
-                  setShowMobileMenu(false)
-                }}
-                style={{
-                  display: 'block',
-                  width: '100%',
-                  padding: '12px 16px',
-                  background: 'none',
-                  border: 'none',
-                  textAlign: 'left',
-                  cursor: 'pointer',
-                  borderBottom: '1px solid #f0f0f0'
-                }}
-              >
-                📖 Reader
-              </button>
-              <button 
-                onClick={() => {
-                  router.push('/chat')
-                  setShowMobileMenu(false)
-                }}
-                style={{
-                  display: 'block',
-                  width: '100%',
-                  padding: '12px 16px',
-                  background: 'none',
-                  border: 'none',
-                  textAlign: 'left',
-                  cursor: 'pointer',
-                  borderBottom: '1px solid #f0f0f0'
-                }}
-              >
-                💬 Chat
-              </button>
-              <button 
-                onClick={() => {
-                  router.push('/library')
-                  setShowMobileMenu(false)
-                }}
-                style={{
-                  display: 'block',
-                  width: '100%',
-                  padding: '12px 16px',
-                  background: 'none',
-                  border: 'none',
-                  textAlign: 'left',
-                  cursor: 'pointer',
-                  borderBottom: '1px solid #f0f0f0'
-                }}
-              >
-                📚 Library
-              </button>
-              <button 
-                onClick={() => {
-                  router.push('/styles')
-                  setShowMobileMenu(false)
-                }}
-                style={{
-                  display: 'block',
-                  width: '100%',
-                  padding: '12px 16px',
-                  background: 'none',
-                  border: 'none',
-                  textAlign: 'left',
-                  cursor: 'pointer',
-                  borderBottom: '1px solid #f0f0f0'
-                }}
-              >
-                🎭 Styles
-              </button>
-              <button 
-                onClick={() => setShowMobileMenu(false)}
-                style={{
-                  display: 'block',
-                  width: '100%',
-                  padding: '12px 16px',
-                  background: 'none',
-                  border: 'none',
-                  textAlign: 'left',
-                  cursor: 'pointer',
-                  borderBottom: '1px solid #f0f0f0',
-                  color: '#666'
-                }}
-              >
-                💳 Credits (current)
-              </button>
-              <button 
-                onClick={() => {
-                  router.push('/profile')
-                  setShowMobileMenu(false)
-                }}
-                style={{
-                  display: 'block',
-                  width: '100%',
-                  padding: '12px 16px',
-                  background: 'none',
-                  border: 'none',
-                  textAlign: 'left',
-                  cursor: 'pointer',
-                  borderBottom: '1px solid #f0f0f0'
-                }}
-              >
-                👤 Profile
-              </button>
-              <button 
-                onClick={() => {
-                  router.push('/settings')
-                  setShowMobileMenu(false)
-                }}
-                style={{
-                  display: 'block',
-                  width: '100%',
-                  padding: '12px 16px',
-                  background: 'none',
-                  border: 'none',
-                  textAlign: 'left',
-                  cursor: 'pointer',
-                  borderBottom: '1px solid #f0f0f0'
-                }}
-              >
-                ⚙️ Settings
-              </button>
-              <button 
-                onClick={() => {
-                  router.push('/guide')
-                  setShowMobileMenu(false)
-                }}
-                style={{
-                  display: 'block',
-                  width: '100%',
-                  padding: '12px 16px',
-                  background: 'none',
-                  border: 'none',
-                  textAlign: 'left',
-                  cursor: 'pointer'
-                }}
-              >
-                📖 User Guide
-              </button>
-            </div>
-          )}
-        </div>
-      </header>
-      
-      <div style={{ marginTop: '50px' }}>
+            padding: '4px',
+            borderRadius: '4px',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center'
+          }}
+        >
+          ×
+        </button>
+        </header>
+        
         <div style={{
-          background: 'white',
-          borderRadius: '16px',
-          padding: '32px',
-          maxWidth: '600px',
-          width: '100%',
-          margin: '20px auto',
-          boxShadow: '0 2px 10px rgba(0,0,0,0.1)'
+          flex: 1,
+          overflowY: 'auto',
+          padding: '20px'
         }}>
           {/* Free Demo Banner */}
           <div style={{
