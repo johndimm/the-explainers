@@ -115,29 +115,60 @@ export const ProfileProvider: React.FC<ProfileProviderProps> = ({ children }) =>
   }
 
   const canUseExplanation = (bookTitle: string, author: string, useCustomLLM: boolean) => {
-    // Free if using custom LLM
-    if (useCustomLLM) return true
+    console.log('ProfileContext: canUseExplanation called for:', bookTitle, 'by', author)
+    console.log('ProfileContext: useCustomLLM:', useCustomLLM)
+    console.log('ProfileContext: current profile:', profile)
     
-    // Free if has unlimited access
-    if (profile.hasUnlimitedAccess && profile.unlimitedAccessExpiry && new Date() < new Date(profile.unlimitedAccessExpiry)) {
+    // Free if using custom LLM
+    if (useCustomLLM) {
+      console.log('ProfileContext: using custom LLM - access granted')
       return true
     }
     
+    // Free if has unlimited access
+    if (profile.hasUnlimitedAccess && profile.unlimitedAccessExpiry) {
+      const now = new Date()
+      const expiry = new Date(profile.unlimitedAccessExpiry)
+      console.log('ProfileContext: checking unlimited access - now:', now, 'expiry:', expiry)
+      console.log('ProfileContext: hasUnlimitedAccess:', profile.hasUnlimitedAccess)
+      console.log('ProfileContext: access expired?', now >= expiry)
+      
+      if (now < expiry) {
+        console.log('ProfileContext: unlimited access valid - access granted')
+        return true
+      } else {
+        console.log('ProfileContext: unlimited access expired')
+      }
+    } else {
+      console.log('ProfileContext: no unlimited access or no expiry date')
+    }
+    
     const bookKey = getBookKey(bookTitle, author)
+    console.log('ProfileContext: bookKey:', bookKey)
     
     // Free if book is purchased
     if (profile.purchasedBooks?.includes(bookKey)) {
+      console.log('ProfileContext: book purchased - access granted')
       return true
     }
     
     // Check if under 3 free explanations for this book
     const bookExplanations = profile.bookExplanations?.[bookKey] || 0
+    console.log('ProfileContext: book explanations used:', bookExplanations)
     if (bookExplanations < 3) {
+      console.log('ProfileContext: under 3 free explanations - access granted')
       return true
     }
     
     // Check if has available credits
-    return (profile.availableCredits || 0) > 0
+    const hasCredits = (profile.availableCredits || 0) > 0
+    console.log('ProfileContext: available credits:', profile.availableCredits, 'has credits:', hasCredits)
+    if (hasCredits) {
+      console.log('ProfileContext: has credits - access granted')
+    } else {
+      console.log('ProfileContext: no credits - access denied')
+    }
+    return hasCredits
   }
 
   const useExplanation = (bookTitle: string, author: string, useCustomLLM: boolean) => {
@@ -223,6 +254,7 @@ export const ProfileProvider: React.FC<ProfileProviderProps> = ({ children }) =>
   }
 
   const grantUnlimitedAccess = (duration: 'hour' | 'month' | 'year') => {
+    console.log('ProfileContext: grantUnlimitedAccess called with duration:', duration)
     setProfile(prev => {
       const now = new Date()
       let expiryTime: Date
@@ -246,6 +278,8 @@ export const ProfileProvider: React.FC<ProfileProviderProps> = ({ children }) =>
         hasUnlimitedAccess: true,
         unlimitedAccessExpiry: expiryTime
       }
+      console.log('ProfileContext: granting unlimited access until:', expiryTime)
+      console.log('ProfileContext: new profile with unlimited access:', newProfile)
       localStorage.setItem('explainer-profile', JSON.stringify(newProfile))
       return newProfile
     })

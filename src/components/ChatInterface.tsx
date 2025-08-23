@@ -1,6 +1,7 @@
 'use client'
 
 import React, { useState, useRef, useEffect } from 'react'
+import { useRouter } from 'next/navigation'
 import styles from './ChatInterface.module.css'
 import { SettingsData, LLMProvider, ResponseLength, ExplanationStyle } from './Settings'
 import { ProfileData } from './Profile'
@@ -57,6 +58,7 @@ const getAllStyles = () => {
 }
 
 const ChatInterface: React.FC<ChatInterfaceProps> = ({ selectedText, contextInfo, settings, profile, onClose, onSettingsChange, bookTitle, author, isPageMode = false }) => {
+  const router = useRouter()
   const [messages, setMessages] = useState<Message[]>([])
   const [inputValue, setInputValue] = useState('')
   const [isLoading, setIsLoading] = useState(false)
@@ -65,7 +67,6 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ selectedText, contextInfo
   const [currentStyle, setCurrentStyle] = useState<ExplanationStyle>(settings.explanationStyle)
   const [currentResponseLength, setCurrentResponseLength] = useState<ResponseLength>(settings.responseLength)
   const [hasChanges, setHasChanges] = useState(false)
-  const [showPaymentPrompt, setShowPaymentPrompt] = useState(false)
   const [showFullHistory, setShowFullHistory] = useState(false)
   const [originalSelectedText, setOriginalSelectedText] = useState("")
   const latestResponseRef = useRef<HTMLDivElement>(null)
@@ -494,7 +495,7 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ selectedText, contextInfo
     
     // Check if user can use explanation
     if (!canUseExplanation(bookTitle, author, useCustomLLM)) {
-      setShowPaymentPrompt(true)
+      router.push('/credits')
       return
     }
 
@@ -519,7 +520,7 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ selectedText, contextInfo
       // Use the explanation (deduct credits if needed)
       const success = useExplanation(bookTitle, author, useCustomLLM)
       if (!success) {
-        setShowPaymentPrompt(true)
+        router.push('/credits')
         setIsLoading(false)
         return
       }
@@ -564,7 +565,7 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ selectedText, contextInfo
     
     // Check if user can use explanation
     if (!canUseExplanation(bookTitle, author, useCustomLLM)) {
-      setShowPaymentPrompt(true)
+      router.push('/credits')
       return
     }
 
@@ -598,7 +599,7 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ selectedText, contextInfo
       // Use the explanation (deduct credits if needed)
       const success = useExplanation(bookTitle, author, useCustomLLM)
       if (!success) {
-        setShowPaymentPrompt(true)
+        router.push('/credits')
         setIsLoading(false)
         return
       }
@@ -914,110 +915,6 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ selectedText, contextInfo
         </div>
       </div>
       
-      {showPaymentPrompt && (
-        <div style={{
-          position: 'fixed',
-          top: '50%',
-          left: '50%',
-          transform: 'translate(-50%, -50%)',
-          background: 'white',
-          border: '2px solid #8b5cf6',
-          borderRadius: '12px',
-          padding: '24px',
-          boxShadow: '0 8px 20px rgba(0,0,0,0.3)',
-          zIndex: 3000,
-          maxWidth: '400px',
-          textAlign: 'center'
-        }}>
-          {/* Free Demo Banner */}
-          <div style={{
-            background: 'linear-gradient(135deg, #10b981, #059669)',
-            color: 'white',
-            padding: '16px',
-            borderRadius: '8px',
-            marginBottom: '16px'
-          }}>
-            <div style={{ fontSize: '18px', fontWeight: 'bold', marginBottom: '4px' }}>🎉 Currently FREE!</div>
-            <div style={{ fontSize: '14px', opacity: '0.9' }}>All options below are free during our demo period</div>
-          </div>
-
-          <h3 style={{ margin: '0 0 16px 0', color: '#8b5cf6' }}>Continue Reading</h3>
-          <p style={{ margin: '0 0 20px 0', lineHeight: '1.5' }}>
-            You've used your trial explanations for this book. Choose how to continue:
-          </p>
-          
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '12px', marginBottom: '20px' }}>
-            <div style={{ 
-              background: '#f8f9fa', 
-              padding: '16px', 
-              borderRadius: '8px',
-              border: '2px solid #10b981'
-            }}>
-              <strong style={{ color: '#10b981' }}>Unlimited Book Access - $5</strong>
-              <div style={{ fontSize: '14px', color: '#666', marginTop: '4px' }}>
-                All explanations for "{bookTitle}" forever
-              </div>
-            </div>
-            
-            <div style={{ 
-              background: '#f8f9fa', 
-              padding: '16px', 
-              borderRadius: '8px',
-              border: '1px solid #ddd'
-            }}>
-              <strong>100 Credits - $5</strong>
-              <div style={{ fontSize: '14px', color: '#666', marginTop: '4px' }}>
-                Use across any books (1 credit per explanation)
-              </div>
-            </div>
-            
-            <div style={{ 
-              background: '#e8f4fd', 
-              padding: '16px', 
-              borderRadius: '8px',
-              border: '1px solid #b3d9ff'
-            }}>
-              <strong style={{ color: '#0066cc' }}>Unlimited Access - $1/hour</strong>
-              <div style={{ fontSize: '14px', color: '#666', marginTop: '4px' }}>
-                Unlimited explanations for all books
-              </div>
-            </div>
-          </div>
-          
-          <div style={{ display: 'flex', gap: '10px', justifyContent: 'center' }}>
-            <button 
-              onClick={() => setShowPaymentPrompt(false)}
-              style={{
-                padding: '10px 20px',
-                border: '1px solid #ccc',
-                borderRadius: '6px',
-                background: 'white',
-                cursor: 'pointer'
-              }}
-            >
-              Maybe Later
-            </button>
-            <button 
-              onClick={() => {
-                setShowPaymentPrompt(false)
-                if (typeof window !== 'undefined') {
-                  window.location.href = '/credits'
-                }
-              }}
-              style={{
-                padding: '10px 20px',
-                border: 'none',
-                borderRadius: '6px',
-                background: '#8b5cf6',
-                color: 'white',
-                cursor: 'pointer'
-              }}
-            >
-              Get More Access
-            </button>
-          </div>
-        </div>
-      )}
     </div>
   )
 }

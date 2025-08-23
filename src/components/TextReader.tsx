@@ -922,8 +922,8 @@ const TextReader: React.FC<TextReaderProps> = ({ text, bookTitle = 'Romeo and Ju
         onTouchMove={handleTouchMove}
         onContextMenu={(e) => e.preventDefault()}
         style={{
-          WebkitUserSelect: 'none',
-          userSelect: 'none', 
+          WebkitUserSelect: isInSelectionMode ? 'none' : 'text',
+          userSelect: isInSelectionMode ? 'none' : 'text', 
           WebkitTouchCallout: 'none',
           WebkitTapHighlightColor: 'transparent',
           touchAction: isInSelectionMode ? 'none' : 'pan-y',

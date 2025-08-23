@@ -8,9 +8,10 @@ interface PricingProps {
   onClose: () => void
   bookTitle?: string
   author?: string
+  isPageMode?: boolean
 }
 
-const Pricing: React.FC<PricingProps> = ({ isOpen, onClose, bookTitle, author }) => {
+const Pricing: React.FC<PricingProps> = ({ isOpen, onClose, bookTitle, author, isPageMode = false }) => {
   const { profile, addCredits, purchaseBook, grantUnlimitedAccess } = useProfile()
 
   if (!isOpen) return null
@@ -18,49 +19,72 @@ const Pricing: React.FC<PricingProps> = ({ isOpen, onClose, bookTitle, author })
   const handlePurchaseBook = () => {
     if (bookTitle && author) {
       purchaseBook(bookTitle, author)
-      alert(`Successfully purchased unlimited access to "${bookTitle}"! (Demo mode - no actual payment processed)`)
       onClose()
     }
   }
 
   const handlePurchaseCredits = (amount: number) => {
     addCredits(amount)
-    alert(`Successfully added ${amount} credits! (Demo mode - no actual payment processed)`)
     onClose()
   }
 
   const handleUnlimitedAccess = (duration: 'hour' | 'month' | 'year') => {
+    console.log('Pricing: granting unlimited access for duration:', duration)
     grantUnlimitedAccess(duration)
-    onClose()
+    
+    // Small delay to ensure profile context has updated before closing
+    setTimeout(() => {
+      onClose()
+    }, 100)
+  }
+
+  const containerStyle = isPageMode ? {
+    minHeight: '100vh',
+    background: '#fafafa',
+    padding: '20px',
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'flex-start'
+  } : {
+    position: 'fixed' as const,
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+    background: 'rgba(0, 0, 0, 0.5)',
+    zIndex: 1000,
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    padding: '20px'
+  }
+
+  const contentStyle = isPageMode ? {
+    background: 'white',
+    borderRadius: '16px',
+    width: '100%',
+    maxWidth: '600px',
+    marginTop: '20px',
+    display: 'flex',
+    flexDirection: 'column' as const,
+    boxShadow: '0 1px 3px rgba(0, 0, 0, 0.1), 0 1px 2px rgba(0, 0, 0, 0.06)'
+  } : {
+    background: 'white',
+    borderRadius: '16px',
+    width: '100%',
+    maxWidth: '500px',
+    maxHeight: '90vh',
+    display: 'flex',
+    flexDirection: 'column' as const,
+    boxShadow: '0 10px 25px rgba(0,0,0,0.2)'
   }
 
   return (
-    <div style={{
-      position: 'fixed',
-      top: 0,
-      left: 0,
-      right: 0,
-      bottom: 0,
-      background: 'rgba(0, 0, 0, 0.5)',
-      zIndex: 1000,
-      display: 'flex',
-      justifyContent: 'center',
-      alignItems: 'center',
-      padding: '20px'
-    }}>
-      <div style={{
-        background: 'white',
-        borderRadius: '16px',
-        width: '100%',
-        maxWidth: '500px',
-        maxHeight: '90vh',
-        display: 'flex',
-        flexDirection: 'column',
-        boxShadow: '0 10px 25px rgba(0,0,0,0.2)'
-      }}>
+    <div style={containerStyle}>
+      <div style={contentStyle}>
         <header style={{
           display: 'flex',
-          justifyContent: 'space-between',
+          justifyContent: isPageMode ? 'center' : 'space-between',
           alignItems: 'center',
           padding: '16px 20px',
           borderBottom: '1px solid #e0e0e0',
@@ -74,28 +98,31 @@ const Pricing: React.FC<PricingProps> = ({ isOpen, onClose, bookTitle, author })
             fontSize: '18px', 
             fontWeight: 'bold',
             color: '#333',
-            lineHeight: '1.2'
+            lineHeight: '1.2',
+            textAlign: isPageMode ? 'center' : 'left'
           }}>
             Credits & Usage
           </h1>
         </div>
-        <button 
-          onClick={onClose}
-          style={{
-            background: 'none',
-            border: 'none',
-            fontSize: '24px',
-            cursor: 'pointer',
-            color: '#666',
-            padding: '4px',
-            borderRadius: '4px',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center'
-          }}
-        >
-          ×
-        </button>
+        {!isPageMode && (
+          <button 
+            onClick={onClose}
+            style={{
+              background: 'none',
+              border: 'none',
+              fontSize: '24px',
+              cursor: 'pointer',
+              color: '#666',
+              padding: '4px',
+              borderRadius: '4px',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center'
+            }}
+          >
+            ×
+          </button>
+        )}
         </header>
         
         <div style={{
@@ -298,8 +325,10 @@ const Pricing: React.FC<PricingProps> = ({ isOpen, onClose, bookTitle, author })
           <button
             onClick={() => {
               onClose()
-              // This would open settings - for now just alert
-              alert('Go to Settings → Language Model → Bring Your Own LLM to set up your API key')
+              // Navigate to settings page instead of showing alert
+              if (typeof window !== 'undefined') {
+                window.location.href = '/settings'
+              }
             }}
             style={{
               background: '#f59e0b',
