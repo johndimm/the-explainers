@@ -57,11 +57,15 @@ export const ProfileProvider: React.FC<ProfileProviderProps> = ({ children }) =>
         if (parsed.firstLogin) {
           parsed.firstLogin = new Date(parsed.firstLogin)
         }
+        if (parsed.unlimitedAccessExpiry) {
+          parsed.unlimitedAccessExpiry = new Date(parsed.unlimitedAccessExpiry)
+        }
         let restoredProfile = { ...DEFAULT_PROFILE, ...parsed }
         
         // Migration: Reset credits for users who had the old 100 credit default
         // Handle users with 100 credits (unused) or 97-99 credits (used some)
-        if (restoredProfile.availableCredits && restoredProfile.availableCredits >= 95) {
+        // But don't migrate users who have purchased credits (105+ suggests they bought 100 credits)
+        if (restoredProfile.availableCredits && restoredProfile.availableCredits >= 95 && restoredProfile.availableCredits <= 100) {
           console.log(`ProfileContext: Migrating user from ${restoredProfile.availableCredits} to 5 credits`)
           restoredProfile.availableCredits = 5
           // Save the migrated profile
@@ -84,6 +88,7 @@ export const ProfileProvider: React.FC<ProfileProviderProps> = ({ children }) =>
 
   const updateProfile = (newProfile: ProfileData) => {
     console.log('ProfileContext: updateProfile called with:', newProfile)
+    console.log('ProfileContext: Current profile before update:', profile)
     setProfile(newProfile)
     localStorage.setItem('explainer-profile', JSON.stringify(newProfile))
     console.log('ProfileContext: Profile updated in localStorage')
@@ -191,12 +196,16 @@ export const ProfileProvider: React.FC<ProfileProviderProps> = ({ children }) =>
   }
 
   const addCredits = (amount: number) => {
+    console.log('ProfileContext: addCredits called with amount:', amount)
     setProfile(prev => {
+      console.log('ProfileContext: Previous credits:', prev.availableCredits)
       const newProfile = {
         ...prev,
         availableCredits: (prev.availableCredits || 0) + amount
       }
+      console.log('ProfileContext: New credits:', newProfile.availableCredits)
       localStorage.setItem('explainer-profile', JSON.stringify(newProfile))
+      console.log('ProfileContext: Saved to localStorage:', newProfile)
       return newProfile
     })
   }

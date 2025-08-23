@@ -358,6 +358,7 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ selectedText, contextInfo
   }
 
   const createContextualPrompt = (text: string, context: ContextInfo | null): string => {
+    console.log('ChatInterface: Profile data:', profile)
     let prompt = `Please explain this text: "${text}"`
     
     if (context) {
@@ -373,10 +374,14 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ selectedText, contextInfo
     }
 
     // Add user profile information
+    console.log('ChatInterface: Profile language check:', profile.language, profile.language !== 'english')
     if (profile.age || profile.language !== 'english' || profile.educationLevel) {
       prompt += `\n\nUser Profile:`
       if (profile.age) prompt += `\nAge: ${profile.age}`
-      if (profile.language !== 'english') prompt += `\nLanguage: ${profile.language}`
+      if (profile.language !== 'english') {
+        console.log('ChatInterface: Adding language instruction:', profile.language)
+        prompt += `\nPreferred Language: Please respond in ${profile.language}`
+      }
       prompt += `\nEducation Level: ${profile.educationLevel}`
     }
     
@@ -496,6 +501,7 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ selectedText, contextInfo
     const promptText = createContextualPrompt(text, contextInfo)
     
     console.log('Re-explain prompt sent to LLM:')
+    console.log('Profile language in re-explain:', profile.language)
     console.log(promptText)
     console.log('Context info:', contextInfo)
 
@@ -565,6 +571,7 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ selectedText, contextInfo
     const promptText = createContextualPrompt(text, contextInfo)
     
     console.log('Full prompt sent to LLM:')
+    console.log('Profile language in sendMessage:', profile.language)
     console.log(promptText)
     console.log('Context info:', contextInfo)
     

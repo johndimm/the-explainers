@@ -4,7 +4,6 @@ import Profile from '@/components/Profile'
 import { useProfile } from '@/contexts/ProfileContext'
 import { useRouter } from 'next/navigation'
 import { SettingsProvider } from '@/contexts/SettingsContext'
-import { ProfileProvider } from '@/contexts/ProfileContext'
 
 function ProfileContent() {
   const { profile, updateProfile } = useProfile()
@@ -24,10 +23,8 @@ function ProfileContent() {
 
 export default function ProfilePage() {
   return (
-    <ProfileProvider>
-      <SettingsProvider>
-        <ProfileContent />
-      </SettingsProvider>
-    </ProfileProvider>
+    <SettingsProvider>
+      <ProfileContent />
+    </SettingsProvider>
   )
 }

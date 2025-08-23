@@ -75,6 +75,39 @@ const TextReader: React.FC<TextReaderProps> = ({ text, bookTitle = 'Romeo and Ju
     }
   }, [text, bookTitle, author])
 
+  // Listen for selection changes (more reliable than just mouseUp)
+  useEffect(() => {
+    let selectionTimeout: NodeJS.Timeout
+
+    const handleSelectionChange = () => {
+      // Clear any existing timeout
+      if (selectionTimeout) {
+        clearTimeout(selectionTimeout)
+      }
+      
+      // Wait for selection to stabilize before showing dialog
+      selectionTimeout = setTimeout(() => {
+        const selection = window.getSelection()
+        if (selection && selection.rangeCount > 0 && !selection.isCollapsed) {
+          const selectedText = selection.toString().trim()
+          if (selectedText && selectedText.length > 2) { // Only show for meaningful selections
+            console.log('Selection stabilized, showing dialog')
+            handleTextSelection()
+          }
+        }
+      }, 500) // Wait 500ms after selection stops changing
+    }
+
+    document.addEventListener('selectionchange', handleSelectionChange)
+    
+    return () => {
+      document.removeEventListener('selectionchange', handleSelectionChange)
+      if (selectionTimeout) {
+        clearTimeout(selectionTimeout)
+      }
+    }
+  }, [])
+
   // Save bookmark when user stops scrolling (debounced)
   useEffect(() => {
     const handleScroll = () => {
@@ -227,7 +260,13 @@ const TextReader: React.FC<TextReaderProps> = ({ text, bookTitle = 'Romeo and Ju
       console.log('selection range count:', selection?.rangeCount)
       
       if (selection && selection.rangeCount > 0) {
+        const range = selection.getRangeAt(0)
+        console.log('Range collapsed:', range.collapsed)
+        console.log('Start offset:', range.startOffset)
+        console.log('End offset:', range.endOffset)
+        
         const selectedText = selection.toString().trim()
+        console.log('Selected text length:', selectedText.length)
         console.log('Selected text:', selectedText)
         
         if (selectedText && selectedText.length > 0) {
