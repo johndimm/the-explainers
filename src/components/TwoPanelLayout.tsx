@@ -162,32 +162,6 @@ const TwoPanelLayout: React.FC<TwoPanelLayoutProps> = ({
           font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
         }
 
-        /* Debug info in development */
-        .two-panel-layout::before {
-          content: 'Layout: ${layoutMode} | Screen: ${screenWidth}px | Reader: ${readerWidth}px | Side: ${sidePanelType} | Font: ${settings.textFont}';
-          position: fixed;
-          top: 0;
-          left: 0;
-          background: rgba(0,0,0,0.8);
-          color: white;
-          padding: 4px 8px;
-          font-size: 10px;
-          z-index: 9999;
-          display: block;
-        }
-        
-        .single-page-layout::before {
-          content: 'Layout: ${layoutMode} | Screen: ${screenWidth}px | Reader: ${readerWidth}px | Side: ${sidePanelType} | Font: ${settings.textFont}';
-          position: fixed;
-          top: 0;
-          left: 0;
-          background: rgba(255,0,0,0.8);
-          color: white;
-          padding: 4px 8px;
-          font-size: 10px;
-          z-index: 9999;
-          display: block;
-        }
       `}</style>
     </div>
   )

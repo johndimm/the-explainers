@@ -181,19 +181,6 @@ const AdaptiveLayout: React.FC<AdaptiveLayoutProps> = ({
           position: relative;
         }
 
-        /* Debug info in development */
-        .adaptive-layout::before {
-          content: 'Layout: ${layoutMode} | Screen: ${screenWidth}px | Reader: ${readerWidth}px | Font: ${settings.textFont}';
-          position: fixed;
-          top: 0;
-          left: 0;
-          background: rgba(0,0,0,0.8);
-          color: white;
-          padding: 4px 8px;
-          font-size: 10px;
-          z-index: 9999;
-          display: ${process.env.NODE_ENV === 'development' ? 'block' : 'none'};
-        }
       `}</style>
     </div>
   )

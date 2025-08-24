@@ -3,8 +3,8 @@
 import { useState, useEffect, Suspense } from 'react'
 import TextReader from '@/components/TextReader'
 import ReaderLayout from '@/components/ReaderLayout'
-import { useSettings } from '@/contexts/SettingsContext'
-import { useProfile } from '@/contexts/ProfileContext'
+import { SettingsProvider, useSettings } from '@/contexts/SettingsContext'
+import { ProfileProvider, useProfile } from '@/contexts/ProfileContext'
 import { useRouter, useSearchParams } from 'next/navigation'
 
 function ReaderContent() {
@@ -118,8 +118,12 @@ function ReaderContent() {
 
 export default function ReaderPage() {
   return (
-    <Suspense fallback={<div>Loading...</div>}>
-      <ReaderContent />
-    </Suspense>
+    <ProfileProvider>
+      <SettingsProvider>
+        <Suspense fallback={<div>Loading...</div>}>
+          <ReaderContent />
+        </Suspense>
+      </SettingsProvider>
+    </ProfileProvider>
   )
 }

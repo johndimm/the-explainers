@@ -38,6 +38,7 @@ const TextReader: React.FC<TextReaderProps> = ({ text, bookTitle = 'Romeo and Ju
 
   // Check for first-time user and restore bookmark
   useEffect(() => {
+    
     // Only run after text has loaded and matches the current book
     if (!text || text.length < 100) return
     
@@ -51,28 +52,63 @@ const TextReader: React.FC<TextReaderProps> = ({ text, bookTitle = 'Romeo and Ju
       localStorage.setItem(firstTimeKey, 'true')
     }
     
-    // Restore bookmark position
-    const savedPosition = localStorage.getItem(bookmarkKey)
-    if (savedPosition) {
-      const position = parseInt(savedPosition)
-      debugStorage(`Restoring bookmark for ${bookTitle} by ${author}: position ${position}`)
+    // Restore bookmark position using percentage-based approach
+    const savedPercentage = localStorage.getItem(bookmarkKey + '-percent')
+    const savedPosition = localStorage.getItem(bookmarkKey) // Keep old system as fallback
+    
+    if (savedPercentage || savedPosition) {
+      const percentage = savedPercentage ? parseFloat(savedPercentage) : null
+      const position = savedPosition ? parseInt(savedPosition) : null
       
-      // Wait for DOM to be ready, then restore position
-      setTimeout(() => {
-        if (textReaderRef.current) {
-          console.log(`Setting scrollTop to ${position} for ${bookTitle}`)
-          textReaderRef.current.scrollTop = position
+      // Wait for DOM and text content to be fully loaded
+      const restorePosition = () => {
+        if (textContentRef.current) {
+          const element = textContentRef.current
+          let targetPosition: number
           
-          // Verify the scroll actually happened
-          setTimeout(() => {
-            if (textReaderRef.current) {
-              console.log(`Actual scrollTop after restoration: ${textReaderRef.current.scrollTop}`)
-            }
-          }, 50)
+          if (percentage !== null) {
+            // Use percentage-based restoration (more reliable on mobile)
+            targetPosition = Math.floor((element.scrollHeight - element.clientHeight) * percentage / 100)
+          } else if (position !== null) {
+            // Fallback to pixel-based for old bookmarks
+            targetPosition = position
+          } else {
+            return
+          }
+          
+          
+          // Mobile-friendly scroll restoration
+          element.scrollTo({ top: targetPosition, behavior: 'auto' })
+          
         }
-      }, 300)
-    } else {
-      console.log(`No saved bookmark found for ${bookTitle} by ${author}`)
+      }
+      
+      // Chrome Android-specific restoration
+      // Chrome mobile often needs DOM to be fully ready and sometimes blocks scroll restoration
+      const attemptRestore = () => {
+        if (textContentRef.current && textContentRef.current.scrollHeight > 0) {
+          restorePosition()
+        } else {
+          setTimeout(attemptRestore, 300)
+        }
+      }
+      
+      // Multiple attempts with different triggers
+      setTimeout(attemptRestore, 300)    // Early attempt
+      setTimeout(attemptRestore, 1000)   // After layout stabilizes
+      setTimeout(attemptRestore, 2000)   // Final attempt
+      
+      // Chrome mobile: try after requestAnimationFrame (ensures render complete)
+      requestAnimationFrame(() => {
+        setTimeout(attemptRestore, 100)
+      })
+      
+      // Also try on viewport resize (Chrome mobile sometimes needs this)
+      const handleResize = () => {
+        setTimeout(attemptRestore, 200)
+        window.removeEventListener('resize', handleResize)
+      }
+      window.addEventListener('resize', handleResize)
     }
   }, [text, bookTitle, author])
 
@@ -80,8 +116,8 @@ const TextReader: React.FC<TextReaderProps> = ({ text, bookTitle = 'Romeo and Ju
   // Save bookmark when user stops scrolling (debounced)
   useEffect(() => {
     const handleScroll = () => {
-      if (textReaderRef.current) {
-        const scrollPosition = textReaderRef.current.scrollTop
+      if (textContentRef.current) {
+        const scrollPosition = textContentRef.current.scrollTop
         setHasUserScrolled(true)
         
         // Clear existing timeout
@@ -92,13 +128,19 @@ const TextReader: React.FC<TextReaderProps> = ({ text, bookTitle = 'Romeo and Ju
         // Set new timeout to save after user stops scrolling
         scrollTimeoutRef.current = setTimeout(() => {
           const bookmarkKey = `bookmark-${bookTitle}-${author}`
-          console.log(`Saving bookmark for ${bookTitle}: position ${scrollPosition}`)
+          const scrollableHeight = textContentRef.current!.scrollHeight - textContentRef.current!.clientHeight
+          const percentage = scrollableHeight > 0 ? (scrollPosition / scrollableHeight) * 100 : 0
+          
+          debugStorage(`Saving bookmark for ${bookTitle}: ${scrollPosition}px (${percentage.toFixed(1)}%)`)
+          
+          // Save both pixel position and percentage for compatibility
           localStorage.setItem(bookmarkKey, scrollPosition.toString())
+          localStorage.setItem(bookmarkKey + '-percent', percentage.toString())
         }, 500) // Save 500ms after user stops scrolling
       }
     }
 
-    const textElement = textReaderRef.current
+    const textElement = textContentRef.current
     if (textElement) {
       setTimeout(() => {
         textElement.addEventListener('scroll', handleScroll)
@@ -635,11 +677,17 @@ const TextReader: React.FC<TextReaderProps> = ({ text, bookTitle = 'Romeo and Ju
         setCurrentSelection(text)
         setHighlightedText(text)
       }
-    } else if (longPressTimer && distance > 10) { 
-      // Cancel long press early if user is clearly scrolling (reduced back to 10px)
-      clearTimeout(longPressTimer)
-      setLongPressTimer(null)
-      debugReader('Long press cancelled - user is scrolling')
+    } else if (longPressTimer) { 
+      if (distance > 10) {
+        // Cancel long press early if user is clearly scrolling (reduced back to 10px)
+        clearTimeout(longPressTimer)
+        setLongPressTimer(null)
+        debugReader('Long press cancelled - user is scrolling')
+      } else {
+        // Still in long press detection phase - prevent scrolling
+        e.preventDefault()
+        e.stopPropagation()
+      }
     }
   }
 
@@ -841,7 +889,7 @@ const TextReader: React.FC<TextReaderProps> = ({ text, bookTitle = 'Romeo and Ju
       
       {/* Search Bar - Fixed at top */}
       <div style={{
-        padding: '16px 8px 8px 8px', // More padding on top
+        padding: '8px 8px 8px 8px',
         backgroundColor: 'white',
         borderBottom: '1px solid #e0e0e0',
         flexShrink: 0
@@ -957,7 +1005,7 @@ const TextReader: React.FC<TextReaderProps> = ({ text, bookTitle = 'Romeo and Ju
           userSelect: isInSelectionMode ? 'none' : 'text', 
           WebkitTouchCallout: 'none',
           WebkitTapHighlightColor: 'transparent',
-          touchAction: isInSelectionMode ? 'none' : 'pan-y',
+          touchAction: (isInSelectionMode || longPressTimer) ? 'none' : 'pan-y',
           fontFamily: settings.textFont
         }}
       >

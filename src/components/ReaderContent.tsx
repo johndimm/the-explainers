@@ -15,6 +15,7 @@ function ReaderContent({ showHeader = false }: ReaderContentProps) {
   const [bookText, setBookText] = useState('')
   const [loading, setLoading] = useState(true)
   const [currentBook, setCurrentBook] = useState({ title: '', author: '' })
+  const [debugMsg, setDebugMsg] = useState('')
   const { settings, updateSettings } = useSettings()
   const { profile } = useProfile()
   const router = useRouter()
