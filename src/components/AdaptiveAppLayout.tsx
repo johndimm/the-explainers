@@ -404,7 +404,11 @@ const AdaptiveAppLayout: React.FC<AdaptiveAppLayoutProps> = ({ children }) => {
       </header>
 
       {/* Content area - changes based on screen size */}
-      <div style={{ marginTop: '50px', height: 'calc(100vh - 50px)', overflow: 'hidden' }}>
+      <div style={{ 
+        marginTop: '50px', 
+        height: 'calc(100vh - 50px)', 
+        overflow: shouldUseAdaptiveLayout ? 'hidden' : 'auto' 
+      }}>
         {shouldUseAdaptiveLayout ? (
           /* Two-panel layout for wide screens */
           <div style={{ 
