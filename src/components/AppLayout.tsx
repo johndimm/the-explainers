@@ -4,7 +4,7 @@ import React, { useState, useEffect } from 'react'
 import { useRouter, usePathname } from 'next/navigation'
 import { SettingsProvider } from '../contexts/SettingsContext'
 import { ProfileProvider } from '../contexts/ProfileContext'
-import AdaptiveLayout from './AdaptiveLayout'
+import AdaptiveAppLayout from './AdaptiveAppLayout'
 
 // Import all page components
 import ChatPage from '../app/chat/page'
@@ -56,12 +56,9 @@ const AppLayout: React.FC<AppLayoutProps> = ({ children }) => {
   return (
     <ProfileProvider>
       <SettingsProvider>
-        <AdaptiveLayout 
-          currentPage={currentPage}
-          rightPanelContent={getRightPanelContent()}
-        >
+        <AdaptiveAppLayout>
           {children}
-        </AdaptiveLayout>
+        </AdaptiveAppLayout>
       </SettingsProvider>
     </ProfileProvider>
   )

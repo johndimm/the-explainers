@@ -17,6 +17,8 @@ function ReaderContent() {
   const { profile } = useProfile()
   const router = useRouter()
   const searchParams = useSearchParams()
+  const [showMobileMenu, setShowMobileMenu] = useState(false)
+  const menuRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
     // Check URL parameters for book selection
@@ -207,7 +209,7 @@ function ReaderContent() {
               </button>
               <button 
                 onClick={() => {
-                  setSidePanelPage('chat')
+                  router.push('/chat')
                   setShowMobileMenu(false)
                 }}
                 style={{
@@ -231,8 +233,8 @@ function ReaderContent() {
               </button>
               <button 
                 onClick={() => {
-                  console.log('Library button clicked, calling setSidePanelPage')
-                  setSidePanelPage('library')
+                  console.log('Library button clicked, navigating to library')
+                  router.push('/library')
                   setShowMobileMenu(false)
                 }}
                 style={{
@@ -256,7 +258,7 @@ function ReaderContent() {
               </button>
               <button 
                 onClick={() => {
-                  setSidePanelPage('styles')
+                  router.push('/styles')
                   setShowMobileMenu(false)
                 }}
                 style={{
@@ -280,7 +282,7 @@ function ReaderContent() {
               </button>
               <button 
                 onClick={() => {
-                  setSidePanelPage('credits')
+                  router.push('/credits')
                   setShowMobileMenu(false)
                 }}
                 style={{
@@ -304,8 +306,8 @@ function ReaderContent() {
               </button>
               <button 
                 onClick={() => {
-                  console.log('Profile button clicked, calling setSidePanelPage')
-                  setSidePanelPage('profile')
+                  console.log('Profile button clicked, navigating to profile')
+                  router.push('/profile')
                   setShowMobileMenu(false)
                 }}
                 style={{
@@ -330,7 +332,7 @@ function ReaderContent() {
               <div 
                 onClick={() => {
                   console.log('SIMPLE DIV Settings clicked')
-                  setSidePanelPage('settings')
+                  router.push('/settings')
                   setShowMobileMenu(false)
                 }}
                 style={{
@@ -352,7 +354,7 @@ function ReaderContent() {
               </div>
               <button 
                 onClick={() => {
-                  setSidePanelPage('guide')
+                  router.push('/guide')
                   setShowMobileMenu(false)
                 }}
                 style={{
