@@ -114,9 +114,12 @@ async function callGemini(messages: ChatMessage[], responseLength: string): Prom
 }
 
 export async function POST(request: NextRequest) {
+  let provider: string = 'unknown'
+  
   try {
     const body: ChatRequest = await request.json()
-    const { messages, provider, responseLength, selectedText } = body
+    const { messages, responseLength, selectedText } = body
+    provider = body.provider
 
     if (!messages || messages.length === 0) {
       return NextResponse.json({ error: 'No messages provided' }, { status: 400 })
