@@ -137,12 +137,16 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ selectedText, contextInfo
   }, [messages, isPageMode])
 
   useEffect(() => {
-    if (selectedText && !initializedRef.current) {
-      setOriginalSelectedText(selectedText)
+    if (selectedText) {
+      // Check if this is a new selection different from the original
+      if (!originalSelectedText || selectedText !== originalSelectedText) {
+        setOriginalSelectedText(selectedText)
+        console.log('ChatInterface: Auto-explaining new selection:', selectedText)
+        handleExplainText(selectedText)
+      }
       initializedRef.current = true
-      handleExplainText(selectedText)
     }
-  }, [selectedText])
+  }, [selectedText, originalSelectedText])
 
   // Set original selected text when it becomes available (from props or chat history)
   useEffect(() => {
@@ -499,6 +503,8 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ selectedText, contextInfo
     // Check if user can use explanation
     if (!canUseExplanation(bookTitle, author, useCustomLLM)) {
       console.log('ChatInterface: canUseExplanation returned false, redirecting to credits')
+      console.log('ChatInterface: bookTitle:', bookTitle, 'author:', author, 'useCustomLLM:', useCustomLLM)
+      console.log('ChatInterface: current profile:', profile)
       router.push('/credits')
       return
     }
@@ -577,6 +583,8 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ selectedText, contextInfo
     // Check if user can use explanation
     if (!canUseExplanation(bookTitle, author, useCustomLLM)) {
       console.log('ChatInterface: canUseExplanation returned false, redirecting to credits')
+      console.log('ChatInterface: bookTitle:', bookTitle, 'author:', author, 'useCustomLLM:', useCustomLLM)
+      console.log('ChatInterface: current profile:', profile)
       router.push('/credits')
       return
     }
@@ -740,9 +748,9 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ selectedText, contextInfo
                 disabled={isLoading}
               >
                 <option value="anthropic">Claude 3.5 Sonnet</option>
-                <option value="openai">GPT-5</option>
+                <option value="openai">GPT-4o</option>
                 <option value="deepseek">DeepSeek Chat</option>
-                <option value="gemini">Gemini 2.5 Flash</option>
+                <option value="gemini">Gemini 1.5 Flash</option>
               </select>
             </div>
             <div className={styles.styleSelector}>
@@ -817,10 +825,10 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ selectedText, contextInfo
               {message.role === 'assistant' && message.provider && (
                 <div className={styles.messageInfo}>
                   <span className={styles.providerBadge}>
-                    {message.provider === 'openai' ? 'GPT-5' : 
+                    {message.provider === 'openai' ? 'GPT-4o' : 
                      message.provider === 'anthropic' ? 'Claude 3.5 Sonnet' :
                      message.provider === 'deepseek' ? 'DeepSeek Chat' :
-                     message.provider === 'gemini' ? 'Gemini 2.5 Flash' :
+                     message.provider === 'gemini' ? 'Gemini 1.5 Flash' :
                      message.provider === 'youtube' ? '🎬 YouTube' :
                      message.provider}
                   </span>

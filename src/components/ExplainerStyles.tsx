@@ -1,7 +1,6 @@
 'use client'
 
-import React, { useState, useEffect, useRef } from 'react'
-import { useRouter } from 'next/navigation'
+import React, { useState } from 'react'
 import { ExplanationStyle } from './Settings'
 import stylesCss from './ExplainerStyles.module.css'
 
@@ -102,27 +101,9 @@ const ExplainerStyles: React.FC<ExplainerStylesProps> = ({
   selectedStyle, 
   onStyleChange 
 }) => {
-  const [showMobileMenu, setShowMobileMenu] = useState(false)
   const [showConfirmModal, setShowConfirmModal] = useState(false)
   const [selectedStyleName, setSelectedStyleName] = useState('')
-  const menuRef = useRef<HTMLDivElement>(null)
-  const router = useRouter()
   
-  useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
-      if (menuRef.current && !menuRef.current.contains(event.target as Node)) {
-        setShowMobileMenu(false)
-      }
-    }
-
-    if (showMobileMenu) {
-      document.addEventListener('mousedown', handleClickOutside)
-    }
-
-    return () => {
-      document.removeEventListener('mousedown', handleClickOutside)
-    }
-  }, [showMobileMenu])
   
   if (!isOpen) return null
 
@@ -191,254 +172,47 @@ const ExplainerStyles: React.FC<ExplainerStylesProps> = ({
   )
 
   return (
-    <div>
-      <header style={{
-        position: 'fixed',
-        top: 0,
-        left: 0,
-        right: 0,
-        background: 'white',
-        borderBottom: '1px solid #e0e0e0',
-        padding: '8px 12px',
-        zIndex: 100,
-        display: 'flex',
-        justifyContent: 'space-between',
-        alignItems: 'center'
-      }}>
-        <div style={{ flex: 1 }}>
-          <h1 style={{ 
-            margin: 0, 
-            fontSize: '18px', 
-            fontWeight: 'bold',
-            color: '#333',
-            lineHeight: '1.2'
-          }}>
-            The Explainers
-          </h1>
-          <p style={{ 
-            margin: 0, 
-            fontSize: '11px', 
-            color: '#666',
-            fontStyle: 'italic',
-            lineHeight: '1.2'
-          }}>
-            understand difficult texts
-          </p>
-        </div>
-        {/* Hamburger menu for all devices */}
-        <div ref={menuRef} style={{ position: 'relative' }}>
-          <button 
-            onClick={() => setShowMobileMenu(!showMobileMenu)}
-            style={{
-              padding: '8px',
-              background: 'none',
-              border: 'none',
-              cursor: 'pointer',
-              fontSize: '18px',
-              color: '#333'
-            }}
-          >
-            ☰
-          </button>
+    <>
+      <div className={stylesCss.overlay} style={{ position: 'static', background: 'white', padding: '0' }}>
+        <div className={stylesCss.container} style={{ maxHeight: 'none', overflow: 'visible', boxShadow: 'none' }}>
+          <div className={stylesCss.header}>
+            <h2>In the style of...</h2>
+          </div>
           
-          {showMobileMenu && (
-            <div style={{
-              position: 'absolute',
-              top: '100%',
-              right: 0,
-              background: 'white',
-              border: '1px solid #e0e0e0',
-              borderRadius: '8px',
-              boxShadow: '0 4px 12px rgba(0,0,0,0.15)',
-              minWidth: '160px',
-              zIndex: 1000
-            }}>
-              <button 
-                onClick={() => {
-                  router.push('/reader')
-                  setShowMobileMenu(false)
-                }}
-                style={{
-                  display: 'block',
-                  width: '100%',
-                  padding: '12px 16px',
-                  background: 'none',
-                  border: 'none',
-                  textAlign: 'left',
-                  cursor: 'pointer',
-                  borderBottom: '1px solid #f0f0f0'
-                }}
-              >
-                📖 Reader
-              </button>
-              <button 
-                onClick={() => {
-                  router.push('/chat')
-                  setShowMobileMenu(false)
-                }}
-                style={{
-                  display: 'block',
-                  width: '100%',
-                  padding: '12px 16px',
-                  background: 'none',
-                  border: 'none',
-                  textAlign: 'left',
-                  cursor: 'pointer',
-                  borderBottom: '1px solid #f0f0f0'
-                }}
-              >
-                💬 Chat
-              </button>
-              <button 
-                onClick={() => {
-                  router.push('/library')
-                  setShowMobileMenu(false)
-                }}
-                style={{
-                  display: 'block',
-                  width: '100%',
-                  padding: '12px 16px',
-                  background: 'none',
-                  border: 'none',
-                  textAlign: 'left',
-                  cursor: 'pointer',
-                  borderBottom: '1px solid #f0f0f0'
-                }}
-              >
-                📚 Library
-              </button>
-              <button 
-                onClick={() => setShowMobileMenu(false)}
-                style={{
-                  display: 'block',
-                  width: '100%',
-                  padding: '12px 16px',
-                  background: 'none',
-                  border: 'none',
-                  textAlign: 'left',
-                  cursor: 'pointer',
-                  borderBottom: '1px solid #f0f0f0',
-                  color: '#666'
-                }}
-              >
-                🎭 Styles (current)
-              </button>
-              <button 
-                onClick={() => {
-                  router.push('/credits')
-                  setShowMobileMenu(false)
-                }}
-                style={{
-                  display: 'block',
-                  width: '100%',
-                  padding: '12px 16px',
-                  background: 'none',
-                  border: 'none',
-                  textAlign: 'left',
-                  cursor: 'pointer',
-                  borderBottom: '1px solid #f0f0f0'
-                }}
-              >
-                💳 Credits
-              </button>
-              <button 
-                onClick={() => {
-                  router.push('/profile')
-                  setShowMobileMenu(false)
-                }}
-                style={{
-                  display: 'block',
-                  width: '100%',
-                  padding: '12px 16px',
-                  background: 'none',
-                  border: 'none',
-                  textAlign: 'left',
-                  cursor: 'pointer',
-                  borderBottom: '1px solid #f0f0f0'
-                }}
-              >
-                👤 Profile
-              </button>
-              <button 
-                onClick={() => {
-                  router.push('/settings')
-                  setShowMobileMenu(false)
-                }}
-                style={{
-                  display: 'block',
-                  width: '100%',
-                  padding: '12px 16px',
-                  background: 'none',
-                  border: 'none',
-                  textAlign: 'left',
-                  cursor: 'pointer',
-                  borderBottom: '1px solid #f0f0f0'
-                }}
-              >
-                ⚙️ Settings
-              </button>
-              <button 
-                onClick={() => {
-                  router.push('/guide')
-                  setShowMobileMenu(false)
-                }}
-                style={{
-                  display: 'block',
-                  width: '100%',
-                  padding: '12px 16px',
-                  background: 'none',
-                  border: 'none',
-                  textAlign: 'left',
-                  cursor: 'pointer'
-                }}
-              >
-                📖 User Guide
-              </button>
+          <div className={stylesCss.content} style={{ maxHeight: 'none', overflow: 'visible' }}>
+            <div className={stylesCss.currentSelection}>
+              <span>Current: </span>
+              <strong>
+                {selectedStyle === 'neutral' ? 'Neutral' : 
+                  Object.values(STYLE_CATEGORIES).flat().find(s => s.value === selectedStyle)?.name || 'Unknown'}
+              </strong>
             </div>
-          )}
-        </div>
-      </header>
-    
-    <div className={stylesCss.overlay} style={{ position: 'static', background: 'white', padding: '0', marginTop: '50px' }}>
-      <div className={stylesCss.container} style={{ maxHeight: 'none', overflow: 'visible', boxShadow: 'none' }}>
-        <div className={stylesCss.header}>
-          <h2>In the style of...</h2>
-        </div>
-        
-        <div className={stylesCss.content} style={{ maxHeight: 'none', overflow: 'visible' }}>
-          <div className={stylesCss.currentSelection}>
-            <span>Current: </span>
-            <strong>
-              {selectedStyle === 'neutral' ? 'Neutral' : 
-                Object.values(STYLE_CATEGORIES).flat().find(s => s.value === selectedStyle)?.name || 'Unknown'}
-            </strong>
-          </div>
 
-          <div 
-            className={`${stylesCss.styleOption} ${selectedStyle === 'neutral' ? stylesCss.selected : ''}`}
-            onClick={() => handleStyleSelect('neutral')}
-          >
-            <div className={stylesCss.neutralIcon}>
-              ⚖️
+            <div 
+              className={`${stylesCss.styleOption} ${selectedStyle === 'neutral' ? stylesCss.selected : ''}`}
+              onClick={() => handleStyleSelect('neutral')}
+            >
+              <div className={stylesCss.neutralIcon}>
+                ⚖️
+              </div>
+              <div className={stylesCss.styleInfo}>
+                <div className={stylesCss.styleName}>Neutral</div>
+                <div className={stylesCss.styleDescription}>Standard explanations</div>
+              </div>
             </div>
-            <div className={stylesCss.styleInfo}>
-              <div className={stylesCss.styleName}>Neutral</div>
-              <div className={stylesCss.styleDescription}>Standard explanations</div>
-            </div>
-          </div>
 
-          {renderCategory('Critics', STYLE_CATEGORIES.critics)}
-          {renderCategory('Writers', STYLE_CATEGORIES.writers)}
-          {renderCategory('Comedians', STYLE_CATEGORIES.comedians)}
-          {renderCategory('Talk Show Hosts', STYLE_CATEGORIES.talkShowHosts)}
-          {renderCategory('Other', STYLE_CATEGORIES.other)}
+            {renderCategory('Critics', STYLE_CATEGORIES.critics)}
+            {renderCategory('Writers', STYLE_CATEGORIES.writers)}
+            {renderCategory('Comedians', STYLE_CATEGORIES.comedians)}
+            {renderCategory('Talk Show Hosts', STYLE_CATEGORIES.talkShowHosts)}
+            {renderCategory('Other', STYLE_CATEGORIES.other)}
+          </div>
         </div>
       </div>
-    </div>
-    
-    {/* Custom Confirmation Modal */}
-    {showConfirmModal && (
-      <div style={{
+      
+      {/* Custom Confirmation Modal */}
+      {showConfirmModal && (
+        <div style={{
         position: 'fixed',
         top: 0,
         left: 0,
@@ -525,7 +299,7 @@ const ExplainerStyles: React.FC<ExplainerStylesProps> = ({
         </div>
       </div>
     )}
-    </div>
+    </>
   )
 }
 

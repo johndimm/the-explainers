@@ -1,7 +1,6 @@
 'use client'
 
-import { useState, useRef, useEffect } from 'react'
-import { useRouter } from 'next/navigation'
+import { useState, useEffect } from 'react'
 import ChatInterface from '@/components/ChatInterface'
 import { useSettings } from '@/contexts/SettingsContext'
 import { useProfile } from '@/contexts/ProfileContext'
@@ -9,44 +8,56 @@ import { useProfile } from '@/contexts/ProfileContext'
 function ChatContent() {
   const { settings, updateSettings } = useSettings()
   const { profile } = useProfile()
-  const router = useRouter()
-  const [showMobileMenu, setShowMobileMenu] = useState(false)
-  const menuRef = useRef<HTMLDivElement>(null)
   const [contextData, setContextData] = useState<any>(null)
 
-  useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
-      if (menuRef.current && !menuRef.current.contains(event.target as Node)) {
-        setShowMobileMenu(false)
-      }
-    }
-
-    if (showMobileMenu) {
-      document.addEventListener('mousedown', handleClickOutside)
-    }
-
-    return () => {
-      document.removeEventListener('mousedown', handleClickOutside)
-    }
-  }, [showMobileMenu])
 
   // Check for context data from text selection
   useEffect(() => {
-    console.log('Chat page: Checking for chatContext in sessionStorage')
-    const storedContext = sessionStorage.getItem('chatContext')
-    console.log('Chat page: storedContext:', storedContext)
-    if (storedContext) {
-      try {
-        const parsedContext = JSON.parse(storedContext)
-        console.log('Chat page: parsedContext:', parsedContext)
-        setContextData(parsedContext)
-        // Don't clear it immediately - let it persist for refreshes
-        // It will be cleared when navigating to a new selection
-      } catch (error) {
-        console.error('Error parsing chat context:', error)
+    const checkForNewContext = () => {
+      console.log('Chat page: Checking for chatContext in sessionStorage')
+      const storedContext = sessionStorage.getItem('chatContext')
+      console.log('Chat page: storedContext:', storedContext)
+      if (storedContext) {
+        try {
+          const parsedContext = JSON.parse(storedContext)
+          console.log('Chat page: parsedContext:', parsedContext)
+          
+          // Only update if it's different from current context
+          if (!contextData || 
+              contextData.selectedText !== parsedContext.selectedText ||
+              contextData.bookTitle !== parsedContext.bookTitle) {
+            setContextData(parsedContext)
+          }
+        } catch (error) {
+          console.error('Error parsing chat context:', error)
+        }
       }
     }
-  }, [])
+    
+    // Check immediately when component mounts
+    checkForNewContext()
+    
+    // Also check when the page becomes visible (user comes back from reader)
+    const handleVisibilityChange = () => {
+      if (!document.hidden) {
+        checkForNewContext()
+      }
+    }
+    
+    // Listen for custom event when new context is added while already on chat page
+    const handleNewChatContext = (event: CustomEvent) => {
+      console.log('Received newChatContext event:', event.detail)
+      setContextData(event.detail)
+    }
+    
+    document.addEventListener('visibilitychange', handleVisibilityChange)
+    window.addEventListener('newChatContext', handleNewChatContext as EventListener)
+    
+    return () => {
+      document.removeEventListener('visibilitychange', handleVisibilityChange)
+      window.removeEventListener('newChatContext', handleNewChatContext as EventListener)
+    }
+  }, [contextData])
 
   return (
     <div>
@@ -61,214 +72,9 @@ function ChatContent() {
           }
         }
       `}</style>
-      <header style={{
-        position: 'fixed',
-        top: 0,
-        left: 0,
-        right: 0,
-        background: 'white',
-        borderBottom: '1px solid #e0e0e0',
-        padding: '8px 12px',
-        zIndex: 100,
-        display: 'flex',
-        justifyContent: 'space-between',
-        alignItems: 'center'
-      }}>
-        <div style={{ flex: 1 }}>
-          <h1 style={{ 
-            margin: 0, 
-            fontSize: '18px', 
-            fontWeight: 'bold',
-            color: '#333',
-            lineHeight: '1.2'
-          }}>
-            The Explainers
-          </h1>
-          <p style={{ 
-            margin: 0, 
-            fontSize: '11px', 
-            color: '#666',
-            lineHeight: '1.2'
-          }}>
-            Chat with AI
-          </p>
-        </div>
-        <div ref={menuRef} style={{ position: 'relative' }}>
-          <button 
-            onClick={() => setShowMobileMenu(!showMobileMenu)}
-            style={{
-              padding: '8px',
-              background: 'none',
-              border: 'none',
-              cursor: 'pointer',
-              fontSize: '18px',
-              color: '#333'
-            }}
-          >
-            ☰
-          </button>
-          
-          {showMobileMenu && (
-            <div style={{
-              position: 'absolute',
-              top: '100%',
-              right: 0,
-              background: 'white',
-              border: '1px solid #e0e0e0',
-              borderRadius: '8px',
-              boxShadow: '0 4px 12px rgba(0,0,0,0.15)',
-              minWidth: '160px',
-              zIndex: 1000
-            }}>
-              <button 
-                onClick={() => {
-                  router.push('/reader')
-                  setShowMobileMenu(false)
-                }}
-                style={{
-                  display: 'block',
-                  width: '100%',
-                  padding: '12px 16px',
-                  background: 'none',
-                  border: 'none',
-                  textAlign: 'left',
-                  cursor: 'pointer',
-                  borderBottom: '1px solid #f0f0f0'
-                }}
-              >
-                📖 Reader
-              </button>
-              <button 
-                onClick={() => setShowMobileMenu(false)}
-                style={{
-                  display: 'block',
-                  width: '100%',
-                  padding: '12px 16px',
-                  background: 'none',
-                  border: 'none',
-                  textAlign: 'left',
-                  cursor: 'pointer',
-                  borderBottom: '1px solid #f0f0f0',
-                  color: '#666'
-                }}
-              >
-                💬 Chat (current)
-              </button>
-              <button 
-                onClick={() => {
-                  router.push('/library')
-                  setShowMobileMenu(false)
-                }}
-                style={{
-                  display: 'block',
-                  width: '100%',
-                  padding: '12px 16px',
-                  background: 'none',
-                  border: 'none',
-                  textAlign: 'left',
-                  cursor: 'pointer',
-                  borderBottom: '1px solid #f0f0f0'
-                }}
-              >
-                📚 Library
-              </button>
-              <button 
-                onClick={() => {
-                  router.push('/styles')
-                  setShowMobileMenu(false)
-                }}
-                style={{
-                  display: 'block',
-                  width: '100%',
-                  padding: '12px 16px',
-                  background: 'none',
-                  border: 'none',
-                  textAlign: 'left',
-                  cursor: 'pointer',
-                  borderBottom: '1px solid #f0f0f0'
-                }}
-              >
-                🎭 Styles
-              </button>
-              <button 
-                onClick={() => {
-                  router.push('/credits')
-                  setShowMobileMenu(false)
-                }}
-                style={{
-                  display: 'block',
-                  width: '100%',
-                  padding: '12px 16px',
-                  background: 'none',
-                  border: 'none',
-                  textAlign: 'left',
-                  cursor: 'pointer',
-                  borderBottom: '1px solid #f0f0f0'
-                }}
-              >
-                💳 Credits
-              </button>
-              <button 
-                onClick={() => {
-                  router.push('/profile')
-                  setShowMobileMenu(false)
-                }}
-                style={{
-                  display: 'block',
-                  width: '100%',
-                  padding: '12px 16px',
-                  background: 'none',
-                  border: 'none',
-                  textAlign: 'left',
-                  cursor: 'pointer',
-                  borderBottom: '1px solid #f0f0f0'
-                }}
-              >
-                👤 Profile
-              </button>
-              <button 
-                onClick={() => {
-                  router.push('/settings')
-                  setShowMobileMenu(false)
-                }}
-                style={{
-                  display: 'block',
-                  width: '100%',
-                  padding: '12px 16px',
-                  background: 'none',
-                  border: 'none',
-                  textAlign: 'left',
-                  cursor: 'pointer',
-                  borderBottom: '1px solid #f0f0f0'
-                }}
-              >
-                ⚙️ Settings
-              </button>
-              <button 
-                onClick={() => {
-                  router.push('/guide')
-                  setShowMobileMenu(false)
-                }}
-                style={{
-                  display: 'block',
-                  width: '100%',
-                  padding: '12px 16px',
-                  background: 'none',
-                  border: 'none',
-                  textAlign: 'left',
-                  cursor: 'pointer'
-                }}
-              >
-                📖 User Guide
-              </button>
-            </div>
-          )}
-        </div>
-      </header>
       
       <div style={{ 
-        marginTop: '60px', 
-        minHeight: 'calc(100vh - 60px)', 
+        minHeight: '100vh', 
         padding: '20px', 
         background: '#fafafa' 
       }} className="mobile-padding">
@@ -294,30 +100,54 @@ function ChatContent() {
                 </p>
               )}
             </div>
-            {contextData && (
-              <button
-                onClick={() => router.push('/reader')}
-                style={{
-                  background: '#8b5cf6',
-                  color: 'white',
-                  border: 'none',
-                  padding: '10px 16px',
-                  borderRadius: '8px',
-                  cursor: 'pointer',
-                  fontSize: '14px',
-                  fontWeight: '600',
-                  display: 'flex',
-                  alignItems: 'center',
-                  gap: '8px',
-                  transition: 'background 0.2s'
-                }}
-                onMouseOver={(e) => e.currentTarget.style.background = '#7c3aed'}
-                onMouseOut={(e) => e.currentTarget.style.background = '#8b5cf6'}
-              >
-                ← Back to Reader
-              </button>
-            )}
           </div>
+          
+          {contextData?.selectedText && (
+            <div style={{
+              background: '#f8f9fa',
+              border: '1px solid #e9ecef',
+              borderRadius: '8px',
+              padding: '16px',
+              marginBottom: '16px'
+            }}>
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', gap: '12px' }}>
+                <div style={{ flex: 1 }}>
+                  <h4 style={{ margin: '0 0 8px 0', fontSize: '14px', fontWeight: '600', color: '#495057' }}>
+                    Selected Quote:
+                  </h4>
+                  <p style={{ margin: '0', fontSize: '14px', fontStyle: 'italic', color: '#6c757d' }}>
+                    "{contextData.selectedText}"
+                  </p>
+                </div>
+                <button
+                  onClick={() => {
+                    const encodedQuote = encodeURIComponent(contextData.selectedText)
+                    const url = `https://www.playphrase.me/#/search?q=${encodedQuote}&pos=0&language=en`
+                    window.open(url, '_blank')
+                  }}
+                  style={{
+                    background: '#28a745',
+                    color: 'white',
+                    border: 'none',
+                    borderRadius: '6px',
+                    padding: '8px 12px',
+                    fontSize: '12px',
+                    fontWeight: '600',
+                    cursor: 'pointer',
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: '4px',
+                    transition: 'background-color 0.2s ease'
+                  }}
+                  onMouseEnter={(e) => (e.target as HTMLElement).style.backgroundColor = '#218838'}
+                  onMouseLeave={(e) => (e.target as HTMLElement).style.backgroundColor = '#28a745'}
+                >
+                  🎬 Find in Movies
+                </button>
+              </div>
+            </div>
+          )}
+          
           <p style={{ margin: '0 0 24px 0', color: '#666', fontSize: '16px' }}>
             Ask questions or get explanations about any text. Chat history is preserved during your session.
           </p>
@@ -331,7 +161,7 @@ function ChatContent() {
             contextInfo={contextData?.contextInfo || null}
             settings={settings}
             profile={profile}
-            onClose={() => router.push('/reader')}
+            onClose={() => {}}
             onSettingsChange={updateSettings}
             bookTitle={contextData?.bookTitle || ""}
             author={contextData?.author || ""}

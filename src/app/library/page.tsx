@@ -20,7 +20,7 @@ function LibraryContent() {
   return (
     <Library 
       onBookSelect={handleBookSelect}
-      onBackToCurrentBook={handleBackToCurrentBook}
+      // onBackToCurrentBook={handleBackToCurrentBook} // Removed for wide-screen layout
     />
   )
 }

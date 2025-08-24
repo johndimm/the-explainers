@@ -1,32 +1,24 @@
 'use client'
 
-import { useState, useEffect, Suspense } from 'react'
+import { useState, useEffect } from 'react'
 import TextReader from '@/components/TextReader'
-import ReaderLayout from '@/components/ReaderLayout'
 import { useSettings } from '@/contexts/SettingsContext'
 import { useProfile } from '@/contexts/ProfileContext'
 import { useRouter, useSearchParams } from 'next/navigation'
 
-function ReaderContent() {
+interface ReaderContentProps {
+  showHeader?: boolean
+}
+
+function ReaderContent({ showHeader = false }: ReaderContentProps) {
   const [bookText, setBookText] = useState('')
   const [loading, setLoading] = useState(true)
   const [currentBook, setCurrentBook] = useState({ title: '', author: '' })
   const { settings, updateSettings } = useSettings()
   const { profile } = useProfile()
   const router = useRouter()
-  const searchParams = useSearchParams()
 
   useEffect(() => {
-    // Check URL parameters for book selection
-    const title = searchParams.get('title')
-    const author = searchParams.get('author') 
-    const url = searchParams.get('url')
-
-    if (title && author && url) {
-      handleBookSelect(title, author, decodeURIComponent(url))
-      return
-    }
-
     // Check if there's a saved current book
     const savedBook = localStorage.getItem('current-book')
     if (savedBook) {
@@ -37,16 +29,16 @@ function ReaderContent() {
         if (parsedBook.url) {
           handleBookSelect(parsedBook.title, parsedBook.author, parsedBook.url)
         } else {
-          router.push('/library')
+          setLoading(false)
         }
       } catch (error) {
         console.error('Error loading saved book:', error)
-        router.push('/library')
+        setLoading(false)
       }
     } else {
-      router.push('/library')
+      setLoading(false)
     }
-  }, [searchParams, router])
+  }, [])
 
   const handleBookSelect = async (title: string, author: string, url: string) => {
     setLoading(true)
@@ -99,27 +91,40 @@ function ReaderContent() {
   }
 
   if (loading) {
-    return <div>Loading{currentBook.title ? ` ${currentBook.title}` : ''}...</div>
+    return <div style={{ padding: '20px' }}>Loading{currentBook.title ? ` ${currentBook.title}` : ''}...</div>
+  }
+
+  if (!bookText) {
+    return (
+      <div style={{ padding: '20px' }}>
+        <p>No book loaded. Please select a book from the library.</p>
+        <button 
+          onClick={() => router.push('/library')}
+          style={{
+            padding: '10px 20px',
+            background: '#3b82f6',
+            color: 'white',
+            border: 'none',
+            borderRadius: '6px',
+            cursor: 'pointer'
+          }}
+        >
+          Go to Library
+        </button>
+      </div>
+    )
   }
 
   return (
-    <ReaderLayout currentBook={currentBook}>
-      <TextReader 
-        text={bookText} 
-        bookTitle={currentBook.title}
-        author={currentBook.author}
-        settings={settings}
-        profile={profile}
-        onSettingsChange={updateSettings}
-      />
-    </ReaderLayout>
+    <TextReader 
+      text={bookText} 
+      bookTitle={currentBook.title}
+      author={currentBook.author}
+      settings={settings}
+      profile={profile}
+      onSettingsChange={updateSettings}
+    />
   )
 }
 
-export default function ReaderPage() {
-  return (
-    <Suspense fallback={<div>Loading...</div>}>
-      <ReaderContent />
-    </Suspense>
-  )
-}
+export default ReaderContent

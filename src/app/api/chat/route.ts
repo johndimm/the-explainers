@@ -34,9 +34,9 @@ async function callOpenAI(messages: ChatMessage[], responseLength: string): Prom
   const maxTokens = responseLength === 'brief' ? 200 : responseLength === 'medium' ? 500 : 1000
   
   try {
-    console.log('Testing OpenAI with model: gpt-5')
+    console.log('Using OpenAI with model: gpt-4o')
     const completion = await openai.chat.completions.create({
-      model: 'gpt-5',
+      model: 'gpt-4o',
       messages: messages.map(msg => ({
         role: msg.role,
         content: msg.content
@@ -93,7 +93,7 @@ async function callGemini(messages: ChatMessage[], responseLength: string): Prom
   const maxTokens = responseLength === 'brief' ? 200 : responseLength === 'medium' ? 500 : 1000
   
   const model = gemini.getGenerativeModel({ 
-    model: 'gemini-2.5-flash',
+    model: 'gemini-1.5-flash',
     generationConfig: {
       maxOutputTokens: maxTokens,
     }

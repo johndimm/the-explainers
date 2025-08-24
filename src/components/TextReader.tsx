@@ -643,17 +643,29 @@ const TextReader: React.FC<TextReaderProps> = ({ text, bookTitle = 'Romeo and Ju
   }
 
   const handleExplain = () => {
+    console.log('handleExplain called with selectedText:', selectedText)
+    
     // Store the selected text and context in sessionStorage for the chat page
     const context = extractContextInfo(selectedText, text)
-    sessionStorage.setItem('chatContext', JSON.stringify({
+    const chatData = {
       selectedText,
       contextInfo: context,
       bookTitle,
-      author
-    }))
+      author,
+      timestamp: Date.now() // Add timestamp to force updates
+    }
     
-    // Navigate to chat page
-    router.push('/chat')
+    console.log('Storing chat context:', chatData)
+    sessionStorage.setItem('chatContext', JSON.stringify(chatData))
+    
+    // Navigate to chat page - force a refresh if already there
+    if (window.location.pathname === '/chat') {
+      // If we're already on chat page, trigger a custom event to force update
+      window.dispatchEvent(new CustomEvent('newChatContext', { detail: chatData }))
+    } else {
+      router.push('/chat')
+    }
+    
     setShowConfirmDialog(false)
     setSelectedText('')
   }
@@ -738,19 +750,26 @@ const TextReader: React.FC<TextReaderProps> = ({ text, bookTitle = 'Romeo and Ju
       
       if (highlightedElements && highlightedElements.length > 0) {
         const targetElement = highlightedElements[resultIndex] as HTMLElement
-        if (targetElement) {
-          targetElement.scrollIntoView({ 
-            behavior: 'smooth', 
-            block: 'center',
-            inline: 'nearest'
+        if (targetElement && textContentRef.current) {
+          // Calculate position relative to text content container
+          const containerRect = textContentRef.current.getBoundingClientRect()
+          const targetRect = targetElement.getBoundingClientRect()
+          const relativeTop = targetRect.top - containerRect.top
+          const containerHeight = textContentRef.current.clientHeight
+          
+          // Scroll to center the target in the visible area
+          const scrollTop = textContentRef.current.scrollTop + relativeTop - (containerHeight / 2)
+          textContentRef.current.scrollTo({
+            top: Math.max(0, scrollTop),
+            behavior: 'smooth'
           })
-          console.log('Scrolled to highlighted element')
+          console.log('Scrolled to highlighted element within text container')
           return
         }
       }
       
       // Fallback: manual calculation
-      const scrollContainer = textReaderRef.current
+      const scrollContainer = textContentRef.current
       if (scrollContainer) {
         const textPercentage = result.index / text.length
         const targetPosition = textPercentage * scrollContainer.scrollHeight * 0.8 // Adjust multiplier
@@ -819,42 +838,53 @@ const TextReader: React.FC<TextReaderProps> = ({ text, bookTitle = 'Romeo and Ju
         </div>
       )}
       
-      {/* Search Bar */}
+      {/* Search Bar - Fixed at top */}
       <div style={{
-        position: 'sticky',
-        top: '0px',
-        padding: '8px 20px',
-        margin: '-30px -20px 0 -20px',
+        padding: '16px 8px 8px 8px', // More padding on top
         backgroundColor: 'white',
         borderBottom: '1px solid #e0e0e0',
-        zIndex: 50,
-        width: 'calc(100% + 40px)',
-        boxSizing: 'border-box'
+        flexShrink: 0
       }}>
-        <input
-          ref={searchInputRef}
-          type="text"
-          placeholder="Search..."
-          value={searchQuery}
-          onChange={(e) => {
-            setSearchQuery(e.target.value)
-          }}
-          onKeyDown={(e) => {
-            if (e.key === 'Enter') {
-              handleSearch(searchQuery)
-            }
-          }}
-          style={{
-            width: '100%',
-            padding: '6px 12px',
-            margin: 0,
-            border: '1px solid #ddd',
-            borderRadius: '4px',
-            fontSize: '14px',
-            outline: 'none',
-            backgroundColor: 'white'
-          }}
-        />
+        <div style={{ display: 'flex', gap: '8px', alignItems: 'center' }}>
+          <input
+            ref={searchInputRef}
+            type="text"
+            placeholder="Search in text..."
+            value={searchQuery}
+            onChange={(e) => {
+              setSearchQuery(e.target.value)
+            }}
+            onKeyDown={(e) => {
+              if (e.key === 'Enter') {
+                handleSearch(searchQuery)
+              }
+            }}
+            style={{
+              flex: 1,
+              padding: '6px 12px',
+              margin: 0,
+              border: '1px solid #ddd',
+              borderRadius: '4px',
+              fontSize: '14px',
+              outline: 'none',
+              backgroundColor: 'white'
+            }}
+          />
+          <button
+            onClick={() => handleSearch(searchQuery)}
+            style={{
+              padding: '6px 12px',
+              border: '1px solid #ddd',
+              borderRadius: '4px',
+              background: '#f8f9fa',
+              cursor: 'pointer',
+              fontSize: '14px',
+              color: '#495057'
+            }}
+          >
+            🔍
+          </button>
+        </div>
         {searchResults.length > 0 && (
           <div style={{ 
             marginTop: '4px',
