@@ -59,8 +59,10 @@ export const ProfileProvider: React.FC<ProfileProviderProps> = ({ children }) =>
         }
         if (parsed.unlimitedAccessExpiry) {
           parsed.unlimitedAccessExpiry = new Date(parsed.unlimitedAccessExpiry)
+          console.log('ProfileContext: Converted unlimitedAccessExpiry to Date object:', parsed.unlimitedAccessExpiry)
         }
         let restoredProfile = { ...DEFAULT_PROFILE, ...parsed }
+        console.log('ProfileContext: Final restored profile:', restoredProfile)
         
         // Migration: Reset credits for users who had the old 100 credit default
         // Handle users with 100 credits (unused) or 97-99 credits (used some)
@@ -128,9 +130,15 @@ export const ProfileProvider: React.FC<ProfileProviderProps> = ({ children }) =>
     // Free if has unlimited access
     if (profile.hasUnlimitedAccess && profile.unlimitedAccessExpiry) {
       const now = new Date()
-      const expiry = new Date(profile.unlimitedAccessExpiry)
+      // Ensure expiry is a Date object (defensive programming)
+      const expiry = profile.unlimitedAccessExpiry instanceof Date 
+        ? profile.unlimitedAccessExpiry 
+        : new Date(profile.unlimitedAccessExpiry)
+      
       console.log('ProfileContext: checking unlimited access - now:', now, 'expiry:', expiry)
       console.log('ProfileContext: hasUnlimitedAccess:', profile.hasUnlimitedAccess)
+      console.log('ProfileContext: expiry type:', typeof profile.unlimitedAccessExpiry)
+      console.log('ProfileContext: expiry instanceof Date:', profile.unlimitedAccessExpiry instanceof Date)
       console.log('ProfileContext: access expired?', now >= expiry)
       
       if (now < expiry) {

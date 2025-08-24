@@ -493,11 +493,17 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ selectedText, contextInfo
   const handleReExplain = async (text: string) => {
     const useCustomLLM = selectedProvider === 'custom'
     
+    console.log('ChatInterface: handleReExplain called')
+    console.log('ChatInterface: current profile state:', profile)
+    
     // Check if user can use explanation
     if (!canUseExplanation(bookTitle, author, useCustomLLM)) {
+      console.log('ChatInterface: canUseExplanation returned false, redirecting to credits')
       router.push('/credits')
       return
     }
+    
+    console.log('ChatInterface: canUseExplanation returned true, proceeding with re-explanation')
 
     const promptText = createContextualPrompt(text, contextInfo)
     
@@ -563,11 +569,19 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ selectedText, contextInfo
   const handleExplainText = async (text: string) => {
     const useCustomLLM = selectedProvider === 'custom'
     
+    console.log('ChatInterface: handleExplainText called')
+    console.log('ChatInterface: current profile state:', profile)
+    console.log('ChatInterface: bookTitle:', bookTitle, 'author:', author)
+    console.log('ChatInterface: useCustomLLM:', useCustomLLM)
+    
     // Check if user can use explanation
     if (!canUseExplanation(bookTitle, author, useCustomLLM)) {
+      console.log('ChatInterface: canUseExplanation returned false, redirecting to credits')
       router.push('/credits')
       return
     }
+    
+    console.log('ChatInterface: canUseExplanation returned true, proceeding with explanation')
 
     const promptText = createContextualPrompt(text, contextInfo)
     
@@ -725,10 +739,10 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ selectedText, contextInfo
                 className={styles.providerSelect}
                 disabled={isLoading}
               >
-                <option value="anthropic">Claude (Anthropic)</option>
-                <option value="openai">GPT-4 (OpenAI)</option>
-                <option value="deepseek">DeepSeek</option>
-                <option value="gemini">Gemini</option>
+                <option value="anthropic">Claude 3.5 Sonnet</option>
+                <option value="openai">GPT-5</option>
+                <option value="deepseek">DeepSeek Chat</option>
+                <option value="gemini">Gemini 2.5 Flash</option>
               </select>
             </div>
             <div className={styles.styleSelector}>
@@ -803,10 +817,10 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ selectedText, contextInfo
               {message.role === 'assistant' && message.provider && (
                 <div className={styles.messageInfo}>
                   <span className={styles.providerBadge}>
-                    {message.provider === 'openai' ? 'GPT-4o Mini' : 
-                     message.provider === 'anthropic' ? 'Claude Haiku' :
+                    {message.provider === 'openai' ? 'GPT-5' : 
+                     message.provider === 'anthropic' ? 'Claude 3.5 Sonnet' :
                      message.provider === 'deepseek' ? 'DeepSeek Chat' :
-                     message.provider === 'gemini' ? 'Gemini Flash' :
+                     message.provider === 'gemini' ? 'Gemini 2.5 Flash' :
                      message.provider === 'youtube' ? '🎬 YouTube' :
                      message.provider}
                   </span>

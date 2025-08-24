@@ -33,17 +33,23 @@ const gemini = new GoogleGenerativeAI(process.env.GEMINI_API_KEY || '')
 async function callOpenAI(messages: ChatMessage[], responseLength: string): Promise<string> {
   const maxTokens = responseLength === 'brief' ? 200 : responseLength === 'medium' ? 500 : 1000
   
-  const completion = await openai.chat.completions.create({
-    model: 'gpt-4o-mini',
-    messages: messages.map(msg => ({
-      role: msg.role,
-      content: msg.content
-    })),
-    temperature: 0.7,
-    max_tokens: maxTokens,
-  })
+  try {
+    console.log('Testing OpenAI with model: gpt-5')
+    const completion = await openai.chat.completions.create({
+      model: 'gpt-5',
+      messages: messages.map(msg => ({
+        role: msg.role,
+        content: msg.content
+      })),
+      temperature: 0.7,
+      max_tokens: maxTokens,
+    })
 
-  return completion.choices[0]?.message?.content || 'No response'
+    return completion.choices[0]?.message?.content || 'No response'
+  } catch (error) {
+    console.error('OpenAI API error:', error)
+    throw error
+  }
 }
 
 async function callAnthropic(messages: ChatMessage[], responseLength: string): Promise<string> {
@@ -54,7 +60,7 @@ async function callAnthropic(messages: ChatMessage[], responseLength: string): P
     : 'You are a helpful assistant.'
 
   const response = await anthropic.messages.create({
-    model: 'claude-3-haiku-20240307',
+    model: 'claude-3-5-sonnet-20241022',
     max_tokens: maxTokens,
     temperature: 0.7,
     system: systemMessage,
@@ -87,7 +93,7 @@ async function callGemini(messages: ChatMessage[], responseLength: string): Prom
   const maxTokens = responseLength === 'brief' ? 200 : responseLength === 'medium' ? 500 : 1000
   
   const model = gemini.getGenerativeModel({ 
-    model: 'gemini-1.5-flash',
+    model: 'gemini-2.5-flash',
     generationConfig: {
       maxOutputTokens: maxTokens,
     }
@@ -141,9 +147,10 @@ export async function POST(request: NextRequest) {
     })
 
   } catch (error) {
-    console.error('Chat API error:', error)
+    console.error('Chat API error for provider:', provider)
+    console.error('Full error details:', error)
     return NextResponse.json(
-      { error: 'Failed to process chat request' }, 
+      { error: `Failed to process chat request with ${provider}: ${error}` }, 
       { status: 500 }
     )
   }
