@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react'
 import ChatInterface from '@/components/ChatInterface'
 import { useSettings } from '@/contexts/SettingsContext'
 import { useProfile } from '@/contexts/ProfileContext'
+import { debugChat, debugContext } from '@/utils/debug'
 
 function ChatContent() {
   const { settings, updateSettings } = useSettings()
@@ -14,13 +15,13 @@ function ChatContent() {
   // Check for context data from text selection
   useEffect(() => {
     const checkForNewContext = () => {
-      console.log('Chat page: Checking for chatContext in sessionStorage')
+      debugChat(' Checking for chatContext in sessionStorage')
       const storedContext = sessionStorage.getItem('chatContext')
-      console.log('Chat page: storedContext:', storedContext)
+      debugChat(' storedContext:', storedContext)
       if (storedContext) {
         try {
           const parsedContext = JSON.parse(storedContext)
-          console.log('Chat page: parsedContext:', parsedContext)
+          debugChat(' parsedContext:', parsedContext)
           
           // Only update if it's different from current context
           if (!contextData || 
@@ -46,7 +47,7 @@ function ChatContent() {
     
     // Listen for custom event when new context is added while already on chat page
     const handleNewChatContext = (event: CustomEvent) => {
-      console.log('Received newChatContext event:', event.detail)
+      debugContext('Received newChatContext event:', event.detail)
       setContextData(event.detail)
     }
     
@@ -155,7 +156,7 @@ function ChatContent() {
           <ChatInterface
             selectedText={(() => {
               const text = contextData?.selectedText || "";
-              console.log('Chat page: Passing selectedText to ChatInterface:', text);
+              debugChat(' Passing selectedText to ChatInterface:', text);
               return text;
             })()}
             contextInfo={contextData?.contextInfo || null}

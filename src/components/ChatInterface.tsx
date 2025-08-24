@@ -7,6 +7,7 @@ import { SettingsData, LLMProvider, ResponseLength, ExplanationStyle } from './S
 import { ProfileData } from './Profile'
 import { useProfile } from '../contexts/ProfileContext'
 import { STYLE_CATEGORIES } from './ExplainerStyles'
+import { debugChat, debugCredits, debugLog } from '../utils/debug'
 
 interface Message {
   id: string
@@ -141,7 +142,7 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ selectedText, contextInfo
       // Check if this is a new selection different from the original
       if (!originalSelectedText || selectedText !== originalSelectedText) {
         setOriginalSelectedText(selectedText)
-        console.log('ChatInterface: Auto-explaining new selection:', selectedText)
+        debugChat('Auto-explaining new selection:', selectedText)
         handleExplainText(selectedText)
       }
       initializedRef.current = true
@@ -150,19 +151,19 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ selectedText, contextInfo
 
   // Set original selected text when it becomes available (from props or chat history)
   useEffect(() => {
-    console.log('ChatInterface: selectedText changed:', selectedText)
-    console.log('ChatInterface: originalSelectedText:', originalSelectedText)
-    console.log('ChatInterface: messages:', messages)
+    debugChat(' selectedText changed:', selectedText)
+    debugChat(' originalSelectedText:', originalSelectedText)
+    debugChat(' messages:', messages)
     
     if (!originalSelectedText) {
       if (selectedText) {
-        console.log('ChatInterface: Setting originalSelectedText from selectedText:', selectedText)
+        debugChat(' Setting originalSelectedText from selectedText:', selectedText)
         setOriginalSelectedText(selectedText)
       } else if (messages.length > 0) {
         // If no selectedText but we have chat history, use the first user message as the text to re-explain
         const firstUserMessage = messages.find(m => m.role === 'user')
         if (firstUserMessage) {
-          console.log('ChatInterface: Setting originalSelectedText from chat history:', firstUserMessage.content)
+          debugChat(' Setting originalSelectedText from chat history:', firstUserMessage.content)
           setOriginalSelectedText(firstUserMessage.content)
         }
       }
@@ -363,7 +364,7 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ selectedText, contextInfo
   }
 
   const createContextualPrompt = (text: string, context: ContextInfo | null): string => {
-    console.log('ChatInterface: Profile data:', profile)
+    debugChat(' Profile data:', profile)
     let prompt = `Please explain this text: "${text}"`
     
     if (context) {
@@ -379,12 +380,12 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ selectedText, contextInfo
     }
 
     // Add user profile information
-    console.log('ChatInterface: Profile language check:', profile.language, profile.language !== 'english')
+    debugChat(' Profile language check:', profile.language, profile.language !== 'english')
     if (profile.age || profile.language !== 'english' || profile.educationLevel) {
       prompt += `\n\nUser Profile:`
       if (profile.age) prompt += `\nAge: ${profile.age}`
       if (profile.language !== 'english') {
-        console.log('ChatInterface: Adding language instruction:', profile.language)
+        debugChat(' Adding language instruction:', profile.language)
         prompt += `\nPreferred Language: Please respond in ${profile.language}`
       }
       prompt += `\nEducation Level: ${profile.educationLevel}`
@@ -497,19 +498,19 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ selectedText, contextInfo
   const handleReExplain = async (text: string) => {
     const useCustomLLM = selectedProvider === 'custom'
     
-    console.log('ChatInterface: handleReExplain called')
-    console.log('ChatInterface: current profile state:', profile)
+    debugChat(' handleReExplain called')
+    debugChat(' current profile state:', profile)
     
     // Check if user can use explanation
     if (!canUseExplanation(bookTitle, author, useCustomLLM)) {
-      console.log('ChatInterface: canUseExplanation returned false, redirecting to credits')
-      console.log('ChatInterface: bookTitle:', bookTitle, 'author:', author, 'useCustomLLM:', useCustomLLM)
-      console.log('ChatInterface: current profile:', profile)
+      debugCredits('canUseExplanation returned false, redirecting to credits')
+      debugChat(' bookTitle:', bookTitle, 'author:', author, 'useCustomLLM:', useCustomLLM)
+      debugChat(' current profile:', profile)
       router.push('/credits')
       return
     }
     
-    console.log('ChatInterface: canUseExplanation returned true, proceeding with re-explanation')
+    debugChat(' canUseExplanation returned true, proceeding with re-explanation')
 
     const promptText = createContextualPrompt(text, contextInfo)
     
@@ -575,21 +576,21 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ selectedText, contextInfo
   const handleExplainText = async (text: string) => {
     const useCustomLLM = selectedProvider === 'custom'
     
-    console.log('ChatInterface: handleExplainText called')
-    console.log('ChatInterface: current profile state:', profile)
-    console.log('ChatInterface: bookTitle:', bookTitle, 'author:', author)
-    console.log('ChatInterface: useCustomLLM:', useCustomLLM)
+    debugChat(' handleExplainText called')
+    debugChat(' current profile state:', profile)
+    debugChat(' bookTitle:', bookTitle, 'author:', author)
+    debugChat(' useCustomLLM:', useCustomLLM)
     
     // Check if user can use explanation
     if (!canUseExplanation(bookTitle, author, useCustomLLM)) {
-      console.log('ChatInterface: canUseExplanation returned false, redirecting to credits')
-      console.log('ChatInterface: bookTitle:', bookTitle, 'author:', author, 'useCustomLLM:', useCustomLLM)
-      console.log('ChatInterface: current profile:', profile)
+      debugCredits('canUseExplanation returned false, redirecting to credits')
+      debugChat(' bookTitle:', bookTitle, 'author:', author, 'useCustomLLM:', useCustomLLM)
+      debugChat(' current profile:', profile)
       router.push('/credits')
       return
     }
     
-    console.log('ChatInterface: canUseExplanation returned true, proceeding with explanation')
+    debugChat(' canUseExplanation returned true, proceeding with explanation')
 
     const promptText = createContextualPrompt(text, contextInfo)
     

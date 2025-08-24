@@ -2,6 +2,7 @@
 
 import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react'
 import { ProfileData, Language, EducationLevel } from '../components/Profile'
+import { debugProfile, debugCredits, debugStorage } from '../utils/debug'
 
 interface ProfileContextType {
   profile: ProfileData
@@ -47,22 +48,22 @@ export const ProfileProvider: React.FC<ProfileProviderProps> = ({ children }) =>
     // Mark as hydrated and only then access localStorage
     setIsHydrated(true)
     const savedProfile = localStorage.getItem('explainer-profile')
-    console.log('ProfileContext: Loading profile from localStorage:', savedProfile)
+    debugProfile(' Loading profile from localStorage:', savedProfile)
     
     if (savedProfile) {
       try {
         const parsed = JSON.parse(savedProfile)
-        console.log('ProfileContext: Parsed saved profile:', parsed)
+        debugProfile(' Parsed saved profile:', parsed)
         // Convert date strings back to Date objects
         if (parsed.firstLogin) {
           parsed.firstLogin = new Date(parsed.firstLogin)
         }
         if (parsed.unlimitedAccessExpiry) {
           parsed.unlimitedAccessExpiry = new Date(parsed.unlimitedAccessExpiry)
-          console.log('ProfileContext: Converted unlimitedAccessExpiry to Date object:', parsed.unlimitedAccessExpiry)
+          debugProfile(' Converted unlimitedAccessExpiry to Date object:', parsed.unlimitedAccessExpiry)
         }
         let restoredProfile = { ...DEFAULT_PROFILE, ...parsed }
-        console.log('ProfileContext: Final restored profile:', restoredProfile)
+        debugProfile(' Final restored profile:', restoredProfile)
         
         // Migration: Reset credits for users who had the old 100 credit default
         // Handle users with 100 credits (unused) or 97-99 credits (used some)
@@ -74,14 +75,14 @@ export const ProfileProvider: React.FC<ProfileProviderProps> = ({ children }) =>
           localStorage.setItem('explainer-profile', JSON.stringify(restoredProfile))
         }
         
-        console.log('ProfileContext: Restoring profile:', restoredProfile)
+        debugProfile(' Restoring profile:', restoredProfile)
         setProfile(restoredProfile)
       } catch (error) {
         console.error('Error loading profile:', error)
       }
     } else {
       // First time user - set first login date
-      console.log('ProfileContext: No saved profile found, creating new one')
+      debugProfile(' No saved profile found, creating new one')
       const newProfile = { ...DEFAULT_PROFILE, firstLogin: new Date() }
       setProfile(newProfile)
       localStorage.setItem('explainer-profile', JSON.stringify(newProfile))
@@ -89,11 +90,11 @@ export const ProfileProvider: React.FC<ProfileProviderProps> = ({ children }) =>
   }, [])
 
   const updateProfile = (newProfile: ProfileData) => {
-    console.log('ProfileContext: updateProfile called with:', newProfile)
-    console.log('ProfileContext: Current profile before update:', profile)
+    debugProfile(' updateProfile called with:', newProfile)
+    debugProfile(' Current profile before update:', profile)
     setProfile(newProfile)
     localStorage.setItem('explainer-profile', JSON.stringify(newProfile))
-    console.log('ProfileContext: Profile updated in localStorage')
+    debugProfile(' Profile updated in localStorage')
   }
 
   const incrementExplanations = () => {
@@ -117,13 +118,13 @@ export const ProfileProvider: React.FC<ProfileProviderProps> = ({ children }) =>
   }
 
   const canUseExplanation = (bookTitle: string, author: string, useCustomLLM: boolean) => {
-    console.log('ProfileContext: canUseExplanation called for:', bookTitle, 'by', author)
-    console.log('ProfileContext: useCustomLLM:', useCustomLLM)
-    console.log('ProfileContext: current profile:', profile)
+    debugProfile(' canUseExplanation called for:', bookTitle, 'by', author)
+    debugProfile(' useCustomLLM:', useCustomLLM)
+    debugProfile(' current profile:', profile)
     
     // Free if using custom LLM
     if (useCustomLLM) {
-      console.log('ProfileContext: using custom LLM - access granted')
+      debugProfile(' using custom LLM - access granted')
       return true
     }
     
@@ -135,46 +136,46 @@ export const ProfileProvider: React.FC<ProfileProviderProps> = ({ children }) =>
         ? profile.unlimitedAccessExpiry 
         : new Date(profile.unlimitedAccessExpiry)
       
-      console.log('ProfileContext: checking unlimited access - now:', now, 'expiry:', expiry)
-      console.log('ProfileContext: hasUnlimitedAccess:', profile.hasUnlimitedAccess)
-      console.log('ProfileContext: expiry type:', typeof profile.unlimitedAccessExpiry)
-      console.log('ProfileContext: expiry instanceof Date:', profile.unlimitedAccessExpiry instanceof Date)
-      console.log('ProfileContext: access expired?', now >= expiry)
+      debugProfile(' checking unlimited access - now:', now, 'expiry:', expiry)
+      debugProfile(' hasUnlimitedAccess:', profile.hasUnlimitedAccess)
+      debugProfile(' expiry type:', typeof profile.unlimitedAccessExpiry)
+      debugProfile(' expiry instanceof Date:', profile.unlimitedAccessExpiry instanceof Date)
+      debugProfile(' access expired?', now >= expiry)
       
       if (now < expiry) {
-        console.log('ProfileContext: unlimited access valid - access granted')
+        debugProfile(' unlimited access valid - access granted')
         return true
       } else {
-        console.log('ProfileContext: unlimited access expired')
+        debugProfile(' unlimited access expired')
       }
     } else {
-      console.log('ProfileContext: no unlimited access or no expiry date')
+      debugProfile(' no unlimited access or no expiry date')
     }
     
     const bookKey = getBookKey(bookTitle, author)
-    console.log('ProfileContext: bookKey:', bookKey)
+    debugProfile(' bookKey:', bookKey)
     
     // Free if book is purchased
     if (profile.purchasedBooks?.includes(bookKey)) {
-      console.log('ProfileContext: book purchased - access granted')
+      debugProfile(' book purchased - access granted')
       return true
     }
     
     // Check if under 3 free explanations for this book
     const bookExplanations = profile.bookExplanations?.[bookKey] || 0
-    console.log('ProfileContext: book explanations used:', bookExplanations)
+    debugProfile(' book explanations used:', bookExplanations)
     if (bookExplanations < 3) {
-      console.log('ProfileContext: under 3 free explanations - access granted')
+      debugProfile(' under 3 free explanations - access granted')
       return true
     }
     
     // Check if has available credits
     const hasCredits = (profile.availableCredits || 0) > 0
-    console.log('ProfileContext: available credits:', profile.availableCredits, 'has credits:', hasCredits)
+    debugProfile(' available credits:', profile.availableCredits, 'has credits:', hasCredits)
     if (hasCredits) {
-      console.log('ProfileContext: has credits - access granted')
+      debugProfile(' has credits - access granted')
     } else {
-      console.log('ProfileContext: no credits - access denied')
+      debugProfile(' no credits - access denied')
     }
     return hasCredits
   }
@@ -235,16 +236,16 @@ export const ProfileProvider: React.FC<ProfileProviderProps> = ({ children }) =>
   }
 
   const addCredits = (amount: number) => {
-    console.log('ProfileContext: addCredits called with amount:', amount)
+    debugProfile(' addCredits called with amount:', amount)
     setProfile(prev => {
-      console.log('ProfileContext: Previous credits:', prev.availableCredits)
+      debugProfile(' Previous credits:', prev.availableCredits)
       const newProfile = {
         ...prev,
         availableCredits: (prev.availableCredits || 0) + amount
       }
-      console.log('ProfileContext: New credits:', newProfile.availableCredits)
+      debugProfile(' New credits:', newProfile.availableCredits)
       localStorage.setItem('explainer-profile', JSON.stringify(newProfile))
-      console.log('ProfileContext: Saved to localStorage:', newProfile)
+      debugProfile(' Saved to localStorage:', newProfile)
       return newProfile
     })
   }
@@ -262,7 +263,7 @@ export const ProfileProvider: React.FC<ProfileProviderProps> = ({ children }) =>
   }
 
   const grantUnlimitedAccess = (duration: 'hour' | 'month' | 'year') => {
-    console.log('ProfileContext: grantUnlimitedAccess called with duration:', duration)
+    debugProfile(' grantUnlimitedAccess called with duration:', duration)
     setProfile(prev => {
       const now = new Date()
       let expiryTime: Date
@@ -286,8 +287,8 @@ export const ProfileProvider: React.FC<ProfileProviderProps> = ({ children }) =>
         hasUnlimitedAccess: true,
         unlimitedAccessExpiry: expiryTime
       }
-      console.log('ProfileContext: granting unlimited access until:', expiryTime)
-      console.log('ProfileContext: new profile with unlimited access:', newProfile)
+      debugProfile(' granting unlimited access until:', expiryTime)
+      debugProfile(' new profile with unlimited access:', newProfile)
       localStorage.setItem('explainer-profile', JSON.stringify(newProfile))
       return newProfile
     })

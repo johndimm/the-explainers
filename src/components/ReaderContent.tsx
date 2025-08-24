@@ -5,6 +5,7 @@ import TextReader from '@/components/TextReader'
 import { useSettings } from '@/contexts/SettingsContext'
 import { useProfile } from '@/contexts/ProfileContext'
 import { useRouter, useSearchParams } from 'next/navigation'
+import { debugBook } from '@/utils/debug'
 
 interface ReaderContentProps {
   showHeader?: boolean
@@ -24,7 +25,7 @@ function ReaderContent({ showHeader = false }: ReaderContentProps) {
     if (savedBook) {
       try {
         const parsedBook = JSON.parse(savedBook)
-        console.log('Restoring saved book:', parsedBook)
+        debugBook('Restoring saved book:', parsedBook)
         
         if (parsedBook.url) {
           handleBookSelect(parsedBook.title, parsedBook.author, parsedBook.url)

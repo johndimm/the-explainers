@@ -5,6 +5,7 @@ import { useRouter } from 'next/navigation'
 import styles from './TextReader.module.css'
 import { SettingsData } from './Settings'
 import { ProfileData } from './Profile'
+import { debugReader, debugSearch, debugSelection, debugStorage } from '../utils/debug'
 
 interface TextReaderProps {
   text: string
@@ -54,7 +55,7 @@ const TextReader: React.FC<TextReaderProps> = ({ text, bookTitle = 'Romeo and Ju
     const savedPosition = localStorage.getItem(bookmarkKey)
     if (savedPosition) {
       const position = parseInt(savedPosition)
-      console.log(`Restoring bookmark for ${bookTitle} by ${author}: position ${position}`)
+      debugStorage(`Restoring bookmark for ${bookTitle} by ${author}: position ${position}`)
       
       // Wait for DOM to be ready, then restore position
       setTimeout(() => {
@@ -223,29 +224,29 @@ const TextReader: React.FC<TextReaderProps> = ({ text, bookTitle = 'Romeo and Ju
     // Small delay to ensure selection is fully registered
     setTimeout(() => {
       const selection = window.getSelection()
-      console.log('handleTextSelection called, selection:', selection)
-      console.log('selection text:', selection?.toString())
-      console.log('selection range count:', selection?.rangeCount)
+      debugReader('handleTextSelection called, selection:', selection)
+      debugReader('selection text:', selection?.toString())
+      debugReader('selection range count:', selection?.rangeCount)
       
       if (selection && selection.rangeCount > 0) {
         const range = selection.getRangeAt(0)
-        console.log('Range collapsed:', range.collapsed)
-        console.log('Start offset:', range.startOffset)
-        console.log('End offset:', range.endOffset)
+        debugReader('Range collapsed:', range.collapsed)
+        debugReader('Start offset:', range.startOffset)
+        debugReader('End offset:', range.endOffset)
         
         const selectedText = selection.toString().trim()
-        console.log('Selected text length:', selectedText.length)
-        console.log('Selected text:', selectedText)
+        debugReader('Selected text length:', selectedText.length)
+        debugReader('Selected text:', selectedText)
         
         if (selectedText && selectedText.length > 0) {
           setSelectedText(selectedText)
           setShowConfirmDialog(true)
-          console.log('Setting selectedText and showing dialog')
+          debugReader('Setting selectedText and showing dialog')
         } else {
-          console.log('No text selected or empty selection')
+          debugReader('No text selected or empty selection')
         }
       } else {
-        console.log('No selection or no ranges')
+        debugReader('No selection or no ranges')
       }
     }, 10) // Very small delay to let selection register
   }
@@ -401,7 +402,7 @@ const TextReader: React.FC<TextReaderProps> = ({ text, bookTitle = 'Romeo and Ju
       const endRange = document.caretRangeFromPoint?.(endX, endY)
       
       if (!startRange || !endRange) {
-        console.log('Could not create ranges - likely clicked on whitespace or outside text')
+        debugReader('Could not create ranges - likely clicked on whitespace or outside text')
         return ''
       }
       
@@ -424,7 +425,7 @@ const TextReader: React.FC<TextReaderProps> = ({ text, bookTitle = 'Romeo and Ju
           }
           
           if (!foundText) {
-            console.log('Long press on whitespace - no nearby text found')
+            debugReader('Long press on whitespace - no nearby text found')
             return ''
           }
         }
@@ -453,15 +454,15 @@ const TextReader: React.FC<TextReaderProps> = ({ text, bookTitle = 'Romeo and Ju
       
       // Final validation - make sure we got actual text, not just whitespace
       if (!text || text.length === 0 || /^\s+$/.test(text)) {
-        console.log('Long press resulted in empty or whitespace-only selection')
+        debugReader('Long press resulted in empty or whitespace-only selection')
         return ''
       }
       
       setHighlightedText(text)
-      console.log('Long press selection:', text)
+      debugReader('Long press selection:', text)
       return text
     } catch (error) {
-      console.log('Error in handleLongPress:', error)
+      debugReader('Error in handleLongPress:', error)
       return ''
     }
   }
@@ -484,22 +485,22 @@ const TextReader: React.FC<TextReaderProps> = ({ text, bookTitle = 'Romeo and Ju
         
         // If finger has moved more than 15px, user is probably scrolling, not selecting
         if (currentDistance > 15) {
-          console.log('Long press cancelled - finger moved too much (scrolling)')
+          debugReader('Long press cancelled - finger moved too much (scrolling)')
           return
         }
       }
       
-      console.log('Long press triggered')
+      debugReader('Long press triggered')
       
       // Get the word at the long press position
       const startRange = document.caretRangeFromPoint?.(pos.x, pos.y)
       if (!startRange) {
-        console.log('Long press found no text - not entering selection mode')
+        debugReader('Long press found no text - not entering selection mode')
         return
       }
       
-      console.log('Long press startRange:', startRange)
-      console.log('Start container:', startRange.startContainer.textContent?.substring(Math.max(0, startRange.startOffset - 10), startRange.startOffset + 10))
+      debugReader('Long press startRange:', startRange)
+      debugReader('Start container:', startRange.startContainer.textContent?.substring(Math.max(0, startRange.startOffset - 10), startRange.startOffset + 10))
       
       // Expand to word boundaries for initial selection
       const initialRange = document.createRange()
@@ -508,12 +509,12 @@ const TextReader: React.FC<TextReaderProps> = ({ text, bookTitle = 'Romeo and Ju
       const expandedRange = expandToWordBoundaries(initialRange)
       const initialText = expandedRange.toString().trim()
       
-      console.log('Initial expanded text:', initialText)
-      console.log('Expanded range:', expandedRange)
+      debugReader('Initial expanded text:', initialText)
+      debugReader('Expanded range:', expandedRange)
       
       // Only enter selection mode if we actually found text
       if (!initialText || initialText.length === 0) {
-        console.log('Long press found no text - not entering selection mode')
+        debugReader('Long press found no text - not entering selection mode')
         return
       }
       
@@ -536,7 +537,7 @@ const TextReader: React.FC<TextReaderProps> = ({ text, bookTitle = 'Romeo and Ju
       
       setCurrentSelection(initialText)
       // Show highlighting immediately - both custom and native selection
-      console.log('Setting highlighted text to:', initialText)
+      debugReader('Setting highlighted text to:', initialText)
       setHighlightedText(initialText)
       
       // Force a re-render to ensure highlighting appears immediately
@@ -547,10 +548,10 @@ const TextReader: React.FC<TextReaderProps> = ({ text, bookTitle = 'Romeo and Ju
       // Create native visual selection for immediate feedback (but don't clear it)
       const selection = window.getSelection()
       if (selection) {
-        console.log('Creating native selection for text:', initialText)
+        debugReader('Creating native selection for text:', initialText)
         selection.removeAllRanges()
         selection.addRange(expandedRange.cloneRange())
-        console.log('Native selection created, selected text:', selection.toString())
+        debugReader('Native selection created, selected text:', selection.toString())
       }
       
       // Provide haptic feedback if available
@@ -598,9 +599,9 @@ const TextReader: React.FC<TextReaderProps> = ({ text, bookTitle = 'Romeo and Ju
         setHighlightedText('')
         setSelectedText(currentSelection)
         setShowConfirmDialog(true)
-        console.log('Touch selection completed:', currentSelection)
+        debugReader('Touch selection completed:', currentSelection)
       } else {
-        console.log('Touch selection too short or empty:', currentSelection)
+        debugReader('Touch selection too short or empty:', currentSelection)
       }
       setIsInSelectionMode(false)
       setCurrentSelection('')
@@ -638,12 +639,12 @@ const TextReader: React.FC<TextReaderProps> = ({ text, bookTitle = 'Romeo and Ju
       // Cancel long press early if user is clearly scrolling (reduced back to 10px)
       clearTimeout(longPressTimer)
       setLongPressTimer(null)
-      console.log('Long press cancelled - user is scrolling')
+      debugReader('Long press cancelled - user is scrolling')
     }
   }
 
   const handleExplain = () => {
-    console.log('handleExplain called with selectedText:', selectedText)
+    debugReader('handleExplain called with selectedText:', selectedText)
     
     // Store the selected text and context in sessionStorage for the chat page
     const context = extractContextInfo(selectedText, text)
@@ -655,7 +656,7 @@ const TextReader: React.FC<TextReaderProps> = ({ text, bookTitle = 'Romeo and Ju
       timestamp: Date.now() // Add timestamp to force updates
     }
     
-    console.log('Storing chat context:', chatData)
+    debugReader('Storing chat context:', chatData)
     sessionStorage.setItem('chatContext', JSON.stringify(chatData))
     
     // Navigate to chat page - force a refresh if already there
@@ -687,8 +688,8 @@ const TextReader: React.FC<TextReaderProps> = ({ text, bookTitle = 'Romeo and Ju
       return
     }
 
-    console.log('Searching for:', query)
-    console.log('Text length:', text.length)
+    debugReader('Searching for:', query)
+    debugReader('Text length:', text.length)
     
     const results: {index: number, length: number}[] = []
     const searchTerm = query.toLowerCase()
@@ -696,7 +697,7 @@ const TextReader: React.FC<TextReaderProps> = ({ text, bookTitle = 'Romeo and Ju
     
     // Debug: check if text contains the search term
     let testIndex = textLower.indexOf(searchTerm)
-    console.log('First occurrence index:', testIndex)
+    debugReader('First occurrence index:', testIndex)
     
     // If exact match not found, try flexible search for common phrases
     let actualSearchTerm = searchTerm
@@ -709,12 +710,12 @@ const TextReader: React.FC<TextReaderProps> = ({ text, bookTitle = 'Romeo and Ju
       if (testIndex >= 0) {
         actualSearchTerm = withCommas
         actualLength = withCommas.length
-        console.log('Found with commas at:', testIndex)
+        debugReader('Found with commas at:', testIndex)
       }
     }
     
     if (testIndex >= 0) {
-      console.log('Context around match:', textLower.substring(testIndex - 20, testIndex + actualLength + 20))
+      debugReader('Context around match:', textLower.substring(testIndex - 20, testIndex + actualLength + 20))
     }
     
     let startIndex = 0
@@ -729,7 +730,7 @@ const TextReader: React.FC<TextReaderProps> = ({ text, bookTitle = 'Romeo and Ju
       startIndex = foundIndex + 1
     }
     
-    console.log('Search results found:', results.length)
+    debugReader('Search results found:', results.length)
     setSearchResults(results)
     setCurrentSearchIndex(results.length > 0 ? 0 : -1)
     
@@ -763,7 +764,7 @@ const TextReader: React.FC<TextReaderProps> = ({ text, bookTitle = 'Romeo and Ju
             top: Math.max(0, scrollTop),
             behavior: 'smooth'
           })
-          console.log('Scrolled to highlighted element within text container')
+          debugReader('Scrolled to highlighted element within text container')
           return
         }
       }
@@ -774,7 +775,7 @@ const TextReader: React.FC<TextReaderProps> = ({ text, bookTitle = 'Romeo and Ju
         const textPercentage = result.index / text.length
         const targetPosition = textPercentage * scrollContainer.scrollHeight * 0.8 // Adjust multiplier
         scrollContainer.scrollTop = Math.max(0, targetPosition - 200)
-        console.log('Fallback scroll to position:', targetPosition)
+        debugReader('Fallback scroll to position:', targetPosition)
       }
     }, 100)
   }

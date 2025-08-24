@@ -139,7 +139,7 @@ const AdaptiveAppLayout: React.FC<AdaptiveAppLayoutProps> = ({ children }) => {
   }
 
   return (
-    <div style={{ minHeight: '100vh', margin: 0, padding: 0 }}>
+    <div style={{ height: '100vh', margin: 0, padding: 0, overflow: 'hidden' }}>
       {/* Global Persistent Header - always visible */}
       <header style={{
         position: 'fixed',
@@ -404,12 +404,12 @@ const AdaptiveAppLayout: React.FC<AdaptiveAppLayoutProps> = ({ children }) => {
       </header>
 
       {/* Content area - changes based on screen size */}
-      <div style={{ marginTop: '50px', minHeight: 'calc(100vh - 50px)' }}>
+      <div style={{ marginTop: '50px', height: 'calc(100vh - 50px)', overflow: 'hidden' }}>
         {shouldUseAdaptiveLayout ? (
           /* Two-panel layout for wide screens */
           <div style={{ 
             display: 'flex', 
-            minHeight: 'calc(100vh - 50px)',
+            height: '100%',
             gap: 0
           }}>
             {/* Reader panel */}
@@ -425,7 +425,7 @@ const AdaptiveAppLayout: React.FC<AdaptiveAppLayoutProps> = ({ children }) => {
             <div style={{ 
               flex: 1, 
               minWidth: `${getSidePanelMinWidth(pathname)}px`,
-              height: 'calc(100vh - 50px)',
+              height: '100%',
               overflow: 'auto',
               position: 'relative'
             }}>
