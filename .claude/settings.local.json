@@ -15,7 +15,9 @@
       "Bash(curl:*)",
       "Bash(rm:*)",
       "Bash(npm run dev:*)",
-      "Bash(mv:*)"
+      "Bash(mv:*)",
+      "Bash(npx next dev:*)",
+      "Bash(grep:*)"
     ],
     "deny": [],
     "ask": []

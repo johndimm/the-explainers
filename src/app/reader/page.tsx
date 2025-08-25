@@ -3,6 +3,7 @@
 import { useState, useEffect, Suspense } from 'react'
 import TextReader from '@/components/TextReader'
 import ReaderLayout from '@/components/ReaderLayout'
+import ChatOverlay from '@/components/ChatOverlay'
 import { SettingsProvider, useSettings } from '@/contexts/SettingsContext'
 import { ProfileProvider, useProfile } from '@/contexts/ProfileContext'
 import { useRouter, useSearchParams } from 'next/navigation'
@@ -11,6 +12,7 @@ function ReaderContent() {
   const [bookText, setBookText] = useState('')
   const [loading, setLoading] = useState(true)
   const [currentBook, setCurrentBook] = useState({ title: '', author: '' })
+  const [showChatOverlay, setShowChatOverlay] = useState(false)
   const { settings, updateSettings } = useSettings()
   const { profile } = useProfile()
   const router = useRouter()
@@ -47,6 +49,20 @@ function ReaderContent() {
       router.push('/library')
     }
   }, [searchParams, router])
+
+  // Listen for chat overlay events
+  useEffect(() => {
+    const handleOpenChatOverlay = (event: CustomEvent) => {
+      console.log('Opening chat overlay with data:', event.detail)
+      setShowChatOverlay(true)
+    }
+
+    window.addEventListener('openChatOverlay', handleOpenChatOverlay as EventListener)
+    
+    return () => {
+      window.removeEventListener('openChatOverlay', handleOpenChatOverlay as EventListener)
+    }
+  }, [])
 
   const handleBookSelect = async (title: string, author: string, url: string) => {
     setLoading(true)
