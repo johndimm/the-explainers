@@ -41,7 +41,6 @@ const LayoutRouter: React.FC<LayoutRouterProps> = ({ children }) => {
   const [shouldUseTwoPanelLayout, setShouldUseTwoPanelLayout] = useState(false)
   const [routerId] = useState(() => Math.random().toString(36).substr(2, 9))
   
-  console.log(`[LayoutRouter-${routerId}] RENDER - pathname: ${pathname}, screenWidth: ${screenWidth}, shouldUseTwoPanelLayout: ${shouldUseTwoPanelLayout}`)
 
   // Calculate optimal reader width based on current font
   const calculateOptimalReaderWidth = () => {

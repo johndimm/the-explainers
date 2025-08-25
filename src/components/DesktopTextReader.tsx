@@ -163,7 +163,7 @@ const DesktopTextReader: React.FC<DesktopTextReaderProps> = (props) => {
           WebkitUserSelect: 'text',
           userSelect: 'text',
           fontFamily: baseReader.settings.textFont,
-          padding: '20px'  // Normal padding since search bar is now sticky
+          padding: '20px'
         }}
       >
         {baseReader.renderTextWithHighlight()}

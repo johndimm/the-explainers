@@ -28,20 +28,11 @@ const TwoPanelLayoutNew: React.FC<TwoPanelLayoutProps> = ({
   const [currentPanel, setCurrentPanel] = useState(initialPanel)
   const [layoutId] = useState(() => Math.random().toString(36).substr(2, 9))
   
-  console.log(`[TwoPanelLayout-${layoutId}] RENDER - initialPanel: ${initialPanel}, currentPanel: ${currentPanel}, pathname: ${pathname}`)
 
-  // Track component lifecycle
-  useEffect(() => {
-    console.log(`[TwoPanelLayout-${layoutId}] MOUNTED`)
-    return () => {
-      console.log(`[TwoPanelLayout-${layoutId}] UNMOUNTING`)
-    }
-  }, [layoutId])
 
   // Listen for panel navigation events
   useEffect(() => {
     const handlePanelNavigation = (event: CustomEvent) => {
-      console.log(`[TwoPanelLayout-${layoutId}] Panel navigation to:`, event.detail.panel)
       setCurrentPanel(event.detail.panel)
     }
 
@@ -136,25 +127,35 @@ const TwoPanelLayoutNew: React.FC<TwoPanelLayoutProps> = ({
         gap: 0
       }}>
         {/* Reader panel - PERSISTENT READER */}
-        <div style={{ 
-          width: `${readerWidth}px`,
-          height: '100%',
-          flexShrink: 0,
-          borderRight: '1px solid rgba(0, 0, 0, 0.08)',
-          overflow: 'auto'
-        }}>
+        <div 
+          className="reader-panel"
+          style={{ 
+            width: `${readerWidth}px`,
+            height: '100%',
+            flexShrink: 0,
+            borderRight: '1px solid rgba(0, 0, 0, 0.08)',
+            overflow: 'auto',
+            overscrollBehavior: 'contain',
+            scrollBehavior: 'smooth',
+            isolation: 'isolate'
+          }}>
           <ReaderContent key="persistent-reader" />
         </div>
         
         {/* Side panel */}
-        <div style={{ 
-          flex: 1, 
-          minWidth: `${sidePanelMinWidth}px`,
-          height: '100%',
-          overflow: 'auto',
-          position: 'relative',
-          paddingTop: '10px'  // Small top padding to prevent content cutoff
-        }}>
+        <div 
+          className="side-panel"
+          style={{ 
+            flex: 1, 
+            minWidth: `${sidePanelMinWidth}px`,
+            height: '100%',
+            overflow: 'auto',
+            position: 'relative',
+            paddingTop: '10px',  // Small top padding to prevent content cutoff
+            overscrollBehavior: 'contain',
+            scrollBehavior: 'smooth',
+            isolation: 'isolate'
+          }}>
           {getSidePanelContent()}
         </div>
       </div>

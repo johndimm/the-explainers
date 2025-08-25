@@ -102,15 +102,7 @@ function ReaderContentInner({ showHeader = false }: ReaderContentProps) {
   const router = useRouter()
   const searchParams = useSearchParams()
 
-  console.log(`[ReaderContent-${componentId}] RENDER - bookText: ${bookText.length} chars, loading: ${loading}, currentBook:`, currentBook)
 
-  // Track component lifecycle
-  useEffect(() => {
-    console.log(`[ReaderContent-${componentId}] MOUNTED`)
-    return () => {
-      console.log(`[ReaderContent-${componentId}] UNMOUNTING`)
-    }
-  }, [componentId])
 
   useEffect(() => {
     // FIRST: Check URL parameters for book selection (highest priority)

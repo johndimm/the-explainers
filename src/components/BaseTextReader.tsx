@@ -78,18 +78,34 @@ const BaseTextReader = ({
       
       const restorePosition = () => {
         if (textContentRef.current) {
-          const element = textContentRef.current
+          // Find the actual scrolling container - could be the element itself or a parent
+          let scrollContainer = textContentRef.current
+          
+          // If this element isn't scrollable, look for a scrollable parent
+          if (scrollContainer.scrollHeight <= scrollContainer.clientHeight) {
+            let parent = scrollContainer.parentElement
+            while (parent) {
+              const computedStyle = window.getComputedStyle(parent)
+              if (computedStyle.overflow === 'auto' || computedStyle.overflowY === 'auto') {
+                scrollContainer = parent
+                break
+              }
+              parent = parent.parentElement
+            }
+          }
+          
           let targetPosition: number
           
           if (percentage !== null) {
-            targetPosition = Math.floor((element.scrollHeight - element.clientHeight) * percentage / 100)
+            targetPosition = Math.floor((scrollContainer.scrollHeight - scrollContainer.clientHeight) * percentage / 100)
           } else if (position !== null) {
             targetPosition = position
           } else {
             return
           }
           
-          element.scrollTo({ top: targetPosition, behavior: 'auto' })
+          console.log('Restoring position:', targetPosition, 'to container:', scrollContainer.tagName, scrollContainer.className)
+          scrollContainer.scrollTo({ top: targetPosition, behavior: 'auto' })
         }
       }
 
@@ -108,37 +124,50 @@ const BaseTextReader = ({
 
   // Save bookmark when user stops scrolling
   useEffect(() => {
-    const handleScroll = () => {
-      if (textContentRef.current) {
-        const scrollPosition = textContentRef.current.scrollTop
-        setHasUserScrolled(true)
-        
-        if (scrollTimeoutRef.current) {
-          clearTimeout(scrollTimeoutRef.current)
-        }
-        
-        scrollTimeoutRef.current = setTimeout(() => {
-          const bookmarkKey = `bookmark-${bookTitle}-${author}`
-          const element = textContentRef.current!
-          const scrollableHeight = element.scrollHeight - element.clientHeight
-          const percentage = scrollableHeight > 0 ? (scrollPosition / scrollableHeight) * 100 : 0
-          
-          debugStorage(`Saving bookmark for ${bookTitle}: ${scrollPosition}px (${percentage.toFixed(1)}%)`)
-          
-          localStorage.setItem(bookmarkKey, scrollPosition.toString())
-          localStorage.setItem(bookmarkKey + '-percent', percentage.toString())
-        }, 500)
+    const handleScroll = (e: Event) => {
+      const scrollContainer = e.target as HTMLElement
+      const scrollPosition = scrollContainer.scrollTop
+      setHasUserScrolled(true)
+      
+      if (scrollTimeoutRef.current) {
+        clearTimeout(scrollTimeoutRef.current)
       }
+      
+      scrollTimeoutRef.current = setTimeout(() => {
+        const bookmarkKey = `bookmark-${bookTitle}-${author}`
+        const scrollableHeight = scrollContainer.scrollHeight - scrollContainer.clientHeight
+        const percentage = scrollableHeight > 0 ? (scrollPosition / scrollableHeight) * 100 : 0
+        
+        debugStorage(`Saving bookmark for ${bookTitle}: ${scrollPosition}px (${percentage.toFixed(1)}%)`)
+        
+        localStorage.setItem(bookmarkKey, scrollPosition.toString())
+        localStorage.setItem(bookmarkKey + '-percent', percentage.toString())
+      }, 500)
     }
 
-    const element = textContentRef.current
-    if (element) {
+    if (textContentRef.current) {
+      // Find the actual scrolling container
+      let scrollContainer = textContentRef.current
+      
+      // If this element isn't scrollable, look for a scrollable parent
+      if (scrollContainer.scrollHeight <= scrollContainer.clientHeight) {
+        let parent = scrollContainer.parentElement
+        while (parent) {
+          const computedStyle = window.getComputedStyle(parent)
+          if (computedStyle.overflow === 'auto' || computedStyle.overflowY === 'auto') {
+            scrollContainer = parent
+            break
+          }
+          parent = parent.parentElement
+        }
+      }
+
       setTimeout(() => {
-        element.addEventListener('scroll', handleScroll)
+        scrollContainer.addEventListener('scroll', handleScroll)
       }, 100)
       
       return () => {
-        element.removeEventListener('scroll', handleScroll)
+        scrollContainer.removeEventListener('scroll', handleScroll)
         if (scrollTimeoutRef.current) {
           clearTimeout(scrollTimeoutRef.current)
         }
@@ -301,7 +330,6 @@ const BaseTextReader = ({
       }
     }
     
-    console.log(`[BaseTextReader-${baseReaderId}] Search found:`, results.length, 'results')
     setSearchResults(results)
     setCurrentSearchIndex(results.length > 0 ? 0 : -1)
     
@@ -331,13 +359,10 @@ const BaseTextReader = ({
         const scrollContainer = textContentRef.current
         const containerRect = scrollContainer?.getBoundingClientRect()
         
-        if (scrollContainer && containerRect) {
-          // Since search bar is now sticky, just use scrollIntoView which handles it better
-          targetSpan.scrollIntoView({
-            behavior: 'smooth',
-            block: 'center'
-          })
-        }
+        targetSpan.scrollIntoView({
+          behavior: 'smooth',
+          block: 'center'
+        })
       }
     }, 100)
   }
@@ -360,7 +385,6 @@ const BaseTextReader = ({
     let textToRender = text
 
     // Handle search highlighting first  
-    console.log(`[BaseTextReader-${baseReaderId}] renderTextWithHighlight - searchResults:`, searchResults.length, 'searchQuery:', searchQuery)
     if (searchResults.length > 0 && searchQuery.trim()) {
       const parts = []
       let lastIndex = 0
