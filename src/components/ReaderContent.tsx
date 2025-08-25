@@ -113,6 +113,21 @@ function ReaderContent({ showHeader = false }: ReaderContentProps) {
   }, [componentId])
 
   useEffect(() => {
+    const onLoadFromLibrary = (e: CustomEvent) => {
+      const { title, author, url } = e.detail || {}
+      if (title && author && url) {
+        handleBookSelect(title, author, url)
+      }
+    }
+
+    window.addEventListener('loadBookFromLibrary', onLoadFromLibrary as EventListener)
+
+    return () => {
+      window.removeEventListener('loadBookFromLibrary', onLoadFromLibrary as EventListener)
+    }
+  }, [componentId])
+
+  useEffect(() => {
     console.log(`[ReaderContent-${componentId}] UPDATED useEffect - checking URL params and saved book`)
     
     // FIRST: Check URL parameters for book selection (highest priority)

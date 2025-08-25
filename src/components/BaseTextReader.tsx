@@ -290,6 +290,26 @@ const BaseTextReader = ({
     setHighlightedText('')
   }
 
+  // Build a flexible regex that ignores punctuation and flexible whitespace between tokens
+  const buildFlexibleRegex = (query: string): RegExp | null => {
+    const trimmed = query.trim()
+    if (!trimmed) return null
+    const escapeRegex = (s: string) => s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
+    const tokens = trimmed
+      .split(/[\s\u00A0,.;:!?\-—–'"“”‘’]+/)
+      .filter(Boolean)
+      .map(escapeRegex)
+    if (tokens.length === 0) return null
+    // Allow optional punctuation and whitespace between tokens
+    const sep = "[\\s\\u00A0,.;:!?\\-—–'\"“”‘’]*"
+    const pattern = tokens.join(sep)
+    try {
+      return new RegExp(pattern, 'gi')
+    } catch {
+      return null
+    }
+  }
+
   // Search functionality
   const handleSearch = (query: string) => {
     if (!query.trim()) {
@@ -300,17 +320,20 @@ const BaseTextReader = ({
 
     const text = textContentRef.current?.textContent || ''
     const results: {index: number, length: number}[] = []
-    let index = 0
-    
-    while (index < text.length) {
-      const found = text.toLowerCase().indexOf(query.toLowerCase(), index)
-      if (found === -1) break
-      
-      results.push({
-        index: found,
-        length: query.length
-      })
-      index = found + 1
+    const regex = buildFlexibleRegex(query)
+    if (!regex) {
+      setSearchResults([])
+      setCurrentSearchIndex(-1)
+      return
+    }
+    const lowerText = text.toLowerCase()
+    let match: RegExpExecArray | null
+    while ((match = regex.exec(lowerText)) !== null) {
+      const start = match.index
+      const length = match[0].length
+      results.push({ index: start, length })
+      // Prevent zero-length loops
+      regex.lastIndex = start + Math.max(1, length)
     }
     
     setSearchResults(results)
