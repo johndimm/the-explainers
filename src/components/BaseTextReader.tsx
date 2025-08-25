@@ -54,45 +54,95 @@ const BaseTextReader = ({
     }
   }, [text])
 
-  // Restore bookmark position
+  // Restore bookmark position (robust across layouts)
   useEffect(() => {
     if (!text || !bookTitle || !author) return
-    
+
+    const element = textContentRef.current
+    if (!element) return
+
     const bookmarkKey = `bookmark-${bookTitle}-${author}`
     const savedPercentage = localStorage.getItem(bookmarkKey + '-percent')
     const savedPosition = localStorage.getItem(bookmarkKey)
-    
-    if (savedPercentage || savedPosition) {
-      const percentage = savedPercentage ? parseFloat(savedPercentage) : null
-      const position = savedPosition ? parseInt(savedPosition) : null
-      
-      const restorePosition = () => {
-        if (textContentRef.current) {
-          const element = textContentRef.current
-          let targetPosition: number
-          
-          if (percentage !== null) {
-            targetPosition = Math.floor((element.scrollHeight - element.clientHeight) * percentage / 100)
-          } else if (position !== null) {
-            targetPosition = position
-          } else {
-            return
-          }
-          
-          element.scrollTo({ top: targetPosition, behavior: 'auto' })
-        }
-      }
+    if (!savedPercentage && !savedPosition) return
 
-      const attemptRestore = () => {
-        setTimeout(restorePosition, 100)
-        setTimeout(restorePosition, 500)
-        setTimeout(restorePosition, 1000)
-      }
+    const percentage = savedPercentage ? parseFloat(savedPercentage) : null
+    const position = savedPosition ? parseInt(savedPosition) : null
 
-      setTimeout(attemptRestore, 100)
-      requestAnimationFrame(() => {
-        setTimeout(attemptRestore, 100)
-      })
+    let restored = false
+
+    const restoreIfReady = () => {
+      if (!textContentRef.current || restored) return
+      const el = textContentRef.current
+      const hasMeasurableHeight = el.clientHeight > 0
+      const canScroll = el.scrollHeight > el.clientHeight
+      if (!hasMeasurableHeight) return
+
+      let targetPosition: number | null = null
+      if (percentage !== null) {
+        const scrollableHeight = Math.max(0, el.scrollHeight - el.clientHeight)
+        targetPosition = Math.floor(scrollableHeight * (percentage / 100))
+      } else if (position !== null) {
+        targetPosition = position
+      }
+      if (targetPosition === null) return
+
+      // Apply and mark restored; attempt twice to overcome late layout changes
+      el.scrollTo({ top: targetPosition, behavior: 'auto' })
+      setTimeout(() => {
+        el.scrollTo({ top: targetPosition!, behavior: 'auto' })
+      }, 100)
+      restored = true
+      cleanup()
+    }
+
+    // Observe size changes to know when layout stabilizes
+    const ro = typeof ResizeObserver !== 'undefined' ? new ResizeObserver(() => {
+      restoreIfReady()
+    }) : null
+    if (ro && element) ro.observe(element)
+
+    // Also retry on next frames and a few timeouts
+    const rafId = requestAnimationFrame(() => restoreIfReady())
+    const t1 = setTimeout(restoreIfReady, 50)
+    const t2 = setTimeout(restoreIfReady, 150)
+    const t3 = setTimeout(restoreIfReady, 400)
+    const t4 = setTimeout(restoreIfReady, 800)
+
+    // Fonts can affect layout; wait for them if available
+    // @ts-ignore
+    const fontPromise: Promise<any> | null = (document as any).fonts && (document as any).fonts.ready
+      ? (document as any).fonts.ready
+      : null
+    if (fontPromise) {
+      fontPromise.then(() => restoreIfReady()).catch(() => {})
+    }
+
+    const onResize = () => restoreIfReady()
+    window.addEventListener('resize', onResize)
+
+    const cleanup = () => {
+      window.removeEventListener('resize', onResize)
+      cancelAnimationFrame(rafId)
+      clearTimeout(t1)
+      clearTimeout(t2)
+      clearTimeout(t3)
+      clearTimeout(t4)
+      if (ro && element) ro.unobserve(element)
+    }
+
+    // Final safety timeout in case everything else misses
+    const final = setTimeout(() => restoreIfReady(), 1200)
+
+    return () => {
+      clearTimeout(final)
+      window.removeEventListener('resize', onResize)
+      cancelAnimationFrame(rafId)
+      clearTimeout(t1)
+      clearTimeout(t2)
+      clearTimeout(t3)
+      clearTimeout(t4)
+      if (ro && element) ro.unobserve(element)
     }
   }, [text, bookTitle, author])
 
@@ -272,8 +322,29 @@ const BaseTextReader = ({
   }
 
   const scrollToSearchResult = (resultIndex: number, results: {index: number, length: number}[]) => {
-    // Implementation for scrolling to search results
-    // Left as basic implementation for now
+    const container = textContentRef.current
+    if (!container || results.length === 0 || resultIndex < 0) return
+
+    const tryScroll = () => {
+      const target = container.querySelector(
+        `[data-search-hit="true"][data-search-index="${resultIndex}"]`
+      ) as HTMLElement | null
+      if (!target) return false
+
+      // Scroll the container itself so the fixed header/search bar stays in view
+      const targetRect = target.getBoundingClientRect()
+      const containerRect = container.getBoundingClientRect()
+      const offsetWithin = targetRect.top - containerRect.top
+      const centeredTop = container.scrollTop + offsetWithin - Math.max(0, (container.clientHeight - targetRect.height) / 2)
+      container.scrollTo({ top: Math.max(0, centeredTop), behavior: 'smooth' })
+      return true
+    }
+
+    if (tryScroll()) return
+    // Retry after DOM updates/layout settle
+    requestAnimationFrame(() => { if (tryScroll()) return })
+    setTimeout(() => { tryScroll() }, 50)
+    setTimeout(() => { tryScroll() }, 150)
   }
 
   const nextSearchResult = () => {
@@ -310,6 +381,8 @@ const BaseTextReader = ({
         parts.push(
           <span 
             key={`search-${index}`}
+            data-search-hit="true"
+            data-search-index={index}
             style={{
               backgroundColor: isCurrentResult ? '#8b5cf6' : '#ffeb3b',
               color: isCurrentResult ? 'white' : 'black',

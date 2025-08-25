@@ -12,6 +12,46 @@ const AdaptiveAppLayout: React.FC<AdaptiveAppLayoutProps> = ({ children }) => {
   const router = useRouter()
   const [showMobileMenu, setShowMobileMenu] = useState(false)
   const menuRef = useRef<HTMLDivElement>(null)
+  const [displayBook, setDisplayBook] = useState<{ title: string; author: string }>({ title: '', author: '' })
+
+  // Read current book from localStorage so header can mirror the active text in two-panel
+  useEffect(() => {
+    const updateFromStorage = () => {
+      try {
+        const saved = localStorage.getItem('current-book')
+        if (saved) {
+          const parsed = JSON.parse(saved)
+          if (parsed && parsed.title && parsed.author) {
+            setDisplayBook((prev) => (
+              prev.title !== parsed.title || prev.author !== parsed.author
+                ? { title: parsed.title, author: parsed.author }
+                : prev
+            ))
+          }
+        }
+      } catch {}
+    }
+
+    // Initial read and a few retries to catch async updates
+    updateFromStorage()
+    const t1 = setTimeout(updateFromStorage, 50)
+    const t2 = setTimeout(updateFromStorage, 200)
+    const t3 = setTimeout(updateFromStorage, 600)
+    const t4 = setTimeout(updateFromStorage, 1200)
+
+    const onStorage = (e: StorageEvent) => {
+      if (e.key === 'current-book') updateFromStorage()
+    }
+    window.addEventListener('storage', onStorage)
+
+    return () => {
+      clearTimeout(t1)
+      clearTimeout(t2)
+      clearTimeout(t3)
+      clearTimeout(t4)
+      window.removeEventListener('storage', onStorage)
+    }
+  }, [])
 
   // Helper function for navigation that works in both one-panel and two-panel modes
   const navigateTo = (path: string) => {
@@ -69,15 +109,16 @@ const AdaptiveAppLayout: React.FC<AdaptiveAppLayoutProps> = ({ children }) => {
           }}>
             The Explainers
           </h1>
-          <p style={{ 
-            margin: 0, 
-            fontSize: '11px', 
-            fontStyle: 'italic',
-            color: '#666',
-            lineHeight: '1.2'
-          }}>
-            understand difficult texts
-          </p>
+          {displayBook.title && (
+            <p style={{ 
+              margin: 0, 
+              fontSize: '11px', 
+              color: '#666',
+              lineHeight: '1.2'
+            }}>
+              {displayBook.title} by {displayBook.author}
+            </p>
+          )}
         </div>
         <div ref={menuRef} style={{ position: 'relative' }}>
           <button 

@@ -34,7 +34,7 @@ const DesktopTextReader: React.FC<DesktopTextReaderProps> = (props) => {
   }
 
   return (
-    <div ref={baseReader.textContentRef} className={styles.textReader}>
+    <div className={styles.textReader}>
       {baseReader.showFirstTimeInstructions && (
         <div style={{
           position: 'fixed',
@@ -151,6 +151,7 @@ const DesktopTextReader: React.FC<DesktopTextReaderProps> = (props) => {
       
       {/* Text Content with Desktop Selection */}
       <div 
+        ref={baseReader.textContentRef}
         className={styles.textContent}
         onMouseUp={handleMouseUp}
         onContextMenu={(e) => e.preventDefault()}

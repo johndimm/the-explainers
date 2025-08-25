@@ -223,7 +223,7 @@ const MobileTextReader: React.FC<MobileTextReaderProps> = (props) => {
   }
 
   return (
-    <div ref={baseReader.textContentRef} className={styles.textReader}>
+    <div className={styles.textReader}>
       {baseReader.showFirstTimeInstructions && (
         <div style={{
           position: 'fixed',
@@ -340,6 +340,7 @@ const MobileTextReader: React.FC<MobileTextReaderProps> = (props) => {
       
       {/* Text Content with Mobile Touch Selection */}
       <div 
+        ref={baseReader.textContentRef}
         className={styles.textContent}
         onTouchStart={handleTouchStart}
         onTouchEnd={handleTouchEnd}

@@ -23,6 +23,88 @@ const ReaderLayout: React.FC<ReaderLayoutProps> = ({ children, currentBook }) =>
   const pathname = usePathname()
   const [showMobileMenu, setShowMobileMenu] = useState(false)
   const menuRef = useRef<HTMLDivElement>(null)
+  const headerRef = useRef<HTMLDivElement>(null)
+  const [headerHeight, setHeaderHeight] = useState(40)
+  const [displayBook, setDisplayBook] = useState<{ title: string; author: string }>(() => {
+    if (currentBook.title) return currentBook
+    try {
+      const saved = typeof window !== 'undefined' ? localStorage.getItem('current-book') : null
+      if (saved) {
+        const parsed = JSON.parse(saved)
+        if (parsed && parsed.title && parsed.author) {
+          return { title: parsed.title, author: parsed.author }
+        }
+      }
+    } catch {}
+    return currentBook
+  })
+
+  // Measure header height to correctly offset content in single-page layout
+  useEffect(() => {
+    const measure = () => {
+      if (headerRef.current) {
+        setHeaderHeight(headerRef.current.offsetHeight)
+      }
+    }
+    measure()
+    window.addEventListener('resize', measure)
+    return () => window.removeEventListener('resize', measure)
+  }, [])
+
+  // Keep displayed book in sync; fall back to localStorage if prop is empty
+  useEffect(() => {
+    if (currentBook.title) {
+      setDisplayBook(currentBook)
+      return
+    }
+    try {
+      const saved = localStorage.getItem('current-book')
+      if (saved) {
+        const parsed = JSON.parse(saved)
+        if (parsed && parsed.title && parsed.author) {
+          setDisplayBook({ title: parsed.title, author: parsed.author })
+        }
+      }
+    } catch {}
+  }, [currentBook])
+
+  // Proactively watch for localStorage changes shortly after mount to catch async book loads
+  useEffect(() => {
+    const updateFromStorage = () => {
+      try {
+        const saved = localStorage.getItem('current-book')
+        if (saved) {
+          const parsed = JSON.parse(saved)
+          if (parsed && parsed.title && parsed.author) {
+            setDisplayBook((prev) => (
+              prev.title !== parsed.title || prev.author !== parsed.author
+                ? { title: parsed.title, author: parsed.author }
+                : prev
+            ))
+          }
+        }
+      } catch {}
+    }
+
+    // Poll briefly to catch updates made right after mount
+    const t1 = setTimeout(updateFromStorage, 50)
+    const t2 = setTimeout(updateFromStorage, 200)
+    const t3 = setTimeout(updateFromStorage, 600)
+    const t4 = setTimeout(updateFromStorage, 1200)
+
+    const onStorage = (e: StorageEvent) => {
+      if (e.key === 'current-book') updateFromStorage()
+    }
+    window.addEventListener('storage', onStorage)
+
+    return () => {
+      clearTimeout(t1)
+      clearTimeout(t2)
+      clearTimeout(t3)
+      clearTimeout(t4)
+      window.removeEventListener('storage', onStorage)
+    }
+  }, [])
 
   // Determine side panel content based on current pathname
   const getSidePanelContent = () => {
@@ -84,20 +166,19 @@ const ReaderLayout: React.FC<ReaderLayoutProps> = ({ children, currentBook }) =>
   const readerContentWithHeader = (
     <div>
       {/* Persistent Header */}
-      <header style={{
+      <header ref={headerRef} style={{
         position: 'fixed',
         top: 0,
         left: 0,
         right: 0,
-        background: 'rgba(255, 255, 255, 0.95)',
-        backdropFilter: 'blur(10px)',
-        borderBottom: '1px solid rgba(0, 0, 0, 0.08)',
+        background: '#ffffff',
+        borderBottom: 'none',
         padding: '12px 16px',
         zIndex: 100,
         display: 'flex',
         justifyContent: 'space-between',
         alignItems: 'center',
-        boxShadow: '0 1px 3px rgba(0, 0, 0, 0.06)'
+        boxShadow: 'none'
       }}>
         <div style={{ flex: 1 }}>
           <h1 style={{ 
@@ -109,26 +190,16 @@ const ReaderLayout: React.FC<ReaderLayoutProps> = ({ children, currentBook }) =>
           }}>
             The Explainers
           </h1>
-          {currentBook.title ? (
+          {displayBook.title ? (
             <p style={{ 
               margin: 0, 
               fontSize: '11px', 
               color: '#666',
               lineHeight: '1.2'
             }}>
-              {currentBook.title} by {currentBook.author}
+              {displayBook.title} by {displayBook.author}
             </p>
-          ) : (
-            <p style={{ 
-              margin: 0, 
-              fontSize: '11px', 
-              fontStyle: 'italic',
-              color: '#666',
-              lineHeight: '1.2'
-            }}>
-              understand difficult texts
-            </p>
-          )}
+          ) : null}
         </div>
         <div ref={menuRef} style={{ position: 'relative' }}>
           <button 
@@ -331,8 +402,14 @@ const ReaderLayout: React.FC<ReaderLayoutProps> = ({ children, currentBook }) =>
         </div>
       </header>
       
-      {/* Content with top margin */}
-      <div style={{ marginTop: '40px', minHeight: 'calc(100vh - 40px)' }}>
+      {/* Content fills viewport beneath fixed header */}
+      <div style={{ 
+        height: `calc(100vh - ${headerHeight}px)`,
+        overflow: 'hidden',
+        display: 'flex',
+        flexDirection: 'column',
+        background: '#ffffff'
+      }}>
         {children}
       </div>
     </div>

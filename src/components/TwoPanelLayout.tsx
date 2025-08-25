@@ -101,11 +101,8 @@ const TwoPanelLayout: React.FC<TwoPanelLayoutProps> = ({
 
   // Single-page mode: show only reader content
   if (layoutMode === 'single-page') {
-    return (
-      <div className="single-page-layout" style={{ width: '100%', height: '100vh' }}>
-        {readerContent}
-      </div>
-    )
+    // Avoid an extra wrapper that can introduce unintended spacing; render content directly
+    return <>{readerContent}</>
   }
 
   // Two-panel mode: reader on left, side content on right
