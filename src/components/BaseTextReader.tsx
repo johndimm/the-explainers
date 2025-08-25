@@ -28,9 +28,20 @@ const BaseTextReader = ({
   const [highlightedText, setHighlightedText] = useState<string>('')
   const [showFirstTimeInstructions, setShowFirstTimeInstructions] = useState(false)
   const [hasUserScrolled, setHasUserScrolled] = useState(false)
-  const [searchQuery, setSearchQuery] = useState('')
+  const [searchQuery, setSearchQuery] = useState(() => {
+    // Restore search query from sessionStorage
+    if (typeof window !== 'undefined') {
+      return sessionStorage.getItem('searchQuery') || ''
+    }
+    return ''
+  })
   const [searchResults, setSearchResults] = useState<{index: number, length: number}[]>([])
   const [currentSearchIndex, setCurrentSearchIndex] = useState(-1)
+  
+  // Debug search state changes
+  useEffect(() => {
+    console.log(`[BaseTextReader-${baseReaderId}] Search state changed - query: "${searchQuery}", results: ${searchResults.length}`)
+  }, [searchQuery, searchResults, baseReaderId])
   
   const textContentRef = useRef<HTMLDivElement>(null)
   const scrollTimeoutRef = useRef<NodeJS.Timeout | null>(null)
@@ -248,32 +259,88 @@ const BaseTextReader = ({
       return
     }
 
-    const text = textContentRef.current?.textContent || ''
+    const searchText = text
     const results: {index: number, length: number}[] = []
-    let index = 0
     
-    while (index < text.length) {
-      const found = text.toLowerCase().indexOf(query.toLowerCase(), index)
-      if (found === -1) break
+    // Create a flexible regex pattern that allows for punctuation and whitespace differences
+    // Replace spaces in query with a pattern that matches optional punctuation + whitespace
+    const escapedQuery = query.trim()
+      .replace(/[.*+?^${}()|[\]\\]/g, '\\$&') // Escape regex special characters
+      .replace(/\s+/g, '[\\s\\p{P}]*\\s+[\\s\\p{P}]*') // Replace spaces with flexible pattern
+    
+    try {
+      const regex = new RegExp(escapedQuery, 'giu') // 'u' flag for unicode support
+      let match
       
-      results.push({
-        index: found,
-        length: query.length
-      })
-      index = found + 1
+      while ((match = regex.exec(searchText)) !== null) {
+        results.push({
+          index: match.index,
+          length: match[0].length
+        })
+        
+        // Prevent infinite loop on zero-length matches
+        if (match.index === regex.lastIndex) {
+          regex.lastIndex++
+        }
+      }
+    } catch (error) {
+      // Fallback to simple case-insensitive search if regex fails
+      console.warn('Regex search failed, falling back to simple search:', error)
+      const queryLower = query.toLowerCase()
+      const textLower = searchText.toLowerCase()
+      let index = 0
+      
+      while (index < textLower.length) {
+        const found = textLower.indexOf(queryLower, index)
+        if (found === -1) break
+        
+        results.push({
+          index: found,
+          length: query.length
+        })
+        index = found + 1
+      }
     }
     
+    console.log(`[BaseTextReader-${baseReaderId}] Search found:`, results.length, 'results')
     setSearchResults(results)
     setCurrentSearchIndex(results.length > 0 ? 0 : -1)
+    
+    // Save search query to sessionStorage to persist across component recreations
+    if (typeof window !== 'undefined') {
+      sessionStorage.setItem('searchQuery', query)
+    }
     
     if (results.length > 0) {
       scrollToSearchResult(0, results)
     }
+    
+    // Keep the search query visible - don't clear it
   }
 
   const scrollToSearchResult = (resultIndex: number, results: {index: number, length: number}[]) => {
-    // Implementation for scrolling to search results
-    // Left as basic implementation for now
+    if (!textContentRef.current || resultIndex < 0 || resultIndex >= results.length) {
+      return
+    }
+    
+    // Use the search highlighting spans to scroll
+    setTimeout(() => {
+      const highlightedSpans = textContentRef.current?.querySelectorAll(`span[style*="background"]`)
+      
+      if (highlightedSpans && highlightedSpans[resultIndex]) {
+        const targetSpan = highlightedSpans[resultIndex] as HTMLElement
+        const scrollContainer = textContentRef.current
+        const containerRect = scrollContainer?.getBoundingClientRect()
+        
+        if (scrollContainer && containerRect) {
+          // Since search bar is now sticky, just use scrollIntoView which handles it better
+          targetSpan.scrollIntoView({
+            behavior: 'smooth',
+            block: 'center'
+          })
+        }
+      }
+    }, 100)
   }
 
   const nextSearchResult = () => {
@@ -293,7 +360,8 @@ const BaseTextReader = ({
   const renderTextWithHighlight = () => {
     let textToRender = text
 
-    // Handle search highlighting first
+    // Handle search highlighting first  
+    console.log(`[BaseTextReader-${baseReaderId}] renderTextWithHighlight - searchResults:`, searchResults.length, 'searchQuery:', searchQuery)
     if (searchResults.length > 0 && searchQuery.trim()) {
       const parts = []
       let lastIndex = 0
@@ -313,8 +381,11 @@ const BaseTextReader = ({
             style={{
               backgroundColor: isCurrentResult ? '#8b5cf6' : '#ffeb3b',
               color: isCurrentResult ? 'white' : 'black',
-              padding: '1px 2px',
-              borderRadius: '2px'
+              padding: '3px 6px',
+              borderRadius: '4px',
+              border: '2px solid red',  // TEMPORARY: Make it super obvious
+              fontWeight: 'bold',
+              display: 'inline-block'
             }}
           >
             {searchText}

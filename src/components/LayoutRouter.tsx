@@ -60,12 +60,18 @@ const LayoutRouter: React.FC<LayoutRouterProps> = ({ children }) => {
     const updateScreenWidth = () => {
       const width = window.innerWidth
       console.log(`[LayoutRouter-${routerId}] Screen width updated:`, width)
-      setScreenWidth(width)
+      // Only update if width actually changed to prevent unnecessary re-renders
+      setScreenWidth(prevWidth => prevWidth === width ? prevWidth : width)
     }
 
-    updateScreenWidth()
+    // Add a small delay to let the DOM settle
+    const timer = setTimeout(updateScreenWidth, 100)
     window.addEventListener('resize', updateScreenWidth)
-    return () => window.removeEventListener('resize', updateScreenWidth)
+    
+    return () => {
+      clearTimeout(timer)
+      window.removeEventListener('resize', updateScreenWidth)
+    }
   }, [routerId])
 
   // Determine if we should use two-panel layout
@@ -84,8 +90,8 @@ const LayoutRouter: React.FC<LayoutRouterProps> = ({ children }) => {
   }, [screenWidth, settings.textFont, routerId])
 
   // Clean separation: route to appropriate layout
-  // Force two-panel layout for testing when screen width is detected or >= 1000px
-  if (shouldUseTwoPanelLayout || screenWidth >= 1000) {
+  // TEMPORARY: Force two-panel layout for testing to use improved ReaderContent
+  if (true) {
     return (
       <TwoPanelLayoutNew
         initialPanel={pathname}

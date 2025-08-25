@@ -152,7 +152,8 @@ const TwoPanelLayoutNew: React.FC<TwoPanelLayoutProps> = ({
           minWidth: `${sidePanelMinWidth}px`,
           height: '100%',
           overflow: 'auto',
-          position: 'relative'
+          position: 'relative',
+          paddingTop: '10px'  // Small top padding to prevent content cutoff
         }}>
           {getSidePanelContent()}
         </div>

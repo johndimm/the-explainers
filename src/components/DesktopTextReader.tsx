@@ -74,12 +74,17 @@ const DesktopTextReader: React.FC<DesktopTextReaderProps> = (props) => {
         </div>
       )}
       
-      {/* Search Bar */}
+      {/* Search Bar - STICKY */}
       <div style={{
+        position: 'sticky',
+        top: 0,
+        zIndex: 1000,
         padding: '8px 8px 8px 8px',
-        backgroundColor: 'white',
+        backgroundColor: 'rgba(255, 255, 255, 0.95)',
+        backdropFilter: 'blur(10px)',
         borderBottom: '1px solid #e0e0e0',
-        flexShrink: 0
+        flexShrink: 0,
+        boxShadow: '0 2px 4px rgba(0,0,0,0.1)'
       }}>
         <div style={{ display: 'flex', gap: '8px', alignItems: 'center' }}>
           <input
@@ -157,7 +162,8 @@ const DesktopTextReader: React.FC<DesktopTextReaderProps> = (props) => {
         style={{
           WebkitUserSelect: 'text',
           userSelect: 'text',
-          fontFamily: baseReader.settings.textFont
+          fontFamily: baseReader.settings.textFont,
+          padding: '20px'  // Normal padding since search bar is now sticky
         }}
       >
         {baseReader.renderTextWithHighlight()}

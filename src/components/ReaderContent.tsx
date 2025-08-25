@@ -113,15 +113,12 @@ function ReaderContent({ showHeader = false }: ReaderContentProps) {
   }, [componentId])
 
   useEffect(() => {
-    console.log(`[ReaderContent-${componentId}] UPDATED useEffect - checking URL params and saved book`)
-    
     // FIRST: Check URL parameters for book selection (highest priority)
     const title = searchParams.get('title')
     const author = searchParams.get('author')
     const url = searchParams.get('url')
 
     if (title && author && url) {
-      console.log(`[ReaderContent-${componentId}] Found URL params - loading book:`, { title, author, url })
       handleBookSelect(title, author, decodeURIComponent(url))
       return
     }
