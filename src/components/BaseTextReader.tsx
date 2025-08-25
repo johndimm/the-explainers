@@ -23,7 +23,6 @@ const BaseTextReader = ({
   const [selectedText, setSelectedText] = useState('')
   const [baseReaderId] = useState(() => Math.random().toString(36).substr(2, 9))
   
-  console.log(`[BaseTextReader-${baseReaderId}] RENDER - text: ${text.length} chars, book: ${bookTitle} by ${author}`)
   const [showConfirmDialog, setShowConfirmDialog] = useState(false)
   const [highlightedText, setHighlightedText] = useState<string>('')
   const [showFirstTimeInstructions, setShowFirstTimeInstructions] = useState(false)

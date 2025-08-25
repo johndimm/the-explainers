@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, Suspense } from 'react'
 import TextReader from '@/components/TextReader'
 import { useSettings } from '@/contexts/SettingsContext'
 import { useProfile } from '@/contexts/ProfileContext'
@@ -68,7 +68,7 @@ let readerCache = {
   set timestamp(value: number) { readerStateManager.timestamp = value }
 }
 
-function ReaderContent({ showHeader = false }: ReaderContentProps) {
+function ReaderContentInner({ showHeader = false }: ReaderContentProps) {
   // Create a unique component ID to track individual component instances
   const [componentId] = useState(() => Math.random().toString(36).substr(2, 9))
   
@@ -256,6 +256,15 @@ function ReaderContent({ showHeader = false }: ReaderContentProps) {
       profile={profile}
       onSettingsChange={updateSettings}
     />
+  )
+}
+
+// Wrapper component with Suspense boundary
+function ReaderContent({ showHeader = false }: ReaderContentProps) {
+  return (
+    <Suspense fallback={<div style={{ padding: '20px' }}>Loading...</div>}>
+      <ReaderContentInner showHeader={showHeader} />
+    </Suspense>
   )
 }
 
