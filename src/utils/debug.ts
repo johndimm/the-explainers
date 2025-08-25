@@ -1,13 +1,13 @@
 // Debug utility for controlled logging
 // Set DEBUG_ENABLED to false to disable all logs, or configure specific categories
 
-const DEBUG_ENABLED = false // All debug logs disabled - only LLM prompts show in console
+const DEBUG_ENABLED = true // Enable debug logs for text selection troubleshooting
 
 // Enable/disable specific debug categories
 const DEBUG_CATEGORIES = {
   CHAT: false,
   PROFILE: false,
-  READER: false,
+  READER: true,
   SEARCH: false,
   NAVIGATION: false,
   STORAGE: false,
