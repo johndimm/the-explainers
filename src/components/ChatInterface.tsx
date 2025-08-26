@@ -620,7 +620,7 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ selectedText, contextInfo
     // Display only the selected text to the user, not the full prompt
     const userMessage: Message = {
       id: Date.now().toString(),
-      content: `Please explain this text: "${text}"`,
+      content: `"${text}"`,
       role: 'user',
       timestamp: new Date()
     }

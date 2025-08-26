@@ -5,6 +5,7 @@ import { ProfileData, Language, EducationLevel } from '../components/Profile'
 
 interface ProfileContextType {
   profile: ProfileData
+  isHydrated: boolean
   updateProfile: (newProfile: ProfileData) => void
   isProfileOpen: boolean
   openProfile: () => void
@@ -324,6 +325,7 @@ export const ProfileProvider: React.FC<ProfileProviderProps> = ({ children }) =>
   return (
     <ProfileContext.Provider value={{
       profile,
+      isHydrated,
       updateProfile,
       isProfileOpen,
       openProfile,
