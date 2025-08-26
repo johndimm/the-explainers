@@ -397,7 +397,7 @@ const Library: React.FC<LibraryProps> = ({ onBookSelect, onBackToCurrentBook }) 
             type="url"
             value={customUrl}
             onChange={(e) => setCustomUrl(e.target.value)}
-            placeholder="Enter URL to text file..."
+            placeholder="Enter URL…"
             className={styles.input}
           />
           <button onClick={handleCustomUrl} className={styles.loadButton}>

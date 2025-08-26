@@ -93,7 +93,7 @@ async function callGemini(messages: ChatMessage[], responseLength: string): Prom
   const maxTokens = responseLength === 'brief' ? 200 : responseLength === 'medium' ? 500 : 1000
   
   const model = gemini.getGenerativeModel({ 
-    model: 'gemini-2.5-flash',
+    model: 'gemini-1.5-flash',
     generationConfig: {
       maxOutputTokens: maxTokens,
     }
