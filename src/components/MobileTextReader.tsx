@@ -19,6 +19,7 @@ const MobileTextReader: React.FC<MobileTextReaderProps> = (props) => {
   const [touchStartPos, setTouchStartPos] = useState<{ x: number; y: number } | null>(null)
   const [isInSelectionMode, setIsInSelectionMode] = useState(false)
   const [currentSelection, setCurrentSelection] = useState('')
+  const initialScrollTopRef = useRef<number | null>(null)
 
   // Mobile-specific touch selection handlers
   const expandToWordBoundaries = (range: Range): Range => {
@@ -149,10 +150,19 @@ const MobileTextReader: React.FC<MobileTextReaderProps> = (props) => {
         return
       }
       
-      // Enter selection mode and disable scrolling
+      // Enter selection mode
       setIsInSelectionMode(true)
       document.body.style.overflow = 'hidden'
       document.body.style.touchAction = 'none'
+      // Lock overscroll (rubber band) while selecting
+      const htmlEl = document.documentElement as HTMLElement
+      const prevOverscroll = htmlEl.style.overscrollBehavior
+      htmlEl.style.overscrollBehavior = 'contain'
+      // Remember current scrollTop of the text container
+      const container = baseReader.textContentRef.current
+      if (container) {
+        initialScrollTopRef.current = container.scrollTop
+      }
       
       setCurrentSelection(initialText)
       baseReader.setHighlightedText(initialText)
@@ -174,6 +184,9 @@ const MobileTextReader: React.FC<MobileTextReaderProps> = (props) => {
       // Restore scrolling
       document.body.style.overflow = ''
       document.body.style.touchAction = ''
+      const htmlEl = document.documentElement as HTMLElement
+      htmlEl.style.overscrollBehavior = ''
+      initialScrollTopRef.current = null
       
       // Show text selection dialog if we have current selection
       if (currentSelection && currentSelection.length > 2) {
@@ -221,6 +234,22 @@ const MobileTextReader: React.FC<MobileTextReaderProps> = (props) => {
       setLongPressTimer(null)
     }
   }
+
+  // While selecting, add a non-passive touchmove listener to the container so preventDefault actually blocks scroll (iOS Safari)
+  React.useEffect(() => {
+    const container = baseReader.textContentRef.current
+    if (!isInSelectionMode || !container) return
+    const onTouchMove = (evt: TouchEvent) => {
+      evt.preventDefault()
+      if (initialScrollTopRef.current !== null) {
+        container.scrollTop = initialScrollTopRef.current
+      }
+    }
+    container.addEventListener('touchmove', onTouchMove, { passive: false })
+    return () => {
+      container.removeEventListener('touchmove', onTouchMove as EventListener as any)
+    }
+  }, [isInSelectionMode, baseReader.textContentRef])
 
   return (
     <div className={styles.textReader}>
