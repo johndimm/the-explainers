@@ -48,6 +48,7 @@ export const STYLE_CATEGORIES = {
     { value: 'christopher-hitchens', name: 'Christopher Hitchens', description: 'Contrarian and erudite' },
     { value: 'charles-dickens', name: 'Charles Dickens', description: 'Victorian and social realist' },
     { value: 'cormac-mccarthy', name: 'Cormac McCarthy', description: 'Sparse and haunting' },
+    { value: 'stephen-king', name: 'Stephen King', description: 'Lean, vivid, and suspenseful' },
   ],
   comedians: [
     { value: 'jerry-seinfeld', name: 'Jerry Seinfeld', description: 'What\'s the deal with...' },
@@ -413,6 +414,31 @@ const ExplainerStyles: React.FC<ExplainerStylesProps> = ({
                 Object.values(STYLE_CATEGORIES).flat().find(s => s.value === selectedStyle)?.name || 'Unknown'}
             </strong>
           </div>
+
+          {selectedStyle !== 'neutral' && (() => {
+            const selected = Object.values(STYLE_CATEGORIES).flat().find(s => s.value === selectedStyle)
+            if (!selected) return null
+            return (
+              <div style={{ display: 'flex', alignItems: 'center', gap: '16px', margin: '12px 0 24px' }}>
+                <img 
+                  src={`/explainer-photos/${selected.value}.jpg`}
+                  alt={selected.name}
+                  style={{ 
+                    width: 'min(40vw, 240px)',
+                    height: 'auto',
+                    objectFit: 'cover',
+                    borderRadius: '12px',
+                    boxShadow: '0 6px 16px rgba(0,0,0,0.15)'
+                  }}
+                  onError={(e) => { (e.currentTarget as HTMLImageElement).style.display = 'none' }}
+                />
+                <div>
+                  <div style={{ fontWeight: 600, marginBottom: '6px' }}>{selected.name}</div>
+                  <div style={{ color: '#666' }}>{selected.description}</div>
+                </div>
+              </div>
+            )
+          })()}
 
           <div 
             className={`${stylesCss.styleOption} ${selectedStyle === 'neutral' ? stylesCss.selected : ''}`}

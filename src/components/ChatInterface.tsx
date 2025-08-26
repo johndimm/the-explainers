@@ -185,6 +185,19 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ selectedText, contextInfo
     setHasChanges(hasProviderChange || hasStyleChange || hasLengthChange)
   }, [selectedProvider, currentStyle, currentResponseLength, settings])
 
+  // Keep local chat controls in sync with global settings unless user changes them here
+  useEffect(() => {
+    setSelectedProvider(settings.llmProvider)
+  }, [settings.llmProvider])
+
+  useEffect(() => {
+    setCurrentStyle(settings.explanationStyle)
+  }, [settings.explanationStyle])
+
+  useEffect(() => {
+    setCurrentResponseLength(settings.responseLength)
+  }, [settings.responseLength])
+
   // Auto-save settings changes immediately
   useEffect(() => {
     if (hasChanges) {
@@ -353,6 +366,8 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ selectedText, contextInfo
         return 'Respond in the style of Charles Dickens - Victorian social realist with humanitarian passion. Use his characteristic concern for the poor and oppressed, his gift for vivid character portraits and social criticism, and his ability to combine melodrama with moral purpose and reformist zeal.'
       case 'cormac-mccarthy':
         return 'Respond in the style of Cormac McCarthy - sparse and haunting with biblical undertones. Use his characteristic stripped-down prose, his gift for finding beauty in desolation, and his ability to explore profound themes of violence, survival, and human nature with minimal but powerful language.'
+      case 'stephen-king':
+        return 'Respond in the style of Stephen King – lean, vivid, and conversational. Use concrete sensory detail, plainspoken clarity, and momentum-building sentences. Favor active voice, steady rising tension, and character-centric insight. Keep explanations accessible and gripping, like storytelling that moves.'
       default:
         return ''
     }
@@ -488,6 +503,18 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ selectedText, contextInfo
       // Silently ignore errors - don't interrupt the user experience
     }
   }
+
+  // Build external Playphrase link for the currently selected/original quote
+  const playphraseUrl = (() => {
+    if (!originalSelectedText) return null
+    // Normalize: trim, collapse whitespace, strip surrounding quotes/newlines
+    const normalized = originalSelectedText
+      .replace(/\s+/g, ' ')
+      .replace(/^\s*["]|[\"]\s*$/g, '')
+      .trim()
+    const encoded = encodeURIComponent(normalized)
+    return `https://www.playphrase.me/#/search?q=${encoded}&pos=0&language=en`
+  })()
 
 
   const handleReExplain = async (text: string) => {
@@ -740,7 +767,7 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ selectedText, contextInfo
                 disabled={isLoading}
               >
                 <option value="anthropic">Claude 3.5 Sonnet</option>
-                <option value="openai">GPT-5</option>
+                <option value="openai">GPT-4 (OpenAI)</option>
                 <option value="deepseek">DeepSeek Chat</option>
                 <option value="gemini">Gemini 2.5 Flash</option>
               </select>
@@ -817,7 +844,7 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ selectedText, contextInfo
               {message.role === 'assistant' && message.provider && (
                 <div className={styles.messageInfo}>
                   <span className={styles.providerBadge}>
-                    {message.provider === 'openai' ? 'GPT-5' : 
+                    {message.provider === 'openai' ? 'GPT-4 (OpenAI)' : 
                      message.provider === 'anthropic' ? 'Claude 3.5 Sonnet' :
                      message.provider === 'deepseek' ? 'DeepSeek Chat' :
                      message.provider === 'gemini' ? 'Gemini 2.5 Flash' :
@@ -874,6 +901,20 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ selectedText, contextInfo
                     {message.videoTitle && (
                       <div style={{ marginTop: '8px', fontSize: '14px', color: '#666', fontStyle: 'italic' }}>
                         {message.videoTitle}
+                      </div>
+                    )}
+                    {playphraseUrl && (
+                      <div style={{ marginTop: '10px' }}>
+                        <a
+                          href={playphraseUrl}
+                          target="playphrase"
+                          rel="noopener noreferrer"
+                          className={styles.reexplainButton}
+                          style={{ textDecoration: 'none', display: 'inline-flex', alignItems: 'center', justifyContent: 'center' }}
+                          title="Open this quote on Playphrase"
+                        >
+                          Is this quote in the movies?
+                        </a>
                       </div>
                     )}
                   </div>

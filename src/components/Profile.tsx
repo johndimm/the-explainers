@@ -17,6 +17,7 @@ export interface ProfileData {
   availableCredits?: number
   bookExplanations?: { [bookKey: string]: number }
   purchasedBooks?: string[]
+  purchasedBookDetails?: { [bookKey: string]: { title: string; author: string } }
   hasUnlimitedAccess?: boolean
   unlimitedAccessExpiry?: Date
 }

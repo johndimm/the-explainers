@@ -34,6 +34,8 @@ const TextReader: React.FC<TextReaderProps> = ({ text, bookTitle = 'Romeo and Ju
   const textReaderRef = useRef<HTMLDivElement>(null)
   const scrollTimeoutRef = useRef<NodeJS.Timeout | null>(null)
   const searchInputRef = useRef<HTMLInputElement>(null)
+  const isMobile = typeof window !== 'undefined' && ((('ontouchstart' in window)) || (navigator.maxTouchPoints > 0))
+  const initialScrollTopRef = useRef<number | null>(null)
 
   // Check for first-time user and restore bookmark
   useEffect(() => {
@@ -216,6 +218,15 @@ const TextReader: React.FC<TextReaderProps> = ({ text, bookTitle = 'Romeo and Ju
       selectedText,
       beforeContext: beforeText.slice(-200), // Last 200 chars for context
       afterContext: afterText.slice(0, 200)   // First 200 chars for context
+    }
+  }
+
+  // Block touchmove to stop scrolling while selecting
+  const blockTouchMove = (evt: TouchEvent) => {
+    evt.preventDefault()
+    // Additionally pin scrollTop for extra safety
+    if (textReaderRef.current && initialScrollTopRef.current !== null) {
+      textReaderRef.current.scrollTop = initialScrollTopRef.current
     }
   }
 
@@ -529,29 +540,28 @@ const TextReader: React.FC<TextReaderProps> = ({ text, bookTitle = 'Romeo and Ju
       document.body.style.width = '100%'
       document.body.style.height = '100%'
       
-      // Also prevent scrolling on the text container itself
+      // Also prevent scrolling on the text container itself and remember its scrollTop
       if (textReaderRef.current) {
+        initialScrollTopRef.current = textReaderRef.current.scrollTop
         textReaderRef.current.style.overflow = 'hidden'
+        ;(textReaderRef.current as HTMLElement).addEventListener('touchmove', blockTouchMove, { passive: false })
       }
       
       setCurrentSelection(initialText)
       // Show highlighting immediately - both custom and native selection
       console.log('Setting highlighted text to:', initialText)
       setHighlightedText(initialText)
+      // Clear any active search UI/highlights when entering selection mode via long press
+      setSearchQuery('')
+      setSearchResults([])
+      setCurrentSearchIndex(-1)
       
       // Force a re-render to ensure highlighting appears immediately
       setTimeout(() => {
         setHighlightedText(initialText)
       }, 0)
       
-      // Create native visual selection for immediate feedback (but don't clear it)
-      const selection = window.getSelection()
-      if (selection) {
-        console.log('Creating native selection for text:', initialText)
-        selection.removeAllRanges()
-        selection.addRange(expandedRange.cloneRange())
-        console.log('Native selection created, selected text:', selection.toString())
-      }
+      // Do NOT create native selection on mobile to avoid system menus/search bars
       
       // Provide haptic feedback if available
       if (navigator.vibrate) {
@@ -586,6 +596,7 @@ const TextReader: React.FC<TextReaderProps> = ({ text, bookTitle = 'Romeo and Ju
       // Restore text container scrolling
       if (textReaderRef.current) {
         textReaderRef.current.style.overflow = 'auto'
+        ;(textReaderRef.current as HTMLElement).removeEventListener('touchmove', blockTouchMove as any)
       }
       
       // No event listeners to clean up
@@ -634,6 +645,10 @@ const TextReader: React.FC<TextReaderProps> = ({ text, bookTitle = 'Romeo and Ju
         setCurrentSelection(text)
         setHighlightedText(text)
       }
+      // Pin scrollTop while selecting
+      if (textReaderRef.current && initialScrollTopRef.current !== null) {
+        textReaderRef.current.scrollTop = initialScrollTopRef.current
+      }
     } else if (longPressTimer && distance > 10) { 
       // Cancel long press early if user is clearly scrolling (reduced back to 10px)
       clearTimeout(longPressTimer)
@@ -668,6 +683,25 @@ const TextReader: React.FC<TextReaderProps> = ({ text, bookTitle = 'Romeo and Ju
     window.getSelection()?.removeAllRanges()
   }
 
+  // Build a flexible regex that ignores punctuation and allows flexible whitespace between tokens
+  const buildFlexibleRegex = (query: string): RegExp | null => {
+    const trimmed = query.trim()
+    if (!trimmed) return null
+    const escapeRegex = (s: string) => s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
+    const tokens = trimmed
+      .split(/[\s\u00A0,.;:!?\-—–'"“”‘’]+/)
+      .filter(Boolean)
+      .map(escapeRegex)
+    if (tokens.length === 0) return null
+    const sep = "[\\s\\u00A0,.;:!?\\-—–'\"“”‘’]*"
+    const pattern = tokens.join(sep)
+    try {
+      return new RegExp(pattern, 'gi')
+    } catch {
+      return null
+    }
+  }
+
   const handleSearch = (query: string) => {
     if (!query.trim()) {
       setSearchResults([])
@@ -675,49 +709,22 @@ const TextReader: React.FC<TextReaderProps> = ({ text, bookTitle = 'Romeo and Ju
       return
     }
 
-    console.log('Searching for:', query)
-    console.log('Text length:', text.length)
-    
-    const results: {index: number, length: number}[] = []
-    const searchTerm = query.toLowerCase()
-    const textLower = text.toLowerCase()
-    
-    // Debug: check if text contains the search term
-    let testIndex = textLower.indexOf(searchTerm)
-    console.log('First occurrence index:', testIndex)
-    
-    // If exact match not found, try flexible search for common phrases
-    let actualSearchTerm = searchTerm
-    let actualLength = searchTerm.length
-    
-    if (testIndex === -1 && searchTerm.includes('to be')) {
-      // Try with commas for Shakespeare quotes
-      const withCommas = searchTerm.replace('to be or not to be', 'to be, or not to be')
-      testIndex = textLower.indexOf(withCommas)
-      if (testIndex >= 0) {
-        actualSearchTerm = withCommas
-        actualLength = withCommas.length
-        console.log('Found with commas at:', testIndex)
-      }
+    const results: { index: number, length: number }[] = []
+    const regex = buildFlexibleRegex(query)
+    if (!regex) {
+      setSearchResults([])
+      setCurrentSearchIndex(-1)
+      return
     }
-    
-    if (testIndex >= 0) {
-      console.log('Context around match:', textLower.substring(testIndex - 20, testIndex + actualLength + 20))
+    let match: RegExpExecArray | null
+    while ((match = regex.exec(text)) !== null) {
+      const start = match.index
+      const length = match[0].length
+      results.push({ index: start, length })
+      // Move forward to avoid zero-length loops
+      regex.lastIndex = start + Math.max(1, length)
     }
-    
-    let startIndex = 0
-    while (startIndex < textLower.length) {
-      const foundIndex = textLower.indexOf(actualSearchTerm, startIndex)
-      if (foundIndex === -1) break
-      
-      results.push({
-        index: foundIndex,
-        length: actualLength
-      })
-      startIndex = foundIndex + 1
-    }
-    
-    console.log('Search results found:', results.length)
+
     setSearchResults(results)
     setCurrentSearchIndex(results.length > 0 ? 0 : -1)
     
@@ -922,8 +929,8 @@ const TextReader: React.FC<TextReaderProps> = ({ text, bookTitle = 'Romeo and Ju
         onTouchMove={handleTouchMove}
         onContextMenu={(e) => e.preventDefault()}
         style={{
-          WebkitUserSelect: isInSelectionMode ? 'none' : 'text',
-          userSelect: isInSelectionMode ? 'none' : 'text', 
+          WebkitUserSelect: isInSelectionMode ? 'none' : (isMobile ? 'none' : 'text'),
+          userSelect: isInSelectionMode ? 'none' : (isMobile ? 'none' : 'text'), 
           WebkitTouchCallout: 'none',
           WebkitTapHighlightColor: 'transparent',
           touchAction: isInSelectionMode ? 'none' : 'pan-y',

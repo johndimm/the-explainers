@@ -73,6 +73,22 @@ function CreditsContent() {
     }, 100)
   }
 
+  // Helper to format remaining time for unlimited access
+  const getUnlimitedRemaining = (): string | null => {
+    if (!profile.hasUnlimitedAccess || !profile.unlimitedAccessExpiry) return null
+    const now = currentTime.getTime()
+    const expiry = new Date(profile.unlimitedAccessExpiry).getTime()
+    const ms = expiry - now
+    if (ms <= 0) return null
+    const minutes = Math.ceil(ms / (1000 * 60))
+    const days = Math.floor(minutes / (60 * 24))
+    const hours = Math.floor((minutes % (60 * 24)) / 60)
+    const mins = minutes % 60
+    if (days > 0) return `${days} day${days !== 1 ? 's' : ''} ${hours} hour${hours !== 1 ? 's' : ''} left`
+    if (hours > 0) return `${hours} hour${hours !== 1 ? 's' : ''} ${mins} minute${mins !== 1 ? 's' : ''} left`
+    return `${mins} minute${mins !== 1 ? 's' : ''} left`
+  }
+
   return (
     <div style={{ minHeight: '100vh', background: '#fafafa' }}>
       <style jsx>{`
@@ -352,6 +368,61 @@ function CreditsContent() {
             </div>
           </div>
           
+          {/* Owned Books */}
+          {profile.purchasedBooks && profile.purchasedBooks.length > 0 && (
+            <div style={{
+              background: '#f8f9fa',
+              padding: '20px',
+              borderRadius: '12px',
+              border: '1px solid #e9ecef',
+              marginBottom: '20px'
+            }}>
+              <h3 style={{ margin: '0 0 12px 0', color: '#10b981' }}>📚 Your Books</h3>
+              <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'grid', gap: '10px' }}>
+                {profile.purchasedBooks.map((bookKey) => {
+                  const detail = (profile as any).purchasedBookDetails?.[bookKey]
+                  let title = detail?.title || ''
+                  let author = detail?.author || ''
+                  if (!title) {
+                    // Heuristic fallback: last two tokens are author, rest are title
+                    const tokens = bookKey.split('-').filter(Boolean)
+                    const authorTokens = tokens.slice(Math.max(0, tokens.length - 2))
+                    const titleTokens = tokens.slice(0, Math.max(0, tokens.length - 2))
+                    // Reconstruct possessives like Night's from ["night","s"]
+                    const mergedTitleTokens: string[] = []
+                    for (let i = 0; i < titleTokens.length; i++) {
+                      const t = titleTokens[i]
+                      if (t === 's' && mergedTitleTokens.length > 0) {
+                        mergedTitleTokens[mergedTitleTokens.length - 1] = mergedTitleTokens[mergedTitleTokens.length - 1] + "'s"
+                      } else {
+                        mergedTitleTokens.push(t)
+                      }
+                    }
+                    const cap = (str: string) => str.replace(/\b\w/g, (m) => m.toUpperCase())
+                    title = cap(decodeURIComponent(mergedTitleTokens.join(' ')))
+                    author = cap(decodeURIComponent(authorTokens.join(' ')))
+                  }
+                  const handleLoad = () => {
+                    const url = (profile as any).purchasedBookDetails?.[bookKey]?.url || ''
+                    const params = new URLSearchParams({ title, author })
+                    if (url) params.set('url', encodeURIComponent(url))
+                    router.push(`/reader?${params.toString()}`)
+                  }
+                  return (
+                    <li key={bookKey} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', background: 'white', border: '1px solid #e9ecef', borderRadius: '8px', padding: '10px 12px' }}>
+                      <span style={{ color: '#333' }}>
+                        <strong>{title}</strong>{author ? ` by ${author}` : ''}
+                      </span>
+                      <button onClick={handleLoad} style={{ background: '#10b981', color: 'white', border: 'none', padding: '6px 12px', borderRadius: '6px', cursor: 'pointer' }}>
+                        Open
+                      </button>
+                    </li>
+                  )
+                })}
+              </ul>
+            </div>
+          )}
+
           {/* Unlimited Access Status */}
           {profile.hasUnlimitedAccess && profile.unlimitedAccessExpiry && new Date() < new Date(profile.unlimitedAccessExpiry) && (
             <div style={{
@@ -363,20 +434,7 @@ function CreditsContent() {
               textAlign: 'center'
             }}>
               <div style={{ fontSize: '20px', marginBottom: '8px', fontWeight: '600' }}>⚡ Unlimited Access Active!</div>
-              <div style={{ fontSize: '14px', opacity: '0.9' }}>
-                {(() => {
-                  const expiry = new Date(profile.unlimitedAccessExpiry!)
-                  const msRemaining = expiry.getTime() - currentTime.getTime()
-                  const minutesRemaining = Math.ceil(msRemaining / (1000 * 60))
-                  
-                  if (minutesRemaining > 60) {
-                    const hoursRemaining = Math.ceil(minutesRemaining / 60)
-                    return `${hoursRemaining} hour${hoursRemaining !== 1 ? 's' : ''} remaining`
-                  } else {
-                    return `${minutesRemaining} minute${minutesRemaining !== 1 ? 's' : ''} remaining`
-                  }
-                })()}
-              </div>
+              <div style={{ fontSize: '14px', opacity: '0.9' }}>{getUnlimitedRemaining() || 'expiring soon'}</div>
             </div>
           )}
           
@@ -487,7 +545,7 @@ function CreditsContent() {
                     fontWeight: '500'
                   }}
                 >
-                  1 Hour - $1
+                  1 Day - $1
                 </button>
                 <button
                   onClick={() => handleUnlimitedAccess('month')}

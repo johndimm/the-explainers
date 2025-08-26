@@ -77,9 +77,11 @@ const Library: React.FC<LibraryProps> = ({ onBookSelect, onBackToCurrentBook }) 
           .map(word => word.charAt(0).toUpperCase() + word.slice(1))
           .join(' ')
 
+        // Limit English Literature to 100 top entries
+        const limitedBooks = filename === 'english-literature.json' ? books.slice(0, 100) : books
         return {
           name: categoryName,
-          books,
+          books: limitedBooks,
           visibleCount: 10
         }
       })
@@ -385,8 +387,8 @@ const Library: React.FC<LibraryProps> = ({ onBookSelect, onBackToCurrentBook }) 
         )}
         
         <div className={styles.header}>
-          <h1>Library</h1>
-          <p>Choose a book to read and explore</p>
+          <h1 style={{ marginTop: 4 }}>Library</h1>
+          <p style={{ marginTop: 4 }}>Choose a book to read and explore</p>
         </div>
 
       <div className={styles.customSection}>

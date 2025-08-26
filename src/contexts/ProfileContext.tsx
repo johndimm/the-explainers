@@ -14,8 +14,9 @@ interface ProfileContextType {
   useExplanation: (bookTitle: string, author: string, useCustomLLM: boolean) => boolean
   getBookExplanationsUsed: (bookTitle: string, author: string) => number
   addCredits: (amount: number) => void
-  purchaseBook: (bookTitle: string, author: string) => void
+  purchaseBook: (bookTitle: string, author: string, url?: string) => void
   grantUnlimitedAccess: (duration: 'hour' | 'month' | 'year') => void
+  removePurchasedBook: (bookTitle: string, author: string) => void
 }
 
 const DEFAULT_PROFILE: ProfileData = {
@@ -249,12 +250,36 @@ export const ProfileProvider: React.FC<ProfileProviderProps> = ({ children }) =>
     })
   }
 
-  const purchaseBook = (bookTitle: string, author: string) => {
+  const purchaseBook = (bookTitle: string, author: string, url?: string) => {
     setProfile(prev => {
       const bookKey = getBookKey(bookTitle, author)
       const newProfile = {
         ...prev,
         purchasedBooks: [...(prev.purchasedBooks || []), bookKey]
+      }
+      // Also persist friendly title/author mapping for display
+      const details = {
+        ...(prev as any).purchasedBookDetails,
+        [bookKey]: { title: bookTitle, author, url }
+      }
+      ;(newProfile as any).purchasedBookDetails = details
+      localStorage.setItem('explainer-profile', JSON.stringify(newProfile))
+      return newProfile
+    })
+  }
+
+  const removePurchasedBook = (bookTitle: string, author: string) => {
+    setProfile(prev => {
+      const bookKey = getBookKey(bookTitle, author)
+      const newPurchased = (prev.purchasedBooks || []).filter(k => k !== bookKey)
+      const details = { ...(prev as any).purchasedBookDetails }
+      if (details && details[bookKey]) {
+        delete details[bookKey]
+      }
+      const newProfile = {
+        ...prev,
+        purchasedBooks: newPurchased,
+        ...(details ? { purchasedBookDetails: details } : {})
       }
       localStorage.setItem('explainer-profile', JSON.stringify(newProfile))
       return newProfile
@@ -269,7 +294,7 @@ export const ProfileProvider: React.FC<ProfileProviderProps> = ({ children }) =>
       
       switch (duration) {
         case 'hour':
-          expiryTime = new Date(now.getTime() + 60 * 60 * 1000) // 1 hour
+          expiryTime = new Date(now.getTime() + 24 * 60 * 60 * 1000) // 1 day
           break
         case 'month':
           expiryTime = new Date(now.getTime() + 30 * 24 * 60 * 60 * 1000) // 30 days
@@ -309,7 +334,8 @@ export const ProfileProvider: React.FC<ProfileProviderProps> = ({ children }) =>
       getBookExplanationsUsed,
       addCredits,
       purchaseBook,
-      grantUnlimitedAccess
+      grantUnlimitedAccess,
+      removePurchasedBook
     }}>
       {children}
     </ProfileContext.Provider>

@@ -18,7 +18,18 @@ const Pricing: React.FC<PricingProps> = ({ isOpen, onClose, bookTitle, author, i
 
   const handlePurchaseBook = () => {
     if (bookTitle && author) {
-      purchaseBook(bookTitle, author)
+      // Try to capture the source URL from current-book so credits can deep-link to reader later
+      let url: string | undefined
+      try {
+        const saved = localStorage.getItem('current-book')
+        if (saved) {
+          const parsed = JSON.parse(saved)
+          if (parsed && parsed.title === bookTitle && parsed.author === author && parsed.url) {
+            url = parsed.url
+          }
+        }
+      } catch {}
+      purchaseBook(bookTitle, author, url)
       onClose()
     }
   }
@@ -279,7 +290,7 @@ const Pricing: React.FC<PricingProps> = ({ isOpen, onClose, bookTitle, author, i
                   cursor: 'pointer'
                 }}
               >
-                1 Hour - $1
+                1 Day - $1
               </button>
               <button
                 onClick={() => handleUnlimitedAccess('month')}
