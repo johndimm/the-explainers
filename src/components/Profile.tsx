@@ -303,7 +303,7 @@ const Profile: React.FC<ProfileProps> = ({ isOpen, onClose, profile, onProfileCh
       <div style={{ marginTop: '50px' }}>
         <div className={styles.modal} style={{ margin: '20px auto', maxWidth: '600px', boxShadow: 'none', border: 'none', position: 'static', transform: 'none', overflow: 'visible', maxHeight: 'none' }}>
           <div className={styles.header}>
-            <h2>Profile Settings</h2>
+            <h2>Profile</h2>
           </div>
 
         <div className={styles.content}>

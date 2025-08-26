@@ -174,6 +174,24 @@ function ChatContent() {
               </button>
               <button 
                 onClick={() => {
+                  router.push('/demo')
+                  setShowMobileMenu(false)
+                }}
+                style={{
+                  display: 'block',
+                  width: '100%',
+                  padding: '12px 16px',
+                  background: 'none',
+                  border: 'none',
+                  textAlign: 'left',
+                  cursor: 'pointer',
+                  borderBottom: '1px solid #f0f0f0'
+                }}
+              >
+                🗯️ Demo
+              </button>
+              <button 
+                onClick={() => {
                   router.push('/styles')
                   setShowMobileMenu(false)
                 }}

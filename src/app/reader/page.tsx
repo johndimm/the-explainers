@@ -240,6 +240,30 @@ function ReaderContent() {
               </button>
               <button 
                 onClick={() => {
+                  router.push('/demo')
+                  setShowMobileMenu(false)
+                }}
+                style={{
+                  display: 'block',
+                  width: '100%',
+                  padding: '14px 20px',
+                  background: 'none',
+                  border: 'none',
+                  textAlign: 'left',
+                  cursor: 'pointer',
+                  fontSize: '15px',
+                  fontWeight: '500',
+                  color: '#1a1a1a',
+                  transition: 'background-color 0.15s ease',
+                  borderBottom: '1px solid rgba(0, 0, 0, 0.06)'
+                }}
+                onMouseEnter={(e) => (e.target as HTMLElement).style.backgroundColor = 'rgba(59, 130, 246, 0.04)'}
+                onMouseLeave={(e) => (e.target as HTMLElement).style.backgroundColor = 'transparent'}
+              >
+                🗯️ Demo
+              </button>
+              <button 
+                onClick={() => {
                   router.push('/library')
                   setShowMobileMenu(false)
                 }}
