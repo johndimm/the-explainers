@@ -69,8 +69,10 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ selectedText, contextInfo
   const [hasChanges, setHasChanges] = useState(false)
   const [showFullHistory, setShowFullHistory] = useState(false)
   const [originalSelectedText, setOriginalSelectedText] = useState("")
+  const [showStyleMenu, setShowStyleMenu] = useState(false)
   const latestResponseRef = useRef<HTMLDivElement>(null)
   const inputRef = useRef<HTMLInputElement>(null)
+  const styleMenuRef = useRef<HTMLDivElement>(null)
   const initializedRef = useRef(false)
   const { canUseExplanation, useExplanation, getBookExplanationsUsed } = useProfile()
 
@@ -197,6 +199,23 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ selectedText, contextInfo
   useEffect(() => {
     setCurrentResponseLength(settings.responseLength)
   }, [settings.responseLength])
+
+  // Close custom style menu when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event: Event) => {
+      if (styleMenuRef.current && !styleMenuRef.current.contains(event.target as Node)) {
+        setShowStyleMenu(false)
+      }
+    }
+    if (showStyleMenu) {
+      document.addEventListener('mousedown', handleClickOutside as EventListener)
+      document.addEventListener('touchstart', handleClickOutside as EventListener, { passive: true })
+    }
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside as EventListener)
+      document.removeEventListener('touchstart', handleClickOutside as EventListener)
+    }
+  }, [showStyleMenu])
 
   // Auto-save settings changes immediately
   useEffect(() => {
@@ -773,18 +792,34 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ selectedText, contextInfo
               </select>
             </div>
             <div className={styles.styleSelector}>
-              <select 
-                value={currentStyle} 
-                onChange={(e) => setCurrentStyle(e.target.value as ExplanationStyle)}
-                className={styles.styleSelect}
-                disabled={isLoading}
+              <div 
+                ref={styleMenuRef}
+                className={`${styles.customSelect} ${isLoading ? styles.disabled : ''}`}
+                onClick={() => { if (!isLoading) setShowStyleMenu(!showStyleMenu) }}
+                role="button"
+                aria-haspopup="listbox"
+                aria-expanded={showStyleMenu}
+                tabIndex={0}
+                onKeyDown={(e) => { if ((e.key === 'Enter' || e.key === ' ') && !isLoading) { e.preventDefault(); setShowStyleMenu(!showStyleMenu) } }}
               >
-                {getAllStyles().map((style) => (
-                  <option key={style.value} value={style.value}>
-                    {style.name}
-                  </option>
-                ))}
-              </select>
+                <span className={styles.customSelectLabel}>{getAllStyles().find(s => s.value === currentStyle)?.name || 'Neutral'}</span>
+                <span className={styles.customSelectCaret}>▾</span>
+                {showStyleMenu && (
+                  <div className={styles.customMenu} role="listbox">
+                    {getAllStyles().map((style) => (
+                      <div
+                        key={style.value}
+                        role="option"
+                        aria-selected={currentStyle === style.value}
+                        className={`${styles.customOption} ${currentStyle === style.value ? styles.selectedOption : ''}`}
+                        onClick={(e) => { e.stopPropagation(); setCurrentStyle(style.value as ExplanationStyle); setShowStyleMenu(false) }}
+                      >
+                        {style.name}
+                      </div>
+                    ))}
+                  </div>
+                )}
+              </div>
             </div>
             <div className={styles.lengthSelector}>
               <select 

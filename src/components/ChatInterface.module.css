@@ -21,6 +21,7 @@
   display: flex;
   flex-direction: column;
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+  color-scheme: light;
 }
 
 .chatHeader {
@@ -297,20 +298,27 @@
   padding: 6px 12px;
   border: 1px solid #d0d7de;
   border-radius: 6px;
-  background: white;
+  background: #ffffff;
+  color: #111827;
   font-size: 14px;
   cursor: pointer;
   outline: none;
   transition: border-color 0.2s;
   min-width: 120px;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
 }
 
 .providerSelect:focus, .styleSelect:focus, .lengthSelect:focus {
   border-color: #007bff;
+  background: #ffffff;
+  color: #111827;
 }
 
 .providerSelect:disabled, .styleSelect:disabled, .lengthSelect:disabled {
   background: #f6f8fa;
+  color: #6b7280;
   cursor: not-allowed;
   opacity: 0.6;
 }
@@ -334,6 +342,67 @@
 
 .reexplainButton:disabled {
   background: #6c757d;
+  cursor: not-allowed;
+}
+
+/* Custom light-themed select for styles (avoids Android dark native menu) */
+.customSelect {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 10px;
+  border: 1px solid #d0d7de;
+  border-radius: 6px;
+  background: #ffffff;
+  color: #111827;
+  min-width: 160px;
+  cursor: pointer;
+  user-select: none;
+}
+
+.customSelectLabel {
+  font-size: 14px;
+}
+
+.customSelectCaret {
+  margin-left: auto;
+  font-size: 12px;
+  color: #6b7280;
+}
+
+.customMenu {
+  position: absolute;
+  top: calc(100% + 4px);
+  left: 0;
+  right: 0;
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+  max-height: 280px;
+  overflow: auto;
+  z-index: 10000;
+}
+
+.customOption {
+  padding: 8px 10px;
+  font-size: 14px;
+  color: #111827;
+}
+
+.customOption:hover {
+  background: #f3f4f6;
+}
+
+.selectedOption {
+  background: #eef2ff;
+  color: #3730a3;
+  font-weight: 500;
+}
+
+.disabled {
+  opacity: 0.6;
   cursor: not-allowed;
 }
 
@@ -401,4 +470,10 @@
   background: #e5e7eb;
   border-color: #d1d5db;
   transform: translateY(-1px);
+}
+
+/* Ensure dropdown menus render in light theme with readable text */
+.providerSelect option, .styleSelect option, .lengthSelect option {
+  background: #ffffff;
+  color: #111827;
 }

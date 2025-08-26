@@ -378,13 +378,7 @@ const Library: React.FC<LibraryProps> = ({ onBookSelect, onBackToCurrentBook }) 
       </header>
       
       <div className={styles.library} style={{ marginTop: '50px' }}>
-        {currentBook && onBackToCurrentBook && (
-          <div className={styles.currentBookLink}>
-            <button onClick={onBackToCurrentBook} className={styles.backButton}>
-              ← Back to "{currentBook.title}"
-            </button>
-          </div>
-        )}
+        {/* Back to current book link removed by request */}
         
         <div className={styles.header}>
           <h1 style={{ marginTop: 4 }}>Library</h1>
