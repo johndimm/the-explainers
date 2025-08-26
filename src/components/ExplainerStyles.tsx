@@ -202,7 +202,7 @@ const ExplainerStyles: React.FC<ExplainerStylesProps> = ({
         borderBottom: '1px solid #e0e0e0',
         padding: '8px 12px',
         zIndex: 100,
-        display: 'flex',
+        display: 'none',
         justifyContent: 'space-between',
         alignItems: 'center'
       }}>

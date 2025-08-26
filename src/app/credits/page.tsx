@@ -107,7 +107,7 @@ function CreditsContent() {
         borderBottom: '1px solid #e0e0e0',
         padding: '8px 12px',
         zIndex: 100,
-        display: 'flex',
+        display: 'none',
         justifyContent: 'space-between',
         alignItems: 'center'
       }}>
@@ -322,7 +322,7 @@ function CreditsContent() {
       </header>
 
       {/* Main Content */}
-      <main style={{ maxWidth: '800px', margin: '0 auto', padding: '40px 20px', marginTop: '60px' }} className="mobile-padding">
+      <main style={{ maxWidth: '800px', margin: '0 auto', padding: '40px 20px', marginTop: '0' }} className="mobile-padding">
         {/* Free Demo Banner */}
         <div style={{
           background: 'linear-gradient(135deg, #10b981, #059669)',

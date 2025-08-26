@@ -100,7 +100,7 @@ const Settings: React.FC<SettingsProps> = ({ isOpen, onClose, settings, onSettin
         borderBottom: '1px solid #e0e0e0',
         padding: '8px 12px',
         zIndex: 100,
-        display: 'flex',
+        display: 'none',
         justifyContent: 'space-between',
         alignItems: 'center'
       }}>
@@ -298,7 +298,7 @@ const Settings: React.FC<SettingsProps> = ({ isOpen, onClose, settings, onSettin
         </div>
       </header>
       
-      <div style={{ marginTop: '50px' }}>
+      <div style={{ marginTop: '0' }}>
         <div className={styles.settingsContainer} style={{ margin: '20px auto', maxWidth: '600px', boxShadow: 'none', border: 'none', overflow: 'visible', maxHeight: 'none' }}>
           <div className={styles.settingsHeader}>
             <h2>Settings</h2>
