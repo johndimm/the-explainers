@@ -387,6 +387,8 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ selectedText, contextInfo
         return 'Respond in the style of Cormac McCarthy - sparse and haunting with biblical undertones. Use his characteristic stripped-down prose, his gift for finding beauty in desolation, and his ability to explore profound themes of violence, survival, and human nature with minimal but powerful language.'
       case 'stephen-king':
         return 'Respond in the style of Stephen King – lean, vivid, and conversational. Use concrete sensory detail, plainspoken clarity, and momentum-building sentences. Favor active voice, steady rising tension, and character-centric insight. Keep explanations accessible and gripping, like storytelling that moves.'
+      case 'william-shakespeare':
+        return 'Respond in the style of William Shakespeare: poetic, metaphor-rich, and iambic where fitting. Favor vivid imagery, antithesis, and rhetorical flourish. You may use Early Modern idiom sparingly for flavor (e.g., thee/thou), but ensure the meaning remains clear to modern readers. When explaining, frame the sense plainly after a brief poetic gloss.'
       default:
         return ''
     }

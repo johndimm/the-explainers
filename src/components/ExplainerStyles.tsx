@@ -49,6 +49,7 @@ export const STYLE_CATEGORIES = {
     { value: 'charles-dickens', name: 'Charles Dickens', description: 'Victorian and social realist' },
     { value: 'cormac-mccarthy', name: 'Cormac McCarthy', description: 'Sparse and haunting' },
     { value: 'stephen-king', name: 'Stephen King', description: 'Lean, vivid, and suspenseful' },
+    { value: 'william-shakespeare', name: 'William Shakespeare', description: 'Elizabethan drama, metaphor-rich, poetic' },
   ],
   comedians: [
     { value: 'jerry-seinfeld', name: 'Jerry Seinfeld', description: 'What\'s the deal with...' },
