@@ -17,7 +17,7 @@ const UserGuide: React.FC = () => {
         <h2 style={{ color: '#10b981', marginTop: '30px', marginBottom: '15px' }}>Navigation and Layout</h2>
         <ul>
           <li style={{ marginBottom: '6px' }}><strong>Single global header</strong>: The header stays put on every page. In the reader it shows <em>Title by Author</em>; elsewhere it shows <em>understand difficult texts</em>.</li>
-          <li style={{ marginBottom: '6px' }}><strong>Hamburger menu</strong>: Tap ☰ to open the same 9-item menu everywhere: Reader, Chat, Library, Styles, Credits, Profile, Settings, User Guide, and <em>Demo</em> (at the bottom).</li>
+          <li style={{ marginBottom: '6px' }}><strong>Hamburger menu</strong>: Tap ☰ to open the same 10-item menu everywhere: Reader, Chat, Library, Styles, Credits, Profile, Settings, User Guide, About, and <em>Demo</em> (at the bottom).</li>
         </ul>
 
         <h2 style={{ color: '#10b981', marginTop: '30px', marginBottom: '15px' }}>Getting Started</h2>
@@ -73,6 +73,15 @@ const UserGuide: React.FC = () => {
           <li style={{ marginBottom: '5px' }}><strong>Multiple Personalities</strong>: Choose from 50+ explanation styles</li>
         </ul>
 
+        <h3 style={{ color: '#007bff', marginTop: '25px', marginBottom: '10px' }}>Shakespeare & Drama Context</h3>
+        <ul>
+          <li style={{ marginBottom: '5px' }}><strong>Act & Scene Detection</strong>: The AI automatically identifies which act and scene you're reading</li>
+          <li style={{ marginBottom: '5px' }}><strong>Speaker Recognition</strong>: Knows which character is speaking each line</li>
+          <li style={{ marginBottom: '5px' }}><strong>Characters on Stage</strong>: Tracks who is present in the current scene</li>
+          <li style={{ marginBottom: '5px' }}><strong>Rich Context</strong>: Provides explanations that consider the dramatic situation, character relationships, and theatrical context</li>
+          <li style={{ marginBottom: '5px' }}><strong>Performance Insights</strong>: Understands how lines would be delivered on stage and their dramatic impact</li>
+        </ul>
+
         <h3 style={{ color: '#007bff', marginTop: '25px', marginBottom: '10px' }}>Library</h3>
         <ul>
           <li style={{ marginBottom: '5px' }}><strong>Curated Collection</strong>: Hundreds of classic texts organized by category</li>
@@ -83,12 +92,13 @@ const UserGuide: React.FC = () => {
 
         <h2 style={{ color: '#10b981', marginTop: '30px', marginBottom: '12px' }}>What’s New</h2>
         <ul>
-          <li style={{ marginBottom: '6px' }}><strong>Single, persistent header</strong>: One header everywhere with a consistent 9‑item hamburger (Demo at the bottom).</li>
+          <li style={{ marginBottom: '6px' }}><strong>Single, persistent header</strong>: One header everywhere with a consistent 10‑item hamburger (Demo at the bottom).</li>
           <li style={{ marginBottom: '6px' }}><strong>New Demo page</strong>: A visual walkthrough with captions, accessible from the hamburger.</li>
+          <li style={{ marginBottom: '6px' }}><strong>New About page</strong>: Learn about the project, author, and AI-generated development process.</li>
           <li style={{ marginBottom: '6px' }}><strong>Reader resumes position</strong>: Your last scroll position is saved and restored across one‑panel and two‑panel layouts.</li>
           <li style={{ marginBottom: '6px' }}><strong>Smarter search</strong>: Finds phrases with or without punctuation and flexible spacing, and scrolls to results.</li>
-          <li style={{ marginBottom: '6px' }}><strong>Playphrase link</strong>: After an explanation (and under any embedded video), tap “Is this quote in the movies?” to search film clips. It reuses the same browser tab.</li>
-          <li style={{ marginBottom: '6px' }}><strong>Styles preview</strong>: The Styles page now shows a photo preview of the selected persona. Added <em>Stephen King</em>.</li>
+          <li style={{ marginBottom: '6px' }}><strong>Playphrase link</strong>: After an explanation (and under any embedded video), tap “Is this quote in the movies?” to search film clips at <a href="https://playphrase.me" target="_blank" rel="noopener noreferrer" style={{ color: '#007bff', textDecoration: 'underline' }}>playphrase.me</a>. It reuses the same browser tab. Thanks to Playphrase for making movie quotes searchable!</li>
+          <li style={{ marginBottom: '6px' }}><strong>Styles preview</strong>: The Styles page now shows a photo preview of the selected persona. Added <em>Stephen King</em> and <em>William Shakespeare</em> - ask the Bard to explain his own plays!</li>
           <li style={{ marginBottom: '6px' }}><strong>Chat uses your style</strong>: Chat automatically follows the currently selected explainer style unless you change it in Chat.</li>
           <li style={{ marginBottom: '6px' }}><strong>Library polish</strong>: URL + Upload buttons fit on one line on phones; the URL placeholder is shorter; English Literature is trimmed to the top 100 books for speed.</li>
           <li style={{ marginBottom: '6px' }}><strong>Mobile selection</strong>: Long‑press selection now keeps the highlight visible while confirming; scroll lock is more reliable; haptic feedback on first long‑press is improved.</li>
