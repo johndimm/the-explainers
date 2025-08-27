@@ -121,7 +121,7 @@ function ReaderContent() {
 
   return (
     <div>
-      <div style={{ marginTop: '40px', minHeight: 'calc(100vh - 40px)' }}>
+      <div style={{ minHeight: 'calc(100vh - 40px)' }}>
         <TextReader 
           text={bookText} 
           bookTitle={currentBook.title}

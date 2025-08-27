@@ -312,8 +312,8 @@ const MobileTextReader: React.FC<ReaderCommonProps> = ({ text, bookTitle = 'Rome
     <div ref={textReaderRef} className={styles.textReader}>
       {/* Search Bar */}
       <div style={{
-        position: 'sticky', top: '0px', padding: '8px 20px', margin: '-30px -20px 0 -20px',
-        backgroundColor: 'white', borderBottom: '1px solid #e0e0e0', zIndex: 50, width: 'calc(100% + 40px)', boxSizing: 'border-box'
+        position: 'sticky', top: '0px', padding: '8px 0', marginBottom: '16px',
+        backgroundColor: 'white', borderBottom: '1px solid #e0e0e0', zIndex: 50
       }}>
         <input
           type="text"
