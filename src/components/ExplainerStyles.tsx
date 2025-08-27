@@ -5,6 +5,11 @@ import { useRouter } from 'next/navigation'
 import { ExplanationStyle } from './Settings'
 import stylesCss from './ExplainerStyles.module.css'
 
+const getPhotoSrc = (value: ExplanationStyle) => {
+  if (value === 'william-shakespeare') return '/icon-512x512.png'
+  return `/explainer-photos/${value}.jpg`
+}
+
 interface ExplainerStylesProps {
   isOpen: boolean
   onClose: () => void
@@ -157,7 +162,7 @@ const ExplainerStyles: React.FC<ExplainerStylesProps> = ({
             onClick={() => handleStyleSelect(style.value)}
           >
             <img 
-              src={`/explainer-photos/${style.value}.jpg`}
+              src={getPhotoSrc(style.value)}
               alt={style.name}
               className={stylesCss.stylePhoto}
               onError={(e) => { 
@@ -178,7 +183,7 @@ const ExplainerStyles: React.FC<ExplainerStylesProps> = ({
               }}
             />
             <img 
-              src={`/explainer-photos/${style.value}.jpg`}
+              src={getPhotoSrc(style.value)}
               alt={`${style.name} - Large View`}
               className={stylesCss.hoverImage}
             />
@@ -422,7 +427,7 @@ const ExplainerStyles: React.FC<ExplainerStylesProps> = ({
             return (
               <div style={{ display: 'flex', alignItems: 'center', gap: '16px', margin: '12px 0 24px' }}>
                 <img 
-                  src={`/explainer-photos/${selected.value}.jpg`}
+                  src={getPhotoSrc(selected.value)}
                   alt={selected.name}
                   style={{ 
                     width: 'min(40vw, 240px)',
