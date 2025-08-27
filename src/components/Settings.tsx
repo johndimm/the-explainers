@@ -172,6 +172,24 @@ const Settings: React.FC<SettingsProps> = ({ isOpen, onClose, settings, onSettin
               </button>
               <button 
                 onClick={() => {
+                  router.push('/about')
+                  setShowMobileMenu(false)
+                }}
+                style={{
+                  display: 'block',
+                  width: '100%',
+                  padding: '12px 16px',
+                  background: 'none',
+                  border: 'none',
+                  textAlign: 'left',
+                  cursor: 'pointer',
+                  borderBottom: '1px solid #f0f0f0'
+                }}
+              >
+                ℹ️ About
+              </button>
+              <button 
+                onClick={() => {
                   router.push('/reader')
                   setShowMobileMenu(false)
                 }}

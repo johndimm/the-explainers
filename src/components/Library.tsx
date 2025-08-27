@@ -251,6 +251,24 @@ const Library: React.FC<LibraryProps> = ({ onBookSelect, onBackToCurrentBook }) 
               </button>
               <button 
                 onClick={() => {
+                  router.push('/about')
+                  setShowMobileMenu(false)
+                }}
+                style={{
+                  display: 'block',
+                  width: '100%',
+                  padding: '12px 16px',
+                  background: 'none',
+                  border: 'none',
+                  textAlign: 'left',
+                  cursor: 'pointer',
+                  borderBottom: '1px solid #f0f0f0'
+                }}
+              >
+                ℹ️ About
+              </button>
+              <button 
+                onClick={() => {
                   router.push('/reader')
                   setShowMobileMenu(false)
                 }}
@@ -367,10 +385,46 @@ const Library: React.FC<LibraryProps> = ({ onBookSelect, onBackToCurrentBook }) 
                   background: 'none',
                   border: 'none',
                   textAlign: 'left',
-                  cursor: 'pointer'
+                  cursor: 'pointer',
+                  borderBottom: '1px solid #f0f0f0'
                 }}
               >
                 ⚙️ Settings
+              </button>
+              <button 
+                onClick={() => {
+                  router.push('/guide')
+                  setShowMobileMenu(false)
+                }}
+                style={{
+                  display: 'block',
+                  width: '100%',
+                  padding: '12px 16px',
+                  background: 'none',
+                  border: 'none',
+                  textAlign: 'left',
+                  cursor: 'pointer',
+                  borderBottom: '1px solid #f0f0f0'
+                }}
+              >
+                📖 User Guide
+              </button>
+              <button 
+                onClick={() => {
+                  router.push('/demo')
+                  setShowMobileMenu(false)
+                }}
+                style={{
+                  display: 'block',
+                  width: '100%',
+                  padding: '12px 16px',
+                  background: 'none',
+                  border: 'none',
+                  textAlign: 'left',
+                  cursor: 'pointer'
+                }}
+              >
+                🗯️ Demo
               </button>
             </div>
           )}
@@ -383,6 +437,17 @@ const Library: React.FC<LibraryProps> = ({ onBookSelect, onBackToCurrentBook }) 
         <div className={styles.header}>
           <h1 style={{ marginTop: 4 }}>Library</h1>
           <p style={{ marginTop: 4 }}>Choose a book to read and explore</p>
+          <div style={{ 
+            background: '#f0f9ff', 
+            border: '1px solid #0ea5e9', 
+            borderRadius: '8px', 
+            padding: '12px 16px', 
+            marginTop: '12px',
+            fontSize: '14px',
+            color: '#0369a1'
+          }}>
+            <strong>📚 Project Gutenberg Integration:</strong> This library features a curated selection from <a href="https://www.gutenberg.org/" target="_blank" rel="noopener noreferrer" style={{ color: '#0369a1', textDecoration: 'underline' }}>Project Gutenberg</a>'s collection of over 75,000 free eBooks. You can also load any book from their library using the URL input below.
+          </div>
         </div>
 
       <div className={styles.customSection}>
