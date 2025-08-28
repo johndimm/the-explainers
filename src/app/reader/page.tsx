@@ -126,54 +126,17 @@ function ReaderContent() {
     return <div>Loading{currentBook.title ? ` ${currentBook.title}` : ''}...</div>
   }
 
-  // Debug logging
-  console.log('Reader page rendering with:', {
-    bookTextLength: bookText?.length || 0,
-    currentBook,
-    hasSettings: !!settings,
-    hasProfile: !!profile
-  })
-
-  if (!bookText || bookText.length === 0) {
-    return (
-      <div style={{ padding: '20px', textAlign: 'center' }}>
-        <h2>No Book Content</h2>
-        <p>No book text was loaded. Please try selecting a book from the library.</p>
-        <button onClick={() => router.push('/library')} style={{ padding: '8px 16px', background: '#007bff', color: 'white', border: 'none', borderRadius: '4px', cursor: 'pointer' }}>
-          Go to Library
-        </button>
-      </div>
-    )
-  }
-
   return (
     <div>
       <div style={{ minHeight: 'calc(100vh - 40px)' }}>
-        {(() => {
-          try {
-            return (
-              <TextReader 
-                text={bookText} 
-                bookTitle={currentBook.title}
-                author={currentBook.author}
-                settings={settings}
-                profile={profile}
-                onSettingsChange={updateSettings}
-              />
-            )
-          } catch (error) {
-            console.error('Error rendering TextReader:', error)
-            return (
-              <div style={{ padding: '20px', textAlign: 'center' }}>
-                <h2>Error Loading Reader</h2>
-                <p>There was an error loading the text reader. Please try refreshing the page.</p>
-                <button onClick={() => window.location.reload()} style={{ padding: '8px 16px', background: '#007bff', color: 'white', border: 'none', borderRadius: '4px', cursor: 'pointer' }}>
-                  Refresh Page
-                </button>
-              </div>
-            )
-          }
-        })()}
+        <TextReader 
+          text={bookText} 
+          bookTitle={currentBook.title}
+          author={currentBook.author}
+          settings={settings}
+          profile={profile}
+          onSettingsChange={updateSettings}
+        />
       </div>
     </div>
   )
@@ -182,22 +145,7 @@ function ReaderContent() {
 export default function ReaderPage() {
   return (
     <Suspense fallback={<div>Loading...</div>}>
-      {(() => {
-        try {
-          return <ReaderContent />
-        } catch (error) {
-          console.error('Error in ReaderPage:', error)
-          return (
-            <div style={{ padding: '20px', textAlign: 'center' }}>
-              <h2>Reader Error</h2>
-              <p>Something went wrong loading the reader. Please try again.</p>
-              <button onClick={() => window.location.reload()} style={{ padding: '8px 16px', background: '#007bff', color: 'white', border: 'none', borderRadius: '4px', cursor: 'pointer' }}>
-                Reload
-              </button>
-            </div>
-          )
-        }
-      })()}
+      <ReaderContent />
     </Suspense>
   )
 }

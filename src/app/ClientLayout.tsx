@@ -11,25 +11,7 @@ export default function ClientLayout({ children }: { children: React.ReactNode }
   const menuRef = useRef<HTMLDivElement>(null)
   const [subtitle, setSubtitle] = useState<string>('understand difficult texts')
   
-  // Test if JavaScript is working on mobile
-  useEffect(() => {
-    if (typeof window !== 'undefined') {
-      try {
-        // Try to show a simple alert to test if JavaScript is working
-        if (window.location.pathname === '/reader') {
-          setTimeout(() => {
-            try {
-              alert('JavaScript is working! If you see this, the app should load.')
-            } catch (e) {
-              console.error('Alert failed:', e)
-            }
-          }, 1000)
-        }
-      } catch (error) {
-        console.error('Error in ClientLayout useEffect:', error)
-      }
-    }
-  }, [])
+
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -84,10 +66,7 @@ export default function ClientLayout({ children }: { children: React.ReactNode }
             </div>
             <div ref={menuRef} style={{ position: 'relative' }}>
               <button 
-                onClick={() => {
-                  console.log('Hamburger clicked, current state:', showMobileMenu)
-                  setShowMobileMenu(!showMobileMenu)
-                }}
+                onClick={() => setShowMobileMenu(!showMobileMenu)}
                 style={{ padding: '8px', background: 'none', border: 'none', cursor: 'pointer', fontSize: '18px', color: '#333' }}
               >
                 ☰
