@@ -80,9 +80,9 @@ const DesktopTextReader: React.FC<ReaderCommonProps> = ({ text, bookTitle = 'Rom
         style={{ userSelect: 'text', fontFamily: settings.textFont }}
       >
         <pre style={{ 
-          whiteSpace: 'pre', 
-          wordWrap: 'normal', 
-          overflowWrap: 'normal',
+          whiteSpace: 'pre-wrap', 
+          wordWrap: 'break-word',
+          overflowWrap: 'break-word',
           margin: 0, 
           fontFamily: 'inherit',
           fontSize: 'inherit',

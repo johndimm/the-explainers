@@ -10,6 +10,26 @@ export default function ClientLayout({ children }: { children: React.ReactNode }
   const [showMobileMenu, setShowMobileMenu] = useState(false)
   const menuRef = useRef<HTMLDivElement>(null)
   const [subtitle, setSubtitle] = useState<string>('understand difficult texts')
+  
+  // Test if JavaScript is working on mobile
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      try {
+        // Try to show a simple alert to test if JavaScript is working
+        if (window.location.pathname === '/reader') {
+          setTimeout(() => {
+            try {
+              alert('JavaScript is working! If you see this, the app should load.')
+            } catch (e) {
+              console.error('Alert failed:', e)
+            }
+          }, 1000)
+        }
+      } catch (error) {
+        console.error('Error in ClientLayout useEffect:', error)
+      }
+    }
+  }, [])
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -64,13 +84,28 @@ export default function ClientLayout({ children }: { children: React.ReactNode }
             </div>
             <div ref={menuRef} style={{ position: 'relative' }}>
               <button 
-                onClick={() => setShowMobileMenu(!showMobileMenu)}
+                onClick={() => {
+                  console.log('Hamburger clicked, current state:', showMobileMenu)
+                  setShowMobileMenu(!showMobileMenu)
+                }}
                 style={{ padding: '8px', background: 'none', border: 'none', cursor: 'pointer', fontSize: '18px', color: '#333' }}
               >
                 ☰
               </button>
               {showMobileMenu && (
-                <div style={{ position: 'absolute', top: '100%', right: 0, background: 'white', border: '1px solid #e0e0e0', borderRadius: '8px', boxShadow: '0 4px 12px rgba(0,0,0,0.15)', minWidth: '160px', zIndex: 1000 }}>
+                <div style={{ 
+                  position: 'absolute', 
+                  top: '100%', 
+                  right: 0, 
+                  background: 'white', 
+                  border: '1px solid #e0e0e0', 
+                  borderRadius: '8px', 
+                  boxShadow: '0 4px 12px rgba(0,0,0,0.15)', 
+                  minWidth: '200px', 
+                  zIndex: 1000,
+                  maxHeight: '80vh',
+                  overflowY: 'auto'
+                }}>
                   <button onClick={() => { router.push('/reader'); setShowMobileMenu(false) }} style={{ display: 'block', width: '100%', padding: '12px 16px', background: 'none', border: 'none', textAlign: 'left', cursor: 'pointer', borderBottom: '1px solid #f0f0f0' }}>📖 Reader</button>
                   <button onClick={() => { router.push('/chat'); setShowMobileMenu(false) }} style={{ display: 'block', width: '100%', padding: '12px 16px', background: 'none', border: 'none', textAlign: 'left', cursor: 'pointer', borderBottom: '1px solid #f0f0f0' }}>💬 Chat</button>
                   <button onClick={() => { router.push('/library'); setShowMobileMenu(false) }} style={{ display: 'block', width: '100%', padding: '12px 16px', background: 'none', border: 'none', textAlign: 'left', cursor: 'pointer', borderBottom: '1px solid #f0f0f0' }}>📚 Library</button>

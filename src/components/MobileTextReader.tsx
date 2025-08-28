@@ -7,6 +7,7 @@ import { useRouter } from 'next/navigation'
 import { log, warn } from '../utils/log'
 
 const MobileTextReader: React.FC<ReaderCommonProps> = ({ text, bookTitle = 'Romeo and Juliet', author = 'William Shakespeare', settings, profile, onSettingsChange }) => {
+  console.log('MobileTextReader rendering with:', { textLength: text?.length, bookTitle, author })
   const router = useRouter()
   const textReaderRef = useRef<HTMLDivElement>(null)
   const textContentRef = useRef<HTMLDivElement>(null)
@@ -298,9 +299,9 @@ const MobileTextReader: React.FC<ReaderCommonProps> = ({ text, bookTitle = 'Rome
         const after = text.slice(idx + highlightedText.length)
         rendered = (
           <pre style={{ 
-            whiteSpace: 'pre', 
-            wordWrap: 'normal', 
-            overflowWrap: 'normal',
+            whiteSpace: 'pre-wrap', 
+            wordWrap: 'break-word',
+            overflowWrap: 'break-word',
             margin: 0, 
             fontFamily: 'inherit',
             fontSize: 'inherit',
@@ -317,9 +318,9 @@ const MobileTextReader: React.FC<ReaderCommonProps> = ({ text, bookTitle = 'Rome
     if (typeof rendered === 'string') {
       rendered = (
         <pre style={{ 
-          whiteSpace: 'pre', 
-          wordWrap: 'normal', 
-          overflowWrap: 'normal',
+          whiteSpace: 'pre-wrap', 
+          wordWrap: 'break-word',
+          overflowWrap: 'break-word',
           margin: 0, 
           fontFamily: 'inherit',
           fontSize: 'inherit',
