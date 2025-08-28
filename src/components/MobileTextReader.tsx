@@ -22,6 +22,9 @@ const MobileTextReader: React.FC<ReaderCommonProps> = ({ text, bookTitle = 'Rome
   const CANCEL_DISTANCE_PX = 35
   const selectionModeRef = useRef<boolean>(false)
   const vibratedRef = useRef<boolean>(false)
+  const [zoomLevel, setZoomLevel] = useState(1)
+  const [initialPinchDistance, setInitialPinchDistance] = useState<number | null>(null)
+  const [initialZoomLevel, setInitialZoomLevel] = useState<number>(1)
 
   const tryVibrate = (): boolean => {
     if (vibratedRef.current) return true
@@ -200,6 +203,29 @@ const MobileTextReader: React.FC<ReaderCommonProps> = ({ text, bookTitle = 'Rome
   }
 
   const handleTouchMove = (e: React.TouchEvent) => {
+    if (e.touches.length === 2) {
+      // Pinch gesture - prevent scrolling
+      e.preventDefault()
+      e.stopPropagation()
+      
+      const touch1 = e.touches[0]
+      const touch2 = e.touches[1]
+      const currentDistance = Math.sqrt(
+        Math.pow(touch2.clientX - touch1.clientX, 2) + 
+        Math.pow(touch2.clientY - touch1.clientY, 2)
+      )
+      
+      if (initialPinchDistance === null) {
+        setInitialPinchDistance(currentDistance)
+        setInitialZoomLevel(zoomLevel)
+      } else {
+        const scale = currentDistance / initialPinchDistance
+        const newZoomLevel = Math.max(0.5, Math.min(2, initialZoomLevel * scale))
+        setZoomLevel(newZoomLevel)
+      }
+      return
+    }
+    
     const start = touchStartPosRef.current
     if (!start) return
     const touch = e.touches[0]
@@ -231,6 +257,11 @@ const MobileTextReader: React.FC<ReaderCommonProps> = ({ text, bookTitle = 'Rome
   }
 
   const handleTouchEnd = (e: React.TouchEvent) => {
+    // Reset pinch state if we had a pinch gesture
+    if (e.touches.length < 2) {
+      setInitialPinchDistance(null)
+    }
+    
     log('touchend', { inSelection: isInSelectionMode, selectedTextLength: selectedText.length })
     if (isInSelectionMode) {
       e.preventDefault()
@@ -336,7 +367,7 @@ const MobileTextReader: React.FC<ReaderCommonProps> = ({ text, bookTitle = 'Rome
     <div ref={textReaderRef} className={styles.textReader}>
       {/* Search Bar */}
       <div style={{
-        position: 'sticky', top: '0px', padding: '8px 0', marginBottom: '16px',
+        position: 'sticky', top: '0px', padding: '4px 0', marginBottom: '8px',
         backgroundColor: 'white', borderBottom: '1px solid #e0e0e0', zIndex: 50
       }}>
         <input
@@ -345,10 +376,10 @@ const MobileTextReader: React.FC<ReaderCommonProps> = ({ text, bookTitle = 'Rome
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
           onKeyDown={(e) => { if (e.key === 'Enter') handleSearch(searchQuery) }}
-          style={{ width: '100%', padding: '6px 12px', margin: 0, border: '1px solid #ddd', borderRadius: '4px', fontSize: '14px', outline: 'none', backgroundColor: 'white' }}
+          style={{ width: '100%', padding: '4px 8px', margin: 0, border: '1px solid #ddd', borderRadius: '4px', fontSize: '13px', outline: 'none', backgroundColor: 'white' }}
         />
         {searchResults.length > 0 && (
-          <div style={{ marginTop: '4px', fontSize: '12px', color: '#666', display: 'flex', alignItems: 'center', gap: '8px' }}>
+          <div style={{ marginTop: '2px', fontSize: '11px', color: '#666', display: 'flex', alignItems: 'center', gap: '6px' }}>
             <span>{currentSearchIndex + 1} of {searchResults.length}</span>
             <button onClick={prevSearchResult} style={{ padding: '2px 6px', border: '1px solid #ddd', borderRadius: '2px', background: 'white', cursor: 'pointer', fontSize: '11px' }}>↑</button>
             <button onClick={nextSearchResult} style={{ padding: '2px 6px', border: '1px solid #ddd', borderRadius: '2px', background: 'white', cursor: 'pointer', fontSize: '11px' }}>↓</button>
@@ -366,7 +397,10 @@ const MobileTextReader: React.FC<ReaderCommonProps> = ({ text, bookTitle = 'Rome
         onContextMenu={(e) => e.preventDefault()}
         style={{
           WebkitUserSelect: 'none', userSelect: 'none', WebkitTouchCallout: 'none', WebkitTapHighlightColor: 'transparent',
-          touchAction: isInSelectionMode ? 'none' : 'pan-y', fontFamily: settings.textFont
+          touchAction: isInSelectionMode ? 'none' : 'pan-y', fontFamily: settings.textFont,
+          transform: `scale(${zoomLevel})`,
+          transformOrigin: 'top left',
+          width: `${100 / zoomLevel}%`
         }}
       >
         {renderText()}

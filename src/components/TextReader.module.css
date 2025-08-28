@@ -17,6 +17,20 @@
   word-wrap: break-word;
 }
 
+/* Mobile optimizations */
+@media (max-width: 768px) {
+  .textReader {
+    padding: 0 12px 12px 12px;
+  }
+  
+  .textContent {
+    max-width: none;
+    margin: 0;
+    font-size: 15px;
+    line-height: 1.5;
+  }
+}
+
 .selectedText {
   background-color: #b3d9ff;
 }
