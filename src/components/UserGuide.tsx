@@ -14,12 +14,6 @@ const UserGuide: React.FC = () => {
           <strong>Welcome to The Explainers!</strong> This app helps you understand difficult texts by providing AI-powered explanations of selected passages. Whether you're tackling Shakespeare, philosophy, or classic literature, we make challenging texts accessible.
         </div>
 
-        <h2 style={{ color: '#10b981', marginTop: '30px', marginBottom: '15px' }}>Navigation and Layout</h2>
-        <ul>
-          <li style={{ marginBottom: '6px' }}><strong>Single global header</strong>: The header stays put on every page. In the reader it shows <em>Title by Author</em>; elsewhere it shows <em>understand difficult texts</em>.</li>
-          <li style={{ marginBottom: '6px' }}><strong>Hamburger menu</strong>: Tap ☰ to open the same 10-item menu everywhere: Reader, Chat, Library, Styles, Credits, Profile, Settings, User Guide, About, and <em>Demo</em> (at the bottom).</li>
-        </ul>
-
         <h2 style={{ color: '#10b981', marginTop: '30px', marginBottom: '15px' }}>Getting Started</h2>
 
         <h3 style={{ color: '#007bff', marginTop: '25px', marginBottom: '10px' }}>Quick Start</h3>
@@ -29,6 +23,14 @@ const UserGuide: React.FC = () => {
           <li style={{ marginBottom: '5px' }}>Get an instant AI explanation tailored to your needs</li>
           <li style={{ marginBottom: '5px' }}>Ask follow-up questions in the chat interface</li>
         </ol>
+
+        <h3 style={{ color: '#007bff', marginTop: '25px', marginBottom: '10px' }}>Tips</h3>
+        <ul>
+          <li style={{ marginBottom: '5px' }}><strong>Navigation</strong>: The hamburger menu (☰) in the top right provides access to all app features from any page.</li>
+          <li style={{ marginBottom: '5px' }}><strong>Desktop selection</strong>: Click the start of your quote, hold down the mouse button, drag to the end of your quote, and lift up the mouse button.</li>
+          <li style={{ marginBottom: '5px' }}><strong>Mobile selection</strong>: Long‑press (with a short vibration) to enter selection, drag to the end of your quote and lift your finger.</li>
+          <li style={{ marginBottom: '5px' }}><strong>Search navigation</strong>: Use the up/down arrows next to the search to jump between hits.</li>
+        </ul>
 
         <h3 style={{ color: '#007bff', marginTop: '25px', marginBottom: '10px' }}>First-Time Setup</h3>
         <p>For the best experience, configure your profile and preferences:</p>
@@ -69,17 +71,17 @@ const UserGuide: React.FC = () => {
         <ul>
           <li style={{ marginBottom: '5px' }}><strong>Instant Explanations</strong>: Get immediate help with difficult passages</li>
           <li style={{ marginBottom: '5px' }}><strong>Follow-up Questions</strong>: Ask for clarification or deeper analysis</li>
-          <li style={{ marginBottom: '5px' }}><strong>Context Awareness</strong>: AI knows exactly where you are in the text</li>
+          <li style={{ marginBottom: '5px' }}><strong>Context Awareness</strong>: AI knows where you are in the text</li>
           <li style={{ marginBottom: '5px' }}><strong>Multiple Personalities</strong>: Choose from 50+ explanation styles</li>
         </ul>
 
-        <h3 style={{ color: '#007bff', marginTop: '25px', marginBottom: '10px' }}>Shakespeare & Drama Context</h3>
+        <h3 style={{ color: '#007bff', marginTop: '25px', marginBottom: '10px' }}>Smart Context Detection</h3>
         <ul>
-          <li style={{ marginBottom: '5px' }}><strong>Act & Scene Detection</strong>: The AI automatically identifies which act and scene you're reading</li>
-          <li style={{ marginBottom: '5px' }}><strong>Speaker Recognition</strong>: Knows which character is speaking each line</li>
-          <li style={{ marginBottom: '5px' }}><strong>Characters on Stage</strong>: Tracks who is present in the current scene</li>
-          <li style={{ marginBottom: '5px' }}><strong>Rich Context</strong>: Provides explanations that consider the dramatic situation, character relationships, and theatrical context</li>
-          <li style={{ marginBottom: '5px' }}><strong>Performance Insights</strong>: Understands how lines would be delivered on stage and their dramatic impact</li>
+          <li style={{ marginBottom: '5px' }}><strong>Shakespeare Plays</strong>: Automatically detects act, scene, speaker, and characters on stage for rich dramatic context</li>
+          <li style={{ marginBottom: '5px' }}><strong>Chapter & Section Detection</strong>: Identifies chapters, sections, parts, and books to provide precise location context</li>
+          <li style={{ marginBottom: '5px' }}><strong>Multiple Formats</strong>: Recognizes various chapter formats including "Chapter 1", "Ch. 1", "I.", and Roman numerals</li>
+          <li style={{ marginBottom: '5px' }}><strong>Rich Context</strong>: Provides explanations that consider the book's structure, location, and surrounding context</li>
+          <li style={{ marginBottom: '5px' }}><strong>Performance Insights</strong>: For plays, understands how lines would be delivered on stage and their dramatic impact</li>
         </ul>
 
         <h3 style={{ color: '#007bff', marginTop: '25px', marginBottom: '10px' }}>Library</h3>
@@ -87,35 +89,14 @@ const UserGuide: React.FC = () => {
           <li style={{ marginBottom: '5px' }}><strong>Curated Collection</strong>: Hundreds of classic texts organized by category</li>
           <li style={{ marginBottom: '5px' }}><strong>Custom URLs</strong>: Load any text from the web</li>
           <li style={{ marginBottom: '5px' }}><strong>File Upload</strong>: Upload your own .txt files</li>
-          <li style={{ marginBottom: '5px' }}><strong>Consistent navigation</strong>: Use the global header/menu to jump anywhere without losing your place</li>
-        </ul>
 
-        <h2 style={{ color: '#10b981', marginTop: '30px', marginBottom: '12px' }}>What’s New</h2>
-        <ul>
-          <li style={{ marginBottom: '6px' }}><strong>Single, persistent header</strong>: One header everywhere with a consistent 10‑item hamburger (Demo at the bottom).</li>
-          <li style={{ marginBottom: '6px' }}><strong>New Demo page</strong>: A visual walkthrough with captions, accessible from the hamburger.</li>
-          <li style={{ marginBottom: '6px' }}><strong>New About page</strong>: Learn about the project, author, and AI-generated development process.</li>
-          <li style={{ marginBottom: '6px' }}><strong>Reader resumes position</strong>: Your last scroll position is saved and restored across one‑panel and two‑panel layouts.</li>
-          <li style={{ marginBottom: '6px' }}><strong>Smarter search</strong>: Finds phrases with or without punctuation and flexible spacing, and scrolls to results.</li>
-          <li style={{ marginBottom: '6px' }}><strong>Playphrase link</strong>: After an explanation (and under any embedded video), tap “Is this quote in the movies?” to search film clips at <a href="https://playphrase.me" target="_blank" rel="noopener noreferrer" style={{ color: '#007bff', textDecoration: 'underline' }}>playphrase.me</a>. It reuses the same browser tab. Thanks to Playphrase for making movie quotes searchable!</li>
-          <li style={{ marginBottom: '6px' }}><strong>Styles preview</strong>: The Styles page now shows a photo preview of the selected persona. Added <em>Stephen King</em> and <em>William Shakespeare</em> - ask the Bard to explain his own plays!</li>
-          <li style={{ marginBottom: '6px' }}><strong>Chat uses your style</strong>: Chat automatically follows the currently selected explainer style unless you change it in Chat.</li>
-          <li style={{ marginBottom: '6px' }}><strong>Library polish</strong>: URL + Upload buttons fit on one line on phones; the URL placeholder is shorter; English Literature is trimmed to the top 100 books for speed.</li>
-          <li style={{ marginBottom: '6px' }}><strong>Mobile selection</strong>: Long‑press selection now keeps the highlight visible while confirming; scroll lock is more reliable; haptic feedback on first long‑press is improved.</li>
-          <li style={{ marginBottom: '6px' }}><strong>Mobile style picker</strong>: The style dropdown in Chat is now a custom, light‑themed menu for better Android compatibility.</li>
-          <li style={{ marginBottom: '6px' }}><strong>Credits page</strong>: Shows books you own with Open links, and a live countdown for <em>Unlimited</em> time remaining. The “1 Day” option grants 24‑hour unlimited access.</li>
         </ul>
+        
+        <div style={{ background: '#fff3cd', border: '1px solid #ffeaa7', borderRadius: '6px', padding: '12px', marginTop: '12px', fontSize: '14px' }}>
+          <strong>💡 Project Gutenberg Tip:</strong> When you find a book on <a href="https://www.gutenberg.org/" target="_blank" rel="noopener noreferrer" style={{ color: '#007bff', textDecoration: 'underline' }}>Project Gutenberg</a>, select the <strong>"Plain Text UTF-8"</strong> version.
+        </div>
 
-        <h3 style={{ color: '#007bff', marginTop: '22px', marginBottom: '10px' }}>Tips</h3>
-        <ul>
-          <li style={{ marginBottom: '5px' }}><strong>Desktop selection</strong>: Drag to highlight, then choose Explain.</li>
-          <li style={{ marginBottom: '5px' }}><strong>Mobile selection</strong>: Long‑press (with a short vibration) to enter selection, drag to refine. Scrolling is locked for accuracy, and the highlight remains visible while you confirm.</li>
-          <li style={{ marginBottom: '5px' }}><strong>Search navigation</strong>: Use the up/down arrows next to the search to jump between hits.</li>
-        </ul>
 
-        <p style={{ marginTop: '30px', padding: '15px', background: '#e3f2fd', borderRadius: '6px', borderLeft: '4px solid #2196f3' }}>
-          <strong>Tip:</strong> The hamburger menu (☰) in the top right provides access to all app features from any page.
-        </p>
       </div>
     </div>
   )

@@ -30,22 +30,79 @@
 
 .customSection {
   background: #f8fafc;
-  padding: 12px;
+  padding: 16px;
   border-radius: 12px;
   margin-bottom: 16px;
   display: flex;
-  gap: 12px;
-  flex-wrap: wrap;
   align-items: center;
   justify-content: center;
   border: 1px solid #e5e7eb;
 }
 
+.customLink {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  font-size: 16px;
+  color: #374151;
+}
+
+.customBooksButton {
+  padding: 10px 20px;
+  background: #3b82f6;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 500;
+  font-size: 14px;
+  transition: all 0.2s ease;
+}
+
+.customBooksButton:hover {
+  background: #2563eb;
+  transform: translateY(-1px);
+  box-shadow: 0 2px 8px rgba(59, 130, 246, 0.3);
+}
+
 .urlInput {
   display: flex;
+  flex-direction: column;
   gap: 8px;
   flex: 1;
-  min-width: 300px;
+  min-width: 280px;
+  max-width: 400px;
+}
+
+.urlInputHeader {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  font-weight: 500;
+  color: #374151;
+}
+
+.helpIcon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 14px;
+  height: 14px;
+  background: #e0e0e0;
+  color: #444;
+  border-radius: 50%;
+  font-size: 10px;
+  font-weight: normal;
+  cursor: help;
+  transition: all 0.2s;
+  opacity: 0.7;
+}
+
+.helpIcon:hover {
+  background: #d0d0d0;
+  color: #555;
+  opacity: 1;
 }
 
 .input {
@@ -81,6 +138,9 @@
 
 .fileInput {
   position: relative;
+  display: flex;
+  align-items: flex-end;
+  min-height: 80px;
 }
 
 .fileInputHidden {
@@ -92,17 +152,22 @@
 
 .fileLabel {
   display: inline-block;
-  padding: 10px 20px;
+  padding: 12px 24px;
   background: #10b981;
   color: white;
   border-radius: 6px;
   cursor: pointer;
   font-weight: 500;
+  font-size: 14px;
+  white-space: nowrap;
+  transition: background-color 0.2s ease;
   transition: background 0.15s ease;
 }
 
 .fileLabel:hover {
   background: #059669;
+  transform: translateY(-1px);
+  box-shadow: 0 2px 8px rgba(16, 185, 129, 0.3);
 }
 
 .categories {
@@ -220,25 +285,41 @@
   }
   
   .customSection {
-    flex-direction: row;
-    flex-wrap: nowrap;
-    gap: 8px;
-    padding: 12px;
+    flex-direction: column;
+    gap: 12px;
+    padding: 16px;
     margin-bottom: 16px;
     background: #ffffff;
     border: 1px solid #e0e0e0;
     border-radius: 8px;
-    align-items: stretch;
-    justify-content: stretch;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .customLink {
+    flex-direction: column;
+    gap: 12px;
+    text-align: center;
   }
   
   .urlInput {
     min-width: 0;
-    width: auto;
-    flex-direction: row;
+    width: 100%;
+    flex-direction: column;
     gap: 8px;
     align-items: stretch;
-    flex: 1 1 auto;
+    flex: none;
+  }
+
+  .urlInputHeader {
+    font-size: 12px;
+    gap: 6px;
+  }
+
+  .helpIcon {
+    width: 12px;
+    height: 12px;
+    font-size: 9px;
   }
   
   .input {
@@ -259,13 +340,13 @@
   }
   
   .fileLabel {
-    padding: 8px 10px;
-    font-size: 13px;
+    padding: 12px 20px;
+    font-size: 14px;
     text-align: center;
     background: #10b981;
     border-radius: 6px;
     margin-top: 0;
-    flex: 0 0 auto;
+    width: 100%;
     white-space: nowrap;
   }
   
@@ -310,4 +391,110 @@
     padding: 4px 8px;
     font-size: 13px;
   }
+}
+
+.helpPopupOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 2000;
+}
+
+.helpPopup {
+  background: white;
+  border-radius: 12px;
+  padding: 0;
+  max-width: 500px;
+  width: 90%;
+  max-height: 80vh;
+  overflow: hidden;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+  animation: helpPopupSlideIn 0.2s ease-out;
+}
+
+@keyframes helpPopupSlideIn {
+  from {
+    opacity: 0;
+    transform: scale(0.9) translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+.helpPopupHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 24px 16px;
+  border-bottom: 1px solid #e0e0e0;
+  background: #f8f9fa;
+}
+
+.helpPopupHeader h4 {
+  margin: 0;
+  color: #333;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.helpPopupClose {
+  background: none;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+  color: #666;
+  padding: 0;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  transition: background-color 0.2s;
+}
+
+.helpPopupClose:hover {
+  background: #e0e0e0;
+}
+
+.helpPopupContent {
+  padding: 20px 24px;
+  line-height: 1.6;
+  color: #333;
+}
+
+.helpPopupContent p {
+  margin: 0 0 16px 0;
+}
+
+.helpPopupContent p:last-child {
+  margin-bottom: 0;
+}
+
+.helpPopupContent h5 {
+  margin: 20px 0 12px 0;
+  color: #1f2937;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.helpPopupContent ul {
+  margin: 0 0 16px 0;
+  padding-left: 20px;
+}
+
+.helpPopupContent li {
+  margin-bottom: 8px;
+}
+
+.helpPopupContent strong {
+  color: #007bff;
 }

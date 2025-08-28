@@ -43,10 +43,19 @@ export default function ClientLayout({ children }: { children: React.ReactNode }
       <SettingsProvider>
         <div>
           <header style={{
-            position: 'fixed', top: 0, left: 0, right: 0,
-            background: 'white', borderBottom: '1px solid #e0e0e0', padding: '8px 12px', zIndex: 100,
-            display: 'flex', justifyContent: 'space-between', alignItems: 'center'
+            background: 'white', borderBottom: '1px solid #e0e0e0',
+            maxWidth: '1024px',
+            margin: '0 auto',
+            width: '100%'
           }}>
+            <div style={{
+              width: '100%',
+              display: 'flex',
+              justifyContent: 'space-between',
+              alignItems: 'center',
+              padding: '8px 20px',
+              boxSizing: 'border-box'
+            }}>
             <div style={{ flex: 1 }}>
               <h1 style={{ margin: 0, fontSize: '18px', fontWeight: 'bold', color: '#333', lineHeight: '1.2' }}>The Explainers</h1>
               <p style={{ margin: 0, fontSize: '11px', color: '#666', lineHeight: '1.2' }}>
@@ -65,6 +74,7 @@ export default function ClientLayout({ children }: { children: React.ReactNode }
                   <button onClick={() => { router.push('/reader'); setShowMobileMenu(false) }} style={{ display: 'block', width: '100%', padding: '12px 16px', background: 'none', border: 'none', textAlign: 'left', cursor: 'pointer', borderBottom: '1px solid #f0f0f0' }}>📖 Reader</button>
                   <button onClick={() => { router.push('/chat'); setShowMobileMenu(false) }} style={{ display: 'block', width: '100%', padding: '12px 16px', background: 'none', border: 'none', textAlign: 'left', cursor: 'pointer', borderBottom: '1px solid #f0f0f0' }}>💬 Chat</button>
                   <button onClick={() => { router.push('/library'); setShowMobileMenu(false) }} style={{ display: 'block', width: '100%', padding: '12px 16px', background: 'none', border: 'none', textAlign: 'left', cursor: 'pointer', borderBottom: '1px solid #f0f0f0' }}>📚 Library</button>
+                  <button onClick={() => { router.push('/custom-books'); setShowMobileMenu(false) }} style={{ display: 'block', width: '100%', padding: '12px 16px', background: 'none', border: 'none', textAlign: 'left', cursor: 'pointer', borderBottom: '1px solid #f0f0f0' }}>📖 Custom Books</button>
                   <button onClick={() => { router.push('/styles'); setShowMobileMenu(false) }} style={{ display: 'block', width: '100%', padding: '12px 16px', background: 'none', border: 'none', textAlign: 'left', cursor: 'pointer', borderBottom: '1px solid #f0f0f0' }}>🎭 Styles</button>
                   <button onClick={() => { router.push('/credits'); setShowMobileMenu(false) }} style={{ display: 'block', width: '100%', padding: '12px 16px', background: 'none', border: 'none', textAlign: 'left', cursor: 'pointer', borderBottom: '1px solid #f0f0f0' }}>💳 Credits</button>
                   <button onClick={() => { router.push('/profile'); setShowMobileMenu(false) }} style={{ display: 'block', width: '100%', padding: '12px 16px', background: 'none', border: 'none', textAlign: 'left', cursor: 'pointer', borderBottom: '1px solid #f0f0f0' }}>👤 Profile</button>
@@ -75,9 +85,15 @@ export default function ClientLayout({ children }: { children: React.ReactNode }
                 </div>
               )}
             </div>
+            </div>
           </header>
 
-          <main style={{ marginTop: '60px', minHeight: 'calc(100vh - 60px)' }}>
+          <main style={{ 
+            minHeight: 'calc(100vh - 60px)',
+            maxWidth: '1024px',
+            margin: '0 auto',
+            padding: '0 20px'
+          }}>
             {children}
           </main>
         </div>

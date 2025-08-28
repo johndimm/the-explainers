@@ -44,8 +44,14 @@ export const extractContextInfo = (selectedText: string, fullText: string, bookT
   let scene: string | null = null
   let speaker: string | null = null
   let charactersOnStage: string[] = []
+  let chapter: string | null = null
+  let section: string | null = null
+  let part: string | null = null
+  let book: string | null = null
 
   const searchText = fullText.substring(0, selectedIndex + selectedText.length)
+  
+  // Shakespeare-specific context (Act & Scene)
   const actMatches = searchText.match(/\bACT\s+([IVXLCDM]+)\b/gi)
   if (actMatches) {
     const lastActMatch = actMatches[actMatches.length - 1]
@@ -56,6 +62,45 @@ export const extractContextInfo = (selectedText: string, fullText: string, bookT
   if (sceneMatches) {
     const lastSceneMatch = sceneMatches[sceneMatches.length - 1]
     scene = lastSceneMatch.replace(/\bSCENE\s+/i, '').trim()
+  }
+
+  // General book context (Chapter, Section, Part, Book)
+  const chapterMatches = searchText.match(/\bCHAPTER\s+([IVXLCDM0-9]+)\b/gi)
+  if (chapterMatches) {
+    const lastChapterMatch = chapterMatches[chapterMatches.length - 1]
+    chapter = lastChapterMatch.replace(/\bCHAPTER\s+/i, '').trim()
+  }
+
+  const sectionMatches = searchText.match(/\bSECTION\s+([IVXLCDM0-9]+)\b/gi)
+  if (sectionMatches) {
+    const lastSectionMatch = sectionMatches[sectionMatches.length - 1]
+    section = lastSectionMatch.replace(/\bSECTION\s+/i, '').trim()
+  }
+
+  const partMatches = searchText.match(/\bPART\s+([IVXLCDM0-9]+)\b/gi)
+  if (partMatches) {
+    const lastPartMatch = partMatches[partMatches.length - 1]
+    part = lastPartMatch.replace(/\bPART\s+/i, '').trim()
+  }
+
+  const bookMatches = searchText.match(/\bBOOK\s+([IVXLCDM0-9]+)\b/gi)
+  if (bookMatches) {
+    const lastBookMatch = bookMatches[bookMatches.length - 1]
+    book = lastBookMatch.replace(/\bBOOK\s+/i, '').trim()
+  }
+
+  // Alternative chapter formats (e.g., "Chapter 1", "Ch. 1", "I.")
+  const altChapterMatches = searchText.match(/\b(?:Chapter|Ch\.?)\s+([IVXLCDM0-9]+)\b/gi)
+  if (altChapterMatches && !chapter) {
+    const lastAltChapterMatch = altChapterMatches[altChapterMatches.length - 1]
+    chapter = lastAltChapterMatch.replace(/\b(?:Chapter|Ch\.?)\s+/i, '').trim()
+  }
+
+  // Roman numeral chapters (e.g., "I.", "II.", "III.")
+  const romanChapterMatches = searchText.match(/\b([IVXLCDM]+)\.\s*\n/g)
+  if (romanChapterMatches && !chapter) {
+    const lastRomanMatch = romanChapterMatches[romanChapterMatches.length - 1]
+    chapter = lastRomanMatch.replace(/\.\s*\n$/, '').trim()
   }
 
   const speakerMatches = beforeText.match(/\n([A-Z][A-Z\s&']+)\./g)
@@ -111,6 +156,10 @@ export const extractContextInfo = (selectedText: string, fullText: string, bookT
     scene,
     speaker,
     charactersOnStage,
+    chapter,
+    section,
+    part,
+    book,
     selectedText,
     beforeContext: beforeText.slice(-200),
     afterContext: afterText.slice(0, 200)

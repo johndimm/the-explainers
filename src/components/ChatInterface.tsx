@@ -70,6 +70,7 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ selectedText, contextInfo
   const [showFullHistory, setShowFullHistory] = useState(false)
   const [originalSelectedText, setOriginalSelectedText] = useState("")
   const [showStyleMenu, setShowStyleMenu] = useState(false)
+  const [showHelpPopup, setShowHelpPopup] = useState<string | null>(null)
   const latestResponseRef = useRef<HTMLDivElement>(null)
   const inputRef = useRef<HTMLInputElement>(null)
   const styleMenuRef = useRef<HTMLDivElement>(null)
@@ -746,6 +747,55 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ selectedText, contextInfo
     }
   }
 
+  const getHelpPopupTitle = () => {
+    switch (showHelpPopup) {
+      case 'ai-model':
+        return 'AI Model Selection'
+      case 'style':
+        return 'Explanation Style'
+      case 'length':
+        return 'Response Length'
+      default:
+        return 'Help'
+    }
+  }
+
+  const getHelpPopupContent = () => {
+    switch (showHelpPopup) {
+      case 'ai-model':
+        return (
+          <div>
+            <p><strong>Claude 3.5 Sonnet:</strong> Excellent for literature, poetry, and nuanced text analysis. Often provides the most thoughtful and context-aware explanations.</p>
+            <p><strong>GPT-4 (OpenAI):</strong> Great for technical texts, academic writing, and comprehensive analysis. Very strong at breaking down complex concepts.</p>
+            <p><strong>DeepSeek Chat:</strong> Creative and engaging explanations, good for making difficult texts accessible and interesting.</p>
+            <p><strong>Gemini 2.5 Flash:</strong> Fast responses, good for quick explanations and straightforward text interpretation.</p>
+          </div>
+        )
+      case 'style':
+        return (
+          <div>
+            <p><strong>Neutral:</strong> Clear, academic explanations without personality.</p>
+            <p><strong>William Shakespeare:</strong> The Bard himself explains his plays with dramatic context and performance insights.</p>
+            <p><strong>Stephen King:</strong> Lean, vivid explanations with suspenseful storytelling.</p>
+            <p><strong>David Foster Wallace:</strong> Hyper-detailed, verbose analysis with deep intellectual exploration.</p>
+            <p><strong>Oscar Wilde:</strong> Witty, paradoxical explanations with clever wordplay.</p>
+            <p><strong>Carl Sagan:</strong> Cosmic wonder and curiosity in explaining any text.</p>
+            <p>And many more! Choose from critics, writers, comedians, and talk show hosts - each offers a unique approach to understanding difficult texts.</p>
+          </div>
+        )
+      case 'length':
+        return (
+          <div>
+            <p><strong>Brief:</strong> 2-3 sentences maximum. Perfect for quick understanding when you just need the key point.</p>
+            <p><strong>Medium:</strong> 1-2 paragraphs. Balanced explanation with context but not overwhelming.</p>
+            <p><strong>Long:</strong> Comprehensive analysis with full context, historical background, and detailed interpretation.</p>
+          </div>
+        )
+      default:
+        return <p>Help information not available.</p>
+    }
+  }
+
   return (
     <div className={isPageMode ? '' : styles.chatOverlay}>
       <div className={isPageMode ? '' : styles.chatContainer} style={isPageMode ? { height: '100%', display: 'flex', flexDirection: 'column' } : {}}>
@@ -781,6 +831,14 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ selectedText, contextInfo
           </div>
           <div className={styles.headerControls}>
             <div className={styles.providerSelector}>
+              <div className={styles.dropdownLabel}>
+                <span>AI Model</span>
+                <span 
+                  className={styles.helpIcon} 
+                  onClick={() => setShowHelpPopup('ai-model')}
+                  title="Click for more info"
+                >?</span>
+              </div>
               <select 
                 value={selectedProvider} 
                 onChange={(e) => setSelectedProvider(e.target.value as LLMProvider)}
@@ -794,6 +852,14 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ selectedText, contextInfo
               </select>
             </div>
             <div className={styles.styleSelector}>
+              <div className={styles.dropdownLabel}>
+                <span>Explanation Style</span>
+                <span 
+                  className={styles.helpIcon} 
+                  onClick={() => setShowHelpPopup('style')}
+                  title="Click for more info"
+                >?</span>
+              </div>
               <div 
                 ref={styleMenuRef}
                 className={`${styles.customSelect} ${isLoading ? styles.disabled : ''}`}
@@ -824,6 +890,14 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ selectedText, contextInfo
               </div>
             </div>
             <div className={styles.lengthSelector}>
+              <div className={styles.dropdownLabel}>
+                <span>Response Length</span>
+                <span 
+                  className={styles.helpIcon} 
+                  onClick={() => setShowHelpPopup('length')}
+                  title="Click for more info"
+                >?</span>
+              </div>
               <select 
                 value={currentResponseLength} 
                 onChange={(e) => setCurrentResponseLength(e.target.value as ResponseLength)}
@@ -1007,6 +1081,23 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ selectedText, contextInfo
         </div>
       </div>
       
+      {/* Help Popup */}
+      {showHelpPopup && (
+        <div className={styles.helpPopupOverlay} onClick={() => setShowHelpPopup(null)}>
+          <div className={styles.helpPopup} onClick={(e) => e.stopPropagation()}>
+            <div className={styles.helpPopupHeader}>
+              <h4>{getHelpPopupTitle()}</h4>
+              <button 
+                className={styles.helpPopupClose}
+                onClick={() => setShowHelpPopup(null)}
+              >×</button>
+            </div>
+            <div className={styles.helpPopupContent}>
+              {getHelpPopupContent()}
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   )
 }
