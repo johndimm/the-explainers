@@ -111,10 +111,12 @@ export async function POST(request: NextRequest) {
 
     const text = await response.text()
     
-    return NextResponse.json({ 
-      text,
-      contentType,
-      originalUrl: url
+    // Return the text directly as plain text instead of JSON
+    // This matches the GET handler behavior and avoids double-encoding issues
+    return new Response(text, {
+      headers: {
+        'Content-Type': 'text/plain; charset=utf-8',
+      },
     })
     
   } catch (error) {

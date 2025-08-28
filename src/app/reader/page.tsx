@@ -77,6 +77,7 @@ function ReaderContent() {
       const isHtmlFile = url.toLowerCase().endsWith('.html')
       
       if (url.startsWith('blob:') || url.startsWith('/')) {
+        // Handle local files and blob URLs directly
         const response = await fetch(url)
         text = await response.text()
         
@@ -86,6 +87,7 @@ function ReaderContent() {
           text = doc.body.textContent || doc.documentElement.textContent || text
         }
       } else {
+        // Route external URLs through our API to avoid CORS
         const response = await fetch('/api/download-text', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
@@ -96,14 +98,7 @@ function ReaderContent() {
           throw new Error(`Failed to download: ${response.statusText}`)
         }
         
-        // All responses should be plain text
         text = await response.text()
-        console.log('Plain text response received:', {
-          textLength: text.length,
-          firstChars: text.substring(0, 100),
-          hasNewlines: text.includes('\n'),
-          newlineCount: (text.match(/\n/g) || []).length
-        })
         
         if (isHtmlFile) {
           const parser = new DOMParser()

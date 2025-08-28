@@ -1,6 +1,6 @@
 [
   { "id": "magna-carta", "title": "Magna Carta", "author": "King John of England", "localPath": "/public-domain-texts/magna-carta.txt" },
   { "id": "kjv-bible", "title": "The King James Version of the Bible", "author": "Various", "localPath": "/public-domain-texts/king-james-bible.txt" },
-  { "id": "tractatus", "title": "Tractatus Logico-Philosophicus", "author": "Ludwig Wittgenstein", "localPath": "/public-domain-texts/Tractatus Logico-Philosophicus (English).html" },
+  { "id": "tractatus", "title": "Tractatus Logico-Philosophicus", "author": "Ludwig Wittgenstein", "localPath": "/public-domain-texts/tractatus-english.txt" },
   { "id": "book-of-mormon", "title": "The Book of Mormon", "author": "Various", "directUrl": "https://www.gutenberg.org/files/17/17-0.txt" }
 ]
