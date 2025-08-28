@@ -87,7 +87,12 @@ const Library: React.FC<LibraryProps> = ({ onBookSelect, onBackToCurrentBook }) 
     if (book.directUrl) {
       return book.directUrl
     }
-    return `/api/download-text?path=${encodeURIComponent(book.localPath || '')}`
+    if (book.localPath) {
+      return `/api/download-text?path=${encodeURIComponent(book.localPath)}`
+    }
+    // For books without localPath or directUrl, construct Project Gutenberg URL
+    // Most books use their ID to construct the URL
+    return `https://www.gutenberg.org/files/${book.id}/${book.id}-0.txt`
   }
 
   const handleBookClick = (book: Book, categoryName: string) => {

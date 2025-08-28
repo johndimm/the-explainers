@@ -1,5 +1,63 @@
 import { NextRequest, NextResponse } from 'next/server'
 
+export async function GET(request: NextRequest) {
+  try {
+    const { searchParams } = new URL(request.url)
+    const path = searchParams.get('path')
+    
+    console.log('GET /api/download-text called with path:', path)
+    console.log('Full URL:', request.url)
+    
+    if (!path) {
+      return NextResponse.json({ error: 'Path parameter is required' }, { status: 400 })
+    }
+
+    // For GET requests, we expect a local path to a book file
+    // This is used by the Library component for pre-loaded books
+    try {
+      const fs = require('fs')
+      const pathModule = require('path')
+      
+      // Construct the full path to the book file
+      // Remove leading slash and handle both src/data/library and public/public-domain-texts
+      const cleanPath = path.startsWith('/') ? path.slice(1) : path
+      let bookPath
+      
+      if (cleanPath.startsWith('public-domain-texts/')) {
+        bookPath = pathModule.join(process.cwd(), 'public', cleanPath)
+      } else {
+        bookPath = pathModule.join(process.cwd(), 'src/data/library', cleanPath)
+      }
+      
+      if (!fs.existsSync(bookPath)) {
+        return NextResponse.json({ error: 'Book file not found' }, { status: 404 })
+      }
+      
+      const text = fs.readFileSync(bookPath, 'utf-8')
+      
+      return NextResponse.json({ 
+        text,
+        contentType: 'text/plain',
+        originalPath: path
+      })
+      
+    } catch (error) {
+      console.error('Error reading book file:', error)
+      return NextResponse.json(
+        { error: 'Failed to read book file' }, 
+        { status: 500 }
+      )
+    }
+    
+  } catch (error) {
+    console.error('Error in GET download-text:', error)
+    return NextResponse.json(
+      { error: 'Failed to process request' }, 
+      { status: 500 }
+    )
+  }
+}
+
 export async function POST(request: NextRequest) {
   try {
     const { url } = await request.json()

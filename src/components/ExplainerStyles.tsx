@@ -55,8 +55,15 @@ export const STYLE_CATEGORIES = {
     { value: 'cormac-mccarthy', name: 'Cormac McCarthy', description: 'Sparse and haunting' },
     { value: 'stephen-king', name: 'Stephen King', description: 'Lean, vivid, and suspenseful' },
     { value: 'william-shakespeare', name: 'William Shakespeare', description: 'Elizabethan drama, metaphor-rich, poetic' },
-  ],
-  comedians: [
+    { value: 'dorothy-parker', name: 'Dorothy Parker', description: 'Witty, sharp, and acerbic' },
+    { value: 'ernest-hemingway', name: 'Ernest Hemingway', description: 'Sparse, direct, and masculine' },
+      ],
+    presidents: [
+      { value: 'donald-trump', name: 'Donald Trump', description: 'Bold, direct, and controversial' },
+      { value: 'george-w-bush', name: 'George W. Bush', description: 'Down-to-earth and folksy' },
+      { value: 'barack-obama', name: 'Barack Obama', description: 'Eloquent, thoughtful, and inspiring' },
+    ],
+    comedians: [
     { value: 'jerry-seinfeld', name: 'Jerry Seinfeld', description: 'What\'s the deal with...' },
     { value: 'louis-ck', name: 'Louis C.K.', description: 'Observational and conversational' },
     { value: 'dave-chappelle', name: 'Dave Chappelle', description: 'Sharp social commentary' },
@@ -459,11 +466,12 @@ const ExplainerStyles: React.FC<ExplainerStylesProps> = ({
             </div>
           </div>
 
-          {renderCategory('Critics', STYLE_CATEGORIES.critics)}
-          {renderCategory('Writers', STYLE_CATEGORIES.writers)}
-          {renderCategory('Comedians', STYLE_CATEGORIES.comedians)}
-          {renderCategory('Talk Show Hosts', STYLE_CATEGORIES.talkShowHosts)}
-          {renderCategory('Other', STYLE_CATEGORIES.other)}
+                  {renderCategory('Critics', STYLE_CATEGORIES.critics)}
+        {renderCategory('Writers', STYLE_CATEGORIES.writers)}
+        {renderCategory('Presidents', STYLE_CATEGORIES.presidents)}
+        {renderCategory('Comedians', STYLE_CATEGORIES.comedians)}
+        {renderCategory('Talk Show Hosts', STYLE_CATEGORIES.talkShowHosts)}
+        {renderCategory('Other', STYLE_CATEGORIES.other)}
         </div>
       </div>
     </div>
