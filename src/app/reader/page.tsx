@@ -96,8 +96,14 @@ function ReaderContent() {
           throw new Error(`Failed to download: ${response.statusText}`)
         }
         
-        const data = await response.json()
-        text = data.text
+        // All responses should be plain text
+        text = await response.text()
+        console.log('Plain text response received:', {
+          textLength: text.length,
+          firstChars: text.substring(0, 100),
+          hasNewlines: text.includes('\n'),
+          newlineCount: (text.match(/\n/g) || []).length
+        })
         
         if (isHtmlFile) {
           const parser = new DOMParser()
@@ -106,6 +112,12 @@ function ReaderContent() {
         }
       }
       
+      console.log('Setting book text:', {
+        textLength: text.length,
+        firstChars: text.substring(0, 100),
+        hasNewlines: text.includes('\n'),
+        newlineCount: (text.match(/\n/g) || []).length
+      })
       setBookText(text)
     } catch (error) {
       console.error('Error loading book:', error)

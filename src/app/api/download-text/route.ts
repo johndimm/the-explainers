@@ -35,10 +35,16 @@ export async function GET(request: NextRequest) {
       
       const text = fs.readFileSync(bookPath, 'utf-8')
       
-      return NextResponse.json({ 
-        text,
-        contentType: 'text/plain',
-        originalPath: path
+      console.log(`Reading file: ${bookPath}`)
+      console.log(`File size: ${text.length} characters`)
+      console.log(`First 200 chars: ${text.substring(0, 200)}`)
+      console.log(`Last 200 chars: ${text.substring(text.length - 200)}`)
+      
+      // Return the text directly as plain text instead of JSON
+      return new Response(text, {
+        headers: {
+          'Content-Type': 'text/plain; charset=utf-8',
+        },
       })
       
     } catch (error) {

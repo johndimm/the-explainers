@@ -79,7 +79,17 @@ const DesktopTextReader: React.FC<ReaderCommonProps> = ({ text, bookTitle = 'Rom
         onMouseUp={handleMouseUp}
         style={{ userSelect: 'text', fontFamily: settings.textFont }}
       >
-        {renderTextWithSearchHighlight(text)}
+        <pre style={{ 
+          whiteSpace: 'pre', 
+          wordWrap: 'normal', 
+          overflowWrap: 'normal',
+          margin: 0, 
+          fontFamily: 'inherit',
+          fontSize: 'inherit',
+          lineHeight: 'inherit'
+        }}>
+          {renderTextWithSearchHighlight(text)}
+        </pre>
       </div>
 
       {showConfirmDialog && (

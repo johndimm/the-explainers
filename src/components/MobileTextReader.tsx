@@ -297,13 +297,37 @@ const MobileTextReader: React.FC<ReaderCommonProps> = ({ text, bookTitle = 'Rome
         const before = text.slice(0, idx)
         const after = text.slice(idx + highlightedText.length)
         rendered = (
-          <>
+          <pre style={{ 
+            whiteSpace: 'pre', 
+            wordWrap: 'normal', 
+            overflowWrap: 'normal',
+            margin: 0, 
+            fontFamily: 'inherit',
+            fontSize: 'inherit',
+            lineHeight: 'inherit'
+          }}>
             {before}
             <span className={styles.selectedText}>{highlightedText}</span>
             {after}
-          </>
+          </pre>
         )
       }
+    }
+    // Wrap the final rendered text in a pre tag to preserve formatting
+    if (typeof rendered === 'string') {
+      rendered = (
+        <pre style={{ 
+          whiteSpace: 'pre', 
+          wordWrap: 'normal', 
+          overflowWrap: 'normal',
+          margin: 0, 
+          fontFamily: 'inherit',
+          fontSize: 'inherit',
+          lineHeight: 'inherit'
+        }}>
+          {rendered}
+        </pre>
+      )
     }
     return rendered
   }
