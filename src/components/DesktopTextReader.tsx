@@ -5,7 +5,8 @@ import styles from './TextReader.module.css'
 import { ReaderCommonProps, useBookmarkRestoreAndSave, useSearchCore, extractContextInfo } from './BaseTextReader'
 import { useRouter } from 'next/navigation'
 
-const DesktopTextReader: React.FC<ReaderCommonProps> = ({ text, bookTitle = 'Romeo and Juliet', author = 'William Shakespeare', settings }) => {
+const DesktopTextReader: React.FC<ReaderCommonProps> = ({ text, bookTitle = 'Romeo and Juliet', author = 'William Shakespeare', settings, profile, onSettingsChange }) => {
+  log('DesktopTextReader rendering with text length:', text?.length)
   const router = useRouter()
   const textReaderRef = useRef<HTMLDivElement>(null)
   const textContentRef = useRef<HTMLDivElement>(null)
@@ -90,6 +91,8 @@ const DesktopTextReader: React.FC<ReaderCommonProps> = ({ text, bookTitle = 'Rom
         }}>
           {renderTextWithSearchHighlight(text)}
         </pre>
+        
+
       </div>
 
       {showConfirmDialog && (

@@ -7,6 +7,7 @@ import { useRouter } from 'next/navigation'
 import { log, warn } from '../utils/log'
 
 const MobileTextReader: React.FC<ReaderCommonProps> = ({ text, bookTitle = 'Romeo and Juliet', author = 'William Shakespeare', settings, profile, onSettingsChange }) => {
+  log('MobileTextReader rendering with text length:', text?.length)
   const router = useRouter()
   const textReaderRef = useRef<HTMLDivElement>(null)
   const textContentRef = useRef<HTMLDivElement>(null)
@@ -404,6 +405,8 @@ const MobileTextReader: React.FC<ReaderCommonProps> = ({ text, bookTitle = 'Rome
         }}
       >
         {renderText()}
+        
+
       </div>
 
       {showConfirmDialog && (
