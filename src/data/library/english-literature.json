@@ -3,6 +3,7 @@
     { "id": "4217", "title": "A Portrait of the Artist as a Young Man", "author": "Joyce" },
     { "id": "2814", "title": "Dubliners", "author": "Joyce" },
     { "id": "55945", "title": "Exiles: A Play in Three Acts", "author": "Joyce" },
+    { "id": "finnegans-wake", "title": "Finnegans Wake", "author": "Joyce", "localPath": "public-domain-texts/finnegans-wake.txt" },
     { "id": "1", "title": "Alice's Adventures in Wonderland", "author": "Carroll" },
     { "id": "4", "title": "Pride and Prejudice", "author": "Austen" },
     { "id": "12", "title": "Through the Looking-Glass", "author": "Carroll" },
