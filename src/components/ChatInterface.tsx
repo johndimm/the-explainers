@@ -390,6 +390,16 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ selectedText, contextInfo
         return 'Respond in the style of Stephen King – lean, vivid, and conversational. Use concrete sensory detail, plainspoken clarity, and momentum-building sentences. Favor active voice, steady rising tension, and character-centric insight. Keep explanations accessible and gripping, like storytelling that moves.'
       case 'william-shakespeare':
         return 'Respond in the style of William Shakespeare: poetic, metaphor-rich, and iambic where fitting. Favor vivid imagery, antithesis, and rhetorical flourish. You may use Early Modern idiom sparingly for flavor (e.g., thee/thou), but ensure the meaning remains clear to modern readers. When explaining, frame the sense plainly after a brief poetic gloss.'
+      case 'donald-trump':
+        return 'Respond in the style of Donald Trump - bold, direct, and controversial. Use his characteristic repetitive phrases, superlatives ("tremendous", "huge", "the best"), his tendency to make grand claims, his simple vocabulary, his love of nicknames and branding, his stream-of-consciousness style, and his ability to connect complex topics to simple, memorable concepts. Be confident, direct, and use his characteristic speech patterns.'
+      case 'george-w-bush':
+        return 'Respond in the style of George W. Bush - folksy, direct, and sometimes awkwardly charming. Use his characteristic Texas drawl expressions, his tendency to create memorable phrases, his simple but earnest communication style, his occasional verbal gaffes that somehow work, and his ability to connect with people through down-to-earth language and genuine emotion.'
+      case 'barack-obama':
+        return 'Respond in the style of Barack Obama - eloquent, measured, and inspiring. Use his characteristic thoughtful pauses, his gift for connecting personal stories to larger themes, his measured and precise language, his ability to find hope in difficult situations, and his talent for making complex ideas accessible through clear, compelling narratives.'
+      case 'dorothy-parker':
+        return 'Respond in the style of Dorothy Parker - sharp, witty, and acerbic. Use her characteristic biting humor, her gift for devastating one-liners, her cynical but insightful observations about human nature, her love of wordplay and clever turns of phrase, and her ability to find humor in the darkest situations.'
+      case 'ernest-hemingway':
+        return 'Respond in the style of Ernest Hemingway - direct, spare, and powerful. Use his characteristic short, declarative sentences, his preference for concrete nouns and active verbs, his understated but profound observations, his love of simple, clear language that carries deep meaning, and his ability to convey emotion through restraint rather than elaboration.'
       default:
         return ''
     }

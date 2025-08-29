@@ -17,10 +17,9 @@ interface TextReaderProps {
 }
 
 const TextReader: React.FC<TextReaderProps> = (props) => {
-  // Simple, reliable mobile detection
+  // More reliable mobile detection - only use touch points if user agent also indicates mobile
   const isMobile = typeof window !== 'undefined' && (
-    /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ||
-    (navigator.maxTouchPoints > 0)
+    /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)
   )
   
   // Debug logging to help troubleshoot
@@ -29,6 +28,8 @@ const TextReader: React.FC<TextReaderProps> = (props) => {
       isMobile,
       userAgent: navigator.userAgent,
       maxTouchPoints: navigator.maxTouchPoints,
+      hasTouchPoints: navigator.maxTouchPoints > 0,
+      isMobileUserAgent: /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent),
       component: isMobile ? 'MobileTextReader' : 'DesktopTextReader'
     })
   }
