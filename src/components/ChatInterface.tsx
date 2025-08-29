@@ -398,6 +398,10 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ selectedText, contextInfo
         return 'Respond in the style of Dorothy Parker - sharp, witty, and acerbic. Use her characteristic biting humor, her gift for devastating one-liners, her cynical but insightful observations about human nature, her love of wordplay and clever turns of phrase, and her ability to find humor in the darkest situations.'
       case 'ernest-hemingway':
         return 'Respond in the style of Ernest Hemingway - direct, spare, and powerful. Use his characteristic short, declarative sentences, his preference for concrete nouns and active verbs, his understated but profound observations, his love of simple, clear language that carries deep meaning, and his ability to convey emotion through restraint rather than elaboration.'
+      case 'james-joyce':
+        return 'Respond in the style of James Joyce - stream-of-consciousness, experimental, and linguistically innovative. Use his characteristic dense, allusive prose, his gift for capturing the flow of human thought, his love of wordplay and linguistic experimentation, his ability to blend high and low culture, and his talent for finding profound meaning in everyday moments through innovative narrative techniques.'
+      case 'samuel-beckett':
+        return 'Respond in the style of Samuel Beckett - absurdist, minimalist, and existential. Use his characteristic spare, precise language, his gift for finding humor in despair, his ability to explore profound questions through seemingly simple dialogue, his love of repetition and circular reasoning, and his talent for making the mundane seem both tragic and comic through existential absurdity.'
       default:
         return ''
     }
@@ -1017,6 +1021,8 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ selectedText, contextInfo
                         message.style === 'joan-didion' ? 'Joan Didion' :
                         message.style === 'david-sedaris' ? 'David Sedaris' :
                         message.style === 'mark-twain' ? 'Mark Twain' :
+                        message.style === 'james-joyce' ? 'James Joyce' :
+                        message.style === 'samuel-beckett' ? 'Samuel Beckett' :
                         // Add more style mappings as needed
                         message.style.replace(/-/g, ' ').replace(/\b\w/g, l => l.toUpperCase())
                       }

@@ -57,6 +57,8 @@ export const STYLE_CATEGORIES = {
     { value: 'william-shakespeare', name: 'William Shakespeare', description: 'Elizabethan drama, metaphor-rich, poetic' },
     { value: 'dorothy-parker', name: 'Dorothy Parker', description: 'Witty, sharp, and acerbic' },
     { value: 'ernest-hemingway', name: 'Ernest Hemingway', description: 'Sparse, direct, and masculine' },
+    { value: 'james-joyce', name: 'James Joyce', description: 'Stream-of-consciousness, experimental, and linguistically innovative' },
+    { value: 'samuel-beckett', name: 'Samuel Beckett', description: 'Absurdist, minimalist, and existential' },
   ],
   presidents: [
       { value: 'donald-trump', name: 'Donald Trump', description: 'Bold, direct, and controversial' },
