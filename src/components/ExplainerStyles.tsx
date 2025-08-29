@@ -110,6 +110,7 @@ export const STYLE_CATEGORIES = {
     { value: 'neil-degrasse-tyson', name: 'Neil deGrasse Tyson', description: 'Scientific and accessible' },
     { value: 'humphrey-bogart', name: 'Humphrey Bogart', description: 'Tough and world-weary' },
     { value: 'marilyn-monroe', name: 'Marilyn Monroe', description: 'Glamorous and vulnerable' },
+    { value: 'louis-theroux', name: 'Louis Theroux', description: 'Curious, empathetic, and gently probing' },
   ]
 } as const
 

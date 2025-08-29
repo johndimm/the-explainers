@@ -39,11 +39,30 @@ const CATEGORY_FILES = [
 const Library: React.FC<LibraryProps> = ({ onBookSelect, onBackToCurrentBook }) => {
   const [categories, setCategories] = useState<LibraryCategory[]>([])
   const [loading, setLoading] = useState(true)
+  const [searchQuery, setSearchQuery] = useState('')
+  const [filteredCategories, setFilteredCategories] = useState<LibraryCategory[]>([])
   const router = useRouter()
 
   useEffect(() => {
     loadLibraryData()
   }, [])
+
+  useEffect(() => {
+    if (searchQuery.trim() === '') {
+      setFilteredCategories(categories)
+    } else {
+      const query = searchQuery.toLowerCase()
+      const filtered = categories.map(category => ({
+        ...category,
+        books: category.books.filter(book => 
+          book.title.toLowerCase().includes(query) ||
+          (book.author && book.author.toLowerCase().includes(query))
+        )
+      })).filter(category => category.books.length > 0)
+      
+      setFilteredCategories(filtered)
+    }
+  }, [searchQuery, categories])
 
   const loadLibraryData = async () => {
     try {
@@ -116,7 +135,57 @@ const Library: React.FC<LibraryProps> = ({ onBookSelect, onBackToCurrentBook }) 
       <div className={styles.library}>
         <div className={styles.header}>
           <h1 style={{ marginTop: 4 }}>Library</h1>
-          <p style={{ marginTop: 4 }}>Choose a book to read and explore</p>
+          <p style={{ marginTop: 4 }}>
+            Choose a book to read and explore
+            {searchQuery.trim() !== '' && (
+              <span style={{ 
+                display: 'block', 
+                fontSize: '14px', 
+                color: '#0ea5e9', 
+                marginTop: '4px',
+                fontWeight: '500'
+              }}>
+                🔍 Searching for "{searchQuery}"
+              </span>
+            )}
+          </p>
+          
+          {/* Search Bar */}
+          <div className={styles.searchContainer}>
+            <input
+              type="text"
+              placeholder="Search books by title or author... (Press Esc to clear)"
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              onKeyDown={(e) => {
+                if (e.key === 'Escape') {
+                  setSearchQuery('')
+                  e.currentTarget.blur()
+                }
+              }}
+              className={styles.searchInput}
+            />
+            
+            {/* Search Results Summary */}
+            {searchQuery.trim() !== '' && (
+              <div className={styles.searchResults}>
+                <span>🔍</span>
+                <span>
+                  Found {filteredCategories.reduce((total, cat) => total + cat.books.length, 0)} books 
+                  in {filteredCategories.length} categories
+                </span>
+                {searchQuery.trim() !== '' && (
+                  <button
+                    onClick={() => setSearchQuery('')}
+                    className={styles.clearSearchButton}
+                  >
+                    Clear search
+                  </button>
+                )}
+              </div>
+            )}
+          </div>
+          
           <div style={{ 
             background: '#f0f9ff', 
             border: '1px solid #0ea5e9', 
@@ -143,7 +212,16 @@ const Library: React.FC<LibraryProps> = ({ onBookSelect, onBackToCurrentBook }) 
         </div>
 
         <div className={styles.categories}>
-          {categories.map((category, categoryIndex) => (
+          {filteredCategories.length === 0 && searchQuery.trim() !== '' ? (
+            <div className={styles.noResults}>
+              <div className={styles.noResultsIcon}>🔍</div>
+              <div>No books found matching "{searchQuery}"</div>
+              <div className={styles.noResultsText}>
+                Try searching for a different title or author
+              </div>
+            </div>
+          ) : (
+            filteredCategories.map((category, categoryIndex) => (
             <div key={category.name} className={styles.category}>
               <h2 className={styles.categoryTitle}>{category.name}</h2>
               <div className={styles.bookList}>
@@ -170,7 +248,8 @@ const Library: React.FC<LibraryProps> = ({ onBookSelect, onBackToCurrentBook }) 
                 )}
               </div>
             </div>
-          ))}
+          ))
+          )}
         </div>
       </div>
     </div>

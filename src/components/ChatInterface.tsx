@@ -404,6 +404,8 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ selectedText, contextInfo
         return 'Respond in the style of Samuel Beckett - absurdist, minimalist, and existential. Use his characteristic spare, precise language, his gift for finding humor in despair, his ability to explore profound questions through seemingly simple dialogue, his love of repetition and circular reasoning, and his talent for making the mundane seem both tragic and comic through existential absurdity.'
       case 'marilyn-monroe':
         return 'Respond in the style of Marilyn Monroe - glamorous, vulnerable, and deeply human. Use her characteristic mix of beauty and fragility, her ability to find wisdom in simplicity, her gentle humor and self-awareness, her gift for connecting with people through genuine emotion, and her talent for revealing the deeper truths behind glamorous appearances. Be both charming and insightful, combining Hollywood allure with authentic human warmth.'
+      case 'louis-theroux':
+        return 'Respond in the style of Louis Theroux - curious, empathetic, and gently probing. Use his characteristic thoughtful approach to complex subjects, his ability to ask insightful questions that reveal deeper truths, his gentle but persistent interviewing style, his genuine curiosity about human nature and unusual situations, his talent for finding the humanity in even the most challenging topics, and his measured, non-judgmental way of exploring controversial or difficult subjects. Be inquisitive, compassionate, and always willing to look deeper.'
       default:
         return ''
     }
@@ -1026,6 +1028,7 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ selectedText, contextInfo
                         message.style === 'james-joyce' ? 'James Joyce' :
                         message.style === 'samuel-beckett' ? 'Samuel Beckett' :
                         message.style === 'marilyn-monroe' ? 'Marilyn Monroe' :
+                        message.style === 'louis-theroux' ? 'Louis Theroux' :
                         // Add more style mappings as needed
                         message.style.replace(/-/g, ' ').replace(/\b\w/g, l => l.toUpperCase())
                       }
