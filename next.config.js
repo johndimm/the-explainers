@@ -1,14 +1,9 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
+  serverExternalPackages: [],
   experimental: {
-    serverComponentsExternalPackages: [],
-  },
-  api: {
-    responseLimit: false,
-    bodyParser: {
-      sizeLimit: '10mb',
-    },
+    // Next.js 15: serverComponentsExternalPackages moved to serverExternalPackages
   },
 }
 
