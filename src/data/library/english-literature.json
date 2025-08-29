@@ -1,4 +1,14 @@
 [
+    { "id": "1", "title": "Ulysses", "author": "Joyce" },
+    { "id": "2", "title": "A Portrait of the Artist as a Young Man", "author": "Joyce" },
+    { "id": "3", "title": "Dubliners", "author": "Joyce" },
+    { "id": "4", "title": "Finnegans Wake", "author": "Joyce" },
+    { "id": "5", "title": "Waiting for Godot", "author": "Beckett" },
+    { "id": "6", "title": "Endgame", "author": "Beckett" },
+    { "id": "7", "title": "Krapp's Last Tape", "author": "Beckett" },
+    { "id": "8", "title": "Happy Days", "author": "Beckett" },
+    { "id": "9", "title": "Molloy", "author": "Beckett" },
+    { "id": "10", "title": "Malone Dies", "author": "Beckett" },
     { "id": "11", "title": "Alice's Adventures in Wonderland", "author": "Carroll" },
     { "id": "12", "title": "Through the Looking-Glass", "author": "Carroll" },
     { "id": "13", "title": "The Hunting of the Snark: An Agony in Eight Fits", "author": "Carroll" },
@@ -3358,16 +3368,5 @@
     { "id": "76314", "title": "Genius rewarded", "author": "Scott" },
     { "id": "76357", "title": "Blind mice", "author": "Kay-Scott" },
     { "id": "76383", "title": "The Norse discoverers of America", "author": "Gathorne-Hardy" },
-    { "id": "76413", "title": "Slighted love", "author": "Miller" },
-    { "id": "76414", "title": "Ulysses", "author": "Joyce" },
-    { "id": "76415", "title": "A Portrait of the Artist as a Young Man", "author": "Joyce" },
-    { "id": "76416", "title": "Dubliners", "author": "Joyce" },
-    { "id": "76417", "title": "Finnegans Wake", "author": "Joyce" },
-    { "id": "76418", "title": "Waiting for Godot", "author": "Beckett" },
-    { "id": "76419", "title": "Endgame", "author": "Beckett" },
-    { "id": "76420", "title": "Krapp's Last Tape", "author": "Beckett" },
-    { "id": "76421", "title": "Happy Days", "author": "Beckett" },
-    { "id": "76422", "title": "Molloy", "author": "Beckett" },
-    { "id": "76423", "title": "Malone Dies", "author": "Beckett" },
-    { "id": "76424", "title": "The Unnamable", "author": "Beckett" }
+    { "id": "76413", "title": "Slighted love", "author": "Miller" }
 ]
