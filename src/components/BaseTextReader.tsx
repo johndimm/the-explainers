@@ -113,41 +113,49 @@ export const extractContextInfo = (selectedText: string, fullText: string, bookT
     }
   }
 
-  const textBeforeSelection = fullText.substring(0, selectedIndex)
-  const stageDirections = textBeforeSelection.match(/\s+Enter\s+[^\r\n]+|Exit\s+[^\r\n]+|Exeunt[^\r\n]*/gi) || []
-  const currentCharacters = new Set<string>()
-  stageDirections.forEach(direction => {
-    const trimmedDirection = direction.trim()
-    const isEnter = /^Enter/i.test(trimmedDirection)
-    const isExit = /^Exit/i.test(trimmedDirection)
-    const isExeunt = /^Exeunt/i.test(trimmedDirection)
-    if (isEnter) {
-      const characterMatch = trimmedDirection.match(/Enter\s+(.+)/i)
-      if (characterMatch) {
-        const characterList = characterMatch[1].replace(/\.$/, '')
-        const characters = characterList
-          .split(/\s+and\s+|,\s*/)
-          .map(c => c.trim().toUpperCase())
-          .filter(c => c.length > 0 && !c.includes('SERVANT') && !c.includes('PAGE'))
-        characters.forEach(char => currentCharacters.add(char))
-      }
-    } else if (isExit || isExeunt) {
-      if (isExeunt && trimmedDirection.toLowerCase().includes('all')) {
-        currentCharacters.clear()
-      } else {
-        const characterMatch = trimmedDirection.match(/(?:Exit|Exeunt)\s+(.+)/i)
+  // Only extract stage directions and characters for plays (texts with Acts/Scenes)
+  const isPlay = act !== null || scene !== null
+  
+  if (isPlay) {
+    const textBeforeSelection = fullText.substring(0, selectedIndex)
+    // More specific regex for actual stage directions
+    const stageDirections = textBeforeSelection.match(/\n\s*Enter\s+[A-Z][A-Z\s&']+[^\r\n]*|\n\s*Exit\s+[A-Z][A-Z\s&']+[^\r\n]*|\n\s*Exeunt[^\r\n]*/gi) || []
+    const currentCharacters = new Set<string>()
+    
+    stageDirections.forEach(direction => {
+      const trimmedDirection = direction.trim()
+      const isEnter = /^Enter/i.test(trimmedDirection)
+      const isExit = /^Exit/i.test(trimmedDirection)
+      const isExeunt = /^Exeunt/i.test(trimmedDirection)
+      
+      if (isEnter) {
+        const characterMatch = trimmedDirection.match(/Enter\s+(.+)/i)
         if (characterMatch) {
           const characterList = characterMatch[1].replace(/\.$/, '')
           const characters = characterList
             .split(/\s+and\s+|,\s*/)
             .map(c => c.trim().toUpperCase())
-            .filter(c => c.length > 0)
-          characters.forEach(char => currentCharacters.delete(char))
+            .filter(c => c.length > 0 && !c.includes('SERVANT') && !c.includes('PAGE'))
+          characters.forEach(char => currentCharacters.add(char))
+        }
+      } else if (isExit || isExeunt) {
+        if (isExeunt && trimmedDirection.toLowerCase().includes('all')) {
+          currentCharacters.clear()
+        } else {
+          const characterMatch = trimmedDirection.match(/(?:Exit|Exeunt)\s+(.+)/i)
+          if (characterMatch) {
+            const characterList = characterMatch[1].replace(/\.$/, '')
+            const characters = characterList
+              .split(/\s+and\s+|,\s*/)
+              .map(c => c.trim().toUpperCase())
+              .filter(c => c.length > 0)
+            characters.forEach(char => currentCharacters.delete(char))
+          }
         }
       }
-    }
-  })
-  charactersOnStage = Array.from(currentCharacters)
+    })
+    charactersOnStage = Array.from(currentCharacters)
+  }
 
   return {
     bookTitle,

@@ -149,26 +149,19 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ selectedText, contextInfo
     }
   }, [selectedText])
 
-  // Set original selected text when it becomes available (from props or chat history)
+  // Set original selected text when it becomes available
   useEffect(() => {
-    console.log('ChatInterface: selectedText changed:', selectedText)
-    console.log('ChatInterface: originalSelectedText:', originalSelectedText)
-    console.log('ChatInterface: messages:', messages)
+    log('ChatInterface: selectedText changed:', selectedText)
+    log('ChatInterface: current originalSelectedText:', originalSelectedText)
     
-    if (!originalSelectedText) {
-      if (selectedText) {
-        console.log('ChatInterface: Setting originalSelectedText from selectedText:', selectedText)
+    if (selectedText) {
+      // Always update originalSelectedText when selectedText changes
+      if (selectedText !== originalSelectedText) {
+        log('ChatInterface: Updating originalSelectedText from selectedText:', selectedText)
         setOriginalSelectedText(selectedText)
-      } else if (messages.length > 0) {
-        // If no selectedText but we have chat history, use the first user message as the text to re-explain
-        const firstUserMessage = messages.find(m => m.role === 'user')
-        if (firstUserMessage) {
-          console.log('ChatInterface: Setting originalSelectedText from chat history:', firstUserMessage.content)
-          setOriginalSelectedText(firstUserMessage.content)
-        }
       }
     }
-  }, [selectedText, originalSelectedText, messages])
+  }, [selectedText, originalSelectedText])
 
   useEffect(() => {
     inputRef.current?.focus()
@@ -396,7 +389,7 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ selectedText, contextInfo
       case 'william-shakespeare':
         return 'Respond in the style of William Shakespeare: poetic, metaphor-rich, and iambic where fitting. Favor vivid imagery, antithesis, and rhetorical flourish. You may use Early Modern idiom sparingly for flavor (e.g., thee/thou), but ensure the meaning remains clear to modern readers. When explaining, frame the sense plainly after a brief poetic gloss.'
       case 'donald-trump':
-        return 'Respond in the style of Donald Trump - bold, direct, and controversial. Use his characteristic repetitive phrases, superlatives ("tremendous", "huge", "the best"), his tendency to make grand claims, his simple vocabulary, his love of nicknames and branding, and his signature "weave" - jumping between topics, circling back to previous points, and creating a stream-of-consciousness flow that somehow connects everything together. Use his ability to connect complex topics to simple, memorable concepts through this weaving pattern. Be confident, direct, and use his characteristic speech rhythms and topic transitions.'
+        return 'Respond in the style of Donald Trump - bold, direct, and controversial. Use his characteristic repetitive phrases, superlatives ("tremendous", "huge", "the best"), his tendency to make grand claims, his simple vocabulary, his love of nicknames and branding, and his signature "weave" - jumping between topics, circling back to previous points, and creating a stream-of-consciousness flow that never connects everything together. Use his ability to connect complex topics to simple, memorable concepts through this weaving pattern. Be confident, direct, and use his characteristic speech rhythms and topic transitions.'
       case 'george-w-bush':
         return 'Respond in the style of George W. Bush - folksy, direct, and sometimes awkwardly charming. Use his characteristic Texas drawl expressions, his tendency to create memorable phrases, his simple but earnest communication style, his occasional verbal gaffes that somehow work, and his ability to connect with people through down-to-earth language and genuine emotion.'
       case 'barack-obama':
@@ -411,7 +404,7 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ selectedText, contextInfo
   }
 
   const createContextualPrompt = (text: string, context: ContextInfo | null): string => {
-    console.log('ChatInterface: Profile data:', profile)
+    log('ChatInterface: Profile data:', profile)
     let prompt = `Please explain this text: "${text}"`
     
     if (context) {
@@ -427,12 +420,12 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ selectedText, contextInfo
     }
 
     // Add user profile information
-    console.log('ChatInterface: Profile language check:', profile.language, profile.language !== 'english')
+    log('ChatInterface: Profile language check:', profile.language, profile.language !== 'english')
     if (profile.age || profile.language !== 'english' || profile.educationLevel) {
       prompt += `\n\nUser Profile:`
       if (profile.age) prompt += `\nAge: ${profile.age}`
       if (profile.language !== 'english') {
-        console.log('ChatInterface: Adding language instruction:', profile.language)
+        log('ChatInterface: Adding language instruction:', profile.language)
         prompt += `\nPreferred Language: Please respond in ${profile.language}`
       }
       prompt += `\nEducation Level: ${profile.educationLevel}`
@@ -473,8 +466,8 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ selectedText, contextInfo
   }
 
   const searchAndEmbedVideo = async (text: string) => {
-    console.log('Automatically searching for video with quote:', text)
-    console.log('Using context info:', contextInfo)
+    log('Automatically searching for video with quote:', text)
+    log('Using context info:', contextInfo)
     
     try {
       // Build a richer search query using context information
@@ -499,7 +492,7 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ selectedText, contextInfo
       searchTerms.push('performance', 'scene')
       
       const searchQuery = searchTerms.join(' ').trim()
-      console.log('Enhanced YouTube search query:', searchQuery)
+      log('Enhanced YouTube search query:', searchQuery)
       
       const response = await fetch('/api/youtube-search', {
         method: 'POST',
@@ -512,12 +505,12 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ selectedText, contextInfo
       })
       
       if (!response.ok) {
-        console.log('YouTube search failed, skipping video')
+        log('YouTube search failed, skipping video')
         return // Silently fail - no video embedded
       }
       
       const data = await response.json()
-      console.log('Auto YouTube search results:', data)
+      log('Auto YouTube search results:', data)
       
       if (data.videos && data.videos.length > 0) {
         // Add video message to chat automatically
@@ -557,24 +550,45 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ selectedText, contextInfo
   const handleReExplain = async (text: string) => {
     const useCustomLLM = selectedProvider === 'custom'
     
-    console.log('ChatInterface: handleReExplain called')
-    console.log('ChatInterface: current profile state:', profile)
+    log('ChatInterface: handleReExplain called')
+    log('ChatInterface: current profile state:', profile)
+    
+    // Fallback: if no text provided, try to get it from the first user message
+    if (!text && messages.length > 0) {
+      const firstUserMessage = messages.find(m => m.role === 'user')
+      if (firstUserMessage) {
+        text = firstUserMessage.content.replace(/^"|"$/g, '') // Remove quotes
+        log('ChatInterface: Using fallback text from first user message:', text)
+      }
+    }
+    
+    if (!text) {
+      log('ChatInterface: No text available for re-explain')
+      return
+    }
     
     // Check if user can use explanation
     if (!canUseExplanation(bookTitle, author, useCustomLLM)) {
-      console.log('ChatInterface: canUseExplanation returned false, redirecting to credits')
+      log('ChatInterface: canUseExplanation returned false, redirecting to credits')
       router.push('/credits')
       return
     }
     
-    console.log('ChatInterface: canUseExplanation returned true, proceeding with re-explanation')
+    log('ChatInterface: canUseExplanation returned true, proceeding with re-explanation')
 
     const promptText = createContextualPrompt(text, contextInfo)
     
-    console.log('Re-explain prompt sent to LLM:')
-    console.log('Profile language in re-explain:', profile.language)
+    // CURSOR HELPER: Log the full prompt being sent to the LLM for re-explain
+    console.log('🔄 RE-EXPLAIN PROMPT SENT TO LLM 🔄')
+    console.log('='.repeat(80))
     console.log(promptText)
+    console.log('='.repeat(80))
     console.log('Context info:', contextInfo)
+    
+    log('Re-explain prompt sent to LLM:')
+    log('Profile language in re-explain:', profile.language)
+    log('Prompt text:', promptText)
+    log('Context info:', contextInfo)
 
     // For re-explain, we don't add a user message, just get a new assistant response
     const llmMessage: Message = {
@@ -633,26 +647,33 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ selectedText, contextInfo
   const handleExplainText = async (text: string) => {
     const useCustomLLM = selectedProvider === 'custom'
     
-    console.log('ChatInterface: handleExplainText called')
-    console.log('ChatInterface: current profile state:', profile)
-    console.log('ChatInterface: bookTitle:', bookTitle, 'author:', author)
-    console.log('ChatInterface: useCustomLLM:', useCustomLLM)
+    log('ChatInterface: handleExplainText called')
+    log('ChatInterface: current profile state:', profile)
+    log('ChatInterface: bookTitle:', bookTitle, 'author:', author)
+    log('ChatInterface: useCustomLLM:', useCustomLLM)
     
     // Check if user can use explanation
     if (!canUseExplanation(bookTitle, author, useCustomLLM)) {
-      console.log('ChatInterface: canUseExplanation returned false, redirecting to credits')
+      log('ChatInterface: canUseExplanation returned false, redirecting to credits')
       router.push('/credits')
       return
     }
     
-    console.log('ChatInterface: canUseExplanation returned true, proceeding with explanation')
+    log('ChatInterface: canUseExplanation returned true, proceeding with explanation')
 
     const promptText = createContextualPrompt(text, contextInfo)
     
-    console.log('Full prompt sent to LLM:')
-    console.log('Profile language in sendMessage:', profile.language)
+    // CURSOR HELPER: Log the full prompt being sent to the LLM
+    console.log('🚀 FULL PROMPT SENT TO LLM 🚀')
+    console.log('='.repeat(80))
     console.log(promptText)
+    console.log('='.repeat(80))
     console.log('Context info:', contextInfo)
+    
+    log('Full prompt sent to LLM:')
+    log('Profile language in sendMessage:', profile.language)
+    log('Prompt text:', promptText)
+    log('Context info:', contextInfo)
     
     // Display only the selected text to the user, not the full prompt
     const userMessage: Message = {
@@ -928,10 +949,16 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ selectedText, contextInfo
               onClick={() => handleReExplain(originalSelectedText)}
               disabled={isLoading || !originalSelectedText}
               className={styles.reexplainButton}
-              title="Re-explain in selected style"
+              title={`Re-explain in selected style${!originalSelectedText ? ' (no text available)' : ''}`}
             >
               Re-explain
             </button>
+            {/* Debug info for re-explain button */}
+            {process.env.NODE_ENV === 'development' && (
+              <div style={{ fontSize: '12px', color: '#666', marginTop: '4px' }}>
+                Debug: originalSelectedText length: {originalSelectedText?.length || 0}
+              </div>
+            )}
           </div>
 {!isPageMode && <button onClick={onClose} className={styles.closeButton}>×</button>}
         </div>
