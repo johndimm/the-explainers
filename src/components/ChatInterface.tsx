@@ -389,7 +389,7 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ selectedText, contextInfo
       case 'william-shakespeare':
         return 'Respond in the style of William Shakespeare: poetic, metaphor-rich, and iambic where fitting. Favor vivid imagery, antithesis, and rhetorical flourish. You may use Early Modern idiom sparingly for flavor (e.g., thee/thou), but ensure the meaning remains clear to modern readers. When explaining, frame the sense plainly after a brief poetic gloss.'
       case 'donald-trump':
-        return 'Respond in the style of Donald Trump - bold, direct, and controversial. Use his characteristic repetitive phrases, superlatives ("tremendous", "huge", "the best"), his tendency to make grand claims, his simple vocabulary, his love of nicknames and branding, and his signature "weave" - jumping between topics, circling back to previous points, and creating a stream-of-consciousness flow that never connects everything together. Use his ability to connect complex topics to simple, memorable concepts through this weaving pattern. Be confident, direct, and use his characteristic speech rhythms and topic transitions.'
+        return 'Respond in the style of Donald Trump - bold, direct, and controversial. Use his characteristic repetitive phrases, superlatives ("tremendous", "huge", "the best"), his tendency to make grand claims, his simple vocabulary, his love of nicknames and branding, and his signature "weave" - jumping between topics, circling back to previous points, and creating a stream-of-consciousness flow that never connects everything together. Be confident, direct, and use his characteristic speech rhythms and topic transitions.'
       case 'george-w-bush':
         return 'Respond in the style of George W. Bush - folksy, direct, and sometimes awkwardly charming. Use his characteristic Texas drawl expressions, his tendency to create memorable phrases, his simple but earnest communication style, his occasional verbal gaffes that somehow work, and his ability to connect with people through down-to-earth language and genuine emotion.'
       case 'barack-obama':
@@ -402,6 +402,8 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ selectedText, contextInfo
         return 'Respond in the style of James Joyce - stream-of-consciousness, experimental, and linguistically innovative. Use his characteristic dense, allusive prose, his gift for capturing the flow of human thought, his love of wordplay and linguistic experimentation, his ability to blend high and low culture, and his talent for finding profound meaning in everyday moments through innovative narrative techniques.'
       case 'samuel-beckett':
         return 'Respond in the style of Samuel Beckett - absurdist, minimalist, and existential. Use his characteristic spare, precise language, his gift for finding humor in despair, his ability to explore profound questions through seemingly simple dialogue, his love of repetition and circular reasoning, and his talent for making the mundane seem both tragic and comic through existential absurdity.'
+      case 'marilyn-monroe':
+        return 'Respond in the style of Marilyn Monroe - glamorous, vulnerable, and deeply human. Use her characteristic mix of beauty and fragility, her ability to find wisdom in simplicity, her gentle humor and self-awareness, her gift for connecting with people through genuine emotion, and her talent for revealing the deeper truths behind glamorous appearances. Be both charming and insightful, combining Hollywood allure with authentic human warmth.'
       default:
         return ''
     }
@@ -1023,6 +1025,7 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ selectedText, contextInfo
                         message.style === 'mark-twain' ? 'Mark Twain' :
                         message.style === 'james-joyce' ? 'James Joyce' :
                         message.style === 'samuel-beckett' ? 'Samuel Beckett' :
+                        message.style === 'marilyn-monroe' ? 'Marilyn Monroe' :
                         // Add more style mappings as needed
                         message.style.replace(/-/g, ' ').replace(/\b\w/g, l => l.toUpperCase())
                       }

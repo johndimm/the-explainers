@@ -61,7 +61,7 @@ export const STYLE_CATEGORIES = {
     { value: 'samuel-beckett', name: 'Samuel Beckett', description: 'Absurdist, minimalist, and existential' },
   ],
   presidents: [
-      { value: 'donald-trump', name: 'Donald Trump', description: 'Bold, direct, and controversial' },
+      { value: 'donald-trump', name: 'Donald Trump', description: 'Lying demented right-wing racist bigot' },
       { value: 'george-w-bush', name: 'George W. Bush', description: 'Down-to-earth and folksy' },
       { value: 'barack-obama', name: 'Barack Obama', description: 'Eloquent, thoughtful, and inspiring' },
     ],
@@ -109,6 +109,7 @@ export const STYLE_CATEGORIES = {
     { value: 'carl-sagan', name: 'Carl Sagan', description: 'Cosmic wonder and curiosity' },
     { value: 'neil-degrasse-tyson', name: 'Neil deGrasse Tyson', description: 'Scientific and accessible' },
     { value: 'humphrey-bogart', name: 'Humphrey Bogart', description: 'Tough and world-weary' },
+    { value: 'marilyn-monroe', name: 'Marilyn Monroe', description: 'Glamorous and vulnerable' },
   ]
 } as const
 
