@@ -7,6 +7,7 @@ import { SettingsData, LLMProvider, ResponseLength, ExplanationStyle } from './S
 import { ProfileData } from './Profile'
 import { useProfile } from '../contexts/ProfileContext'
 import { STYLE_CATEGORIES } from './ExplainerStyles'
+import { log } from '../utils/log'
 
 interface Message {
   id: string
@@ -58,6 +59,7 @@ const getAllStyles = () => {
 }
 
 const ChatInterface: React.FC<ChatInterfaceProps> = ({ selectedText, contextInfo, settings, profile, onClose, onSettingsChange, bookTitle, author, isPageMode = false }) => {
+  log('ChatInterface: Received settings:', settings)
   const router = useRouter()
   const [messages, setMessages] = useState<Message[]>([])
   const [inputValue, setInputValue] = useState('')
@@ -190,14 +192,17 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ selectedText, contextInfo
 
   // Keep local chat controls in sync with global settings unless user changes them here
   useEffect(() => {
+    log('ChatInterface: settings.llmProvider changed to:', settings.llmProvider)
     setSelectedProvider(settings.llmProvider)
   }, [settings.llmProvider])
 
   useEffect(() => {
+    log('ChatInterface: settings.explanationStyle changed to:', settings.explanationStyle)
     setCurrentStyle(settings.explanationStyle)
   }, [settings.explanationStyle])
 
   useEffect(() => {
+    log('ChatInterface: settings.responseLength changed to:', settings.responseLength)
     setCurrentResponseLength(settings.responseLength)
   }, [settings.responseLength])
 
@@ -391,7 +396,7 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ selectedText, contextInfo
       case 'william-shakespeare':
         return 'Respond in the style of William Shakespeare: poetic, metaphor-rich, and iambic where fitting. Favor vivid imagery, antithesis, and rhetorical flourish. You may use Early Modern idiom sparingly for flavor (e.g., thee/thou), but ensure the meaning remains clear to modern readers. When explaining, frame the sense plainly after a brief poetic gloss.'
       case 'donald-trump':
-        return 'Respond in the style of Donald Trump - bold, direct, and controversial. Use his characteristic repetitive phrases, superlatives ("tremendous", "huge", "the best"), his tendency to make grand claims, his simple vocabulary, his love of nicknames and branding, his stream-of-consciousness style, and his ability to connect complex topics to simple, memorable concepts. Be confident, direct, and use his characteristic speech patterns.'
+        return 'Respond in the style of Donald Trump - bold, direct, and controversial. Use his characteristic repetitive phrases, superlatives ("tremendous", "huge", "the best"), his tendency to make grand claims, his simple vocabulary, his love of nicknames and branding, and his signature "weave" - jumping between topics, circling back to previous points, and creating a stream-of-consciousness flow that somehow connects everything together. Use his ability to connect complex topics to simple, memorable concepts through this weaving pattern. Be confident, direct, and use his characteristic speech rhythms and topic transitions.'
       case 'george-w-bush':
         return 'Respond in the style of George W. Bush - folksy, direct, and sometimes awkwardly charming. Use his characteristic Texas drawl expressions, his tendency to create memorable phrases, his simple but earnest communication style, his occasional verbal gaffes that somehow work, and his ability to connect with people through down-to-earth language and genuine emotion.'
       case 'barack-obama':

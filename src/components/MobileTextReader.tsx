@@ -227,6 +227,11 @@ const MobileTextReader: React.FC<ReaderCommonProps> = ({ text, bookTitle = 'Rome
       return
     }
     
+    // If we were just pinching, reset the pinch state
+    if (initialPinchDistance !== null) {
+      setInitialPinchDistance(null)
+    }
+    
     const start = touchStartPosRef.current
     if (!start) return
     const touch = e.touches[0]
@@ -258,10 +263,8 @@ const MobileTextReader: React.FC<ReaderCommonProps> = ({ text, bookTitle = 'Rome
   }
 
   const handleTouchEnd = (e: React.TouchEvent) => {
-    // Reset pinch state if we had a pinch gesture
-    if (e.touches.length < 2) {
-      setInitialPinchDistance(null)
-    }
+    // Always reset pinch state when touch ends
+    setInitialPinchDistance(null)
     
     log('touchend', { inSelection: isInSelectionMode, selectedTextLength: selectedText.length })
     if (isInSelectionMode) {
