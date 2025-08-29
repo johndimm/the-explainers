@@ -61,7 +61,7 @@ export const STYLE_CATEGORIES = {
     { value: 'samuel-beckett', name: 'Samuel Beckett', description: 'Absurdist, minimalist, and existential' },
   ],
   presidents: [
-      { value: 'donald-trump', name: 'Donald Trump', description: 'Lying demented right-wing racist bigot' },
+      { value: 'donald-trump', name: 'Donald Trump', description: 'Lying sociopathic narcissistic demented monster' },
       { value: 'george-w-bush', name: 'George W. Bush', description: 'Down-to-earth and folksy' },
       { value: 'barack-obama', name: 'Barack Obama', description: 'Eloquent, thoughtful, and inspiring' },
     ],

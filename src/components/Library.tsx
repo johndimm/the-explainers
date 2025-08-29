@@ -209,6 +209,30 @@ const Library: React.FC<LibraryProps> = ({ onBookSelect, onBackToCurrentBook }) 
               Load More Options →
             </button>
           </div>
+          
+          {/* Community Section */}
+          <div className={styles.communitySection}>
+            <div className={styles.communityContent}>
+              <div className={styles.communityInfo}>
+                <span className={styles.communityIcon}>📱</span>
+                <div className={styles.communityText}>
+                  <strong>Join Our Community</strong>
+                  <span>Have suggestions? Found a bug? Want to discuss books?</span>
+                </div>
+              </div>
+              <div className={styles.communityActions}>
+                <button 
+                  className={styles.communityButton}
+                  onClick={() => window.open('https://reddit.com/r/TheExplainersApp', '_blank')}
+                >
+                  Reddit Forum →
+                </button>
+                <span className={styles.communityNote}>
+                  Join r/TheExplainersApp
+                </span>
+              </div>
+            </div>
+          </div>
         </div>
 
         <div className={styles.categories}>

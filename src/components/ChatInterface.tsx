@@ -18,6 +18,7 @@ interface Message {
   style?: ExplanationStyle
   videoId?: string
   videoTitle?: string
+  rating?: 'good' | 'bad' | null
 }
 
 interface ContextInfo {
@@ -81,6 +82,86 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ selectedText, contextInfo
 
   const scrollToLatestResponse = () => {
     latestResponseRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+  }
+
+  const saveChatHistory = () => {
+    if (messages.length === 0) return
+    
+    const chatData = {
+      bookTitle,
+      author,
+      selectedText: originalSelectedText,
+      contextInfo,
+      messages,
+      settings: {
+        provider: selectedProvider,
+        style: currentStyle,
+        responseLength: currentResponseLength
+      },
+      timestamp: new Date().toISOString()
+    }
+    
+    const blob = new Blob([JSON.stringify(chatData, null, 2)], { type: 'application/json' })
+    const url = URL.createObjectURL(blob)
+    const a = document.createElement('a')
+    a.href = url
+    a.download = `chat-history-${bookTitle.replace(/[^a-z0-9]/gi, '-')}-${new Date().toISOString().split('T')[0]}.json`
+    document.body.appendChild(a)
+    a.click()
+    document.body.removeChild(a)
+    URL.revokeObjectURL(url)
+  }
+
+  const shareToReddit = () => {
+    if (messages.length === 0) return
+    
+    // Find the last AI response
+    const lastAIResponse = messages.filter(m => m.role === 'assistant').pop()
+    if (!lastAIResponse) return
+    
+    // Format the content for Reddit
+    const title = `AI Explanation: ${bookTitle} by ${author}`
+    const content = `**Book:** ${bookTitle} by ${author}
+
+**Selected Text:**
+> ${originalSelectedText}
+
+**AI Response (${getAllStyles().find(s => s.value === currentStyle)?.name || 'Neutral'} style):**
+${lastAIResponse.content}
+
+**Context:** ${contextInfo ? `${contextInfo.act ? `Act ${contextInfo.act}` : ''}${contextInfo.scene ? `, Scene ${contextInfo.scene}` : ''}${contextInfo.speaker ? `, Speaker: ${contextInfo.speaker}` : ''}` : 'General text'}
+
+---
+*Shared from The Explainers app - AI-powered literary analysis*`
+
+    // Copy content to clipboard
+    navigator.clipboard.writeText(content).then(() => {
+      // Show success message
+      alert('Content copied to clipboard! Now opening Reddit...')
+      
+      // Open Reddit submit page (just the title will be pre-filled)
+      const encodedTitle = encodeURIComponent(title)
+      const redditUrl = `https://reddit.com/r/TheExplainersApp/submit?title=${encodedTitle}`
+      window.open(redditUrl, '_blank')
+    }).catch(() => {
+      // Fallback if clipboard fails
+      alert('Content copied to clipboard! Now opening Reddit...')
+      const encodedTitle = encodeURIComponent(title)
+      const redditUrl = `https://reddit.com/r/TheExplainersApp/submit?title=${encodedTitle}`
+      window.open(redditUrl, '_blank')
+    })
+  }
+
+  const rateResponse = (messageId: string, rating: 'good' | 'bad') => {
+    setMessages(prev => prev.map(msg => 
+      msg.id === messageId ? { ...msg, rating } : msg
+    ))
+  }
+
+  const getRatingIcon = (rating: 'good' | 'bad' | null | undefined) => {
+    if (rating === 'good') return '👍'
+    if (rating === 'bad') return '👎'
+    return null
   }
 
   const getDisplayedMessages = () => {
@@ -389,7 +470,7 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ selectedText, contextInfo
       case 'william-shakespeare':
         return 'Respond in the style of William Shakespeare: poetic, metaphor-rich, and iambic where fitting. Favor vivid imagery, antithesis, and rhetorical flourish. You may use Early Modern idiom sparingly for flavor (e.g., thee/thou), but ensure the meaning remains clear to modern readers. When explaining, frame the sense plainly after a brief poetic gloss.'
       case 'donald-trump':
-        return 'Respond in the style of Donald Trump - bold, direct, and controversial. Use his characteristic repetitive phrases, superlatives ("tremendous", "huge", "the best"), his tendency to make grand claims, his simple vocabulary, his love of nicknames and branding, and his signature "weave" - jumping between topics, circling back to previous points, and creating a stream-of-consciousness flow that never connects everything together. Be confident, direct, and use his characteristic speech rhythms and topic transitions.'
+        return 'Respond in the style of Donald Trump - lying sociopathic narcissistic demented monster. Use his characteristic repetitive phrases, superlatives ("tremendous", "huge", "the best"), his tendency to make grand claims, his simple vocabulary, his love of nicknames and branding, and his signature "weave" - jumping between topics, circling back to previous points, and creating a stream-of-consciousness flow that never connects everything together. Be confident, direct, and use his characteristic speech rhythms and topic transitions.'
       case 'george-w-bush':
         return 'Respond in the style of George W. Bush - folksy, direct, and sometimes awkwardly charming. Use his characteristic Texas drawl expressions, his tendency to create memorable phrases, his simple but earnest communication style, his occasional verbal gaffes that somehow work, and his ability to connect with people through down-to-earth language and genuine emotion.'
       case 'barack-obama':
@@ -961,6 +1042,22 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ selectedText, contextInfo
             >
               Re-explain
             </button>
+            <button 
+              onClick={saveChatHistory}
+              disabled={messages.length === 0}
+              className={styles.saveButton}
+              title="Save chat history to file (includes book context, AI responses, and settings)"
+            >
+              💾 Save Chat
+            </button>
+            <button 
+              onClick={shareToReddit}
+              disabled={messages.length === 0}
+              className={styles.shareButton}
+              title="Copy formatted content to clipboard and open Reddit submit page"
+            >
+              📋 Copy & Share
+            </button>
             {/* Debug info for re-explain button */}
             {process.env.NODE_ENV === 'development' && (
               <div style={{ fontSize: '12px', color: '#666', marginTop: '4px' }}>
@@ -1092,6 +1189,31 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ selectedText, contextInfo
                   </pre>
                 )}
               </div>
+              {message.role === 'assistant' && (
+                <div className={styles.messageActions}>
+                  <div className={styles.ratingButtons}>
+                    <button
+                      onClick={() => rateResponse(message.id, 'good')}
+                      className={`${styles.ratingButton} ${styles.goodRating} ${message.rating === 'good' ? styles.active : ''}`}
+                      title="Mark as good response"
+                    >
+                      👍 Good
+                    </button>
+                    <button
+                      onClick={() => rateResponse(message.id, 'bad')}
+                      className={`${styles.ratingButton} ${styles.badRating} ${message.rating === 'bad' ? styles.active : ''}`}
+                      title="Mark as bad response"
+                    >
+                      👎 Bad
+                    </button>
+                  </div>
+                  {message.rating && (
+                    <span className={styles.ratingStatus}>
+                      {getRatingIcon(message.rating)} Rated as {message.rating}
+                    </span>
+                  )}
+                </div>
+              )}
               <div className={styles.messageTime}>
                 {message.timestamp.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
               </div>
