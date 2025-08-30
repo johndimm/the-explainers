@@ -492,7 +492,7 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ selectedText, contextInfo
       case 'william-shakespeare':
         return 'Respond in the style of William Shakespeare: poetic, metaphor-rich, and iambic where fitting. Favor vivid imagery, antithesis, and rhetorical flourish. You may use Early Modern idiom sparingly for flavor (e.g., thee/thou), but ensure the meaning remains clear to modern readers. When explaining, frame the sense plainly after a brief poetic gloss.'
       case 'donald-trump':
-        return 'Respond in the style of Donald Trump - lying sociopathic narcissistic demented monster. Use his characteristic repetitive phrases, superlatives ("tremendous", "huge", "the best"), his tendency to make grand claims, his simple vocabulary, his love of nicknames and branding, and his signature "weave" - jumping between topics, circling back to previous points, and creating a stream-of-consciousness flow that never connects everything together. Be confident, direct, and use his characteristic speech rhythms and topic transitions.'
+        return 'Respond in the style of Donald Trump - demented sociopathic narcissist. Use his characteristic repetitive phrases, superlatives ("tremendous", "huge", "the best"), his tendency to make grand claims, his simple vocabulary, his love of nicknames and branding, and his signature "weave" - jumping between topics, circling back to previous points, and creating a stream-of-consciousness flow that never connects everything together. Be confident, direct, and use his characteristic speech rhythms and topic transitions.'
       case 'george-w-bush':
         return 'Respond in the style of George W. Bush - folksy, direct, and sometimes awkwardly charming. Use his characteristic Texas drawl expressions, his tendency to create memorable phrases, his simple but earnest communication style, his occasional verbal gaffes that somehow work, and his ability to connect with people through down-to-earth language and genuine emotion.'
       case 'barack-obama':
@@ -994,6 +994,12 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ selectedText, contextInfo
     // Add the specific AI response
     content += `## AI Response\n\n${message.content}\n\n`
     
+    // Add style information if available
+    if (message.style && message.style !== 'neutral') {
+      const styleName = getAllStyles().find(s => s.value === message.style)?.name || message.style
+      content += `## Style\n\n**Explanation Style:** ${styleName}\n\n`
+    }
+    
     // Add book context if available
     if (bookTitle || author) {
       content += `## Source\n\n`
@@ -1016,7 +1022,13 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ selectedText, contextInfo
     
     content += `---\n*Shared from The Explainers App*`
 
-    const title = `AI Explanation: ${bookTitle || 'Text Passage'}`
+    // Create title with style if available
+    let title = `AI Explanation: ${bookTitle || 'Text Passage'}`
+    if (message.style && message.style !== 'neutral') {
+      const styleName = getAllStyles().find(s => s.value === message.style)?.name || message.style
+      title += ` (${styleName} style)`
+    }
+    
     setShareFormData({ title, content })
     setShowShareModal(true)
   }
@@ -1038,6 +1050,12 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ selectedText, contextInfo
     }
 
     let content = `**AI Response:**\n\n${message.content}\n\n`
+    
+    // Add style information if available
+    if (message.style && message.style !== 'neutral') {
+      const styleName = getAllStyles().find(s => s.value === message.style)?.name || message.style
+      content += `**Style:** ${styleName}\n\n`
+    }
     
     if (quoteText) {
       content += `**Selected Text:**\n\n> ${quoteText}\n\n`
@@ -1080,6 +1098,12 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ selectedText, contextInfo
 
     let content = `**AI Explanation${bookTitle ? ` - ${bookTitle}` : ''}**\n\n`
     
+    // Add style information if available
+    if (message.style && message.style !== 'neutral') {
+      const styleName = getAllStyles().find(s => s.value === message.style)?.name || message.style
+      content += `**Style:** ${styleName}\n\n`
+    }
+    
     if (quoteText) {
       content += `> ${quoteText}\n\n`
     }
@@ -1113,6 +1137,12 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ selectedText, contextInfo
     }
     
     content += `AI Response: ${message.content}`
+    
+    // Add style information if available
+    if (message.style && message.style !== 'neutral') {
+      const styleName = getAllStyles().find(s => s.value === message.style)?.name || message.style
+      content += `\n\nStyle: ${styleName}`
+    }
     
     if (bookTitle) {
       content += `\n\nSource: ${bookTitle}${author ? ` by ${author}` : ''}`
@@ -1255,12 +1285,6 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ selectedText, contextInfo
               💾 Save Chat
             </button>
             {/* Share button moved to inline with each response */}
-            {/* Debug info for re-explain button */}
-            {process.env.NODE_ENV === 'development' && (
-              <div style={{ fontSize: '12px', color: '#666', marginTop: '4px' }}>
-                Debug: originalSelectedText: {originalSelectedText?.length || 0}, selectedText: {selectedText?.length || 0}, hasChanges: {hasChanges ? 'true' : 'false'}, disabled: {(isLoading || (!originalSelectedText && !selectedText && !hasChanges)) ? 'true' : 'false'}
-              </div>
-            )}
           </div>
 {!isPageMode && <button onClick={onClose} className={styles.closeButton}>×</button>}
         </div>
@@ -1386,7 +1410,7 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ selectedText, contextInfo
                   </pre>
                 )}
               </div>
-              {message.role === 'assistant' && (
+              {message.role === 'assistant' && !message.videoId && (
                 <div className={styles.messageActions}>
                   <div className={styles.ratingButtons}>
                     <button
@@ -1522,16 +1546,6 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ selectedText, contextInfo
             </div>
             
             <div className={styles.shareModalContent}>
-              <div className={styles.shareHelp}>
-                <p>📋 <strong>How it works:</strong></p>
-                <ol>
-                  <li>Edit your title and content below</li>
-                  <li>Click "Create GitHub Issue" - content will be copied to clipboard</li>
-                  <li>GitHub will open in a new tab</li>
-                  <li>Paste your content (Ctrl+V/Cmd+V) into the issue description</li>
-                  <li>Add appropriate labels and submit</li>
-                </ol>
-              </div>
 
               <div className={styles.formGroup}>
                 <label htmlFor="reddit-title">Issue Title:</label>
@@ -1574,29 +1588,12 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ selectedText, contextInfo
                     const encodedBody = encodeURIComponent(shareFormData.content)
                     const githubUrl = `https://github.com/johndimm/the-explainers/issues/new?title=${encodedTitle}&body=${encodedBody}&labels=ai-response,shared`
                     
-                    // Step 1: Copy content to clipboard with enhanced feedback
                     navigator.clipboard.writeText(shareFormData.content).then(() => {
-                      // Step 2: Show success message with clear next steps
-                      const successMessage = `✅ Content copied to clipboard!\n\n📋 Next steps:\n1. GitHub will open in a new tab\n2. The title and description should be pre-filled\n3. Review and edit if needed\n4. Add appropriate labels and submit\n\n💡 Tip: Keep this tab open until you've reviewed the issue!`
-                      
-                      alert(successMessage)
-                      
-                      // Step 3: Open GitHub with a slight delay for better UX
-                      setTimeout(() => {
-                        window.open(githubUrl, '_blank')
-                        setShowShareModal(false)
-                      }, 500)
+                      window.open(githubUrl, '_blank')
+                      setShowShareModal(false)
                     }).catch(() => {
-                      // Enhanced fallback with clear instructions
-                      const fallbackMessage = `⚠️ Clipboard access failed\n\n📋 Manual copy method:\n1. Select the content above (Ctrl+A)\n2. Copy it (Ctrl+C)\n3. Open GitHub in a new tab\n4. Paste the content into the issue description`
-                      
-                      alert(fallbackMessage)
-                      
-                      // Still open GitHub for manual process
-                      setTimeout(() => {
-                        window.open(githubUrl, '_blank')
-                        setShowShareModal(false)
-                      }, 500)
+                      window.open(githubUrl, '_blank')
+                      setShowShareModal(false)
                     })
                   }}
                   className={styles.redditSubmitButton}
@@ -1609,9 +1606,9 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ selectedText, contextInfo
                     if (!shareFormData) return
                     
                     navigator.clipboard.writeText(shareFormData.content).then(() => {
-                      alert('✅ Content copied to clipboard! You can now paste it anywhere.')
+                      setShowShareModal(false)
                     }).catch(() => {
-                      alert('⚠️ Clipboard access failed. Please manually select and copy the content.')
+                      setShowShareModal(false)
                     })
                   }}
                   className={styles.redditCopyButton}

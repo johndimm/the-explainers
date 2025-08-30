@@ -12,6 +12,7 @@ export interface ChatRequest {
   messages: ChatMessage[]
   provider: 'openai' | 'anthropic' | 'deepseek' | 'gemini'
   responseLength: 'brief' | 'medium' | 'long'
+  style?: string
   selectedText?: string
 }
 
@@ -30,7 +31,7 @@ const deepseekOpenai = new OpenAI({
 
 const gemini = new GoogleGenerativeAI(process.env.GEMINI_API_KEY || '')
 
-async function callOpenAI(messages: ChatMessage[], responseLength: string): Promise<string> {
+async function callOpenAI(messages: ChatMessage[], responseLength: string, style?: string): Promise<string> {
   const maxTokens = responseLength === 'brief' ? 200 : responseLength === 'medium' ? 500 : 1000
   
   try {
@@ -52,7 +53,7 @@ async function callOpenAI(messages: ChatMessage[], responseLength: string): Prom
   }
 }
 
-async function callAnthropic(messages: ChatMessage[], responseLength: string): Promise<string> {
+async function callAnthropic(messages: ChatMessage[], responseLength: string, style?: string): Promise<string> {
   const maxTokens = responseLength === 'brief' ? 200 : responseLength === 'medium' ? 500 : 1000
   
   const systemMessage = messages.find(m => m.role === 'user')?.content.includes('Please explain this text:') 
@@ -73,7 +74,7 @@ async function callAnthropic(messages: ChatMessage[], responseLength: string): P
   return response.content[0]?.type === 'text' ? response.content[0].text : 'No response'
 }
 
-async function callDeepSeek(messages: ChatMessage[], responseLength: string): Promise<string> {
+async function callDeepSeek(messages: ChatMessage[], responseLength: string, style?: string): Promise<string> {
   const maxTokens = responseLength === 'brief' ? 200 : responseLength === 'medium' ? 500 : 1000
   
   const completion = await deepseekOpenai.chat.completions.create({
@@ -89,7 +90,7 @@ async function callDeepSeek(messages: ChatMessage[], responseLength: string): Pr
   return completion.choices[0]?.message?.content || 'No response'
 }
 
-async function callGemini(messages: ChatMessage[], responseLength: string): Promise<string> {
+async function callGemini(messages: ChatMessage[], responseLength: string, style?: string): Promise<string> {
   const maxTokens = responseLength === 'brief' ? 200 : responseLength === 'medium' ? 500 : 1000
   
   const model = gemini.getGenerativeModel({ 
@@ -118,7 +119,7 @@ export async function POST(request: NextRequest) {
   
   try {
     const body: ChatRequest = await request.json()
-    const { messages, responseLength, selectedText } = body
+    const { messages, responseLength, style, selectedText } = body
     provider = body.provider
 
     if (!messages || messages.length === 0) {
@@ -129,16 +130,16 @@ export async function POST(request: NextRequest) {
 
     switch (provider) {
       case 'openai':
-        response = await callOpenAI(messages, responseLength)
+        response = await callOpenAI(messages, responseLength, style)
         break
       case 'anthropic':
-        response = await callAnthropic(messages, responseLength)
+        response = await callAnthropic(messages, responseLength, style)
         break
       case 'deepseek':
-        response = await callDeepSeek(messages, responseLength)
+        response = await callDeepSeek(messages, responseLength, style)
         break
       case 'gemini':
-        response = await callGemini(messages, responseLength)
+        response = await callGemini(messages, responseLength, style)
         break
       default:
         return NextResponse.json({ error: 'Invalid provider' }, { status: 400 })
