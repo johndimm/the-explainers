@@ -74,6 +74,8 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ selectedText, contextInfo
   const [originalSelectedText, setOriginalSelectedText] = useState("")
   const [showStyleMenu, setShowStyleMenu] = useState(false)
   const [showHelpPopup, setShowHelpPopup] = useState<string | null>(null)
+  const [showShareModal, setShowShareModal] = useState(false)
+  const [shareFormData, setShareFormData] = useState<{ title: string; content: string } | null>(null)
   const latestResponseRef = useRef<HTMLDivElement>(null)
   const inputRef = useRef<HTMLInputElement>(null)
   const styleMenuRef = useRef<HTMLDivElement>(null)
@@ -112,44 +114,24 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ selectedText, contextInfo
     URL.revokeObjectURL(url)
   }
 
-  const shareToReddit = () => {
-    if (messages.length === 0) return
-    
-    // Find the last AI response
-    const lastAIResponse = messages.filter(m => m.role === 'assistant').pop()
-    if (!lastAIResponse) return
-    
-    // Format the content for Reddit
-    const title = `AI Explanation: ${bookTitle} by ${author}`
-    const content = `**Book:** ${bookTitle} by ${author}
+  const shareToGitHub = () => {
+    if (!messages.length) return
 
-**Selected Text:**
-> ${originalSelectedText}
+    // Find the last AI response (excluding YouTube video messages)
+    const lastAiMessage = [...messages].reverse().find(msg => 
+      msg.role === 'assistant' && !msg.content.includes('YouTube video')
+    )
 
-**AI Response (${getAllStyles().find(s => s.value === currentStyle)?.name || 'Neutral'} style):**
-${lastAIResponse.content}
+    if (!lastAiMessage) {
+      alert('No AI response found to share.')
+      return
+    }
 
-**Context:** ${contextInfo ? `${contextInfo.act ? `Act ${contextInfo.act}` : ''}${contextInfo.scene ? `, Scene ${contextInfo.scene}` : ''}${contextInfo.speaker ? `, Speaker: ${contextInfo.speaker}` : ''}` : 'General text'}
+    const title = `AI Explanation: ${bookTitle || 'Text Passage'}`
+    const content = `## AI Response\n\n${lastAiMessage.content}\n\n---\n*Shared from The Explainers App*`
 
----
-*Shared from The Explainers app - AI-powered literary analysis*`
-
-    // Copy content to clipboard
-    navigator.clipboard.writeText(content).then(() => {
-      // Show success message
-      alert('Content copied to clipboard! Now opening Reddit...')
-      
-      // Open Reddit submit page (just the title will be pre-filled)
-      const encodedTitle = encodeURIComponent(title)
-      const redditUrl = `https://reddit.com/r/TheExplainersApp/submit?title=${encodedTitle}`
-      window.open(redditUrl, '_blank')
-    }).catch(() => {
-      // Fallback if clipboard fails
-      alert('Content copied to clipboard! Now opening Reddit...')
-      const encodedTitle = encodeURIComponent(title)
-      const redditUrl = `https://reddit.com/r/TheExplainersApp/submit?title=${encodedTitle}`
-      window.open(redditUrl, '_blank')
-    })
+    setShareFormData({ title, content })
+    setShowShareModal(true)
   }
 
   const rateResponse = (messageId: string, rating: 'good' | 'bad') => {
@@ -261,8 +243,10 @@ ${lastAIResponse.content}
     const hasProviderChange = selectedProvider !== settings.llmProvider
     const hasStyleChange = currentStyle !== settings.explanationStyle
     const hasLengthChange = currentResponseLength !== settings.responseLength
-    setHasChanges(hasProviderChange || hasStyleChange || hasLengthChange)
-  }, [selectedProvider, currentStyle, currentResponseLength, settings])
+    const newHasChanges = hasProviderChange || hasStyleChange || hasLengthChange
+    console.log('hasChanges calculation:', { hasProviderChange, hasStyleChange, hasLengthChange, newHasChanges, selectedProvider, currentStyle, currentResponseLength, settingsProvider: settings.llmProvider, settingsStyle: settings.explanationStyle, settingsLength: settings.responseLength })
+    setHasChanges(newHasChanges)
+  }, [selectedProvider, currentStyle, currentResponseLength, settings.llmProvider, settings.explanationStyle, settings.responseLength])
 
   // Keep local chat controls in sync with global settings unless user changes them here
   useEffect(() => {
@@ -297,19 +281,8 @@ ${lastAIResponse.content}
     }
   }, [showStyleMenu])
 
-  // Auto-save settings changes immediately
-  useEffect(() => {
-    if (hasChanges) {
-      const updatedSettings: SettingsData = {
-        ...settings,
-        llmProvider: selectedProvider,
-        explanationStyle: currentStyle,
-        responseLength: currentResponseLength
-      }
-      onSettingsChange(updatedSettings)
-      setHasChanges(false)
-    }
-  }, [hasChanges, selectedProvider, currentStyle, currentResponseLength, settings, onSettingsChange])
+  // Don't auto-save immediately - let user see changes and use re-explain button
+  // Settings will be saved when re-explain is used or when component unmounts
 
 
   const callLLM = async (messages: Message[]): Promise<string> => {
@@ -730,6 +703,18 @@ ${lastAIResponse.content}
       setMessages(prev => [...prev, errorMessage])
     } finally {
       setIsLoading(false)
+      
+      // Save settings after successful re-explain
+      if (hasChanges) {
+        const updatedSettings: SettingsData = {
+          ...settings,
+          llmProvider: selectedProvider,
+          explanationStyle: currentStyle,
+          responseLength: currentResponseLength
+        }
+        onSettingsChange(updatedSettings)
+        setHasChanges(false)
+      }
     }
   }
 
@@ -1035,12 +1020,12 @@ ${lastAIResponse.content}
               </select>
             </div>
             <button 
-              onClick={() => handleReExplain(originalSelectedText)}
-              disabled={isLoading || !originalSelectedText}
+              onClick={() => handleReExplain(originalSelectedText || selectedText)}
+              disabled={isLoading || (!originalSelectedText && !selectedText && !hasChanges)}
               className={styles.reexplainButton}
-              title={`Re-explain in selected style${!originalSelectedText ? ' (no text available)' : ''}`}
+              title={`Re-explain in selected style${(!originalSelectedText && !selectedText && !hasChanges) ? ' (no text available)' : ''}${hasChanges ? ' (settings changed)' : ''}`}
             >
-              Re-explain
+              Re-explain{hasChanges ? ' *' : ''}
             </button>
             <button 
               onClick={saveChatHistory}
@@ -1051,17 +1036,17 @@ ${lastAIResponse.content}
               💾 Save Chat
             </button>
             <button 
-              onClick={shareToReddit}
+              onClick={shareToGitHub}
               disabled={messages.length === 0}
               className={styles.shareButton}
-              title="Copy formatted content to clipboard and open Reddit submit page"
+              title="Share this AI response to GitHub Issues"
             >
-              📋 Copy & Share
+              🐙 Share to GitHub
             </button>
             {/* Debug info for re-explain button */}
             {process.env.NODE_ENV === 'development' && (
               <div style={{ fontSize: '12px', color: '#666', marginTop: '4px' }}>
-                Debug: originalSelectedText length: {originalSelectedText?.length || 0}
+                Debug: originalSelectedText: {originalSelectedText?.length || 0}, selectedText: {selectedText?.length || 0}, hasChanges: {hasChanges ? 'true' : 'false'}, disabled: {(isLoading || (!originalSelectedText && !selectedText && !hasChanges)) ? 'true' : 'false'}
               </div>
             )}
           </div>
@@ -1257,6 +1242,141 @@ ${lastAIResponse.content}
         </div>
       </div>
       
+      {/* GitHub Sharing Modal */}
+      {showShareModal && (
+        <div className={styles.shareModalOverlay}>
+          <div className={styles.shareModal}>
+            <div className={styles.shareModalHeader}>
+              <h3>🐙 Share to GitHub</h3>
+              <button 
+                onClick={() => setShowShareModal(false)}
+                className={styles.shareModalClose}
+              >
+                ×
+              </button>
+            </div>
+            
+            <div className={styles.shareModalContent}>
+              <div className={styles.shareHelp}>
+                <p>📋 <strong>How it works:</strong></p>
+                <ol>
+                  <li>Edit your title and content below</li>
+                  <li>Click "Create GitHub Issue" - content will be copied to clipboard</li>
+                  <li>GitHub will open in a new tab</li>
+                  <li>Paste your content (Ctrl+V/Cmd+V) into the issue description</li>
+                  <li>Add appropriate labels and submit</li>
+                </ol>
+              </div>
+
+              <div className={styles.formGroup}>
+                <label htmlFor="reddit-title">Issue Title:</label>
+                <input
+                  id="reddit-title"
+                  type="text"
+                  className={styles.redditInput}
+                  value={shareFormData?.title || ''}
+                  onChange={(e) => setShareFormData(prev => prev ? { ...prev, title: e.target.value } : null)}
+                  placeholder="Enter your GitHub issue title..."
+                  maxLength={300}
+                />
+                <span className={styles.charCount}>
+                  {shareFormData?.title?.length || 0}/300
+                </span>
+              </div>
+
+              <div className={styles.formGroup}>
+                <label htmlFor="reddit-content">Issue Description:</label>
+                <textarea
+                  id="reddit-content"
+                  className={styles.redditTextarea}
+                  value={shareFormData?.content || ''}
+                  onChange={(e) => setShareFormData(prev => prev ? { ...prev, content: e.target.value } : null)}
+                  placeholder="Your content will appear here..."
+                  maxLength={40000}
+                />
+                <span className={styles.charCount}>
+                  {shareFormData?.content?.length || 0}/40,000
+                </span>
+              </div>
+
+              <div className={styles.redditActions}>
+                <button
+                  onClick={() => {
+                    if (!shareFormData) return
+                    
+                    // GitHub approach: Copy to clipboard + open GitHub new issue
+                    const encodedTitle = encodeURIComponent(shareFormData.title)
+                    const encodedBody = encodeURIComponent(shareFormData.content)
+                    const githubUrl = `https://github.com/johndimm/the-explainers/issues/new?title=${encodedTitle}&body=${encodedBody}&labels=ai-response,shared`
+                    
+                    // Step 1: Copy content to clipboard with enhanced feedback
+                    navigator.clipboard.writeText(shareFormData.content).then(() => {
+                      // Step 2: Show success message with clear next steps
+                      const successMessage = `✅ Content copied to clipboard!\n\n📋 Next steps:\n1. GitHub will open in a new tab\n2. The title and description should be pre-filled\n3. Review and edit if needed\n4. Add appropriate labels and submit\n\n💡 Tip: Keep this tab open until you've reviewed the issue!`
+                      
+                      alert(successMessage)
+                      
+                      // Step 3: Open GitHub with a slight delay for better UX
+                      setTimeout(() => {
+                        window.open(githubUrl, '_blank')
+                        setShowShareModal(false)
+                      }, 500)
+                    }).catch(() => {
+                      // Enhanced fallback with clear instructions
+                      const fallbackMessage = `⚠️ Clipboard access failed\n\n📋 Manual copy method:\n1. Select the content above (Ctrl+A)\n2. Copy it (Ctrl+C)\n3. Open GitHub in a new tab\n4. Paste the content into the issue description`
+                      
+                      alert(fallbackMessage)
+                      
+                      // Still open GitHub for manual process
+                      setTimeout(() => {
+                        window.open(githubUrl, '_blank')
+                        setShowShareModal(false)
+                      }, 500)
+                    })
+                  }}
+                  className={styles.redditSubmitButton}
+                >
+                  🐙 Create GitHub Issue
+                </button>
+                
+                <button
+                  onClick={() => {
+                    if (!shareFormData) return
+                    
+                    navigator.clipboard.writeText(shareFormData.content).then(() => {
+                      alert('✅ Content copied to clipboard! You can now paste it anywhere.')
+                    }).catch(() => {
+                      alert('⚠️ Clipboard access failed. Please manually select and copy the content.')
+                    })
+                  }}
+                  className={styles.redditCopyButton}
+                >
+                  📋 Copy Content
+                </button>
+                
+                <button
+                  onClick={() => setShowShareModal(false)}
+                  className={styles.redditCancelButton}
+                >
+                  Cancel
+                </button>
+              </div>
+
+              <div className={styles.shareTips}>
+                <p>💡 <strong>Pro Tips:</strong></p>
+                <ul>
+                  <li>GitHub will pre-fill both title and description (much more reliable than Reddit!)</li>
+                  <li>Use Ctrl+V (Windows) or Cmd+V (Mac) to paste if needed</li>
+                  <li>Add relevant labels like "ai-response", "discussion", or "question"</li>
+                  <li>Consider adding context about what you found interesting</li>
+                  <li>GitHub issues support full markdown formatting</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
       {/* Help Popup */}
       {showHelpPopup && (
         <div className={styles.helpPopupOverlay} onClick={() => setShowHelpPopup(null)}>

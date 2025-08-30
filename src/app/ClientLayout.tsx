@@ -59,7 +59,39 @@ export default function ClientLayout({ children }: { children: React.ReactNode }
               boxSizing: 'border-box'
             }}>
             <div style={{ flex: 1 }}>
-              <h1 style={{ margin: 0, fontSize: '18px', fontWeight: 'bold', color: '#333', lineHeight: '1.2' }}>The Explainers</h1>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                <h1 style={{ margin: 0, fontSize: '18px', fontWeight: 'bold', color: '#333', lineHeight: '1.2' }}>The Explainers</h1>
+                <button
+                  onClick={() => window.open('https://reddit.com/r/TheExplainersApp', '_blank')}
+                  style={{
+                    background: 'none',
+                    border: 'none',
+                    cursor: 'pointer',
+                    padding: '2px 6px',
+                    borderRadius: '4px',
+                    fontSize: '10px',
+                    color: '#ff6b35',
+                    fontWeight: '500',
+                    textDecoration: 'none',
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: '2px',
+                    transition: 'all 0.2s'
+                  }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.background = '#fff5f2'
+                    e.currentTarget.style.color = '#e55a2b'
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.background = 'none'
+                    e.currentTarget.style.color = '#ff6b35'
+                  }}
+                  title="Join our Reddit community"
+                >
+                  <span style={{ fontSize: '8px' }}>🔗</span>
+                  Community
+                </button>
+              </div>
               <p style={{ margin: 0, fontSize: '11px', color: '#666', lineHeight: '1.2' }}>
                 {subtitle}
               </p>
