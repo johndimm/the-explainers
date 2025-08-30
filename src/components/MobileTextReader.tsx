@@ -26,6 +26,9 @@ const MobileTextReader: React.FC<ReaderCommonProps> = ({ text, bookTitle = 'Rome
   const [zoomLevel, setZoomLevel] = useState(1)
   const [initialPinchDistance, setInitialPinchDistance] = useState<number | null>(null)
   const [initialZoomLevel, setInitialZoomLevel] = useState<number>(1)
+  
+  // Device detection - only for iPhone-specific fallbacks
+  const isIPhone = /iPhone|iPad|iPod/.test(navigator.userAgent)
 
   const tryVibrate = (): boolean => {
     if (vibratedRef.current) return true
@@ -128,6 +131,13 @@ const MobileTextReader: React.FC<ReaderCommonProps> = ({ text, bookTitle = 'Rome
       
       if (!startRange || !endRange) {
         log('caretRangeAtPoint failed', { startRange: !!startRange, endRange: !!endRange })
+        
+        // iPhone fallback: only if standard method failed AND we're on iPhone
+        if (isIPhone) {
+          log('trying iPhone fallback method')
+          return handleLongPressIPhone(startX, startY, endX, endY)
+        }
+        
         return ''
       }
       
@@ -156,6 +166,92 @@ const MobileTextReader: React.FC<ReaderCommonProps> = ({ text, bookTitle = 'Rome
       return t
     } catch (error) {
       log('handleLongPress error', error)
+      
+      // iPhone fallback on error: only if we're on iPhone
+      if (isIPhone) {
+        log('trying iPhone fallback method after error')
+        return handleLongPressIPhone(startX, startY, endX, endY)
+      }
+      
+      return ''
+    }
+  }
+
+  // iPhone-specific fallback method that only activates when standard method fails
+  const handleLongPressIPhone = (startX: number, startY: number, endX: number, endY: number): string => {
+    try {
+      log('iPhone fallback method called', { startX, startY, endX, endY })
+      
+      // Get the text element at the touch points
+      const startElement = document.elementFromPoint(startX, startY)
+      const endElement = document.elementFromPoint(endX, endY)
+      
+      if (!startElement || !endElement) {
+        log('iPhone fallback: elementFromPoint failed', { startElement: !!startElement, endElement: !!endElement })
+        return ''
+      }
+      
+      // Find the common text container
+      let textContainer: Element | null = startElement
+      while (textContainer && !textContainer.textContent) {
+        textContainer = textContainer.parentElement
+      }
+      
+      if (!textContainer || !textContainer.textContent) {
+        log('iPhone fallback: no text container found')
+        return ''
+      }
+      
+      const text = textContainer.textContent
+      log('iPhone fallback: found text container with length:', text.length)
+      
+      // Estimate character positions based on touch coordinates relative to container
+      const containerRect = textContainer.getBoundingClientRect()
+      const startCharIndex = Math.floor(((startX - containerRect.left) / containerRect.width) * text.length)
+      const endCharIndex = Math.floor(((endX - containerRect.left) / containerRect.width) * text.length)
+      
+      // Ensure start is before end
+      const actualStart = Math.min(startCharIndex, endCharIndex)
+      const actualEnd = Math.max(startCharIndex, endCharIndex)
+      
+      // Get the text between the estimated positions
+      let selectedText = text.substring(actualStart, actualEnd).trim()
+      
+      // If the selection is too short or empty, try to expand to word boundaries
+      if (selectedText.length < 3) {
+        // Find word boundaries around the estimated positions
+        let wordStart = actualStart
+        let wordEnd = actualEnd
+        
+        // Expand start to word beginning
+        while (wordStart > 0 && /\w/.test(text[wordStart - 1])) {
+          wordStart--
+        }
+        
+        // Expand end to word end
+        while (wordEnd < text.length && /\w/.test(text[wordEnd])) {
+          wordEnd++
+        }
+        
+        selectedText = text.substring(wordStart, wordEnd).trim()
+      }
+      
+      log('iPhone fallback result', { 
+        selectedText, 
+        length: selectedText.length, 
+        startChar: actualStart, 
+        endChar: actualEnd,
+        textLength: text.length 
+      })
+      
+      if (selectedText && selectedText.length > 2) {
+        setHighlightedText(selectedText)
+        return selectedText
+      }
+      
+      return ''
+    } catch (error) {
+      log('iPhone fallback error', error)
       return ''
     }
   }
@@ -226,6 +322,50 @@ const MobileTextReader: React.FC<ReaderCommonProps> = ({ text, bookTitle = 'Rome
         }
       } else {
         warn('caretRangeAtPoint returned null at', pos)
+        
+        // iPhone fallback for initial selection
+        if (isIPhone) {
+          log('trying iPhone fallback for initial selection')
+          try {
+            const startElement = document.elementFromPoint(start.x, start.y)
+            if (startElement && startElement.textContent) {
+              // Find the text container
+              let textContainer: Element | null = startElement
+              while (textContainer && !textContainer.textContent) {
+                textContainer = textContainer.parentElement
+              }
+              
+              if (textContainer && textContainer.textContent) {
+                const text = textContainer.textContent
+                const containerRect = textContainer.getBoundingClientRect()
+                const charIndex = Math.floor(((start.x - containerRect.left) / containerRect.width) * text.length)
+                
+                // Find word boundaries around the touch point
+                let wordStart = charIndex
+                let wordEnd = charIndex
+                
+                // Expand to word beginning
+                while (wordStart > 0 && /\w/.test(text[wordStart - 1])) {
+                  wordStart--
+                }
+                
+                // Expand to word end
+                while (wordEnd < text.length && /\w/.test(text[wordEnd])) {
+                  wordEnd++
+                }
+                
+                const initialWord = text.substring(wordStart, wordEnd).trim()
+                if (initialWord && initialWord.length > 2) {
+                  log('iPhone initial selection fallback', initialWord)
+                  setSelectedText(initialWord)
+                  setHighlightedText(initialWord)
+                }
+              }
+            }
+          } catch (e) {
+            log('iPhone initial selection fallback failed:', e)
+          }
+        }
       }
       // Also try a frame-later vibrate for WebKit quirks
       requestAnimationFrame(() => { if (!vibratedRef.current) tryVibrate() })
