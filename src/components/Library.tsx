@@ -227,8 +227,15 @@ const Library: React.FC<LibraryProps> = ({ onBookSelect, onBackToCurrentBook }) 
                 >
                   Reddit Forum →
                 </button>
+                <button 
+                  className={styles.communityButton}
+                  onClick={() => window.open('https://github.com/johndimm/the-explainers/discussions', '_blank')}
+                  style={{ marginLeft: '8px' }}
+                >
+                  GitHub Discussions →
+                </button>
                 <span className={styles.communityNote}>
-                  Join r/TheExplainersApp
+                  Join r/TheExplainersApp or GitHub Discussions
                 </span>
               </div>
             </div>

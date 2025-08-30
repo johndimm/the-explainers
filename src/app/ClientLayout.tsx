@@ -89,7 +89,38 @@ export default function ClientLayout({ children }: { children: React.ReactNode }
                   title="Join our Reddit community"
                 >
                   <span style={{ fontSize: '8px' }}>🔗</span>
-                  Community
+                  Reddit
+                </button>
+                
+                <button
+                  onClick={() => window.open('https://github.com/johndimm/the-explainers/discussions', '_blank')}
+                  style={{
+                    background: 'none',
+                    border: 'none',
+                    cursor: 'pointer',
+                    padding: '2px 6px',
+                    borderRadius: '4px',
+                    fontSize: '10px',
+                    color: '#2ea44f',
+                    fontWeight: '500',
+                    textDecoration: 'none',
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: '2px',
+                    transition: 'all 0.2s'
+                  }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.background = '#f0f9f0'
+                    e.currentTarget.style.color = '#2c974b'
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.background = 'none'
+                    e.currentTarget.style.color = '#2ea44f'
+                  }}
+                  title="Join our GitHub Discussions community"
+                >
+                  <span style={{ fontSize: '8px' }}>🐙</span>
+                  GitHub
                 </button>
               </div>
               <p style={{ margin: 0, fontSize: '11px', color: '#666', lineHeight: '1.2' }}>

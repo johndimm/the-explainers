@@ -127,9 +127,67 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ selectedText, contextInfo
       return
     }
 
-    const title = `AI Explanation: ${bookTitle || 'Text Passage'}`
-    const content = `## AI Response\n\n${lastAiMessage.content}\n\n---\n*Shared from The Explainers App*`
+    // Build comprehensive content including the quote and context
+    let content = ''
+    
+    // Debug: log what we're building
+    console.log('🔍 GitHub Share Debug:')
+    console.log('AI Response content:', lastAiMessage.content)
+    console.log('Selected text:', selectedText)
+    console.log('Book title:', bookTitle)
+    console.log('Author:', author)
+    console.log('Context info:', contextInfo)
+    
+    // Find the selected text quote - try multiple sources
+    let quoteText = ''
+    if (selectedText && selectedText.trim()) {
+      quoteText = selectedText.trim()
+    } else if (originalSelectedText && originalSelectedText.trim()) {
+      quoteText = originalSelectedText.trim()
+    } else {
+      // Look for the first user message in chat history as fallback
+      const firstUserMessage = messages.find(msg => msg.role === 'user')
+      if (firstUserMessage && firstUserMessage.content.trim()) {
+        quoteText = firstUserMessage.content.trim()
+      }
+    }
+    
+    // Start with the selected text quote at the top
+    if (quoteText) {
+      content += `## Selected Text\n\n> ${quoteText}\n\n`
+    }
+    
+    // Add the AI response
+    content += `## AI Response\n\n${lastAiMessage.content}\n\n`
+    
+    // Add book context if available
+    if (bookTitle || author) {
+      content += `## Source\n\n`
+      if (bookTitle) content += `**Book:** ${bookTitle}\n`
+      if (author) content += `**Author:** ${author}\n`
+      content += `\n`
+    }
+    
+    // Add context info if available
+    if (contextInfo) {
+      content += `## Context\n\n`
+      if (contextInfo.act) content += `**Act:** ${contextInfo.act}\n`
+      if (contextInfo.scene) content += `**Scene:** ${contextInfo.scene}\n`
+      if (contextInfo.speaker) content += `**Speaker:** ${contextInfo.speaker}\n`
+      if (contextInfo.charactersOnStage && contextInfo.charactersOnStage.length > 0) {
+        content += `**Characters on Stage:** ${contextInfo.charactersOnStage.join(', ')}\n`
+      }
+      content += `\n`
+    }
+    
+    content += `---\n*Shared from The Explainers App*`
+    
+    // Debug: log final content
+    console.log('Final content length:', content.length)
+    console.log('Final content preview:', content.substring(0, 200))
+    console.log('Quote text found:', quoteText)
 
+    const title = `AI Explanation: ${bookTitle || 'Text Passage'}`
     setShareFormData({ title, content })
     setShowShareModal(true)
   }
@@ -1366,6 +1424,7 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ selectedText, contextInfo
                 <p>💡 <strong>Pro Tips:</strong></p>
                 <ul>
                   <li>GitHub will pre-fill both title and description (much more reliable than Reddit!)</li>
+                  <li>The selected text quote and context are automatically included</li>
                   <li>Use Ctrl+V (Windows) or Cmd+V (Mac) to paste if needed</li>
                   <li>Add relevant labels like "ai-response", "discussion", or "question"</li>
                   <li>Consider adding context about what you found interesting</li>
