@@ -113,7 +113,7 @@ export const STYLE_CATEGORIES = {
   other: [
     { value: 'carl-sagan', name: 'Carl Sagan', description: 'Cosmic wonder and curiosity' },
     { value: 'neil-degrasse-tyson', name: 'Neil deGrasse Tyson', description: 'Scientific and accessible' },
-    { value: 'humphrey-bogart', name: 'Humphrey Bogart', description: 'Tough and world-weary' },
+    { value: 'humphrey-bogart', name: 'Humphrey Bogart', description: 'Philip Marlowe hard-boiled detective' },
     { value: 'marilyn-monroe', name: 'Marilyn Monroe', description: 'Glamorous and vulnerable' },
     { value: 'louis-theroux', name: 'Louis Theroux', description: 'Curious, empathetic, and gently probing' },
     { value: 'robin-williams', name: 'Robin Williams', description: 'Energetic, improvisational, and heartfelt' },
