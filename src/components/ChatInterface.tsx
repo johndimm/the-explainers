@@ -119,7 +119,10 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ selectedText, contextInfo
 
     // Find the last AI response (excluding YouTube video messages)
     const lastAiMessage = [...messages].reverse().find(msg => 
-      msg.role === 'assistant' && !msg.content.includes('YouTube video')
+      msg.role === 'assistant' && 
+      !msg.content.includes('YouTube video') && 
+      !msg.content.includes('🎬 Found related video') &&
+      msg.content.length > 50  // Ensure it's a substantial response, not just a short message
     )
 
     if (!lastAiMessage) {
@@ -129,14 +132,6 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ selectedText, contextInfo
 
     // Build comprehensive content including the quote and context
     let content = ''
-    
-    // Debug: log what we're building
-    console.log('🔍 GitHub Share Debug:')
-    console.log('AI Response content:', lastAiMessage.content)
-    console.log('Selected text:', selectedText)
-    console.log('Book title:', bookTitle)
-    console.log('Author:', author)
-    console.log('Context info:', contextInfo)
     
     // Find the selected text quote - try multiple sources
     let quoteText = ''
@@ -181,11 +176,6 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ selectedText, contextInfo
     }
     
     content += `---\n*Shared from The Explainers App*`
-    
-    // Debug: log final content
-    console.log('Final content length:', content.length)
-    console.log('Final content preview:', content.substring(0, 200))
-    console.log('Quote text found:', quoteText)
 
     const title = `AI Explanation: ${bookTitle || 'Text Passage'}`
     setShareFormData({ title, content })
@@ -964,6 +954,72 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ selectedText, contextInfo
     }
   }
 
+  const shareSpecificResponse = (message: Message) => {
+    // Check if this is a substantial AI response (not a YouTube video message)
+    if (message.content.includes('🎬 Found related video') || message.content.length < 50) {
+      alert('This message cannot be shared. Please select a substantial AI response.')
+      return
+    }
+
+    // Find the user message that preceded this AI response
+    const messageIndex = messages.findIndex(msg => msg.id === message.id)
+    let quoteText = ''
+    
+    // Look for the user message before this AI response
+    for (let i = messageIndex - 1; i >= 0; i--) {
+      if (messages[i].role === 'user') {
+        quoteText = messages[i].content.trim()
+        break
+      }
+    }
+    
+    // If no user message found, try to get from selectedText or originalSelectedText
+    if (!quoteText) {
+      if (selectedText && selectedText.trim()) {
+        quoteText = selectedText.trim()
+      } else if (originalSelectedText && originalSelectedText.trim()) {
+        quoteText = originalSelectedText.trim()
+      }
+    }
+
+    // Build content for this specific response
+    let content = ''
+    
+    // Start with the selected text quote if available
+    if (quoteText) {
+      content += `## Selected Text\n\n> ${quoteText}\n\n`
+    }
+    
+    // Add the specific AI response
+    content += `## AI Response\n\n${message.content}\n\n`
+    
+    // Add book context if available
+    if (bookTitle || author) {
+      content += `## Source\n\n`
+      if (bookTitle) content += `**Book:** ${bookTitle}\n`
+      if (author) content += `**Author:** ${author}\n`
+      content += `\n`
+    }
+    
+    // Add context info if available
+    if (contextInfo) {
+      content += `## Context\n\n`
+      if (contextInfo.act) content += `**Act:** ${contextInfo.act}\n`
+      if (contextInfo.scene) content += `**Scene:** ${contextInfo.scene}\n`
+      if (contextInfo.speaker) content += `**Speaker:** ${contextInfo.speaker}\n`
+      if (contextInfo.charactersOnStage && contextInfo.charactersOnStage.length > 0) {
+        content += `**Characters on Stage:** ${contextInfo.charactersOnStage.join(', ')}\n`
+      }
+      content += `\n`
+    }
+    
+    content += `---\n*Shared from The Explainers App*`
+
+    const title = `AI Explanation: ${bookTitle || 'Text Passage'}`
+    setShareFormData({ title, content })
+    setShowShareModal(true)
+  }
+
   return (
     <div className={isPageMode ? '' : styles.chatOverlay}>
       <div className={isPageMode ? '' : styles.chatContainer} style={isPageMode ? { height: '100%', display: 'flex', flexDirection: 'column' } : {}}>
@@ -1093,14 +1149,7 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ selectedText, contextInfo
             >
               💾 Save Chat
             </button>
-            <button 
-              onClick={shareToGitHub}
-              disabled={messages.length === 0}
-              className={styles.shareButton}
-              title="Share this AI response to GitHub Issues"
-            >
-              🐙 Share to GitHub
-            </button>
+            {/* Share button moved to inline with each response */}
             {/* Debug info for re-explain button */}
             {process.env.NODE_ENV === 'development' && (
               <div style={{ fontSize: '12px', color: '#666', marginTop: '4px' }}>
@@ -1248,6 +1297,13 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ selectedText, contextInfo
                       title="Mark as bad response"
                     >
                       👎 Bad
+                    </button>
+                    <button
+                      onClick={() => shareSpecificResponse(message)}
+                      className={styles.shareResponseButton}
+                      title="Share this response to GitHub"
+                    >
+                      🐙 Share
                     </button>
                   </div>
                   {message.rating && (

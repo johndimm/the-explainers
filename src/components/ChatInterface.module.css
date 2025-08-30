@@ -555,14 +555,11 @@
 .ratingButton {
   padding: 4px 8px;
   border: 1px solid #ddd;
-  border-radius: 4px;
   background: white;
+  border-radius: 4px;
   cursor: pointer;
   font-size: 12px;
   transition: all 0.2s;
-  display: flex;
-  align-items: center;
-  gap: 4px;
 }
 
 .ratingButton:hover {
@@ -1131,4 +1128,21 @@
 .providerSelect option, .styleSelect option, .lengthSelect option {
   background: #ffffff;
   color: #111827;
+}
+
+.shareResponseButton {
+  padding: 4px 8px;
+  border: 1px solid #2ea44f;
+  background: #2ea44f;
+  color: white;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 12px;
+  transition: all 0.2s;
+  margin-left: 4px;
+}
+
+.shareResponseButton:hover {
+  background: #2c974b;
+  border-color: #2c974b;
 }
