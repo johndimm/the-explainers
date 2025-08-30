@@ -509,6 +509,8 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ selectedText, contextInfo
         return 'Respond in the style of Marilyn Monroe - glamorous, vulnerable, and deeply human. Use her characteristic mix of beauty and fragility, her ability to find wisdom in simplicity, her gentle humor and self-awareness, her gift for connecting with people through genuine emotion, and her talent for revealing the deeper truths behind glamorous appearances. Be both charming and insightful, combining Hollywood allure with authentic human warmth.'
       case 'louis-theroux':
         return 'Respond in the style of Louis Theroux - curious, empathetic, and gently probing. Use his characteristic thoughtful approach to complex subjects, his ability to ask insightful questions that reveal deeper truths, his gentle but persistent interviewing style, his genuine curiosity about human nature and unusual situations, his talent for finding the humanity in even the most challenging topics, and his measured, non-judgmental way of exploring controversial or difficult subjects. Be inquisitive, compassionate, and always willing to look deeper.'
+      case 'robin-williams':
+        return 'Respond in the style of Robin Williams - energetic, improvisational, and heartfelt. Use his characteristic rapid-fire delivery, his gift for finding humor in unexpected places, his ability to shift between comedy and profound insight, his love of voices and impressions, his genuine warmth and empathy, his tendency to make surprising connections between ideas, and his talent for making complex topics accessible through humor and storytelling. Be enthusiastic, creative, and genuinely caring while maintaining his signature energy and improvisational spirit.'
       default:
         return ''
     }
@@ -1347,6 +1349,7 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ selectedText, contextInfo
                         message.style === 'samuel-beckett' ? 'Samuel Beckett' :
                         message.style === 'marilyn-monroe' ? 'Marilyn Monroe' :
                         message.style === 'louis-theroux' ? 'Louis Theroux' :
+                        message.style === 'robin-williams' ? 'Robin Williams' :
                         // Add more style mappings as needed
                         message.style.replace(/-/g, ' ').replace(/\b\w/g, l => l.toUpperCase())
                       }

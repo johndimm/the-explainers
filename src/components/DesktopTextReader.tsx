@@ -13,6 +13,9 @@ const DesktopTextReader: React.FC<ReaderCommonProps> = ({ text, bookTitle = 'Rom
   const textContentRef = useRef<HTMLDivElement>(null)
   const [showConfirmDialog, setShowConfirmDialog] = useState(false)
   const [selectedText, setSelectedText] = useState('')
+  const [touchStartPos, setTouchStartPos] = useState<{ x: number; y: number } | null>(null)
+  const [isInSelectionMode, setIsInSelectionMode] = useState(false)
+  const longPressTimer = useRef<NodeJS.Timeout | null>(null)
 
   useBookmarkRestoreAndSave(textReaderRef, text, bookTitle, author)
   const {
@@ -28,12 +31,16 @@ const DesktopTextReader: React.FC<ReaderCommonProps> = ({ text, bookTitle = 'Rom
   } = useSearchCore(text, textReaderRef, textContentRef)
 
   const handleMouseUp = () => {
-    const selection = window.getSelection()
-    const t = selection?.toString().trim() || ''
-    if (t.length > 0) {
-      setSelectedText(t)
-      setShowConfirmDialog(true)
-    }
+    // Small delay to ensure selection is complete
+    setTimeout(() => {
+      const selection = window.getSelection()
+      const t = selection?.toString().trim() || ''
+      log('DesktopTextReader: mouseup selection', { text: t, length: t.length, hasSelection: !!selection })
+      if (t.length > 0) {
+        setSelectedText(t)
+        setShowConfirmDialog(true)
+      }
+    }, 10)
   }
 
   const handleCancel = () => {
@@ -48,6 +55,79 @@ const DesktopTextReader: React.FC<ReaderCommonProps> = ({ text, bookTitle = 'Rom
     router.push('/chat')
     setShowConfirmDialog(false)
     setSelectedText('')
+  }
+
+  // Touch gesture handlers for swipe text selection
+  const handleTouchStart = (e: React.TouchEvent) => {
+    log('DesktopTextReader: touchstart', { touches: e.touches.length })
+    const touch = e.touches[0]
+    const pos = { x: touch.clientX, y: touch.clientY }
+    setTouchStartPos(pos)
+    
+    // Start long press timer for swipe selection
+    const timer = setTimeout(() => {
+      log('DesktopTextReader: longpress fired')
+      setIsInSelectionMode(true)
+    }, 400)
+    longPressTimer.current = timer
+  }
+
+  const handleTouchMove = (e: React.TouchEvent) => {
+    if (!touchStartPos || !isInSelectionMode) return
+    
+    const touch = e.touches[0]
+    const distance = Math.hypot(touch.clientX - touchStartPos.x, touch.clientY - touchStartPos.y)
+    
+    if (distance > 10) { // Minimum distance to trigger selection
+      try {
+        // Get text range from start to current position
+        const startRange = document.caretRangeFromPoint?.(touchStartPos.x, touchStartPos.y) || 
+                          (document as any).caretPositionFromPoint?.(touchStartPos.x, touchStartPos.y)
+        const endRange = document.caretRangeFromPoint?.(touch.clientX, touch.clientY) || 
+                        (document as any).caretPositionFromPoint?.(touch.clientX, touch.clientY)
+        
+        if (startRange && endRange) {
+          const range = document.createRange()
+          
+          // Always create range from left to right regardless of swipe direction
+          const startX = touchStartPos.x
+          const endX = touch.clientX
+          
+          if (startX <= endX) {
+            // Left to right swipe
+            range.setStart(startRange.startContainer, startRange.startOffset)
+            range.setEnd(endRange.startContainer, endRange.endOffset)
+          } else {
+            // Right to left swipe
+            range.setStart(endRange.startContainer, endRange.startOffset)
+            range.setEnd(startRange.startContainer, startRange.startOffset)
+          }
+          
+          const text = range.toString().trim()
+          if (text) {
+            setSelectedText(text)
+            log('DesktopTextReader: selected text via swipe', { text, length: text.length })
+          }
+        }
+      } catch (error) {
+        log('DesktopTextReader: error in touch move', error)
+      }
+    }
+  }
+
+  const handleTouchEnd = (e: React.TouchEvent) => {
+    if (longPressTimer.current) {
+      clearTimeout(longPressTimer.current)
+      longPressTimer.current = null
+    }
+    
+    if (isInSelectionMode && selectedText.length > 2) {
+      log('DesktopTextReader: show dialog for swipe selection')
+      setShowConfirmDialog(true)
+    }
+    
+    setIsInSelectionMode(false)
+    setTouchStartPos(null)
   }
 
   return (
@@ -75,12 +155,19 @@ const DesktopTextReader: React.FC<ReaderCommonProps> = ({ text, bookTitle = 'Rom
         )}
       </div>
 
-      <div
-        ref={textContentRef}
-        className={styles.textContent}
-        onMouseUp={handleMouseUp}
-        style={{ userSelect: 'text', fontFamily: settings.textFont }}
-      >
+              <div
+          ref={textContentRef}
+          className={styles.textContent}
+          onMouseDown={() => {
+            // Clear any previous selection when starting a new selection
+            window.getSelection()?.removeAllRanges()
+          }}
+          onMouseUp={handleMouseUp}
+          onTouchStart={handleTouchStart}
+          onTouchMove={handleTouchMove}
+          onTouchEnd={handleTouchEnd}
+          style={{ userSelect: 'text', fontFamily: settings.textFont }}
+        >
         <pre style={{ 
           whiteSpace: 'pre-wrap', 
           wordWrap: 'break-word',

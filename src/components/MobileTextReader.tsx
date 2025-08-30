@@ -115,24 +115,39 @@ const MobileTextReader: React.FC<ReaderCommonProps> = ({ text, bookTitle = 'Rome
 
   const handleLongPress = (startX: number, startY: number, endX: number, endY: number): string => {
     try {
+      log('handleLongPress called', { startX, startY, endX, endY })
       const startRange = caretRangeAtPoint(startX, startY)
       const endRange = caretRangeAtPoint(endX, endY)
-      if (!startRange || !endRange) return ''
+      if (!startRange || !endRange) {
+        log('caretRangeAtPoint failed', { startRange: !!startRange, endRange: !!endRange })
+        return ''
+      }
+      
       const range = document.createRange()
+      
+      // Always create range from left to right regardless of swipe direction
+      // This ensures both left-to-right and right-to-left swipes work
       const comparison = startRange.compareBoundaryPoints(Range.START_TO_START, endRange)
+      log('range comparison', { comparison, startX, endX, swipeDirection: startX < endX ? 'left-to-right' : 'right-to-left' })
+      
       if (comparison <= 0) {
         range.setStart(startRange.startContainer, startRange.startOffset)
         range.setEnd(endRange.startContainer, endRange.endOffset)
+        log('range set: start to end')
       } else {
         range.setStart(endRange.startContainer, endRange.startOffset)
         range.setEnd(startRange.startContainer, startRange.startOffset)
+        log('range set: end to start (swapped)')
       }
+      
       const expandedRange = expandToWordBoundaries(range)
       const t = expandedRange.toString().trim()
+      log('expanded range result', { text: t, length: t.length })
       if (!t) return ''
       setHighlightedText(t)
       return t
-    } catch {
+    } catch (error) {
+      log('handleLongPress error', error)
       return ''
     }
   }
@@ -236,7 +251,14 @@ const MobileTextReader: React.FC<ReaderCommonProps> = ({ text, bookTitle = 'Rome
     if (!start) return
     const touch = e.touches[0]
     if (isInSelectionMode) {
-      log('touchmove in selection')
+      log('touchmove in selection', { 
+        startX: start.x, 
+        startY: start.y, 
+        currentX: touch.clientX, 
+        currentY: touch.clientY,
+        deltaX: touch.clientX - start.x,
+        deltaY: touch.clientY - start.y
+      })
       e.preventDefault()
       e.stopPropagation()
       if (!vibratedRef.current) tryVibrate()
