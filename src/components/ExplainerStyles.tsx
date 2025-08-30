@@ -59,8 +59,13 @@ export const STYLE_CATEGORIES = {
     { value: 'ernest-hemingway', name: 'Ernest Hemingway', description: 'Sparse, direct, and masculine' },
     { value: 'james-joyce', name: 'James Joyce', description: 'Stream-of-consciousness, experimental, and linguistically innovative' },
     { value: 'samuel-beckett', name: 'Samuel Beckett', description: 'Absurdist, minimalist, and existential' },
+    { value: 'kurt-vonnegut', name: 'Kurt Vonnegut', description: 'Satirical, darkly humorous, and humanistic' },
   ],
-  presidents: [
+  politics: [
+      { value: 'bernie-sanders', name: 'Bernie Sanders', description: 'Progressive populist and passionate advocate' },
+      { value: 'martin-luther-king', name: 'Martin Luther King', description: 'Eloquent, inspiring, and morally grounded' },
+      { value: 'john-f-kennedy', name: 'John F. Kennedy', description: 'Charismatic, optimistic, and forward-looking' },
+      { value: 'james-carville', name: 'James Carville', description: 'Sharp political strategist and colorful commentator' },
       { value: 'donald-trump', name: 'Donald Trump', description: 'Demented sociopathic narcissist' },
       { value: 'george-w-bush', name: 'George W. Bush', description: 'Down-to-earth and folksy' },
       { value: 'barack-obama', name: 'Barack Obama', description: 'Eloquent, thoughtful, and inspiring' },
@@ -473,7 +478,7 @@ const ExplainerStyles: React.FC<ExplainerStylesProps> = ({
 
                   {renderCategory('Critics', STYLE_CATEGORIES.critics)}
         {renderCategory('Writers', STYLE_CATEGORIES.writers)}
-        {renderCategory('Presidents', STYLE_CATEGORIES.presidents)}
+        {renderCategory('Politics', STYLE_CATEGORIES.politics)}
         {renderCategory('Comedians', STYLE_CATEGORIES.comedians)}
         {renderCategory('Talk Show Hosts', STYLE_CATEGORIES.talkShowHosts)}
         {renderCategory('Other', STYLE_CATEGORIES.other)}
