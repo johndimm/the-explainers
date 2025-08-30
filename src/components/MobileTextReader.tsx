@@ -116,8 +116,16 @@ const MobileTextReader: React.FC<ReaderCommonProps> = ({ text, bookTitle = 'Rome
   const handleLongPress = (startX: number, startY: number, endX: number, endY: number): string => {
     try {
       log('handleLongPress called', { startX, startY, endX, endY })
-      const startRange = caretRangeAtPoint(startX, startY)
-      const endRange = caretRangeAtPoint(endX, endY)
+      
+      // Try multiple methods to get text ranges for iPhone compatibility
+      const startRange = caretRangeAtPoint(startX, startY) || 
+                        (document as any).caretPositionFromPoint?.(startX, startY) ||
+                        document.elementFromPoint?.(startX, startY)?.ownerDocument?.createRange?.()
+      
+      const endRange = caretRangeAtPoint(endX, endY) || 
+                      (document as any).caretPositionFromPoint?.(endX, endY) ||
+                      document.elementFromPoint?.(endX, endY)?.ownerDocument?.createRange?.()
+      
       if (!startRange || !endRange) {
         log('caretRangeAtPoint failed', { startRange: !!startRange, endRange: !!endRange })
         return ''
@@ -127,7 +135,7 @@ const MobileTextReader: React.FC<ReaderCommonProps> = ({ text, bookTitle = 'Rome
       
       // Always create range from left to right regardless of swipe direction
       // This ensures both left-to-right and right-to-left swipes work
-      const comparison = startRange.compareBoundaryPoints(Range.START_TO_START, endRange)
+      const comparison = startRange.compareBoundaryPoints?.(Range.START_TO_START, endRange) ?? 0
       log('range comparison', { comparison, startX, endX, swipeDirection: startX < endX ? 'left-to-right' : 'right-to-left' })
       
       if (comparison <= 0) {
@@ -166,13 +174,20 @@ const MobileTextReader: React.FC<ReaderCommonProps> = ({ text, bookTitle = 'Rome
   }
 
   const handleTouchStart = (e: React.TouchEvent) => {
-    log('touchstart', { touches: e.touches.length })
+    log('touchstart', { touches: e.touches.length, clientX: e.touches[0].clientX, clientY: e.touches[0].clientY })
+    
+    // Clear any existing selection to start fresh
     window.getSelection()?.removeAllRanges()
+    
     const touch = e.touches[0]
     const pos = { x: touch.clientX, y: touch.clientY }
     setTouchStartPos(pos)
     touchStartPosRef.current = pos
     startScrollTopRef.current = textReaderRef.current ? textReaderRef.current.scrollTop : 0
+    
+    // Use a shorter delay for iPhone to make it more responsive
+    const longPressDelay = /iPhone|iPad|iPod/.test(navigator.userAgent) ? 300 : 400
+    
     const timer = setTimeout(() => {
       const start = touchStartPosRef.current
       if (!start) { warn('longpress aborted: no touchStartPos'); return }
@@ -214,7 +229,7 @@ const MobileTextReader: React.FC<ReaderCommonProps> = ({ text, bookTitle = 'Rome
       }
       // Also try a frame-later vibrate for WebKit quirks
       requestAnimationFrame(() => { if (!vibratedRef.current) tryVibrate() })
-    }, 400)
+    }, longPressDelay)
     setLongPressTimer(timer)
   }
 
