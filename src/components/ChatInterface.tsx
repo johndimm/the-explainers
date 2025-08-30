@@ -76,6 +76,7 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ selectedText, contextInfo
   const [showHelpPopup, setShowHelpPopup] = useState<string | null>(null)
   const [showShareModal, setShowShareModal] = useState(false)
   const [shareFormData, setShareFormData] = useState<{ title: string; content: string } | null>(null)
+  const [shareDropdownOpen, setShareDropdownOpen] = useState<string | null>(null)
   const latestResponseRef = useRef<HTMLDivElement>(null)
   const inputRef = useRef<HTMLInputElement>(null)
   const styleMenuRef = useRef<HTMLDivElement>(null)
@@ -1020,6 +1021,110 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ selectedText, contextInfo
     setShowShareModal(true)
   }
 
+  const shareToReddit = (message: Message) => {
+    // Build content similar to GitHub but formatted for Reddit
+    const messageIndex = messages.findIndex(msg => msg.id === message.id)
+    let quoteText = ''
+    
+    for (let i = messageIndex - 1; i >= 0; i--) {
+      if (messages[i].role === 'user') {
+        quoteText = messages[i].content.trim()
+        break
+      }
+    }
+    
+    if (!quoteText && selectedText) {
+      quoteText = selectedText.trim()
+    }
+
+    let content = `**AI Response:**\n\n${message.content}\n\n`
+    
+    if (quoteText) {
+      content += `**Selected Text:**\n\n> ${quoteText}\n\n`
+    }
+    
+    if (bookTitle) {
+      content += `**Source:** ${bookTitle}${author ? ` by ${author}` : ''}\n\n`
+    }
+    
+    content += `*Shared from The Explainers App*`
+
+    const title = `AI Explanation: ${bookTitle || 'Text Passage'}`
+    const encodedTitle = encodeURIComponent(title)
+    const redditUrl = `https://reddit.com/r/TheExplainersApp/submit?title=${encodedTitle}`
+    
+    navigator.clipboard.writeText(content).then(() => {
+      alert('✅ Content copied to clipboard!\n\nReddit will open in a new tab. Paste the content (Ctrl+V/Cmd+V) into the text area.')
+      window.open(redditUrl, '_blank')
+    }).catch(() => {
+      alert('⚠️ Clipboard access failed. Please manually copy the content.')
+      window.open(redditUrl, '_blank')
+    })
+  }
+
+  const shareToDiscord = (message: Message) => {
+    // Build content for Discord (simpler format)
+    const messageIndex = messages.findIndex(msg => msg.id === message.id)
+    let quoteText = ''
+    
+    for (let i = messageIndex - 1; i >= 0; i--) {
+      if (messages[i].role === 'user') {
+        quoteText = messages[i].content.trim()
+        break
+      }
+    }
+    
+    if (!quoteText && selectedText) {
+      quoteText = selectedText.trim()
+    }
+
+    let content = `**AI Explanation${bookTitle ? ` - ${bookTitle}` : ''}**\n\n`
+    
+    if (quoteText) {
+      content += `> ${quoteText}\n\n`
+    }
+    
+    content += `${message.content}\n\n`
+    content += `*Shared from The Explainers App*`
+
+    navigator.clipboard.writeText(content).then(() => {
+      alert('✅ Content copied to clipboard!\n\nYou can now paste this into Discord, Slack, or any other platform.')
+    }).catch(() => {
+      alert('⚠️ Clipboard access failed. Please manually select and copy the content.')
+    })
+  }
+
+  const copyToClipboard = (message: Message) => {
+    // Simple copy - just the AI response with minimal formatting
+    const messageIndex = messages.findIndex(msg => msg.id === message.id)
+    let quoteText = ''
+    
+    for (let i = messageIndex - 1; i >= 0; i--) {
+      if (messages[i].role === 'user') {
+        quoteText = messages[i].content.trim()
+        break
+      }
+    }
+
+    let content = ''
+    
+    if (quoteText) {
+      content += `Selected Text: "${quoteText}"\n\n`
+    }
+    
+    content += `AI Response: ${message.content}`
+    
+    if (bookTitle) {
+      content += `\n\nSource: ${bookTitle}${author ? ` by ${author}` : ''}`
+    }
+
+    navigator.clipboard.writeText(content).then(() => {
+      alert('✅ Content copied to clipboard!')
+    }).catch(() => {
+      alert('⚠️ Clipboard access failed.')
+    })
+  }
+
   return (
     <div className={isPageMode ? '' : styles.chatOverlay}>
       <div className={isPageMode ? '' : styles.chatContainer} style={isPageMode ? { height: '100%', display: 'flex', flexDirection: 'column' } : {}}>
@@ -1298,13 +1403,59 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ selectedText, contextInfo
                     >
                       👎 Bad
                     </button>
-                    <button
-                      onClick={() => shareSpecificResponse(message)}
-                      className={styles.shareResponseButton}
-                      title="Share this response to GitHub"
-                    >
-                      🐙 Share
-                    </button>
+                    <div className={styles.shareDropdown}>
+                      <button
+                        onClick={() => setShareDropdownOpen(shareDropdownOpen === message.id ? null : message.id)}
+                        className={styles.shareResponseButton}
+                        title="Share this response"
+                      >
+                        🐙 Share ▼
+                      </button>
+                      {shareDropdownOpen === message.id && (
+                        <div className={styles.shareDropdownContent}>
+                          <button
+                            onClick={() => {
+                              shareSpecificResponse(message)
+                              setShareDropdownOpen(null)
+                            }}
+                            className={styles.shareOption}
+                            title="Share to GitHub Issues"
+                          >
+                            🐙 GitHub Issues
+                          </button>
+                          <button
+                            onClick={() => {
+                              shareToReddit(message)
+                              setShareDropdownOpen(null)
+                            }}
+                            className={styles.shareOption}
+                            title="Share to Reddit"
+                          >
+                            🔗 Reddit
+                          </button>
+                          <button
+                            onClick={() => {
+                              shareToDiscord(message)
+                              setShareDropdownOpen(null)
+                            }}
+                            className={styles.shareOption}
+                            title="Share to Discord"
+                          >
+                            💬 Discord
+                          </button>
+                          <button
+                            onClick={() => {
+                              copyToClipboard(message)
+                              setShareDropdownOpen(null)
+                            }}
+                            className={styles.shareOption}
+                            title="Copy to clipboard"
+                          >
+                            📋 Copy
+                          </button>
+                        </div>
+                      )}
+                    </div>
                   </div>
                   {message.rating && (
                     <span className={styles.ratingStatus}>
