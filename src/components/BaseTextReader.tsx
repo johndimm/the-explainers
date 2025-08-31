@@ -33,6 +33,191 @@ export const buildFlexibleRegex = (query: string): RegExp | null => {
   }
 }
 
+// Page mapping interface
+export interface PageMap {
+  pages: string[]
+  pageRanges: Array<{ start: number; end: number; pageIndex: number }>
+}
+
+// Page calculation utilities for page-by-page reading mode
+export const calculatePageContent = (text: string, pageHeight: number, lineHeight: number, charsPerLine: number): PageMap => {
+  const pages: string[] = []
+  const pageRanges: Array<{ start: number; end: number; pageIndex: number }> = []
+  const lines = text.split('\n')
+  let currentPage: string[] = []
+  let currentHeight = 0
+  let currentStartPos = 0
+  
+  for (let i = 0; i < lines.length; i++) {
+    const line = lines[i]
+    // Calculate how many lines this text will actually take up
+    const estimatedLines = Math.max(1, Math.ceil(line.length / charsPerLine))
+    const lineHeightPx = estimatedLines * lineHeight
+    
+    if (currentHeight + lineHeightPx > pageHeight) {
+      // Current page is full, start a new one
+      if (currentPage.length > 0) {
+        const pageContent = currentPage.join('\n')
+        pages.push(pageContent)
+        pageRanges.push({
+          start: currentStartPos,
+          end: currentStartPos + pageContent.length,
+          pageIndex: pages.length - 1
+        })
+        currentPage = []
+        currentHeight = 0
+        currentStartPos += pageContent.length
+
+      }
+      
+      // If a single line is too long for a page, split it
+      if (lineHeightPx > pageHeight) {
+        // Split the long line into chunks that fit on a page
+        let remainingLine = line
+        while (remainingLine.length > 0) {
+          const charsThatFit = Math.floor((pageHeight / lineHeight) * charsPerLine)
+          const chunk = remainingLine.substring(0, charsThatFit)
+          pages.push(chunk)
+          pageRanges.push({
+            start: currentStartPos,
+            end: currentStartPos + chunk.length,
+            pageIndex: pages.length - 1
+          })
+          currentStartPos += chunk.length
+          remainingLine = remainingLine.substring(charsThatFit)
+        }
+        currentHeight = 0
+      } else {
+        currentPage = [line]
+        currentHeight = lineHeightPx
+      }
+    } else {
+      currentPage.push(line)
+      currentHeight += lineHeightPx
+    }
+  }
+  
+  // Add the last page if it has content
+  if (currentPage.length > 0) {
+    const pageContent = currentPage.join('\n')
+    pages.push(pageContent)
+    pageRanges.push({
+      start: currentStartPos,
+      end: currentStartPos + pageContent.length,
+      pageIndex: pages.length - 1
+    })
+  }
+  
+
+  
+  return { pages, pageRanges }
+}
+
+export const estimateCharsPerLine = (containerWidth: number, fontSize: number, fontFamily: string): number => {
+  // Rough estimation based on font characteristics
+  const charWidth = fontFamily === 'monospace' ? fontSize * 0.6 : fontSize * 0.5
+  return Math.floor(containerWidth / charWidth)
+}
+
+// Find which page contains a specific text position using page mapping
+export const findPageForPosition = (position: number, pageMap: PageMap): number => {
+  if (pageMap.pageRanges.length === 0) return 0
+  
+  // Find the page range that contains this position
+  for (const range of pageMap.pageRanges) {
+    if (position >= range.start && position < range.end) {
+      return range.pageIndex
+    }
+  }
+  
+  // If position is beyond all pages, return last page
+  return pageMap.pageRanges.length - 1
+}
+
+// Legacy function for backward compatibility
+export const findPageForPositionLegacy = (text: string, position: number, pages: string[]): number => {
+  if (pages.length === 0) return 0
+  
+  // For page mode, we need to find which page contains the search result
+  // The position is the character index in the full text
+  let currentPos = 0
+  for (let i = 0; i < pages.length; i++) {
+    const pageLength = pages[i].length
+    if (position >= currentPos && position < currentPos + pageLength) {
+      return i
+    }
+    currentPos += pageLength
+  }
+  
+  // If position is beyond all pages, return last page
+  return pages.length - 1
+}
+
+// Alternative approach: Find page by searching for text content
+export const findPageByContent = (searchText: string, pages: string[]): number => {
+  if (pages.length === 0) return 0
+  
+  // Search for the text in each page
+  for (let i = 0; i < pages.length; i++) {
+    if (pages[i].includes(searchText)) {
+      return i
+    }
+  }
+  
+  // If not found, return 0
+  return 0
+}
+
+// Find page by searching for the actual search result text
+export const findPageBySearchResult = (searchResult: { index: number; length: number }, text: string, pages: string[]): number => {
+  if (pages.length === 0) return 0
+  
+  // Get the actual text that was found
+  const foundText = text.substring(searchResult.index, searchResult.index + searchResult.length)
+  
+  // Search for this text in each page
+  for (let i = 0; i < pages.length; i++) {
+    if (pages[i].includes(foundText)) {
+      return i
+    }
+  }
+  
+  // If not found, return 0
+  return 0
+}
+
+// Convert full text position to page-relative position using page mapping
+export const convertToPagePosition = (fullTextPosition: number, pageMap: PageMap): { pageIndex: number; pagePosition: number } => {
+  if (pageMap.pageRanges.length === 0) return { pageIndex: 0, pagePosition: 0 }
+  
+  // Find the page range that contains this position
+  for (const range of pageMap.pageRanges) {
+    if (fullTextPosition >= range.start && fullTextPosition < range.end) {
+      return { pageIndex: range.pageIndex, pagePosition: fullTextPosition - range.start }
+    }
+  }
+  
+  // If position is beyond all pages, return last page
+  return { pageIndex: pageMap.pageRanges.length - 1, pagePosition: 0 }
+}
+
+// Legacy function for backward compatibility
+export const convertToPagePositionLegacy = (fullTextPosition: number, pages: string[]): { pageIndex: number; pagePosition: number } => {
+  if (pages.length === 0) return { pageIndex: 0, pagePosition: 0 }
+  
+  let currentPos = 0
+  for (let i = 0; i < pages.length; i++) {
+    const pageLength = pages[i].length
+    if (fullTextPosition >= currentPos && fullTextPosition < currentPos + pageLength) {
+      return { pageIndex: i, pagePosition: fullTextPosition - currentPos }
+    }
+    currentPos += pageLength
+  }
+  
+  // If position is beyond all pages, return last page
+  return { pageIndex: pages.length - 1, pagePosition: 0 }
+}
+
 export const extractContextInfo = (selectedText: string, fullText: string, bookTitle?: string, author?: string) => {
   const selectedIndex = fullText.indexOf(selectedText)
   if (selectedIndex === -1) return null
@@ -225,7 +410,9 @@ export const useBookmarkRestoreAndSave = (
 export const useSearchCore = (
   text: string,
   textReaderRef: React.RefObject<HTMLDivElement | null>,
-  textContentRef: React.RefObject<HTMLDivElement | null>
+  textContentRef: React.RefObject<HTMLDivElement | null>,
+  onNavigateToPage?: (pageNum: number) => void,
+  pageMap?: PageMap // Use PageMap instead of just pages array
 ) => {
   const [searchQuery, setSearchQuery] = useState('')
   const [searchResults, setSearchResults] = useState<{ index: number, length: number }[]>([])
@@ -262,6 +449,14 @@ export const useSearchCore = (
   const scrollToSearchResult = (resultIndex: number, results: { index: number, length: number }[]) => {
     if (resultIndex < 0 || resultIndex >= results.length || !textContentRef.current) return
     const result = results[resultIndex]
+    
+    // If we have page navigation and page mapping, navigate to the correct page first
+    if (onNavigateToPage && pageMap && pageMap.pages.length > 0) {
+      // Use the more reliable method: search for the actual text in each page
+      const targetPage = findPageBySearchResult(result, text, pageMap.pages)
+      onNavigateToPage(targetPage)
+    }
+    
     setTimeout(() => {
       const highlightedElements = textContentRef.current?.querySelectorAll('span[style*="background"]')
       if (highlightedElements && highlightedElements.length > 0) {
@@ -271,11 +466,15 @@ export const useSearchCore = (
           return
         }
       }
-      const scrollContainer = textReaderRef.current
-      if (scrollContainer) {
-        const textPercentage = result.index / text.length
-        const targetPosition = textPercentage * scrollContainer.scrollHeight * 0.8
-        scrollContainer.scrollTop = Math.max(0, targetPosition - 200)
+      
+      // Only do scroll-based navigation if we're not in page mode
+      if (!onNavigateToPage || !pageMap || pageMap.pages.length === 0) {
+        const scrollContainer = textReaderRef.current
+        if (scrollContainer) {
+          const textPercentage = result.index / text.length
+          const targetPosition = textPercentage * scrollContainer.scrollHeight * 0.8
+          scrollContainer.scrollTop = Math.max(0, targetPosition - 200)
+        }
       }
     }, 100)
   }
@@ -294,37 +493,59 @@ export const useSearchCore = (
     scrollToSearchResult(newIndex, searchResults)
   }
 
-  const renderTextWithSearchHighlight = (textToRender: string) => {
-    if (searchResults.length > 0 && searchQuery.trim()) {
-      const parts: React.ReactNode[] = []
-      let lastIndex = 0
-      searchResults.forEach((result, index) => {
-        if (result.index > lastIndex) {
-          parts.push(textToRender.slice(lastIndex, result.index))
-        }
-        const isCurrentResult = index === currentSearchIndex
-        const searchText = textToRender.slice(result.index, result.index + result.length)
-        parts.push(
-          <span 
-            key={`search-${index}`}
-            style={{
-              backgroundColor: isCurrentResult ? '#8b5cf6' : '#ffeb3b',
-              color: isCurrentResult ? 'white' : 'black',
-              padding: '1px 2px',
-              borderRadius: '2px'
-            }}
-          >
-            {searchText}
-          </span>
-        )
-        lastIndex = result.index + result.length
-      })
-      if (lastIndex < textToRender.length) {
-        parts.push(textToRender.slice(lastIndex))
-      }
-      return <>{parts}</>
+  const renderTextWithSearchHighlight = (textToRender: string, isPageMode: boolean = false, currentPageIndex: number = 0) => {
+    if (searchResults.length === 0 || !searchQuery.trim()) {
+      return textToRender
     }
-    return textToRender
+
+    // Simple approach: find and highlight the search query text in the current text
+    const query = searchQuery.trim()
+    if (!query) return textToRender
+
+    const parts: React.ReactNode[] = []
+    let lastIndex = 0
+    let currentIndex = 0
+
+    // Find all occurrences of the search query in the current text
+    while (true) {
+      const index = textToRender.indexOf(query, currentIndex)
+      if (index === -1) break
+
+      // Add text before the match
+      if (index > lastIndex) {
+        parts.push(textToRender.slice(lastIndex, index))
+      }
+
+      // Check if this match corresponds to the current search result
+      const isCurrentResult = searchResults[currentSearchIndex] && 
+        searchResults[currentSearchIndex].index >= 0 &&
+        textToRender.slice(index, index + query.length) === query
+
+      // Add the highlighted match
+      parts.push(
+        <span 
+          key={`search-${index}`}
+          style={{
+            backgroundColor: isCurrentResult ? '#8b5cf6' : '#ffeb3b',
+            color: isCurrentResult ? 'white' : 'black',
+            padding: '1px 2px',
+            borderRadius: '2px'
+          }}
+        >
+          {query}
+        </span>
+      )
+
+      lastIndex = index + query.length
+      currentIndex = index + 1 // Move past this match to find next one
+    }
+
+    // Add remaining text
+    if (lastIndex < textToRender.length) {
+      parts.push(textToRender.slice(lastIndex))
+    }
+
+    return <>{parts}</>
   }
 
   return {

@@ -1,7 +1,7 @@
 'use client'
 
 import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react'
-import { SettingsData, LLMProvider, ResponseLength, FontFamily, ExplanationStyle } from '../components/Settings'
+import { SettingsData, LLMProvider, ResponseLength, FontFamily, ReadingMode, ExplanationStyle } from '../components/Settings'
 
 interface SettingsContextType {
   settings: SettingsData
@@ -16,6 +16,7 @@ const DEFAULT_SETTINGS: SettingsData = {
   responseLength: 'medium',
   textFont: 'serif',
   chatFont: 'sans-serif',
+  readingMode: 'scroll',
   explanationStyle: 'neutral'
 }
 

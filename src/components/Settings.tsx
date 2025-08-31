@@ -8,6 +8,7 @@ import ExplainerStyles from './ExplainerStyles'
 export type LLMProvider = 'openai' | 'anthropic' | 'deepseek' | 'gemini' | 'custom'
 export type ResponseLength = 'brief' | 'medium' | 'long'
 export type FontFamily = 'serif' | 'sans-serif' | 'monospace'
+export type ReadingMode = 'scroll' | 'page'
 export type ExplanationStyle = 
   | 'neutral'
   | 'harold-bloom' | 'carl-sagan' | 'louis-ck' | 'david-foster-wallace' | 'neil-degrasse-tyson'
@@ -34,6 +35,7 @@ export interface SettingsData {
   responseLength: ResponseLength
   textFont: FontFamily
   chatFont: FontFamily
+  readingMode: ReadingMode
   explanationStyle: ExplanationStyle
   customApiKey?: string
   customApiUrl?: string
@@ -52,6 +54,7 @@ const DEFAULT_SETTINGS: SettingsData = {
   responseLength: 'medium',
   textFont: 'serif',
   chatFont: 'sans-serif',
+  readingMode: 'scroll',
   explanationStyle: 'neutral'
 }
 
@@ -501,6 +504,32 @@ const Settings: React.FC<SettingsProps> = ({ isOpen, onClose, settings, onSettin
                   onChange={(e) => setLocalSettings(prev => ({ ...prev, textFont: e.target.value as FontFamily }))}
                 />
                 <span style={{ fontFamily: 'monospace' }}>Monospace - Fixed width</span>
+              </label>
+            </div>
+          </div>
+
+          <div className={styles.settingGroup}>
+            <h3>Reading Mode</h3>
+            <div className={styles.radioGroup}>
+              <label className={styles.radioLabel}>
+                <input
+                  type="radio"
+                  name="readingMode"
+                  value="scroll"
+                  checked={localSettings.readingMode === 'scroll'}
+                  onChange={(e) => setLocalSettings(prev => ({ ...prev, readingMode: e.target.value as ReadingMode }))}
+                />
+                <span>📜 Scroll - Continuous scrolling document</span>
+              </label>
+              <label className={styles.radioLabel}>
+                <input
+                  type="radio"
+                  name="readingMode"
+                  value="page"
+                  checked={localSettings.readingMode === 'page'}
+                  onChange={(e) => setLocalSettings(prev => ({ ...prev, readingMode: e.target.value as ReadingMode }))}
+                />
+                <span>📖 Page - Kindle-like page-by-page reading</span>
               </label>
             </div>
           </div>

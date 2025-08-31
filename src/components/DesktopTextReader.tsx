@@ -2,7 +2,7 @@
 
 import React, { useRef, useState } from 'react'
 import styles from './TextReader.module.css'
-import { ReaderCommonProps, useBookmarkRestoreAndSave, useSearchCore, extractContextInfo } from './BaseTextReader'
+import { ReaderCommonProps, useBookmarkRestoreAndSave, useSearchCore, extractContextInfo, calculatePageContent, estimateCharsPerLine, PageMap } from './BaseTextReader'
 import { useRouter } from 'next/navigation'
 import { log } from '../utils/log'
 
@@ -16,19 +16,59 @@ const DesktopTextReader: React.FC<ReaderCommonProps> = ({ text, bookTitle = 'Rom
   const [touchStartPos, setTouchStartPos] = useState<{ x: number; y: number } | null>(null)
   const [isInSelectionMode, setIsInSelectionMode] = useState(false)
   const longPressTimer = useRef<NodeJS.Timeout | null>(null)
+  
+  // Page calculation state for scroll navigation
+  const [pageMap, setPageMap] = useState<PageMap>({ pages: [], pageRanges: [] })
+  const [currentPage, setCurrentPage] = useState(0)
+  const pageHeight = 600 // Default page height in pixels
 
   useBookmarkRestoreAndSave(textReaderRef, text, bookTitle, author)
-  const {
-    searchQuery,
-    setSearchQuery,
-    searchResults,
-    currentSearchIndex,
-    setCurrentSearchIndex,
-    handleSearch,
-    nextSearchResult,
-    prevSearchResult,
-    renderTextWithSearchHighlight
-  } = useSearchCore(text, textReaderRef, textContentRef)
+  
+  // Calculate pages for scroll navigation
+  React.useEffect(() => {
+    if (textReaderRef.current) {
+      const containerWidth = textReaderRef.current.clientWidth
+      const fontSize = parseInt(getComputedStyle(textReaderRef.current).fontSize) || 16
+      const lineHeight = parseInt(getComputedStyle(textReaderRef.current).lineHeight) || 24
+      const charsPerLine = estimateCharsPerLine(containerWidth, fontSize, settings.textFont)
+      
+      const calculatedPageMap = calculatePageContent(text, pageHeight, lineHeight, charsPerLine)
+      setPageMap(calculatedPageMap)
+      setCurrentPage(0)
+      log('DesktopTextReader: calculated pages for scroll navigation', { pageCount: calculatedPageMap.pages.length, charsPerLine, lineHeight })
+    }
+  }, [text, settings.textFont, pageHeight])
+
+  // Track scroll position and update currentPage accordingly
+  React.useEffect(() => {
+    const textReader = textReaderRef.current
+    if (!textReader || pageMap.pageRanges.length === 0) return
+
+    const handleScroll = () => {
+      const scrollTop = textReader.scrollTop
+      const lineHeight = parseInt(getComputedStyle(textReader).lineHeight) || 24
+      
+      // Calculate which page we're currently viewing based on scroll position
+      const currentLine = Math.floor(scrollTop / lineHeight)
+      const currentCharPosition = currentLine * (estimateCharsPerLine(textReader.clientWidth, parseInt(getComputedStyle(textReader).fontSize) || 16, settings.textFont))
+      
+      // Find which page contains this position
+      let newCurrentPage = 0
+      for (let i = 0; i < pageMap.pageRanges.length; i++) {
+        if (currentCharPosition >= pageMap.pageRanges[i].start && currentCharPosition < pageMap.pageRanges[i].end) {
+          newCurrentPage = i
+          break
+        }
+      }
+      
+      if (newCurrentPage !== currentPage) {
+        setCurrentPage(newCurrentPage)
+      }
+    }
+
+    textReader.addEventListener('scroll', handleScroll)
+    return () => textReader.removeEventListener('scroll', handleScroll)
+  }, [pageMap.pageRanges, currentPage, settings.textFont])
 
   const handleMouseUp = () => {
     // Small delay to ensure selection is complete
@@ -56,95 +96,148 @@ const DesktopTextReader: React.FC<ReaderCommonProps> = ({ text, bookTitle = 'Rom
     setShowConfirmDialog(false)
     setSelectedText('')
   }
-
-  // Touch gesture handlers for swipe text selection
-  const handleTouchStart = (e: React.TouchEvent) => {
-    log('DesktopTextReader: touchstart', { touches: e.touches.length })
-    const touch = e.touches[0]
-    const pos = { x: touch.clientX, y: touch.clientY }
-    setTouchStartPos(pos)
-    
-    // Start long press timer for swipe selection
-    const timer = setTimeout(() => {
-      log('DesktopTextReader: longpress fired')
-      setIsInSelectionMode(true)
-    }, 400)
-    longPressTimer.current = timer
-  }
-
-  const handleTouchMove = (e: React.TouchEvent) => {
-    if (!touchStartPos || !isInSelectionMode) return
-    
-    const touch = e.touches[0]
-    const distance = Math.hypot(touch.clientX - touchStartPos.x, touch.clientY - touchStartPos.y)
-    
-    if (distance > 10) { // Minimum distance to trigger selection
-      try {
-        // Get text range from start to current position
-        const startRange = document.caretRangeFromPoint?.(touchStartPos.x, touchStartPos.y) || 
-                          (document as any).caretPositionFromPoint?.(touchStartPos.x, touchStartPos.y)
-        const endRange = document.caretRangeFromPoint?.(touch.clientX, touch.clientY) || 
-                        (document as any).caretPositionFromPoint?.(touch.clientX, touch.clientY)
+  
+  // Scroll mode page navigation functions
+  const goToNextScrollPage = () => {
+    if (pageMap.pages.length > 0 && currentPage < pageMap.pages.length - 1) {
+      const nextPage = currentPage + 1
+      setCurrentPage(nextPage)
+      
+      // Use a more conservative approach - scroll by a reasonable amount
+      if (textReaderRef.current) {
+        const currentScrollTop = textReaderRef.current.scrollTop
+        const viewportHeight = textReaderRef.current.clientHeight
         
-        if (startRange && endRange) {
-          const range = document.createRange()
-          
-          // Always create range from left to right regardless of swipe direction
-          const startX = touchStartPos.x
-          const endX = touch.clientX
-          
-          if (startX <= endX) {
-            // Left to right swipe
-            range.setStart(startRange.startContainer, startRange.startOffset)
-            range.setEnd(endRange.startContainer, endRange.endOffset)
-          } else {
-            // Right to left swipe
-            range.setStart(endRange.startContainer, endRange.startOffset)
-            range.setEnd(startRange.startContainer, startRange.startOffset)
-          }
-          
-          const text = range.toString().trim()
-          if (text) {
-            setSelectedText(text)
-            log('DesktopTextReader: selected text via swipe', { text, length: text.length })
-          }
-        }
-      } catch (error) {
-        log('DesktopTextReader: error in touch move', error)
+        // Scroll down by approximately one viewport height, but not more than needed
+        const targetScrollTop = Math.min(
+          currentScrollTop + viewportHeight * 0.8, // Scroll down by 80% of viewport
+          textReaderRef.current.scrollHeight - viewportHeight // Don't scroll past the end
+        )
+        
+        textReaderRef.current.scrollTo({
+          top: targetScrollTop,
+          behavior: 'smooth'
+        })
+      }
+    }
+  }
+  
+  const goToPrevScrollPage = () => {
+    if (pageMap.pages.length > 0 && currentPage > 0) {
+      const prevPage = currentPage - 1
+      setCurrentPage(prevPage)
+      
+      // Use a more conservative approach - scroll by a reasonable amount
+      if (textReaderRef.current) {
+        const currentScrollTop = textReaderRef.current.scrollTop
+        const viewportHeight = textReaderRef.current.clientHeight
+        
+        // Scroll up by approximately one viewport height, but not more than needed
+        const targetScrollTop = Math.max(
+          currentScrollTop - viewportHeight * 0.8, // Scroll up by 80% of viewport
+          0 // Don't scroll past the beginning
+        )
+        
+        textReaderRef.current.scrollTo({
+          top: targetScrollTop,
+          behavior: 'smooth'
+        })
       }
     }
   }
 
-  const handleTouchEnd = (e: React.TouchEvent) => {
+  const goToPage = (pageNum: number) => {
+    if (pageNum >= 0 && pageNum < pageMap.pages.length) {
+      setCurrentPage(pageNum)
+    }
+  }
+
+  // Now that goToPage is defined, we can use it in useSearchCore
+  const {
+    searchQuery,
+    setSearchQuery,
+    searchResults,
+    currentSearchIndex,
+    setCurrentSearchIndex,
+    handleSearch,
+    nextSearchResult,
+    prevSearchResult,
+    renderTextWithSearchHighlight
+  } = useSearchCore(text, textReaderRef, textContentRef, goToPage, pageMap)
+
+  const handleTouchStart = (e: React.TouchEvent) => {
+    if (e.touches.length === 1) {
+      const touch = e.touches[0]
+      setTouchStartPos({ x: touch.clientX, y: touch.clientY })
+      
+      // Start long press timer
+      const timer = setTimeout(() => {
+        setIsInSelectionMode(true)
+        setTouchStartPos(null)
+      }, 400)
+      
+      longPressTimer.current = timer
+    }
+  }
+
+  const handleTouchMove = (e: React.TouchEvent) => {
+    if (e.touches.length === 1 && touchStartPos) {
+      const touch = e.touches[0]
+      const deltaX = Math.abs(touch.clientX - touchStartPos.x)
+      const deltaY = Math.abs(touch.clientY - touchStartPos.y)
+      
+      // If moved more than threshold, cancel long press
+      if (deltaX > 10 || deltaY > 10) {
+        if (longPressTimer.current) {
+          clearTimeout(longPressTimer.current)
+          longPressTimer.current = null
+        }
+        setTouchStartPos(null)
+      }
+    }
+  }
+
+  const handleTouchEnd = () => {
     if (longPressTimer.current) {
       clearTimeout(longPressTimer.current)
       longPressTimer.current = null
     }
-    
-    if (isInSelectionMode && selectedText.length > 2) {
-      log('DesktopTextReader: show dialog for swipe selection')
-      setShowConfirmDialog(true)
-    }
-    
-    setIsInSelectionMode(false)
     setTouchStartPos(null)
   }
 
   return (
     <div ref={textReaderRef} className={styles.textReader}>
-      {/* Search Bar */}
-      <div style={{
-        position: 'sticky', top: '0px', padding: '8px 0', marginBottom: '16px',
-        backgroundColor: 'white', borderBottom: '1px solid #e0e0e0', zIndex: 50
-      }}>
-        <input
-          type="text"
-          placeholder="Search..."
-          value={searchQuery}
-          onChange={(e) => setSearchQuery(e.target.value)}
-          onKeyDown={(e) => { if (e.key === 'Enter') handleSearch(searchQuery) }}
-          style={{ width: '100%', padding: '6px 12px', margin: 0, border: '1px solid #ddd', borderRadius: '4px', fontSize: '14px', outline: 'none', backgroundColor: 'white' }}
-        />
+      <div style={{ padding: '16px', borderBottom: '1px solid #e9ecef' }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '8px' }}>
+          <input
+            type="text"
+            placeholder="Search in text..."
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+            onKeyPress={(e) => e.key === 'Enter' && handleSearch(searchQuery)}
+            style={{
+              flex: 1,
+              padding: '8px 12px',
+              border: '1px solid #dee2e6',
+              borderRadius: '4px',
+              fontSize: '14px'
+            }}
+          />
+          <button
+            onClick={() => handleSearch(searchQuery)}
+            style={{
+              padding: '8px 16px',
+              border: 'none',
+              borderRadius: '4px',
+              background: '#007bff',
+              color: 'white',
+              cursor: 'pointer',
+              fontSize: '14px'
+            }}
+          >
+            Search
+          </button>
+        </div>
         {searchResults.length > 0 && (
           <div style={{ marginTop: '4px', fontSize: '12px', color: '#666', display: 'flex', alignItems: 'center', gap: '8px' }}>
             <span>{currentSearchIndex + 1} of {searchResults.length}</span>
@@ -155,19 +248,59 @@ const DesktopTextReader: React.FC<ReaderCommonProps> = ({ text, bookTitle = 'Rom
         )}
       </div>
 
-              <div
-          ref={textContentRef}
-          className={styles.textContent}
-          onMouseDown={() => {
-            // Clear any previous selection when starting a new selection
-            window.getSelection()?.removeAllRanges()
-          }}
-          onMouseUp={handleMouseUp}
-          onTouchStart={handleTouchStart}
-          onTouchMove={handleTouchMove}
-          onTouchEnd={handleTouchEnd}
-          style={{ userSelect: 'text', fontFamily: settings.textFont }}
-        >
+      <div
+        ref={textContentRef}
+        className={styles.textContent}
+        onMouseDown={() => {
+          // Clear any previous selection when starting a new selection
+          window.getSelection()?.removeAllRanges()
+        }}
+        onMouseUp={handleMouseUp}
+        onTouchStart={handleTouchStart}
+        onTouchMove={handleTouchMove}
+        onTouchEnd={handleTouchEnd}
+        style={{ userSelect: 'text', fontFamily: settings.textFont, position: 'relative' }}
+      >
+        {/* Scroll mode page navigation zones - always visible when pages are available */}
+        {pageMap.pages.length > 0 && (
+          <>
+            {/* Left side - Previous page */}
+            <div
+              onClick={goToPrevScrollPage}
+              style={{
+                position: 'absolute',
+                left: 0,
+                top: 0,
+                width: '25%',
+                height: '100%',
+                cursor: 'pointer',
+                zIndex: 100,
+                backgroundColor: 'rgba(0, 0, 0, 0.01)',
+                borderRight: '1px solid rgba(0, 0, 0, 0.1)',
+                pointerEvents: 'auto'
+              }}
+              title="Click to go to previous page"
+            />
+            {/* Right side - Next page */}
+            <div
+              onClick={goToNextScrollPage}
+              style={{
+                position: 'absolute',
+                right: 0,
+                top: 0,
+                width: '25%',
+                height: '100%',
+                cursor: 'pointer',
+                zIndex: 100,
+                backgroundColor: 'rgba(0, 0, 0, 0.01)',
+                borderLeft: '1px solid rgba(0, 0, 0, 0.1)',
+                pointerEvents: 'auto'
+              }}
+              title="Click to go to next page"
+            />
+          </>
+        )}
+        
         <pre style={{ 
           whiteSpace: 'pre-wrap', 
           wordWrap: 'break-word',
@@ -177,10 +310,8 @@ const DesktopTextReader: React.FC<ReaderCommonProps> = ({ text, bookTitle = 'Rom
           fontSize: 'inherit',
           lineHeight: 'inherit'
         }}>
-          {renderTextWithSearchHighlight(text)}
+          {renderTextWithSearchHighlight(text, false)}
         </pre>
-        
-
       </div>
 
       {showConfirmDialog && (
@@ -200,5 +331,3 @@ const DesktopTextReader: React.FC<ReaderCommonProps> = ({ text, bookTitle = 'Rom
 }
 
 export default DesktopTextReader
-
-
