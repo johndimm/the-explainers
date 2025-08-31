@@ -282,7 +282,7 @@ const MobileTextReader: React.FC<ReaderCommonProps> = ({ text, bookTitle = 'Rome
     startScrollTopRef.current = textReaderRef.current ? textReaderRef.current.scrollTop : 0
     
     // Use a shorter delay for iPhone to make it more responsive
-    const longPressDelay = /iPhone|iPad|iPod/.test(navigator.userAgent) ? 300 : 400
+    const longPressDelay = isIPhone ? 300 : 400
     
     const timer = setTimeout(() => {
       const start = touchStartPosRef.current
@@ -424,6 +424,15 @@ const MobileTextReader: React.FC<ReaderCommonProps> = ({ text, bookTitle = 'Rome
       }
       if (textReaderRef.current && initialScrollTopRef.current !== null) {
         textReaderRef.current.scrollTop = initialScrollTopRef.current
+      }
+    } else if (isIPhone && longPressTimer) {
+      // On iPhone, be more permissive with touch movement to allow native selection
+      const distance = Math.hypot(touch.clientX - start.x, touch.clientY - start.y)
+      if (distance > CANCEL_DISTANCE_PX * 2) { // More generous on iPhone
+        log('longpress cancelled by move on iPhone', { distance })
+        clearTimeout(longPressTimer)
+        setLongPressTimer(null)
+        touchStartPosRef.current = null
       }
     } else if (longPressTimer) {
       const distance = Math.hypot(touch.clientX - start.x, touch.clientY - start.y)
@@ -577,7 +586,10 @@ const MobileTextReader: React.FC<ReaderCommonProps> = ({ text, bookTitle = 'Rome
         onTouchMove={handleTouchMove}
         onContextMenu={(e) => e.preventDefault()}
         style={{
-          WebkitUserSelect: 'none', userSelect: 'none', WebkitTouchCallout: 'none', WebkitTapHighlightColor: 'transparent',
+          WebkitUserSelect: isIPhone ? 'text' : 'none', 
+          userSelect: isIPhone ? 'text' : 'none', 
+          WebkitTouchCallout: isIPhone ? 'default' : 'none', 
+          WebkitTapHighlightColor: 'transparent',
           touchAction: isInSelectionMode ? 'none' : 'pan-y', fontFamily: settings.textFont,
           transform: `scale(${zoomLevel})`,
           transformOrigin: 'top left',
