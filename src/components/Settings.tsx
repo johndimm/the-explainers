@@ -22,6 +22,7 @@ export type ExplanationStyle =
   | 'ernest-hemingway' | 'james-joyce' | 'samuel-beckett' | 'marilyn-monroe' | 'louis-theroux'
   | 'robin-williams' | 'kurt-vonnegut'
   | 'flannery-oconnor' | 'humphrey-bogart' | 'anthony-jeselnik' | 'doug-stanhope' | 'jim-norton'
+  | 'aaron-sorkin' | 'woody-allen'
   | 'jim-jefferies' | 'daniel-tosh' | 'andy-andrist' | 'bill-burr' | 'lewis-black'
   | 'george-carlin' | 'sam-kinison' | 'paul-mooney' | 'bill-hicks' | 'bob-saget'
   | 'norm-macdonald' | 'bernard-henri-levy' | 'michel-houellebecq' | 'bill-maher' | 'john-ruskin'

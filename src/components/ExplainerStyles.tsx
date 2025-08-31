@@ -117,6 +117,8 @@ export const STYLE_CATEGORIES = {
     { value: 'marilyn-monroe', name: 'Marilyn Monroe', description: 'Glamorous and vulnerable' },
     { value: 'louis-theroux', name: 'Louis Theroux', description: 'Curious, empathetic, and gently probing' },
     { value: 'robin-williams', name: 'Robin Williams', description: 'Energetic, improvisational, and heartfelt' },
+    { value: 'aaron-sorkin', name: 'Aaron Sorkin', description: 'Rapid-fire dialogue and idealistic politics' },
+    { value: 'woody-allen', name: 'Woody Allen', description: 'Neurotic, intellectual, and New York witty' },
   ]
 } as const
 
