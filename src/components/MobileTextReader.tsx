@@ -142,8 +142,52 @@ const MobileTextReader: React.FC<ReaderCommonProps> = ({ text, bookTitle = 'Rome
     console.log('=== END ANDROID DEBUG ===')
   }
   
-  // Zoom state
-  const [zoomLevel, setZoomLevel] = useState(1)
+  // Initialize zoom level from sessionStorage or default
+  const [zoomLevel, setZoomLevel] = useState(() => {
+    if (typeof window !== 'undefined') {
+      const saved = sessionStorage.getItem('textReaderZoomLevel')
+      return saved ? parseFloat(saved) : 1
+    }
+    return 1
+  })
+  
+  const [isScrolling, setIsScrolling] = useState(false)
+  const scrollTimeoutRef = useRef<NodeJS.Timeout | null>(null)
+
+  // Save zoom level to sessionStorage whenever it changes
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      sessionStorage.setItem('textReaderZoomLevel', zoomLevel.toString())
+    }
+  }, [zoomLevel])
+
+  // Handle scroll events to hide/show navigation buttons
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolling(true)
+      
+      // Clear existing timeout
+      if (scrollTimeoutRef.current) {
+        clearTimeout(scrollTimeoutRef.current)
+      }
+      
+      // Show buttons again after scrolling stops
+      scrollTimeoutRef.current = setTimeout(() => {
+        setIsScrolling(false)
+      }, 1000) // Wait 1 second after scrolling stops
+    }
+
+    const textReader = textReaderRef.current
+    if (textReader) {
+      textReader.addEventListener('scroll', handleScroll)
+      return () => {
+        textReader.removeEventListener('scroll', handleScroll)
+        if (scrollTimeoutRef.current) {
+          clearTimeout(scrollTimeoutRef.current)
+        }
+      }
+    }
+  }, [])
 
   useBookmarkRestoreAndSave(textReaderRef, text, bookTitle, author)
   
@@ -265,25 +309,41 @@ const MobileTextReader: React.FC<ReaderCommonProps> = ({ text, bookTitle = 'Rome
   // Simple native text selection handlers
   const handleTouchStart = (e: React.TouchEvent) => {
     console.log('Touch start detected')
-    
-    // Prime the vibration API on first touch (like the test button)
-    if (navigator.vibrate && !e.currentTarget.hasAttribute('data-vibration-primed')) {
+
+    // Handle multi-touch for zoom
+    if (e.touches.length === 2) {
+      console.log('Two finger touch detected - zoom mode')
+      const touch1 = e.touches[0]
+      const touch2 = e.touches[1]
+      const initialDistance = Math.sqrt(
+        Math.pow(touch2.clientX - touch1.clientX, 2) +
+        Math.pow(touch2.clientY - touch1.clientY, 2)
+      )
+      e.currentTarget.setAttribute('data-initial-distance', initialDistance.toString())
+      e.currentTarget.setAttribute('data-initial-zoom', zoomLevel.toString())
+      e.currentTarget.setAttribute('data-zoom-mode', 'true')
+      return // Exit early, don't do text selection or vibration
+    }
+
+    // Single touch - handle text selection
+    // Only prime vibration if not in scroll mode
+    if (navigator.vibrate && !e.currentTarget.hasAttribute('data-vibration-primed') && !isScrolling) {
       navigator.vibrate(10) // Very subtle first vibration
       e.currentTarget.setAttribute('data-vibration-primed', 'true')
       console.log('Vibration API primed')
     }
-    
-    // Set up long press detection for vibration
-    const longPressTimer = setTimeout(() => {
-      // Use the same direct vibration approach as the test button
-      if (navigator.vibrate) {
-        navigator.vibrate(50)
-        console.log('Vibration triggered on long press')
-      }
-    }, 500) // 500ms for long press
-    
-    // Store the timer so we can clear it on touch end
-    e.currentTarget.setAttribute('data-long-press-timer', longPressTimer.toString())
+
+    // Set up long press detection for vibration (only if not scrolling)
+    if (!isScrolling) {
+      const longPressTimer = setTimeout(() => {
+        if (navigator.vibrate) {
+          navigator.vibrate(50)
+          console.log('Vibration triggered on long press')
+        }
+      }, 500) // 500ms for long press
+
+      e.currentTarget.setAttribute('data-long-press-timer', longPressTimer.toString())
+    }
   }
 
   const handleTouchEnd = (e: React.TouchEvent) => {
@@ -346,16 +406,30 @@ const MobileTextReader: React.FC<ReaderCommonProps> = ({ text, bookTitle = 'Rome
   }
 
   const handleTouchMove = (e: React.TouchEvent) => {
-    // Check if we have a selection after touch moves
-    const selection = window.getSelection()
-    const selectedText = selection?.toString().trim()
+    console.log('Touch move detected, touches:', e.touches.length)
     
-    if (selectedText && selectedText.length > 0) {
-      console.log('Text selected during touch move:', selectedText)
-      setSelectedText(selectedText)
-      setShowConfirmDialog(true)
-      // Clear the selection after showing the dialog
-      window.getSelection()?.removeAllRanges()
+    // Handle pinch to zoom
+    if (e.touches.length === 2) {
+      console.log('Two finger touch move - zoom mode')
+      e.preventDefault()
+      const touch1 = e.touches[0]
+      const touch2 = e.touches[1]
+      const currentDistance = Math.sqrt(
+        Math.pow(touch2.clientX - touch1.clientX, 2) + 
+        Math.pow(touch2.clientY - touch1.clientY, 2)
+      )
+      
+      const initialDistance = parseFloat(e.currentTarget.getAttribute('data-initial-distance') || '0')
+      const initialZoom = parseFloat(e.currentTarget.getAttribute('data-initial-zoom') || '1')
+      
+      console.log('Zoom calculation:', { currentDistance, initialDistance, initialZoom })
+      
+      if (initialDistance > 0) {
+        const scale = currentDistance / initialDistance
+        const newZoom = Math.max(0.5, Math.min(3, initialZoom * scale))
+        console.log('Setting zoom to:', newZoom)
+        setZoomLevel(newZoom)
+      }
     }
   }
 
@@ -367,19 +441,13 @@ const MobileTextReader: React.FC<ReaderCommonProps> = ({ text, bookTitle = 'Rome
       const nextPage = currentPage + 1
       setCurrentPage(nextPage)
       
-      // Use a more conservative approach - scroll by a reasonable amount
+      // Use a smaller scroll distance to avoid skipping content
       if (textReaderRef.current) {
         const currentScrollTop = textReaderRef.current.scrollTop
         const viewportHeight = textReaderRef.current.clientHeight
         
-        // Scroll down by approximately one viewport height, but not more than needed
-        const targetScrollTop = Math.min(
-          currentScrollTop + viewportHeight * 0.8, // Scroll down by 80% of viewport
-          textReaderRef.current.scrollHeight - viewportHeight // Don't scroll past the end
-        )
-        
         textReaderRef.current.scrollTo({
-          top: targetScrollTop,
+          top: currentScrollTop + (viewportHeight * 0.7), // Scroll by 70% of viewport
           behavior: 'smooth'
         })
       }
@@ -391,19 +459,13 @@ const MobileTextReader: React.FC<ReaderCommonProps> = ({ text, bookTitle = 'Rome
       const prevPage = currentPage - 1
       setCurrentPage(prevPage)
       
-      // Use a more conservative approach - scroll by a reasonable amount
+      // Use a smaller scroll distance to avoid skipping content
       if (textReaderRef.current) {
         const currentScrollTop = textReaderRef.current.scrollTop
         const viewportHeight = textReaderRef.current.clientHeight
         
-        // Scroll up by approximately one viewport height, but not more than needed
-        const targetScrollTop = Math.max(
-          currentScrollTop - viewportHeight * 0.8, // Scroll up by 80% of viewport
-          0 // Don't scroll past the beginning
-        )
-        
         textReaderRef.current.scrollTo({
-          top: targetScrollTop,
+          top: Math.max(0, currentScrollTop - (viewportHeight * 0.7)), // Scroll by 70% of viewport
           behavior: 'smooth'
         })
       }
@@ -625,6 +687,7 @@ const MobileTextReader: React.FC<ReaderCommonProps> = ({ text, bookTitle = 'Rome
         ref={textContentRef}
         className={styles.textContent}
         onTouchStart={handleTouchStart}
+        onTouchMove={handleTouchMove}
         onTouchEnd={handleTouchEnd}
         onMouseUp={handleMouseUp}
         onContextMenu={(e) => e.preventDefault()}
@@ -633,7 +696,7 @@ const MobileTextReader: React.FC<ReaderCommonProps> = ({ text, bookTitle = 'Rome
           userSelect: 'text', 
           WebkitTouchCallout: 'none', 
           WebkitTapHighlightColor: 'transparent',
-          touchAction: 'pan-y', fontFamily: settings.textFont,
+          touchAction: 'pan-y pinch-zoom', fontFamily: settings.textFont,
           transform: `scale(${zoomLevel})`,
           transformOrigin: 'top left',
           width: `${100 / zoomLevel}%`,
@@ -641,42 +704,6 @@ const MobileTextReader: React.FC<ReaderCommonProps> = ({ text, bookTitle = 'Rome
         }}
       >
         {/* Scroll mode page navigation zones - disabled to avoid interfering with text selection */}
-        {/* 
-        {pageMap.pages.length > 0 && (
-          <>
-            <div
-              onClick={goToPrevScrollPage}
-              style={{
-                position: 'absolute',
-                left: 0,
-                top: 0,
-                width: '10%',
-                height: '100%',
-                cursor: 'pointer',
-                zIndex: 10,
-                opacity: 0.3,
-                backgroundColor: 'transparent'
-              }}
-              title="Click to go to previous page"
-            />
-            <div
-              onClick={goToNextScrollPage}
-              style={{
-                position: 'absolute',
-                right: 0,
-                top: 0,
-                width: '10%',
-                height: '100%',
-                cursor: 'pointer',
-                zIndex: 10,
-                opacity: 0.3,
-                backgroundColor: 'transparent'
-              }}
-              title="Click to go to next page"
-            />
-          </>
-        )}
-        */}
         
         {renderText()}
       </div>
@@ -722,6 +749,58 @@ const MobileTextReader: React.FC<ReaderCommonProps> = ({ text, bookTitle = 'Rome
             <button onClick={handleCancel} style={{ padding: '8px 16px', border: '1px solid #ccc', borderRadius: '4px', background: 'white', cursor: 'pointer' }}>Cancel</button>
             <button onClick={handleExplain} style={{ padding: '8px 16px', border: 'none', borderRadius: '4px', background: '#007bff', color: 'white', cursor: 'pointer' }}>Explain</button>
           </div>
+        </div>
+      )}
+
+      {/* Fixed bottom navigation bar */}
+      {pageMap.pages.length > 0 && !isScrolling && (
+        <div style={{
+          position: 'fixed',
+          bottom: '20px',
+          left: '50%',
+          transform: 'translateX(-50%)',
+          display: 'flex',
+          alignItems: 'center',
+          gap: '10px',
+          zIndex: 1000
+        }}>
+          <button
+            onClick={goToPrevScrollPage}
+            disabled={currentPage <= 0}
+            style={{
+              padding: '12px 24px',
+              fontSize: '48px',
+              fontWeight: 'bold',
+              border: '1px solid rgba(0, 123, 255, 0.1)',
+              borderRadius: '8px',
+              background: currentPage <= 0 ? 'rgba(240, 240, 240, 0.1)' : 'rgba(0, 123, 255, 0.1)',
+              color: currentPage <= 0 ? 'rgba(102, 102, 102, 0.1)' : 'rgba(0, 86, 179, 0.1)',
+              cursor: currentPage <= 0 ? 'not-allowed' : 'pointer',
+              minWidth: '80px',
+              boxShadow: '0 4px 12px rgba(0, 0, 0, 0.15)'
+            }}
+          >
+            ◀
+          </button>
+
+          <button
+            onClick={goToNextScrollPage}
+            disabled={currentPage >= pageMap.pages.length - 1}
+            style={{
+              padding: '12px 24px',
+              fontSize: '48px',
+              fontWeight: 'bold',
+              border: '1px solid rgba(0, 123, 255, 0.1)',
+              borderRadius: '8px',
+              background: currentPage >= pageMap.pages.length - 1 ? 'rgba(240, 240, 240, 0.1)' : 'rgba(0, 123, 255, 0.1)',
+              color: currentPage >= pageMap.pages.length - 1 ? 'rgba(102, 102, 102, 0.1)' : 'rgba(0, 86, 179, 0.1)',
+              cursor: currentPage >= pageMap.pages.length - 1 ? 'not-allowed' : 'pointer',
+              minWidth: '80px',
+              boxShadow: '0 4px 12px rgba(0, 0, 0, 0.15)'
+            }}
+          >
+            ▶
+          </button>
         </div>
       )}
     </div>
