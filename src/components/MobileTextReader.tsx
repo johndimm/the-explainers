@@ -546,14 +546,14 @@ const MobileTextReader: React.FC<ReaderCommonProps> = ({ text, bookTitle = 'Rome
         endTextContainer = endTextContainer.parentElement
       }
       
-      if (!startTextContainer || !endTextContainer || !startTextContainer.textContent || !endTextContainer.textContent) {
+      if (!textContainer || !endTextContainer || !textContainer.textContent || !endTextContainer.textContent) {
         log('could not find text containers')
         return ''
       }
       
       // Get text content and calculate character positions
-      const text = startTextContainer.textContent
-      const startRect = startTextContainer.getBoundingClientRect()
+      const text = textContainer.textContent
+      const startRect = textContainer.getBoundingClientRect()
       const endRect = endTextContainer.getBoundingClientRect()
       
       const startCharIndex = Math.floor(((startX - startRect.left) / startRect.width) * text.length)
