@@ -16,6 +16,7 @@ const MobileTextReader: React.FC<ReaderCommonProps> = ({ text, bookTitle = 'Rome
   const [touchStartPos, setTouchStartPos] = useState<{ x: number; y: number } | null>(null)
   const [isInSelectionMode, setIsInSelectionMode] = useState(false)
   const longPressTimer = useRef<NodeJS.Timeout | null>(null)
+  const [debugMessage, setDebugMessage] = useState('')
   
   // Page calculation state for scroll navigation
   const [pageMap, setPageMap] = useState<PageMap>({ pages: [], pageRanges: [] })
@@ -24,12 +25,122 @@ const MobileTextReader: React.FC<ReaderCommonProps> = ({ text, bookTitle = 'Rome
   
   // Device detection - only for iPhone-specific fallbacks
   const isIPhone = /iPhone|iPod/.test(navigator.userAgent)
+  const isAndroid = /Android/.test(navigator.userAgent)
   
   // Text selection state
   const [highlightedText, setHighlightedText] = useState('')
   const selectionModeRef = useRef(false)
   const initialScrollTopRef = useRef<number | null>(null)
   const vibratedRef = useRef(false)
+  const androidSelectedWordRef = useRef<string>('') // Store Android selected word
+  
+  // Simple Android text selection function
+  const selectAndroidWord = (pos: { x: number; y: number }) => {
+    console.log('=== ANDROID TEXT SELECTION DEBUG ===')
+    console.log('Input pos:', pos)
+    
+    // Use the browser's built-in text selection capabilities
+    try {
+      // Clear any existing selection
+      window.getSelection()?.removeAllRanges()
+      
+      // Get the text element
+      const textElement = textContentRef.current
+      if (!textElement) {
+        console.log('ERROR: No text element found')
+        setDebugMessage('ERROR: No text element found')
+        return
+      }
+      
+      // Create a range at the touch point
+      const range = document.caretRangeFromPoint(pos.x, pos.y)
+      if (!range) {
+        console.log('ERROR: Could not create range at point, trying fallback')
+        setDebugMessage('ERROR: Could not create range at point, trying fallback')
+        
+        // Fallback: try to get element at point and find text
+        const element = document.elementFromPoint(pos.x, pos.y)
+        if (element && element.textContent) {
+          console.log('Fallback: Found element with text content')
+          const fallbackText = element.textContent
+          const rect = element.getBoundingClientRect()
+          const charIndex = Math.floor(((pos.x - rect.left) / rect.width) * fallbackText.length)
+          
+          // Find word boundaries
+          let wordStart = charIndex
+          let wordEnd = charIndex
+          
+          while (wordStart > 0 && /\w/.test(fallbackText[wordStart - 1])) {
+            wordStart--
+          }
+          
+          while (wordEnd < fallbackText.length && /\w/.test(fallbackText[wordEnd])) {
+            wordEnd++
+          }
+          
+          const fallbackWord = fallbackText.substring(wordStart, wordEnd).trim()
+          console.log('Fallback selected word:', fallbackWord)
+          
+          if (fallbackWord && fallbackWord.length > 2) {
+            androidSelectedWordRef.current = fallbackWord
+            setDebugMessage(`Android fallback selected: "${fallbackWord}" - lift finger to confirm`)
+            console.log('SUCCESS: Fallback word stored in ref')
+            return
+          }
+        }
+        
+        setDebugMessage('ERROR: Both range and fallback failed')
+        return
+      }
+      
+      console.log('Range created:', range)
+      console.log('Range start:', range.startContainer, range.startOffset)
+      
+      // Get the text content around the range
+      const textContent = range.startContainer.textContent || ''
+      console.log('Text content:', textContent.substring(0, 100))
+      
+      // Find word boundaries manually
+      let wordStart = range.startOffset
+      let wordEnd = range.startOffset
+      
+      // Expand to word beginning
+      while (wordStart > 0 && /\w/.test(textContent[wordStart - 1])) {
+        wordStart--
+      }
+      
+      // Expand to word end
+      while (wordEnd < textContent.length && /\w/.test(textContent[wordEnd])) {
+        wordEnd++
+      }
+      
+      // Set the range to the word boundaries
+      range.setStart(range.startContainer, wordStart)
+      range.setEnd(range.startContainer, wordEnd)
+      
+      console.log('Range after expand:', range)
+      console.log('Selected text:', range.toString())
+      
+      const selectedWord = range.toString().trim()
+      console.log('Selected word:', selectedWord)
+      
+      if (selectedWord && selectedWord.length > 2) {
+        // Store the word but don't show dialog yet
+        androidSelectedWordRef.current = selectedWord
+        setDebugMessage(`Android selected: "${selectedWord}" - lift finger to confirm`)
+        console.log('SUCCESS: Word stored in ref')
+      } else {
+        console.log('ERROR: No valid word found')
+        setDebugMessage('ERROR: No valid word found')
+      }
+      
+    } catch (error) {
+      console.log('ERROR in Android text selection:', error)
+      setDebugMessage('ERROR in text selection')
+    }
+    
+    console.log('=== END ANDROID DEBUG ===')
+  }
   
   // Zoom state
   const [zoomLevel, setZoomLevel] = useState(1)
@@ -82,6 +193,48 @@ const MobileTextReader: React.FC<ReaderCommonProps> = ({ text, bookTitle = 'Rome
     return () => textReader.removeEventListener('scroll', handleScroll)
   }, [pageMap.pageRanges, currentPage, settings.textFont])
 
+  // Add global selection change listener for text selection detection
+  useEffect(() => {
+    let selectionTimeout: NodeJS.Timeout | null = null
+    
+    const handleSelectionChange = () => {
+      // Clear any existing timeout
+      if (selectionTimeout) {
+        clearTimeout(selectionTimeout)
+      }
+      
+      // Wait longer for the selection to be complete
+      selectionTimeout = setTimeout(() => {
+        const selection = window.getSelection()
+        const selectedText = selection?.toString().trim()
+        
+        console.log('Selection change check:', {
+          hasSelection: !!selection,
+          selectionText: selectedText,
+          selectionLength: selectedText?.length || 0,
+          selectionRangeCount: selection?.rangeCount || 0
+        })
+        
+        if (selectedText && selectedText.length > 0) {
+          console.log('Text selected via selection change:', selectedText)
+          setSelectedText(selectedText)
+          setShowConfirmDialog(true)
+          // Clear the selection after showing the dialog
+          window.getSelection()?.removeAllRanges()
+        }
+      }, 1500) // Wait 1.5 seconds for selection to be complete
+    }
+
+    document.addEventListener('selectionchange', handleSelectionChange)
+    
+    return () => {
+      document.removeEventListener('selectionchange', handleSelectionChange)
+      if (selectionTimeout) {
+        clearTimeout(selectionTimeout)
+      }
+    }
+  }, [])
+
   const handleCancel = () => {
     setShowConfirmDialog(false)
     setSelectedText('')
@@ -108,6 +261,105 @@ const MobileTextReader: React.FC<ReaderCommonProps> = ({ text, bookTitle = 'Rome
       ;(textReaderRef.current as HTMLElement).style.setProperty('overscroll-behavior', 'auto')
     }
   }
+
+  // Simple native text selection handlers
+  const handleTouchStart = (e: React.TouchEvent) => {
+    console.log('Touch start detected')
+    
+    // Prime the vibration API on first touch (like the test button)
+    if (navigator.vibrate && !e.currentTarget.hasAttribute('data-vibration-primed')) {
+      navigator.vibrate(10) // Very subtle first vibration
+      e.currentTarget.setAttribute('data-vibration-primed', 'true')
+      console.log('Vibration API primed')
+    }
+    
+    // Set up long press detection for vibration
+    const longPressTimer = setTimeout(() => {
+      // Use the same direct vibration approach as the test button
+      if (navigator.vibrate) {
+        navigator.vibrate(50)
+        console.log('Vibration triggered on long press')
+      }
+    }, 500) // 500ms for long press
+    
+    // Store the timer so we can clear it on touch end
+    e.currentTarget.setAttribute('data-long-press-timer', longPressTimer.toString())
+  }
+
+  const handleTouchEnd = (e: React.TouchEvent) => {
+    // Clear the long press timer
+    const timerId = e.currentTarget.getAttribute('data-long-press-timer')
+    if (timerId) {
+      clearTimeout(parseInt(timerId))
+      e.currentTarget.removeAttribute('data-long-press-timer')
+    }
+  }
+
+  // Add global event listener to prevent browser selection behavior
+  useEffect(() => {
+    const preventSelectionBehavior = (e: Event) => {
+      // Prevent the browser's default text selection behavior
+      if (e.type === 'selectionchange') {
+        const selection = window.getSelection()
+        if (selection && selection.toString().trim()) {
+          // Clear any browser selection UI
+          setTimeout(() => {
+            if (selection.toString().trim()) {
+              // Our dialog will handle this
+            }
+          }, 10)
+        }
+      }
+    }
+
+    document.addEventListener('selectionchange', preventSelectionBehavior)
+    
+    return () => {
+      document.removeEventListener('selectionchange', preventSelectionBehavior)
+    }
+  }, [])
+
+  const handleMouseUp = (e: React.MouseEvent) => {
+    console.log('Mouse up detected')
+    
+    // Prevent default browser behavior (Google search bar, etc.)
+    e.preventDefault()
+    e.stopPropagation()
+    
+    // Check for text selection
+    setTimeout(() => {
+      const selection = window.getSelection()
+      const selectedText = selection?.toString().trim()
+      
+      if (selectedText && selectedText.length > 0) {
+        console.log('Text selected via mouse up:', selectedText)
+        setSelectedText(selectedText)
+        setShowConfirmDialog(true)
+        // Clear the selection after showing the dialog
+        window.getSelection()?.removeAllRanges()
+      }
+    }, 100)
+  }
+
+  const handleTouchEndSimple = (e: React.TouchEvent) => {
+    setDebugMessage('SIMPLE TOUCH END FIRED!')
+  }
+
+  const handleTouchMove = (e: React.TouchEvent) => {
+    // Check if we have a selection after touch moves
+    const selection = window.getSelection()
+    const selectedText = selection?.toString().trim()
+    
+    if (selectedText && selectedText.length > 0) {
+      console.log('Text selected during touch move:', selectedText)
+      setSelectedText(selectedText)
+      setShowConfirmDialog(true)
+      // Clear the selection after showing the dialog
+      window.getSelection()?.removeAllRanges()
+    }
+  }
+
+
   
   // Scroll mode page navigation functions
   const goToNextScrollPage = () => {
@@ -215,14 +467,6 @@ const MobileTextReader: React.FC<ReaderCommonProps> = ({ text, bookTitle = 'Rome
     return null
   }
 
-  const blockTouchMove = (evt: TouchEvent) => {
-    if (!selectionModeRef.current) return
-    evt.preventDefault()
-    if (textReaderRef.current && initialScrollTopRef.current !== null) {
-      textReaderRef.current.scrollTop = initialScrollTopRef.current
-    }
-  }
-
   const handleLongPress = (startX: number, startY: number, endX: number, endY: number): string => {
     try {
       log('handleLongPress called', { startX, startY, endX, endY })
@@ -291,10 +535,10 @@ const MobileTextReader: React.FC<ReaderCommonProps> = ({ text, bookTitle = 'Rome
         return ''
       }
       
-      // Find the text container
-      let startTextContainer: Element | null = startElement
-      while (startTextContainer && !startTextContainer.textContent) {
-        startTextContainer = startTextContainer.parentElement
+      // Find the text container - look for the pre element that contains the actual text
+      let textContainer: Element | null = startElement
+      while (textContainer && textContainer.tagName !== 'PRE') {
+        textContainer = textContainer.parentElement
       }
       
       let endTextContainer: Element | null = endElement
@@ -345,160 +589,8 @@ const MobileTextReader: React.FC<ReaderCommonProps> = ({ text, bookTitle = 'Rome
     }
   }
 
-  const handleTouchStart = (e: React.TouchEvent) => {
-    if (e.touches.length === 1) {
-      const touch = e.touches[0]
-      const pos = { x: touch.clientX, y: touch.clientY }
-      setTouchStartPos(pos)
-      
-      // Start long press timer for swipe selection
-      const timer = setTimeout(() => {
-        log('MobileTextReader: longpress fired')
-        setIsInSelectionMode(true)
-        selectionModeRef.current = true
-        vibratedRef.current = false
-        
-        if (textReaderRef.current) {
-          initialScrollTopRef.current = textReaderRef.current.scrollTop
-          textReaderRef.current.style.overflowY = 'hidden'
-          ;(textReaderRef.current as HTMLElement).style.setProperty('overscroll-behavior', 'contain')
-          ;(textReaderRef.current as HTMLElement).addEventListener('touchmove', blockTouchMove, { passive: false })
-        }
-        
-        // Clear search UI + results
-        setSearchQuery('')
-        setCurrentSearchIndex(-1)
-        setHighlightedText('')
-        handleSearch('')
-        
-        // Create initial word selection at press point so user doesn't need to drag
-        const startR = caretRangeAtPoint(pos.x, pos.y)
-        if (startR) {
-          const initialRange = document.createRange()
-          initialRange.setStart(startR.startContainer, startR.startOffset)
-          initialRange.setEnd(startR.startContainer, startR.startOffset)
-          const expanded = expandToWordBoundaries(initialRange)
-          const t = expanded.toString().trim()
-          if (t) {
-            log('initial selection', t)
-            setSelectedText(t)
-            setHighlightedText(t)
-          }
-        } else {
-          warn('caretRangeAtPoint returned null at', pos)
-          
-          // iPhone fallback for initial selection
-          if (isIPhone) {
-            log('trying iPhone fallback for initial selection')
-            try {
-              const startElement = document.elementFromPoint(pos.x, pos.y)
-              if (startElement && startElement.textContent) {
-                // Find the text container
-                let textContainer: Element | null = startElement
-                while (textContainer && !textContainer.textContent) {
-                  textContainer = textContainer.parentElement
-                }
-                
-                if (textContainer && textContainer.textContent) {
-                  const text = textContainer.textContent
-                  const containerRect = textContainer.getBoundingClientRect()
-                  const charIndex = Math.floor(((pos.x - containerRect.left) / containerRect.width) * text.length)
-                  
-                  // Find word boundaries around the touch point
-                  let wordStart = charIndex
-                  let wordEnd = charIndex
-                  
-                  // Expand to word beginning
-                  while (wordStart > 0 && /\w/.test(text[wordStart - 1])) {
-                    wordStart--
-                  }
-                  
-                  // Expand to word end
-                  while (wordEnd < text.length && /\w/.test(text[wordEnd])) {
-                    wordEnd++
-                  }
-                  
-                  const initialWord = text.substring(wordStart, wordEnd).trim()
-                  if (initialWord && initialWord.length > 2) {
-                    log('iPhone initial selection fallback', initialWord)
-                    setSelectedText(initialWord)
-                    setHighlightedText(initialWord)
-                  }
-                }
-              }
-            } catch (e) {
-              log('iPhone initial selection fallback failed:', e)
-            }
-          }
-        }
-      }, 400)
-      
-      longPressTimer.current = timer
-    }
-  }
-
-  const handleTouchMove = (e: React.TouchEvent) => {
-    if (!touchStartPos || !isInSelectionMode) return
-    
-    const touch = e.touches[0]
-    const distance = Math.hypot(touch.clientX - touchStartPos.x, touch.clientY - touchStartPos.y)
-    
-    if (distance > 10) { // Minimum distance to trigger selection
-      try {
-        // Get text range from start to current position
-        const startRange = document.caretRangeFromPoint?.(touchStartPos.x, touchStartPos.y) || 
-                          (document as any).caretPositionFromPoint?.(touchStartPos.x, touchStartPos.y)
-        const endRange = document.caretRangeFromPoint?.(touch.clientX, touch.clientY) || 
-                        (document as any).caretPositionFromPoint?.(touch.clientX, touch.clientY)
-        
-        if (startRange && endRange) {
-          const range = document.createRange()
-          
-          // Always create range from left to right regardless of swipe direction
-          const startX = touchStartPos.x
-          const endX = touch.clientX
-          
-          if (startX <= endX) {
-            // Left to right swipe
-            range.setStart(startRange.startContainer, startRange.startOffset)
-            range.setEnd(endRange.startContainer, endRange.endOffset)
-          } else {
-            // Right to left swipe
-            range.setStart(endRange.startContainer, endRange.startOffset)
-            range.setEnd(startRange.startContainer, startRange.startOffset)
-          }
-          
-          const text = range.toString().trim()
-          if (text) {
-            setSelectedText(text)
-            log('MobileTextReader: selected text via swipe', { text, length: text.length })
-          }
-        }
-      } catch (error) {
-        log('MobileTextReader: error in touch move', error)
-      }
-    }
-  }
-
-  const handleTouchEnd = (e: React.TouchEvent) => {
-    if (longPressTimer.current) {
-      clearTimeout(longPressTimer.current)
-      longPressTimer.current = null
-    }
-    
-    if (isInSelectionMode && selectedText.length > 2) {
-      log('MobileTextReader: show dialog for swipe selection')
-      setShowConfirmDialog(true)
-    }
-    
-    setIsInSelectionMode(false)
-    setTouchStartPos(null)
-  }
-
   const renderText = () => {
-    if (highlightedText) {
-      return renderTextWithSearchHighlight(highlightedText, false)
-    }
+    // Always render the full text with search highlighting
     return renderTextWithSearchHighlight(text, false)
   }
 
@@ -534,31 +626,31 @@ const MobileTextReader: React.FC<ReaderCommonProps> = ({ text, bookTitle = 'Rome
         className={styles.textContent}
         onTouchStart={handleTouchStart}
         onTouchEnd={handleTouchEnd}
-        onTouchMove={handleTouchMove}
+        onMouseUp={handleMouseUp}
         onContextMenu={(e) => e.preventDefault()}
         style={{
-          WebkitUserSelect: isIPhone ? 'text' : 'none', 
-          userSelect: isIPhone ? 'text' : 'none', 
-          WebkitTouchCallout: isIPhone ? 'default' : 'none', 
+          WebkitUserSelect: 'text', 
+          userSelect: 'text', 
+          WebkitTouchCallout: 'none', 
           WebkitTapHighlightColor: 'transparent',
-          touchAction: isInSelectionMode ? 'none' : 'pan-y', fontFamily: settings.textFont,
+          touchAction: 'pan-y', fontFamily: settings.textFont,
           transform: `scale(${zoomLevel})`,
           transformOrigin: 'top left',
           width: `${100 / zoomLevel}%`,
           position: 'relative'
         }}
       >
-        {/* Scroll mode page navigation zones - always visible when pages are available */}
+        {/* Scroll mode page navigation zones - disabled to avoid interfering with text selection */}
+        {/* 
         {pageMap.pages.length > 0 && (
           <>
-            {/* Left side - Previous page */}
             <div
               onClick={goToPrevScrollPage}
               style={{
                 position: 'absolute',
                 left: 0,
                 top: 0,
-                width: '25%',
+                width: '10%',
                 height: '100%',
                 cursor: 'pointer',
                 zIndex: 10,
@@ -567,14 +659,13 @@ const MobileTextReader: React.FC<ReaderCommonProps> = ({ text, bookTitle = 'Rome
               }}
               title="Click to go to previous page"
             />
-            {/* Right side - Next page */}
             <div
               onClick={goToNextScrollPage}
               style={{
                 position: 'absolute',
                 right: 0,
                 top: 0,
-                width: '25%',
+                width: '10%',
                 height: '100%',
                 cursor: 'pointer',
                 zIndex: 10,
@@ -585,17 +676,49 @@ const MobileTextReader: React.FC<ReaderCommonProps> = ({ text, bookTitle = 'Rome
             />
           </>
         )}
+        */}
         
         {renderText()}
       </div>
 
       {showConfirmDialog && (
-        <div style={{ position: 'fixed', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', background: 'white', border: '1px solid #ccc', borderRadius: '8px', padding: '20px', boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)', zIndex: 1000, maxWidth: '400px' }}>
-          <h3>Selected Text:</h3>
-          <p style={{ margin: '10px 0', fontStyle: 'italic' }}>
-            "{selectedText}"
-          </p>
-          <div style={{ display: 'flex', gap: '10px', justifyContent: 'flex-end' }}>
+        <div style={{ 
+          position: 'fixed', 
+          top: '50%', 
+          left: '50%', 
+          transform: 'translate(-50%, -50%)', 
+          background: 'white', 
+          border: '1px solid #ccc', 
+          borderRadius: '8px', 
+          padding: '20px', 
+          boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)', 
+          zIndex: 1000, 
+          maxWidth: '90vw',
+          maxHeight: '80vh',
+          display: 'flex',
+          flexDirection: 'column'
+        }}>
+          <h3 style={{ margin: '0 0 10px 0', flexShrink: 0 }}>Selected Text:</h3>
+          <div style={{ 
+            flex: 1, 
+            overflowY: 'auto', 
+            marginBottom: '15px',
+            border: '1px solid #eee',
+            borderRadius: '4px',
+            padding: '10px',
+            backgroundColor: '#f9f9f9',
+            maxHeight: '60vh'
+          }}>
+            <p style={{ margin: 0, fontStyle: 'italic', whiteSpace: 'pre-wrap', wordBreak: 'break-word' }}>
+              "{selectedText}"
+            </p>
+          </div>
+          <div style={{ 
+            display: 'flex', 
+            gap: '10px', 
+            justifyContent: 'flex-end',
+            flexShrink: 0
+          }}>
             <button onClick={handleCancel} style={{ padding: '8px 16px', border: '1px solid #ccc', borderRadius: '4px', background: 'white', cursor: 'pointer' }}>Cancel</button>
             <button onClick={handleExplain} style={{ padding: '8px 16px', border: 'none', borderRadius: '4px', background: '#007bff', color: 'white', cursor: 'pointer' }}>Explain</button>
           </div>
@@ -606,3 +729,8 @@ const MobileTextReader: React.FC<ReaderCommonProps> = ({ text, bookTitle = 'Rome
 }
 
 export default MobileTextReader
+
+
+
+
+

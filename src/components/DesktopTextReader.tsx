@@ -13,9 +13,6 @@ const DesktopTextReader: React.FC<ReaderCommonProps> = ({ text, bookTitle = 'Rom
   const textContentRef = useRef<HTMLDivElement>(null)
   const [showConfirmDialog, setShowConfirmDialog] = useState(false)
   const [selectedText, setSelectedText] = useState('')
-  const [touchStartPos, setTouchStartPos] = useState<{ x: number; y: number } | null>(null)
-  const [isInSelectionMode, setIsInSelectionMode] = useState(false)
-  const longPressTimer = useRef<NodeJS.Timeout | null>(null)
   
   // Page calculation state for scroll navigation
   const [pageMap, setPageMap] = useState<PageMap>({ pages: [], pageRanges: [] })
@@ -44,30 +41,44 @@ const DesktopTextReader: React.FC<ReaderCommonProps> = ({ text, bookTitle = 'Rom
     const textReader = textReaderRef.current
     if (!textReader || pageMap.pageRanges.length === 0) return
 
+    let scrollTimeout: NodeJS.Timeout | null = null
+
     const handleScroll = () => {
-      const scrollTop = textReader.scrollTop
-      const lineHeight = parseInt(getComputedStyle(textReader).lineHeight) || 24
+      // Debounce scroll events to prevent excessive calculations
+      if (scrollTimeout) {
+        clearTimeout(scrollTimeout)
+      }
       
-      // Calculate which page we're currently viewing based on scroll position
-      const currentLine = Math.floor(scrollTop / lineHeight)
-      const currentCharPosition = currentLine * (estimateCharsPerLine(textReader.clientWidth, parseInt(getComputedStyle(textReader).fontSize) || 16, settings.textFont))
-      
-      // Find which page contains this position
-      let newCurrentPage = 0
-      for (let i = 0; i < pageMap.pageRanges.length; i++) {
-        if (currentCharPosition >= pageMap.pageRanges[i].start && currentCharPosition < pageMap.pageRanges[i].end) {
-          newCurrentPage = i
-          break
+      scrollTimeout = setTimeout(() => {
+        const scrollTop = textReader.scrollTop
+        const lineHeight = parseInt(getComputedStyle(textReader).lineHeight) || 24
+        
+        // Calculate which page we're currently viewing based on scroll position
+        const currentLine = Math.floor(scrollTop / lineHeight)
+        const currentCharPosition = currentLine * (estimateCharsPerLine(textReader.clientWidth, parseInt(getComputedStyle(textReader).fontSize) || 16, settings.textFont))
+        
+        // Find which page contains this position
+        let newCurrentPage = 0
+        for (let i = 0; i < pageMap.pageRanges.length; i++) {
+          if (currentCharPosition >= pageMap.pageRanges[i].start && currentCharPosition < pageMap.pageRanges[i].end) {
+            newCurrentPage = i
+            break
+          }
         }
-      }
-      
-      if (newCurrentPage !== currentPage) {
-        setCurrentPage(newCurrentPage)
-      }
+        
+        if (newCurrentPage !== currentPage) {
+          setCurrentPage(newCurrentPage)
+        }
+      }, 100) // Debounce scroll events by 100ms
     }
 
-    textReader.addEventListener('scroll', handleScroll)
-    return () => textReader.removeEventListener('scroll', handleScroll)
+    textReader.addEventListener('scroll', handleScroll, { passive: true })
+    return () => {
+      textReader.removeEventListener('scroll', handleScroll)
+      if (scrollTimeout) {
+        clearTimeout(scrollTimeout)
+      }
+    }
   }, [pageMap.pageRanges, currentPage, settings.textFont])
 
   const handleMouseUp = () => {
@@ -165,46 +176,6 @@ const DesktopTextReader: React.FC<ReaderCommonProps> = ({ text, bookTitle = 'Rom
     renderTextWithSearchHighlight
   } = useSearchCore(text, textReaderRef, textContentRef, goToPage, pageMap)
 
-  const handleTouchStart = (e: React.TouchEvent) => {
-    if (e.touches.length === 1) {
-      const touch = e.touches[0]
-      setTouchStartPos({ x: touch.clientX, y: touch.clientY })
-      
-      // Start long press timer
-      const timer = setTimeout(() => {
-        setIsInSelectionMode(true)
-        setTouchStartPos(null)
-      }, 400)
-      
-      longPressTimer.current = timer
-    }
-  }
-
-  const handleTouchMove = (e: React.TouchEvent) => {
-    if (e.touches.length === 1 && touchStartPos) {
-      const touch = e.touches[0]
-      const deltaX = Math.abs(touch.clientX - touchStartPos.x)
-      const deltaY = Math.abs(touch.clientY - touchStartPos.y)
-      
-      // If moved more than threshold, cancel long press
-      if (deltaX > 10 || deltaY > 10) {
-        if (longPressTimer.current) {
-          clearTimeout(longPressTimer.current)
-          longPressTimer.current = null
-        }
-        setTouchStartPos(null)
-      }
-    }
-  }
-
-  const handleTouchEnd = () => {
-    if (longPressTimer.current) {
-      clearTimeout(longPressTimer.current)
-      longPressTimer.current = null
-    }
-    setTouchStartPos(null)
-  }
-
   return (
     <div ref={textReaderRef} className={styles.textReader}>
       <div style={{ padding: '16px', borderBottom: '1px solid #e9ecef' }}>
@@ -256,9 +227,6 @@ const DesktopTextReader: React.FC<ReaderCommonProps> = ({ text, bookTitle = 'Rom
           window.getSelection()?.removeAllRanges()
         }}
         onMouseUp={handleMouseUp}
-        onTouchStart={handleTouchStart}
-        onTouchMove={handleTouchMove}
-        onTouchEnd={handleTouchEnd}
         style={{ userSelect: 'text', fontFamily: settings.textFont, position: 'relative' }}
       >
         {/* Scroll mode page navigation zones - always visible when pages are available */}
@@ -315,12 +283,43 @@ const DesktopTextReader: React.FC<ReaderCommonProps> = ({ text, bookTitle = 'Rom
       </div>
 
       {showConfirmDialog && (
-        <div style={{ position: 'fixed', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', background: 'white', border: '1px solid #ccc', borderRadius: '8px', padding: '20px', boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)', zIndex: 1000, maxWidth: '400px' }}>
-          <h3>Selected Text:</h3>
-          <p style={{ margin: '10px 0', fontStyle: 'italic' }}>
-            "{selectedText}"
-          </p>
-          <div style={{ display: 'flex', gap: '10px', justifyContent: 'flex-end' }}>
+        <div style={{ 
+          position: 'fixed', 
+          top: '50%', 
+          left: '50%', 
+          transform: 'translate(-50%, -50%)', 
+          background: 'white', 
+          border: '1px solid #ccc', 
+          borderRadius: '8px', 
+          padding: '20px', 
+          boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)', 
+          zIndex: 1000, 
+          maxWidth: '90vw',
+          maxHeight: '80vh',
+          display: 'flex',
+          flexDirection: 'column'
+        }}>
+          <h3 style={{ margin: '0 0 10px 0', flexShrink: 0 }}>Selected Text:</h3>
+          <div style={{ 
+            flex: 1, 
+            overflowY: 'auto', 
+            marginBottom: '15px',
+            border: '1px solid #eee',
+            borderRadius: '4px',
+            padding: '10px',
+            backgroundColor: '#f9f9f9',
+            maxHeight: '60vh'
+          }}>
+            <p style={{ margin: 0, fontStyle: 'italic', whiteSpace: 'pre-wrap', wordBreak: 'break-word' }}>
+              "{selectedText}"
+            </p>
+          </div>
+          <div style={{ 
+            display: 'flex', 
+            gap: '10px', 
+            justifyContent: 'flex-end',
+            flexShrink: 0
+          }}>
             <button onClick={handleCancel} style={{ padding: '8px 16px', border: '1px solid #ccc', borderRadius: '4px', background: 'white', cursor: 'pointer' }}>Cancel</button>
             <button onClick={handleExplain} style={{ padding: '8px 16px', border: 'none', borderRadius: '4px', background: '#007bff', color: 'white', cursor: 'pointer' }}>Explain</button>
           </div>
@@ -331,3 +330,8 @@ const DesktopTextReader: React.FC<ReaderCommonProps> = ({ text, bookTitle = 'Rom
 }
 
 export default DesktopTextReader
+
+
+
+
+
