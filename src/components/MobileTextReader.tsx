@@ -353,7 +353,7 @@ const MobileTextReader: React.FC<ReaderCommonProps> = ({ text, bookTitle = 'Rome
     
     // Single touch - handle text selection
     // Only prime vibration if not scrolling and haven't recently scrolled
-    if (navigator.vibrate && !e.currentTarget.hasAttribute('data-vibration-primed') && !isScrolling && !recentlyScrolled) {
+    if ('vibrate' in navigator && !e.currentTarget.hasAttribute('data-vibration-primed') && !isScrolling && !recentlyScrolled) {
       // Don't vibrate on initial touch anymore - wait for long press
       e.currentTarget.setAttribute('data-vibration-primed', 'true')
       console.log('Vibration API primed (no initial vibration)')
@@ -367,7 +367,7 @@ const MobileTextReader: React.FC<ReaderCommonProps> = ({ text, bookTitle = 'Rome
       
       const longPressTimer = setTimeout(() => {
         // Double-check we're still not scrolling when timer fires
-        if (!isScrolling && navigator.vibrate) {
+        if (!isScrolling && 'vibrate' in navigator) {
           // Also check if touch position hasn't moved much (to avoid vibrating during drag)
           const touchMoveThreshold = 10 // pixels
           const currentTouch = e.touches[0]
