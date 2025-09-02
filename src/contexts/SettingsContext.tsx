@@ -12,8 +12,8 @@ interface SettingsContextType {
 }
 
 const DEFAULT_SETTINGS: SettingsData = {
-  llmProvider: 'openai',
-  responseLength: 'medium',
+  llmProvider: 'gemini',
+  responseLength: 'brief',
   textFont: 'serif',
   chatFont: 'sans-serif',
   readingMode: 'scroll',

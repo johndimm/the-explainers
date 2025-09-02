@@ -21,6 +21,7 @@ const MobileTextReader: React.FC<ReaderCommonProps> = ({ text, bookTitle = 'Rome
   // Page calculation state for scroll navigation
   const [pageMap, setPageMap] = useState<PageMap>({ pages: [], pageRanges: [] })
   const [currentPage, setCurrentPage] = useState(0)
+  const [showPrevButton, setShowPrevButton] = useState(false)
   const pageHeight = 600 // Default page height in pixels
   
   // Device detection - only for iPhone-specific fallbacks
@@ -440,6 +441,7 @@ const MobileTextReader: React.FC<ReaderCommonProps> = ({ text, bookTitle = 'Rome
     if (pageMap.pages.length > 0 && currentPage < pageMap.pages.length - 1) {
       const nextPage = currentPage + 1
       setCurrentPage(nextPage)
+      setShowPrevButton(true) // Show previous button after first next click
       
       // Use a smaller scroll distance to avoid skipping content
       if (textReaderRef.current) {
@@ -447,7 +449,7 @@ const MobileTextReader: React.FC<ReaderCommonProps> = ({ text, bookTitle = 'Rome
         const viewportHeight = textReaderRef.current.clientHeight
         
         textReaderRef.current.scrollTo({
-          top: currentScrollTop + (viewportHeight * 0.7), // Scroll by 70% of viewport
+          top: currentScrollTop + viewportHeight - 170, // Scroll by text reader height minus overlap
           behavior: 'smooth'
         })
       }
@@ -465,7 +467,7 @@ const MobileTextReader: React.FC<ReaderCommonProps> = ({ text, bookTitle = 'Rome
         const viewportHeight = textReaderRef.current.clientHeight
         
         textReaderRef.current.scrollTo({
-          top: Math.max(0, currentScrollTop - (viewportHeight * 0.7)), // Scroll by 70% of viewport
+          top: Math.max(0, currentScrollTop - viewportHeight + 170), // Scroll by text reader height minus overlap
           behavior: 'smooth'
         })
       }
@@ -752,56 +754,63 @@ const MobileTextReader: React.FC<ReaderCommonProps> = ({ text, bookTitle = 'Rome
         </div>
       )}
 
-      {/* Fixed bottom navigation bar */}
+      {/* Fixed navigation buttons */}
       {pageMap.pages.length > 0 && !isScrolling && (
-        <div style={{
-          position: 'fixed',
-          bottom: '20px',
-          left: '50%',
-          transform: 'translateX(-50%)',
-          display: 'flex',
-          alignItems: 'center',
-          gap: '10px',
-          zIndex: 1000
-        }}>
-          <button
-            onClick={goToPrevScrollPage}
-            disabled={currentPage <= 0}
-            style={{
-              padding: '12px 24px',
-              fontSize: '48px',
-              fontWeight: 'bold',
-              border: '1px solid rgba(0, 123, 255, 0.1)',
-              borderRadius: '8px',
-              background: currentPage <= 0 ? 'rgba(240, 240, 240, 0.1)' : 'rgba(0, 123, 255, 0.1)',
-              color: currentPage <= 0 ? 'rgba(102, 102, 102, 0.1)' : 'rgba(0, 86, 179, 0.1)',
-              cursor: currentPage <= 0 ? 'not-allowed' : 'pointer',
-              minWidth: '80px',
-              boxShadow: '0 4px 12px rgba(0, 0, 0, 0.15)'
-            }}
-          >
-            ◀
-          </button>
+        <>
+          {/* Previous button - only show when showPrevButton is true */}
+          {showPrevButton && currentPage > 0 && (
+            <button
+              onClick={goToPrevScrollPage}
+              style={{
+                position: 'fixed',
+                bottom: '20px',
+                left: '20px',
+                width: '50px',
+                height: '50px',
+                borderRadius: '50%',
+                border: 'none',
+                background: 'rgba(0, 123, 255, 0.15)',
+                color: 'rgba(0, 0, 0, 0.2)',
+                fontSize: '20px',
+                cursor: 'pointer',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                boxShadow: '0 4px 12px rgba(0, 0, 0, 0.15)',
+                zIndex: 1000
+              }}
+            >
+              ◀
+            </button>
+          )}
 
-          <button
-            onClick={goToNextScrollPage}
-            disabled={currentPage >= pageMap.pages.length - 1}
-            style={{
-              padding: '12px 24px',
-              fontSize: '48px',
-              fontWeight: 'bold',
-              border: '1px solid rgba(0, 123, 255, 0.1)',
-              borderRadius: '8px',
-              background: currentPage >= pageMap.pages.length - 1 ? 'rgba(240, 240, 240, 0.1)' : 'rgba(0, 123, 255, 0.1)',
-              color: currentPage >= pageMap.pages.length - 1 ? 'rgba(102, 102, 102, 0.1)' : 'rgba(0, 86, 179, 0.1)',
-              cursor: currentPage >= pageMap.pages.length - 1 ? 'not-allowed' : 'pointer',
-              minWidth: '80px',
-              boxShadow: '0 4px 12px rgba(0, 0, 0, 0.15)'
-            }}
-          >
-            ▶
-          </button>
-        </div>
+          {/* Next button - always show at bottom right when available */}
+          {currentPage < pageMap.pages.length - 1 && (
+            <button
+              onClick={goToNextScrollPage}
+              style={{
+                position: 'fixed',
+                bottom: '20px',
+                right: '20px',
+                width: '50px',
+                height: '50px',
+                borderRadius: '50%',
+                border: 'none',
+                background: 'rgba(0, 123, 255, 0.15)',
+                color: 'rgba(0, 0, 0, 0.2)',
+                fontSize: '20px',
+                cursor: 'pointer',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                boxShadow: '0 4px 12px rgba(0, 0, 0, 0.15)',
+                zIndex: 1000
+              }}
+            >
+              ▶
+            </button>
+          )}
+        </>
       )}
     </div>
   )

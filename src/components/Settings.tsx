@@ -50,8 +50,8 @@ interface SettingsProps {
 }
 
 const DEFAULT_SETTINGS: SettingsData = {
-  llmProvider: 'openai',
-  responseLength: 'medium',
+  llmProvider: 'gemini',
+  responseLength: 'brief',
   textFont: 'serif',
   chatFont: 'sans-serif',
   readingMode: 'scroll',
@@ -356,7 +356,7 @@ const Settings: React.FC<SettingsProps> = ({ isOpen, onClose, settings, onSettin
                   checked={localSettings.llmProvider === 'openai'}
                   onChange={() => handleProviderChange('openai')}
                 />
-                <span>GPT-4 (OpenAI) - Default</span>
+                <span>GPT-4 (OpenAI)</span>
               </label>
               <label className={styles.radioLabel}>
                 <input
@@ -386,7 +386,7 @@ const Settings: React.FC<SettingsProps> = ({ isOpen, onClose, settings, onSettin
                   checked={localSettings.llmProvider === 'gemini'}
                   onChange={() => handleProviderChange('gemini')}
                 />
-                <span>Gemini (Google)</span>
+                <span>Gemini (Google) - Default</span>
               </label>
               <label className={styles.radioLabel}>
                 <input
