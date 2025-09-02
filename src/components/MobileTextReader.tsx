@@ -154,6 +154,9 @@ const MobileTextReader: React.FC<ReaderCommonProps> = ({ text, bookTitle = 'Rome
   
   const [isScrolling, setIsScrolling] = useState(false)
   const scrollTimeoutRef = useRef<NodeJS.Timeout | null>(null)
+  const lastScrollTime = useRef<number>(0)
+  const scrollVelocityRef = useRef<number>(0)
+  const lastScrollPosition = useRef<number>(0)
 
   // Save zoom level to sessionStorage whenever it changes
   useEffect(() => {
@@ -162,9 +165,23 @@ const MobileTextReader: React.FC<ReaderCommonProps> = ({ text, bookTitle = 'Rome
     }
   }, [zoomLevel])
 
-  // Handle scroll events to hide/show navigation buttons
+  // Handle scroll events to hide/show navigation buttons and prevent unwanted vibrations
   useEffect(() => {
     const handleScroll = () => {
+      const now = Date.now()
+      const textReader = textReaderRef.current
+      
+      if (textReader) {
+        // Calculate scroll velocity
+        const currentPosition = textReader.scrollTop
+        const timeDelta = now - lastScrollTime.current
+        if (timeDelta > 0) {
+          scrollVelocityRef.current = Math.abs(currentPosition - lastScrollPosition.current) / timeDelta
+        }
+        lastScrollPosition.current = currentPosition
+      }
+      
+      lastScrollTime.current = now
       setIsScrolling(true)
       
       // Clear existing timeout
@@ -172,10 +189,14 @@ const MobileTextReader: React.FC<ReaderCommonProps> = ({ text, bookTitle = 'Rome
         clearTimeout(scrollTimeoutRef.current)
       }
       
+      // Wait longer if scroll velocity was high (momentum scrolling)
+      const waitTime = scrollVelocityRef.current > 1 ? 2000 : 1000
+      
       // Show buttons again after scrolling stops
       scrollTimeoutRef.current = setTimeout(() => {
         setIsScrolling(false)
-      }, 1000) // Wait 1 second after scrolling stops
+        scrollVelocityRef.current = 0
+      }, waitTime) // Wait 1-2 seconds after scrolling stops
     }
 
     const textReader = textReaderRef.current
@@ -326,24 +347,44 @@ const MobileTextReader: React.FC<ReaderCommonProps> = ({ text, bookTitle = 'Rome
       return // Exit early, don't do text selection or vibration
     }
 
+    // Check if we recently stopped scrolling (within last 500ms)
+    const timeSinceLastScroll = Date.now() - lastScrollTime.current
+    const recentlyScrolled = timeSinceLastScroll < 500
+    
     // Single touch - handle text selection
-    // Only prime vibration if not in scroll mode
-    if (navigator.vibrate && !e.currentTarget.hasAttribute('data-vibration-primed') && !isScrolling) {
-      navigator.vibrate(10) // Very subtle first vibration
+    // Only prime vibration if not scrolling and haven't recently scrolled
+    if (navigator.vibrate && !e.currentTarget.hasAttribute('data-vibration-primed') && !isScrolling && !recentlyScrolled) {
+      // Don't vibrate on initial touch anymore - wait for long press
       e.currentTarget.setAttribute('data-vibration-primed', 'true')
-      console.log('Vibration API primed')
+      console.log('Vibration API primed (no initial vibration)')
     }
 
-    // Set up long press detection for vibration (only if not scrolling)
-    if (!isScrolling) {
+    // Set up long press detection for vibration (only if not scrolling and haven't recently scrolled)
+    if (!isScrolling && !recentlyScrolled) {
+      const touchStartTime = Date.now()
+      const touchStartX = e.touches[0].clientX
+      const touchStartY = e.touches[0].clientY
+      
       const longPressTimer = setTimeout(() => {
-        if (navigator.vibrate) {
-          navigator.vibrate(50)
-          console.log('Vibration triggered on long press')
+        // Double-check we're still not scrolling when timer fires
+        if (!isScrolling && navigator.vibrate) {
+          // Also check if touch position hasn't moved much (to avoid vibrating during drag)
+          const touchMoveThreshold = 10 // pixels
+          const currentTouch = e.touches[0]
+          if (currentTouch) {
+            const deltaX = Math.abs(currentTouch.clientX - touchStartX)
+            const deltaY = Math.abs(currentTouch.clientY - touchStartY)
+            if (deltaX < touchMoveThreshold && deltaY < touchMoveThreshold) {
+              navigator.vibrate(50)
+              console.log('Vibration triggered on long press')
+            }
+          }
         }
-      }, 500) // 500ms for long press
+      }, 700) // Increased to 700ms for long press to reduce accidental triggers
 
       e.currentTarget.setAttribute('data-long-press-timer', longPressTimer.toString())
+      e.currentTarget.setAttribute('data-touch-start-x', touchStartX.toString())
+      e.currentTarget.setAttribute('data-touch-start-y', touchStartY.toString())
     }
   }
 
@@ -409,6 +450,14 @@ const MobileTextReader: React.FC<ReaderCommonProps> = ({ text, bookTitle = 'Rome
   const handleTouchMove = (e: React.TouchEvent) => {
     console.log('Touch move detected, touches:', e.touches.length)
     
+    // Clear any pending vibration timer if user is moving
+    const timerId = e.currentTarget.getAttribute('data-long-press-timer')
+    if (timerId) {
+      clearTimeout(parseInt(timerId))
+      e.currentTarget.removeAttribute('data-long-press-timer')
+      console.log('Cancelled vibration timer due to touch move')
+    }
+    
     // Handle pinch to zoom
     if (e.touches.length === 2) {
       console.log('Two finger touch move - zoom mode')
@@ -430,6 +479,26 @@ const MobileTextReader: React.FC<ReaderCommonProps> = ({ text, bookTitle = 'Rome
         const newZoom = Math.max(0.5, Math.min(3, initialZoom * scale))
         console.log('Setting zoom to:', newZoom)
         setZoomLevel(newZoom)
+      }
+    } else if (e.touches.length === 1) {
+      // For single touch, check if movement exceeds threshold
+      const touchStartX = parseFloat(e.currentTarget.getAttribute('data-touch-start-x') || '0')
+      const touchStartY = parseFloat(e.currentTarget.getAttribute('data-touch-start-y') || '0')
+      const currentX = e.touches[0].clientX
+      const currentY = e.touches[0].clientY
+      
+      const deltaX = Math.abs(currentX - touchStartX)
+      const deltaY = Math.abs(currentY - touchStartY)
+      
+      // If user has moved more than 10 pixels, they're probably scrolling
+      if (deltaX > 10 || deltaY > 10) {
+        // Clear vibration timer if it exists
+        const timerId = e.currentTarget.getAttribute('data-long-press-timer')
+        if (timerId) {
+          clearTimeout(parseInt(timerId))
+          e.currentTarget.removeAttribute('data-long-press-timer')
+          console.log('Cancelled vibration due to movement threshold')
+        }
       }
     }
   }
