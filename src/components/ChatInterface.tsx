@@ -79,6 +79,7 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ selectedText, contextInfo
   const [shareFormData, setShareFormData] = useState<{ title: string; content: string } | null>(null)
   const [shareDropdownOpen, setShareDropdownOpen] = useState<string | null>(null)
   const [saveFormatDropdownOpen, setSaveFormatDropdownOpen] = useState(false)
+  const [showClearConfirm, setShowClearConfirm] = useState(false)
   const latestResponseRef = useRef<HTMLDivElement>(null)
   const inputRef = useRef<HTMLInputElement>(null)
   const styleMenuRef = useRef<HTMLDivElement>(null)
@@ -146,6 +147,20 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ selectedText, contextInfo
     document.body.removeChild(a)
     URL.revokeObjectURL(url)
     setSaveFormatDropdownOpen(false)
+  }
+
+  const clearChatHistory = () => {
+    setMessages([])
+    setOriginalSelectedText('')
+    setShowFullHistory(false)
+    
+    // Clear from sessionStorage if in page mode
+    if (isPageMode) {
+      sessionStorage.removeItem('chatHistory')
+    }
+    
+    setShowClearConfirm(false)
+    console.log('Chat history cleared')
   }
 
   const shareToGitHub = () => {
@@ -1379,6 +1394,14 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ selectedText, contextInfo
                 </div>
               )}
             </div>
+            <button 
+              onClick={() => setShowClearConfirm(true)}
+              disabled={messages.length === 0}
+              className={styles.clearButton}
+              title="Clear all chat history"
+            >
+              🗑️ Clear History
+            </button>
             {/* Share button moved to inline with each response */}
           </div>
 {!isPageMode && <button onClick={onClose} className={styles.closeButton}>×</button>}
@@ -1751,6 +1774,56 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ selectedText, contextInfo
             <div className={styles.helpPopupContent}>
               {getHelpPopupContent()}
             </div>
+          </div>
+        </div>
+      )}
+
+      {/* Clear History Confirmation Dialog */}
+      {showClearConfirm && (
+        <div style={{ 
+          position: 'fixed', 
+          top: '50%', 
+          left: '50%', 
+          transform: 'translate(-50%, -50%)', 
+          background: 'white', 
+          border: '1px solid #ccc', 
+          borderRadius: '8px', 
+          padding: '20px', 
+          boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)', 
+          zIndex: 1001,
+          maxWidth: '400px',
+          textAlign: 'center'
+        }}>
+          <h3 style={{ margin: '0 0 12px 0', color: '#d32f2f' }}>Clear Chat History?</h3>
+          <p style={{ margin: '0 0 20px 0', color: '#666' }}>
+            This will permanently delete all {messages.length} messages in this conversation. This action cannot be undone.
+          </p>
+          <div style={{ display: 'flex', gap: '12px', justifyContent: 'center' }}>
+            <button 
+              onClick={() => setShowClearConfirm(false)}
+              style={{ 
+                padding: '8px 16px', 
+                border: '1px solid #ccc', 
+                borderRadius: '4px', 
+                background: 'white', 
+                cursor: 'pointer' 
+              }}
+            >
+              Cancel
+            </button>
+            <button 
+              onClick={clearChatHistory}
+              style={{ 
+                padding: '8px 16px', 
+                border: 'none', 
+                borderRadius: '4px', 
+                background: '#d32f2f', 
+                color: 'white', 
+                cursor: 'pointer' 
+              }}
+            >
+              🗑️ Clear All
+            </button>
           </div>
         </div>
       )}

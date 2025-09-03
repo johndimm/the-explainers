@@ -1247,3 +1247,25 @@
 .saveOption:not(:last-child) {
   border-bottom: 1px solid #eee;
 }
+
+.clearButton {
+  padding: 6px 12px;
+  background: #dc3545;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 500;
+  transition: background-color 0.2s;
+  white-space: nowrap;
+}
+
+.clearButton:hover:not(:disabled) {
+  background: #c82333;
+}
+
+.clearButton:disabled {
+  background: #6c757d;
+  cursor: not-allowed;
+}
