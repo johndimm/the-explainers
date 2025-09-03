@@ -8,6 +8,7 @@ import { ProfileData } from './Profile'
 import { useProfile } from '../contexts/ProfileContext'
 import { STYLE_CATEGORIES } from './ExplainerStyles'
 import { log } from '../utils/log'
+import { convertToHTML, convertToMarkdown, convertToPlainText } from '../utils/chatConverters'
 
 interface Message {
   id: string
@@ -77,9 +78,11 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ selectedText, contextInfo
   const [showShareModal, setShowShareModal] = useState(false)
   const [shareFormData, setShareFormData] = useState<{ title: string; content: string } | null>(null)
   const [shareDropdownOpen, setShareDropdownOpen] = useState<string | null>(null)
+  const [saveFormatDropdownOpen, setSaveFormatDropdownOpen] = useState(false)
   const latestResponseRef = useRef<HTMLDivElement>(null)
   const inputRef = useRef<HTMLInputElement>(null)
   const styleMenuRef = useRef<HTMLDivElement>(null)
+  const saveDropdownRef = useRef<HTMLDivElement>(null)
   const initializedRef = useRef(false)
   const { canUseExplanation, useExplanation, getBookExplanationsUsed } = useProfile()
 
@@ -87,7 +90,7 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ selectedText, contextInfo
     latestResponseRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' })
   }
 
-  const saveChatHistory = () => {
+  const saveChatHistory = (format: 'json' | 'html' | 'markdown' | 'text' = 'json') => {
     if (messages.length === 0) return
     
     const chatData = {
@@ -95,7 +98,10 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ selectedText, contextInfo
       author,
       selectedText: originalSelectedText,
       contextInfo,
-      messages,
+      messages: messages.map(msg => ({
+        ...msg,
+        timestamp: msg.timestamp.toISOString()
+      })),
       settings: {
         provider: selectedProvider,
         style: currentStyle,
@@ -104,15 +110,42 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ selectedText, contextInfo
       timestamp: new Date().toISOString()
     }
     
-    const blob = new Blob([JSON.stringify(chatData, null, 2)], { type: 'application/json' })
+    let content: string;
+    let mimeType: string;
+    let extension: string;
+    
+    switch (format) {
+      case 'html':
+        content = convertToHTML(chatData);
+        mimeType = 'text/html';
+        extension = 'html';
+        break;
+      case 'markdown':
+        content = convertToMarkdown(chatData);
+        mimeType = 'text/markdown';
+        extension = 'md';
+        break;
+      case 'text':
+        content = convertToPlainText(chatData);
+        mimeType = 'text/plain';
+        extension = 'txt';
+        break;
+      default:
+        content = JSON.stringify(chatData, null, 2);
+        mimeType = 'application/json';
+        extension = 'json';
+    }
+    
+    const blob = new Blob([content], { type: mimeType })
     const url = URL.createObjectURL(blob)
     const a = document.createElement('a')
     a.href = url
-    a.download = `chat-history-${bookTitle.replace(/[^a-z0-9]/gi, '-')}-${new Date().toISOString().split('T')[0]}.json`
+    a.download = `chat-history-${bookTitle.replace(/[^a-z0-9]/gi, '-')}-${new Date().toISOString().split('T')[0]}.${extension}`
     document.body.appendChild(a)
     a.click()
     document.body.removeChild(a)
     URL.revokeObjectURL(url)
+    setSaveFormatDropdownOpen(false)
   }
 
   const shareToGitHub = () => {
@@ -260,6 +293,23 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ selectedText, contextInfo
       handleExplainText(selectedText)
     }
   }, [selectedText])
+
+  // Click outside handler for save dropdown
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (saveDropdownRef.current && !saveDropdownRef.current.contains(event.target as Node)) {
+        setSaveFormatDropdownOpen(false)
+      }
+    }
+
+    if (saveFormatDropdownOpen) {
+      document.addEventListener('mousedown', handleClickOutside)
+    }
+
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside)
+    }
+  }, [saveFormatDropdownOpen])
 
   // Set original selected text when it becomes available
   useEffect(() => {
@@ -642,7 +692,7 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ selectedText, contextInfo
       if (data.videos && data.videos.length > 0) {
         // Add video message to chat automatically
         const videoMessage: Message = {
-          id: (Date.now() + 2).toString(),
+          id: (Date.now() + 1).toString(),
           content: `🎬 Found related video`,
           role: 'assistant',
           timestamp: new Date(),
@@ -842,9 +892,13 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ selectedText, contextInfo
         return
       }
 
+      // First, search for YouTube video and add it if found
+      await searchAndEmbedVideo(text)
+      
+      // Then get the AI explanation
       const response = await callLLM([llmMessage])
       const assistantMessage: Message = {
-        id: (Date.now() + 1).toString(),
+        id: (Date.now() + 2).toString(),
         content: response,
         role: 'assistant',
         timestamp: new Date(),
@@ -852,15 +906,10 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ selectedText, contextInfo
         style: currentStyle
       }
       setMessages(prev => [...prev, assistantMessage])
-      
-      // Automatically search for video after getting explanation
-      setTimeout(() => {
-        searchAndEmbedVideo(text)
-      }, 500) // Small delay to let the explanation render first
     } catch (error) {
       console.error('Error calling LLM:', error)
       const errorMessage: Message = {
-        id: (Date.now() + 1).toString(),
+        id: (Date.now() + 3).toString(),
         content: 'Sorry, I encountered an error while trying to explain this text. Please try again.',
         role: 'assistant',
         timestamp: new Date(),
@@ -1292,14 +1341,44 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ selectedText, contextInfo
             >
               Re-explain{hasChanges ? ' *' : ''}
             </button>
-            <button 
-              onClick={saveChatHistory}
-              disabled={messages.length === 0}
-              className={styles.saveButton}
-              title="Save chat history to file (includes book context, AI responses, and settings)"
-            >
-              💾 Save Chat
-            </button>
+            <div className={styles.saveDropdown} ref={saveDropdownRef}>
+              <button 
+                onClick={() => setSaveFormatDropdownOpen(!saveFormatDropdownOpen)}
+                disabled={messages.length === 0}
+                className={styles.saveButton}
+                title="Save chat history to file (includes book context, AI responses, and settings)"
+              >
+                💾 Save Chat ▼
+              </button>
+              {saveFormatDropdownOpen && (
+                <div className={styles.saveDropdownContent}>
+                  <button 
+                    className={styles.saveOption}
+                    onClick={() => saveChatHistory('json')}
+                  >
+                    📄 JSON
+                  </button>
+                  <button 
+                    className={styles.saveOption}
+                    onClick={() => saveChatHistory('html')}
+                  >
+                    🌐 HTML
+                  </button>
+                  <button 
+                    className={styles.saveOption}
+                    onClick={() => saveChatHistory('markdown')}
+                  >
+                    📝 Markdown
+                  </button>
+                  <button 
+                    className={styles.saveOption}
+                    onClick={() => saveChatHistory('text')}
+                  >
+                    📋 Plain Text
+                  </button>
+                </div>
+              )}
+            </div>
             {/* Share button moved to inline with each response */}
           </div>
 {!isPageMode && <button onClick={onClose} className={styles.closeButton}>×</button>}

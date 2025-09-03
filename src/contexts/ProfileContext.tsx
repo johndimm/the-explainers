@@ -154,10 +154,21 @@ export const ProfileProvider: React.FC<ProfileProviderProps> = ({ children }) =>
     }
     
     const bookKey = getBookKey(bookTitle, author)
-    console.log('ProfileContext: bookKey:', bookKey)
+    console.log('ProfileContext: generated bookKey:', bookKey)
+    console.log('ProfileContext: purchasedBooks array:', profile.purchasedBooks)
+    console.log('ProfileContext: bookKey generation details:', { 
+      originalTitle: bookTitle, 
+      originalAuthor: author,
+      combined: `${bookTitle}-${author}`,
+      lowercase: `${bookTitle}-${author}`.toLowerCase(),
+      final: bookKey
+    })
     
     // Free if book is purchased
-    if (profile.purchasedBooks?.includes(bookKey)) {
+    const isPurchased = profile.purchasedBooks?.includes(bookKey)
+    console.log('ProfileContext: book purchased check result:', isPurchased)
+    
+    if (isPurchased) {
       console.log('ProfileContext: book purchased - access granted')
       return true
     }

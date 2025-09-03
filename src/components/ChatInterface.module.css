@@ -1198,3 +1198,52 @@
 .shareOption:not(:last-child) {
   border-bottom: 1px solid #eee;
 }
+
+.saveDropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.saveDropdownContent {
+  position: absolute;
+  bottom: 100%;
+  left: 0;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+  min-width: 140px;
+  margin-bottom: 4px;
+}
+
+.saveOption {
+  display: block;
+  width: 100%;
+  padding: 8px 12px;
+  border: none;
+  background: white;
+  text-align: left;
+  cursor: pointer;
+  font-size: 12px;
+  transition: background-color 0.2s;
+  border-radius: 0;
+}
+
+.saveOption:first-child {
+  border-top-left-radius: 6px;
+  border-top-right-radius: 6px;
+}
+
+.saveOption:last-child {
+  border-bottom-left-radius: 6px;
+  border-bottom-right-radius: 6px;
+}
+
+.saveOption:hover {
+  background: #f5f5f5;
+}
+
+.saveOption:not(:last-child) {
+  border-bottom: 1px solid #eee;
+}

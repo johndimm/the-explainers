@@ -229,45 +229,7 @@ const DesktopTextReader: React.FC<ReaderCommonProps> = ({ text, bookTitle = 'Rom
         onMouseUp={handleMouseUp}
         style={{ userSelect: 'text', fontFamily: settings.textFont, position: 'relative' }}
       >
-        {/* Scroll mode page navigation zones - always visible when pages are available */}
-        {pageMap.pages.length > 0 && (
-          <>
-            {/* Left side - Previous page */}
-            <div
-              onClick={goToPrevScrollPage}
-              style={{
-                position: 'absolute',
-                left: 0,
-                top: 0,
-                width: '25%',
-                height: '100%',
-                cursor: 'pointer',
-                zIndex: 100,
-                backgroundColor: 'rgba(0, 0, 0, 0.01)',
-                borderRight: '1px solid rgba(0, 0, 0, 0.1)',
-                pointerEvents: 'auto'
-              }}
-              title="Click to go to previous page"
-            />
-            {/* Right side - Next page */}
-            <div
-              onClick={goToNextScrollPage}
-              style={{
-                position: 'absolute',
-                right: 0,
-                top: 0,
-                width: '25%',
-                height: '100%',
-                cursor: 'pointer',
-                zIndex: 100,
-                backgroundColor: 'rgba(0, 0, 0, 0.01)',
-                borderLeft: '1px solid rgba(0, 0, 0, 0.1)',
-                pointerEvents: 'auto'
-              }}
-              title="Click to go to next page"
-            />
-          </>
-        )}
+
         
         <pre style={{ 
           whiteSpace: 'pre-wrap', 
