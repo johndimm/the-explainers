@@ -61,17 +61,23 @@ function SignInContent() {
       }
     } catch (error) {
       console.error('🔐 Sign in error:', error)
+      
+      // Type guard for Error object
+      const errorMessage = error instanceof Error ? error.message : String(error)
+      const errorName = error instanceof Error ? error.name : 'Unknown'
+      const errorStack = error instanceof Error ? error.stack : undefined
+      
       console.error('🔐 Error details:', {
-        name: error.name,
-        message: error.message,
-        stack: error.stack,
+        name: errorName,
+        message: errorMessage,
+        stack: errorStack,
         userAgent: navigator.userAgent
       })
       setIsLoading(false)
       
       // Show user-friendly error on mobile
       if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
-        alert(`Sign-in failed: ${error.message}\n\nPlease try again or contact support if the issue persists.`)
+        alert(`Sign-in failed: ${errorMessage}\n\nPlease try again or contact support if the issue persists.`)
       }
     }
   }
