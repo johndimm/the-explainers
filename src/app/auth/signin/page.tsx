@@ -3,8 +3,9 @@
 import { signIn, getSession } from 'next-auth/react'
 import { useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation'
+import ErrorBoundary from '@/components/ErrorBoundary'
 
-export default function SignIn() {
+function SignInContent() {
   const router = useRouter()
   const [isLoading, setIsLoading] = useState(false)
 
@@ -25,6 +26,18 @@ export default function SignIn() {
 
   const handleGoogleSignIn = async () => {
     console.log('🔐 Starting Google sign-in process')
+    console.log('🔐 Mobile debug info:', {
+      userAgent: navigator.userAgent,
+      isMobile: /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent),
+      isIOS: /iPhone|iPad|iPod/.test(navigator.userAgent),
+      isAndroid: /Android/.test(navigator.userAgent),
+      hasTouch: 'ontouchstart' in window,
+      screenWidth: window.screen.width,
+      screenHeight: window.screen.height,
+      viewportWidth: window.innerWidth,
+      viewportHeight: window.innerHeight
+    })
+    
     setIsLoading(true)
     try {
       const result = await signIn('google', { 
@@ -34,7 +47,18 @@ export default function SignIn() {
       console.log('🔐 Sign-in result:', result)
     } catch (error) {
       console.error('🔐 Sign in error:', error)
+      console.error('🔐 Error details:', {
+        name: error.name,
+        message: error.message,
+        stack: error.stack,
+        userAgent: navigator.userAgent
+      })
       setIsLoading(false)
+      
+      // Show user-friendly error on mobile
+      if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+        alert(`Sign-in failed: ${error.message}\n\nPlease try again or contact support if the issue persists.`)
+      }
     }
   }
 
@@ -75,7 +99,15 @@ export default function SignIn() {
 
         <button
           onClick={handleGoogleSignIn}
+          onTouchEnd={(e) => {
+            // Prevent double-tap on mobile
+            e.preventDefault()
+            if (!isLoading) {
+              handleGoogleSignIn()
+            }
+          }}
           disabled={isLoading}
+          type="button"
           style={{
             width: '100%',
             display: 'flex',
@@ -91,7 +123,14 @@ export default function SignIn() {
             fontWeight: '500',
             cursor: isLoading ? 'not-allowed' : 'pointer',
             opacity: isLoading ? 0.7 : 1,
-            transition: 'all 0.2s'
+            transition: 'all 0.2s',
+            // Mobile-specific styles
+            minHeight: '48px', // Minimum touch target size
+            touchAction: 'manipulation', // Prevent double-tap zoom
+            WebkitTapHighlightColor: 'transparent', // Remove tap highlight on iOS
+            WebkitTouchCallout: 'none', // Disable callout on iOS
+            WebkitUserSelect: 'none', // Disable text selection
+            userSelect: 'none'
           }}
         >
           {isLoading ? (
@@ -135,5 +174,13 @@ export default function SignIn() {
         }
       `}</style>
     </div>
+  )
+}
+
+export default function SignIn() {
+  return (
+    <ErrorBoundary>
+      <SignInContent />
+    </ErrorBoundary>
   )
 }

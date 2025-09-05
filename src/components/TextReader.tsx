@@ -24,14 +24,20 @@ const TextReader: React.FC<TextReaderProps> = (props) => {
   
   // Debug logging to help troubleshoot
   if (typeof window !== 'undefined') {
-    log('TextReader detection:', {
-      isMobile,
-      userAgent: navigator.userAgent,
-      maxTouchPoints: navigator.maxTouchPoints,
-      hasTouchPoints: navigator.maxTouchPoints > 0,
-      isMobileUserAgent: /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent),
-      component: isMobile ? 'MobileTextReader' : 'DesktopTextReader'
-    })
+    try {
+      log('TextReader detection:', {
+        isMobile,
+        userAgent: navigator.userAgent,
+        maxTouchPoints: navigator.maxTouchPoints,
+        hasTouchPoints: navigator.maxTouchPoints > 0,
+        isMobileUserAgent: /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent),
+        component: isMobile ? 'MobileTextReader' : 'DesktopTextReader',
+        isIOS: /iPhone|iPad|iPod/.test(navigator.userAgent),
+        isSafari: /Safari/.test(navigator.userAgent) && !/Chrome/.test(navigator.userAgent)
+      })
+    } catch (error) {
+      console.error('🚨 Error in TextReader detection:', error)
+    }
   }
   
   // Ensure we have text content

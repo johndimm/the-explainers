@@ -25,8 +25,30 @@ const MobileTextReader: React.FC<ReaderCommonProps> = ({ text, bookTitle = 'Rome
   const pageHeight = 600 // Default page height in pixels
   
   // Device detection - only for iPhone-specific fallbacks
-  const isIPhone = /iPhone|iPod/.test(navigator.userAgent)
-  const isAndroid = /Android/.test(navigator.userAgent)
+  const isIPhone = typeof window !== 'undefined' && /iPhone|iPod/.test(navigator.userAgent)
+  const isAndroid = typeof window !== 'undefined' && /Android/.test(navigator.userAgent)
+  
+  // iOS-specific error handling
+  useEffect(() => {
+    if (typeof window !== 'undefined' && isIPhone) {
+      console.log('🍎 iOS detected, enabling error handling')
+      
+      // Add global error handler for iOS
+      const handleError = (event: ErrorEvent) => {
+        console.error('🚨 iOS Error:', event.error)
+        console.error('🚨 Error message:', event.message)
+        console.error('🚨 Error filename:', event.filename)
+        console.error('🚨 Error lineno:', event.lineno)
+        console.error('🚨 Error colno:', event.colno)
+      }
+      
+      window.addEventListener('error', handleError)
+      
+      return () => {
+        window.removeEventListener('error', handleError)
+      }
+    }
+  }, [isIPhone])
   
   // Text selection state
   const [highlightedText, setHighlightedText] = useState('')
@@ -584,17 +606,24 @@ const MobileTextReader: React.FC<ReaderCommonProps> = ({ text, bookTitle = 'Rome
   }
 
   const caretRangeAtPoint = (x: number, y: number): Range | null => {
-    const anyDoc: any = document as any
-    if (document.caretRangeFromPoint) {
-      return document.caretRangeFromPoint(x, y)
-    }
-    if (anyDoc.caretPositionFromPoint) {
-      const pos = anyDoc.caretPositionFromPoint(x, y)
-      if (pos && pos.offsetNode != null) {
-        const r = document.createRange()
-        r.setStart(pos.offsetNode, pos.offset)
-        r.setEnd(pos.offsetNode, pos.offset)
-        return r
+    try {
+      const anyDoc: any = document as any
+      if (document.caretRangeFromPoint) {
+        return document.caretRangeFromPoint(x, y)
+      }
+      if (anyDoc.caretPositionFromPoint) {
+        const pos = anyDoc.caretPositionFromPoint(x, y)
+        if (pos && pos.offsetNode != null) {
+          const r = document.createRange()
+          r.setStart(pos.offsetNode, pos.offset)
+          r.setEnd(pos.offsetNode, pos.offset)
+          return r
+        }
+      }
+    } catch (error) {
+      console.error('🚨 Error in caretRangeAtPoint:', error)
+      if (isIPhone) {
+        console.log('🍎 iOS fallback for caretRangeAtPoint')
       }
     }
     return null

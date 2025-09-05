@@ -6,6 +6,8 @@ import { SessionProvider, signOut, useSession, getSession } from 'next-auth/reac
 import { AuthenticatedProfileProvider } from '@/contexts/AuthenticatedProfileContext'
 import { SettingsProvider } from '@/contexts/SettingsContext'
 import { BookCacheProvider, useBookCache } from '@/contexts/BookCacheContext'
+import ErrorBoundary from '@/components/ErrorBoundary'
+import '@/utils/vercel-debug'
 
 interface ClientLayoutProps {
   children: React.ReactNode
@@ -27,7 +29,13 @@ function LayoutContent({ children }: { children: React.ReactNode }) {
       status,
       hasSession: !!session,
       sessionUser: session?.user,
-      timestamp: new Date().toISOString()
+      timestamp: new Date().toISOString(),
+      userAgent: navigator.userAgent,
+      isIOS: /iPhone|iPad|iPod/.test(navigator.userAgent),
+      isSafari: /Safari/.test(navigator.userAgent) && !/Chrome/.test(navigator.userAgent),
+      isVercel: window.location.hostname.includes('vercel'),
+      environment: process.env.NODE_ENV,
+      hostname: window.location.hostname
     })
   }, [session, status])
 
@@ -249,14 +257,16 @@ function LayoutContent({ children }: { children: React.ReactNode }) {
 
 export default function ClientLayout({ children, requiresAuth = false }: ClientLayoutProps) {
   return (
-    <SessionProvider>
-      <BookCacheProvider>
-        <SettingsProvider>
-          <LayoutContent>
-            {children}
-          </LayoutContent>
-        </SettingsProvider>
-      </BookCacheProvider>
-    </SessionProvider>
+    <ErrorBoundary>
+      <SessionProvider>
+        <BookCacheProvider>
+          <SettingsProvider>
+            <LayoutContent>
+              {children}
+            </LayoutContent>
+          </SettingsProvider>
+        </BookCacheProvider>
+      </SessionProvider>
+    </ErrorBoundary>
   )
 }
