@@ -66,6 +66,29 @@ export const checkVercelIssues = () => {
     if (process.env.NODE_ENV === 'production') {
       issues.push('Running in production mode on Vercel')
     }
+    
+    // Check for HTTPS issues
+    if (window.location.protocol !== 'https:') {
+      issues.push('Not using HTTPS on Vercel')
+    }
+    
+    // Check for mobile-specific production issues
+    if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+      issues.push('Mobile device on Vercel production')
+      
+      // Check for potential mobile production issues
+      if (!window.isSecureContext) {
+        issues.push('Not in secure context on mobile')
+      }
+      
+      if (typeof localStorage === 'undefined') {
+        issues.push('localStorage not available on mobile')
+      }
+      
+      if (typeof sessionStorage === 'undefined') {
+        issues.push('sessionStorage not available on mobile')
+      }
+    }
   }
   
   return issues

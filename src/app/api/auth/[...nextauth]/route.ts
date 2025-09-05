@@ -94,6 +94,18 @@ const handler = NextAuth({
         secure: process.env.NODE_ENV === 'production'
       }
     }
+  },
+  // Add production-specific mobile configuration
+  logger: {
+    error: (code, metadata) => {
+      console.error('🔐 NextAuth Error:', { code, metadata, timestamp: new Date().toISOString() })
+    },
+    warn: (code) => {
+      console.warn('🔐 NextAuth Warning:', { code, timestamp: new Date().toISOString() })
+    },
+    debug: (code, metadata) => {
+      console.log('🔐 NextAuth Debug:', { code, metadata, timestamp: new Date().toISOString() })
+    }
   }
 })
 
