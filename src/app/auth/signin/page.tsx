@@ -21,6 +21,8 @@ function SignInContent() {
         console.log('🔐 User already signed in, redirecting to library')
         router.push('/library')
       }
+    }).catch((error) => {
+      console.error('🔐 Error getting session:', error)
     })
     
     // Add client-side environment debugging
@@ -32,6 +34,31 @@ function SignInContent() {
       isMobile: /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent),
       timestamp: new Date().toISOString()
     })
+    
+    // Test NextAuth availability
+    console.log('🔐 NextAuth availability check:', {
+      hasSignIn: typeof signIn === 'function',
+      hasGetSession: typeof getSession === 'function',
+      signInType: typeof signIn,
+      getSessionType: typeof getSession,
+      windowLocation: window.location.href,
+      isSecureContext: window.isSecureContext,
+      hasLocalStorage: typeof localStorage !== 'undefined',
+      hasSessionStorage: typeof sessionStorage !== 'undefined'
+    })
+    
+    // Test if we can make a basic fetch request
+    fetch('/api/auth/csrf')
+      .then(response => {
+        console.log('🔐 CSRF test successful:', response.status)
+        return response.text()
+      })
+      .then(text => {
+        console.log('🔐 CSRF response:', text)
+      })
+      .catch(error => {
+        console.error('🔐 CSRF test failed:', error)
+      })
   }, [router])
 
   const handleGoogleSignIn = async () => {
@@ -51,14 +78,37 @@ function SignInContent() {
       hostname: window.location.hostname
     })
     
+    // Show immediate feedback on mobile
+    if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+      alert('🔐 Starting Google sign-in process...\n\nCheck console for details.')
+    }
+    
     setIsLoading(true)
     try {
+      console.log('🔐 About to call signIn...')
+      
+      // Test if signIn function exists
+      if (typeof signIn !== 'function') {
+        throw new Error('signIn function is not available')
+      }
+      
       // For mobile, try without redirect first to see what happens
       const result = await signIn('google', { 
         callbackUrl: '/library',
         redirect: false // Changed to false for debugging
       })
       console.log('🔐 Sign-in result:', result)
+      
+      // Show result on mobile
+      if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+        if (result?.url) {
+          alert(`🔐 Redirect URL generated:\n${result.url}\n\nRedirecting...`)
+        } else if (result?.error) {
+          alert(`🔐 Sign-in error: ${result.error}`)
+        } else {
+          alert(`🔐 Unexpected result: ${JSON.stringify(result)}`)
+        }
+      }
       
       // If successful, manually redirect
       if (result?.url) {
@@ -87,7 +137,7 @@ function SignInContent() {
       
       // Show user-friendly error on mobile
       if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
-        alert(`Sign-in failed: ${errorMessage}\n\nPlease try again or contact support if the issue persists.`)
+        alert(`🔐 Sign-in failed: ${errorMessage}\n\nPlease try again or contact support if the issue persists.`)
       }
     }
   }
