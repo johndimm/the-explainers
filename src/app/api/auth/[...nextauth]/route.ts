@@ -54,6 +54,21 @@ const handler = NextAuth({
       }
       return token
     },
+    async redirect({ url, baseUrl }) {
+      console.log('🔐 NextAuth redirect callback:', {
+        url,
+        baseUrl,
+        isAbsoluteUrl: url.startsWith('http'),
+        shouldRedirectToBase: url.startsWith(baseUrl),
+        finalUrl: url.startsWith(baseUrl) ? url : `${baseUrl}${url}`,
+        timestamp: new Date().toISOString()
+      })
+      // Allows relative callback URLs
+      if (url.startsWith("/")) return `${baseUrl}${url}`
+      // Allows callback URLs on the same origin
+      else if (new URL(url).origin === baseUrl) return url
+      return baseUrl
+    },
   },
   pages: {
     signIn: '/auth/signin',

@@ -22,6 +22,16 @@ function SignInContent() {
         router.push('/library')
       }
     })
+    
+    // Add client-side environment debugging
+    console.log('🔐 Client-side environment check:', {
+      currentUrl: window.location.href,
+      hostname: window.location.hostname,
+      protocol: window.location.protocol,
+      userAgent: navigator.userAgent,
+      isMobile: /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent),
+      timestamp: new Date().toISOString()
+    })
   }, [router])
 
   const handleGoogleSignIn = async () => {
