@@ -93,15 +93,26 @@ function SignInContent() {
       }
       
       // For mobile, try without redirect first to see what happens
+      console.log('🔐 Calling signIn with params:', {
+        provider: 'google',
+        callbackUrl: '/library',
+        redirect: false
+      })
+      
       const result = await signIn('google', { 
         callbackUrl: '/library',
         redirect: false // Changed to false for debugging
       })
+      
+      console.log('🔐 Sign-in result type:', typeof result)
       console.log('🔐 Sign-in result:', result)
+      console.log('🔐 Sign-in result keys:', result ? Object.keys(result) : 'no keys')
       
       // Show result on mobile
       if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
-        if (result?.url) {
+        if (result === undefined) {
+          alert(`🔐 Sign-in returned undefined!\n\nThis usually means:\n1. NextAuth configuration issue\n2. Network error\n3. Mobile browser compatibility issue\n\nCheck console for details.`)
+        } else if (result?.url) {
           alert(`🔐 Redirect URL generated:\n${result.url}\n\nRedirecting...`)
         } else if (result?.error) {
           alert(`🔐 Sign-in error: ${result.error}`)
@@ -118,6 +129,18 @@ function SignInContent() {
         console.error('🔐 Sign-in error from NextAuth:', result.error)
         alert(`Sign-in error: ${result.error}`)
         setIsLoading(false)
+      } else if (result === undefined) {
+        console.error('🔐 Sign-in returned undefined - trying fallback method')
+        
+        // Fallback: try direct redirect to Google OAuth
+        if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+          const fallbackUrl = `${window.location.origin}/api/auth/signin/google`
+          console.log('🔐 Trying fallback URL:', fallbackUrl)
+          alert(`🔐 Trying fallback method...\n\nRedirecting to: ${fallbackUrl}`)
+          window.location.href = fallbackUrl
+        } else {
+          setIsLoading(false)
+        }
       }
     } catch (error) {
       console.error('🔐 Sign in error:', error)
