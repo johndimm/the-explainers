@@ -35,16 +35,30 @@ function SignInContent() {
       screenWidth: window.screen.width,
       screenHeight: window.screen.height,
       viewportWidth: window.innerWidth,
-      viewportHeight: window.innerHeight
+      viewportHeight: window.innerHeight,
+      currentUrl: window.location.href,
+      protocol: window.location.protocol,
+      hostname: window.location.hostname
     })
     
     setIsLoading(true)
     try {
+      // For mobile, try without redirect first to see what happens
       const result = await signIn('google', { 
         callbackUrl: '/library',
-        redirect: true 
+        redirect: false // Changed to false for debugging
       })
       console.log('🔐 Sign-in result:', result)
+      
+      // If successful, manually redirect
+      if (result?.url) {
+        console.log('🔐 Redirecting to:', result.url)
+        window.location.href = result.url
+      } else if (result?.error) {
+        console.error('🔐 Sign-in error from NextAuth:', result.error)
+        alert(`Sign-in error: ${result.error}`)
+        setIsLoading(false)
+      }
     } catch (error) {
       console.error('🔐 Sign in error:', error)
       console.error('🔐 Error details:', {

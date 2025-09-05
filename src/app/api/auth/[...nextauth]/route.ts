@@ -6,7 +6,10 @@ console.log('🔐 NextAuth Environment Check:', {
   NODE_ENV: process.env.NODE_ENV,
   hasGoogleClientId: !!process.env.GOOGLE_CLIENT_ID,
   hasGoogleClientSecret: !!process.env.GOOGLE_CLIENT_SECRET,
-  timestamp: new Date().toISOString()
+  timestamp: new Date().toISOString(),
+  // Additional debugging for mobile
+  userAgent: typeof window !== 'undefined' ? navigator.userAgent : 'server',
+  isMobile: typeof window !== 'undefined' ? /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) : 'server'
 })
 
 const handler = NextAuth({
@@ -14,6 +17,12 @@ const handler = NextAuth({
     GoogleProvider({
       clientId: process.env.GOOGLE_CLIENT_ID!,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET!,
+      // Add explicit redirect URI for debugging
+      authorization: {
+        params: {
+          prompt: "select_account", // Force account selection
+        }
+      }
     })
   ],
   callbacks: {
