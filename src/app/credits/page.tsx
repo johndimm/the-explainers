@@ -3,7 +3,7 @@
 import { useState, useEffect, useRef } from 'react'
 import { useRouter } from 'next/navigation'
 import { SettingsProvider } from '@/contexts/SettingsContext'
-import { useAuthenticatedProfile } from '@/contexts/AuthenticatedProfileContext'
+import { useAuthenticatedProfile, AuthenticatedProfileProvider } from '@/contexts/AuthenticatedProfileContext'
 
 function CreditsContent() {
   const router = useRouter()
@@ -406,6 +406,8 @@ function CreditsContent() {
 
 export default function CreditsPage() {
   return (
-    <CreditsContent />
+    <AuthenticatedProfileProvider>
+      <CreditsContent />
+    </AuthenticatedProfileProvider>
   )
 }

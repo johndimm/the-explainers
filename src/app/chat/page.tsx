@@ -4,14 +4,14 @@ import { useState, useRef, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
 import ChatInterface from '@/components/ChatInterface'
 import { useSettings } from '@/contexts/SettingsContext'
-import { useAuthenticatedProfile } from '@/contexts/AuthenticatedProfileContext'
+import { useAuthenticatedProfile, AuthenticatedProfileProvider } from '@/contexts/AuthenticatedProfileContext'
 
 function ChatContent() {
   const { settings, updateSettings } = useSettings()
   const { profile, isHydrated } = useAuthenticatedProfile()
   const router = useRouter()
   const [contextData, setContextData] = useState<any>(null)
-
+  const [contextLoaded, setContextLoaded] = useState(false)
 
   // Check for context data from text selection
   useEffect(() => {
@@ -29,40 +29,10 @@ function ChatContent() {
         console.error('Error parsing chat context:', error)
       }
     }
+    setContextLoaded(true) // Mark context loading as complete
   }, [])
 
-  // Show loading while profile data is being loaded
-  if (!isHydrated) {
-    return (
-      <div style={{
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        minHeight: '100vh',
-        fontFamily: 'system-ui, -apple-system, sans-serif'
-      }}>
-        <div style={{ textAlign: 'center' }}>
-          <div style={{
-            width: '40px',
-            height: '40px',
-            border: '4px solid #f3f3f3',
-            borderTop: '4px solid #8b5cf6',
-            borderRadius: '50%',
-            animation: 'spin 1s linear infinite',
-            margin: '0 auto 16px'
-          }} />
-          <p style={{ color: '#666', margin: 0 }}>Loading...</p>
-        </div>
-        <style jsx>{`
-          @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-          }
-        `}</style>
-      </div>
-    )
-  }
-
+  // Calculate derived values
   const hasUnlimitedAccess = profile.hasUnlimitedAccess && profile.unlimitedAccessExpiry && new Date() < new Date(profile.unlimitedAccessExpiry)
   const hasCredits = (profile.availableCredits || 0) > 0
   const hasBookContext = contextData?.bookTitle && contextData?.author
@@ -104,12 +74,44 @@ function ChatContent() {
   
   // Handle redirects in useEffect to avoid setState during render
   useEffect(() => {
-    // If no unlimited access, no credits, no purchased book, and no book context for free explanations, redirect to credits
-    if (!hasUnlimitedAccess && !hasCredits && !isBookPurchased && !hasBookContext) {
+    // Only redirect if we're sure the context data has been loaded and there's no access
+    if (contextLoaded && !hasUnlimitedAccess && !hasCredits && !isBookPurchased && !hasBookContext) {
       console.log('Chat page: No credits, no unlimited access, no purchased book, no book context - redirecting to credits')
       router.push('/credits')
     }
-  }, [hasUnlimitedAccess, hasCredits, isBookPurchased, hasBookContext, router])
+  }, [contextLoaded, hasUnlimitedAccess, hasCredits, isBookPurchased, hasBookContext, router])
+
+  // Show loading while profile data and context data are being loaded
+  if (!isHydrated || !contextLoaded) {
+    return (
+      <div style={{
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        minHeight: '100vh',
+        fontFamily: 'system-ui, -apple-system, sans-serif'
+      }}>
+        <div style={{ textAlign: 'center' }}>
+          <div style={{
+            width: '40px',
+            height: '40px',
+            border: '4px solid #f3f3f3',
+            borderTop: '4px solid #8b5cf6',
+            borderRadius: '50%',
+            animation: 'spin 1s linear infinite',
+            margin: '0 auto 16px'
+          }} />
+          <p style={{ color: '#666', margin: 0 }}>Loading...</p>
+        </div>
+        <style jsx>{`
+          @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+          }
+        `}</style>
+      </div>
+    )
+  }
   
   // If no unlimited access, no credits, not purchased, but has book context, check if free explanations are available
   // Note: We don't redirect immediately here to allow users to read their last response
@@ -217,5 +219,9 @@ function ChatContent() {
 }
 
 export default function ChatPage() {
-  return <ChatContent />
+  return (
+    <AuthenticatedProfileProvider>
+      <ChatContent />
+    </AuthenticatedProfileProvider>
+  )
 }

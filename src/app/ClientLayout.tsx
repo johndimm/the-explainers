@@ -2,7 +2,7 @@
 
 import React, { useState, useRef, useEffect } from 'react'
 import { useRouter, usePathname } from 'next/navigation'
-import { SessionProvider } from 'next-auth/react'
+import { SessionProvider, signOut, useSession } from 'next-auth/react'
 import { AuthenticatedProfileProvider } from '@/contexts/AuthenticatedProfileContext'
 import { SettingsProvider } from '@/contexts/SettingsContext'
 import { BookCacheProvider, useBookCache } from '@/contexts/BookCacheContext'
@@ -19,6 +19,7 @@ function LayoutContent({ children }: { children: React.ReactNode }) {
   const router = useRouter()
   const pathname = usePathname()
   const { cachedBook } = useBookCache()
+  const { data: session, status } = useSession()
 
   // Close mobile menu when clicking outside
   useEffect(() => {
@@ -69,6 +70,11 @@ function LayoutContent({ children }: { children: React.ReactNode }) {
   const handleNavigation = (path: string) => {
     router.push(path)
     setShowMobileMenu(false)
+  }
+
+  const handleLogout = async () => {
+    setShowMobileMenu(false)
+    await signOut({ callbackUrl: '/' })
   }
 
   return (
@@ -161,7 +167,12 @@ function LayoutContent({ children }: { children: React.ReactNode }) {
               <button type="button" onClick={() => handleNavigation('/settings')} style={{ display: 'block', width: '100%', padding: '12px 16px', background: 'none', border: 'none', textAlign: 'left', cursor: 'pointer', borderBottom: '1px solid #f0f0f0' }}>⚙️ Settings</button>
               <button type="button" onClick={() => handleNavigation('/guide')} style={{ display: 'block', width: '100%', padding: '12px 16px', background: 'none', border: 'none', textAlign: 'left', cursor: 'pointer', borderBottom: '1px solid #f0f0f0' }}>📖 User Guide</button>
               <button type="button" onClick={() => handleNavigation('/about')} style={{ display: 'block', width: '100%', padding: '12px 16px', background: 'none', border: 'none', textAlign: 'left', cursor: 'pointer', borderBottom: '1px solid #f0f0f0' }}>ℹ️ About</button>
-              <button type="button" onClick={() => handleNavigation('/demo')} style={{ display: 'block', width: '100%', padding: '12px 16px', background: 'none', border: 'none', textAlign: 'left', cursor: 'pointer' }}>🗯️ Demo</button>
+              <button type="button" onClick={() => handleNavigation('/demo')} style={{ display: 'block', width: '100%', padding: '12px 16px', background: 'none', border: 'none', textAlign: 'left', cursor: 'pointer', borderBottom: '1px solid #f0f0f0' }}>🗯️ Demo</button>
+              {session ? (
+                <button type="button" onClick={handleLogout} style={{ display: 'block', width: '100%', padding: '12px 16px', background: 'none', border: 'none', textAlign: 'left', cursor: 'pointer', color: '#dc2626' }}>🚪 Logout</button>
+              ) : (
+                <button type="button" onClick={() => handleNavigation('/auth/signin')} style={{ display: 'block', width: '100%', padding: '12px 16px', background: 'none', border: 'none', textAlign: 'left', cursor: 'pointer', color: '#059669' }}>🔑 Log in</button>
+              )}
             </div>
           )}
         </div>
@@ -185,11 +196,9 @@ export default function ClientLayout({ children, requiresAuth = false }: ClientL
     <SessionProvider>
       <BookCacheProvider>
         <SettingsProvider>
-          <AuthenticatedProfileProvider>
-            <LayoutContent>
-              {children}
-            </LayoutContent>
-          </AuthenticatedProfileProvider>
+          <LayoutContent>
+            {children}
+          </LayoutContent>
         </SettingsProvider>
       </BookCacheProvider>
     </SessionProvider>
