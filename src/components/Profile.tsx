@@ -390,6 +390,44 @@ const Profile: React.FC<ProfileProps> = ({ isOpen, onClose, profile, onProfileCh
           <div style={{ fontSize: '14px', color: '#666', textAlign: 'center', padding: '16px' }}>
             Changes are saved automatically
           </div>
+          
+          {/* Testing Button */}
+          <div style={{ textAlign: 'center', padding: '16px', borderTop: '1px solid #e0e0e0' }}>
+            <button
+              type="button"
+              onClick={() => {
+                const resetProfile = {
+                  ...localProfile,
+                  availableCredits: 0,
+                  purchasedBooks: [],
+                  purchasedBookDetails: {},
+                  hasUnlimitedAccess: false,
+                  unlimitedAccessExpiry: undefined,
+                  bookExplanations: {},
+                  totalExplanations: 0,
+                  todayExplanations: 0
+                }
+                setLocalProfile(resetProfile)
+                onProfileChange(resetProfile)
+                alert('🧪 Testing: Reset all credits, books, and access to zero/empty!')
+              }}
+              style={{
+                background: '#dc3545',
+                color: 'white',
+                border: 'none',
+                padding: '8px 16px',
+                borderRadius: '6px',
+                cursor: 'pointer',
+                fontSize: '14px',
+                fontWeight: '500'
+              }}
+            >
+              🧪 Reset for Testing
+            </button>
+            <div style={{ fontSize: '12px', color: '#999', marginTop: '8px' }}>
+              Sets credits, books, and access to zero/empty
+            </div>
+          </div>
         </div>
         </div>
       </div>

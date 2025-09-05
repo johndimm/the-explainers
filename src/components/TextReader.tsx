@@ -12,7 +12,7 @@ interface TextReaderProps {
   bookTitle?: string
   author?: string
   settings: SettingsData
-  profile: ProfileData
+  profile?: ProfileData | null
   onSettingsChange: (settings: SettingsData) => void
 }
 

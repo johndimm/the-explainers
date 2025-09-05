@@ -1,7 +1,7 @@
 'use client'
 
 import React from 'react'
-import { useProfile } from '../contexts/ProfileContext'
+import { useAuthenticatedProfile } from '../contexts/AuthenticatedProfileContext'
 
 interface PricingProps {
   isOpen: boolean
@@ -12,7 +12,7 @@ interface PricingProps {
 }
 
 const Pricing: React.FC<PricingProps> = ({ isOpen, onClose, bookTitle, author, isPageMode = false }) => {
-  const { profile, addCredits, purchaseBook, grantUnlimitedAccess } = useProfile()
+  const { profile, addCredits, purchaseBook, grantUnlimitedAccess, isHydrated } = useAuthenticatedProfile()
 
   if (!isOpen) return null
 
@@ -39,7 +39,7 @@ const Pricing: React.FC<PricingProps> = ({ isOpen, onClose, bookTitle, author, i
     onClose()
   }
 
-  const handleUnlimitedAccess = (duration: 'hour' | 'month' | 'year') => {
+  const handleUnlimitedAccess = (duration: 'month' | 'year') => {
     console.log('Pricing: granting unlimited access for duration:', duration)
     grantUnlimitedAccess(duration)
     
@@ -174,25 +174,25 @@ const Pricing: React.FC<PricingProps> = ({ isOpen, onClose, bookTitle, author, i
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '20px', marginBottom: '16px' }}>
             <div style={{ textAlign: 'center' }}>
               <div style={{ fontSize: '28px', fontWeight: 'bold', color: '#8b5cf6' }}>
-                {profile.availableCredits || 0}
+                {!isHydrated ? '...' : (profile.availableCredits || 0)}
               </div>
               <div style={{ fontSize: '14px', color: '#666' }}>Available Credits</div>
             </div>
             <div style={{ textAlign: 'center' }}>
               <div style={{ fontSize: '28px', fontWeight: 'bold', color: '#10b981' }}>
-                {profile.totalExplanations || 0}
+                {!isHydrated ? '...' : (profile.totalExplanations || 0)}
               </div>
               <div style={{ fontSize: '14px', color: '#666' }}>Total Explanations</div>
             </div>
             <div style={{ textAlign: 'center' }}>
               <div style={{ fontSize: '28px', fontWeight: 'bold', color: '#f59e0b' }}>
-                {profile.todayExplanations || 0}
+                {!isHydrated ? '...' : (profile.todayExplanations || 0)}
               </div>
               <div style={{ fontSize: '14px', color: '#666' }}>Today</div>
             </div>
             <div style={{ textAlign: 'center' }}>
               <div style={{ fontSize: '28px', fontWeight: 'bold', color: '#ef4444' }}>
-                {profile.purchasedBooks?.length || 0}
+                {!isHydrated ? '...' : (profile.purchasedBooks?.length || 0)}
               </div>
               <div style={{ fontSize: '14px', color: '#666' }}>Books Owned</div>
             </div>
@@ -280,7 +280,7 @@ const Pricing: React.FC<PricingProps> = ({ isOpen, onClose, bookTitle, author, i
             <h3 style={{ margin: '0 0 12px 0', color: '#f59e0b' }}>⚡ Unlimited Access</h3>
             <div style={{ display: 'grid', gap: '8px' }}>
               <button
-                onClick={() => handleUnlimitedAccess('hour')}
+                onClick={() => handleUnlimitedAccess('month')}
                 style={{
                   background: '#f59e0b',
                   color: 'white',

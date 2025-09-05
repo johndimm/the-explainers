@@ -5,7 +5,7 @@ import { useRouter } from 'next/navigation'
 import styles from './ChatInterface.module.css'
 import { SettingsData, LLMProvider, ResponseLength, ExplanationStyle } from './Settings'
 import { ProfileData } from './Profile'
-import { useProfile } from '../contexts/ProfileContext'
+import { useAuthenticatedProfile } from '../contexts/AuthenticatedProfileContext'
 import { STYLE_CATEGORIES } from './ExplainerStyles'
 import { log } from '../utils/log'
 import { convertToHTML, convertToMarkdown, convertToPlainText } from '../utils/chatConverters'
@@ -62,6 +62,7 @@ const getAllStyles = () => {
 
 const ChatInterface: React.FC<ChatInterfaceProps> = ({ selectedText, contextInfo, settings, profile, onClose, onSettingsChange, bookTitle, author, isPageMode = false }) => {
   log('ChatInterface: Received settings:', settings)
+  log('ChatInterface: Received bookTitle:', bookTitle, 'author:', author)
   const router = useRouter()
   const [messages, setMessages] = useState<Message[]>([])
   const [inputValue, setInputValue] = useState('')
@@ -80,16 +81,19 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ selectedText, contextInfo
   const [shareDropdownOpen, setShareDropdownOpen] = useState<string | null>(null)
   const [saveFormatDropdownOpen, setSaveFormatDropdownOpen] = useState(false)
   const [showClearConfirm, setShowClearConfirm] = useState(false)
+  const [showLimitReached, setShowLimitReached] = useState(false)
   const latestResponseRef = useRef<HTMLDivElement>(null)
   const inputRef = useRef<HTMLInputElement>(null)
   const styleMenuRef = useRef<HTMLDivElement>(null)
   const saveDropdownRef = useRef<HTMLDivElement>(null)
   const initializedRef = useRef(false)
-  const { canUseExplanation, useExplanation, getBookExplanationsUsed } = useProfile()
+  const { canUseExplanation, useExplanation, refreshProfileAfterExplanation, getBookExplanationsUsed, isHydrated } = useAuthenticatedProfile()
 
   const scrollToLatestResponse = () => {
     latestResponseRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' })
   }
+
+
 
   const saveChatHistory = (format: 'json' | 'html' | 'markdown' | 'text' = 'json') => {
     if (messages.length === 0) return
@@ -243,33 +247,6 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ selectedText, contextInfo
     return null
   }
 
-  const getDisplayedMessages = () => {
-    if (showFullHistory) {
-      return messages
-    }
-    
-    if (messages.length <= 2) {
-      return messages
-    }
-    
-    // Find the index of the last user message (most recent quote)
-    let lastUserMessageIndex = -1
-    for (let i = messages.length - 1; i >= 0; i--) {
-      if (messages[i].role === 'user') {
-        lastUserMessageIndex = i
-        break
-      }
-    }
-    
-    // If we found a user message, show it and all assistant messages that follow
-    // This allows multiple re-explanations of the same quote to all be visible
-    if (lastUserMessageIndex >= 0) {
-      return messages.slice(lastUserMessageIndex)
-    }
-    
-    // Fallback to showing all messages if no user message found
-    return messages
-  }
 
   useEffect(() => {
     if (messages.length > 0 && messages[messages.length - 1].role === 'assistant') {
@@ -278,21 +255,65 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ selectedText, contextInfo
     }
   }, [messages])
 
-  // Load chat history from sessionStorage
+  // Load chat history from sessionStorage - only for current quote
   useEffect(() => {
     const savedMessages = sessionStorage.getItem('chatHistory')
-    if (savedMessages && isPageMode) {
+    console.log('ChatInterface: Loading chat history, savedMessages:', savedMessages)
+    console.log('ChatInterface: isPageMode:', isPageMode, 'selectedText:', selectedText)
+    if (savedMessages && isPageMode && selectedText) {
       try {
         const parsedMessages = JSON.parse(savedMessages)
-        setMessages(parsedMessages.map((msg: any) => ({
-          ...msg,
-          timestamp: new Date(msg.timestamp)
-        })))
+        console.log('ChatInterface: Parsed messages:', parsedMessages)
+        
+        // Filter messages to only include those for the current quote
+        // Find the last user message that matches the current selectedText
+        let lastQuoteIndex = -1
+        for (let i = parsedMessages.length - 1; i >= 0; i--) {
+          if (parsedMessages[i].role === 'user') {
+            // Check if the content matches selectedText (with or without quotes)
+            const messageContent = parsedMessages[i].content.replace(/^"|"$/g, '') // Remove quotes
+            if (messageContent === selectedText || parsedMessages[i].content === selectedText) {
+              lastQuoteIndex = i
+              break
+            }
+          }
+        }
+        
+        // If we found the current quote, show it and all assistant messages that follow
+        if (lastQuoteIndex >= 0) {
+          const filteredMessages = parsedMessages.slice(lastQuoteIndex)
+          console.log('ChatInterface: Found quote in history, loading messages:', filteredMessages)
+          setMessages(filteredMessages.map((msg: any) => ({
+            ...msg,
+            timestamp: new Date(msg.timestamp)
+          })))
+        } else {
+          // No messages for this quote yet, start fresh but add the quote
+          console.log('ChatInterface: No quote found in history, starting fresh with quote')
+          const quoteMessage: Message = {
+            id: 'quote-' + Date.now(),
+            content: `"${selectedText}"`,
+            role: 'user',
+            timestamp: new Date()
+          }
+          setMessages([quoteMessage])
+        }
       } catch (error) {
         console.error('Error loading chat history:', error)
+        setMessages([])
       }
+    } else if (isPageMode && selectedText) {
+      // No saved messages, start fresh but add the quote
+      console.log('ChatInterface: No saved messages, starting fresh with quote')
+      const quoteMessage: Message = {
+        id: 'quote-' + Date.now(),
+        content: `"${selectedText}"`,
+        role: 'user',
+        timestamp: new Date()
+      }
+      setMessages([quoteMessage])
     }
-  }, [isPageMode])
+  }, [isPageMode, selectedText])
 
   // Save chat history to sessionStorage
   useEffect(() => {
@@ -363,20 +384,11 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ selectedText, contextInfo
   }, [selectedProvider, currentStyle, currentResponseLength, settings.llmProvider, settings.explanationStyle, settings.responseLength])
 
   // Keep local chat controls in sync with global settings unless user changes them here
-  useEffect(() => {
-    log('ChatInterface: settings.llmProvider changed to:', settings.llmProvider)
-    setSelectedProvider(settings.llmProvider)
-  }, [settings.llmProvider])
+  // Don't sync with global settings - let user make their choice in chat
 
-  useEffect(() => {
-    log('ChatInterface: settings.explanationStyle changed to:', settings.explanationStyle)
-    setCurrentStyle(settings.explanationStyle)
-  }, [settings.explanationStyle])
+  // Don't sync with global settings - let user make their choice in chat
 
-  useEffect(() => {
-    log('ChatInterface: settings.responseLength changed to:', settings.responseLength)
-    setCurrentResponseLength(settings.responseLength)
-  }, [settings.responseLength])
+  // Don't sync with global settings - let user make their choice in chat
 
   // Close custom style menu when clicking outside
   useEffect(() => {
@@ -400,16 +412,26 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ selectedText, contextInfo
 
 
   const callLLM = async (messages: Message[]): Promise<string> => {
+    const requestBody = {
+      messages: messages.map(m => ({ role: m.role, content: m.content })),
+      provider: selectedProvider,
+      responseLength: currentResponseLength,
+      style: currentStyle,
+      selectedText: originalSelectedText,
+      bookTitle: bookTitle,
+      author: author,
+      useCustomLLM: selectedProvider === 'custom'
+    }
+    
+    log('ChatInterface: callLLM sending request body:', requestBody)
+    console.log('ChatInterface: callLLM - selectedProvider:', selectedProvider, 'settings.llmProvider:', settings.llmProvider)
+    
     const response = await fetch('/api/chat', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({
-        messages: messages.map(m => ({ role: m.role, content: m.content })),
-        provider: selectedProvider,
-        responseLength: currentResponseLength,
-      }),
+      body: JSON.stringify(requestBody),
     })
 
     if (!response.ok) {
@@ -745,6 +767,13 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ selectedText, contextInfo
     log('ChatInterface: handleReExplain called')
     log('ChatInterface: current profile state:', profile)
     
+    // Check if we have book context (required for re-explain)
+    if (!bookTitle || !author) {
+      log('ChatInterface: No book context available for re-explain')
+      alert('Re-explain requires book context. Please select text from a book first.')
+      return
+    }
+    
     // Fallback: if no text provided, try to get it from the first user message
     if (!text && messages.length > 0) {
       const firstUserMessage = messages.find(m => m.role === 'user')
@@ -761,8 +790,8 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ selectedText, contextInfo
     
     // Check if user can use explanation
     if (!canUseExplanation(bookTitle, author, useCustomLLM)) {
-      log('ChatInterface: canUseExplanation returned false, redirecting to credits')
-      router.push('/credits')
+      log('ChatInterface: canUseExplanation returned false, showing limit reached message')
+      setShowLimitReached(true)
       return
     }
     
@@ -812,6 +841,11 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ selectedText, contextInfo
       }
       setMessages(prev => [...prev, assistantMessage])
       
+      // Refresh profile to sync with server-side credit deduction
+      if (refreshProfileAfterExplanation) {
+        await refreshProfileAfterExplanation()
+      }
+      
       // Also automatically search for video after re-explain (but only if there's no video already for this quote)
       setTimeout(() => {
         const hasVideoForThisQuote = messages.some(msg => msg.videoId && msg.provider === 'youtube')
@@ -858,8 +892,8 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ selectedText, contextInfo
     
     // Check if user can use explanation
     if (!canUseExplanation(bookTitle, author, useCustomLLM)) {
-      log('ChatInterface: canUseExplanation returned false, redirecting to credits')
-      router.push('/credits')
+      log('ChatInterface: canUseExplanation returned false, showing limit reached message')
+      setShowLimitReached(true)
       return
     }
     
@@ -921,6 +955,11 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ selectedText, contextInfo
         style: currentStyle
       }
       setMessages(prev => [...prev, assistantMessage])
+      
+      // Refresh profile to sync with server-side credit deduction
+      if (refreshProfileAfterExplanation) {
+        await refreshProfileAfterExplanation()
+      }
     } catch (error) {
       console.error('Error calling LLM:', error)
       const errorMessage: Message = {
@@ -940,6 +979,15 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ selectedText, contextInfo
   const handleSendMessage = async () => {
     if (!inputValue.trim() || isLoading) return
 
+    const useCustomLLM = selectedProvider === 'custom'
+    
+    // Check if user can use explanation (for follow-up messages, we still need book context)
+    if (!canUseExplanation(bookTitle, author, useCustomLLM)) {
+      log('ChatInterface: handleSendMessage - canUseExplanation returned false, showing limit reached message')
+      setShowLimitReached(true)
+      return
+    }
+
     const userMessage: Message = {
       id: Date.now().toString(),
       content: inputValue,
@@ -953,6 +1001,14 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ selectedText, contextInfo
     setIsLoading(true)
 
     try {
+      // Use the explanation (deduct credits if needed)
+      const success = useExplanation(bookTitle, author, useCustomLLM)
+      if (!success) {
+        router.push('/credits')
+        setIsLoading(false)
+        return
+      }
+
       const response = await callLLM(newMessages)
       const assistantMessage: Message = {
         id: (Date.now() + 1).toString(),
@@ -963,6 +1019,11 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ selectedText, contextInfo
         style: currentStyle
       }
       setMessages(prev => [...prev, assistantMessage])
+      
+      // Refresh profile to sync with server-side credit deduction
+      if (refreshProfileAfterExplanation) {
+        await refreshProfileAfterExplanation()
+      }
     } catch (error) {
       console.error('Error calling LLM:', error)
       const errorMessage: Message = {
@@ -1242,7 +1303,9 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ selectedText, contextInfo
           <div>
             <h3>Text Explanation</h3>
             <div style={{ fontSize: '13px', color: '#8b5cf6', marginTop: '4px', fontWeight: '500' }}>
-              {(() => {
+              {!isHydrated ? (
+                'Loading...'
+              ) : (() => {
                 const useCustomLLM = selectedProvider === 'custom'
                 const bookExplanationsUsed = getBookExplanationsUsed(bookTitle, author)
                 const bookKey = `${bookTitle}-${author}`.toLowerCase().replace(/[^a-z0-9-]/g, '-')
@@ -1263,11 +1326,79 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ selectedText, contextInfo
                   }
                 }
                 if (isBookPurchased) return 'Book purchased - unlimited explanations'
-                if (bookExplanationsUsed < 3) return `${3 - bookExplanationsUsed} free explanations left for this book`
-                return `${profile.availableCredits || 0} credits remaining`
+                
+                // Show what will be used next: free explanations first, then purchased credits
+                if (bookExplanationsUsed < 3) {
+                  const freeLeft = 3 - bookExplanationsUsed
+                  const availableCredits = profile.availableCredits || 0
+                  if (availableCredits > 0) {
+                    return `${freeLeft} free explanations left, then ${availableCredits} credits`
+                  } else {
+                    return `${freeLeft} free explanations left for this book`
+                  }
+                }
+                
+                // All free explanations used, show purchased credits
+                const availableCredits = profile.availableCredits || 0
+                if (availableCredits > 0) return `${availableCredits} credits remaining`
+                return 'No credits remaining'
               })()}
             </div>
           </div>
+          
+          {/* Limit Reached Message */}
+          {showLimitReached && (
+            <div style={{
+              background: '#fef3c7',
+              border: '2px solid #f59e0b',
+              borderRadius: '8px',
+              padding: '16px',
+              marginBottom: '20px',
+              textAlign: 'center'
+            }}>
+              <div style={{ fontSize: '16px', fontWeight: '600', color: '#92400e', marginBottom: '8px' }}>
+                ⚠️ Explanation Limit Reached
+              </div>
+              <div style={{ fontSize: '14px', color: '#92400e', marginBottom: '12px' }}>
+                You've used all your free explanations for this book. Purchase the book or get more credits to continue.
+              </div>
+              <div style={{ display: 'flex', gap: '12px', justifyContent: 'center' }}>
+                <button
+                  type="button"
+                  onClick={() => router.push('/credits')}
+                  style={{
+                    background: '#f59e0b',
+                    color: 'white',
+                    border: 'none',
+                    padding: '8px 16px',
+                    borderRadius: '6px',
+                    cursor: 'pointer',
+                    fontSize: '14px',
+                    fontWeight: '500'
+                  }}
+                >
+                  Get More Credits
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setShowLimitReached(false)}
+                  style={{
+                    background: '#6b7280',
+                    color: 'white',
+                    border: 'none',
+                    padding: '8px 16px',
+                    borderRadius: '6px',
+                    cursor: 'pointer',
+                    fontSize: '14px',
+                    fontWeight: '500'
+                  }}
+                >
+                  Dismiss
+                </button>
+              </div>
+            </div>
+          )}
+          
           <div className={styles.headerControls}>
             <div className={styles.providerSelector}>
               <div className={styles.dropdownLabel}>
@@ -1349,15 +1480,17 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ selectedText, contextInfo
               </select>
             </div>
             <button 
+              type="button"
               onClick={() => handleReExplain(originalSelectedText || selectedText)}
-              disabled={isLoading || (!originalSelectedText && !selectedText && !hasChanges)}
+              disabled={isLoading || (!originalSelectedText && !selectedText && !hasChanges) || !bookTitle || !author}
               className={styles.reexplainButton}
-              title={`Re-explain in selected style${(!originalSelectedText && !selectedText && !hasChanges) ? ' (no text available)' : ''}${hasChanges ? ' (settings changed)' : ''}`}
+              title={`Re-explain in selected style${(!originalSelectedText && !selectedText && !hasChanges) ? ' (no text available)' : ''}${(!bookTitle || !author) ? ' (no book context)' : ''}${hasChanges ? ' (settings changed)' : ''}`}
             >
               Re-explain{hasChanges ? ' *' : ''}
             </button>
             <div className={styles.saveDropdown} ref={saveDropdownRef}>
               <button 
+                type="button"
                 onClick={() => setSaveFormatDropdownOpen(!saveFormatDropdownOpen)}
                 disabled={messages.length === 0}
                 className={styles.saveButton}
@@ -1368,24 +1501,28 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ selectedText, contextInfo
               {saveFormatDropdownOpen && (
                 <div className={styles.saveDropdownContent}>
                   <button 
+                    type="button"
                     className={styles.saveOption}
                     onClick={() => saveChatHistory('json')}
                   >
                     📄 JSON
                   </button>
                   <button 
+                    type="button"
                     className={styles.saveOption}
                     onClick={() => saveChatHistory('html')}
                   >
                     🌐 HTML
                   </button>
                   <button 
+                    type="button"
                     className={styles.saveOption}
                     onClick={() => saveChatHistory('markdown')}
                   >
                     📝 Markdown
                   </button>
                   <button 
+                    type="button"
                     className={styles.saveOption}
                     onClick={() => saveChatHistory('text')}
                   >
@@ -1395,6 +1532,7 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ selectedText, contextInfo
               )}
             </div>
             <button 
+              type="button"
               onClick={() => setShowClearConfirm(true)}
               disabled={messages.length === 0}
               className={styles.clearButton}
@@ -1404,13 +1542,14 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ selectedText, contextInfo
             </button>
             {/* Share button moved to inline with each response */}
           </div>
-{!isPageMode && <button onClick={onClose} className={styles.closeButton}>×</button>}
+{!isPageMode && <button type="button" onClick={onClose} className={styles.closeButton}>×</button>}
         </div>
         
         <div className={styles.messagesContainer}>
           {!showFullHistory && messages.length > 2 && (
             <div style={{ textAlign: 'center', marginBottom: '16px' }}>
               <button 
+                type="button"
                 onClick={() => setShowFullHistory(true)}
                 className={styles.historyToggle}
                 title="Show full conversation history"
@@ -1422,6 +1561,7 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ selectedText, contextInfo
           {showFullHistory && messages.length > 2 && (
             <div style={{ textAlign: 'center', marginBottom: '16px' }}>
               <button 
+                type="button"
                 onClick={() => setShowFullHistory(false)}
                 className={styles.historyToggle}
                 title="Show only current exchange"
@@ -1430,8 +1570,8 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ selectedText, contextInfo
               </button>
             </div>
           )}
-          {getDisplayedMessages().map((message, index) => {
-            const isLatestAssistantMessage = message.role === 'assistant' && index === getDisplayedMessages().length - 1
+          {messages.map((message, index) => {
+            const isLatestAssistantMessage = message.role === 'assistant' && index === messages.length - 1
             return (
             <div 
               key={message.id} 
@@ -1534,6 +1674,7 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ selectedText, contextInfo
                 <div className={styles.messageActions}>
                   <div className={styles.ratingButtons}>
                     <button
+                      type="button"
                       onClick={() => rateResponse(message.id, 'good')}
                       className={`${styles.ratingButton} ${styles.goodRating} ${message.rating === 'good' ? styles.active : ''}`}
                       title="Mark as good response"
@@ -1541,6 +1682,7 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ selectedText, contextInfo
                       👍 Good
                     </button>
                     <button
+                      type="button"
                       onClick={() => rateResponse(message.id, 'bad')}
                       className={`${styles.ratingButton} ${styles.badRating} ${message.rating === 'bad' ? styles.active : ''}`}
                       title="Mark as bad response"
@@ -1637,13 +1779,14 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ selectedText, contextInfo
             value={inputValue}
             onChange={(e) => setInputValue(e.target.value)}
             onKeyPress={handleKeyPress}
-            placeholder="Ask a follow-up question..."
+            placeholder={showLimitReached ? "Explanation limit reached" : "Ask a follow-up question..."}
             className={styles.messageInput}
-            disabled={isLoading}
+            disabled={isLoading || showLimitReached}
           />
           <button 
+            type="button"
             onClick={handleSendMessage}
-            disabled={!inputValue.trim() || isLoading}
+            disabled={!inputValue.trim() || isLoading || showLimitReached}
             className={styles.sendButton}
           >
             Send

@@ -1,6 +1,7 @@
 'use client'
 
 import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react'
+import { useSession } from 'next-auth/react'
 import { ProfileData, Language, EducationLevel } from '../components/Profile'
 
 interface ProfileContextType {

@@ -2,7 +2,6 @@
 
 import React, { useState } from 'react'
 import { useRouter } from 'next/navigation'
-import { useProfile } from '@/contexts/ProfileContext'
 
 const CustomBooksPage: React.FC = () => {
   const [customUrl, setCustomUrl] = useState('')
@@ -11,7 +10,6 @@ const CustomBooksPage: React.FC = () => {
   const [author, setAuthor] = useState('')
   const [fileInput, setFileInput] = useState<File | null>(null)
   const router = useRouter()
-  const { purchaseBook } = useProfile()
 
   const handleCustomUrl = () => {
     if (!customUrl.trim() || !bookTitle.trim()) return
@@ -21,7 +19,7 @@ const CustomBooksPage: React.FC = () => {
     
     // Save current-book and persist purchase details URL for later deep-linking
     localStorage.setItem('current-book', JSON.stringify({ title: title, author: authorName, url: customUrl }))
-    purchaseBook(title, authorName, customUrl)
+    // Note: Book access tracking would happen when user signs in to chat
     
     router.push(`/reader?title=${encodeURIComponent(title)}&author=${encodeURIComponent(authorName)}&url=${encodeURIComponent(customUrl)}`)
   }
@@ -40,7 +38,7 @@ const CustomBooksPage: React.FC = () => {
       const url = URL.createObjectURL(blob)
       
       localStorage.setItem('current-book', JSON.stringify({ title: title, author: authorName, url: url }))
-      purchaseBook(title, authorName, url)
+      // Note: Book access tracking would happen when user signs in to chat
       
       router.push(`/reader?title=${encodeURIComponent(title)}&author=${encodeURIComponent(authorName)}&url=${encodeURIComponent(url)}`)
     }
@@ -57,7 +55,7 @@ const CustomBooksPage: React.FC = () => {
     const url = URL.createObjectURL(blob)
     
     localStorage.setItem('current-book', JSON.stringify({ title: title, author: authorName, url: url }))
-    purchaseBook(title, authorName, url)
+    // Note: Book access tracking would happen when user signs in to chat
     
     router.push(`/reader?title=${encodeURIComponent(title)}&author=${encodeURIComponent(authorName)}&url=${encodeURIComponent(url)}`)
   }

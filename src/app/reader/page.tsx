@@ -1,39 +1,23 @@
 'use client'
 
-import { useState, useEffect, useRef, Suspense } from 'react'
+import { useState, useEffect, Suspense } from 'react'
 import TextReader from '@/components/TextReader'
 import { useSettings } from '@/contexts/SettingsContext'
-import { useProfile } from '@/contexts/ProfileContext'
+import { useBookCache } from '@/contexts/BookCacheContext'
 import { useRouter, useSearchParams } from 'next/navigation'
 
 function ReaderContent() {
   const [bookText, setBookText] = useState('')
   const [loading, setLoading] = useState(true)
   const [currentBook, setCurrentBook] = useState({ title: '', author: '' })
-  const [showMobileMenu, setShowMobileMenu] = useState(false)
-  const menuRef = useRef<HTMLDivElement>(null)
   const { settings, updateSettings } = useSettings()
-  const { profile } = useProfile()
+  const { getCachedBook, setCachedBook } = useBookCache()
   const router = useRouter()
   const searchParams = useSearchParams()
 
-  useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
-      if (menuRef.current && !menuRef.current.contains(event.target as Node)) {
-        setShowMobileMenu(false)
-      }
-    }
-
-    if (showMobileMenu) {
-      document.addEventListener('mousedown', handleClickOutside)
-    }
-
-    return () => {
-      document.removeEventListener('mousedown', handleClickOutside)
-    }
-  }, [showMobileMenu])
 
   useEffect(() => {
+    console.log('Reader page: useEffect running - searchParams changed')
     // Check URL parameters for book selection
     const title = searchParams.get('title')
     const author = searchParams.get('author') 
@@ -46,6 +30,7 @@ function ReaderContent() {
 
     // Check if there's a saved current book
     const savedBook = localStorage.getItem('current-book')
+    console.log('Reader page: savedBook from localStorage:', savedBook)
     if (savedBook) {
       try {
         const parsedBook = JSON.parse(savedBook)
@@ -54,16 +39,19 @@ function ReaderContent() {
         if (parsedBook.url) {
           handleBookSelect(parsedBook.title, parsedBook.author, parsedBook.url)
         } else {
+          console.log('Reader page: No URL in saved book, redirecting to library')
           router.push('/library')
         }
       } catch (error) {
         console.error('Error loading saved book:', error)
+        console.log('Reader page: Error parsing saved book, redirecting to library')
         router.push('/library')
       }
     } else {
+      console.log('Reader page: No saved book, redirecting to library')
       router.push('/library')
     }
-  }, [searchParams, router])
+  }, [searchParams])
 
   const handleBookSelect = async (title: string, author: string, url: string) => {
     setLoading(true)
@@ -72,6 +60,16 @@ function ReaderContent() {
     
     localStorage.setItem('current-book', JSON.stringify(newBook))
     
+    // Check cache first
+    const cachedBook = getCachedBook(title, author, url)
+    if (cachedBook) {
+      console.log('Reader: Using cached book content')
+      setBookText(cachedBook.text)
+      setLoading(false)
+      return
+    }
+    
+    console.log('Reader: Cache miss, loading book content')
     try {
       let text: string
       const isHtmlFile = url.toLowerCase().endsWith('.html')
@@ -113,6 +111,16 @@ function ReaderContent() {
         hasNewlines: text.includes('\n'),
         newlineCount: (text.match(/\n/g) || []).length
       })
+      
+      // Cache the loaded book content
+      setCachedBook({
+        title,
+        author,
+        url,
+        text,
+        loadedAt: Date.now()
+      })
+      
       setBookText(text)
     } catch (error) {
       console.error('Error loading book:', error)
@@ -134,7 +142,7 @@ function ReaderContent() {
           bookTitle={currentBook.title}
           author={currentBook.author}
           settings={settings}
-          profile={profile}
+          profile={null}
           onSettingsChange={updateSettings}
         />
       </div>

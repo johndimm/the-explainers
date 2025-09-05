@@ -1,7 +1,9 @@
 import { NextRequest, NextResponse } from 'next/server'
+import { getServerSession } from 'next-auth'
 import OpenAI from 'openai'
 import Anthropic from '@anthropic-ai/sdk'
 import { GoogleGenerativeAI } from '@google/generative-ai'
+import { log } from '@/utils/log'
 
 export interface ChatMessage {
   role: 'user' | 'assistant'
@@ -14,6 +16,9 @@ export interface ChatRequest {
   responseLength: 'brief' | 'medium' | 'long'
   style?: string
   selectedText?: string
+  bookTitle?: string
+  author?: string
+  useCustomLLM?: boolean
 }
 
 const openai = new OpenAI({
@@ -119,15 +124,87 @@ export async function POST(request: NextRequest) {
   
   try {
     const body: ChatRequest = await request.json()
-    const { messages, responseLength, style, selectedText } = body
+    const { messages, responseLength, style, selectedText, bookTitle, author, useCustomLLM } = body
     provider = body.provider
+    
+    log('Chat API: Request received', { 
+      provider, 
+      bookTitle, 
+      author, 
+      useCustomLLM, 
+      hasMessages: !!messages?.length,
+      responseLength,
+      style
+    })
 
     if (!messages || messages.length === 0) {
       return NextResponse.json({ error: 'No messages provided' }, { status: 400 })
     }
 
-    let response: string
+    // Server-side access validation for authenticated users
+    if (bookTitle && author && !useCustomLLM) {
+      log('Chat API: Taking authenticated path - bookTitle and author provided, not custom LLM')
+      const session = await getServerSession()
+      
+      if (session?.user?.email) {
+        log('Chat API: User authenticated, proceeding with access check')
+        // Validate access using database
+        const { canUserExplainText, createOrGetUser, logUsage, useCredit } = await import('@/lib/db')
+        const user = await createOrGetUser(session.user.email)
+        const accessCheck = await canUserExplainText(user.id, bookTitle, author)
+        
+        if (!accessCheck.canUse) {
+          return NextResponse.json({ 
+            error: 'Insufficient credits or access',
+            reason: accessCheck.reason 
+          }, { status: 402 })
+        }
+        
+        // Process the LLM call
+        let response: string
+        switch (provider) {
+          case 'openai':
+            response = await callOpenAI(messages, responseLength, style)
+            break
+          case 'anthropic':
+            response = await callAnthropic(messages, responseLength, style)
+            break
+          case 'deepseek':
+            response = await callDeepSeek(messages, responseLength, style)
+            break
+          case 'gemini':
+            response = await callGemini(messages, responseLength, style)
+            break
+          default:
+            return NextResponse.json({ error: 'Invalid provider' }, { status: 400 })
+        }
+        
+        // Log usage and deduct credits if needed
+        log('Chat API: Logging usage for user:', user.id, 'book:', bookTitle, 'author:', author)
+        await logUsage(user.id, bookTitle, author, 'explanation')
+        log('Chat API: Usage logged successfully')
+        
+        // Deduct credit if this isn't free (unlimited access, purchased book, or free tier)
+        log('Chat API: Access check reason:', accessCheck.reason)
+        if (accessCheck.reason === 'Credits available') {
+          log('Chat API: Deducting credit for user:', user.id)
+          const creditResult = await useCredit(user.id)
+          log('Chat API: Credit deduction result:', creditResult)
+        } else {
+          log('Chat API: No credit deduction needed, reason:', accessCheck.reason)
+        }
+        
+        return NextResponse.json({ 
+          message: response,
+          provider: provider
+        })
+      }
+    } else {
+      log('Chat API: Taking fallback path - missing bookTitle/author or using custom LLM')
+    }
 
+    // Fallback for unauthenticated users or custom LLM usage
+    let response: string
     switch (provider) {
       case 'openai':
         response = await callOpenAI(messages, responseLength, style)

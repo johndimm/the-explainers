@@ -3,12 +3,12 @@
 import { useState, useEffect, useRef } from 'react'
 import { useRouter } from 'next/navigation'
 import { SettingsProvider } from '@/contexts/SettingsContext'
-import { ProfileProvider, useProfile } from '@/contexts/ProfileContext'
+import { useAuthenticatedProfile } from '@/contexts/AuthenticatedProfileContext'
 
 function CreditsContent() {
   const router = useRouter()
   const [currentBook, setCurrentBook] = useState({ title: '', author: '' })
-  const { profile, addCredits, purchaseBook, grantUnlimitedAccess } = useProfile()
+  const { profile, addCredits, purchaseBook, grantUnlimitedAccess, isHydrated } = useAuthenticatedProfile()
   const [currentTime, setCurrentTime] = useState(new Date())
   const [showMobileMenu, setShowMobileMenu] = useState(false)
   const menuRef = useRef<HTMLDivElement>(null)
@@ -32,13 +32,17 @@ function CreditsContent() {
   useEffect(() => {
     // Get the current book from localStorage
     const savedBook = localStorage.getItem('current-book')
+    console.log('Credits page: savedBook from localStorage:', savedBook)
     if (savedBook) {
       try {
         const parsedBook = JSON.parse(savedBook)
+        console.log('Credits page: parsed book:', parsedBook)
         setCurrentBook({ title: parsedBook.title || '', author: parsedBook.author || '' })
       } catch (error) {
         console.error('Error loading current book:', error)
       }
+    } else {
+      console.log('Credits page: No saved book found in localStorage')
     }
   }, [])
 
@@ -52,9 +56,14 @@ function CreditsContent() {
   }, [])
 
   const handlePurchaseBook = () => {
+    console.log('handlePurchaseBook called with currentBook:', currentBook)
     if (currentBook.title && currentBook.author) {
+      console.log('Purchasing book:', currentBook.title, 'by', currentBook.author)
       purchaseBook(currentBook.title, currentBook.author)
       router.push('/reader')
+    } else {
+      console.log('Cannot purchase book - missing title or author')
+      alert('No book selected. Please select text from a book first.')
     }
   }
 
@@ -63,7 +72,7 @@ function CreditsContent() {
     router.push('/reader')
   }
 
-  const handleUnlimitedAccess = (duration: 'hour' | 'month' | 'year') => {
+  const handleUnlimitedAccess = (duration: 'day' | 'month' | 'year') => {
     console.log('Credits page: granting unlimited access for duration:', duration)
     grantUnlimitedAccess(duration)
     
@@ -98,228 +107,6 @@ function CreditsContent() {
           }
         }
       `}</style>
-      <header style={{
-        position: 'fixed',
-        top: 0,
-        left: 0,
-        right: 0,
-        background: 'white',
-        borderBottom: '1px solid #e0e0e0',
-        padding: '8px 12px',
-        zIndex: 100,
-        display: 'none',
-        justifyContent: 'space-between',
-        alignItems: 'center'
-      }}>
-        <div style={{ flex: 1 }}>
-          <h1 style={{ 
-            margin: 0, 
-            fontSize: '18px', 
-            fontWeight: 'bold',
-            color: '#333',
-            lineHeight: '1.2'
-          }}>
-            The Explainers
-          </h1>
-          <p style={{ 
-            margin: 0, 
-            fontSize: '11px', 
-            color: '#666',
-            lineHeight: '1.2'
-          }}>
-            Credits & Usage
-          </p>
-        </div>
-        <div ref={menuRef} style={{ position: 'relative' }}>
-          <button 
-            onClick={() => setShowMobileMenu(!showMobileMenu)}
-            style={{
-              padding: '8px',
-              background: 'none',
-              border: 'none',
-              cursor: 'pointer',
-              fontSize: '18px',
-              color: '#333'
-            }}
-          >
-            ☰
-          </button>
-          
-          {showMobileMenu && (
-            <div style={{
-              position: 'absolute',
-              top: '100%',
-              right: 0,
-              background: 'white',
-              border: '1px solid #e0e0e0',
-              borderRadius: '8px',
-              boxShadow: '0 4px 12px rgba(0,0,0,0.15)',
-              minWidth: '160px',
-              zIndex: 1000
-            }}>
-              <button 
-                onClick={() => {
-                  router.push('/reader')
-                  setShowMobileMenu(false)
-                }}
-                style={{
-                  display: 'block',
-                  width: '100%',
-                  padding: '12px 16px',
-                  background: 'none',
-                  border: 'none',
-                  textAlign: 'left',
-                  cursor: 'pointer',
-                  borderBottom: '1px solid #f0f0f0'
-                }}
-              >
-                📖 Reader
-              </button>
-              <button 
-                onClick={() => {
-                  router.push('/chat')
-                  setShowMobileMenu(false)
-                }}
-                style={{
-                  display: 'block',
-                  width: '100%',
-                  padding: '12px 16px',
-                  background: 'none',
-                  border: 'none',
-                  textAlign: 'left',
-                  cursor: 'pointer',
-                  borderBottom: '1px solid #f0f0f0'
-                }}
-              >
-                💬 Chat
-              </button>
-              <button 
-                onClick={() => {
-                  router.push('/library')
-                  setShowMobileMenu(false)
-                }}
-                style={{
-                  display: 'block',
-                  width: '100%',
-                  padding: '12px 16px',
-                  background: 'none',
-                  border: 'none',
-                  textAlign: 'left',
-                  cursor: 'pointer',
-                  borderBottom: '1px solid #f0f0f0'
-                }}
-              >
-                📚 Library
-              </button>
-              <button 
-                onClick={() => {
-                  router.push('/styles')
-                  setShowMobileMenu(false)
-                }}
-                style={{
-                  display: 'block',
-                  width: '100%',
-                  padding: '12px 16px',
-                  background: 'none',
-                  border: 'none',
-                  textAlign: 'left',
-                  cursor: 'pointer',
-                  borderBottom: '1px solid #f0f0f0'
-                }}
-              >
-                🎭 Styles
-              </button>
-              <button 
-                onClick={() => {
-                  router.push('/demo')
-                  setShowMobileMenu(false)
-                }}
-                style={{
-                  display: 'block',
-                  width: '100%',
-                  padding: '12px 16px',
-                  background: 'none',
-                  border: 'none',
-                  textAlign: 'left',
-                  cursor: 'pointer',
-                  borderBottom: '1px solid #f0f0f0'
-                }}
-              >
-                🗯️ Demo
-              </button>
-              <button 
-                onClick={() => setShowMobileMenu(false)}
-                style={{
-                  display: 'block',
-                  width: '100%',
-                  padding: '12px 16px',
-                  background: 'none',
-                  border: 'none',
-                  textAlign: 'left',
-                  cursor: 'pointer',
-                  borderBottom: '1px solid #f0f0f0',
-                  color: '#666'
-                }}
-              >
-                💳 Credits (current)
-              </button>
-              <button 
-                onClick={() => {
-                  router.push('/profile')
-                  setShowMobileMenu(false)
-                }}
-                style={{
-                  display: 'block',
-                  width: '100%',
-                  padding: '12px 16px',
-                  background: 'none',
-                  border: 'none',
-                  textAlign: 'left',
-                  cursor: 'pointer',
-                  borderBottom: '1px solid #f0f0f0'
-                }}
-              >
-                👤 Profile
-              </button>
-              <button 
-                onClick={() => {
-                  router.push('/settings')
-                  setShowMobileMenu(false)
-                }}
-                style={{
-                  display: 'block',
-                  width: '100%',
-                  padding: '12px 16px',
-                  background: 'none',
-                  border: 'none',
-                  textAlign: 'left',
-                  cursor: 'pointer',
-                  borderBottom: '1px solid #f0f0f0'
-                }}
-              >
-                ⚙️ Settings
-              </button>
-              <button 
-                onClick={() => {
-                  router.push('/guide')
-                  setShowMobileMenu(false)
-                }}
-                style={{
-                  display: 'block',
-                  width: '100%',
-                  padding: '12px 16px',
-                  background: 'none',
-                  border: 'none',
-                  textAlign: 'left',
-                  cursor: 'pointer'
-                }}
-              >
-                📖 User Guide
-              </button>
-            </div>
-          )}
-        </div>
-      </header>
 
       {/* Main Content */}
       <main style={{ maxWidth: '800px', margin: '0 auto', padding: '40px 20px', marginTop: '0' }} className="mobile-padding">
@@ -362,25 +149,25 @@ function CreditsContent() {
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(150px, 1fr))', gap: '24px', marginBottom: '20px' }}>
             <div style={{ textAlign: 'center' }}>
               <div style={{ fontSize: '36px', fontWeight: 'bold', color: '#8b5cf6', marginBottom: '8px' }}>
-                {profile.availableCredits || 0}
+                {!isHydrated ? '...' : (profile.availableCredits || 0)}
               </div>
               <div style={{ fontSize: '14px', color: '#666' }}>Available Credits</div>
             </div>
             <div style={{ textAlign: 'center' }}>
               <div style={{ fontSize: '36px', fontWeight: 'bold', color: '#10b981', marginBottom: '8px' }}>
-                {profile.totalExplanations || 0}
+                {!isHydrated ? '...' : (profile.totalExplanations || 0)}
               </div>
               <div style={{ fontSize: '14px', color: '#666' }}>Total Explanations</div>
             </div>
             <div style={{ textAlign: 'center' }}>
               <div style={{ fontSize: '36px', fontWeight: 'bold', color: '#f59e0b', marginBottom: '8px' }}>
-                {profile.todayExplanations || 0}
+                {!isHydrated ? '...' : (profile.todayExplanations || 0)}
               </div>
               <div style={{ fontSize: '14px', color: '#666' }}>Today</div>
             </div>
             <div style={{ textAlign: 'center' }}>
               <div style={{ fontSize: '36px', fontWeight: 'bold', color: '#ef4444', marginBottom: '8px' }}>
-                {profile.purchasedBooks?.length || 0}
+                {!isHydrated ? '...' : (profile.purchasedBooks?.length || 0)}
               </div>
               <div style={{ fontSize: '14px', color: '#666' }}>Books Owned</div>
             </div>
@@ -476,40 +263,40 @@ function CreditsContent() {
         }}>
           <h2 style={{ margin: '0 0 24px 0', fontSize: '20px', color: '#333' }}>Get More Explanations</h2>
 
-          {/* Book Purchase */}
-          {currentBook.title && currentBook.author && (
-            <div style={{
-              background: '#f0f9ff',
-              border: '2px solid #10b981',
-              borderRadius: '16px',
-              padding: '24px',
-              marginBottom: '24px'
-            }}>
-              <h3 style={{ margin: '0 0 12px 0', color: '#10b981', fontSize: '18px' }}>📚 Unlimited Book Access - $5</h3>
-              <p style={{ margin: '0 0 16px 0', color: '#666' }}>
-                Get unlimited explanations for "<strong>{currentBook.title}</strong>" {currentBook.author ? `by ${currentBook.author}` : ''}
-              </p>
-              <button
-                onClick={handlePurchaseBook}
-                style={{
-                  background: '#10b981',
-                  color: 'white',
-                  border: 'none',
-                  padding: '14px 28px',
-                  borderRadius: '8px',
-                  cursor: 'pointer',
-                  fontWeight: 'bold',
-                  fontSize: '16px',
-                  width: '100%'
-                }}
-              >
-                Buy This Book - $5
-              </button>
-            </div>
-          )}
-
-          {/* Other Options */}
+          {/* Simplified $5 Options */}
           <div style={{ display: 'grid', gap: '20px', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))' }}>
+            {/* Book Purchase */}
+            {currentBook.title && currentBook.author && (
+              <div style={{
+                background: '#f0f9ff',
+                border: '2px solid #10b981',
+                borderRadius: '16px',
+                padding: '24px'
+              }}>
+                <h3 style={{ margin: '0 0 12px 0', color: '#10b981', fontSize: '18px' }}>📚 This Book - $5</h3>
+                <p style={{ margin: '0 0 16px 0', color: '#666' }}>
+                  Unlimited explanations for "<strong>{currentBook.title}</strong>" {currentBook.author ? `by ${currentBook.author}` : ''}
+                </p>
+                <button
+                  type="button"
+                  onClick={handlePurchaseBook}
+                  style={{
+                    background: '#10b981',
+                    color: 'white',
+                    border: 'none',
+                    padding: '14px 28px',
+                    borderRadius: '8px',
+                    cursor: 'pointer',
+                    fontWeight: 'bold',
+                    fontSize: '16px',
+                    width: '100%'
+                  }}
+                >
+                  Buy This Book - $5
+                </button>
+              </div>
+            )}
+
             {/* Credits */}
             <div style={{
               background: '#f8f9fa',
@@ -522,6 +309,7 @@ function CreditsContent() {
                 100 credits to use across any books (1 credit = 1 explanation)
               </p>
               <button
+                type="button"
                 onClick={() => handlePurchaseCredits(100)}
                 style={{
                   background: '#8b5cf6',
@@ -546,54 +334,27 @@ function CreditsContent() {
               borderRadius: '16px',
               padding: '24px'
             }}>
-              <h3 style={{ margin: '0 0 12px 0', color: '#f59e0b', fontSize: '18px' }}>⚡ Unlimited Access</h3>
+              <h3 style={{ margin: '0 0 12px 0', color: '#f59e0b', fontSize: '18px' }}>⚡ Unlimited - $5</h3>
               <p style={{ margin: '0 0 16px 0', color: '#666' }}>
-                Unlimited explanations for all books
+                Unlimited explanations for all books for 1 month
               </p>
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
-                <button
-                  onClick={() => handleUnlimitedAccess('hour')}
-                  style={{
-                    background: '#f59e0b',
-                    color: 'white',
-                    border: 'none',
-                    padding: '12px 20px',
-                    borderRadius: '6px',
-                    cursor: 'pointer',
-                    fontWeight: '500'
-                  }}
-                >
-                  1 Day - $1
-                </button>
-                <button
-                  onClick={() => handleUnlimitedAccess('month')}
-                  style={{
-                    background: '#f59e0b',
-                    color: 'white',
-                    border: 'none',
-                    padding: '12px 20px',
-                    borderRadius: '6px',
-                    cursor: 'pointer',
-                    fontWeight: '500'
-                  }}
-                >
-                  1 Month - $5
-                </button>
-                <button
-                  onClick={() => handleUnlimitedAccess('year')}
-                  style={{
-                    background: '#f59e0b',
-                    color: 'white',
-                    border: 'none',
-                    padding: '12px 20px',
-                    borderRadius: '6px',
-                    cursor: 'pointer',
-                    fontWeight: '500'
-                  }}
-                >
-                  1 Year - $25
-                </button>
-              </div>
+              <button
+                type="button"
+                onClick={() => handleUnlimitedAccess('month')}
+                style={{
+                  background: '#f59e0b',
+                  color: 'white',
+                  border: 'none',
+                  padding: '14px 28px',
+                  borderRadius: '8px',
+                  cursor: 'pointer',
+                  fontWeight: 'bold',
+                  fontSize: '16px',
+                  width: '100%'
+                }}
+              >
+                Buy 1 Month - $5
+              </button>
             </div>
           </div>
 
@@ -611,6 +372,7 @@ function CreditsContent() {
               Use your own OpenAI, Anthropic, or other API key for unlimited free explanations
             </p>
             <button
+              type="button"
               onClick={() => router.push('/settings')}
               style={{
                 background: '#f59e0b',
@@ -644,10 +406,6 @@ function CreditsContent() {
 
 export default function CreditsPage() {
   return (
-    <ProfileProvider>
-      <SettingsProvider>
-        <CreditsContent />
-      </SettingsProvider>
-    </ProfileProvider>
+    <CreditsContent />
   )
 }

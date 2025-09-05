@@ -9,6 +9,7 @@ interface SettingsContextType {
   isSettingsOpen: boolean
   openSettings: () => void
   closeSettings: () => void
+  isSettingsLoaded: boolean
 }
 
 const DEFAULT_SETTINGS: SettingsData = {
@@ -29,17 +30,25 @@ interface SettingsProviderProps {
 export const SettingsProvider: React.FC<SettingsProviderProps> = ({ children }) => {
   const [settings, setSettings] = useState<SettingsData>(DEFAULT_SETTINGS)
   const [isSettingsOpen, setIsSettingsOpen] = useState(false)
+  const [isSettingsLoaded, setIsSettingsLoaded] = useState(false)
 
   useEffect(() => {
     const savedSettings = localStorage.getItem('explainer-settings')
+    console.log('SettingsContext: Loading settings from localStorage:', savedSettings)
     if (savedSettings) {
       try {
         const parsed = JSON.parse(savedSettings)
-        setSettings({ ...DEFAULT_SETTINGS, ...parsed })
+        console.log('SettingsContext: Parsed settings:', parsed)
+        const mergedSettings = { ...DEFAULT_SETTINGS, ...parsed }
+        console.log('SettingsContext: Merged settings:', mergedSettings)
+        setSettings(mergedSettings)
       } catch (error) {
         console.error('Error loading settings:', error)
       }
+    } else {
+      console.log('SettingsContext: No saved settings found, using defaults:', DEFAULT_SETTINGS)
     }
+    setIsSettingsLoaded(true)
   }, [])
 
   const updateSettings = (newSettings: SettingsData) => {
@@ -56,7 +65,8 @@ export const SettingsProvider: React.FC<SettingsProviderProps> = ({ children }) 
       updateSettings,
       isSettingsOpen,
       openSettings,
-      closeSettings
+      closeSettings,
+      isSettingsLoaded
     }}>
       {children}
     </SettingsContext.Provider>

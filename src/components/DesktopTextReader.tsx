@@ -21,6 +21,53 @@ const DesktopTextReader: React.FC<ReaderCommonProps> = ({ text, bookTitle = 'Rom
 
   useBookmarkRestoreAndSave(textReaderRef, text, bookTitle, author)
   
+  // Add global mouse event listeners for debugging and handling edge cases
+  React.useEffect(() => {
+    let isDragging = false
+    let dragStartedInTextArea = false
+    
+    const handleGlobalMouseDown = (e: MouseEvent) => {
+      log('Global mousedown event', { x: e.clientX, y: e.clientY, target: e.target })
+      isDragging = false
+      dragStartedInTextArea = false
+      
+      // Check if the mousedown started within our text content area
+      if (textContentRef.current?.contains(e.target as Node)) {
+        dragStartedInTextArea = true
+      }
+    }
+    
+    const handleGlobalMouseMove = (e: MouseEvent) => {
+      if (e.buttons === 1 && dragStartedInTextArea) {
+        isDragging = true
+      }
+    }
+    
+    const handleGlobalMouseUp = (e: MouseEvent) => {
+      log('Global mouseup event', { x: e.clientX, y: e.clientY, target: e.target })
+      
+      // If we were dragging and started in the text area, handle the selection
+      // even if we ended outside the text area
+      if (isDragging && dragStartedInTextArea) {
+        log('Handling selection from global mouseup (drag ended outside text area)')
+        handleMouseUp()
+      }
+      
+      isDragging = false
+      dragStartedInTextArea = false
+    }
+    
+    document.addEventListener('mousedown', handleGlobalMouseDown)
+    document.addEventListener('mousemove', handleGlobalMouseMove)
+    document.addEventListener('mouseup', handleGlobalMouseUp)
+    
+    return () => {
+      document.removeEventListener('mousedown', handleGlobalMouseDown)
+      document.removeEventListener('mousemove', handleGlobalMouseMove)
+      document.removeEventListener('mouseup', handleGlobalMouseUp)
+    }
+  }, [])
+  
   // Calculate pages for scroll navigation
   React.useEffect(() => {
     if (textReaderRef.current) {
@@ -85,10 +132,14 @@ const DesktopTextReader: React.FC<ReaderCommonProps> = ({ text, bookTitle = 'Rom
     // Small delay to ensure selection is complete
     setTimeout(() => {
       const selection = window.getSelection()
-      const t = selection?.toString().trim() || ''
-      log('DesktopTextReader: mouseup selection', { text: t, length: t.length, hasSelection: !!selection })
-      if (t.length > 0) {
-        setSelectedText(t)
+      const rawText = selection?.toString() || ''
+      const trimmedText = rawText.trim()
+      log('DesktopTextReader: mouseup selection', { rawText, trimmedText, rawLength: rawText.length, trimmedLength: trimmedText.length, hasSelection: !!selection })
+      
+      // Accept selection if it has meaningful content (not just whitespace)
+      // But allow selections that include whitespace if they also have non-whitespace content
+      if (trimmedText.length > 0) {
+        setSelectedText(rawText) // Use raw text to preserve formatting
         setShowConfirmDialog(true)
       }
     }, 10)
@@ -185,7 +236,12 @@ const DesktopTextReader: React.FC<ReaderCommonProps> = ({ text, bookTitle = 'Rom
             placeholder="Search in text..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            onKeyPress={(e) => e.key === 'Enter' && handleSearch(searchQuery)}
+            onKeyPress={(e) => {
+              if (e.key === 'Enter') {
+                e.preventDefault()
+                handleSearch(searchQuery)
+              }
+            }}
             style={{
               flex: 1,
               padding: '8px 12px',
@@ -222,11 +278,24 @@ const DesktopTextReader: React.FC<ReaderCommonProps> = ({ text, bookTitle = 'Rom
       <div
         ref={textContentRef}
         className={styles.textContent}
-        onMouseDown={() => {
-          // Clear any previous selection when starting a new selection
-          window.getSelection()?.removeAllRanges()
+        onMouseDown={(e) => {
+          log('DesktopTextReader: mousedown event', { x: e.clientX, y: e.clientY, target: e.target })
+          // Only clear selection if there's already a selection and we're starting a new one
+          const selection = window.getSelection()
+          if (selection && selection.toString().trim().length > 0) {
+            selection.removeAllRanges()
+          }
         }}
-        onMouseUp={handleMouseUp}
+        onMouseUp={(e) => {
+          log('DesktopTextReader: mouseup event triggered', { x: e.clientX, y: e.clientY, target: e.target })
+          handleMouseUp()
+        }}
+        onMouseMove={(e) => {
+          // Only log if we're dragging (mouse button is down)
+          if (e.buttons === 1) {
+            log('DesktopTextReader: mousemove during drag', { x: e.clientX, y: e.clientY })
+          }
+        }}
         style={{ userSelect: 'text', fontFamily: settings.textFont, position: 'relative' }}
       >
 

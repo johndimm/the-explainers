@@ -42,6 +42,9 @@ const Library: React.FC<LibraryProps> = ({ onBookSelect, onBackToCurrentBook }) 
   const [searchQuery, setSearchQuery] = useState('')
   const [filteredCategories, setFilteredCategories] = useState<LibraryCategory[]>([])
   const router = useRouter()
+  
+  // Debug: Log when component renders
+  console.log('Library component: Component rendering')
 
   useEffect(() => {
     loadLibraryData()
@@ -201,44 +204,12 @@ const Library: React.FC<LibraryProps> = ({ onBookSelect, onBackToCurrentBook }) 
 
         <div className={styles.customSection}>
           <div className={styles.customLink}>
-            <span>Need a different book or text?</span>
             <button 
               onClick={() => router.push('/custom-books')}
               className={styles.customBooksButton}
             >
-              Load More Options →
+              Need a different book?
             </button>
-          </div>
-          
-          {/* Community Section */}
-          <div className={styles.communitySection}>
-            <div className={styles.communityContent}>
-              <div className={styles.communityInfo}>
-                <span className={styles.communityIcon}>📱</span>
-                <div className={styles.communityText}>
-                  <strong>Join Our Community</strong>
-                  <span>Have suggestions? Found a bug? Want to discuss books?</span>
-                </div>
-              </div>
-              <div className={styles.communityActions}>
-                <button 
-                  className={styles.communityButton}
-                  onClick={() => window.open('https://reddit.com/r/TheExplainersApp', '_blank')}
-                >
-                  Reddit Forum →
-                </button>
-                <button 
-                  className={styles.communityButton}
-                  onClick={() => window.open('https://github.com/johndimm/the-explainers/discussions', '_blank')}
-                  style={{ marginLeft: '8px' }}
-                >
-                  GitHub Discussions →
-                </button>
-                <span className={styles.communityNote}>
-                  Join r/TheExplainersApp or GitHub Discussions
-                </span>
-              </div>
-            </div>
           </div>
         </div>
 
@@ -281,6 +252,38 @@ const Library: React.FC<LibraryProps> = ({ onBookSelect, onBackToCurrentBook }) 
             </div>
           ))
           )}
+        </div>
+
+        {/* Community Section */}
+        <div className={styles.communitySection}>
+          <div className={styles.communityContent}>
+            <div className={styles.communityInfo}>
+              <span className={styles.communityIcon}>📱</span>
+              <div className={styles.communityText}>
+                <strong>Join Our Community</strong>
+                <span>Have suggestions? Found a bug? Want to discuss books?</span>
+              </div>
+            </div>
+            <div className={styles.communityActions}>
+              <div className={styles.communityButtons}>
+                <button 
+                  className={styles.communityButton}
+                  onClick={() => window.open('https://reddit.com/r/TheExplainersApp', '_blank')}
+                >
+                  Reddit Forum →
+                </button>
+                <button 
+                  className={styles.communityButton}
+                  onClick={() => window.open('https://github.com/johndimm/the-explainers/discussions', '_blank')}
+                >
+                  GitHub Discussions →
+                </button>
+              </div>
+              <span className={styles.communityNote}>
+                Join r/TheExplainersApp or GitHub Discussions
+              </span>
+            </div>
+          </div>
         </div>
       </div>
     </div>

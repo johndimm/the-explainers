@@ -67,41 +67,50 @@
 
 .communitySection {
   background: #fef3c7;
-  padding: 16px;
+  padding: 24px;
   border-radius: 12px;
-  margin-top: 16px;
+  margin-top: 24px;
   border: 1px solid #f59e0b;
+  text-align: center;
 }
 
 .communityContent {
   display: flex;
+  flex-direction: column;
   align-items: center;
-  justify-content: space-between;
-  gap: 16px;
+  gap: 20px;
+  max-width: 600px;
+  margin: 0 auto;
 }
 
 @media (max-width: 768px) {
-  .communityContent {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 12px;
+  .communitySection {
+    padding: 20px 16px;
   }
   
-  .communityActions {
-    align-items: flex-start;
+  .communityContent {
+    gap: 16px;
+  }
+  
+  .communityButtons {
+    flex-direction: column;
+    gap: 12px;
     width: 100%;
   }
   
   .communityButton {
     width: 100%;
+    max-width: 280px;
+    text-align: center;
   }
 }
 
 .communityInfo {
   display: flex;
+  flex-direction: column;
   align-items: center;
-  gap: 12px;
-  flex: 1;
+  gap: 8px;
+  text-align: center;
 }
 
 .communityIcon {
@@ -127,8 +136,18 @@
 .communityActions {
   display: flex;
   flex-direction: column;
-  align-items: flex-end;
-  gap: 8px;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+}
+
+.communityButtons {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  flex-wrap: wrap;
 }
 
 .communityButton {
@@ -150,9 +169,11 @@
 }
 
 .communityNote {
-  font-size: 12px;
+  font-size: 13px;
   color: #a16207;
   font-style: italic;
+  text-align: center;
+  margin-top: 4px;
 }
 
 .urlInput {

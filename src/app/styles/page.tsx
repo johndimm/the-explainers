@@ -3,8 +3,6 @@
 import ExplainerStyles from '@/components/ExplainerStyles'
 import { useSettings } from '@/contexts/SettingsContext'
 import { useRouter } from 'next/navigation'
-import { SettingsProvider } from '@/contexts/SettingsContext'
-import { ProfileProvider } from '@/contexts/ProfileContext'
 
 function StylesContent() {
   const { settings, updateSettings } = useSettings()
@@ -23,11 +21,5 @@ function StylesContent() {
 }
 
 export default function StylesPage() {
-  return (
-    <ProfileProvider>
-      <SettingsProvider>
-        <StylesContent />
-      </SettingsProvider>
-    </ProfileProvider>
-  )
+  return <StylesContent />
 }

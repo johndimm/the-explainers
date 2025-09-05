@@ -4,31 +4,14 @@ import { useState, useRef, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
 import ChatInterface from '@/components/ChatInterface'
 import { useSettings } from '@/contexts/SettingsContext'
-import { useProfile } from '@/contexts/ProfileContext'
+import { useAuthenticatedProfile } from '@/contexts/AuthenticatedProfileContext'
 
 function ChatContent() {
   const { settings, updateSettings } = useSettings()
-  const { profile } = useProfile()
+  const { profile, isHydrated } = useAuthenticatedProfile()
   const router = useRouter()
-  const [showMobileMenu, setShowMobileMenu] = useState(false)
-  const menuRef = useRef<HTMLDivElement>(null)
   const [contextData, setContextData] = useState<any>(null)
 
-  useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
-      if (menuRef.current && !menuRef.current.contains(event.target as Node)) {
-        setShowMobileMenu(false)
-      }
-    }
-
-    if (showMobileMenu) {
-      document.addEventListener('mousedown', handleClickOutside)
-    }
-
-    return () => {
-      document.removeEventListener('mousedown', handleClickOutside)
-    }
-  }, [showMobileMenu])
 
   // Check for context data from text selection
   useEffect(() => {
@@ -48,6 +31,100 @@ function ChatContent() {
     }
   }, [])
 
+  // Show loading while profile data is being loaded
+  if (!isHydrated) {
+    return (
+      <div style={{
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        minHeight: '100vh',
+        fontFamily: 'system-ui, -apple-system, sans-serif'
+      }}>
+        <div style={{ textAlign: 'center' }}>
+          <div style={{
+            width: '40px',
+            height: '40px',
+            border: '4px solid #f3f3f3',
+            borderTop: '4px solid #8b5cf6',
+            borderRadius: '50%',
+            animation: 'spin 1s linear infinite',
+            margin: '0 auto 16px'
+          }} />
+          <p style={{ color: '#666', margin: 0 }}>Loading...</p>
+        </div>
+        <style jsx>{`
+          @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+          }
+        `}</style>
+      </div>
+    )
+  }
+
+  const hasUnlimitedAccess = profile.hasUnlimitedAccess && profile.unlimitedAccessExpiry && new Date() < new Date(profile.unlimitedAccessExpiry)
+  const hasCredits = (profile.availableCredits || 0) > 0
+  const hasBookContext = contextData?.bookTitle && contextData?.author
+  
+  // Check if current book is purchased
+  const isBookPurchased = hasBookContext ? (() => {
+    const bookKey = `${contextData.bookTitle}-${contextData.author}`.toLowerCase().replace(/[^a-z0-9-]/g, '-')
+    console.log('Chat page: Generated bookKey:', bookKey)
+    console.log('Chat page: Available purchasedBooks:', profile.purchasedBooks)
+    console.log('Chat page: Book title from context:', contextData.bookTitle)
+    console.log('Chat page: Author from context:', contextData.author)
+    
+    // Check for exact match first
+    let isPurchased = profile.purchasedBooks?.includes(bookKey) || false
+    console.log('Chat page: Exact match result:', isPurchased)
+    
+    // If not found, try some variations in case there are formatting differences
+    if (!isPurchased && profile.purchasedBooks) {
+      console.log('Chat page: Exact match not found, trying variations...')
+      for (const purchasedBook of profile.purchasedBooks) {
+        console.log('Chat page: Checking against purchased book:', purchasedBook)
+        // Check if the purchased book contains the same title and author (case insensitive)
+        const titleMatch = purchasedBook.includes(contextData.bookTitle.toLowerCase().replace(/[^a-z0-9-]/g, '-'))
+        const authorMatch = purchasedBook.includes(contextData.author.toLowerCase().replace(/[^a-z0-9-]/g, '-'))
+        console.log('Chat page: Title match:', titleMatch, 'Author match:', authorMatch)
+        if (titleMatch && authorMatch) {
+          console.log('Chat page: Found matching purchased book:', purchasedBook)
+          isPurchased = true
+          break
+        }
+      }
+    }
+    
+    console.log('Chat page: Final isPurchased result:', isPurchased)
+    return isPurchased
+  })() : false
+  
+  console.log('Chat page: hasUnlimitedAccess:', hasUnlimitedAccess, 'hasCredits:', hasCredits, 'hasBookContext:', hasBookContext, 'isBookPurchased:', isBookPurchased)
+  
+  // Handle redirects in useEffect to avoid setState during render
+  useEffect(() => {
+    // If no unlimited access, no credits, no purchased book, and no book context for free explanations, redirect to credits
+    if (!hasUnlimitedAccess && !hasCredits && !isBookPurchased && !hasBookContext) {
+      console.log('Chat page: No credits, no unlimited access, no purchased book, no book context - redirecting to credits')
+      router.push('/credits')
+    }
+  }, [hasUnlimitedAccess, hasCredits, isBookPurchased, hasBookContext, router])
+  
+  // If no unlimited access, no credits, not purchased, but has book context, check if free explanations are available
+  // Note: We don't redirect immediately here to allow users to read their last response
+  // The ChatInterface component will handle preventing new requests when limits are reached
+  if (!hasUnlimitedAccess && !hasCredits && !isBookPurchased && hasBookContext) {
+    const bookKey = `${contextData.bookTitle}-${contextData.author}`.toLowerCase().replace(/[^a-z0-9-]/g, '-')
+    const bookExplanationsUsed = profile.bookExplanations?.[bookKey] || 0
+    
+    if (bookExplanationsUsed >= 3) {
+      console.log('Chat page: All free explanations used, but allowing user to stay on page to read response')
+      // Don't redirect - let user read their response
+      // The ChatInterface will prevent new requests
+    }
+  }
+
   return (
     <div>
       <style jsx>{`
@@ -61,232 +138,9 @@ function ChatContent() {
           }
         }
       `}</style>
-      <header style={{
-        position: 'fixed',
-        top: 0,
-        left: 0,
-        right: 0,
-        background: 'white',
-        borderBottom: '1px solid #e0e0e0',
-        padding: '8px 12px',
-        zIndex: 100,
-        display: 'none',
-        justifyContent: 'space-between',
-        alignItems: 'center'
-      }}>
-        <div style={{ flex: 1 }}>
-          <h1 style={{ 
-            margin: 0, 
-            fontSize: '18px', 
-            fontWeight: 'bold',
-            color: '#333',
-            lineHeight: '1.2'
-          }}>
-            The Explainers
-          </h1>
-          <p style={{ 
-            margin: 0, 
-            fontSize: '11px', 
-            color: '#666',
-            lineHeight: '1.2'
-          }}>
-            Chat with AI
-          </p>
-        </div>
-        <div ref={menuRef} style={{ position: 'relative' }}>
-          <button 
-            onClick={() => setShowMobileMenu(!showMobileMenu)}
-            style={{
-              padding: '8px',
-              background: 'none',
-              border: 'none',
-              cursor: 'pointer',
-              fontSize: '18px',
-              color: '#333'
-            }}
-          >
-            ☰
-          </button>
-          
-          {showMobileMenu && (
-            <div style={{
-              position: 'absolute',
-              top: '100%',
-              right: 0,
-              background: 'white',
-              border: '1px solid #e0e0e0',
-              borderRadius: '8px',
-              boxShadow: '0 4px 12px rgba(0,0,0,0.15)',
-              minWidth: '160px',
-              zIndex: 1000
-            }}>
-              <button 
-                onClick={() => {
-                  router.push('/reader')
-                  setShowMobileMenu(false)
-                }}
-                style={{
-                  display: 'block',
-                  width: '100%',
-                  padding: '12px 16px',
-                  background: 'none',
-                  border: 'none',
-                  textAlign: 'left',
-                  cursor: 'pointer',
-                  borderBottom: '1px solid #f0f0f0'
-                }}
-              >
-                📖 Reader
-              </button>
-              <button 
-                onClick={() => setShowMobileMenu(false)}
-                style={{
-                  display: 'block',
-                  width: '100%',
-                  padding: '12px 16px',
-                  background: 'none',
-                  border: 'none',
-                  textAlign: 'left',
-                  cursor: 'pointer',
-                  borderBottom: '1px solid #f0f0f0',
-                  color: '#666'
-                }}
-              >
-                💬 Chat (current)
-              </button>
-              <button 
-                onClick={() => {
-                  router.push('/library')
-                  setShowMobileMenu(false)
-                }}
-                style={{
-                  display: 'block',
-                  width: '100%',
-                  padding: '12px 16px',
-                  background: 'none',
-                  border: 'none',
-                  textAlign: 'left',
-                  cursor: 'pointer',
-                  borderBottom: '1px solid #f0f0f0'
-                }}
-              >
-                📚 Library
-              </button>
-              <button 
-                onClick={() => {
-                  router.push('/demo')
-                  setShowMobileMenu(false)
-                }}
-                style={{
-                  display: 'block',
-                  width: '100%',
-                  padding: '12px 16px',
-                  background: 'none',
-                  border: 'none',
-                  textAlign: 'left',
-                  cursor: 'pointer',
-                  borderBottom: '1px solid #f0f0f0'
-                }}
-              >
-                🗯️ Demo
-              </button>
-              <button 
-                onClick={() => {
-                  router.push('/styles')
-                  setShowMobileMenu(false)
-                }}
-                style={{
-                  display: 'block',
-                  width: '100%',
-                  padding: '12px 16px',
-                  background: 'none',
-                  border: 'none',
-                  textAlign: 'left',
-                  cursor: 'pointer',
-                  borderBottom: '1px solid #f0f0f0'
-                }}
-              >
-                🎭 Styles
-              </button>
-              <button 
-                onClick={() => {
-                  router.push('/credits')
-                  setShowMobileMenu(false)
-                }}
-                style={{
-                  display: 'block',
-                  width: '100%',
-                  padding: '12px 16px',
-                  background: 'none',
-                  border: 'none',
-                  textAlign: 'left',
-                  cursor: 'pointer',
-                  borderBottom: '1px solid #f0f0f0'
-                }}
-              >
-                💳 Credits
-              </button>
-              <button 
-                onClick={() => {
-                  router.push('/profile')
-                  setShowMobileMenu(false)
-                }}
-                style={{
-                  display: 'block',
-                  width: '100%',
-                  padding: '12px 16px',
-                  background: 'none',
-                  border: 'none',
-                  textAlign: 'left',
-                  cursor: 'pointer',
-                  borderBottom: '1px solid #f0f0f0'
-                }}
-              >
-                👤 Profile
-              </button>
-              <button 
-                onClick={() => {
-                  router.push('/settings')
-                  setShowMobileMenu(false)
-                }}
-                style={{
-                  display: 'block',
-                  width: '100%',
-                  padding: '12px 16px',
-                  background: 'none',
-                  border: 'none',
-                  textAlign: 'left',
-                  cursor: 'pointer',
-                  borderBottom: '1px solid #f0f0f0'
-                }}
-              >
-                ⚙️ Settings
-              </button>
-              <button 
-                onClick={() => {
-                  router.push('/guide')
-                  setShowMobileMenu(false)
-                }}
-                style={{
-                  display: 'block',
-                  width: '100%',
-                  padding: '12px 16px',
-                  background: 'none',
-                  border: 'none',
-                  textAlign: 'left',
-                  cursor: 'pointer'
-                }}
-              >
-                📖 User Guide
-              </button>
-            </div>
-          )}
-        </div>
-      </header>
       
       <div style={{ 
-        marginTop: '0', 
-        minHeight: 'calc(100vh - 60px)', 
+        minHeight: '100vh', 
         padding: '20px', 
         background: '#fafafa' 
       }} className="mobile-padding">
@@ -314,6 +168,7 @@ function ChatContent() {
             </div>
             {contextData && (
               <button
+                type="button"
                 onClick={() => router.push('/reader')}
                 style={{
                   background: '#8b5cf6',

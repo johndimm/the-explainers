@@ -1,12 +1,11 @@
 'use client'
 
 import Profile from '@/components/Profile'
-import { useProfile } from '@/contexts/ProfileContext'
+import { useAuthenticatedProfile } from '@/contexts/AuthenticatedProfileContext'
 import { useRouter } from 'next/navigation'
-import { SettingsProvider } from '@/contexts/SettingsContext'
 
 function ProfileContent() {
-  const { profile, updateProfile } = useProfile()
+  const { profile, updateProfile } = useAuthenticatedProfile()
   const router = useRouter()
 
   return (
@@ -22,9 +21,5 @@ function ProfileContent() {
 }
 
 export default function ProfilePage() {
-  return (
-    <SettingsProvider>
-      <ProfileContent />
-    </SettingsProvider>
-  )
+  return <ProfileContent />
 }
