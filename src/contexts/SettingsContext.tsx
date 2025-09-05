@@ -35,12 +35,14 @@ export const SettingsProvider: React.FC<SettingsProviderProps> = ({ children }) 
   useEffect(() => {
     const savedSettings = localStorage.getItem('explainer-settings')
     console.log('SettingsContext: Loading settings from localStorage:', savedSettings)
+    console.log('SettingsContext: DEFAULT_SETTINGS:', DEFAULT_SETTINGS)
     if (savedSettings) {
       try {
         const parsed = JSON.parse(savedSettings)
         console.log('SettingsContext: Parsed settings:', parsed)
         const mergedSettings = { ...DEFAULT_SETTINGS, ...parsed }
         console.log('SettingsContext: Merged settings:', mergedSettings)
+        console.log('SettingsContext: Why is llmProvider openai? Original:', parsed.llmProvider, 'Default:', DEFAULT_SETTINGS.llmProvider)
         setSettings(mergedSettings)
       } catch (error) {
         console.error('Error loading settings:', error)
@@ -54,6 +56,17 @@ export const SettingsProvider: React.FC<SettingsProviderProps> = ({ children }) 
   const updateSettings = (newSettings: SettingsData) => {
     setSettings(newSettings)
     localStorage.setItem('explainer-settings', JSON.stringify(newSettings))
+  }
+
+  const resetToDefaults = () => {
+    console.log('SettingsContext: Resetting to defaults:', DEFAULT_SETTINGS)
+    setSettings(DEFAULT_SETTINGS)
+    localStorage.setItem('explainer-settings', JSON.stringify(DEFAULT_SETTINGS))
+  }
+
+  // Expose resetToDefaults globally for debugging
+  if (typeof window !== 'undefined') {
+    (window as any).resetSettingsToDefaults = resetToDefaults
   }
 
   const openSettings = () => setIsSettingsOpen(true)

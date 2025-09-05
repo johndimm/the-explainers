@@ -11,21 +11,29 @@ export default function SignIn() {
   useEffect(() => {
     // Check if user is already signed in
     getSession().then((session) => {
+      console.log('🔐 Sign-in page session check:', {
+        hasSession: !!session,
+        sessionUser: session?.user,
+        timestamp: new Date().toISOString()
+      })
       if (session) {
+        console.log('🔐 User already signed in, redirecting to library')
         router.push('/library')
       }
     })
   }, [router])
 
   const handleGoogleSignIn = async () => {
+    console.log('🔐 Starting Google sign-in process')
     setIsLoading(true)
     try {
-      await signIn('google', { 
+      const result = await signIn('google', { 
         callbackUrl: '/library',
         redirect: true 
       })
+      console.log('🔐 Sign-in result:', result)
     } catch (error) {
-      console.error('Sign in error:', error)
+      console.error('🔐 Sign in error:', error)
       setIsLoading(false)
     }
   }

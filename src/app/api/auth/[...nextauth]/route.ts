@@ -1,6 +1,14 @@
 import NextAuth from 'next-auth'
 import GoogleProvider from 'next-auth/providers/google'
 
+console.log('🔐 NextAuth Environment Check:', {
+  NEXTAUTH_URL: process.env.NEXTAUTH_URL,
+  NODE_ENV: process.env.NODE_ENV,
+  hasGoogleClientId: !!process.env.GOOGLE_CLIENT_ID,
+  hasGoogleClientSecret: !!process.env.GOOGLE_CLIENT_SECRET,
+  timestamp: new Date().toISOString()
+})
+
 const handler = NextAuth({
   providers: [
     GoogleProvider({
@@ -10,6 +18,13 @@ const handler = NextAuth({
   ],
   callbacks: {
     async session({ session, token }) {
+      console.log('🔐 NextAuth session callback:', {
+        hasSession: !!session,
+        hasToken: !!token,
+        tokenSub: token?.sub,
+        sessionUser: session?.user,
+        timestamp: new Date().toISOString()
+      })
       // Add user ID to session
       if (session.user) {
         session.user.id = token.sub!
@@ -17,6 +32,13 @@ const handler = NextAuth({
       return session
     },
     async jwt({ token, user }) {
+      console.log('🔐 NextAuth JWT callback:', {
+        hasToken: !!token,
+        hasUser: !!user,
+        tokenSub: token?.sub,
+        user: user?.email,
+        timestamp: new Date().toISOString()
+      })
       // Persist user ID in token
       if (user) {
         token.sub = user.id
@@ -27,6 +49,7 @@ const handler = NextAuth({
   pages: {
     signIn: '/auth/signin',
   },
+  debug: process.env.NODE_ENV === 'development',
 })
 
 export { handler as GET, handler as POST }

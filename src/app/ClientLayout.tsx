@@ -2,7 +2,7 @@
 
 import React, { useState, useRef, useEffect } from 'react'
 import { useRouter, usePathname } from 'next/navigation'
-import { SessionProvider, signOut, useSession } from 'next-auth/react'
+import { SessionProvider, signOut, useSession, getSession } from 'next-auth/react'
 import { AuthenticatedProfileProvider } from '@/contexts/AuthenticatedProfileContext'
 import { SettingsProvider } from '@/contexts/SettingsContext'
 import { BookCacheProvider, useBookCache } from '@/contexts/BookCacheContext'
@@ -20,6 +20,54 @@ function LayoutContent({ children }: { children: React.ReactNode }) {
   const pathname = usePathname()
   const { cachedBook } = useBookCache()
   const { data: session, status } = useSession()
+  
+  // Debug logging for authentication status
+  useEffect(() => {
+    console.log('🔐 Auth Status Debug:', {
+      status,
+      hasSession: !!session,
+      sessionUser: session?.user,
+      timestamp: new Date().toISOString()
+    })
+  }, [session, status])
+
+  // Force re-render when session changes
+  const [authKey, setAuthKey] = useState(0)
+  useEffect(() => {
+    setAuthKey(prev => prev + 1)
+  }, [session])
+
+  // Manual session refresh function
+  const refreshSession = async () => {
+    console.log('🔐 Manually refreshing session...')
+    const newSession = await getSession()
+    console.log('🔐 Refreshed session:', {
+      hasSession: !!newSession,
+      sessionUser: newSession?.user?.email,
+      timestamp: new Date().toISOString()
+    })
+  }
+
+  // Check session periodically (every 2 seconds) for a short time after page load
+  useEffect(() => {
+    const interval = setInterval(async () => {
+      const currentSession = await getSession()
+      if (currentSession && !session) {
+        console.log('🔐 Session detected via polling, forcing refresh')
+        window.location.reload() // Force full page refresh to update all components
+      }
+    }, 2000)
+
+    // Clear interval after 10 seconds
+    const timeout = setTimeout(() => {
+      clearInterval(interval)
+    }, 10000)
+
+    return () => {
+      clearInterval(interval)
+      clearTimeout(timeout)
+    }
+  }, [session])
 
   // Close mobile menu when clicking outside
   useEffect(() => {
@@ -144,7 +192,7 @@ function LayoutContent({ children }: { children: React.ReactNode }) {
             ☰
           </button>
           {showMobileMenu && (
-            <div style={{ 
+            <div key={authKey} style={{ 
               position: 'absolute', 
               top: '100%', 
               right: 0, 
@@ -168,11 +216,19 @@ function LayoutContent({ children }: { children: React.ReactNode }) {
               <button type="button" onClick={() => handleNavigation('/guide')} style={{ display: 'block', width: '100%', padding: '12px 16px', background: 'none', border: 'none', textAlign: 'left', cursor: 'pointer', borderBottom: '1px solid #f0f0f0' }}>📖 User Guide</button>
               <button type="button" onClick={() => handleNavigation('/about')} style={{ display: 'block', width: '100%', padding: '12px 16px', background: 'none', border: 'none', textAlign: 'left', cursor: 'pointer', borderBottom: '1px solid #f0f0f0' }}>ℹ️ About</button>
               <button type="button" onClick={() => handleNavigation('/demo')} style={{ display: 'block', width: '100%', padding: '12px 16px', background: 'none', border: 'none', textAlign: 'left', cursor: 'pointer', borderBottom: '1px solid #f0f0f0' }}>🗯️ Demo</button>
-              {session ? (
-                <button type="button" onClick={handleLogout} style={{ display: 'block', width: '100%', padding: '12px 16px', background: 'none', border: 'none', textAlign: 'left', cursor: 'pointer', color: '#dc2626' }}>🚪 Logout</button>
-              ) : (
-                <button type="button" onClick={() => handleNavigation('/auth/signin')} style={{ display: 'block', width: '100%', padding: '12px 16px', background: 'none', border: 'none', textAlign: 'left', cursor: 'pointer', color: '#059669' }}>🔑 Log in</button>
-              )}
+              {(() => {
+                console.log('🔐 Hamburger menu render - session check:', {
+                  hasSession: !!session,
+                  sessionUser: session?.user?.email,
+                  status,
+                  timestamp: new Date().toISOString()
+                })
+                return session ? (
+                  <button type="button" onClick={handleLogout} style={{ display: 'block', width: '100%', padding: '12px 16px', background: 'none', border: 'none', textAlign: 'left', cursor: 'pointer', color: '#dc2626' }}>🚪 Logout</button>
+                ) : (
+                  <button type="button" onClick={() => handleNavigation('/auth/signin')} style={{ display: 'block', width: '100%', padding: '12px 16px', background: 'none', border: 'none', textAlign: 'left', cursor: 'pointer', color: '#059669' }}>🔑 Log in</button>
+                )
+              })()}
             </div>
           )}
         </div>

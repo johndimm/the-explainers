@@ -63,14 +63,45 @@ const getAllStyles = () => {
 const ChatInterface: React.FC<ChatInterfaceProps> = ({ selectedText, contextInfo, settings, profile, onClose, onSettingsChange, bookTitle, author, isPageMode = false }) => {
   log('ChatInterface: Received settings:', settings)
   log('ChatInterface: Received bookTitle:', bookTitle, 'author:', author)
+  console.log('🔧 ChatInterface: Component rendering with settings.llmProvider:', settings.llmProvider)
   const router = useRouter()
   const [messages, setMessages] = useState<Message[]>([])
   const [inputValue, setInputValue] = useState('')
   const [isLoading, setIsLoading] = useState(false)
   const [currentTime, setCurrentTime] = useState(new Date())
-  const [selectedProvider, setSelectedProvider] = useState<LLMProvider>(settings.llmProvider)
-  const [currentStyle, setCurrentStyle] = useState<ExplanationStyle>(settings.explanationStyle)
-  const [currentResponseLength, setCurrentResponseLength] = useState<ResponseLength>(settings.responseLength)
+  // Use refs to track if user has made choices
+  const userHasChosenProvider = useRef(false)
+  const userHasChosenStyle = useRef(false)
+  const userHasChosenLength = useRef(false)
+  
+  // Initialize state only if user hasn't made a choice yet
+  const [selectedProvider, setSelectedProvider] = useState<LLMProvider>(() => {
+    console.log('🔧 Initializing selectedProvider with:', settings.llmProvider)
+    return settings.llmProvider
+  })
+  const [currentStyle, setCurrentStyle] = useState<ExplanationStyle>(() => {
+    console.log('🔧 Initializing currentStyle with:', settings.explanationStyle)
+    return settings.explanationStyle
+  })
+  const [currentResponseLength, setCurrentResponseLength] = useState<ResponseLength>(() => {
+    console.log('🔧 Initializing currentResponseLength with:', settings.responseLength)
+    return settings.responseLength
+  })
+  
+  // Debug when selectedProvider changes
+  useEffect(() => {
+    console.log('🔧 selectedProvider changed to:', selectedProvider, 'settings.llmProvider:', settings.llmProvider, 'userHasChosen:', userHasChosenProvider.current)
+  }, [selectedProvider, settings.llmProvider])
+  
+  // Debug when settings change
+  useEffect(() => {
+    console.log('🔧 Settings changed:', {
+      llmProvider: settings.llmProvider,
+      explanationStyle: settings.explanationStyle,
+      responseLength: settings.responseLength,
+      timestamp: new Date().toISOString()
+    })
+  }, [settings.llmProvider, settings.explanationStyle, settings.responseLength])
   const [hasChanges, setHasChanges] = useState(false)
   const [showFullHistory, setShowFullHistory] = useState(false)
   const [originalSelectedText, setOriginalSelectedText] = useState("")
@@ -871,11 +902,14 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ selectedText, contextInfo
       // Save settings after successful re-explain
       if (hasChanges) {
         const updatedSettings: SettingsData = {
-          ...settings,
           llmProvider: selectedProvider,
           explanationStyle: currentStyle,
-          responseLength: currentResponseLength
+          responseLength: currentResponseLength,
+          textFont: settings.textFont,
+          chatFont: settings.chatFont,
+          readingMode: settings.readingMode
         }
+        console.log('🔧 Saving updated settings:', updatedSettings)
         onSettingsChange(updatedSettings)
         setHasChanges(false)
       }
@@ -913,12 +947,20 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ selectedText, contextInfo
     log('Prompt text:', promptText)
     log('Context info:', contextInfo)
     
-    // Display only the selected text to the user, not the full prompt
-    const userMessage: Message = {
-      id: Date.now().toString(),
-      content: `"${text}"`,
-      role: 'user',
-      timestamp: new Date()
+    // Check if the quote is already the first message to avoid duplication
+    const isQuoteAlreadyFirstMessage = messages.length > 0 && 
+      messages[0].role === 'user' && 
+      (messages[0].content === `"${text}"` || messages[0].content === text)
+
+    // Only add the quote as a user message if it's not already there
+    if (!isQuoteAlreadyFirstMessage) {
+      const userMessage: Message = {
+        id: Date.now().toString(),
+        content: `"${text}"`,
+        role: 'user',
+        timestamp: new Date()
+      }
+      setMessages(prev => [...prev, userMessage])
     }
 
     // But send the full contextual prompt to the LLM
@@ -928,8 +970,6 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ selectedText, contextInfo
       content: promptText,
       timestamp: new Date()
     }
-
-    setMessages(prev => [...prev, userMessage])
     setIsLoading(true)
 
     try {
@@ -1411,7 +1451,11 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ selectedText, contextInfo
               </div>
               <select 
                 value={selectedProvider} 
-                onChange={(e) => setSelectedProvider(e.target.value as LLMProvider)}
+                onChange={(e) => {
+                  console.log('🔧 User selected provider:', e.target.value)
+                  userHasChosenProvider.current = true
+                  setSelectedProvider(e.target.value as LLMProvider)
+                }}
                 className={styles.providerSelect}
                 disabled={isLoading}
               >
@@ -1450,7 +1494,13 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ selectedText, contextInfo
                         role="option"
                         aria-selected={currentStyle === style.value}
                         className={`${styles.customOption} ${currentStyle === style.value ? styles.selectedOption : ''}`}
-                        onClick={(e) => { e.stopPropagation(); setCurrentStyle(style.value as ExplanationStyle); setShowStyleMenu(false) }}
+                        onClick={(e) => { 
+                          e.stopPropagation(); 
+                          console.log('🔧 User selected style:', style.value)
+                          userHasChosenStyle.current = true
+                          setCurrentStyle(style.value as ExplanationStyle); 
+                          setShowStyleMenu(false) 
+                        }}
                       >
                         {style.name}
                       </div>
@@ -1470,7 +1520,11 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ selectedText, contextInfo
               </div>
               <select 
                 value={currentResponseLength} 
-                onChange={(e) => setCurrentResponseLength(e.target.value as ResponseLength)}
+                onChange={(e) => {
+                  console.log('🔧 User selected response length:', e.target.value)
+                  userHasChosenLength.current = true
+                  setCurrentResponseLength(e.target.value as ResponseLength)
+                }}
                 className={styles.lengthSelect}
                 disabled={isLoading}
               >
