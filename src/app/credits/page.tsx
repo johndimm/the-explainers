@@ -188,24 +188,45 @@ function CreditsContent() {
                   const detail = (profile as any).purchasedBookDetails?.[bookKey]
                   let title = detail?.title || ''
                   let author = detail?.author || ''
+                  
+                  // If no detail found, try to map from stable ID
                   if (!title) {
-                    // Heuristic fallback: last two tokens are author, rest are title
-                    const tokens = bookKey.split('-').filter(Boolean)
-                    const authorTokens = tokens.slice(Math.max(0, tokens.length - 2))
-                    const titleTokens = tokens.slice(0, Math.max(0, tokens.length - 2))
-                    // Reconstruct possessives like Night's from ["night","s"]
-                    const mergedTitleTokens: string[] = []
-                    for (let i = 0; i < titleTokens.length; i++) {
-                      const t = titleTokens[i]
-                      if (t === 's' && mergedTitleTokens.length > 0) {
-                        mergedTitleTokens[mergedTitleTokens.length - 1] = mergedTitleTokens[mergedTitleTokens.length - 1] + "'s"
-                      } else {
-                        mergedTitleTokens.push(t)
-                      }
+                    const stableIdMapping: { [key: string]: { title: string; author: string } } = {
+                      'custom-finnegans-wake': { title: 'Finnegans Wake', author: 'James Joyce' },
+                      'pg-4300': { title: 'Ulysses', author: 'James Joyce' },
+                      'pg-2814': { title: 'Dubliners', author: 'James Joyce' },
+                      'pg-4217': { title: 'A Portrait of the Artist as a Young Man', author: 'James Joyce' },
+                      'pg-55945': { title: 'Exiles: A Play in Three Acts', author: 'James Joyce' },
+                      'pg-1': { title: 'Alice\'s Adventures in Wonderland', author: 'Lewis Carroll' },
+                      'pg-4': { title: 'Pride and Prejudice', author: 'Jane Austen' },
+                      'pg-12': { title: 'Through the Looking-Glass', author: 'Lewis Carroll' },
+                      'pg-13': { title: 'The Hunting of the Snark: An Agony in Eight Fits', author: 'Lewis Carroll' },
+                      'pg-16': { title: 'Peter Pan', author: 'J.M. Barrie' },
                     }
-                    const cap = (str: string) => str.replace(/\b\w/g, (m) => m.toUpperCase())
-                    title = cap(decodeURIComponent(mergedTitleTokens.join(' ')))
-                    author = cap(decodeURIComponent(authorTokens.join(' ')))
+                    
+                    const mapped = stableIdMapping[bookKey]
+                    if (mapped) {
+                      title = mapped.title
+                      author = mapped.author
+                    } else {
+                      // Fallback to old parsing for legacy keys
+                      const tokens = bookKey.split('-').filter(Boolean)
+                      const authorTokens = tokens.slice(Math.max(0, tokens.length - 2))
+                      const titleTokens = tokens.slice(0, Math.max(0, tokens.length - 2))
+                      // Reconstruct possessives like Night's from ["night","s"]
+                      const mergedTitleTokens: string[] = []
+                      for (let i = 0; i < titleTokens.length; i++) {
+                        const t = titleTokens[i]
+                        if (t === 's' && mergedTitleTokens.length > 0) {
+                          mergedTitleTokens[mergedTitleTokens.length - 1] = mergedTitleTokens[mergedTitleTokens.length - 1] + "'s"
+                        } else {
+                          mergedTitleTokens.push(t)
+                        }
+                      }
+                      const cap = (str: string) => str.replace(/\b\w/g, (m) => m.toUpperCase())
+                      title = cap(decodeURIComponent(mergedTitleTokens.join(' ')))
+                      author = cap(decodeURIComponent(authorTokens.join(' ')))
+                    }
                   }
                   const handleLoad = () => {
                     const url = (profile as any).purchasedBookDetails?.[bookKey]?.url || ''

@@ -33,6 +33,36 @@ export async function GET(request: NextRequest) {
     const totalExplanations = usageData.total
     const todayExplanations = usageData.today
 
+    // Normalize author names for James Joyce books
+    const normalizeAuthor = (title: string, author: string) => {
+      if (author === 'Joyce' && ['Ulysses', 'A Portrait of the Artist as a Young Man', 'Dubliners', 'Exiles: A Play in Three Acts', 'Finnegans Wake'].includes(title)) {
+        return 'James Joyce'
+      }
+      return author
+    }
+
+    // Map to stable IDs for better book identification
+    const mapToStableIds = (bookPurchases: any[]) => {
+      const stableIdMapping: { [key: string]: string } = {
+        'finnegans-wake-joyce': 'custom-finnegans-wake',
+        'finnegans-wake-james-joyce': 'custom-finnegans-wake',
+        'ulysses-joyce': 'pg-4300',
+        'ulysses-james-joyce': 'pg-4300',
+        'dubliners-joyce': 'pg-2814',
+        'dubliners-james-joyce': 'pg-2814',
+        'a-portrait-of-the-artist-as-a-young-man-joyce': 'pg-4217',
+        'a-portrait-of-the-artist-as-a-young-man-james-joyce': 'pg-4217',
+        'exiles-a-play-in-three-acts-joyce': 'pg-55945',
+        'exiles-a-play-in-three-acts-james-joyce': 'pg-55945',
+      }
+      
+      return bookPurchases.map(bp => {
+        const normalizedAuthor = normalizeAuthor(bp.book_title, bp.book_author)
+        const legacyKey = `${bp.book_title}-${normalizedAuthor}`.toLowerCase().replace(/[^a-z0-9-]/g, '-')
+        return stableIdMapping[legacyKey] || legacyKey
+      })
+    }
+
     // Build response
     const profileData = {
       id: user.id,
@@ -41,8 +71,11 @@ export async function GET(request: NextRequest) {
       image: user.image,
       firstLogin: user.created_at,
       credits: credits,
-      purchasedBooks: bookPurchases.map(bp => `${bp.book_title}-${bp.book_author}`.toLowerCase().replace(/[^a-z0-9-]/g, '-')),
-      bookPurchases: bookPurchases,
+      purchasedBooks: mapToStableIds(bookPurchases),
+      bookPurchases: bookPurchases.map(bp => ({
+        ...bp,
+        book_author: normalizeAuthor(bp.book_title, bp.book_author)
+      })),
       totalExplanations: totalExplanations,
       todayExplanations: todayExplanations,
       bookExplanations: bookExplanations

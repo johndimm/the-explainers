@@ -126,6 +126,8 @@ export const AuthenticatedProfileProvider: React.FC<ProfileProviderProps> = ({ c
   }
 
   const getBookKey = (bookTitle: string, author: string) => {
+    // For now, keep the old system for backward compatibility
+    // TODO: Migrate to stable IDs
     return `${bookTitle}-${author}`.toLowerCase().replace(/[^a-z0-9-]/g, '-')
   }
 
