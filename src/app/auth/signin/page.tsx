@@ -58,6 +58,50 @@ function SignInContent() {
       })
       .catch(error => {
         console.error('🔐 CSRF test failed:', error)
+        
+        // Show mobile-specific error
+        if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+          alert(`🔐 Network Error Detected!\n\nCSRF test failed: ${error.message}\n\nThis explains why sign-in returns undefined.\n\nTry the green "Direct Google Sign-in" button below.`)
+        }
+      })
+    
+    // Test session endpoint specifically
+    fetch('/api/auth/session')
+      .then(response => {
+        console.log('🔐 Session test successful:', response.status)
+        return response.json()
+      })
+      .then(data => {
+        console.log('🔐 Session response:', data)
+      })
+      .catch(error => {
+        console.error('🔐 Session test failed:', error)
+        
+        // Show mobile-specific error
+        if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+          alert(`🔐 Session API Error!\n\nSession test failed: ${error.message}\n\nThis is why NextAuth returns undefined.\n\nUse the green button instead.`)
+        }
+      })
+    
+    // Test the direct signin endpoint
+    fetch('/api/auth/signin/google')
+      .then(response => {
+        console.log('🔐 Direct signin test successful:', response.status, response.url)
+        if (response.redirected) {
+          console.log('🔐 Redirected to:', response.url)
+        }
+        return response.text()
+      })
+      .then(text => {
+        console.log('🔐 Direct signin response:', text.substring(0, 200) + '...')
+      })
+      .catch(error => {
+        console.error('🔐 Direct signin test failed:', error)
+        
+        // Show mobile-specific error
+        if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+          alert(`🔐 Direct Signin Error!\n\nDirect signin test failed: ${error.message}\n\nThis explains why the green button doesn't work.`)
+        }
       })
   }, [router])
 
@@ -268,37 +312,73 @@ function SignInContent() {
 
         {/* Fallback direct link for mobile */}
         {/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) && (
-          <a
-            href="/api/auth/signin/google"
-            style={{
-              width: '100%',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              gap: '12px',
-              padding: '12px 24px',
-              backgroundColor: '#34a853',
-              color: 'white',
-              textDecoration: 'none',
+          <>
+            <div style={{
+              background: '#fef3c7',
+              border: '1px solid #f59e0b',
               borderRadius: '8px',
-              fontSize: '16px',
-              fontWeight: '500',
-              minHeight: '48px',
-              touchAction: 'manipulation',
-              WebkitTapHighlightColor: 'transparent',
-              WebkitTouchCallout: 'none',
-              WebkitUserSelect: 'none',
-              userSelect: 'none'
-            }}
-          >
-            <svg width="20" height="20" viewBox="0 0 24 24">
-              <path fill="currentColor" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
-              <path fill="currentColor" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
-              <path fill="currentColor" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/>
-              <path fill="currentColor" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/>
-            </svg>
-            Direct Google Sign-in (Mobile)
-          </a>
+              padding: '12px',
+              marginBottom: '16px',
+              fontSize: '14px',
+              color: '#92400e'
+            }}>
+              <strong>Mobile Users:</strong> If the blue button above doesn't work, use the green button below for direct Google sign-in.
+            </div>
+            
+            <a
+              href="/api/auth/signin/google"
+              onClick={(e) => {
+                console.log('🔐 Direct Google sign-in clicked')
+                console.log('🔐 Link href:', e.currentTarget.href)
+                
+                // For mobile, try to force the redirect
+                if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+                  e.preventDefault()
+                  console.log('🔐 Mobile detected - forcing redirect')
+                  
+                  // Try multiple methods to ensure redirect works
+                  setTimeout(() => {
+                    window.location.href = '/api/auth/signin/google'
+                  }, 100)
+                  
+                  // Backup method
+                  setTimeout(() => {
+                    window.open('/api/auth/signin/google', '_self')
+                  }, 500)
+                }
+                // Don't prevent default on desktop
+              }}
+              style={{
+                width: '100%',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                gap: '12px',
+                padding: '12px 24px',
+                backgroundColor: '#34a853',
+                color: 'white',
+                textDecoration: 'none',
+                borderRadius: '8px',
+                fontSize: '16px',
+                fontWeight: '500',
+                minHeight: '48px',
+                touchAction: 'manipulation',
+                WebkitTapHighlightColor: 'transparent',
+                WebkitTouchCallout: 'none',
+                WebkitUserSelect: 'none',
+                userSelect: 'none',
+                boxShadow: '0 2px 4px rgba(0,0,0,0.1)'
+              }}
+            >
+              <svg width="20" height="20" viewBox="0 0 24 24">
+                <path fill="currentColor" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
+                <path fill="currentColor" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
+                <path fill="currentColor" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/>
+                <path fill="currentColor" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/>
+              </svg>
+              Direct Google Sign-in (Mobile)
+            </a>
+          </>
         )}
 
         <p style={{
