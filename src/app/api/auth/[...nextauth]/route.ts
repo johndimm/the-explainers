@@ -109,34 +109,4 @@ const handler = NextAuth({
   }
 })
 
-// Add request logging wrapper
-const loggedHandler = {
-  GET: async (req: any, context: any) => {
-    console.log('🔐 NextAuth GET request:', {
-      url: req.url,
-      method: req.method,
-      headers: {
-        'user-agent': req.headers.get('user-agent'),
-        'referer': req.headers.get('referer'),
-        'origin': req.headers.get('origin')
-      },
-      timestamp: new Date().toISOString()
-    })
-    return handler.GET(req, context)
-  },
-  POST: async (req: any, context: any) => {
-    console.log('🔐 NextAuth POST request:', {
-      url: req.url,
-      method: req.method,
-      headers: {
-        'user-agent': req.headers.get('user-agent'),
-        'referer': req.headers.get('referer'),
-        'origin': req.headers.get('origin')
-      },
-      timestamp: new Date().toISOString()
-    })
-    return handler.POST(req, context)
-  }
-}
-
-export { loggedHandler as GET, loggedHandler as POST }
+export { handler as GET, handler as POST }
