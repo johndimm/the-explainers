@@ -1,7 +1,7 @@
 'use client'
 
 import Profile from '@/components/Profile'
-import { useAuthenticatedProfile } from '@/contexts/AuthenticatedProfileContext'
+import { useAuthenticatedProfile, AuthenticatedProfileProvider } from '@/contexts/AuthenticatedProfileContext'
 import { useRouter } from 'next/navigation'
 
 function ProfileContent() {
@@ -21,5 +21,9 @@ function ProfileContent() {
 }
 
 export default function ProfilePage() {
-  return <ProfileContent />
+  return (
+    <AuthenticatedProfileProvider>
+      <ProfileContent />
+    </AuthenticatedProfileProvider>
+  )
 }
