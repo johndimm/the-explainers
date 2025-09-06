@@ -349,19 +349,17 @@ function SignInContent() {
               onClick={() => {
                 console.log('🔐 Direct Google sign-in button clicked')
                 
-                // Use the exact Google OAuth URL that the server generates
-                // This bypasses the mobile redirect issue entirely
-                const googleOAuthUrl = `https://accounts.google.com/o/oauth2/v2/auth?client_id=901669085394-p6lo402or53841uug31kap5q0nkc9ujv.apps.googleusercontent.com&scope=openid%20email%20profile&response_type=code&redirect_uri=${encodeURIComponent('https://the-explainers.vercel.app/api/auth/callback/google')}&prompt=select_account`
-                
-                console.log('🔐 Redirecting directly to Google OAuth:', googleOAuthUrl)
+                // Use NextAuth's proper signin endpoint to get the correct OAuth URL with state
+                const signinUrl = `${window.location.origin}/api/auth/signin/google`
+                console.log('🔐 Using NextAuth signin URL:', signinUrl)
                 
                 // Show user what's happening
                 if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
                   alert('🔐 Redirecting to Google Sign-in...\n\nYou should see the Google account selection page.')
                 }
                 
-                // Direct redirect to Google OAuth - NO SERVER CALLS
-                window.location.href = googleOAuthUrl
+                // Direct redirect to NextAuth signin endpoint (which will redirect to Google with proper state)
+                window.location.href = signinUrl
               }}
               style={{
                 width: '100%',

@@ -26,12 +26,27 @@ const handler = NextAuth({
     })
   ],
   callbacks: {
+    async signIn({ user, account, profile }) {
+      console.log('🔐 NextAuth signIn callback:', {
+        hasUser: !!user,
+        hasAccount: !!account,
+        hasProfile: !!profile,
+        userEmail: user?.email,
+        userName: user?.name,
+        userId: user?.id,
+        accountProvider: account?.provider,
+        timestamp: new Date().toISOString()
+      })
+      return true
+    },
     async session({ session, token }) {
       console.log('🔐 NextAuth session callback:', {
         hasSession: !!session,
         hasToken: !!token,
         tokenSub: token?.sub,
         sessionUser: session?.user,
+        sessionUserEmail: session?.user?.email,
+        sessionUserName: session?.user?.name,
         timestamp: new Date().toISOString()
       })
       // Add user ID to session
@@ -45,12 +60,15 @@ const handler = NextAuth({
         hasToken: !!token,
         hasUser: !!user,
         tokenSub: token?.sub,
-        user: user?.email,
+        userEmail: user?.email,
+        userName: user?.name,
+        userId: user?.id,
         timestamp: new Date().toISOString()
       })
       // Persist user ID in token
       if (user) {
         token.sub = user.id
+        console.log('🔐 Setting token.sub to:', user.id)
       }
       return token
     },
