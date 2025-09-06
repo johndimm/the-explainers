@@ -47,81 +47,82 @@ function SignInContent() {
       hasSessionStorage: typeof sessionStorage !== 'undefined'
     })
     
-    // Test if we can make a basic fetch request
-    fetch('/api/auth/csrf')
-      .then(response => {
-        console.log('🔐 CSRF test successful:', response.status)
-        return response.text()
-      })
-      .then(text => {
-        console.log('🔐 CSRF response:', text)
-      })
-      .catch(error => {
-        console.error('🔐 CSRF test failed:', error)
-        
-        // Show mobile-specific error
-        if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
-          alert(`🔐 Network Error Detected!\n\nCSRF test failed: ${error.message}\n\nThis explains why sign-in returns undefined.\n\nTry the green "Direct Google Sign-in" button below.`)
-        }
-      })
+    // Skip server tests on mobile to avoid "This site can't be reached" errors
+    if (!/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+      // Test if we can make a basic fetch request (desktop only)
+      fetch('/api/auth/csrf')
+        .then(response => {
+          console.log('🔐 CSRF test successful:', response.status)
+          return response.text()
+        })
+        .then(text => {
+          console.log('🔐 CSRF response:', text)
+        })
+        .catch(error => {
+          console.error('🔐 CSRF test failed:', error)
+        })
+      
+      // Test session endpoint specifically (desktop only)
+      fetch('/api/auth/session')
+        .then(response => {
+          console.log('🔐 Session test successful:', response.status)
+          return response.json()
+        })
+        .then(data => {
+          console.log('🔐 Session response:', data)
+        })
+        .catch(error => {
+          console.error('🔐 Session test failed:', error)
+        })
+      
+      // Test basic API connectivity first (desktop only)
+      fetch(`${window.location.origin}/api/test`)
+        .then(response => {
+          console.log('🔐 Basic API test successful:', response.status)
+          return response.json()
+        })
+        .then(data => {
+          console.log('🔐 Basic API response:', data)
+        })
+        .catch(error => {
+          console.error('🔐 Basic API test failed:', error)
+        })
+      
+      // Test NextAuth specifically (desktop only)
+      fetch(`${window.location.origin}/api/test-nextauth`)
+        .then(response => {
+          console.log('🔐 NextAuth API test successful:', response.status)
+          return response.json()
+        })
+        .then(data => {
+          console.log('🔐 NextAuth API response:', data)
+        })
+        .catch(error => {
+          console.error('🔐 NextAuth API test failed:', error)
+        })
+    }
     
-    // Test session endpoint specifically
-    fetch('/api/auth/session')
-      .then(response => {
-        console.log('🔐 Session test successful:', response.status)
-        return response.json()
-      })
-      .then(data => {
-        console.log('🔐 Session response:', data)
-      })
-      .catch(error => {
-        console.error('🔐 Session test failed:', error)
-        
-        // Show mobile-specific error
-        if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
-          alert(`🔐 Session API Error!\n\nSession test failed: ${error.message}\n\nThis is why NextAuth returns undefined.\n\nUse the green button instead.`)
-        }
-      })
-    
-    // Test basic API connectivity first
-    fetch(`${window.location.origin}/api/test`)
-      .then(response => {
-        console.log('🔐 Basic API test successful:', response.status)
-        return response.json()
-      })
-      .then(data => {
-        console.log('🔐 Basic API response:', data)
-      })
-      .catch(error => {
-        console.error('🔐 Basic API test failed:', error)
-        if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
-          alert(`🔐 API Routes Not Working!\n\nBasic API test failed: ${error.message}\n\nThis means the API routes aren't deployed properly.`)
-        }
-      })
-    
-    // Test the direct signin endpoint
-    const signinUrl = `${window.location.origin}/api/auth/signin/google`
-    console.log('🔐 Testing signin URL:', signinUrl)
-    
-    fetch(signinUrl)
-      .then(response => {
-        console.log('🔐 Direct signin test successful:', response.status, response.url)
-        if (response.redirected) {
-          console.log('🔐 Redirected to:', response.url)
-        }
-        return response.text()
-      })
-      .then(text => {
-        console.log('🔐 Direct signin response:', text.substring(0, 200) + '...')
-      })
-      .catch(error => {
-        console.error('🔐 Direct signin test failed:', error)
-        
-        // Show mobile-specific error
-        if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
-          alert(`🔐 Direct Signin Error!\n\nURL: ${signinUrl}\nError: ${error.message}\n\nThis explains why the green button doesn't work.`)
-        }
-      })
+    // Skip server tests on mobile to avoid "This site can't be reached" errors
+    if (!/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+      // Test the direct signin endpoint only on desktop
+      const signinUrl = `${window.location.origin}/api/auth/signin/google`
+      console.log('🔐 Testing signin URL:', signinUrl)
+      
+      fetch(signinUrl)
+        .then(response => {
+          console.log('🔐 Direct signin test successful:', response.status, response.url)
+          if (response.redirected) {
+            console.log('🔐 Redirected to:', response.url)
+          }
+          return response.text()
+        })
+        .then(text => {
+          console.log('🔐 Direct signin response:', text.substring(0, 200) + '...')
+        })
+        .catch(error => {
+          console.error('🔐 Direct signin test failed:', error)
+        })
+    }
   }, [router])
 
   const handleGoogleSignIn = async () => {
@@ -345,61 +346,22 @@ function SignInContent() {
             </div>
             
             <button
-              onClick={async () => {
+              onClick={() => {
                 console.log('🔐 Direct Google sign-in button clicked')
                 
-                try {
-                  // First, get the Google OAuth URL from the server
-                  console.log('🔐 Fetching Google OAuth URL from server...')
-                  const response = await fetch('/api/auth/signin/google', {
-                    method: 'GET',
-                    redirect: 'manual' // Don't follow redirects automatically
-                  })
-                  
-                  console.log('🔐 Server response:', response.status, response.type)
-                  
-                  if (response.type === 'opaqueredirect' || response.status === 0) {
-                    // The server is redirecting, but we can't see the URL due to CORS
-                    // Try to construct the Google OAuth URL manually
-                    const googleOAuthUrl = `https://accounts.google.com/o/oauth2/v2/auth?client_id=901669085394-p6lo402or53841uug31kap5q0nkc9ujv.apps.googleusercontent.com&scope=openid%20email%20profile&response_type=code&redirect_uri=${encodeURIComponent('https://the-explainers.vercel.app/api/auth/callback/google')}&prompt=select_account`
-                    
-                    console.log('🔐 Using manual Google OAuth URL:', googleOAuthUrl)
-                    
-                    // Try multiple approaches to open the Google OAuth URL
-                    const approaches = [
-                      () => {
-                        console.log('🔐 Approach 1: Direct window.location.href to Google')
-                        window.location.href = googleOAuthUrl
-                      },
-                      () => {
-                        console.log('🔐 Approach 2: window.open to Google')
-                        window.open(googleOAuthUrl, '_self')
-                      },
-                      () => {
-                        console.log('🔐 Approach 3: window.open in new tab')
-                        window.open(googleOAuthUrl, '_blank')
-                      }
-                    ]
-                    
-                    approaches.forEach((approach, index) => {
-                      setTimeout(() => {
-                        try {
-                          approach()
-                        } catch (error) {
-                          console.error(`🔐 Approach ${index + 1} failed:`, error)
-                        }
-                      }, index * 300)
-                    })
-                  } else {
-                    console.log('🔐 Unexpected response type:', response.type)
-                    // Fallback to original method
-                    window.location.href = '/api/auth/signin/google'
-                  }
-                } catch (error) {
-                  console.error('🔐 Error fetching OAuth URL:', error)
-                  // Fallback to original method
-                  window.location.href = '/api/auth/signin/google'
+                // Use the exact Google OAuth URL that the server generates
+                // This bypasses the mobile redirect issue entirely
+                const googleOAuthUrl = `https://accounts.google.com/o/oauth2/v2/auth?client_id=901669085394-p6lo402or53841uug31kap5q0nkc9ujv.apps.googleusercontent.com&scope=openid%20email%20profile&response_type=code&redirect_uri=${encodeURIComponent('https://the-explainers.vercel.app/api/auth/callback/google')}&prompt=select_account`
+                
+                console.log('🔐 Redirecting directly to Google OAuth:', googleOAuthUrl)
+                
+                // Show user what's happening
+                if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+                  alert('🔐 Redirecting to Google Sign-in...\n\nYou should see the Google account selection page.')
                 }
+                
+                // Direct redirect to Google OAuth - NO SERVER CALLS
+                window.location.href = googleOAuthUrl
               }}
               style={{
                 width: '100%',
