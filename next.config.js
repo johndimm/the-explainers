@@ -1,10 +1,11 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
-  serverExternalPackages: [],
   experimental: {
-    // Next.js 15: serverComponentsExternalPackages moved to serverExternalPackages
+    serverComponentsExternalPackages: []
   },
+  // Fix for Vercel deployment issues
+  trailingSlash: false
 }
 
 module.exports = nextConfig
