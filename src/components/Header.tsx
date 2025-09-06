@@ -42,8 +42,10 @@ export default function Header() {
   }, [])
 
   const handleAuthAction = async () => {
-    alert('BUTTON CLICKED! This should appear when you click sign-out')
-    console.log('🚨 BUTTON CLICKED! handleAuthAction called, isAuthenticated:', isAuthenticated)
+    const userAgent = navigator.userAgent
+    const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(userAgent)
+    alert(`BUTTON CLICKED! Platform: ${isMobile ? 'MOBILE' : 'DESKTOP'}, isAuthenticated: ${isAuthenticated}`)
+    console.log('🚨 BUTTON CLICKED! handleAuthAction called, isAuthenticated:', isAuthenticated, 'Platform:', isMobile ? 'MOBILE' : 'DESKTOP')
     if (isAuthenticated) {
       console.log('🚨 Header: Calling handleSignOut')
       await handleSignOut()
@@ -193,7 +195,11 @@ export default function Header() {
                       {user?.email}
                     </div>
                     <button 
-                      onClick={handleAuthAction}
+                      onClick={(e) => {
+                        console.log('🚨 SIGN-OUT BUTTON CLICKED!', e)
+                        alert('SIGN-OUT BUTTON CLICKED!')
+                        handleAuthAction()
+                      }}
                       disabled={isLoading}
                       style={{ 
                         display: 'block', 
@@ -204,7 +210,9 @@ export default function Header() {
                         textAlign: 'left', 
                         cursor: isLoading ? 'not-allowed' : 'pointer',
                         color: '#dc3545',
-                        opacity: isLoading ? 0.6 : 1
+                        opacity: isLoading ? 0.6 : 1,
+                        zIndex: 9999,
+                        position: 'relative'
                       }}
                     >
                       {isLoading ? 'Signing out...' : '🚪 Sign Out'}
