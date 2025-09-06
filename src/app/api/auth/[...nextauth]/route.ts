@@ -31,6 +31,15 @@ const handler = NextAuth({
   session: {
     strategy: 'jwt',
     maxAge: 30 * 24 * 60 * 60, // 30 days
+  },
+  // Add events for debugging
+  events: {
+    signOut: async (message) => {
+      console.log('NextAuth signOut event:', message)
+    },
+    session: async (message) => {
+      console.log('NextAuth session event:', message)
+    }
   }
 })
 

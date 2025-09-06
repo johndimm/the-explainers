@@ -48,15 +48,24 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   }
 
   const handleSignOut = async () => {
+    console.log('Sign out started')
     setIsLoading(true)
     try {
-      // Simple signOut with redirect
-      await signOut({ callbackUrl: '/' })
+      console.log('Calling signOut...')
+      // Try signOut without redirect first
+      const result = await signOut({ redirect: false })
+      console.log('SignOut result:', result)
+      
+      // Then redirect manually
+      console.log('Redirecting to home page')
+      window.location.href = '/'
     } catch (error) {
       console.error('Sign out error:', error)
+      console.log('Falling back to direct redirect')
       // Fallback: just redirect to home
       window.location.href = '/'
     } finally {
+      console.log('Sign out finally block')
       setIsLoading(false)
     }
   }
