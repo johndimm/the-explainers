@@ -27,15 +27,6 @@ const handler = NextAuth({
     })
   ],
   callbacks: {
-    async authorized({ token, req }) {
-      console.log('🔐 NextAuth authorized callback:', {
-        hasToken: !!token,
-        url: req?.url,
-        method: req?.method,
-        timestamp: new Date().toISOString()
-      })
-      return true
-    },
     async signIn({ user, account, profile }) {
       console.log('🔐 NextAuth signIn callback:', {
         hasUser: !!user,
