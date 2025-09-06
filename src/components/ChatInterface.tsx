@@ -305,7 +305,8 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ selectedText, contextInfo
     if (selectedText && !initializedRef.current) {
       setOriginalSelectedText(selectedText)
       initializedRef.current = true
-      handleExplainText(selectedText)
+      // Don't automatically call handleExplainText - let user choose to re-explain
+      // This prevents charging users when they navigate to chat from hamburger menu
     }
   }, [selectedText])
 
