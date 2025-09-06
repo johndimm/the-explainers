@@ -6,7 +6,7 @@ import { useAuth } from '@/contexts/AuthContext'
 
 export default function Header() {
   const router = useRouter()
-  const { user, isAuthenticated, isLoading, signIn, signOut } = useAuth()
+  const { user, isAuthenticated, isLoading, signIn, signOut: handleSignOut } = useAuth()
   const [showMobileMenu, setShowMobileMenu] = useState(false)
   const menuRef = useRef<HTMLDivElement>(null)
   const [subtitle, setSubtitle] = useState<string>('understand difficult texts')
@@ -40,7 +40,7 @@ export default function Header() {
 
   const handleAuthAction = async () => {
     if (isAuthenticated) {
-      await signOut()
+      await handleSignOut()
     } else {
       await signIn()
     }
