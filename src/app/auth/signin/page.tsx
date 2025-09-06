@@ -27,7 +27,7 @@ function SignInContent() {
     const checkSession = async () => {
       console.log('🔐 Checking simple session...')
       try {
-        const response = await fetch('/api/auth/simple-session')
+        const response = await fetch('/api/oauth/session')
         const data = await response.json()
         
         console.log('🔐 Simple session check:', {
@@ -203,7 +203,7 @@ function SignInContent() {
           onClick={() => {
             console.log('🔐 Direct OAuth button clicked')
             setIsLoading(true)
-            window.location.href = '/api/auth/direct-google'
+            window.location.href = '/api/oauth/google'
           }}
           onTouchEnd={(e) => {
             // Prevent double-tap on mobile
@@ -211,7 +211,7 @@ function SignInContent() {
             if (!isLoading) {
               console.log('🔐 Direct OAuth button clicked (touch)')
               setIsLoading(true)
-              window.location.href = '/api/auth/direct-google'
+              window.location.href = '/api/oauth/google'
             }
           }}
           disabled={isLoading}
@@ -273,7 +273,7 @@ function SignInContent() {
           onClick={async () => {
             console.log('🔐 Manual simple session check...')
             try {
-              const response = await fetch('/api/auth/simple-session')
+              const response = await fetch('/api/oauth/session')
               const data = await response.json()
               console.log('🔐 Manual simple session result:', data)
               if (data.user) {
