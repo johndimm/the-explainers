@@ -60,6 +60,13 @@ function LayoutContent({ children }: { children: React.ReactNode }) {
   useEffect(() => {
     const interval = setInterval(async () => {
       const currentSession = await getSession()
+      console.log('🔐 Polling session check:', {
+        hasCurrentSession: !!currentSession,
+        hasLocalSession: !!session,
+        currentUser: currentSession?.user?.email,
+        localUser: session?.user?.email,
+        timestamp: new Date().toISOString()
+      })
       if (currentSession && !session) {
         console.log('🔐 Session detected via polling, forcing refresh')
         window.location.reload() // Force full page refresh to update all components
@@ -75,6 +82,26 @@ function LayoutContent({ children }: { children: React.ReactNode }) {
       clearInterval(interval)
       clearTimeout(timeout)
     }
+  }, [session])
+
+  // Force session refresh when coming back from OAuth
+  useEffect(() => {
+    const handleFocus = async () => {
+      console.log('🔐 Window focus - refreshing session...')
+      const newSession = await getSession()
+      console.log('🔐 Focus session result:', {
+        hasSession: !!newSession,
+        sessionUser: newSession?.user?.email,
+        timestamp: new Date().toISOString()
+      })
+      if (newSession && !session) {
+        console.log('🔐 Session detected on focus, forcing refresh')
+        window.location.reload()
+      }
+    }
+    
+    window.addEventListener('focus', handleFocus)
+    return () => window.removeEventListener('focus', handleFocus)
   }, [session])
 
   // Close mobile menu when clicking outside
