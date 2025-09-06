@@ -10,17 +10,35 @@ function SignInContent() {
   const [isLoading, setIsLoading] = useState(false)
 
   useEffect(() => {
+    // Check if we're returning from OAuth callback
+    const urlParams = new URLSearchParams(window.location.search)
+    const hasCallbackParams = urlParams.has('callbackUrl') || urlParams.has('error') || urlParams.has('code')
+    
+    console.log('🔐 Sign-in page loaded:', {
+      currentUrl: window.location.href,
+      hasCallbackParams,
+      callbackUrl: urlParams.get('callbackUrl'),
+      error: urlParams.get('error'),
+      code: urlParams.get('code'),
+      timestamp: new Date().toISOString()
+    })
+    
     // Add a delay before checking session to allow OAuth callback to complete
     const checkSession = () => {
+      console.log('🔐 Checking session...')
       getSession().then((session) => {
         console.log('🔐 Sign-in page session check:', {
           hasSession: !!session,
           sessionUser: session?.user,
+          sessionUserEmail: session?.user?.email,
+          sessionUserName: session?.user?.name,
           timestamp: new Date().toISOString()
         })
         if (session) {
           console.log('🔐 User already signed in, redirecting to library')
           router.push('/library')
+        } else {
+          console.log('🔐 No session found')
         }
       }).catch((error) => {
         console.error('🔐 Error getting session:', error)
@@ -30,10 +48,16 @@ function SignInContent() {
     // Check immediately
     checkSession()
     
-    // Also check after a delay to catch OAuth callbacks
-    const timeoutId = setTimeout(checkSession, 2000)
+    // Check multiple times to catch OAuth callbacks
+    const timeoutId1 = setTimeout(checkSession, 1000)
+    const timeoutId2 = setTimeout(checkSession, 3000)
+    const timeoutId3 = setTimeout(checkSession, 5000)
     
-    return () => clearTimeout(timeoutId)
+    return () => {
+      clearTimeout(timeoutId1)
+      clearTimeout(timeoutId2)
+      clearTimeout(timeoutId3)
+    }
     
     // Add client-side environment debugging
     console.log('🔐 Client-side environment check:', {
@@ -356,20 +380,35 @@ function SignInContent() {
             </div>
             
             <button
-              onClick={() => {
+              onClick={async () => {
                 console.log('🔐 Direct Google sign-in button clicked')
                 
-                // Use NextAuth's proper signin endpoint to get the correct OAuth URL with state
-                const signinUrl = `${window.location.origin}/api/auth/signin/google`
-                console.log('🔐 Using NextAuth signin URL:', signinUrl)
-                
-                // Show user what's happening
-                if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
-                  alert('🔐 Redirecting to Google Sign-in...\n\nYou should see the Google account selection page.')
+                try {
+                  // Get the proper OAuth URL from our custom endpoint
+                  const response = await fetch('/api/auth/google-oauth-url')
+                  const data = await response.json()
+                  
+                  if (data.oauthUrl) {
+                    console.log('🔐 Got OAuth URL from server:', data.oauthUrl)
+                    
+                    // Show user what's happening
+                    if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+                      alert('🔐 Redirecting to Google Sign-in...\n\nYou should see the Google account selection page.')
+                    }
+                    
+                    // Redirect to Google OAuth URL
+                    window.location.href = data.oauthUrl
+                  } else {
+                    throw new Error('No OAuth URL received from server')
+                  }
+                } catch (error) {
+                  console.error('🔐 Error getting OAuth URL:', error)
+                  
+                  // Fallback: try NextAuth endpoint
+                  const signinUrl = `${window.location.origin}/api/auth/signin/google`
+                  console.log('🔐 Fallback to NextAuth URL:', signinUrl)
+                  window.location.href = signinUrl
                 }
-                
-                // Direct redirect to NextAuth signin endpoint (which will redirect to Google with proper state)
-                window.location.href = signinUrl
               }}
               style={{
                 width: '100%',
@@ -404,6 +443,38 @@ function SignInContent() {
             </button>
           </>
         )}
+
+        {/* Debug session check button */}
+        <button
+          onClick={async () => {
+            console.log('🔐 Manual session check...')
+            try {
+              const session = await getSession()
+              console.log('🔐 Manual session result:', session)
+              if (session) {
+                alert(`🔐 Session found!\n\nUser: ${session.user?.name}\nEmail: ${session.user?.email}`)
+                router.push('/library')
+              } else {
+                alert('🔐 No session found')
+              }
+            } catch (error) {
+              console.error('🔐 Manual session check error:', error)
+              alert(`🔐 Session check error: ${error}`)
+            }
+          }}
+          style={{
+            marginTop: '16px',
+            padding: '8px 16px',
+            backgroundColor: '#6b7280',
+            color: 'white',
+            border: 'none',
+            borderRadius: '4px',
+            fontSize: '14px',
+            cursor: 'pointer'
+          }}
+        >
+          Check Session (Debug)
+        </button>
 
         <p style={{
           marginTop: '24px',
