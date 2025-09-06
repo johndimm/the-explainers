@@ -41,9 +41,8 @@ export default function Header() {
 
   const handleAuthAction = async () => {
     if (isAuthenticated) {
+      setShowMobileMenu(false)
       await handleSignOut()
-      // Give NextAuth time to update the session state
-      setTimeout(() => setShowMobileMenu(false), 500)
     } else {
       await signIn()
       setShowMobileMenu(false)
