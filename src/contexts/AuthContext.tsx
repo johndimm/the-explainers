@@ -50,29 +50,11 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   const handleSignOut = async () => {
     setIsLoading(true)
     try {
-      // Try the standard signOut first
-      const result = await signOut({ 
-        callbackUrl: '/',
-        redirect: false 
-      })
-      
-      // If signOut returns a URL, redirect manually
-      if (result?.url) {
-        window.location.href = result.url
-      } else {
-        // Fallback: clear session and redirect
-        window.location.href = '/'
-      }
+      // Simple signOut with redirect
+      await signOut({ callbackUrl: '/' })
     } catch (error) {
       console.error('Sign out error:', error)
-      // Fallback: clear localStorage and redirect
-      try {
-        localStorage.removeItem('next-auth.session-token')
-        localStorage.removeItem('__Secure-next-auth.session-token')
-      } catch (e) {
-        console.log('Could not clear localStorage:', e)
-      }
-      // Force reload the page
+      // Fallback: just redirect to home
       window.location.href = '/'
     } finally {
       setIsLoading(false)
