@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server'
 
 export async function GET() {
-  console.log('🔐 Direct Google OAuth endpoint called')
+  console.log('🔐 Direct Google OAuth endpoint called - v2')
   
   const clientId = process.env.GOOGLE_CLIENT_ID
   const baseUrl = process.env.NEXTAUTH_URL || 'http://localhost:3000'
