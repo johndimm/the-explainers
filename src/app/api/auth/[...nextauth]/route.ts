@@ -6,6 +6,7 @@ console.log('🔐 NextAuth Environment Check:', {
   NODE_ENV: process.env.NODE_ENV,
   hasGoogleClientId: !!process.env.GOOGLE_CLIENT_ID,
   hasGoogleClientSecret: !!process.env.GOOGLE_CLIENT_SECRET,
+  expectedCallbackUrl: `${process.env.NEXTAUTH_URL}/api/auth/callback/google`,
   timestamp: new Date().toISOString(),
   // Additional debugging for mobile
   userAgent: typeof window !== 'undefined' ? navigator.userAgent : 'server',
@@ -26,6 +27,15 @@ const handler = NextAuth({
     })
   ],
   callbacks: {
+    async authorized({ token, req }) {
+      console.log('🔐 NextAuth authorized callback:', {
+        hasToken: !!token,
+        url: req?.url,
+        method: req?.method,
+        timestamp: new Date().toISOString()
+      })
+      return true
+    },
     async signIn({ user, account, profile }) {
       console.log('🔐 NextAuth signIn callback:', {
         hasUser: !!user,
@@ -37,6 +47,9 @@ const handler = NextAuth({
         accountProvider: account?.provider,
         timestamp: new Date().toISOString()
       })
+      
+      // Always allow sign in for debugging
+      console.log('🔐 Allowing sign in')
       return true
     },
     async session({ session, token }) {
