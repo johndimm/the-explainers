@@ -198,20 +198,20 @@ function SignInContent() {
           Sign in to access your credits, purchases, and reading history across all your devices.
         </p>
 
-        {/* Custom OAuth Google button */}
+        {/* NextAuth Google button */}
         <button
           onClick={() => {
-            console.log('🔐 Custom OAuth Google button clicked')
+            console.log('🔐 NextAuth Google button clicked')
             setIsLoading(true)
-            window.location.href = '/api/oauth/google'
+            signIn('google', { callbackUrl: '/library' })
           }}
           onTouchEnd={(e) => {
             // Prevent double-tap on mobile
             e.preventDefault()
             if (!isLoading) {
-              console.log('🔐 Custom OAuth Google button clicked (touch)')
+              console.log('🔐 NextAuth Google button clicked (touch)')
               setIsLoading(true)
-              window.location.href = '/api/oauth/google'
+              signIn('google', { callbackUrl: '/library' })
             }
           }}
           disabled={isLoading}
