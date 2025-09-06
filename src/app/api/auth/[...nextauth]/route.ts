@@ -81,6 +81,13 @@ const handler = NextAuth({
         finalUrl: url.startsWith(baseUrl) ? url : `${baseUrl}${url}`,
         timestamp: new Date().toISOString()
       })
+      
+      // If redirecting to base URL (after successful login), go to library instead
+      if (url === baseUrl || url === `${baseUrl}/`) {
+        console.log('🔐 Redirecting to library after successful login')
+        return `${baseUrl}/library`
+      }
+      
       // Allows relative callback URLs
       if (url.startsWith("/")) return `${baseUrl}${url}`
       // Allows callback URLs on the same origin

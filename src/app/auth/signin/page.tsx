@@ -10,20 +10,30 @@ function SignInContent() {
   const [isLoading, setIsLoading] = useState(false)
 
   useEffect(() => {
-    // Check if user is already signed in
-    getSession().then((session) => {
-      console.log('🔐 Sign-in page session check:', {
-        hasSession: !!session,
-        sessionUser: session?.user,
-        timestamp: new Date().toISOString()
+    // Add a delay before checking session to allow OAuth callback to complete
+    const checkSession = () => {
+      getSession().then((session) => {
+        console.log('🔐 Sign-in page session check:', {
+          hasSession: !!session,
+          sessionUser: session?.user,
+          timestamp: new Date().toISOString()
+        })
+        if (session) {
+          console.log('🔐 User already signed in, redirecting to library')
+          router.push('/library')
+        }
+      }).catch((error) => {
+        console.error('🔐 Error getting session:', error)
       })
-      if (session) {
-        console.log('🔐 User already signed in, redirecting to library')
-        router.push('/library')
-      }
-    }).catch((error) => {
-      console.error('🔐 Error getting session:', error)
-    })
+    }
+    
+    // Check immediately
+    checkSession()
+    
+    // Also check after a delay to catch OAuth callbacks
+    const timeoutId = setTimeout(checkSession, 2000)
+    
+    return () => clearTimeout(timeoutId)
     
     // Add client-side environment debugging
     console.log('🔐 Client-side environment check:', {
