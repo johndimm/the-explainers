@@ -44,11 +44,16 @@ interface ProfileProviderProps {
 }
 
 export const AuthenticatedProfileProvider: React.FC<ProfileProviderProps> = ({ children }) => {
-  const { data: session, status } = useSession()
+  const [mounted, setMounted] = useState(false)
+  const { data: session, status } = mounted ? useSession() : { data: null, status: 'loading' }
   const router = useRouter()
   const [profile, setProfile] = useState<ProfileData>(DEFAULT_PROFILE)
   const [isProfileOpen, setIsProfileOpen] = useState(false)
   const [isHydrated, setIsHydrated] = useState(false)
+
+  useEffect(() => {
+    setMounted(true)
+  }, [])
 
   // Redirect to sign-in if not authenticated
   useEffect(() => {

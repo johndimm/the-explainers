@@ -17,11 +17,17 @@ interface ClientLayoutProps {
 function LayoutContent({ children }: { children: React.ReactNode }) {
   const [showMobileMenu, setShowMobileMenu] = useState(false)
   const [subtitle, setSubtitle] = useState('understand difficult texts')
+  const [mounted, setMounted] = useState(false)
   const menuRef = useRef<HTMLDivElement>(null)
   const router = useRouter()
   const pathname = usePathname()
   const { cachedBook } = useBookCache()
-  const { data: session, status } = useSession()
+  
+  useEffect(() => {
+    setMounted(true)
+  }, [])
+  
+  const { data: session, status } = mounted ? useSession() : { data: null, status: 'loading' }
   
   // Debug logging for authentication status
   useEffect(() => {
@@ -306,6 +312,26 @@ function LayoutContent({ children }: { children: React.ReactNode }) {
 }
 
 export default function ClientLayout({ children, requiresAuth = false }: ClientLayoutProps) {
+  const [mounted, setMounted] = useState(false)
+
+  useEffect(() => {
+    setMounted(true)
+  }, [])
+
+  if (!mounted) {
+    return (
+      <ErrorBoundary>
+        <BookCacheProvider>
+          <SettingsProvider>
+            <LayoutContent>
+              {children}
+            </LayoutContent>
+          </SettingsProvider>
+        </BookCacheProvider>
+      </ErrorBoundary>
+    )
+  }
+
   return (
     <ErrorBoundary>
       <SessionProvider>
