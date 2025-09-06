@@ -115,27 +115,27 @@ function ChatContent() {
         }} className="mobile-card">
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '20px' }}>
             <div style={{ flex: 1 }}>
-              <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '8px' }}>
-                <h2 style={{ margin: '0', fontSize: '24px', fontWeight: '600', color: '#1a1a1a' }}>
-                  Chat with AI
-                </h2>
-                {user?.image && (
-                  <img 
-                    src={user.image} 
-                    alt={user.name || 'User'} 
-                    style={{ 
-                      width: '32px', 
-                      height: '32px', 
-                      borderRadius: '50%',
-                      border: '2px solid #e0e0e0'
-                    }} 
-                  />
-                )}
-              </div>
+              <h2 style={{ margin: '0 0 8px 0', fontSize: '24px', fontWeight: '600', color: '#1a1a1a' }}>
+                Chat with AI
+              </h2>
               {user?.email && (
-                <p style={{ margin: '0 0 8px 0', color: '#666', fontSize: '14px' }}>
-                  Signed in as {user.email}
-                </p>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '8px' }}>
+                  {user?.image && (
+                    <img 
+                      src={user.image} 
+                      alt={user.name || 'User'} 
+                      style={{ 
+                        width: '24px', 
+                        height: '24px', 
+                        borderRadius: '50%',
+                        border: '2px solid #e0e0e0'
+                      }} 
+                    />
+                  )}
+                  <p style={{ margin: '0', color: '#666', fontSize: '14px' }}>
+                    Signed in as {user.email}
+                  </p>
+                </div>
               )}
               {contextData?.bookTitle && (
                 <p style={{ margin: '0', color: '#8b5cf6', fontSize: '14px', fontWeight: '500' }}>

@@ -305,8 +305,24 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ selectedText, contextInfo
     if (selectedText && !initializedRef.current) {
       setOriginalSelectedText(selectedText)
       initializedRef.current = true
-      // Don't automatically call handleExplainText - let user choose to re-explain
-      // This prevents charging users when they navigate to chat from hamburger menu
+      
+      // Check if we have context data (meaning user clicked "explain" button)
+      // If so, automatically explain. If not, just show the quote.
+      const storedContext = sessionStorage.getItem('chatContext')
+      if (storedContext) {
+        try {
+          const parsedContext = JSON.parse(storedContext)
+          if (parsedContext.selectedText === selectedText) {
+            // User clicked "explain" button - auto-explain
+            handleExplainText(selectedText)
+            // Clear the context data so it's not used again
+            sessionStorage.removeItem('chatContext')
+          }
+        } catch (error) {
+          console.error('Error parsing chat context:', error)
+        }
+      }
+      // If no context data, just show the quote (user clicked "chat" in hamburger)
     }
   }, [selectedText])
 
@@ -1630,6 +1646,30 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ selectedText, contextInfo
             </div>
           )}
         </div>
+        
+        {/* Display selected text quote if no messages yet */}
+        {messages.length === 0 && (originalSelectedText || selectedText) && (
+          <div className={styles.quoteDisplay}>
+            <div className={styles.quoteHeader}>
+              <h4>Selected Text</h4>
+            </div>
+            <div className={styles.quoteContent}>
+              <blockquote>
+                "{originalSelectedText || selectedText}"
+              </blockquote>
+            </div>
+            <div className={styles.quoteActions}>
+              <button 
+                onClick={() => handleReExplain(originalSelectedText || selectedText)}
+                disabled={isLoading}
+                className={styles.explainButton}
+                title="Explain this text"
+              >
+                {isLoading ? 'Explaining...' : 'Explain This Text'}
+              </button>
+            </div>
+          </div>
+        )}
         
         <div className={styles.inputContainer}>
           <input
