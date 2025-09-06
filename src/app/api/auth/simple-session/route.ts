@@ -4,7 +4,7 @@ import { cookies } from 'next/headers'
 export async function GET(request: NextRequest) {
   console.log('🔐 Simple session check called')
   
-  const cookieStore = cookies()
+  const cookieStore = await cookies()
   const sessionToken = cookieStore.get('simple-session')?.value
   
   if (!sessionToken) {

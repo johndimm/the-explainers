@@ -27,7 +27,7 @@ export async function GET(request: NextRequest) {
   }
   
   // Verify state
-  const cookieStore = cookies()
+  const cookieStore = await cookies()
   const storedState = cookieStore.get('oauth-state')?.value
   
   if (state !== storedState) {
