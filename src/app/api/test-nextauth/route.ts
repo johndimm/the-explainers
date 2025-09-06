@@ -23,12 +23,14 @@ export async function GET(request: NextRequest) {
   } catch (error) {
     console.error('🔐 NextAuth import failed:', error)
     
+    const errorMessage = error instanceof Error ? error.message : String(error)
+    
     return NextResponse.json({
       message: 'NextAuth API test failed',
       timestamp: new Date().toISOString(),
       url: request.url,
       nextAuthAvailable: false,
-      error: error.message
+      error: errorMessage
     }, { status: 500 })
   }
 }
