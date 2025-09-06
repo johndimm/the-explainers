@@ -3,7 +3,6 @@
 import React, { useState, useEffect, useRef } from 'react'
 import { useRouter } from 'next/navigation'
 import styles from './Settings.module.css'
-import ExplainerStyles from './ExplainerStyles'
 
 export type LLMProvider = 'openai' | 'anthropic' | 'deepseek' | 'gemini' | 'custom'
 export type ResponseLength = 'brief' | 'medium' | 'long'
@@ -61,7 +60,6 @@ const DEFAULT_SETTINGS: SettingsData = {
 const Settings: React.FC<SettingsProps> = ({ isOpen, onClose, settings, onSettingsChange }) => {
   const [localSettings, setLocalSettings] = useState<SettingsData>(settings)
   const [showCustomFields, setShowCustomFields] = useState(settings.llmProvider === 'custom')
-  const [showExplainerStyles, setShowExplainerStyles] = useState(false)
   const [showMobileMenu, setShowMobileMenu] = useState(false)
   const menuRef = useRef<HTMLDivElement>(null)
   const router = useRouter()
@@ -570,35 +568,6 @@ const Settings: React.FC<SettingsProps> = ({ isOpen, onClose, settings, onSettin
             </div>
           </div>
 
-          <div className={styles.settingGroup}>
-            <h3>Explanation Style</h3>
-            <p style={{ color: '#666', fontSize: '14px', marginBottom: '16px' }}>
-              Choose how explanations are delivered - from neutral to various personality styles.
-            </p>
-            <button
-              onClick={() => setShowExplainerStyles(true)}
-              style={{
-                padding: '12px 20px',
-                background: '#f3f4f6',
-                border: '1px solid #d1d5db',
-                borderRadius: '8px',
-                cursor: 'pointer',
-                fontSize: '14px',
-                color: '#374151',
-                width: '100%',
-                textAlign: 'left',
-                display: 'flex',
-                justifyContent: 'space-between',
-                alignItems: 'center'
-              }}
-            >
-              <span>Current: {localSettings.explanationStyle === 'neutral' ? 'Neutral' : 
-                localSettings.explanationStyle.split('-').map(word => 
-                  word.charAt(0).toUpperCase() + word.slice(1)
-                ).join(' ')}</span>
-              <span>→</span>
-            </button>
-          </div>
         </div>
 
         <div className={styles.settingsFooter}>
@@ -612,12 +581,6 @@ const Settings: React.FC<SettingsProps> = ({ isOpen, onClose, settings, onSettin
         </div>
       </div>
       
-      <ExplainerStyles
-        isOpen={showExplainerStyles}
-        onClose={() => setShowExplainerStyles(false)}
-        selectedStyle={localSettings.explanationStyle}
-        onStyleChange={(style) => setLocalSettings(prev => ({ ...prev, explanationStyle: style }))}
-      />
     </div>
   )
 }

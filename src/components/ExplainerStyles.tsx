@@ -425,13 +425,13 @@ const ExplainerStyles: React.FC<ExplainerStylesProps> = ({
         </div>
       </header>
     
-    <div className={stylesCss.overlay} style={{ position: 'static', background: 'white', padding: '0', marginTop: '50px' }}>
-      <div className={stylesCss.container} style={{ maxHeight: 'none', overflow: 'visible', boxShadow: 'none' }}>
+    <div className={stylesCss.overlay}>
+      <div className={stylesCss.container}>
         <div className={stylesCss.header}>
           <h2>In the style of...</h2>
         </div>
         
-        <div className={stylesCss.content} style={{ maxHeight: 'none', overflow: 'visible' }}>
+        <div className={stylesCss.content}>
           <div className={stylesCss.currentSelection}>
             <span>Current: </span>
             <strong>
