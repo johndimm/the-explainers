@@ -176,6 +176,16 @@ export default function Header() {
               
               {/* Auth buttons */}
               <div style={{ borderTop: '1px solid #e0e0e0', marginTop: '8px', paddingTop: '8px' }}>
+                <div style={{ 
+                  background: 'orange', 
+                  border: '2px solid purple', 
+                  padding: '8px',
+                  margin: '4px',
+                  color: 'black',
+                  fontWeight: 'bold'
+                }}>
+                  DEBUG: isAuthenticated = {String(isAuthenticated)}, user = {user ? 'EXISTS' : 'NULL'}, isLoading = {String(isLoading)}
+                </div>
                 {isAuthenticated ? (
                   <>
                     <div style={{ padding: '8px 16px', fontSize: '12px', color: '#666', borderBottom: '1px solid #f0f0f0' }}>
@@ -227,6 +237,16 @@ export default function Header() {
                       >
                         {isLoading ? 'Signing out...' : '🚪 SIGN OUT BUTTON'}
                       </button>
+                    </div>
+                    <div style={{ 
+                      background: 'lime', 
+                      border: '3px solid blue', 
+                      padding: '4px',
+                      margin: '4px',
+                      color: 'black',
+                      fontWeight: 'bold'
+                    }}>
+                      DEBUG: Sign-out button should be visible above this text
                     </div>
                   </>
                 ) : (
