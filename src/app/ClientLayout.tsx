@@ -104,6 +104,29 @@ function LayoutContent({ children }: { children: React.ReactNode }) {
     return () => window.removeEventListener('focus', handleFocus)
   }, [session])
 
+  // Manual session check on page load
+  useEffect(() => {
+    const checkSession = async () => {
+      console.log('🔐 Manual session check on page load...')
+      const currentSession = await getSession()
+      console.log('🔐 Manual session result:', {
+        hasSession: !!currentSession,
+        sessionUser: currentSession?.user?.email,
+        timestamp: new Date().toISOString()
+      })
+      if (currentSession && !session) {
+        console.log('🔐 Session found but not in state, forcing refresh')
+        window.location.reload()
+      }
+    }
+    
+    // Check immediately
+    checkSession()
+    
+    // Check again after a short delay
+    setTimeout(checkSession, 1000)
+  }, [])
+
   // Close mobile menu when clicking outside
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
