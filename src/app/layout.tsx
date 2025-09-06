@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from 'next'
 import './globals.css'
 import ClientLayout from './ClientLayout'
+import { SessionProvider } from 'next-auth/react'
 
 export const metadata: Metadata = {
   title: 'The Explainers',
@@ -49,9 +50,11 @@ export default function RootLayout({
         <meta name="msapplication-tap-highlight" content="no" />
       </head>
       <body>
-        <ClientLayout>
-          {children}
-        </ClientLayout>
+        <SessionProvider>
+          <ClientLayout>
+            {children}
+          </ClientLayout>
+        </SessionProvider>
       </body>
     </html>
   )
