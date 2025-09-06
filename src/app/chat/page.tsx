@@ -5,30 +5,14 @@ import { useRouter } from 'next/navigation'
 import ChatInterface from '@/components/ChatInterface'
 import { useSettings } from '@/contexts/SettingsContext'
 import { useProfile } from '@/contexts/ProfileContext'
+import { useAuth } from '@/contexts/AuthContext'
 
 function ChatContent() {
   const { settings, updateSettings } = useSettings()
   const { profile } = useProfile()
+  const { user, isAuthenticated, isLoading } = useAuth()
   const router = useRouter()
-  const [showMobileMenu, setShowMobileMenu] = useState(false)
-  const menuRef = useRef<HTMLDivElement>(null)
   const [contextData, setContextData] = useState<any>(null)
-
-  useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
-      if (menuRef.current && !menuRef.current.contains(event.target as Node)) {
-        setShowMobileMenu(false)
-      }
-    }
-
-    if (showMobileMenu) {
-      document.addEventListener('mousedown', handleClickOutside)
-    }
-
-    return () => {
-      document.removeEventListener('mousedown', handleClickOutside)
-    }
-  }, [showMobileMenu])
 
   // Check for context data from text selection
   useEffect(() => {
@@ -48,6 +32,56 @@ function ChatContent() {
     }
   }, [])
 
+  // Redirect to sign-in if not authenticated
+  useEffect(() => {
+    if (!isLoading && !isAuthenticated) {
+      router.push('/auth/signin')
+    }
+  }, [isLoading, isAuthenticated, router])
+
+  // Show loading state while checking authentication
+  if (isLoading) {
+    return (
+      <div style={{
+        minHeight: '100vh',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        background: '#fafafa'
+      }}>
+        <div style={{
+          textAlign: 'center',
+          padding: '40px',
+          background: 'white',
+          borderRadius: '16px',
+          boxShadow: '0 4px 12px rgba(0, 0, 0, 0.1)'
+        }}>
+          <div style={{
+            width: '32px',
+            height: '32px',
+            border: '3px solid #f3f3f3',
+            borderTop: '3px solid #8b5cf6',
+            borderRadius: '50%',
+            animation: 'spin 1s linear infinite',
+            margin: '0 auto 16px'
+          }} />
+          <p style={{ margin: 0, color: '#666' }}>Loading...</p>
+        </div>
+        <style jsx>{`
+          @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+          }
+        `}</style>
+      </div>
+    )
+  }
+
+  // Don't render chat if not authenticated
+  if (!isAuthenticated) {
+    return null
+  }
+
   return (
     <div>
       <style jsx>{`
@@ -61,228 +95,6 @@ function ChatContent() {
           }
         }
       `}</style>
-      <header style={{
-        position: 'fixed',
-        top: 0,
-        left: 0,
-        right: 0,
-        background: 'white',
-        borderBottom: '1px solid #e0e0e0',
-        padding: '8px 12px',
-        zIndex: 100,
-        display: 'none',
-        justifyContent: 'space-between',
-        alignItems: 'center'
-      }}>
-        <div style={{ flex: 1 }}>
-          <h1 style={{ 
-            margin: 0, 
-            fontSize: '18px', 
-            fontWeight: 'bold',
-            color: '#333',
-            lineHeight: '1.2'
-          }}>
-            The Explainers
-          </h1>
-          <p style={{ 
-            margin: 0, 
-            fontSize: '11px', 
-            color: '#666',
-            lineHeight: '1.2'
-          }}>
-            Chat with AI
-          </p>
-        </div>
-        <div ref={menuRef} style={{ position: 'relative' }}>
-          <button 
-            onClick={() => setShowMobileMenu(!showMobileMenu)}
-            style={{
-              padding: '8px',
-              background: 'none',
-              border: 'none',
-              cursor: 'pointer',
-              fontSize: '18px',
-              color: '#333'
-            }}
-          >
-            ☰
-          </button>
-          
-          {showMobileMenu && (
-            <div style={{
-              position: 'absolute',
-              top: '100%',
-              right: 0,
-              background: 'white',
-              border: '1px solid #e0e0e0',
-              borderRadius: '8px',
-              boxShadow: '0 4px 12px rgba(0,0,0,0.15)',
-              minWidth: '160px',
-              zIndex: 1000
-            }}>
-              <button 
-                onClick={() => {
-                  router.push('/reader')
-                  setShowMobileMenu(false)
-                }}
-                style={{
-                  display: 'block',
-                  width: '100%',
-                  padding: '12px 16px',
-                  background: 'none',
-                  border: 'none',
-                  textAlign: 'left',
-                  cursor: 'pointer',
-                  borderBottom: '1px solid #f0f0f0'
-                }}
-              >
-                📖 Reader
-              </button>
-              <button 
-                onClick={() => setShowMobileMenu(false)}
-                style={{
-                  display: 'block',
-                  width: '100%',
-                  padding: '12px 16px',
-                  background: 'none',
-                  border: 'none',
-                  textAlign: 'left',
-                  cursor: 'pointer',
-                  borderBottom: '1px solid #f0f0f0',
-                  color: '#666'
-                }}
-              >
-                💬 Chat (current)
-              </button>
-              <button 
-                onClick={() => {
-                  router.push('/library')
-                  setShowMobileMenu(false)
-                }}
-                style={{
-                  display: 'block',
-                  width: '100%',
-                  padding: '12px 16px',
-                  background: 'none',
-                  border: 'none',
-                  textAlign: 'left',
-                  cursor: 'pointer',
-                  borderBottom: '1px solid #f0f0f0'
-                }}
-              >
-                📚 Library
-              </button>
-              <button 
-                onClick={() => {
-                  router.push('/demo')
-                  setShowMobileMenu(false)
-                }}
-                style={{
-                  display: 'block',
-                  width: '100%',
-                  padding: '12px 16px',
-                  background: 'none',
-                  border: 'none',
-                  textAlign: 'left',
-                  cursor: 'pointer',
-                  borderBottom: '1px solid #f0f0f0'
-                }}
-              >
-                🗯️ Demo
-              </button>
-              <button 
-                onClick={() => {
-                  router.push('/styles')
-                  setShowMobileMenu(false)
-                }}
-                style={{
-                  display: 'block',
-                  width: '100%',
-                  padding: '12px 16px',
-                  background: 'none',
-                  border: 'none',
-                  textAlign: 'left',
-                  cursor: 'pointer',
-                  borderBottom: '1px solid #f0f0f0'
-                }}
-              >
-                🎭 Styles
-              </button>
-              <button 
-                onClick={() => {
-                  router.push('/credits')
-                  setShowMobileMenu(false)
-                }}
-                style={{
-                  display: 'block',
-                  width: '100%',
-                  padding: '12px 16px',
-                  background: 'none',
-                  border: 'none',
-                  textAlign: 'left',
-                  cursor: 'pointer',
-                  borderBottom: '1px solid #f0f0f0'
-                }}
-              >
-                💳 Credits
-              </button>
-              <button 
-                onClick={() => {
-                  router.push('/profile')
-                  setShowMobileMenu(false)
-                }}
-                style={{
-                  display: 'block',
-                  width: '100%',
-                  padding: '12px 16px',
-                  background: 'none',
-                  border: 'none',
-                  textAlign: 'left',
-                  cursor: 'pointer',
-                  borderBottom: '1px solid #f0f0f0'
-                }}
-              >
-                👤 Profile
-              </button>
-              <button 
-                onClick={() => {
-                  router.push('/settings')
-                  setShowMobileMenu(false)
-                }}
-                style={{
-                  display: 'block',
-                  width: '100%',
-                  padding: '12px 16px',
-                  background: 'none',
-                  border: 'none',
-                  textAlign: 'left',
-                  cursor: 'pointer',
-                  borderBottom: '1px solid #f0f0f0'
-                }}
-              >
-                ⚙️ Settings
-              </button>
-              <button 
-                onClick={() => {
-                  router.push('/guide')
-                  setShowMobileMenu(false)
-                }}
-                style={{
-                  display: 'block',
-                  width: '100%',
-                  padding: '12px 16px',
-                  background: 'none',
-                  border: 'none',
-                  textAlign: 'left',
-                  cursor: 'pointer'
-                }}
-              >
-                📖 User Guide
-              </button>
-            </div>
-          )}
-        </div>
-      </header>
       
       <div style={{ 
         marginTop: '0', 
@@ -303,9 +115,28 @@ function ChatContent() {
         }} className="mobile-card">
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '20px' }}>
             <div style={{ flex: 1 }}>
-              <h2 style={{ margin: '0 0 8px 0', fontSize: '24px', fontWeight: '600', color: '#1a1a1a' }}>
-                Chat with AI
-              </h2>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '8px' }}>
+                <h2 style={{ margin: '0', fontSize: '24px', fontWeight: '600', color: '#1a1a1a' }}>
+                  Chat with AI
+                </h2>
+                {user?.image && (
+                  <img 
+                    src={user.image} 
+                    alt={user.name || 'User'} 
+                    style={{ 
+                      width: '32px', 
+                      height: '32px', 
+                      borderRadius: '50%',
+                      border: '2px solid #e0e0e0'
+                    }} 
+                  />
+                )}
+              </div>
+              {user?.email && (
+                <p style={{ margin: '0 0 8px 0', color: '#666', fontSize: '14px' }}>
+                  Signed in as {user.email}
+                </p>
+              )}
               {contextData?.bookTitle && (
                 <p style={{ margin: '0', color: '#8b5cf6', fontSize: '14px', fontWeight: '500' }}>
                   Discussing: {contextData.bookTitle} by {contextData.author}
