@@ -46,15 +46,20 @@ export default function Header() {
     const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(userAgent)
     alert(`BUTTON CLICKED! Platform: ${isMobile ? 'MOBILE' : 'DESKTOP'}, isAuthenticated: ${isAuthenticated}`)
     console.log('🚨 BUTTON CLICKED! handleAuthAction called, isAuthenticated:', isAuthenticated, 'Platform:', isMobile ? 'MOBILE' : 'DESKTOP')
+    
+    // Don't close the menu immediately - let the user see what's happening
     if (isAuthenticated) {
       console.log('🚨 Header: Calling handleSignOut')
       await handleSignOut()
+      // Close menu after sign-out completes
+      setTimeout(() => setShowMobileMenu(false), 1000)
     } else {
       console.log('🚨 Header: Calling signIn')
       await signIn()
+      // Close menu after sign-in completes
+      setTimeout(() => setShowMobileMenu(false), 1000)
     }
-    console.log('🚨 Header: Closing mobile menu')
-    setShowMobileMenu(false)
+    console.log('🚨 Header: Auth action completed')
   }
 
   return (
