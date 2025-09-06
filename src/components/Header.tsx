@@ -42,6 +42,7 @@ export default function Header() {
   }, [])
 
   const handleAuthAction = async () => {
+    alert('BUTTON CLICKED! This should appear when you click sign-out')
     console.log('🚨 BUTTON CLICKED! handleAuthAction called, isAuthenticated:', isAuthenticated)
     if (isAuthenticated) {
       console.log('🚨 Header: Calling handleSignOut')
