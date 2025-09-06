@@ -24,6 +24,7 @@ const handler = NextAuth({
   },
   pages: {
     signIn: '/auth/signin',
+    signOut: '/',
   },
   secret: process.env.NEXTAUTH_SECRET,
   // Fix for mobile development
@@ -37,6 +38,17 @@ const handler = NextAuth({
         path: '/',
         secure: process.env.NODE_ENV === 'production'
       }
+    }
+  },
+  // Ensure proper session handling
+  session: {
+    strategy: 'jwt',
+    maxAge: 30 * 24 * 60 * 60, // 30 days
+  },
+  // Add events for debugging
+  events: {
+    signOut: async (message) => {
+      console.log('Sign out event:', message)
     }
   }
 })
