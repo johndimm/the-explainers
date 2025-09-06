@@ -51,15 +51,11 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     console.log('Sign out started')
     setIsLoading(true)
     try {
-      // Sign out without redirect so we can handle the UI state update
+      // Sign out without redirect so the session state can update
       await signOut({ redirect: false })
       console.log('SignOut completed')
-      // Now manually redirect after NextAuth has cleared the session
-      window.location.href = '/'
     } catch (error) {
       console.error('Sign out error:', error)
-      // Fallback: just redirect to home
-      window.location.href = '/'
     } finally {
       console.log('Sign out finally block')
       setIsLoading(false)
