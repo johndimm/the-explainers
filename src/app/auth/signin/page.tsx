@@ -176,73 +176,23 @@ function SignInContent() {
       hostname: window.location.hostname
     })
     
-    // Show immediate feedback on mobile
-    if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
-      alert('🔐 Starting Google sign-in process...\n\nCheck console for details.')
-    }
-    
     setIsLoading(true)
+    
     try {
-      console.log('🔐 About to call signIn...')
+      // Skip the problematic signIn() call and go directly to the OAuth URL
+      console.log('🔐 Skipping signIn() call, redirecting directly to OAuth URL')
       
-      // Test if signIn function exists
-      if (typeof signIn !== 'function') {
-        throw new Error('signIn function is not available')
-      }
+      const oauthUrl = `${window.location.origin}/api/auth/signin/google`
+      console.log('🔐 Redirecting to OAuth URL:', oauthUrl)
       
-      // For mobile, try without redirect first to see what happens
-      console.log('🔐 Calling signIn with params:', {
-        provider: 'google',
-        callbackUrl: '/library',
-        redirect: false
-      })
-      
-      const result = await signIn('google', { 
-        callbackUrl: '/library',
-        redirect: false // Changed to false for debugging
-      })
-      
-      console.log('🔐 Sign-in result type:', typeof result)
-      console.log('🔐 Sign-in result:', result)
-      console.log('🔐 Sign-in result keys:', result ? Object.keys(result) : 'no keys')
-      
-      // Show result on mobile
+      // Show feedback on mobile
       if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
-        if (result === undefined) {
-          alert(`🔐 Sign-in returned undefined!\n\nThis usually means:\n1. NextAuth configuration issue\n2. Network error\n3. Mobile browser compatibility issue\n\nCheck console for details.`)
-        } else if (result?.url) {
-          alert(`🔐 Redirect URL generated:\n${result.url}\n\nRedirecting...`)
-        } else if (result?.error) {
-          alert(`🔐 Sign-in error: ${result.error}`)
-        } else {
-          alert(`🔐 Unexpected result: ${JSON.stringify(result)}`)
-        }
+        alert('🔐 Redirecting to Google Sign-in...\n\nYou should see the Google account selection page.')
       }
       
-      // If successful, manually redirect
-      if (result?.url) {
-        console.log('🔐 Redirecting to:', result.url)
-        window.location.href = result.url
-      } else if (result?.error) {
-        console.error('🔐 Sign-in error from NextAuth:', result.error)
-        alert(`Sign-in error: ${result.error}`)
-        setIsLoading(false)
-      } else if (result === undefined) {
-        console.error('🔐 Sign-in returned undefined - trying fallback method')
-        
-        // Fallback: try direct redirect to Google OAuth
-        if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
-          const fallbackUrl = `${window.location.origin}/api/auth/signin/google`
-          console.log('🔐 Trying fallback URL:', fallbackUrl)
-          
-          // Try the fallback immediately
-          setTimeout(() => {
-            window.location.href = fallbackUrl
-          }, 1000) // Give user time to read the message
-        } else {
-          setIsLoading(false)
-        }
-      }
+      // Direct redirect to OAuth URL
+      window.location.href = oauthUrl
+      
     } catch (error) {
       console.error('🔐 Sign in error:', error)
       
