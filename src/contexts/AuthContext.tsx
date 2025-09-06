@@ -24,7 +24,7 @@ interface AuthProviderProps {
 }
 
 export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
-  const { data: session, status } = useSession()
+  const { data: session, status, update } = useSession()
   const [isLoading, setIsLoading] = useState(true)
 
   useEffect(() => {
@@ -54,6 +54,9 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
       // Sign out without redirect so the session state can update
       await signOut({ redirect: false })
       console.log('SignOut completed')
+      // Force session refresh
+      await update()
+      console.log('Session updated')
     } catch (error) {
       console.error('Sign out error:', error)
     } finally {
