@@ -51,6 +51,10 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     console.log('Sign out started')
     setIsLoading(true)
     try {
+      // Clear local state immediately
+      setUser(null)
+      setIsAuthenticated(false)
+      
       // Let NextAuth handle the redirect properly
       await signOut({ callbackUrl: '/' })
       console.log('SignOut completed')
