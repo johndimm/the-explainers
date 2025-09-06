@@ -48,32 +48,18 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   }
 
   const handleSignOut = async () => {
-    console.log('🚨 Sign out started')
-    alert('🚨 SIGN OUT STARTED - Check console for details')
+    console.log('Sign out started')
     setIsLoading(true)
     try {
-      console.log('🚨 Calling signOut...')
-      // Try signOut without redirect first
-      const result = await signOut({ redirect: false })
-      console.log('🚨 SignOut result:', result)
-      alert(`🚨 SignOut result: ${JSON.stringify(result)}`)
-      
-      // Wait a moment before redirecting
-      console.log('🚨 Waiting 2 seconds before redirect...')
-      await new Promise(resolve => setTimeout(resolve, 2000))
-      
-      // Then redirect manually
-      console.log('🚨 Redirecting to home page')
-      alert('🚨 About to redirect to home page')
-      window.location.href = '/'
+      // Let NextAuth handle the redirect properly
+      await signOut({ callbackUrl: '/' })
+      console.log('SignOut completed')
     } catch (error) {
-      console.error('🚨 Sign out error:', error)
-      alert(`🚨 Sign out error: ${error}`)
-      console.log('🚨 Falling back to direct redirect')
+      console.error('Sign out error:', error)
       // Fallback: just redirect to home
       window.location.href = '/'
     } finally {
-      console.log('🚨 Sign out finally block')
+      console.log('Sign out finally block')
       setIsLoading(false)
     }
   }
