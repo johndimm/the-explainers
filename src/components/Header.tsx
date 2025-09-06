@@ -11,8 +11,6 @@ export default function Header() {
   const menuRef = useRef<HTMLDivElement>(null)
   const [subtitle, setSubtitle] = useState<string>('understand difficult texts')
 
-  // Debug authentication state
-  console.log('Header: Auth state - isAuthenticated:', isAuthenticated, 'user:', user, 'isLoading:', isLoading)
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -42,24 +40,12 @@ export default function Header() {
   }, [])
 
   const handleAuthAction = async () => {
-    const userAgent = navigator.userAgent
-    const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(userAgent)
-    alert(`BUTTON CLICKED! Platform: ${isMobile ? 'MOBILE' : 'DESKTOP'}, isAuthenticated: ${isAuthenticated}`)
-    console.log('🚨 BUTTON CLICKED! handleAuthAction called, isAuthenticated:', isAuthenticated, 'Platform:', isMobile ? 'MOBILE' : 'DESKTOP')
-    
-    // Don't close the menu immediately - let the user see what's happening
     if (isAuthenticated) {
-      console.log('🚨 Header: Calling handleSignOut')
       await handleSignOut()
-      // Close menu after sign-out completes
-      setTimeout(() => setShowMobileMenu(false), 1000)
     } else {
-      console.log('🚨 Header: Calling signIn')
       await signIn()
-      // Close menu after sign-in completes
-      setTimeout(() => setShowMobileMenu(false), 1000)
     }
-    console.log('🚨 Header: Auth action completed')
+    setShowMobileMenu(false)
   }
 
   return (
@@ -181,16 +167,6 @@ export default function Header() {
               
               {/* Auth buttons */}
               <div style={{ borderTop: '1px solid #e0e0e0', marginTop: '8px', paddingTop: '8px' }}>
-                <div style={{ 
-                  background: 'orange', 
-                  border: '2px solid purple', 
-                  padding: '8px',
-                  margin: '4px',
-                  color: 'black',
-                  fontWeight: 'bold'
-                }}>
-                  DEBUG: isAuthenticated = {String(isAuthenticated)}, user = {user ? 'EXISTS' : 'NULL'}, isLoading = {String(isLoading)}
-                </div>
                 {isAuthenticated ? (
                   <>
                     <div style={{ padding: '8px 16px', fontSize: '12px', color: '#666', borderBottom: '1px solid #f0f0f0' }}>
@@ -209,50 +185,23 @@ export default function Header() {
                       )}
                       {user?.email}
                     </div>
-                    <div style={{ 
-                      background: 'yellow', 
-                      border: '3px solid red', 
-                      padding: '4px',
-                      margin: '4px'
-                    }}>
-                      <button 
-                        onClick={(e) => {
-                          e.preventDefault()
-                          e.stopPropagation()
-                          console.log('🚨 SIGN-OUT BUTTON CLICKED!', e)
-                          alert('SIGN-OUT BUTTON CLICKED!')
-                          handleAuthAction()
-                        }}
-                        disabled={isLoading}
-                        style={{ 
-                          display: 'block', 
-                          width: '100%', 
-                          padding: '12px 16px', 
-                          background: '#ff0000', 
-                          border: '2px solid #000', 
-                          textAlign: 'left', 
-                          cursor: isLoading ? 'not-allowed' : 'pointer',
-                          color: '#ffffff',
-                          opacity: isLoading ? 0.6 : 1,
-                          zIndex: 99999,
-                          position: 'relative',
-                          fontSize: '16px',
-                          fontWeight: 'bold'
-                        }}
-                      >
-                        {isLoading ? 'Signing out...' : '🚪 SIGN OUT BUTTON'}
-                      </button>
-                    </div>
-                    <div style={{ 
-                      background: 'lime', 
-                      border: '3px solid blue', 
-                      padding: '4px',
-                      margin: '4px',
-                      color: 'black',
-                      fontWeight: 'bold'
-                    }}>
-                      DEBUG: Sign-out button should be visible above this text
-                    </div>
+                    <button 
+                      onClick={handleAuthAction}
+                      disabled={isLoading}
+                      style={{ 
+                        display: 'block', 
+                        width: '100%', 
+                        padding: '12px 16px', 
+                        background: 'none', 
+                        border: 'none', 
+                        textAlign: 'left', 
+                        cursor: isLoading ? 'not-allowed' : 'pointer',
+                        color: '#dc3545',
+                        opacity: isLoading ? 0.6 : 1
+                      }}
+                    >
+                      {isLoading ? 'Signing out...' : '🚪 Sign Out'}
+                    </button>
                   </>
                 ) : (
                   <button 
