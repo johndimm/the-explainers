@@ -42,15 +42,15 @@ export default function Header() {
   }, [])
 
   const handleAuthAction = async () => {
-    console.log('Header: handleAuthAction called, isAuthenticated:', isAuthenticated)
+    console.log('🚨 BUTTON CLICKED! handleAuthAction called, isAuthenticated:', isAuthenticated)
     if (isAuthenticated) {
-      console.log('Header: Calling handleSignOut')
+      console.log('🚨 Header: Calling handleSignOut')
       await handleSignOut()
     } else {
-      console.log('Header: Calling signIn')
+      console.log('🚨 Header: Calling signIn')
       await signIn()
     }
-    console.log('Header: Closing mobile menu')
+    console.log('🚨 Header: Closing mobile menu')
     setShowMobileMenu(false)
   }
 
