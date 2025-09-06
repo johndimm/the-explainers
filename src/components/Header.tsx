@@ -194,29 +194,40 @@ export default function Header() {
                       )}
                       {user?.email}
                     </div>
-                    <button 
-                      onClick={(e) => {
-                        console.log('🚨 SIGN-OUT BUTTON CLICKED!', e)
-                        alert('SIGN-OUT BUTTON CLICKED!')
-                        handleAuthAction()
-                      }}
-                      disabled={isLoading}
-                      style={{ 
-                        display: 'block', 
-                        width: '100%', 
-                        padding: '12px 16px', 
-                        background: 'none', 
-                        border: 'none', 
-                        textAlign: 'left', 
-                        cursor: isLoading ? 'not-allowed' : 'pointer',
-                        color: '#dc3545',
-                        opacity: isLoading ? 0.6 : 1,
-                        zIndex: 9999,
-                        position: 'relative'
-                      }}
-                    >
-                      {isLoading ? 'Signing out...' : '🚪 Sign Out'}
-                    </button>
+                    <div style={{ 
+                      background: 'yellow', 
+                      border: '3px solid red', 
+                      padding: '4px',
+                      margin: '4px'
+                    }}>
+                      <button 
+                        onClick={(e) => {
+                          e.preventDefault()
+                          e.stopPropagation()
+                          console.log('🚨 SIGN-OUT BUTTON CLICKED!', e)
+                          alert('SIGN-OUT BUTTON CLICKED!')
+                          handleAuthAction()
+                        }}
+                        disabled={isLoading}
+                        style={{ 
+                          display: 'block', 
+                          width: '100%', 
+                          padding: '12px 16px', 
+                          background: '#ff0000', 
+                          border: '2px solid #000', 
+                          textAlign: 'left', 
+                          cursor: isLoading ? 'not-allowed' : 'pointer',
+                          color: '#ffffff',
+                          opacity: isLoading ? 0.6 : 1,
+                          zIndex: 99999,
+                          position: 'relative',
+                          fontSize: '16px',
+                          fontWeight: 'bold'
+                        }}
+                      >
+                        {isLoading ? 'Signing out...' : '🚪 SIGN OUT BUTTON'}
+                      </button>
+                    </div>
                   </>
                 ) : (
                   <button 
