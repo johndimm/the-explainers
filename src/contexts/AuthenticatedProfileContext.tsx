@@ -45,7 +45,7 @@ interface ProfileProviderProps {
 
 export const AuthenticatedProfileProvider: React.FC<ProfileProviderProps> = ({ children }) => {
   const [mounted, setMounted] = useState(false)
-  const { data: session, status } = mounted ? useSession() : { data: null, status: 'loading' }
+  const { data: session, status } = useSession()
   const router = useRouter()
   const [profile, setProfile] = useState<ProfileData>(DEFAULT_PROFILE)
   const [isProfileOpen, setIsProfileOpen] = useState(false)
@@ -57,20 +57,22 @@ export const AuthenticatedProfileProvider: React.FC<ProfileProviderProps> = ({ c
 
   // Redirect to sign-in if not authenticated
   useEffect(() => {
+    if (!mounted) return
     if (status === 'loading') return // Still loading
     
     if (status === 'unauthenticated') {
       router.push('/auth/signin')
       return
     }
-  }, [status, router])
+  }, [status, router, mounted])
 
   // Load user profile when authenticated
   useEffect(() => {
+    if (!mounted) return
     if (status === 'authenticated' && session?.user) {
       loadUserProfile()
     }
-  }, [session, status])
+  }, [session, status, mounted])
 
   const loadUserProfile = async () => {
     try {

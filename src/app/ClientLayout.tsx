@@ -23,14 +23,16 @@ function LayoutContent({ children }: { children: React.ReactNode }) {
   const pathname = usePathname()
   const { cachedBook } = useBookCache()
   
+  // Always call useSession hook (this component is wrapped in SessionProvider)
+  const { data: session, status } = useSession()
+  
   useEffect(() => {
     setMounted(true)
   }, [])
   
-  const { data: session, status } = mounted ? useSession() : { data: null, status: 'loading' }
-  
   // Debug logging for authentication status
   useEffect(() => {
+    if (!mounted) return
     console.log('🔐 Auth Status Debug:', {
       status,
       hasSession: !!session,
@@ -43,13 +45,14 @@ function LayoutContent({ children }: { children: React.ReactNode }) {
       environment: process.env.NODE_ENV,
       hostname: window.location.hostname
     })
-  }, [session, status])
+  }, [session, status, mounted])
 
   // Force re-render when session changes
   const [authKey, setAuthKey] = useState(0)
   useEffect(() => {
+    if (!mounted) return
     setAuthKey(prev => prev + 1)
-  }, [session])
+  }, [session, mounted])
 
   // Manual session refresh function
   const refreshSession = async () => {
@@ -64,6 +67,8 @@ function LayoutContent({ children }: { children: React.ReactNode }) {
 
   // Check session periodically (every 2 seconds) for a short time after page load
   useEffect(() => {
+    if (!mounted) return
+    
     const interval = setInterval(async () => {
       const currentSession = await getSession()
       console.log('🔐 Polling session check:', {
@@ -88,10 +93,12 @@ function LayoutContent({ children }: { children: React.ReactNode }) {
       clearInterval(interval)
       clearTimeout(timeout)
     }
-  }, [session])
+  }, [session, mounted])
 
   // Force session refresh when coming back from OAuth
   useEffect(() => {
+    if (!mounted) return
+    
     const handleFocus = async () => {
       console.log('🔐 Window focus - refreshing session...')
       const newSession = await getSession()
@@ -108,10 +115,12 @@ function LayoutContent({ children }: { children: React.ReactNode }) {
     
     window.addEventListener('focus', handleFocus)
     return () => window.removeEventListener('focus', handleFocus)
-  }, [session])
+  }, [session, mounted])
 
   // Manual session check on page load
   useEffect(() => {
+    if (!mounted) return
+    
     const checkSession = async () => {
       console.log('🔐 Manual session check on page load...')
       const currentSession = await getSession()
@@ -131,7 +140,7 @@ function LayoutContent({ children }: { children: React.ReactNode }) {
     
     // Check again after a short delay
     setTimeout(checkSession, 1000)
-  }, [])
+  }, [mounted])
 
   // Close mobile menu when clicking outside
   useEffect(() => {
@@ -190,85 +199,85 @@ function LayoutContent({ children }: { children: React.ReactNode }) {
   }
 
   return (
-    <div>
-      <header style={{
-        background: 'white', borderBottom: '1px solid #e0e0e0',
-        maxWidth: '1024px',
-        margin: '0 auto',
-        width: '100%'
-      }}>
-        <div style={{
-          width: '100%',
-          display: 'flex',
-          justifyContent: 'space-between',
-          alignItems: 'center',
-          padding: '8px 20px',
-          boxSizing: 'border-box'
+      <div>
+        <header style={{
+          background: 'white', borderBottom: '1px solid #e0e0e0',
+          maxWidth: '1024px',
+          margin: '0 auto',
+          width: '100%'
         }}>
-        <div style={{ flex: 1 }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-            <h1 style={{ margin: 0, fontSize: '18px', fontWeight: 'bold', color: '#333', lineHeight: '1.2' }}>The Explainers</h1>
-              <button
+          <div style={{
+            width: '100%',
+            display: 'flex',
+            justifyContent: 'space-between',
+            alignItems: 'center',
+            padding: '8px 20px',
+            boxSizing: 'border-box'
+          }}>
+          <div style={{ flex: 1 }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+              <h1 style={{ margin: 0, fontSize: '18px', fontWeight: 'bold', color: '#333', lineHeight: '1.2' }}>The Explainers</h1>
+                <button
                 type="button"
-                onClick={() => window.open('https://reddit.com/r/TheExplainersApp', '_blank')}
-                style={{
-                  background: 'none',
-                  border: 'none',
-                  cursor: 'pointer',
-                  padding: '2px 6px',
-                  borderRadius: '4px',
-                  fontSize: '10px',
-                  color: '#ff6b35',
-                  fontWeight: '500',
-                  textDecoration: 'none',
-                  display: 'flex',
-                  alignItems: 'center',
-                  gap: '2px',
-                  transition: 'all 0.2s'
-                }}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.background = '#fff5f2'
-                  e.currentTarget.style.color = '#e55a2b'
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.background = 'none'
-                  e.currentTarget.style.color = '#ff6b35'
-                }}
+                  onClick={() => window.open('https://reddit.com/r/TheExplainersApp', '_blank')}
+                  style={{
+                    background: 'none',
+                    border: 'none',
+                    cursor: 'pointer',
+                    padding: '2px 6px',
+                    borderRadius: '4px',
+                    fontSize: '10px',
+                    color: '#ff6b35',
+                    fontWeight: '500',
+                    textDecoration: 'none',
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: '2px',
+                    transition: 'all 0.2s'
+                  }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.background = '#fff5f2'
+                    e.currentTarget.style.color = '#e55a2b'
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.background = 'none'
+                    e.currentTarget.style.color = '#ff6b35'
+                  }}
               >
                 r/TheExplainersApp
-              </button>
-          </div>
+                </button>
+              </div>
           <p style={{ 
             margin: '2px 0 0 0', 
             fontSize: '11px', 
             color: '#666',
             lineHeight: '1.2'
           }}>
-            {subtitle}
-          </p>
-        </div>
-        <div ref={menuRef} style={{ position: 'relative' }}>
-          <button 
+                {subtitle}
+              </p>
+            </div>
+            <div ref={menuRef} style={{ position: 'relative' }}>
+              <button 
             type="button"
             onClick={handleMobileMenuToggle}
-            style={{ padding: '8px', background: 'none', border: 'none', cursor: 'pointer', fontSize: '18px', color: '#333' }}
-          >
-            ☰
-          </button>
-          {showMobileMenu && (
+                style={{ padding: '8px', background: 'none', border: 'none', cursor: 'pointer', fontSize: '18px', color: '#333' }}
+              >
+                ☰
+              </button>
+              {showMobileMenu && (
             <div key={authKey} style={{ 
-              position: 'absolute', 
-              top: '100%', 
-              right: 0, 
-              background: 'white', 
-              border: '1px solid #e0e0e0', 
-              borderRadius: '8px', 
-              boxShadow: '0 4px 12px rgba(0,0,0,0.15)', 
-              minWidth: '200px', 
-              zIndex: 1000,
-              maxHeight: '80vh',
-              overflowY: 'auto'
-            }}>
+                  position: 'absolute', 
+                  top: '100%', 
+                  right: 0, 
+                  background: 'white', 
+                  border: '1px solid #e0e0e0', 
+                  borderRadius: '8px', 
+                  boxShadow: '0 4px 12px rgba(0,0,0,0.15)', 
+                  minWidth: '200px', 
+                  zIndex: 1000,
+                  maxHeight: '80vh',
+                  overflowY: 'auto'
+                }}>
               <button type="button" onClick={() => handleNavigation('/reader')} style={{ display: 'block', width: '100%', padding: '12px 16px', background: 'none', border: 'none', textAlign: 'left', cursor: 'pointer', borderBottom: '1px solid #f0f0f0' }}>📖 Reader</button>
               <button type="button" onClick={() => handleNavigation('/chat')} style={{ display: 'block', width: '100%', padding: '12px 16px', background: 'none', border: 'none', textAlign: 'left', cursor: 'pointer', borderBottom: '1px solid #f0f0f0' }}>💬 Chat</button>
               <button type="button" onClick={() => handleNavigation('/library')} style={{ display: 'block', width: '100%', padding: '12px 16px', background: 'none', border: 'none', textAlign: 'left', cursor: 'pointer', borderBottom: '1px solid #f0f0f0' }}>📚 Library</button>
@@ -293,45 +302,26 @@ function LayoutContent({ children }: { children: React.ReactNode }) {
                   <button type="button" onClick={() => handleNavigation('/auth/signin')} style={{ display: 'block', width: '100%', padding: '12px 16px', background: 'none', border: 'none', textAlign: 'left', cursor: 'pointer', color: '#059669' }}>🔑 Log in</button>
                 )
               })()}
+                </div>
+              )}
             </div>
-          )}
-        </div>
-        </div>
-      </header>
+            </div>
+          </header>
 
-      <main style={{ 
-        minHeight: 'calc(100vh - 60px)',
-        maxWidth: '1024px',
-        margin: '0 auto',
-        padding: '0 20px'
-      }}>
-        {children}
-      </main>
-    </div>
+          <main style={{ 
+            minHeight: 'calc(100vh - 60px)',
+            maxWidth: '1024px',
+            margin: '0 auto',
+            padding: '0 20px'
+          }}>
+            {children}
+          </main>
+        </div>
   )
 }
 
+
 export default function ClientLayout({ children, requiresAuth = false }: ClientLayoutProps) {
-  const [mounted, setMounted] = useState(false)
-
-  useEffect(() => {
-    setMounted(true)
-  }, [])
-
-  if (!mounted) {
-    return (
-      <ErrorBoundary>
-        <BookCacheProvider>
-          <SettingsProvider>
-            <LayoutContent>
-              {children}
-            </LayoutContent>
-          </SettingsProvider>
-        </BookCacheProvider>
-      </ErrorBoundary>
-    )
-  }
-
   return (
     <ErrorBoundary>
       <SessionProvider>
