@@ -1,6 +1,7 @@
 'use client'
 
 import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react'
+import { useSession } from 'next-auth/react'
 import { SettingsData, LLMProvider, ResponseLength, FontFamily, ReadingMode, ExplanationStyle } from '../components/Settings'
 
 interface SettingsContextType {
@@ -27,24 +28,99 @@ interface SettingsProviderProps {
 }
 
 export const SettingsProvider: React.FC<SettingsProviderProps> = ({ children }) => {
+  const { data: session, status } = useSession()
   const [settings, setSettings] = useState<SettingsData>(DEFAULT_SETTINGS)
   const [isSettingsOpen, setIsSettingsOpen] = useState(false)
 
+  // Load settings from database when user is authenticated
   useEffect(() => {
+    const loadSettings = async () => {
+      if (status === 'loading') return
+      
+      if (!session?.user?.email) {
+        // Not authenticated, use default settings
+        return
+      }
+
+      try {
+        console.log('SettingsContext: Loading settings from database for:', session.user.email)
+        const response = await fetch('/api/user/settings')
+        
+        if (response.ok) {
+          const dbSettings = await response.json()
+          console.log('SettingsContext: Loaded settings from database:', dbSettings)
+          
+          // Convert database settings to SettingsData format
+          const convertedSettings: SettingsData = {
+            llmProvider: dbSettings.llm_provider as LLMProvider,
+            responseLength: dbSettings.response_length as ResponseLength,
+            textFont: dbSettings.text_font as FontFamily,
+            chatFont: dbSettings.chat_font as FontFamily,
+            readingMode: dbSettings.reading_mode as ReadingMode,
+            explanationStyle: dbSettings.explanation_style as ExplanationStyle,
+            customApiKey: dbSettings.custom_api_key,
+            customApiUrl: dbSettings.custom_api_url,
+            customModelName: dbSettings.custom_model_name
+          }
+          
+          setSettings(convertedSettings)
+        } else if (response.status === 404) {
+          // No settings found, use defaults
+          console.log('SettingsContext: No settings found, using defaults')
+        } else {
+          console.error('SettingsContext: Error loading settings:', response.statusText)
+        }
+      } catch (error) {
+        console.error('SettingsContext: Error loading settings:', error)
+      }
+    }
+
+    loadSettings()
+  }, [session, status])
+
+  // Fallback to localStorage for non-authenticated users
+  useEffect(() => {
+    if (status === 'loading' || session?.user?.email) return
+    
     const savedSettings = localStorage.getItem('explainer-settings')
     if (savedSettings) {
       try {
         const parsed = JSON.parse(savedSettings)
         setSettings({ ...DEFAULT_SETTINGS, ...parsed })
       } catch (error) {
-        console.error('Error loading settings:', error)
+        console.error('Error loading settings from localStorage:', error)
       }
     }
-  }, [])
+  }, [session, status])
 
-  const updateSettings = (newSettings: SettingsData) => {
+  const updateSettings = async (newSettings: SettingsData) => {
     setSettings(newSettings)
+    
+    // Save to localStorage for backward compatibility
     localStorage.setItem('explainer-settings', JSON.stringify(newSettings))
+    
+    // Save to database if authenticated
+    if (session?.user?.email) {
+      try {
+        await fetch('/api/user/settings', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            llm_provider: newSettings.llmProvider,
+            response_length: newSettings.responseLength,
+            text_font: newSettings.textFont,
+            chat_font: newSettings.chatFont,
+            reading_mode: newSettings.readingMode,
+            explanation_style: newSettings.explanationStyle,
+            custom_api_key: newSettings.customApiKey,
+            custom_api_url: newSettings.customApiUrl,
+            custom_model_name: newSettings.customModelName
+          })
+        })
+      } catch (error) {
+        console.error('Error saving settings to database:', error)
+      }
+    }
   }
 
   const openSettings = () => setIsSettingsOpen(true)

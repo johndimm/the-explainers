@@ -45,24 +45,43 @@ function ReaderContent() {
     }
 
     // Check if there's a saved current book
-    const savedBook = localStorage.getItem('current-book')
-    if (savedBook) {
+    const loadCurrentBook = async () => {
       try {
-        const parsedBook = JSON.parse(savedBook)
-        console.log('Restoring saved book:', parsedBook)
-        
-        if (parsedBook.url) {
-          handleBookSelect(parsedBook.title, parsedBook.author, parsedBook.url)
-        } else {
-          router.push('/library')
+        // Try database first
+        const response = await fetch('/api/user/current-book')
+        if (response.ok) {
+          const dbBook = await response.json()
+          console.log('Restoring saved book from database:', dbBook)
+          
+          if (dbBook.url) {
+            handleBookSelect(dbBook.title, dbBook.author, dbBook.url)
+            return
+          }
         }
       } catch (error) {
-        console.error('Error loading saved book:', error)
-        router.push('/library')
+        console.error('Error loading current book from database:', error)
       }
-    } else {
+
+      // Fallback to localStorage
+      const savedBook = localStorage.getItem('current-book')
+      if (savedBook) {
+        try {
+          const parsedBook = JSON.parse(savedBook)
+          console.log('Restoring saved book from localStorage:', parsedBook)
+          
+          if (parsedBook.url) {
+            handleBookSelect(parsedBook.title, parsedBook.author, parsedBook.url)
+            return
+          }
+        } catch (error) {
+          console.error('Error loading saved book from localStorage:', error)
+        }
+      }
+      
       router.push('/library')
     }
+
+    loadCurrentBook()
   }, [searchParams, router])
 
   const handleBookSelect = async (title: string, author: string, url: string) => {
@@ -70,7 +89,19 @@ function ReaderContent() {
     const newBook = { title, author, url }
     setCurrentBook({ title, author })
     
+    // Save to localStorage for backward compatibility
     localStorage.setItem('current-book', JSON.stringify(newBook))
+    
+    // Save to database
+    try {
+      await fetch('/api/user/current-book', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(newBook)
+      })
+    } catch (error) {
+      console.error('Error saving current book to database:', error)
+    }
     
     try {
       let text: string

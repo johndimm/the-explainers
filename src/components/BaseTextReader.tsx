@@ -1,6 +1,7 @@
 'use client'
 
 import React, { useEffect, useRef, useState } from 'react'
+import { useSession } from 'next-auth/react'
 
 // Shared types pulled from existing components
 import { SettingsData } from './Settings'
@@ -366,32 +367,76 @@ export const useBookmarkRestoreAndSave = (
   author?: string
 ) => {
   const scrollTimeoutRef = useRef<NodeJS.Timeout | null>(null)
+  const { data: session } = useSession()
 
   useEffect(() => {
-    if (!text || text.length < 100) return
-    const title = bookTitle || 'Untitled'
-    const auth = author || 'Unknown'
-    const bookmarkKey = `bookmark-${title}-${auth}`
+    const loadBookmark = async () => {
+      if (!text || text.length < 100) return
+      const title = bookTitle || 'Untitled'
+      const auth = author || 'Unknown'
 
-    const savedPosition = typeof window !== 'undefined' ? localStorage.getItem(bookmarkKey) : null
-    if (savedPosition) {
-      const position = parseInt(savedPosition)
-      setTimeout(() => {
-        if (textReaderRef.current) {
-          textReaderRef.current.scrollTop = position
+      // Try to load from database first if user is authenticated
+      if (session?.user?.email) {
+        try {
+          const response = await fetch(`/api/user/bookmark?bookTitle=${encodeURIComponent(title)}&bookAuthor=${encodeURIComponent(auth)}`)
+          if (response.ok) {
+            const bookmark = await response.json()
+            const position = bookmark.scroll_position
+            setTimeout(() => {
+              if (textReaderRef.current) {
+                textReaderRef.current.scrollTop = position
+              }
+            }, 300)
+            return
+          }
+        } catch (error) {
+          console.error('Error loading bookmark from database:', error)
         }
-      }, 300)
+      }
+
+      // Fallback to localStorage for backward compatibility or non-authenticated users
+      const bookmarkKey = `bookmark-${title}-${auth}`
+      const savedPosition = typeof window !== 'undefined' ? localStorage.getItem(bookmarkKey) : null
+      if (savedPosition) {
+        const position = parseInt(savedPosition)
+        setTimeout(() => {
+          if (textReaderRef.current) {
+            textReaderRef.current.scrollTop = position
+          }
+        }, 300)
+      }
     }
-  }, [text, bookTitle, author, textReaderRef])
+
+    loadBookmark()
+  }, [text, bookTitle, author, textReaderRef, session])
 
   useEffect(() => {
     const handleScroll = () => {
       if (!textReaderRef.current) return
       const scrollPosition = textReaderRef.current.scrollTop
       if (scrollTimeoutRef.current) clearTimeout(scrollTimeoutRef.current)
-      scrollTimeoutRef.current = setTimeout(() => {
+      scrollTimeoutRef.current = setTimeout(async () => {
         const title = bookTitle || 'Untitled'
         const auth = author || 'Unknown'
+
+        // Save to database if user is authenticated
+        if (session?.user?.email) {
+          try {
+            await fetch('/api/user/bookmark', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({
+                bookTitle: title,
+                bookAuthor: auth,
+                scrollPosition: scrollPosition
+              })
+            })
+          } catch (error) {
+            console.error('Error saving bookmark to database:', error)
+          }
+        }
+
+        // Also save to localStorage for backward compatibility or non-authenticated users
         const bookmarkKey = `bookmark-${title}-${auth}`
         localStorage.setItem(bookmarkKey, scrollPosition.toString())
       }, 500)
@@ -404,7 +449,7 @@ export const useBookmarkRestoreAndSave = (
       el.removeEventListener('scroll', handleScroll)
       if (scrollTimeoutRef.current) clearTimeout(scrollTimeoutRef.current)
     }
-  }, [bookTitle, author, text, textReaderRef])
+  }, [bookTitle, author, text, textReaderRef, session])
 }
 
 export const useSearchCore = (
