@@ -8,7 +8,7 @@ export interface CurrentBook {
 
 export const getCurrentBook = async (): Promise<CurrentBook | null> => {
   try {
-    // Try to get from database first (if authenticated)
+    // Get from database
     const response = await fetch('/api/user/current-book')
     if (response.ok) {
       const dbBook = await response.json()
@@ -22,24 +22,11 @@ export const getCurrentBook = async (): Promise<CurrentBook | null> => {
     console.error('Error loading current book from database:', error)
   }
 
-  // Fallback to localStorage
-  try {
-    const savedBook = localStorage.getItem('current-book')
-    if (savedBook) {
-      return JSON.parse(savedBook)
-    }
-  } catch (error) {
-    console.error('Error loading current book from localStorage:', error)
-  }
-
   return null
 }
 
 export const setCurrentBook = async (book: CurrentBook): Promise<void> => {
-  // Save to localStorage for backward compatibility
-  localStorage.setItem('current-book', JSON.stringify(book))
-
-  // Save to database if authenticated
+  // Save to database
   try {
     await fetch('/api/user/current-book', {
       method: 'POST',

@@ -46,59 +46,84 @@ export const ProfileProvider: React.FC<ProfileProviderProps> = ({ children }) =>
   const [isHydrated, setIsHydrated] = useState(false)
 
   useEffect(() => {
-    // Mark as hydrated and only then access localStorage
-    setIsHydrated(true)
-    const savedProfile = localStorage.getItem('explainer-profile')
-    console.log('ProfileContext: Loading profile from localStorage:', savedProfile)
-    
-    if (savedProfile) {
+    const loadProfile = async () => {
+      setIsHydrated(true)
+      
       try {
-        const parsed = JSON.parse(savedProfile)
-        console.log('ProfileContext: Parsed saved profile:', parsed)
-        // Convert date strings back to Date objects
-        if (parsed.firstLogin) {
-          parsed.firstLogin = new Date(parsed.firstLogin)
+        // Load from database
+        const response = await fetch('/api/user/profile')
+        if (response.ok) {
+          const dbProfile = await response.json()
+          console.log('ProfileContext: Loading profile from database:', dbProfile)
+          
+          // Convert database format to ProfileData format
+          const profileData: ProfileData = {
+            age: dbProfile.age,
+            language: dbProfile.language as Language,
+            educationLevel: dbProfile.education_level as EducationLevel,
+            firstLogin: dbProfile.first_login ? new Date(dbProfile.first_login) : undefined,
+            totalExplanations: dbProfile.total_explanations,
+            todayExplanations: dbProfile.today_explanations,
+            availableCredits: dbProfile.available_credits,
+            bookExplanations: dbProfile.book_explanations || {},
+            purchasedBooks: dbProfile.purchased_books || [],
+            hasUnlimitedAccess: dbProfile.has_unlimited_access,
+            unlimitedAccessExpiry: dbProfile.unlimited_access_expiry ? new Date(dbProfile.unlimited_access_expiry) : undefined
+          }
+          
+          console.log('ProfileContext: Restoring profile from database:', profileData)
+          setProfile(profileData)
+        } else {
+          // No profile in database, create default
+          console.log('ProfileContext: No profile in database, creating default')
+          const newProfile = { ...DEFAULT_PROFILE, firstLogin: new Date() }
+          setProfile(newProfile)
+          
+          // Save default profile to database
+          try {
+            await fetch('/api/user/profile', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify(newProfile)
+            })
+          } catch (error) {
+            console.error('Error saving default profile to database:', error)
+          }
         }
-        if (parsed.unlimitedAccessExpiry) {
-          parsed.unlimitedAccessExpiry = new Date(parsed.unlimitedAccessExpiry)
-          console.log('ProfileContext: Converted unlimitedAccessExpiry to Date object:', parsed.unlimitedAccessExpiry)
-        }
-        let restoredProfile = { ...DEFAULT_PROFILE, ...parsed }
-        console.log('ProfileContext: Final restored profile:', restoredProfile)
-        
-        // Migration: Reset credits for users who had the old 100 credit default
-        // Handle users with 100 credits (unused) or 97-99 credits (used some)
-        // But don't migrate users who have purchased credits (105+ suggests they bought 100 credits)
-        if (restoredProfile.availableCredits && restoredProfile.availableCredits >= 95 && restoredProfile.availableCredits <= 100) {
-          console.log(`ProfileContext: Migrating user from ${restoredProfile.availableCredits} to 5 credits`)
-          restoredProfile.availableCredits = 5
-          // Save the migrated profile
-          localStorage.setItem('explainer-profile', JSON.stringify(restoredProfile))
-        }
-        
-        console.log('ProfileContext: Restoring profile:', restoredProfile)
-        setProfile(restoredProfile)
       } catch (error) {
-        console.error('Error loading profile:', error)
+        console.error('ProfileContext: Error loading from database:', error)
+        // Fallback to default profile
+        const newProfile = { ...DEFAULT_PROFILE, firstLogin: new Date() }
+        setProfile(newProfile)
       }
-    } else {
-      // First time user - set first login date
-      console.log('ProfileContext: No saved profile found, creating new one')
-      const newProfile = { ...DEFAULT_PROFILE, firstLogin: new Date() }
-      setProfile(newProfile)
-      localStorage.setItem('explainer-profile', JSON.stringify(newProfile))
     }
+
+    loadProfile()
   }, [])
 
-  const updateProfile = (newProfile: ProfileData) => {
+  const updateProfile = async (newProfile: ProfileData) => {
     console.log('ProfileContext: updateProfile called with:', newProfile)
     console.log('ProfileContext: Current profile before update:', profile)
     setProfile(newProfile)
-    localStorage.setItem('explainer-profile', JSON.stringify(newProfile))
-    console.log('ProfileContext: Profile updated in localStorage')
+    
+    // Save to database
+    try {
+      const response = await fetch('/api/user/profile', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(newProfile)
+      })
+      if (response.ok) {
+        console.log('ProfileContext: Profile updated in database')
+      } else {
+        console.error('ProfileContext: Failed to update profile in database')
+      }
+    } catch (error) {
+      console.error('ProfileContext: Error updating profile in database:', error)
+    }
   }
 
-  const incrementExplanations = () => {
+  const incrementExplanations = async () => {
     setProfile(prev => {
       const today = new Date().toDateString()
       const lastUpdate = prev.firstLogin ? new Date(prev.firstLogin).toDateString() : today
@@ -109,7 +134,13 @@ export const ProfileProvider: React.FC<ProfileProviderProps> = ({ children }) =>
         todayExplanations: lastUpdate === today ? (prev.todayExplanations || 0) + 1 : 1
       }
       
-      localStorage.setItem('explainer-profile', JSON.stringify(newProfile))
+      // Save to database
+      fetch('/api/user/profile', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(newProfile)
+      }).catch(error => console.error('Error saving profile to database:', error))
+      
       return newProfile
     })
   }
@@ -235,7 +266,13 @@ export const ProfileProvider: React.FC<ProfileProviderProps> = ({ children }) =>
         }
       }
       
-      localStorage.setItem('explainer-profile', JSON.stringify(newProfile))
+      // Save to database
+      fetch('/api/user/profile', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(newProfile)
+      }).catch(error => console.error('Error saving profile to database:', error))
+      
       return newProfile
     })
     
@@ -256,8 +293,14 @@ export const ProfileProvider: React.FC<ProfileProviderProps> = ({ children }) =>
         availableCredits: (prev.availableCredits || 0) + amount
       }
       console.log('ProfileContext: New credits:', newProfile.availableCredits)
-      localStorage.setItem('explainer-profile', JSON.stringify(newProfile))
-      console.log('ProfileContext: Saved to localStorage:', newProfile)
+      
+      // Save to database
+      fetch('/api/user/profile', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(newProfile)
+      }).catch(error => console.error('Error saving profile to database:', error))
+      
       return newProfile
     })
   }
@@ -275,7 +318,14 @@ export const ProfileProvider: React.FC<ProfileProviderProps> = ({ children }) =>
         [bookKey]: { title: bookTitle, author, url }
       }
       ;(newProfile as any).purchasedBookDetails = details
-      localStorage.setItem('explainer-profile', JSON.stringify(newProfile))
+      
+      // Save to database
+      fetch('/api/user/profile', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(newProfile)
+      }).catch(error => console.error('Error saving profile to database:', error))
+      
       return newProfile
     })
   }
@@ -293,7 +343,14 @@ export const ProfileProvider: React.FC<ProfileProviderProps> = ({ children }) =>
         purchasedBooks: newPurchased,
         ...(details ? { purchasedBookDetails: details } : {})
       }
-      localStorage.setItem('explainer-profile', JSON.stringify(newProfile))
+      
+      // Save to database
+      fetch('/api/user/profile', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(newProfile)
+      }).catch(error => console.error('Error saving profile to database:', error))
+      
       return newProfile
     })
   }
@@ -325,7 +382,14 @@ export const ProfileProvider: React.FC<ProfileProviderProps> = ({ children }) =>
       }
       console.log('ProfileContext: granting unlimited access until:', expiryTime)
       console.log('ProfileContext: new profile with unlimited access:', newProfile)
-      localStorage.setItem('explainer-profile', JSON.stringify(newProfile))
+      
+      // Save to database
+      fetch('/api/user/profile', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(newProfile)
+      }).catch(error => console.error('Error saving profile to database:', error))
+      
       return newProfile
     })
   }
