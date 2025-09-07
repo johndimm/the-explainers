@@ -14,20 +14,17 @@ export const MigrationBanner: React.FC = () => {
     // Only show banner for authenticated users who have localStorage data
     if (status === 'loading' || !session?.user?.email) return
 
-    const localStorageData = extractLocalStorageData()
-    const hasData = localStorageData.profileData || 
-                   localStorageData.settingsData || 
-                   localStorageData.currentBookData || 
-                   (localStorageData.bookmarksData && localStorageData.bookmarksData.length > 0)
-
-    // Check if user has already migrated (no localStorage data but is authenticated)
+    // Check if user has localStorage data that needs migration
     const hasLocalStorageData = localStorage.getItem('explainer-profile') || 
                                localStorage.getItem('explainer-settings') || 
                                localStorage.getItem('current-book') ||
                                Array.from({ length: localStorage.length }, (_, i) => localStorage.key(i))
                                  .some(key => key && key.startsWith('bookmark-'))
 
-    if (hasData && hasLocalStorageData) {
+    // Check if user has already been shown the migration banner (to avoid showing it again)
+    const migrationShown = localStorage.getItem('migration-banner-shown')
+    
+    if (hasLocalStorageData && !migrationShown) {
       setShowBanner(true)
     }
   }, [session, status])
@@ -40,6 +37,8 @@ export const MigrationBanner: React.FC = () => {
       
       if (success) {
         clearLocalStorageData()
+        // Mark that migration banner has been shown to prevent it from showing again
+        localStorage.setItem('migration-banner-shown', 'true')
         setMigrationComplete(true)
         setTimeout(() => {
           setShowBanner(false)
@@ -56,6 +55,8 @@ export const MigrationBanner: React.FC = () => {
   }
 
   const handleDismiss = () => {
+    // Mark that migration banner has been shown to prevent it from showing again
+    localStorage.setItem('migration-banner-shown', 'true')
     setShowBanner(false)
   }
 
