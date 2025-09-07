@@ -49,6 +49,11 @@ export const setCurrentBook = async (book: CurrentBook): Promise<void> => {
   } catch (error) {
     console.error('Error saving current book to database:', error)
   }
+
+  // Dispatch custom event to notify components of the change
+  if (typeof window !== 'undefined') {
+    window.dispatchEvent(new CustomEvent('currentBookChanged'))
+  }
 }
 
 // Hook for easy current book management

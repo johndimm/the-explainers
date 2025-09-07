@@ -3,6 +3,7 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { useAuth } from '@/contexts/AuthContext'
+import { getCurrentBook } from '@/utils/currentBookStorage'
 
 export default function Header() {
   const router = useRouter()
@@ -23,19 +24,42 @@ export default function Header() {
   }, [showMobileMenu])
 
   useEffect(() => {
-    // Update subtitle for reader if we have a current book
-    if (typeof window === 'undefined') return
-    const path = window.location.pathname
-    if (path.startsWith('/reader')) {
+    // Update subtitle based on current book
+    const updateSubtitle = async () => {
       try {
-        const saved = localStorage.getItem('current-book')
-        if (saved) {
-          const { title, author } = JSON.parse(saved)
-          if (title && author) setSubtitle(`${title} by ${author}`)
+        const currentBook = await getCurrentBook()
+        if (currentBook && currentBook.title && currentBook.author) {
+          setSubtitle(`${currentBook.title} by ${currentBook.author}`)
+        } else {
+          setSubtitle('understand difficult texts')
         }
-      } catch {}
-    } else {
-      setSubtitle('understand difficult texts')
+      } catch (error) {
+        console.error('Error loading current book for header:', error)
+        setSubtitle('understand difficult texts')
+      }
+    }
+
+    updateSubtitle()
+
+    // Listen for storage changes to update subtitle when current book changes
+    const handleStorageChange = (e: StorageEvent) => {
+      if (e.key === 'current-book') {
+        updateSubtitle()
+      }
+    }
+
+    window.addEventListener('storage', handleStorageChange)
+
+    // Also listen for custom events that might indicate book changes
+    const handleBookChange = () => {
+      updateSubtitle()
+    }
+
+    window.addEventListener('currentBookChanged', handleBookChange)
+
+    return () => {
+      window.removeEventListener('storage', handleStorageChange)
+      window.removeEventListener('currentBookChanged', handleBookChange)
     }
   }, [])
 
