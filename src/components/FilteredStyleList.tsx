@@ -3,7 +3,8 @@
 import React, { useState, useEffect } from 'react'
 import { ExplanationStyle } from './Settings'
 import WikipediaLink from './WikipediaLink'
-import { getPersonWikipediaSearchTerm, checkWikipediaPage } from '@/utils/wikipedia'
+import { getPersonWikipediaSearchTerm } from '@/utils/wikipedia'
+import { checkPersonWikipediaPage } from '@/utils/wikipediaStatic'
 import LoadingIndicator from './LoadingIndicator'
 
 interface StyleOption {
@@ -31,15 +32,14 @@ export const FilteredStyleList: React.FC<FilteredStyleListProps> = ({
   const [isLoading, setIsLoading] = useState(true)
 
   useEffect(() => {
-    const filterStyles = async () => {
+    const filterStyles = () => {
       setIsLoading(true)
       const validStyles: StyleOption[] = []
 
-      // Check each style for Wikipedia existence
+      // Check each style for Wikipedia existence using static data
       for (const style of styles) {
         try {
-          const searchTerm = getPersonWikipediaSearchTerm(style.name)
-          const result = await checkWikipediaPage(searchTerm)
+          const result = checkPersonWikipediaPage(style.name)
           
           if (result.exists) {
             validStyles.push(style)
@@ -48,7 +48,7 @@ export const FilteredStyleList: React.FC<FilteredStyleListProps> = ({
           }
         } catch (error) {
           console.error(`Error checking Wikipedia for ${style.name}:`, error)
-          // Include the style if we can't check (network error, etc.)
+          // Include the style if we can't check
           validStyles.push(style)
         }
       }

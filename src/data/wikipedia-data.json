@@ -1,0 +1,475 @@
+{
+  "people": {
+    "Harold Bloom": {
+      "exists": true,
+      "url": "https://en.wikipedia.org/wiki/Harold_Bloom",
+      "title": "Harold Bloom"
+    },
+    "T.S. Eliot": {
+      "exists": true,
+      "url": "https://en.wikipedia.org/wiki/T._S._Eliot",
+      "title": "T. S. Eliot"
+    },
+    "John Ruskin": {
+      "exists": true,
+      "url": "https://en.wikipedia.org/wiki/John_Ruskin",
+      "title": "John Ruskin"
+    },
+    "Samuel Johnson": {
+      "exists": true,
+      "url": "https://en.wikipedia.org/wiki/Samuel_Johnson",
+      "title": "Samuel Johnson"
+    },
+    "Christopher Marlowe": {
+      "exists": true,
+      "url": "https://en.wikipedia.org/wiki/Christopher_Marlowe",
+      "title": "Christopher Marlowe"
+    },
+    "Ben Jonson": {
+      "exists": true,
+      "url": "https://en.wikipedia.org/wiki/Ben_Jonson",
+      "title": "Ben Jonson"
+    },
+    "Francis Bacon": {
+      "exists": true,
+      "url": "https://en.wikipedia.org/wiki/Francis_Bacon_(philosopher)",
+      "title": "Francis Bacon (philosopher)"
+    },
+    "David Foster Wallace": {
+      "exists": true,
+      "url": "https://en.wikipedia.org/wiki/David_Foster_Wallace",
+      "title": "David Foster Wallace"
+    },
+    "Oscar Wilde": {
+      "exists": true,
+      "url": "https://en.wikipedia.org/wiki/Oscar_Wilde",
+      "title": "Oscar Wilde"
+    },
+    "Maya Angelou": {
+      "exists": true,
+      "url": "https://en.wikipedia.org/wiki/Maya_Angelou",
+      "title": "Maya Angelou"
+    },
+    "Douglas Adams": {
+      "exists": true,
+      "url": "https://en.wikipedia.org/wiki/Douglas_Adams",
+      "title": "Douglas Adams"
+    },
+    "Terry Pratchett": {
+      "exists": true,
+      "url": "https://en.wikipedia.org/wiki/Terry_Pratchett",
+      "title": "Terry Pratchett"
+    },
+    "Joan Didion": {
+      "exists": true,
+      "url": "https://en.wikipedia.org/wiki/Joan_Didion",
+      "title": "Joan Didion"
+    },
+    "David Sedaris": {
+      "exists": true,
+      "url": "https://en.wikipedia.org/wiki/David_Sedaris",
+      "title": "David Sedaris"
+    },
+    "Mark Twain": {
+      "exists": true,
+      "url": "https://en.wikipedia.org/wiki/Mark_Twain",
+      "title": "Mark Twain"
+    },
+    "Rudyard Kipling": {
+      "exists": true,
+      "url": "https://en.wikipedia.org/wiki/Rudyard_Kipling",
+      "title": "Rudyard Kipling"
+    },
+    "Tom Wolfe": {
+      "exists": true,
+      "url": "https://en.wikipedia.org/wiki/Tom_Wolfe",
+      "title": "Tom Wolfe"
+    },
+    "Flannery O'Connor": {
+      "exists": true,
+      "url": "https://en.wikipedia.org/wiki/Flannery_O%27Connor",
+      "title": "Flannery O'Connor"
+    },
+    "Anthony Bourdain": {
+      "exists": true,
+      "url": "https://en.wikipedia.org/wiki/Anthony_Bourdain",
+      "title": "Anthony Bourdain"
+    },
+    "Bill Bryson": {
+      "exists": true,
+      "url": "https://en.wikipedia.org/wiki/Bill_Bryson",
+      "title": "Bill Bryson"
+    },
+    "Stephen Fry": {
+      "exists": true,
+      "url": "https://en.wikipedia.org/wiki/Stephen_Fry",
+      "title": "Stephen Fry"
+    },
+    "Bernard-Henri Lévy": {
+      "exists": true,
+      "url": "https://en.wikipedia.org/wiki/Bernard-Henri_L%C3%A9vy",
+      "title": "Bernard-Henri Lévy"
+    },
+    "Michel Houellebecq": {
+      "exists": true,
+      "url": "https://en.wikipedia.org/wiki/Michel_Houellebecq",
+      "title": "Michel Houellebecq"
+    },
+    "Christopher Hitchens": {
+      "exists": true,
+      "url": "https://en.wikipedia.org/wiki/Christopher_Hitchens",
+      "title": "Christopher Hitchens"
+    },
+    "Charles Dickens": {
+      "exists": true,
+      "url": "https://en.wikipedia.org/wiki/Charles_Dickens",
+      "title": "Charles Dickens"
+    },
+    "Cormac McCarthy": {
+      "exists": true,
+      "url": "https://en.wikipedia.org/wiki/Cormac_McCarthy",
+      "title": "Cormac McCarthy"
+    },
+    "Stephen King": {
+      "exists": true,
+      "url": "https://en.wikipedia.org/wiki/Stephen_King",
+      "title": "Stephen King"
+    },
+    "William Shakespeare": {
+      "exists": true,
+      "url": "https://en.wikipedia.org/wiki/William_Shakespeare",
+      "title": "William Shakespeare"
+    },
+    "Dorothy Parker": {
+      "exists": true,
+      "url": "https://en.wikipedia.org/wiki/Dorothy_Parker",
+      "title": "Dorothy Parker"
+    },
+    "Ernest Hemingway": {
+      "exists": true,
+      "url": "https://en.wikipedia.org/wiki/Ernest_Hemingway",
+      "title": "Ernest Hemingway"
+    },
+    "James Joyce": {
+      "exists": true,
+      "url": "https://en.wikipedia.org/wiki/James_Joyce",
+      "title": "James Joyce"
+    },
+    "Samuel Beckett": {
+      "exists": true,
+      "url": "https://en.wikipedia.org/wiki/Samuel_Beckett",
+      "title": "Samuel Beckett"
+    },
+    "Kurt Vonnegut": {
+      "exists": true,
+      "url": "https://en.wikipedia.org/wiki/Kurt_Vonnegut",
+      "title": "Kurt Vonnegut"
+    },
+    "Bernie Sanders": {
+      "exists": true,
+      "url": "https://en.wikipedia.org/wiki/Bernie_Sanders",
+      "title": "Bernie Sanders"
+    },
+    "Martin Luther King": {
+      "exists": true,
+      "url": "https://en.wikipedia.org/wiki/Martin_Luther_King_Jr.",
+      "title": "Martin Luther King Jr."
+    },
+    "John F. Kennedy": {
+      "exists": true,
+      "url": "https://en.wikipedia.org/wiki/John_F._Kennedy",
+      "title": "John F. Kennedy"
+    },
+    "James Carville": {
+      "exists": true,
+      "url": "https://en.wikipedia.org/wiki/James_Carville",
+      "title": "James Carville"
+    },
+    "Donald Trump": {
+      "exists": true,
+      "url": "https://en.wikipedia.org/wiki/Donald_Trump",
+      "title": "Donald Trump"
+    },
+    "George W. Bush": {
+      "exists": true,
+      "url": "https://en.wikipedia.org/wiki/George_W._Bush",
+      "title": "George W. Bush"
+    },
+    "Barack Obama": {
+      "exists": true,
+      "url": "https://en.wikipedia.org/wiki/Barack_Obama",
+      "title": "Barack Obama"
+    },
+    "Jerry Seinfeld": {
+      "exists": true,
+      "url": "https://en.wikipedia.org/wiki/Jerry_Seinfeld",
+      "title": "Jerry Seinfeld"
+    },
+    "Louis C.K.": {
+      "exists": true,
+      "url": "https://en.wikipedia.org/wiki/Louis_C.K.",
+      "title": "Louis C.K."
+    },
+    "Dave Chappelle": {
+      "exists": true,
+      "url": "https://en.wikipedia.org/wiki/Dave_Chappelle",
+      "title": "Dave Chappelle"
+    },
+    "Tina Fey": {
+      "exists": true,
+      "url": "https://en.wikipedia.org/wiki/Tina_Fey",
+      "title": "Tina Fey"
+    },
+    "Amy Poehler": {
+      "exists": true,
+      "url": "https://en.wikipedia.org/wiki/Amy_Poehler",
+      "title": "Amy Poehler"
+    },
+    "Ricky Gervais": {
+      "exists": true,
+      "url": "https://en.wikipedia.org/wiki/Ricky_Gervais",
+      "title": "Ricky Gervais"
+    },
+    "Sarah Silverman": {
+      "exists": true,
+      "url": "https://en.wikipedia.org/wiki/Sarah_Silverman",
+      "title": "Sarah Silverman"
+    },
+    "John Mulaney": {
+      "exists": true,
+      "url": "https://en.wikipedia.org/wiki/John_Mulaney",
+      "title": "John Mulaney"
+    },
+    "Ali Wong": {
+      "exists": true,
+      "url": "https://en.wikipedia.org/wiki/Ali_Wong",
+      "title": "Ali Wong"
+    },
+    "Bo Burnham": {
+      "exists": true,
+      "url": "https://en.wikipedia.org/wiki/Bo_Burnham",
+      "title": "Bo Burnham"
+    },
+    "Andrew Dice Clay": {
+      "exists": true,
+      "url": "https://en.wikipedia.org/wiki/Andrew_Dice_Clay",
+      "title": "Andrew Dice Clay"
+    },
+    "Anthony Jeselnik": {
+      "exists": true,
+      "url": "https://en.wikipedia.org/wiki/Anthony_Jeselnik",
+      "title": "Anthony Jeselnik"
+    },
+    "Doug Stanhope": {
+      "exists": true,
+      "url": "https://en.wikipedia.org/wiki/Doug_Stanhope",
+      "title": "Doug Stanhope"
+    },
+    "Jim Norton": {
+      "exists": true,
+      "url": "https://en.wikipedia.org/wiki/Jim_Norton",
+      "title": "Jim Norton"
+    },
+    "Jim Jefferies": {
+      "exists": true,
+      "url": "https://en.wikipedia.org/wiki/Jim_Jefferies",
+      "title": "Jim Jefferies"
+    },
+    "Daniel Tosh": {
+      "exists": true,
+      "url": "https://en.wikipedia.org/wiki/Daniel_Tosh",
+      "title": "Daniel Tosh"
+    },
+    "Andy Andrist": {
+      "exists": false
+    },
+    "Bill Burr": {
+      "exists": true,
+      "url": "https://en.wikipedia.org/wiki/Bill_Burr",
+      "title": "Bill Burr"
+    },
+    "Lewis Black": {
+      "exists": true,
+      "url": "https://en.wikipedia.org/wiki/Lewis_Black",
+      "title": "Lewis Black"
+    },
+    "George Carlin": {
+      "exists": true,
+      "url": "https://en.wikipedia.org/wiki/George_Carlin",
+      "title": "George Carlin"
+    },
+    "Sam Kinison": {
+      "exists": true,
+      "url": "https://en.wikipedia.org/wiki/Sam_Kinison",
+      "title": "Sam Kinison"
+    },
+    "Paul Mooney": {
+      "exists": true,
+      "url": "https://en.wikipedia.org/wiki/Paul_Mooney",
+      "title": "Paul Mooney"
+    },
+    "Bill Hicks": {
+      "exists": true,
+      "url": "https://en.wikipedia.org/wiki/Bill_Hicks",
+      "title": "Bill Hicks"
+    },
+    "Bob Saget": {
+      "exists": true,
+      "url": "https://en.wikipedia.org/wiki/Bob_Saget",
+      "title": "Bob Saget"
+    },
+    "Norm Macdonald": {
+      "exists": true,
+      "url": "https://en.wikipedia.org/wiki/Norm_Macdonald",
+      "title": "Norm Macdonald"
+    },
+    "Oprah Winfrey": {
+      "exists": true,
+      "url": "https://en.wikipedia.org/wiki/Oprah_Winfrey",
+      "title": "Oprah Winfrey"
+    },
+    "David Letterman": {
+      "exists": true,
+      "url": "https://en.wikipedia.org/wiki/David_Letterman",
+      "title": "David Letterman"
+    },
+    "Conan O'Brien": {
+      "exists": true,
+      "url": "https://en.wikipedia.org/wiki/Conan_O%27Brien",
+      "title": "Conan O'Brien"
+    },
+    "Stephen Colbert": {
+      "exists": true,
+      "url": "https://en.wikipedia.org/wiki/Stephen_Colbert",
+      "title": "Stephen Colbert"
+    },
+    "Jimmy Fallon": {
+      "exists": true,
+      "url": "https://en.wikipedia.org/wiki/Jimmy_Fallon",
+      "title": "Jimmy Fallon"
+    },
+    "Ellen DeGeneres": {
+      "exists": true,
+      "url": "https://en.wikipedia.org/wiki/Ellen_DeGeneres",
+      "title": "Ellen DeGeneres"
+    },
+    "Trevor Noah": {
+      "exists": true,
+      "url": "https://en.wikipedia.org/wiki/Trevor_Noah",
+      "title": "Trevor Noah"
+    },
+    "John Oliver": {
+      "exists": true,
+      "url": "https://en.wikipedia.org/wiki/John_Oliver",
+      "title": "John Oliver"
+    },
+    "Jon Stewart": {
+      "exists": true,
+      "url": "https://en.wikipedia.org/wiki/Jon_Stewart",
+      "title": "Jon Stewart"
+    },
+    "Howard Stern": {
+      "exists": true,
+      "url": "https://en.wikipedia.org/wiki/Howard_Stern",
+      "title": "Howard Stern"
+    },
+    "Bill Maher": {
+      "exists": true,
+      "url": "https://en.wikipedia.org/wiki/Bill_Maher",
+      "title": "Bill Maher"
+    },
+    "Carl Sagan": {
+      "exists": true,
+      "url": "https://en.wikipedia.org/wiki/Carl_Sagan",
+      "title": "Carl Sagan"
+    },
+    "Neil deGrasse Tyson": {
+      "exists": true,
+      "url": "https://en.wikipedia.org/wiki/Neil_deGrasse_Tyson",
+      "title": "Neil deGrasse Tyson"
+    },
+    "Humphrey Bogart": {
+      "exists": true,
+      "url": "https://en.wikipedia.org/wiki/Humphrey_Bogart",
+      "title": "Humphrey Bogart"
+    },
+    "Marilyn Monroe": {
+      "exists": true,
+      "url": "https://en.wikipedia.org/wiki/Marilyn_Monroe",
+      "title": "Marilyn Monroe"
+    },
+    "Louis Theroux": {
+      "exists": true,
+      "url": "https://en.wikipedia.org/wiki/Louis_Theroux",
+      "title": "Louis Theroux"
+    },
+    "Robin Williams": {
+      "exists": true,
+      "url": "https://en.wikipedia.org/wiki/Robin_Williams",
+      "title": "Robin Williams"
+    },
+    "Aaron Sorkin": {
+      "exists": true,
+      "url": "https://en.wikipedia.org/wiki/Aaron_Sorkin",
+      "title": "Aaron Sorkin"
+    },
+    "Woody Allen": {
+      "exists": true,
+      "url": "https://en.wikipedia.org/wiki/Woody_Allen",
+      "title": "Woody Allen"
+    }
+  },
+  "books": {
+    "Hamlet by William Shakespeare": {
+      "exists": true,
+      "url": "https://en.wikipedia.org/wiki/Hamlet",
+      "title": "Hamlet"
+    },
+    "Pride and Prejudice by Jane Austen": {
+      "exists": true,
+      "url": "https://en.wikipedia.org/wiki/Pride_and_Prejudice",
+      "title": "Pride and Prejudice"
+    },
+    "Ulysses by James Joyce": {
+      "exists": true,
+      "url": "https://en.wikipedia.org/wiki/Ulysses_(novel)",
+      "title": "Ulysses (novel)"
+    },
+    "1984 by George Orwell": {
+      "exists": true,
+      "url": "https://en.wikipedia.org/wiki/Nineteen_Eighty-Four",
+      "title": "Nineteen Eighty-Four"
+    },
+    "To Kill a Mockingbird by Harper Lee": {
+      "exists": true,
+      "url": "https://en.wikipedia.org/wiki/To_Kill_a_Mockingbird",
+      "title": "To Kill a Mockingbird"
+    },
+    "The Great Gatsby by F. Scott Fitzgerald": {
+      "exists": true,
+      "url": "https://en.wikipedia.org/wiki/The_Great_Gatsby",
+      "title": "The Great Gatsby"
+    },
+    "Moby Dick by Herman Melville": {
+      "exists": true,
+      "url": "https://en.wikipedia.org/wiki/Moby-Dick",
+      "title": "Moby-Dick"
+    },
+    "War and Peace by Leo Tolstoy": {
+      "exists": true,
+      "url": "https://en.wikipedia.org/wiki/War_and_Peace",
+      "title": "War and Peace"
+    },
+    "The Odyssey by Homer": {
+      "exists": true,
+      "url": "https://en.wikipedia.org/wiki/Odyssey",
+      "title": "Odyssey"
+    },
+    "Don Quixote by Miguel de Cervantes": {
+      "exists": true,
+      "url": "https://en.wikipedia.org/wiki/Don_Quixote",
+      "title": "Don Quixote"
+    }
+  },
+  "generatedAt": "2024-01-15T10:00:00.000Z"
+}

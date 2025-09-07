@@ -1,29 +1,42 @@
 'use client'
 
 import React, { useState, useEffect } from 'react'
-import { checkWikipediaPage, WikipediaResult } from '@/utils/wikipedia'
+import { checkPersonWikipediaPage, checkBookWikipediaPage } from '@/utils/wikipediaStatic'
 
 interface WikipediaLinkProps {
   searchTerm: string
   onLinkClick?: (searchTerm: string) => void
   className?: string
   style?: React.CSSProperties
+  type?: 'person' | 'book' // Add type to determine which function to use
 }
 
 export const WikipediaLink: React.FC<WikipediaLinkProps> = ({ 
   searchTerm, 
   onLinkClick,
   className = '',
-  style = {}
+  style = {},
+  type = 'person'
 }) => {
-  const [wikipediaResult, setWikipediaResult] = useState<WikipediaResult | null>(null)
+  const [wikipediaResult, setWikipediaResult] = useState<any>(null)
   const [isLoading, setIsLoading] = useState(true)
 
   useEffect(() => {
-    const checkWikipedia = async () => {
+    const checkWikipedia = () => {
       setIsLoading(true)
       try {
-        const result = await checkWikipediaPage(searchTerm)
+        let result
+        if (type === 'book') {
+          // For books, we need to parse the search term
+          const parts = searchTerm.split(' by ')
+          if (parts.length === 2) {
+            result = checkBookWikipediaPage(parts[0], parts[1])
+          } else {
+            result = checkBookWikipediaPage(searchTerm)
+          }
+        } else {
+          result = checkPersonWikipediaPage(searchTerm)
+        }
         setWikipediaResult(result)
       } catch (error) {
         console.error('Error checking Wikipedia:', error)
@@ -34,7 +47,7 @@ export const WikipediaLink: React.FC<WikipediaLinkProps> = ({
     }
 
     checkWikipedia()
-  }, [searchTerm])
+  }, [searchTerm, type])
 
   const handleClick = (e: React.MouseEvent) => {
     e.stopPropagation() // Prevent triggering parent click handlers

@@ -2,7 +2,8 @@
 
 import React, { useState, useEffect } from 'react'
 import WikipediaLink from './WikipediaLink'
-import { getBookWikipediaSearchTerm, checkWikipediaPage } from '@/utils/wikipedia'
+import { getBookWikipediaSearchTerm } from '@/utils/wikipedia'
+import { checkBookWikipediaPage } from '@/utils/wikipediaStatic'
 import LoadingIndicator from './LoadingIndicator'
 
 interface Book {
@@ -30,15 +31,14 @@ export const FilteredBookList: React.FC<FilteredBookListProps> = ({
   const [isLoading, setIsLoading] = useState(true)
 
   useEffect(() => {
-    const filterBooks = async () => {
+    const filterBooks = () => {
       setIsLoading(true)
       const validBooks: Book[] = []
 
-      // Check each book for Wikipedia existence
+      // Check each book for Wikipedia existence using static data
       for (const book of books) {
         try {
-          const searchTerm = getBookWikipediaSearchTerm(book.title, book.author)
-          const result = await checkWikipediaPage(searchTerm)
+          const result = checkBookWikipediaPage(book.title, book.author)
           
           if (result.exists) {
             validBooks.push(book)
@@ -47,7 +47,7 @@ export const FilteredBookList: React.FC<FilteredBookListProps> = ({
           }
         } catch (error) {
           console.error(`Error checking Wikipedia for ${book.title}:`, error)
-          // Include the book if we can't check (network error, etc.)
+          // Include the book if we can't check
           validBooks.push(book)
         }
       }
@@ -84,15 +84,16 @@ export const FilteredBookList: React.FC<FilteredBookListProps> = ({
                 <span className={styles.bookAuthor}>by {book.author}</span>
               )}
             </div>
-            <WikipediaLink 
-              searchTerm={getBookWikipediaSearchTerm(book.title, book.author)}
-              style={{ 
-                position: 'relative',
-                zIndex: 10,
-                fontSize: '12px',
-                flexShrink: 0
-              }}
-            />
+                      <WikipediaLink 
+                        searchTerm={getBookWikipediaSearchTerm(book.title, book.author)}
+                        type="book"
+                        style={{ 
+                          position: 'relative',
+                          zIndex: 10,
+                          fontSize: '12px',
+                          flexShrink: 0
+                        }}
+                      />
           </div>
         </div>
       ))}
