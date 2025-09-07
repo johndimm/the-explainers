@@ -71,6 +71,11 @@ export const ProfileProvider: React.FC<ProfileProviderProps> = ({ children }) =>
             unlimitedAccessExpiry: dbProfile.unlimited_access_expiry ? new Date(dbProfile.unlimited_access_expiry) : undefined
           }
           
+          // Add purchased book details for frontend use
+          if (dbProfile.purchased_book_details) {
+            ;(profileData as any).purchasedBookDetails = dbProfile.purchased_book_details
+          }
+          
           console.log('ProfileContext: Restoring profile from database:', profileData)
           setProfile(profileData)
         } else {
@@ -187,6 +192,8 @@ export const ProfileProvider: React.FC<ProfileProviderProps> = ({ children }) =>
     const bookKey = getBookKey(bookTitle, author)
     console.log('ProfileContext: generated bookKey:', bookKey)
     console.log('ProfileContext: purchasedBooks array:', profile.purchasedBooks)
+    console.log('ProfileContext: purchasedBooks type:', typeof profile.purchasedBooks)
+    console.log('ProfileContext: purchasedBooks length:', profile.purchasedBooks?.length)
     console.log('ProfileContext: bookKey generation details:', { 
       originalTitle: bookTitle, 
       originalAuthor: author,
@@ -198,6 +205,10 @@ export const ProfileProvider: React.FC<ProfileProviderProps> = ({ children }) =>
     // Free if book is purchased
     const isPurchased = profile.purchasedBooks?.includes(bookKey)
     console.log('ProfileContext: book purchased check result:', isPurchased)
+    console.log('ProfileContext: checking each purchased book:')
+    profile.purchasedBooks?.forEach((book, index) => {
+      console.log(`  [${index}]: "${book}" === "${bookKey}" ? ${book === bookKey}`)
+    })
     
     if (isPurchased) {
       console.log('ProfileContext: book purchased - access granted')
@@ -319,11 +330,17 @@ export const ProfileProvider: React.FC<ProfileProviderProps> = ({ children }) =>
       }
       ;(newProfile as any).purchasedBookDetails = details
       
-      // Save to database
+      // Save to database with correct field names
+      const dbProfile = {
+        ...newProfile,
+        purchased_book_details: details
+      }
+      delete (dbProfile as any).purchasedBookDetails
+      
       fetch('/api/user/profile', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(newProfile)
+        body: JSON.stringify(dbProfile)
       }).catch(error => console.error('Error saving profile to database:', error))
       
       return newProfile
@@ -344,11 +361,17 @@ export const ProfileProvider: React.FC<ProfileProviderProps> = ({ children }) =>
         ...(details ? { purchasedBookDetails: details } : {})
       }
       
-      // Save to database
+      // Save to database with correct field names
+      const dbProfile = {
+        ...newProfile,
+        purchased_book_details: details
+      }
+      delete (dbProfile as any).purchasedBookDetails
+      
       fetch('/api/user/profile', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(newProfile)
+        body: JSON.stringify(dbProfile)
       }).catch(error => console.error('Error saving profile to database:', error))
       
       return newProfile
