@@ -72,7 +72,7 @@ const UserGuide: React.FC = () => {
           <li style={{ marginBottom: '5px' }}><strong>Instant Explanations</strong>: Get immediate help with difficult passages</li>
           <li style={{ marginBottom: '5px' }}><strong>Follow-up Questions</strong>: Ask for clarification or deeper analysis</li>
           <li style={{ marginBottom: '5px' }}><strong>Context Awareness</strong>: AI knows where you are in the text</li>
-          <li style={{ marginBottom: '5px' }}><strong>Multiple Personalities</strong>: Choose from 50+ explanation styles</li>
+          <li style={{ marginBottom: '5px' }}><strong>Multiple Personalities</strong>: Choose from 50+ explainer styles</li>
         </ul>
 
         <h3 style={{ color: '#007bff', marginTop: '25px', marginBottom: '10px' }}>Smart Context Detection</h3>

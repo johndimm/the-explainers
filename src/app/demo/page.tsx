@@ -56,7 +56,7 @@ export default function DemoPage() {
         <div style={{ maxWidth: '1120px', margin: '0 auto' }}>
           <header style={{ marginBottom: '16px' }}>
             <h2 style={{ margin: 0, fontSize: '22px', fontWeight: 800, color: '#111827', letterSpacing: '-0.02em' }}>Demo</h2>
-            <p className="subtitle">A quick walkthrough: select a passage, chat with AI, switch styles, and even find the line in films.</p>
+            <p className="subtitle">A quick walkthrough: select a passage, chat with AI, switch explainers, and even find the line in films.</p>
           </header>
 
           <section className="grid">

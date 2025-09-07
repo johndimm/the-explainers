@@ -264,7 +264,7 @@ const Settings: React.FC<SettingsProps> = ({ isOpen, onClose, settings, onSettin
               </button>
               <button 
                 onClick={() => {
-                  router.push('/styles')
+                  router.push('/explainers')
                   setShowMobileMenu(false)
                 }}
                 style={{

@@ -1,19 +1,15 @@
 'use client'
 
-import ExplainerStyles from '@/components/ExplainerStyles'
+import ExplainerStylesPage from '@/components/ExplainerStylesPage'
 import { useSettings } from '@/contexts/SettingsContext'
-import { useRouter } from 'next/navigation'
 import { SettingsProvider } from '@/contexts/SettingsContext'
 import { ProfileProvider } from '@/contexts/ProfileContext'
 
 function StylesContent() {
   const { settings, updateSettings } = useSettings()
-  const router = useRouter()
 
   return (
-    <ExplainerStyles
-      isOpen={true}
-      onClose={() => router.push('/library')}
+    <ExplainerStylesPage
       selectedStyle={settings.explanationStyle}
       onStyleChange={(style) => {
         updateSettings({ ...settings, explanationStyle: style })
@@ -22,7 +18,7 @@ function StylesContent() {
   )
 }
 
-export default function StylesPage() {
+export default function ExplainersPage() {
   return (
     <ProfileProvider>
       <SettingsProvider>

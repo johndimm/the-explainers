@@ -6,7 +6,7 @@ import styles from './ChatInterface.module.css'
 import { SettingsData, LLMProvider, ResponseLength, ExplanationStyle } from './Settings'
 import { ProfileData } from './Profile'
 import { useProfile } from '../contexts/ProfileContext'
-import { STYLE_CATEGORIES } from './ExplainerStyles'
+import { STYLE_CATEGORIES } from './ExplainerStylesPage'
 import { log } from '../utils/log'
 import { convertToHTML, convertToMarkdown, convertToPlainText } from '../utils/chatConverters'
 

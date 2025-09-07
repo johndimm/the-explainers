@@ -3,6 +3,9 @@
 import React, { useState, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
 import styles from './Library.module.css'
+import WikipediaLink from './WikipediaLink'
+import { getBookWikipediaSearchTerm } from '@/utils/wikipedia'
+import FilteredBookList from './FilteredBookList'
 
 interface Book {
   id: string | number
@@ -255,29 +258,21 @@ const Library: React.FC<LibraryProps> = ({ onBookSelect, onBackToCurrentBook }) 
             filteredCategories.map((category, categoryIndex) => (
             <div key={category.name} className={styles.category}>
               <h2 className={styles.categoryTitle}>{category.name}</h2>
-              <div className={styles.bookList}>
-                {category.books.slice(0, category.visibleCount).map((book) => (
-                  <div 
-                    key={`${category.name}-${book.id}`}
-                    className={styles.bookItem}
-                    onClick={() => handleBookClick(book, category.name)}
-                  >
-                    <span className={styles.bookTitle}>{book.title}</span>
-                    {book.author && (
-                      <span className={styles.bookAuthor}>by {book.author}</span>
-                    )}
-                  </div>
-                ))}
-                
-                {category.visibleCount < category.books.length && (
-                  <button 
-                    onClick={() => showMoreBooks(categoryIndex)}
-                    className={styles.moreButton}
-                  >
-                    More ({category.books.length - category.visibleCount} remaining)
-                  </button>
-                )}
-              </div>
+              <FilteredBookList
+                books={category.books.slice(0, category.visibleCount)}
+                categoryName={category.name}
+                onBookClick={handleBookClick}
+                styles={styles}
+              />
+              
+              {category.visibleCount < category.books.length && (
+                <button 
+                  onClick={() => showMoreBooks(categoryIndex)}
+                  className={styles.moreButton}
+                >
+                  More ({category.books.length - category.visibleCount} remaining)
+                </button>
+              )}
             </div>
           ))
           )}

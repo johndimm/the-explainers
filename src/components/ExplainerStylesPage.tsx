@@ -13,9 +13,7 @@ const getPhotoSrc = (value: ExplanationStyle) => {
   return `/explainer-photos/${value}.jpg`
 }
 
-interface ExplainerStylesProps {
-  isOpen: boolean
-  onClose: () => void
+interface ExplainerStylesPageProps {
   selectedStyle: ExplanationStyle
   onStyleChange: (style: ExplanationStyle) => void
 }
@@ -125,9 +123,7 @@ export const STYLE_CATEGORIES = {
   ]
 } as const
 
-const ExplainerStyles: React.FC<ExplainerStylesProps> = ({ 
-  isOpen, 
-  onClose, 
+const ExplainerStylesPage: React.FC<ExplainerStylesPageProps> = ({ 
   selectedStyle, 
   onStyleChange 
 }) => {
@@ -152,8 +148,6 @@ const ExplainerStyles: React.FC<ExplainerStylesProps> = ({
       document.removeEventListener('mousedown', handleClickOutside)
     }
   }, [showMobileMenu])
-  
-  if (!isOpen) return null
 
   const handleStyleSelect = (style: ExplanationStyle) => {
     onStyleChange(style)
@@ -166,7 +160,7 @@ const ExplainerStyles: React.FC<ExplainerStylesProps> = ({
 
   const handleConfirmReturn = () => {
     setShowConfirmModal(false)
-    onClose()
+    router.push('/reader')
   }
 
   const handleStayOnPage = () => {
@@ -187,24 +181,25 @@ const ExplainerStyles: React.FC<ExplainerStylesProps> = ({
   )
 
   return (
-    <div>
+    <div style={{ minHeight: '100vh', background: '#f8f9fa' }}>
+      {/* Header */}
       <header style={{
-        position: 'fixed',
+        position: 'sticky',
         top: 0,
         left: 0,
         right: 0,
         background: 'white',
         borderBottom: '1px solid #e0e0e0',
-        padding: '8px 12px',
+        padding: '12px 16px',
         zIndex: 100,
-        display: 'none',
+        display: 'flex',
         justifyContent: 'space-between',
         alignItems: 'center'
       }}>
         <div style={{ flex: 1 }}>
           <h1 style={{ 
             margin: 0, 
-            fontSize: '18px', 
+            fontSize: '24px', 
             fontWeight: 'bold',
             color: '#333',
             lineHeight: '1.2'
@@ -213,7 +208,7 @@ const ExplainerStyles: React.FC<ExplainerStylesProps> = ({
           </h1>
           <p style={{ 
             margin: 0, 
-            fontSize: '11px', 
+            fontSize: '14px', 
             color: '#666',
             fontStyle: 'italic',
             lineHeight: '1.2'
@@ -221,7 +216,8 @@ const ExplainerStyles: React.FC<ExplainerStylesProps> = ({
             understand difficult texts
           </p>
         </div>
-        {/* Hamburger menu for all devices */}
+        
+        {/* Navigation Menu */}
         <div ref={menuRef} style={{ position: 'relative' }}>
           <button 
             onClick={() => setShowMobileMenu(!showMobileMenu)}
@@ -317,7 +313,7 @@ const ExplainerStyles: React.FC<ExplainerStylesProps> = ({
                   color: '#666'
                 }}
               >
-                🎭 Styles (current)
+                🎭 Explainers (current)
               </button>
               <button 
                 onClick={() => {
@@ -394,161 +390,239 @@ const ExplainerStyles: React.FC<ExplainerStylesProps> = ({
           )}
         </div>
       </header>
-    
-    <div className={stylesCss.overlay}>
-      <div className={stylesCss.container}>
-        <div className={stylesCss.header}>
-          <h2>In the style of...</h2>
+
+      {/* Main Content */}
+      <div style={{ 
+        maxWidth: '1200px', 
+        margin: '0 auto', 
+        padding: '24px 16px',
+        background: 'white',
+        minHeight: 'calc(100vh - 80px)'
+      }}>
+        <div style={{ marginBottom: '32px' }}>
+          <h2 style={{ 
+            fontSize: '32px', 
+            fontWeight: 'bold', 
+            color: '#333', 
+            margin: '0 0 8px 0',
+            textAlign: 'center'
+          }}>
+            Choose Your Explainer
+          </h2>
+          <p style={{ 
+            fontSize: '16px', 
+            color: '#666', 
+            margin: '0 0 24px 0',
+            textAlign: 'center'
+          }}>
+            Select an explainer style to personalize your reading experience
+          </p>
         </div>
         
-        <div className={stylesCss.content}>
-          <div className={stylesCss.currentSelection}>
-            <span>Current: </span>
-            <strong>
-              {selectedStyle === 'neutral' ? 'Neutral' : 
-                Object.values(STYLE_CATEGORIES).flat().find(s => s.value === selectedStyle)?.name || 'Unknown'}
-            </strong>
+        <div style={{ marginBottom: '32px' }}>
+          <div style={{ 
+            background: '#f8f9fa', 
+            border: '1px solid #e9ecef', 
+            borderRadius: '12px', 
+            padding: '16px',
+            textAlign: 'center'
+          }}>
+            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px' }}>
+              <span style={{ fontSize: '16px', color: '#666' }}>Current: </span>
+              <strong style={{ fontSize: '18px', color: '#333' }}>
+                {selectedStyle === 'neutral' ? 'Neutral' : 
+                  Object.values(STYLE_CATEGORIES).flat().find(s => s.value === selectedStyle)?.name || 'Unknown'}
+              </strong>
+              {selectedStyle !== 'neutral' && (
+                <WikipediaLink 
+                  searchTerm={getPersonWikipediaSearchTerm(
+                    Object.values(STYLE_CATEGORIES).flat().find(s => s.value === selectedStyle)?.name || 'Unknown'
+                  )}
+                  style={{ 
+                    fontSize: '14px',
+                    marginLeft: '4px'
+                  }}
+                />
+              )}
+            </div>
           </div>
 
           {selectedStyle !== 'neutral' && (() => {
             const selected = Object.values(STYLE_CATEGORIES).flat().find(s => s.value === selectedStyle)
             if (!selected) return null
             return (
-              <div style={{ display: 'flex', alignItems: 'center', gap: '16px', margin: '12px 0 24px' }}>
+              <div style={{ 
+                display: 'flex', 
+                alignItems: 'center', 
+                gap: '16px', 
+                margin: '16px 0',
+                background: '#f8f9fa',
+                border: '1px solid #e9ecef',
+                borderRadius: '12px',
+                padding: '16px'
+              }}>
                 <img 
                   src={getPhotoSrc(selected.value)}
                   alt={selected.name}
                   style={{ 
-                    width: 'min(40vw, 240px)',
-                    height: 'auto',
+                    width: '80px',
+                    height: '80px',
                     objectFit: 'cover',
-                    borderRadius: '12px',
-                    boxShadow: '0 6px 16px rgba(0,0,0,0.15)'
+                    borderRadius: '50%',
+                    boxShadow: '0 4px 8px rgba(0,0,0,0.1)'
                   }}
                   onError={(e) => { (e.currentTarget as HTMLImageElement).style.display = 'none' }}
                 />
-                <div>
-                  <div style={{ fontWeight: 600, marginBottom: '6px' }}>{selected.name}</div>
-                  <div style={{ color: '#666' }}>{selected.description}</div>
+                <div style={{ flex: 1 }}>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '6px' }}>
+                    <div style={{ fontWeight: 600, fontSize: '18px' }}>{selected.name}</div>
+                    <WikipediaLink 
+                      searchTerm={getPersonWikipediaSearchTerm(selected.name)}
+                      style={{ 
+                        fontSize: '14px'
+                      }}
+                    />
+                  </div>
+                  <div style={{ color: '#666', fontSize: '14px' }}>{selected.description}</div>
                 </div>
               </div>
             )
           })()}
+        </div>
 
-          <div 
+        {/* Neutral Option */}
+        <div style={{ marginBottom: '32px' }}>
+          <div
             className={`${stylesCss.styleOption} ${selectedStyle === 'neutral' ? stylesCss.selected : ''}`}
             onClick={() => handleStyleSelect('neutral')}
+            style={{ 
+              position: 'relative',
+              maxWidth: '400px',
+              margin: '0 auto'
+            }}
           >
             <div className={stylesCss.neutralIcon}>
               ⚖️
             </div>
             <div className={stylesCss.styleInfo}>
-              <div className={stylesCss.styleName}>Neutral</div>
+              <div className={stylesCss.styleName} style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                Neutral
+                <WikipediaLink 
+                  searchTerm="Neutral explanation"
+                  style={{ 
+                    position: 'relative',
+                    zIndex: 10,
+                    fontSize: '12px'
+                  }}
+                />
+              </div>
               <div className={stylesCss.styleDescription}>Standard explanations</div>
             </div>
           </div>
+        </div>
 
-                  {renderCategory('Critics', STYLE_CATEGORIES.critics)}
-        {renderCategory('Writers', STYLE_CATEGORIES.writers)}
-        {renderCategory('Politics', STYLE_CATEGORIES.politics)}
-        {renderCategory('Comedians', STYLE_CATEGORIES.comedians)}
-        {renderCategory('Talk Show Hosts', STYLE_CATEGORIES.talkShowHosts)}
-        {renderCategory('Other', STYLE_CATEGORIES.other)}
+        {/* Style Categories */}
+        <div>
+          {renderCategory('Critics', STYLE_CATEGORIES.critics)}
+          {renderCategory('Writers', STYLE_CATEGORIES.writers)}
+          {renderCategory('Politics', STYLE_CATEGORIES.politics)}
+          {renderCategory('Comedians', STYLE_CATEGORIES.comedians)}
+          {renderCategory('Talk Show Hosts', STYLE_CATEGORIES.talkShowHosts)}
+          {renderCategory('Other', STYLE_CATEGORIES.other)}
         </div>
       </div>
-    </div>
-    
-    {/* Custom Confirmation Modal */}
-    {showConfirmModal && (
-      <div style={{
-        position: 'fixed',
-        top: 0,
-        left: 0,
-        right: 0,
-        bottom: 0,
-        background: 'rgba(0, 0, 0, 0.5)',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        zIndex: 2000
-      }}>
+      
+      {/* Confirmation Modal */}
+      {showConfirmModal && (
         <div style={{
-          background: 'white',
-          borderRadius: '16px',
-          padding: '32px',
-          maxWidth: '400px',
-          width: '90%',
-          boxShadow: '0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)',
-          textAlign: 'center'
+          position: 'fixed',
+          top: 0,
+          left: 0,
+          right: 0,
+          bottom: 0,
+          background: 'rgba(0, 0, 0, 0.5)',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          zIndex: 2000
         }}>
           <div style={{
-            fontSize: '48px',
-            marginBottom: '16px'
-          }}>✅</div>
-          <h3 style={{
-            margin: '0 0 8px 0',
-            fontSize: '20px',
-            fontWeight: '600',
-            color: '#1a1a1a'
+            background: 'white',
+            borderRadius: '16px',
+            padding: '32px',
+            maxWidth: '400px',
+            width: '90%',
+            boxShadow: '0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)',
+            textAlign: 'center'
           }}>
-            Style Updated!
-          </h3>
-          <p style={{
-            margin: '0 0 24px 0',
-            color: '#666',
-            fontSize: '16px',
-            lineHeight: '1.5'
-          }}>
-            Your explainer style has been changed to <strong>{selectedStyleName}</strong>. 
-            Would you like to return to the reader now?
-          </p>
-          <div style={{
-            display: 'flex',
-            gap: '12px',
-            justifyContent: 'center'
-          }}>
-            <button
-              onClick={handleStayOnPage}
-              style={{
-                background: '#f3f4f6',
-                color: '#374151',
-                border: 'none',
-                padding: '12px 24px',
-                borderRadius: '8px',
-                cursor: 'pointer',
-                fontSize: '14px',
-                fontWeight: '600',
-                transition: 'background 0.2s'
-              }}
-              onMouseOver={(e) => e.currentTarget.style.background = '#e5e7eb'}
-              onMouseOut={(e) => e.currentTarget.style.background = '#f3f4f6'}
-            >
-              Stay Here
-            </button>
-            <button
-              onClick={handleConfirmReturn}
-              style={{
-                background: '#8b5cf6',
-                color: 'white',
-                border: 'none',
-                padding: '12px 24px',
-                borderRadius: '8px',
-                cursor: 'pointer',
-                fontSize: '14px',
-                fontWeight: '600',
-                transition: 'background 0.2s'
-              }}
-              onMouseOver={(e) => e.currentTarget.style.background = '#7c3aed'}
-              onMouseOut={(e) => e.currentTarget.style.background = '#8b5cf6'}
-            >
-              Go to Reader
-            </button>
+            <div style={{
+              fontSize: '48px',
+              marginBottom: '16px'
+            }}>✅</div>
+            <h3 style={{
+              margin: '0 0 8px 0',
+              fontSize: '20px',
+              fontWeight: '600',
+              color: '#1a1a1a'
+            }}>
+              Explainer Updated!
+            </h3>
+            <p style={{
+              margin: '0 0 24px 0',
+              color: '#666',
+              fontSize: '16px',
+              lineHeight: '1.5'
+            }}>
+              Your explainer has been changed to <strong>{selectedStyleName}</strong>. 
+              Would you like to return to the reader now?
+            </p>
+            <div style={{
+              display: 'flex',
+              gap: '12px',
+              justifyContent: 'center'
+            }}>
+              <button
+                onClick={handleStayOnPage}
+                style={{
+                  background: '#f3f4f6',
+                  color: '#374151',
+                  border: 'none',
+                  padding: '12px 24px',
+                  borderRadius: '8px',
+                  cursor: 'pointer',
+                  fontSize: '14px',
+                  fontWeight: '600',
+                  transition: 'background 0.2s'
+                }}
+                onMouseOver={(e) => e.currentTarget.style.background = '#e5e7eb'}
+                onMouseOut={(e) => e.currentTarget.style.background = '#f3f4f6'}
+              >
+                Stay Here
+              </button>
+              <button
+                onClick={handleConfirmReturn}
+                style={{
+                  background: '#8b5cf6',
+                  color: 'white',
+                  border: 'none',
+                  padding: '12px 24px',
+                  borderRadius: '8px',
+                  cursor: 'pointer',
+                  fontSize: '14px',
+                  fontWeight: '600',
+                  transition: 'background 0.2s'
+                }}
+                onMouseOver={(e) => e.currentTarget.style.background = '#7c3aed'}
+                onMouseOut={(e) => e.currentTarget.style.background = '#8b5cf6'}
+              >
+                Go to Reader
+              </button>
+            </div>
           </div>
         </div>
-      </div>
-    )}
+      )}
     </div>
   )
 }
 
-export default ExplainerStyles
+export default ExplainerStylesPage

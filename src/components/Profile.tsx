@@ -210,7 +210,7 @@ const Profile: React.FC<ProfileProps> = ({ isOpen, onClose, profile, onProfileCh
               </button>
               <button 
                 onClick={() => {
-                  router.push('/styles')
+                  router.push('/explainers')
                   setShowMobileMenu(false)
                 }}
                 style={{

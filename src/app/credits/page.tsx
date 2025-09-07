@@ -213,7 +213,7 @@ function CreditsContent() {
               </button>
               <button 
                 onClick={() => {
-                  router.push('/styles')
+                  router.push('/explainers')
                   setShowMobileMenu(false)
                 }}
                 style={{
