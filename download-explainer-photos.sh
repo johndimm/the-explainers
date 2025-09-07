@@ -166,5 +166,3 @@ curl -L -o "$PHOTO_DIR/bob-saget.jpg" "https://upload.wikimedia.org/wikipedia/co
 echo "Download complete! Photos saved to $PHOTO_DIR"
 echo "Note: Some explainers (jim-jefferies, andy-andrist) don't have quality photos on Wikipedia Commons."
 
-
-
