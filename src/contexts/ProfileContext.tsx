@@ -290,8 +290,8 @@ export const ProfileProvider: React.FC<ProfileProviderProps> = ({ children }) =>
       
       console.log('ProfileContext: Saving to database:', {
         available_credits: dbProfile.available_credits,
-        total_explanations: dbProfile.total_explanations,
-        today_explanations: dbProfile.today_explanations
+        totalExplanations: newProfile.totalExplanations,
+        todayExplanations: newProfile.todayExplanations
       })
       
       fetch('/api/user/profile', {
