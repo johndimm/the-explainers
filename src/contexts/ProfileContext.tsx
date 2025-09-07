@@ -66,7 +66,7 @@ export const ProfileProvider: React.FC<ProfileProviderProps> = ({ children }) =>
             todayExplanations: dbProfile.today_explanations,
             availableCredits: dbProfile.available_credits,
             bookExplanations: dbProfile.book_explanations || {},
-            purchasedBooks: dbProfile.purchased_books || [],
+            purchasedBooks: dbProfile.purchased_book_details ? Object.keys(dbProfile.purchased_book_details) : [],
             hasUnlimitedAccess: dbProfile.has_unlimited_access,
             unlimitedAccessExpiry: dbProfile.unlimited_access_expiry ? new Date(dbProfile.unlimited_access_expiry) : undefined
           }
@@ -319,22 +319,25 @@ export const ProfileProvider: React.FC<ProfileProviderProps> = ({ children }) =>
   const purchaseBook = (bookTitle: string, author: string, url?: string) => {
     setProfile(prev => {
       const bookKey = getBookKey(bookTitle, author)
-      const newProfile = {
-        ...prev,
-        purchasedBooks: [...(prev.purchasedBooks || []), bookKey]
-      }
-      // Also persist friendly title/author mapping for display
+      
+      // Update purchased book details (single source of truth)
       const details = {
         ...(prev as any).purchasedBookDetails,
         [bookKey]: { title: bookTitle, author, url }
       }
-      ;(newProfile as any).purchasedBookDetails = details
       
-      // Save to database with correct field names
+      const newProfile = {
+        ...prev,
+        purchasedBooks: Object.keys(details), // Derive from details
+        ...(details ? { purchasedBookDetails: details } : {})
+      }
+      
+      // Save to database - only need purchased_book_details
       const dbProfile = {
         ...newProfile,
         purchased_book_details: details
       }
+      delete (dbProfile as any).purchasedBooks
       delete (dbProfile as any).purchasedBookDetails
       
       fetch('/api/user/profile', {
@@ -350,22 +353,23 @@ export const ProfileProvider: React.FC<ProfileProviderProps> = ({ children }) =>
   const removePurchasedBook = (bookTitle: string, author: string) => {
     setProfile(prev => {
       const bookKey = getBookKey(bookTitle, author)
-      const newPurchased = (prev.purchasedBooks || []).filter(k => k !== bookKey)
       const details = { ...(prev as any).purchasedBookDetails }
       if (details && details[bookKey]) {
         delete details[bookKey]
       }
+      
       const newProfile = {
         ...prev,
-        purchasedBooks: newPurchased,
+        purchasedBooks: Object.keys(details), // Derive from details
         ...(details ? { purchasedBookDetails: details } : {})
       }
       
-      // Save to database with correct field names
+      // Save to database - only need purchased_book_details
       const dbProfile = {
         ...newProfile,
         purchased_book_details: details
       }
+      delete (dbProfile as any).purchasedBooks
       delete (dbProfile as any).purchasedBookDetails
       
       fetch('/api/user/profile', {
