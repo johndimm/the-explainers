@@ -27,7 +27,7 @@ const DEFAULT_PROFILE: ProfileData = {
   firstLogin: undefined,
   totalExplanations: 0,
   todayExplanations: 0,
-  availableCredits: 5,
+  availableCredits: 0,
   bookExplanations: {},
   purchasedBooks: [],
   hasUnlimitedAccess: false,
@@ -77,6 +77,8 @@ export const ProfileProvider: React.FC<ProfileProviderProps> = ({ children }) =>
           }
           
           console.log('ProfileContext: Restoring profile from database:', profileData)
+          console.log('ProfileContext: Credits from database:', profileData.availableCredits)
+          console.log('ProfileContext: Full database response:', dbProfile)
           setProfile(profileData)
         } else {
           // No profile in database, create default
@@ -271,17 +273,31 @@ export const ProfileProvider: React.FC<ProfileProviderProps> = ({ children }) =>
         }
       } else {
         // Use a credit
+        console.log('ProfileContext: Using a credit. Previous credits:', prev.availableCredits)
         newProfile = {
           ...prev,
           availableCredits: Math.max(0, (prev.availableCredits || 0) - 1)
         }
+        console.log('ProfileContext: New credits after deduction:', newProfile.availableCredits)
       }
       
-      // Save to database
+      // Save to database with correct field names
+      const dbProfile = {
+        ...newProfile,
+        available_credits: newProfile.availableCredits
+      }
+      delete (dbProfile as any).availableCredits
+      
+      console.log('ProfileContext: Saving to database:', {
+        available_credits: dbProfile.available_credits,
+        total_explanations: dbProfile.total_explanations,
+        today_explanations: dbProfile.today_explanations
+      })
+      
       fetch('/api/user/profile', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(newProfile)
+        body: JSON.stringify(dbProfile)
       }).catch(error => console.error('Error saving profile to database:', error))
       
       return newProfile
