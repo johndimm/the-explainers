@@ -203,46 +203,26 @@ const Library: React.FC<LibraryProps> = ({ onBookSelect, onBackToCurrentBook }) 
         </div>
 
         <div className={styles.customSection}>
-          <div className={styles.customLink}>
-            <span>Need a different book or text?</span>
-            <button 
-              onClick={() => router.push('/custom-books')}
-              className={styles.customBooksButton}
-            >
-              Load More Options →
-            </button>
-          </div>
-          
-          {/* Community Section */}
-          <div className={styles.communitySection}>
-            <div className={styles.communityContent}>
-              <div className={styles.communityInfo}>
-                <span className={styles.communityIcon}>📱</span>
-                <div className={styles.communityText}>
-                  <strong>Join Our Community</strong>
-                  <span>Have suggestions? Found a bug? Want to discuss books?</span>
-                </div>
-              </div>
-              <div className={styles.communityActions}>
-                <button 
-                  className={styles.communityButton}
-                  onClick={() => window.open('https://reddit.com/r/TheExplainersApp', '_blank')}
-                >
-                  Reddit Forum →
-                </button>
-                <button 
-                  className={styles.communityButton}
-                  onClick={() => window.open('https://github.com/johndimm/the-explainers/discussions', '_blank')}
-                  style={{ marginLeft: '8px' }}
-                >
-                  GitHub Discussions →
-                </button>
-                <span className={styles.communityNote}>
-                  Join r/TheExplainersApp or GitHub Discussions
-                </span>
-              </div>
-            </div>
-          </div>
+          <button 
+            onClick={() => router.push('/custom-books')}
+            className={styles.customBooksButton}
+            style={{
+              padding: '12px 20px',
+              fontSize: '14px',
+              fontWeight: '500',
+              background: '#8b5cf6',
+              color: 'white',
+              border: 'none',
+              borderRadius: '8px',
+              cursor: 'pointer',
+              transition: 'background-color 0.2s',
+              marginBottom: '24px'
+            }}
+            onMouseOver={(e) => e.currentTarget.style.background = '#7c3aed'}
+            onMouseOut={(e) => e.currentTarget.style.background = '#8b5cf6'}
+          >
+            Need a different book or text?
+          </button>
         </div>
 
         <div className={styles.categories}>
@@ -276,6 +256,114 @@ const Library: React.FC<LibraryProps> = ({ onBookSelect, onBackToCurrentBook }) 
             </div>
           ))
           )}
+        </div>
+
+        {/* Community Section - redesigned */}
+        <div style={{ 
+          marginTop: '64px', 
+          padding: '32px 24px',
+          background: 'linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%)',
+          borderRadius: '16px',
+          border: '1px solid #e2e8f0'
+        }}>
+          <div style={{ textAlign: 'center', marginBottom: '24px' }}>
+            <div style={{ 
+              fontSize: '24px', 
+              marginBottom: '8px',
+              fontWeight: '700',
+              color: '#1e293b'
+            }}>
+              💬 Join Our Community
+            </div>
+            <p style={{ 
+              fontSize: '16px', 
+              color: '#64748b',
+              margin: '0',
+              lineHeight: '1.5'
+            }}>
+              Have suggestions? Found a bug? Want to discuss books?
+            </p>
+          </div>
+          
+          <div style={{ 
+            display: 'flex', 
+            gap: '16px', 
+            justifyContent: 'center',
+            flexWrap: 'wrap'
+          }}>
+            <button 
+              onClick={() => window.open('https://reddit.com/r/TheExplainersApp', '_blank')}
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+                gap: '8px',
+                padding: '12px 20px',
+                background: '#ff4500',
+                color: 'white',
+                border: 'none',
+                borderRadius: '10px',
+                cursor: 'pointer',
+                fontSize: '14px',
+                fontWeight: '600',
+                transition: 'all 0.2s',
+                boxShadow: '0 2px 4px rgba(255, 69, 0, 0.2)'
+              }}
+              onMouseOver={(e) => {
+                e.currentTarget.style.background = '#e03e00'
+                e.currentTarget.style.transform = 'translateY(-1px)'
+                e.currentTarget.style.boxShadow = '0 4px 8px rgba(255, 69, 0, 0.3)'
+              }}
+              onMouseOut={(e) => {
+                e.currentTarget.style.background = '#ff4500'
+                e.currentTarget.style.transform = 'translateY(0)'
+                e.currentTarget.style.boxShadow = '0 2px 4px rgba(255, 69, 0, 0.2)'
+              }}
+            >
+              <span style={{ fontSize: '16px' }}>🔴</span>
+              Reddit Forum
+            </button>
+            
+            <button 
+              onClick={() => window.open('https://github.com/johndimm/the-explainers/discussions', '_blank')}
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+                gap: '8px',
+                padding: '12px 20px',
+                background: '#24292e',
+                color: 'white',
+                border: 'none',
+                borderRadius: '10px',
+                cursor: 'pointer',
+                fontSize: '14px',
+                fontWeight: '600',
+                transition: 'all 0.2s',
+                boxShadow: '0 2px 4px rgba(36, 41, 46, 0.2)'
+              }}
+              onMouseOver={(e) => {
+                e.currentTarget.style.background = '#1a1e22'
+                e.currentTarget.style.transform = 'translateY(-1px)'
+                e.currentTarget.style.boxShadow = '0 4px 8px rgba(36, 41, 46, 0.3)'
+              }}
+              onMouseOut={(e) => {
+                e.currentTarget.style.background = '#24292e'
+                e.currentTarget.style.transform = 'translateY(0)'
+                e.currentTarget.style.boxShadow = '0 2px 4px rgba(36, 41, 46, 0.2)'
+              }}
+            >
+              <span style={{ fontSize: '16px' }}>🐙</span>
+              GitHub Discussions
+            </button>
+          </div>
+          
+          <div style={{ 
+            textAlign: 'center', 
+            marginTop: '16px',
+            fontSize: '12px',
+            color: '#94a3b8'
+          }}>
+            Join r/TheExplainersApp or GitHub Discussions
+          </div>
         </div>
       </div>
     </div>
