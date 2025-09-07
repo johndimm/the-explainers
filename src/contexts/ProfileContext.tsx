@@ -284,12 +284,15 @@ export const ProfileProvider: React.FC<ProfileProviderProps> = ({ children }) =>
       // Save to database with correct field names
       const dbProfile = {
         ...newProfile,
-        available_credits: newProfile.availableCredits
+        available_credits: newProfile.availableCredits,
+        book_explanations: newProfile.bookExplanations
       }
       delete (dbProfile as any).availableCredits
+      delete (dbProfile as any).bookExplanations
       
       console.log('ProfileContext: Saving to database:', {
         available_credits: dbProfile.available_credits,
+        book_explanations: dbProfile.book_explanations,
         totalExplanations: newProfile.totalExplanations,
         todayExplanations: newProfile.todayExplanations
       })
