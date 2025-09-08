@@ -68,7 +68,21 @@ export function checkBookWikipediaPage(title: string, author?: string): Wikipedi
     'Whitman': 'Walt Whitman',
     'Dickinson': 'Emily Dickinson',
     'Frost': 'Robert Frost',
-    'Eliot': 'T.S. Eliot'
+    'Eliot': 'T.S. Eliot',
+    'Apollinaire': 'Guillaume Apollinaire',
+    'Baudelaire': 'Charles Baudelaire',
+    'Diderot': 'Denis Diderot',
+    'Rimbaud': 'Arthur Rimbaud',
+    'Verlaine': 'Paul Verlaine',
+    'Rilke': 'Rainer Maria Rilke',
+    'Goethe': 'Johann Wolfgang von Goethe',
+    'Dante': 'Dante Alighieri',
+    'Cervantes': 'Miguel de Cervantes',
+    'Voltaire': 'Voltaire',
+    'Maupassant': 'Guy de Maupassant',
+    'Mann': 'Thomas Mann',
+    'Hesse': 'Hermann Hesse',
+    'Schiller': 'Friedrich Schiller'
   }
   
   // First try with the provided author (or 'Unknown' if none)
