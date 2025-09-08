@@ -355,13 +355,6 @@
     "wikipediaTitle": "Bertrand Russell"
   },
   {
-    "id": "852",
-    "title": "Democracy and Education: An Introduction to the Philosophy of Education",
-    "author": "Dewey",
-    "wikipediaUrl": "https://en.wikipedia.org/wiki/Democracy%20and%20Education",
-    "wikipediaTitle": "Democracy and Education"
-  },
-  {
     "id": "3330",
     "title": "The Analects of Confucius (from the Chinese Classics)",
     "author": "Confucius",
@@ -423,5 +416,109 @@
     "author": "Farrar",
     "wikipediaUrl": "https://en.wikipedia.org/wiki/Robert%20Farrar%20Capon",
     "wikipediaTitle": "Robert Farrar Capon"
+  },
+  {
+    "id": "tractatus",
+    "title": "Tractatus Logico-Philosophicus",
+    "author": "Ludwig Wittgenstein",
+    "localPath": "/public-domain-texts/tractatus-english.txt",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Tractatus%20Logico-Philosophicus",
+    "wikipediaTitle": "Tractatus Logico-Philosophicus"
+  },
+  {
+    "id": "5827",
+    "title": "How We Think",
+    "author": "John Dewey",
+    "directUrl": "https://www.gutenberg.org/ebooks/5827.txt.utf-8",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/How_We_Think",
+    "wikipediaTitle": "How We Think"
+  },
+  {
+    "id": "852",
+    "title": "Democracy and Education",
+    "author": "John Dewey",
+    "directUrl": "https://www.gutenberg.org/ebooks/852.txt.utf-8",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Democracy_and_Education",
+    "wikipediaTitle": "Democracy and Education"
+  },
+  {
+    "id": "41386",
+    "title": "Human Nature and Conduct",
+    "author": "John Dewey",
+    "directUrl": "https://www.gutenberg.org/ebooks/41386.txt.utf-8",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Human_Nature_and_Conduct",
+    "wikipediaTitle": "Human Nature and Conduct"
+  },
+  {
+    "id": "71000",
+    "title": "The Public and Its Problems",
+    "author": "John Dewey",
+    "directUrl": "https://www.gutenberg.org/ebooks/71000.txt.utf-8",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/The_Public_and_Its_Problems",
+    "wikipediaTitle": "The Public and Its Problems"
+  },
+  {
+    "id": "40089",
+    "title": "Reconstruction in Philosophy",
+    "author": "John Dewey",
+    "directUrl": "https://www.gutenberg.org/ebooks/40089.txt.utf-8",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Reconstruction_in_Philosophy",
+    "wikipediaTitle": "Reconstruction in Philosophy"
+  },
+  {
+    "id": "cantor-transfinite",
+    "title": "Contributions to the Founding of the Theory of Transfinite Numbers",
+    "author": "Georg Cantor",
+    "directUrl": "https://en.wikisource.org/wiki/Contributions_to_the_Founding_of_the_Theory_of_Transfinite_Numbers",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Georg_Cantor",
+    "wikipediaTitle": "Georg Cantor"
+  },
+  {
+    "id": "15776",
+    "title": "The Economic Consequences of the Peace",
+    "author": "John Maynard Keynes",
+    "directUrl": "https://www.gutenberg.org/ebooks/15776.txt.utf-8",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/The_Economic_Consequences_of_the_Peace",
+    "wikipediaTitle": "The Economic Consequences of the Peace"
+  },
+  {
+    "id": "32625",
+    "title": "A Treatise on Probability",
+    "author": "John Maynard Keynes",
+    "directUrl": "https://www.gutenberg.org/ebooks/32625.txt.utf-8",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/A_Treatise_on_Probability",
+    "wikipediaTitle": "A Treatise on Probability"
+  },
+  {
+    "id": "keynes-monetary",
+    "title": "A Tract on Monetary Reform",
+    "author": "John Maynard Keynes",
+    "directUrl": "https://www.gutenberg.org/ebooks/author/6280",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/A_Tract_on_Monetary_Reform",
+    "wikipediaTitle": "A Tract on Monetary Reform"
+  },
+  {
+    "id": "moore-principia",
+    "title": "Principia Ethica",
+    "author": "G.E. Moore",
+    "directUrl": "https://www.gutenberg.org/ebooks/author/45722",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Principia_Ethica",
+    "wikipediaTitle": "Principia Ethica"
+  },
+  {
+    "id": "moore-ethics",
+    "title": "Ethics",
+    "author": "G.E. Moore",
+    "directUrl": "https://en.wikisource.org/wiki/Ethics_(Moore)",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/G._E._Moore",
+    "wikipediaTitle": "G. E. Moore"
+  },
+  {
+    "id": "moore-studies",
+    "title": "Philosophical Studies",
+    "author": "G.E. Moore",
+    "directUrl": "https://www.gutenberg.org/ebooks/author/45722",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/G._E._Moore",
+    "wikipediaTitle": "G. E. Moore"
   }
 ]

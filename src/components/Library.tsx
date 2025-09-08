@@ -4,6 +4,7 @@ import React, { useState, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
 import styles from './Library.module.css'
 import FilteredBookList from './FilteredBookList'
+import CategoryPopup from './CategoryPopup'
 
 interface Book {
   id: string | number
@@ -37,7 +38,6 @@ const CATEGORY_FILES = [
   'german-literature.json',
   'italian-literature.json',
   'spanish-literature.json',
-  'historical.json',
   'gutenberg-top.json',
   'humanities-101.json',
   'history.json'
@@ -48,6 +48,7 @@ const Library: React.FC<LibraryProps> = ({ onBookSelect, onBackToCurrentBook }) 
   const [loading, setLoading] = useState(true)
   const [searchQuery, setSearchQuery] = useState('')
   const [filteredCategories, setFilteredCategories] = useState<LibraryCategory[]>([])
+  const [popupCategory, setPopupCategory] = useState<LibraryCategory | null>(null)
   const router = useRouter()
 
   useEffect(() => {
@@ -109,11 +110,24 @@ const Library: React.FC<LibraryProps> = ({ onBookSelect, onBackToCurrentBook }) 
   }
 
   const showMoreBooks = (categoryIndex: number) => {
-    setCategories(prev => prev.map((category, index) => 
-      index === categoryIndex 
-        ? { ...category, visibleCount: Math.min(category.visibleCount + 10, category.filteredBooks?.length || category.books.length) }
-        : category
-    ))
+    const category = categories[categoryIndex]
+    const totalBooks = category.filteredBooks?.length || category.books.length
+    
+    // If category has more than 50 books, show popup instead of expanding
+    if (totalBooks > 50) {
+      setPopupCategory(category)
+    } else {
+      // For smaller categories, use the old behavior
+      setCategories(prev => prev.map((cat, index) => 
+        index === categoryIndex 
+          ? { ...cat, visibleCount: Math.min(cat.visibleCount + 10, totalBooks) }
+          : cat
+      ))
+    }
+  }
+
+  const closePopup = () => {
+    setPopupCategory(null)
   }
 
   const getBookUrl = (book: Book): string => {
@@ -138,6 +152,11 @@ const Library: React.FC<LibraryProps> = ({ onBookSelect, onBackToCurrentBook }) 
     
     const url = getBookUrl(book)
     onBookSelect(book.title, author, url)
+    
+    // Close popup if it's open
+    if (popupCategory) {
+      closePopup()
+    }
   }
 
   if (loading) {
@@ -261,7 +280,10 @@ const Library: React.FC<LibraryProps> = ({ onBookSelect, onBackToCurrentBook }) 
                   onClick={() => showMoreBooks(categoryIndex)}
                   className={styles.moreButton}
                 >
-                  More ({(category.filteredBooks?.length || category.books.length) - category.visibleCount} remaining)
+                  {(category.filteredBooks?.length || category.books.length) > 50 
+                    ? `View All ${category.filteredBooks?.length || category.books.length} Books`
+                    : `More (${(category.filteredBooks?.length || category.books.length) - category.visibleCount} remaining)`
+                  }
                 </button>
               )}
             </div>
@@ -377,6 +399,17 @@ const Library: React.FC<LibraryProps> = ({ onBookSelect, onBackToCurrentBook }) 
           </div>
         </div>
       </div>
+
+      {/* Category Popup */}
+      {popupCategory && (
+        <CategoryPopup
+          isOpen={!!popupCategory}
+          onClose={closePopup}
+          categoryName={popupCategory.name}
+          books={popupCategory.filteredBooks || popupCategory.books}
+          onBookClick={handleBookClick}
+        />
+      )}
     </div>
   )
 }

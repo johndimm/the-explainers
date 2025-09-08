@@ -62,5 +62,29 @@
     "directUrl": "https://www.gutenberg.org/files/674/674-0.txt",
     "wikipediaUrl": "https://en.wikipedia.org/wiki/Parallel_Lives",
     "wikipediaTitle": "Parallel Lives"
+  },
+  {
+    "id": "magna-carta",
+    "title": "Magna Carta",
+    "author": "King John of England",
+    "localPath": "/public-domain-texts/magna-carta.txt",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Magna%20Carta",
+    "wikipediaTitle": "Magna Carta"
+  },
+  {
+    "id": "kjv-bible",
+    "title": "The King James Version of the Bible",
+    "author": "Various",
+    "localPath": "/public-domain-texts/king-james-bible.txt",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/King%20James%20Version",
+    "wikipediaTitle": "King James Version"
+  },
+  {
+    "id": "book-of-mormon",
+    "title": "The Book of Mormon",
+    "author": "Various",
+    "directUrl": "https://www.gutenberg.org/files/17/17-0.txt",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Book%20of%20Mormon",
+    "wikipediaTitle": "Book of Mormon"
   }
 ]
