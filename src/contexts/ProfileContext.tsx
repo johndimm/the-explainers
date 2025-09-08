@@ -1,6 +1,7 @@
 'use client'
 
 import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react'
+import { useSession } from 'next-auth/react'
 import { ProfileData, Language, EducationLevel } from '../components/Profile'
 
 interface ProfileContextType {
@@ -41,16 +42,28 @@ interface ProfileProviderProps {
 }
 
 export const ProfileProvider: React.FC<ProfileProviderProps> = ({ children }) => {
+  const { data: session, status } = useSession()
   const [profile, setProfile] = useState<ProfileData>(DEFAULT_PROFILE)
   const [isProfileOpen, setIsProfileOpen] = useState(false)
   const [isHydrated, setIsHydrated] = useState(false)
 
   useEffect(() => {
     const loadProfile = async () => {
+      if (status === 'loading') return
+      
+      if (!session?.user?.email) {
+        // Not authenticated, use default profile
+        console.log('ProfileContext: Not authenticated, using default profile')
+        setProfile(DEFAULT_PROFILE)
+        setIsHydrated(true)
+        return
+      }
+
       setIsHydrated(true)
       
       try {
         // Load from database
+        console.log('ProfileContext: Loading profile from database for:', session.user.email)
         const response = await fetch('/api/user/profile')
         if (response.ok) {
           const dbProfile = await response.json()
@@ -106,7 +119,7 @@ export const ProfileProvider: React.FC<ProfileProviderProps> = ({ children }) =>
     }
 
     loadProfile()
-  }, [])
+  }, [session, status])
 
   const updateProfile = async (newProfile: ProfileData) => {
     console.log('ProfileContext: updateProfile called with:', newProfile)
@@ -252,13 +265,14 @@ export const ProfileProvider: React.FC<ProfileProviderProps> = ({ children }) =>
       
       let newProfile = { ...prev }
       
-      // If using custom LLM, no cost
-      if (useCustomLLM) {
+      // If unlimited access, no cost and no tracking
+      if (prev.hasUnlimitedAccess && prev.unlimitedAccessExpiry && new Date() < new Date(prev.unlimitedAccessExpiry)) {
+        console.log('ProfileContext: unlimited access - no tracking needed')
         return prev
       }
       
-      // If unlimited access, no cost
-      if (prev.hasUnlimitedAccess && prev.unlimitedAccessExpiry && new Date() < new Date(prev.unlimitedAccessExpiry)) {
+      // If using custom LLM, no cost
+      if (useCustomLLM) {
         return prev
       }
       
