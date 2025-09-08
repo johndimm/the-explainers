@@ -153,7 +153,10 @@ export const ProfileProvider: React.FC<ProfileProviderProps> = ({ children }) =>
   }
 
   const getBookKey = (bookTitle: string, author: string) => {
-    return `${bookTitle}-${author}`.toLowerCase().replace(/[^a-z0-9-]/g, '-')
+    // Create a more explicit format: "title:author" to avoid ambiguity
+    const cleanTitle = bookTitle.toLowerCase().replace(/[^a-z0-9]/g, '-')
+    const cleanAuthor = author.toLowerCase().replace(/[^a-z0-9]/g, '-')
+    return `${cleanTitle}:${cleanAuthor}`
   }
 
   const canUseExplanation = (bookTitle: string, author: string, useCustomLLM: boolean) => {
@@ -432,11 +435,30 @@ export const ProfileProvider: React.FC<ProfileProviderProps> = ({ children }) =>
       console.log('ProfileContext: granting unlimited access until:', expiryTime)
       console.log('ProfileContext: new profile with unlimited access:', newProfile)
       
-      // Save to database
+      // Save to database - convert camelCase to snake_case
+      const dbProfile = {
+        ...newProfile,
+        available_credits: newProfile.availableCredits,
+        book_explanations: newProfile.bookExplanations,
+        purchased_book_details: newProfile.purchasedBookDetails,
+        has_unlimited_access: newProfile.hasUnlimitedAccess,
+        unlimited_access_expiry: newProfile.unlimitedAccessExpiry
+      }
+      delete (dbProfile as any).availableCredits
+      delete (dbProfile as any).bookExplanations
+      delete (dbProfile as any).purchasedBookDetails
+      delete (dbProfile as any).hasUnlimitedAccess
+      delete (dbProfile as any).unlimitedAccessExpiry
+      
+      console.log('ProfileContext: Saving unlimited access to database:', {
+        has_unlimited_access: dbProfile.has_unlimited_access,
+        unlimited_access_expiry: dbProfile.unlimited_access_expiry
+      })
+      
       fetch('/api/user/profile', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(newProfile)
+        body: JSON.stringify(dbProfile)
       }).catch(error => console.error('Error saving profile to database:', error))
       
       return newProfile
