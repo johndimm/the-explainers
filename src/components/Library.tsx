@@ -36,7 +36,9 @@ const CATEGORY_FILES = [
   'italian-literature.json',
   'spanish-literature.json',
   'historical.json',
-  'gutenberg-top.json'
+  'gutenberg-top.json',
+  'humanities-101.json',
+  'history.json'
 ]
 
 const Library: React.FC<LibraryProps> = ({ onBookSelect, onBackToCurrentBook }) => {
