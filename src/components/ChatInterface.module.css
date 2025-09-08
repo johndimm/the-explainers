@@ -246,7 +246,19 @@
   
   .headerControls {
     width: 100%;
-    justify-content: space-between;
+    gap: 12px;
+  }
+  
+  .dropdownsRow {
+    flex-direction: column;
+    gap: 8px;
+    align-items: stretch;
+  }
+  
+  .buttonsRow {
+    flex-direction: column;
+    gap: 8px;
+    align-items: stretch;
   }
   
   .providerSelect, .styleSelect, .lengthSelect {
@@ -294,6 +306,19 @@
 }
 
 .headerControls {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.dropdownsRow {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.buttonsRow {
   display: flex;
   align-items: center;
   gap: 12px;
