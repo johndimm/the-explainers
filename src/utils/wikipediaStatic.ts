@@ -27,12 +27,9 @@ export function checkPersonWikipediaPage(name: string): WikipediaResult {
     return result
   }
   
-  // Fallback: assume it exists if not in our data
-  console.warn(`No Wikipedia data found for person: ${name}`)
+  // No Wikipedia page found
   return {
-    exists: true,
-    url: `https://en.wikipedia.org/wiki/${encodeURIComponent(name)}`,
-    title: name
+    exists: false
   }
 }
 
@@ -51,12 +48,9 @@ export function checkBookWikipediaPage(title: string, author?: string): Wikipedi
     return result
   }
   
-  // Fallback: assume it exists if not in our data
-  console.warn(`No Wikipedia data found for book: ${key}`)
+  // No Wikipedia page found
   return {
-    exists: true,
-    url: `https://en.wikipedia.org/wiki/${encodeURIComponent(title)}`,
-    title: title
+    exists: false
   }
 }
 

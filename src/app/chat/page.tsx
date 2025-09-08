@@ -32,9 +32,10 @@ function ChatContent() {
     }
   }, [])
 
-  // Redirect to sign-in if not authenticated
+  // Redirect to sign-in if not authenticated (except in development)
   useEffect(() => {
-    if (!isLoading && !isAuthenticated) {
+    const isDev = process.env.NODE_ENV === 'development'
+    if (!isLoading && !isAuthenticated && !isDev) {
       router.push('/auth/signin')
     }
   }, [isLoading, isAuthenticated, router])
@@ -77,8 +78,9 @@ function ChatContent() {
     )
   }
 
-  // Don't render chat if not authenticated
-  if (!isAuthenticated) {
+  // Don't render chat if not authenticated (except in development)
+  const isDev = process.env.NODE_ENV === 'development'
+  if (!isAuthenticated && !isDev) {
     return null
   }
 
