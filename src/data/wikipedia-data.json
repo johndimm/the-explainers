@@ -10,11 +10,6 @@
       "url": "https://en.wikipedia.org/wiki/T._S._Eliot",
       "title": "T. S. Eliot"
     },
-    "T. S. Eliot": {
-      "exists": true,
-      "url": "https://en.wikipedia.org/wiki/T._S._Eliot",
-      "title": "T. S. Eliot"
-    },
     "John Ruskin": {
       "exists": true,
       "url": "https://en.wikipedia.org/wiki/John_Ruskin",
@@ -194,595 +189,255 @@
       "exists": true,
       "url": "https://en.wikipedia.org/wiki/Neutral",
       "title": "Neutral"
-    },
-    "Christopher Marlowe": {
-      "exists": true,
-      "url": "https://en.wikipedia.org/wiki/Christopher_Marlowe",
-      "title": "Christopher Marlowe"
-    },
-    "Ben Jonson": {
-      "exists": true,
-      "url": "https://en.wikipedia.org/wiki/Ben_Jonson",
-      "title": "Ben Jonson"
-    },
-    "Francis Bacon": {
-      "exists": true,
-      "url": "https://en.wikipedia.org/wiki/Francis_Bacon",
-      "title": "Francis Bacon"
-    },
-    "David Foster Wallace": {
-      "exists": true,
-      "url": "https://en.wikipedia.org/wiki/David_Foster_Wallace",
-      "title": "David Foster Wallace"
-    },
-    "Oscar Wilde": {
-      "exists": true,
-      "url": "https://en.wikipedia.org/wiki/Oscar_Wilde",
-      "title": "Oscar Wilde"
-    },
-    "Douglas Adams": {
-      "exists": true,
-      "url": "https://en.wikipedia.org/wiki/Douglas_Adams",
-      "title": "Douglas Adams"
-    },
-    "Terry Pratchett": {
-      "exists": true,
-      "url": "https://en.wikipedia.org/wiki/Terry_Pratchett",
-      "title": "Terry Pratchett"
-    },
-    "Joan Didion": {
-      "exists": true,
-      "url": "https://en.wikipedia.org/wiki/Joan_Didion",
-      "title": "Joan Didion"
-    },
-    "David Sedaris": {
-      "exists": true,
-      "url": "https://en.wikipedia.org/wiki/David_Sedaris",
-      "title": "David Sedaris"
-    },
-    "Rudyard Kipling": {
-      "exists": true,
-      "url": "https://en.wikipedia.org/wiki/Rudyard_Kipling",
-      "title": "Rudyard Kipling"
-    },
-    "Tom Wolfe": {
-      "exists": true,
-      "url": "https://en.wikipedia.org/wiki/Tom_Wolfe",
-      "title": "Tom Wolfe"
-    },
-    "Flannery O'Connor": {
-      "exists": true,
-      "url": "https://en.wikipedia.org/wiki/Flannery_O'Connor",
-      "title": "Flannery O'Connor"
-    },
-    "Anthony Bourdain": {
-      "exists": true,
-      "url": "https://en.wikipedia.org/wiki/Anthony_Bourdain",
-      "title": "Anthony Bourdain"
-    },
-    "Bill Bryson": {
-      "exists": true,
-      "url": "https://en.wikipedia.org/wiki/Bill_Bryson",
-      "title": "Bill Bryson"
-    },
-    "Stephen Fry": {
-      "exists": true,
-      "url": "https://en.wikipedia.org/wiki/Stephen_Fry",
-      "title": "Stephen Fry"
-    },
-    "Bernard-Henri Lévy": {
-      "exists": true,
-      "url": "https://en.wikipedia.org/wiki/Bernard-Henri_L%C3%A9vy",
-      "title": "Bernard-Henri Lévy"
-    },
-    "Michel Houellebecq": {
-      "exists": true,
-      "url": "https://en.wikipedia.org/wiki/Michel_Houellebecq",
-      "title": "Michel Houellebecq"
-    },
-    "Christopher Hitchens": {
-      "exists": true,
-      "url": "https://en.wikipedia.org/wiki/Christopher_Hitchens",
-      "title": "Christopher Hitchens"
-    },
-    "Cormac McCarthy": {
-      "exists": true,
-      "url": "https://en.wikipedia.org/wiki/Cormac_McCarthy",
-      "title": "Cormac McCarthy"
-    },
-    "Stephen King": {
-      "exists": true,
-      "url": "https://en.wikipedia.org/wiki/Stephen_King",
-      "title": "Stephen King"
-    },
-    "Dorothy Parker": {
-      "exists": true,
-      "url": "https://en.wikipedia.org/wiki/Dorothy_Parker",
-      "title": "Dorothy Parker"
-    },
-    "Samuel Beckett": {
-      "exists": true,
-      "url": "https://en.wikipedia.org/wiki/Samuel_Beckett",
-      "title": "Samuel Beckett"
-    },
-    "Kurt Vonnegut": {
-      "exists": true,
-      "url": "https://en.wikipedia.org/wiki/Kurt_Vonnegut",
-      "title": "Kurt Vonnegut"
-    },
-    "Bernie Sanders": {
-      "exists": true,
-      "url": "https://en.wikipedia.org/wiki/Bernie_Sanders",
-      "title": "Bernie Sanders"
-    },
-    "Martin Luther King": {
-      "exists": true,
-      "url": "https://en.wikipedia.org/wiki/Martin_Luther_King_Jr.",
-      "title": "Martin Luther King Jr."
-    },
-    "John F. Kennedy": {
-      "exists": true,
-      "url": "https://en.wikipedia.org/wiki/John_F._Kennedy",
-      "title": "John F. Kennedy"
-    },
-    "James Carville": {
-      "exists": true,
-      "url": "https://en.wikipedia.org/wiki/James_Carville",
-      "title": "James Carville"
-    },
-    "Donald Trump": {
-      "exists": true,
-      "url": "https://en.wikipedia.org/wiki/Donald_Trump",
-      "title": "Donald Trump"
-    },
-    "George W. Bush": {
-      "exists": true,
-      "url": "https://en.wikipedia.org/wiki/George_W._Bush",
-      "title": "George W. Bush"
-    },
-    "Barack Obama": {
-      "exists": true,
-      "url": "https://en.wikipedia.org/wiki/Barack_Obama",
-      "title": "Barack Obama"
-    },
-    "Ricky Gervais": {
-      "exists": true,
-      "url": "https://en.wikipedia.org/wiki/Ricky_Gervais",
-      "title": "Ricky Gervais"
-    },
-    "Sarah Silverman": {
-      "exists": true,
-      "url": "https://en.wikipedia.org/wiki/Sarah_Silverman",
-      "title": "Sarah Silverman"
-    },
-    "Ali Wong": {
-      "exists": true,
-      "url": "https://en.wikipedia.org/wiki/Ali_Wong",
-      "title": "Ali Wong"
-    },
-    "Bo Burnham": {
-      "exists": true,
-      "url": "https://en.wikipedia.org/wiki/Bo_Burnham",
-      "title": "Bo Burnham"
-    },
-    "Andrew Dice Clay": {
-      "exists": true,
-      "url": "https://en.wikipedia.org/wiki/Andrew_Dice_Clay",
-      "title": "Andrew Dice Clay"
-    },
-    "Anthony Jeselnik": {
-      "exists": true,
-      "url": "https://en.wikipedia.org/wiki/Anthony_Jeselnik",
-      "title": "Anthony Jeselnik"
-    },
-    "Doug Stanhope": {
-      "exists": true,
-      "url": "https://en.wikipedia.org/wiki/Doug_Stanhope",
-      "title": "Doug Stanhope"
-    },
-    "Jim Norton": {
-      "exists": true,
-      "url": "https://en.wikipedia.org/wiki/Jim_Norton",
-      "title": "Jim Norton"
-    },
-    "Jim Jefferies": {
-      "exists": true,
-      "url": "https://en.wikipedia.org/wiki/Jim_Jefferies",
-      "title": "Jim Jefferies"
-    },
-    "Daniel Tosh": {
-      "exists": true,
-      "url": "https://en.wikipedia.org/wiki/Daniel_Tosh",
-      "title": "Daniel Tosh"
-    },
-    "Andy Andrist": {
-      "exists": true,
-      "url": "https://en.wikipedia.org/wiki/Andy_Andrist",
-      "title": "Andy Andrist"
-    },
-    "Bill Burr": {
-      "exists": true,
-      "url": "https://en.wikipedia.org/wiki/Bill_Burr",
-      "title": "Bill Burr"
-    },
-    "Lewis Black": {
-      "exists": true,
-      "url": "https://en.wikipedia.org/wiki/Lewis_Black",
-      "title": "Lewis Black"
-    },
-    "Sam Kinison": {
-      "exists": true,
-      "url": "https://en.wikipedia.org/wiki/Sam_Kinison",
-      "title": "Sam Kinison"
-    },
-    "Paul Mooney": {
-      "exists": true,
-      "url": "https://en.wikipedia.org/wiki/Paul_Mooney",
-      "title": "Paul Mooney"
-    },
-    "Bill Hicks": {
-      "exists": true,
-      "url": "https://en.wikipedia.org/wiki/Bill_Hicks",
-      "title": "Bill Hicks"
-    },
-    "Bob Saget": {
-      "exists": true,
-      "url": "https://en.wikipedia.org/wiki/Bob_Saget",
-      "title": "Bob Saget"
-    },
-    "Norm MacDonald": {
-      "exists": true,
-      "url": "https://en.wikipedia.org/wiki/Norm_Macdonald",
-      "title": "Norm Macdonald"
-    },
-    "Oprah Winfrey": {
-      "exists": true,
-      "url": "https://en.wikipedia.org/wiki/Oprah_Winfrey",
-      "title": "Oprah Winfrey"
-    },
-    "David Letterman": {
-      "exists": true,
-      "url": "https://en.wikipedia.org/wiki/David_Letterman",
-      "title": "David Letterman"
-    },
-    "Conan O'Brien": {
-      "exists": true,
-      "url": "https://en.wikipedia.org/wiki/Conan_O'Brien",
-      "title": "Conan O'Brien"
-    },
-    "Stephen Colbert": {
-      "exists": true,
-      "url": "https://en.wikipedia.org/wiki/Stephen_Colbert",
-      "title": "Stephen Colbert"
-    },
-    "Jimmy Fallon": {
-      "exists": true,
-      "url": "https://en.wikipedia.org/wiki/Jimmy_Fallon",
-      "title": "Jimmy Fallon"
-    },
-    "Ellen DeGeneres": {
-      "exists": true,
-      "url": "https://en.wikipedia.org/wiki/Ellen_DeGeneres",
-      "title": "Ellen DeGeneres"
-    },
-    "Trevor Noah": {
-      "exists": true,
-      "url": "https://en.wikipedia.org/wiki/Trevor_Noah",
-      "title": "Trevor Noah"
-    },
-    "John Oliver": {
-      "exists": true,
-      "url": "https://en.wikipedia.org/wiki/John_Oliver",
-      "title": "John Oliver"
-    },
-    "Jon Stewart": {
-      "exists": true,
-      "url": "https://en.wikipedia.org/wiki/Jon_Stewart",
-      "title": "Jon Stewart"
-    },
-    "Howard Stern": {
-      "exists": true,
-      "url": "https://en.wikipedia.org/wiki/Howard_Stern",
-      "title": "Howard Stern"
-    },
-    "Bill Maher": {
-      "exists": true,
-      "url": "https://en.wikipedia.org/wiki/Bill_Maher",
-      "title": "Bill Maher"
-    },
-    "Carl Sagan": {
-      "exists": true,
-      "url": "https://en.wikipedia.org/wiki/Carl_Sagan",
-      "title": "Carl Sagan"
-    },
-    "Neil deGrasse Tyson": {
-      "exists": true,
-      "url": "https://en.wikipedia.org/wiki/Neil_deGrasse_Tyson",
-      "title": "Neil deGrasse Tyson"
-    },
-    "Humphrey Bogart": {
-      "exists": true,
-      "url": "https://en.wikipedia.org/wiki/Humphrey_Bogart",
-      "title": "Humphrey Bogart"
-    },
-    "Marilyn Monroe": {
-      "exists": true,
-      "url": "https://en.wikipedia.org/wiki/Marilyn_Monroe",
-      "title": "Marilyn Monroe"
-    },
-    "Louis Theroux": {
-      "exists": true,
-      "url": "https://en.wikipedia.org/wiki/Louis_Theroux",
-      "title": "Louis Theroux"
-    },
-    "Robin Williams": {
-      "exists": true,
-      "url": "https://en.wikipedia.org/wiki/Robin_Williams",
-      "title": "Robin Williams"
-    },
-    "Aaron Sorkin": {
-      "exists": true,
-      "url": "https://en.wikipedia.org/wiki/Aaron_Sorkin",
-      "title": "Aaron Sorkin"
-    },
-    "Woody Allen": {
-      "exists": true,
-      "url": "https://en.wikipedia.org/wiki/Woody_Allen",
-      "title": "Woody Allen"
     }
   },
   "books": {
-    "A Lover's Complaint by Unknown": {
+    "A Lover's Complaint by William Shakespeare": {
       "exists": true,
-      "url": "https://en.wikipedia.org/wiki/A_Lover's_Complaint",
+      "url": "https://en.wikipedia.org/wiki/A%20Lover's%20Complaint",
       "title": "A Lover's Complaint"
     },
-    "A Midsummer Night's Dream by Unknown": {
+    "A Midsummer Night's Dream by William Shakespeare": {
       "exists": true,
-      "url": "https://en.wikipedia.org/wiki/A_Midsummer_Night's_Dream",
-      "title": "A Midsummer Night's Dream"
+      "url": "https://en.wikipedia.org/wiki/Puck%20(A%20Midsummer%20Night's%20Dream)",
+      "title": "Puck (A Midsummer Night's Dream)"
     },
-    "All's Well That Ends Well by Unknown": {
+    "All's Well That Ends Well by William Shakespeare": {
       "exists": true,
-      "url": "https://en.wikipedia.org/wiki/All's_Well_That_Ends_Well",
+      "url": "https://en.wikipedia.org/wiki/All's%20Well%20That%20Ends%20Well",
       "title": "All's Well That Ends Well"
     },
-    "Antony and Cleopatra by Unknown": {
+    "Antony and Cleopatra by William Shakespeare": {
       "exists": true,
-      "url": "https://en.wikipedia.org/wiki/Antony_and_Cleopatra",
+      "url": "https://en.wikipedia.org/wiki/Antony%20and%20Cleopatra",
       "title": "Antony and Cleopatra"
     },
-    "As You Like It by Unknown": {
+    "As You Like It by William Shakespeare": {
       "exists": true,
-      "url": "https://en.wikipedia.org/wiki/As_You_Like_It",
+      "url": "https://en.wikipedia.org/wiki/As%20You%20Like%20It",
       "title": "As You Like It"
     },
-    "Coriolanus by Unknown": {
+    "Coriolanus by William Shakespeare": {
       "exists": true,
       "url": "https://en.wikipedia.org/wiki/Coriolanus",
       "title": "Coriolanus"
     },
-    "Cymbeline by Unknown": {
+    "Cymbeline by William Shakespeare": {
       "exists": true,
       "url": "https://en.wikipedia.org/wiki/Cymbeline",
       "title": "Cymbeline"
     },
-    "Hamlet by Unknown": {
+    "Hamlet by William Shakespeare": {
       "exists": true,
-      "url": "https://en.wikipedia.org/wiki/Hamlet",
-      "title": "Hamlet"
+      "url": "https://en.wikipedia.org/wiki/Ur-Hamlet",
+      "title": "Ur-Hamlet"
     },
-    "Julius Caesar by Unknown": {
+    "Julius Caesar by William Shakespeare": {
       "exists": true,
-      "url": "https://en.wikipedia.org/wiki/Julius_Caesar",
-      "title": "Julius Caesar"
+      "url": "https://en.wikipedia.org/wiki/William%20Shakespeare's%20Julius%20Caesar",
+      "title": "William Shakespeare's Julius Caesar"
     },
-    "King Henry IV, Part 1 by Unknown": {
+    "King Henry IV, Part 1 by William Shakespeare": {
       "exists": true,
-      "url": "https://en.wikipedia.org/wiki/Henry_IV%2C_Part_1",
+      "url": "https://en.wikipedia.org/wiki/Henry%20IV%2C%20Part%201",
       "title": "Henry IV, Part 1"
     },
-    "King Henry IV, Part 2 by Unknown": {
+    "King Henry IV, Part 2 by William Shakespeare": {
       "exists": true,
-      "url": "https://en.wikipedia.org/wiki/Henry_IV%2C_Part_2",
+      "url": "https://en.wikipedia.org/wiki/Henry%20IV%2C%20Part%202",
       "title": "Henry IV, Part 2"
     },
-    "King Henry V by Unknown": {
+    "King Henry V by William Shakespeare": {
       "exists": true,
-      "url": "https://en.wikipedia.org/wiki/Henry_V_of_England",
-      "title": "Henry V of England"
+      "url": "https://en.wikipedia.org/wiki/Henry%20IV%2C%20Part%201",
+      "title": "Henry IV, Part 1"
     },
-    "King Henry VI, Part 1 by Unknown": {
+    "King Henry VI, Part 1 by William Shakespeare": {
       "exists": true,
       "url": "https://en.wikipedia.org/wiki/Henry%20VI%2C%20Part%201",
       "title": "Henry VI, Part 1"
     },
-    "King Henry VI, Part 2 by Unknown": {
+    "King Henry VI, Part 2 by William Shakespeare": {
       "exists": true,
       "url": "https://en.wikipedia.org/wiki/Henry%20VI%2C%20Part%202",
       "title": "Henry VI, Part 2"
     },
-    "King Henry VI, Part 3 by Unknown": {
+    "King Henry VI, Part 3 by William Shakespeare": {
       "exists": true,
-      "url": "https://en.wikipedia.org/wiki/Henry_VI%2C_Part_3",
+      "url": "https://en.wikipedia.org/wiki/Henry%20VI%2C%20Part%203",
       "title": "Henry VI, Part 3"
     },
-    "King Henry VIII by Unknown": {
+    "King Henry VIII by William Shakespeare": {
       "exists": true,
-      "url": "https://en.wikipedia.org/wiki/Henry_VIII",
-      "title": "Henry VIII"
+      "url": "https://en.wikipedia.org/wiki/Henry%20VIII%20(play)",
+      "title": "Henry VIII (play)"
     },
-    "King John by Unknown": {
+    "King John by William Shakespeare": {
       "exists": true,
-      "url": "https://en.wikipedia.org/wiki/King_John",
-      "title": "King John"
+      "url": "https://en.wikipedia.org/wiki/William%20Shakespeare",
+      "title": "William Shakespeare"
     },
-    "King Lear by Unknown": {
+    "King Lear by William Shakespeare": {
       "exists": true,
-      "url": "https://en.wikipedia.org/wiki/King_Lear",
-      "title": "King Lear"
+      "url": "https://en.wikipedia.org/wiki/Cordelia%20(King%20Lear)",
+      "title": "Cordelia (King Lear)"
     },
-    "King Richard II by Unknown": {
+    "King Richard II by William Shakespeare": {
       "exists": true,
-      "url": "https://en.wikipedia.org/wiki/Richard_II_of_England",
-      "title": "Richard II of England"
+      "url": "https://en.wikipedia.org/wiki/Richard%20II%20(play)",
+      "title": "Richard II (play)"
     },
-    "King Richard III by Unknown": {
+    "King Richard III by William Shakespeare": {
       "exists": true,
-      "url": "https://en.wikipedia.org/wiki/Richard_III_of_England",
-      "title": "Richard III of England"
+      "url": "https://en.wikipedia.org/wiki/Richard%20III%20(play)",
+      "title": "Richard III (play)"
     },
-    "Locrine by Unknown": {
+    "Locrine by William Shakespeare": {
       "exists": true,
       "url": "https://en.wikipedia.org/wiki/Locrine",
       "title": "Locrine"
     },
-    "Love's Labour's Lost by Unknown": {
+    "Love's Labour's Lost by William Shakespeare": {
       "exists": true,
-      "url": "https://en.wikipedia.org/wiki/Love's_Labour's_Lost",
+      "url": "https://en.wikipedia.org/wiki/Love's%20Labour's%20Lost",
       "title": "Love's Labour's Lost"
     },
-    "Macbeth by Unknown": {
+    "Macbeth by William Shakespeare": {
       "exists": true,
-      "url": "https://en.wikipedia.org/wiki/Macbeth",
-      "title": "Macbeth"
+      "url": "https://en.wikipedia.org/wiki/Macbeth%20on%20screen",
+      "title": "Macbeth on screen"
     },
-    "Measure for Measure by Unknown": {
+    "Measure for Measure by William Shakespeare": {
       "exists": true,
-      "url": "https://en.wikipedia.org/wiki/Measure_for_Measure",
+      "url": "https://en.wikipedia.org/wiki/Measure%20for%20Measure",
       "title": "Measure for Measure"
     },
-    "Mucedorus by Unknown": {
+    "Mucedorus by William Shakespeare": {
       "exists": true,
       "url": "https://en.wikipedia.org/wiki/Mucedorus",
       "title": "Mucedorus"
     },
-    "Much Ado About Nothing by Unknown": {
+    "Much Ado About Nothing by William Shakespeare": {
       "exists": true,
-      "url": "https://en.wikipedia.org/wiki/Much_Ado_About_Nothing",
-      "title": "Much Ado About Nothing"
+      "url": "https://en.wikipedia.org/wiki/Much%20Ado%20About%20Nothing%20(1993%20film)",
+      "title": "Much Ado About Nothing (1993 film)"
     },
-    "Othello, the Moor of Venice by Unknown": {
+    "Othello, the Moor of Venice by William Shakespeare": {
       "exists": true,
       "url": "https://en.wikipedia.org/wiki/Othello",
       "title": "Othello"
     },
-    "Pericles by Unknown": {
+    "Pericles by William Shakespeare": {
       "exists": true,
-      "url": "https://en.wikipedia.org/wiki/Pericles",
-      "title": "Pericles"
+      "url": "https://en.wikipedia.org/wiki/Pericles%2C%20Prince%20of%20Tyre",
+      "title": "Pericles, Prince of Tyre"
     },
-    "Romeo and Juliet by Unknown": {
+    "Romeo and Juliet by William Shakespeare": {
       "exists": true,
-      "url": "https://en.wikipedia.org/wiki/Romeo_and_Juliet",
-      "title": "Romeo and Juliet"
+      "url": "https://en.wikipedia.org/wiki/Juliet%20%26%20Romeo%20(film)",
+      "title": "Juliet & Romeo (film)"
     },
     "Shakespeare's Sonnets by William Shakespeare": {
       "exists": true,
-      "url": "https://en.wikipedia.org/wiki/Shakespeare's%20sonnets",
-      "title": "Shakespeare's sonnets"
+      "url": "https://en.wikipedia.org/wiki/Petrarch's%20and%20Shakespeare's%20sonnets",
+      "title": "Petrarch's and Shakespeare's sonnets"
     },
-    "Sir Thomas More by Unknown": {
+    "Sir Thomas More by William Shakespeare": {
       "exists": true,
-      "url": "https://en.wikipedia.org/wiki/Thomas_More",
-      "title": "Thomas More"
+      "url": "https://en.wikipedia.org/wiki/Sir%20Thomas%20More%20(play)",
+      "title": "Sir Thomas More (play)"
     },
-    "Sonnets To Sundry Notes of Music by Unknown": {
+    "Sonnets To Sundry Notes of Music by William Shakespeare": {
       "exists": true,
       "url": "https://en.wikipedia.org/wiki/The%20Passionate%20Pilgrim",
       "title": "The Passionate Pilgrim"
     },
-    "The Comedy of Errors by Unknown": {
+    "The Comedy of Errors by William Shakespeare": {
       "exists": true,
-      "url": "https://en.wikipedia.org/wiki/The_Comedy_of_Errors",
+      "url": "https://en.wikipedia.org/wiki/The%20Comedy%20of%20Errors",
       "title": "The Comedy of Errors"
     },
-    "The Merchant of Venice by Unknown": {
+    "The Merchant of Venice by William Shakespeare": {
       "exists": true,
-      "url": "https://en.wikipedia.org/wiki/The_Merchant_of_Venice",
-      "title": "The Merchant of Venice"
+      "url": "https://en.wikipedia.org/wiki/Portia%20(The%20Merchant%20of%20Venice)",
+      "title": "Portia (The Merchant of Venice)"
     },
-    "The Merry Wives of Windsor by Unknown": {
+    "The Merry Wives of Windsor by William Shakespeare": {
       "exists": true,
-      "url": "https://en.wikipedia.org/wiki/The_Merry_Wives_of_Windsor",
+      "url": "https://en.wikipedia.org/wiki/The%20Merry%20Wives%20of%20Windsor",
       "title": "The Merry Wives of Windsor"
     },
-    "The Passionate Pilgrim by Unknown": {
+    "The Passionate Pilgrim by William Shakespeare": {
       "exists": true,
-      "url": "https://en.wikipedia.org/wiki/The_Passionate_Pilgrim",
+      "url": "https://en.wikipedia.org/wiki/The%20Passionate%20Pilgrim",
       "title": "The Passionate Pilgrim"
     },
-    "The Phoenix and the Turtle by Unknown": {
+    "The Phoenix and the Turtle by William Shakespeare": {
       "exists": true,
-      "url": "https://en.wikipedia.org/wiki/The_Phoenix_and_the_Turtle",
+      "url": "https://en.wikipedia.org/wiki/The%20Phoenix%20and%20the%20Turtle",
       "title": "The Phoenix and the Turtle"
     },
-    "The Rape of Lucrece by Unknown": {
+    "The Rape of Lucrece by William Shakespeare": {
       "exists": true,
-      "url": "https://en.wikipedia.org/wiki/The_Rape_of_Lucrece",
+      "url": "https://en.wikipedia.org/wiki/The%20Rape%20of%20Lucrece",
       "title": "The Rape of Lucrece"
     },
-    "The Taming of the Shrew by Unknown": {
+    "The Taming of the Shrew by William Shakespeare": {
       "exists": true,
-      "url": "https://en.wikipedia.org/wiki/The_Taming_of_the_Shrew",
-      "title": "The Taming of the Shrew"
+      "url": "https://en.wikipedia.org/wiki/The%20Taming%20of%20the%20Shrew%20(1967%20film)",
+      "title": "The Taming of the Shrew (1967 film)"
     },
-    "The Tempest by Unknown": {
+    "The Tempest by William Shakespeare": {
       "exists": true,
-      "url": "https://en.wikipedia.org/wiki/The_Tempest",
+      "url": "https://en.wikipedia.org/wiki/The%20Tempest",
       "title": "The Tempest"
     },
-    "The Tragedy of Titus Andronicus by Unknown": {
+    "The Tragedy of Titus Andronicus by William Shakespeare": {
       "exists": true,
-      "url": "https://en.wikipedia.org/wiki/Titus_Andronicus",
+      "url": "https://en.wikipedia.org/wiki/Titus%20Andronicus",
       "title": "Titus Andronicus"
     },
-    "The Two Noble Kinsmen by Unknown": {
+    "The Two Noble Kinsmen by William Shakespeare": {
       "exists": true,
-      "url": "https://en.wikipedia.org/wiki/The_Two_Noble_Kinsmen",
+      "url": "https://en.wikipedia.org/wiki/The%20Two%20Noble%20Kinsmen",
       "title": "The Two Noble Kinsmen"
     },
-    "The Winter's Tale by Unknown": {
+    "The Winter's Tale by William Shakespeare": {
       "exists": true,
-      "url": "https://en.wikipedia.org/wiki/The_Winter's_Tale",
+      "url": "https://en.wikipedia.org/wiki/The%20Winter's%20Tale",
       "title": "The Winter's Tale"
     },
-    "Timon of Athens by Unknown": {
+    "Timon of Athens by William Shakespeare": {
       "exists": true,
-      "url": "https://en.wikipedia.org/wiki/Timon_of_Athens",
+      "url": "https://en.wikipedia.org/wiki/Timon%20of%20Athens",
       "title": "Timon of Athens"
     },
-    "Troilus and Cressida by Unknown": {
+    "Troilus and Cressida by William Shakespeare": {
       "exists": true,
-      "url": "https://en.wikipedia.org/wiki/Troilus_and_Cressida",
+      "url": "https://en.wikipedia.org/wiki/Troilus%20and%20Cressida",
       "title": "Troilus and Cressida"
     },
-    "Twelfth Night by Unknown": {
+    "Twelfth Night by William Shakespeare": {
       "exists": true,
-      "url": "https://en.wikipedia.org/wiki/Twelfth_Night",
-      "title": "Twelfth Night"
+      "url": "https://en.wikipedia.org/wiki/Viola%20(Twelfth%20Night)",
+      "title": "Viola (Twelfth Night)"
     },
-    "Two Gentlemen of Verona by Unknown": {
+    "Two Gentlemen of Verona by William Shakespeare": {
       "exists": true,
-      "url": "https://en.wikipedia.org/wiki/The_Two_Gentlemen_of_Verona",
+      "url": "https://en.wikipedia.org/wiki/The%20Two%20Gentlemen%20of%20Verona",
       "title": "The Two Gentlemen of Verona"
     },
-    "Venus and Adonis by Unknown": {
+    "Venus and Adonis by William Shakespeare": {
       "exists": true,
-      "url": "https://en.wikipedia.org/wiki/Venus_and_Adonis",
-      "title": "Venus and Adonis"
+      "url": "https://en.wikipedia.org/wiki/Venus%20and%20Adonis%20(Shakespeare%20poem)",
+      "title": "Venus and Adonis (Shakespeare poem)"
     },
-    "Ulysses by Joyce": {
+    "Ulysses by James Joyce": {
       "exists": true,
-      "url": "https://en.wikipedia.org/wiki/Ulysses%20(novel)",
+      "url": "https://en.wikipedia.org/wiki/Ulysses_(novel)",
       "title": "Ulysses (novel)"
     },
     "A Portrait of the Artist as a Young Man by James Joyce": {
-      "exists": true,
-      "url": "https://en.wikipedia.org/wiki/A%20Portrait%20of%20the%20Artist%20as%20a%20Young%20Man",
-      "title": "A Portrait of the Artist as a Young Man"
-    },
-    "A Portrait of the Artist as a Young Man by Joyce": {
       "exists": true,
       "url": "https://en.wikipedia.org/wiki/A%20Portrait%20of%20the%20Artist%20as%20a%20Young%20Man",
       "title": "A Portrait of the Artist as a Young Man"
@@ -792,82 +447,72 @@
       "url": "https://en.wikipedia.org/wiki/Dubliners",
       "title": "Dubliners"
     },
-    "Dubliners by Joyce": {
-      "exists": true,
-      "url": "https://en.wikipedia.org/wiki/Dubliners",
-      "title": "Dubliners"
-    },
-    "Exiles: A Play in Three Acts by Joyce": {
+    "Exiles: A Play in Three Acts by James Joyce": {
       "exists": true,
       "url": "https://en.wikipedia.org/wiki/Exiles%20(play)",
       "title": "Exiles (play)"
-    },
-    "Finnegans Wake by Joyce": {
-      "exists": true,
-      "url": "https://en.wikipedia.org/wiki/Finnegans%20Wake",
-      "title": "Finnegans Wake"
     },
     "Finnegans Wake by James Joyce": {
       "exists": true,
       "url": "https://en.wikipedia.org/wiki/Finnegans%20Wake",
       "title": "Finnegans Wake"
     },
-    "Alice's Adventures in Wonderland by Carroll": {
+    "Alice's Adventures in Wonderland by Lewis Carroll": {
       "exists": true,
       "url": "https://en.wikipedia.org/wiki/Alice%20(Alice's%20Adventures%20in%20Wonderland)",
       "title": "Alice (Alice's Adventures in Wonderland)"
     },
-    "Pride and Prejudice by Austen": {
+    "Pride and Prejudice by Jane Austen": {
       "exists": true,
       "url": "https://en.wikipedia.org/wiki/Pride%20and%20Prejudice",
       "title": "Pride and Prejudice"
     },
-    "Through the Looking-Glass by Carroll": {
+    "Through the Looking-Glass by Lewis Carroll": {
       "exists": true,
       "url": "https://en.wikipedia.org/wiki/Through%20the%20Looking-Glass",
       "title": "Through the Looking-Glass"
     },
-    "The Hunting of the Snark: An Agony in Eight Fits by Carroll": {
+    "The Hunting of the Snark: An Agony in Eight Fits by Lewis Carroll": {
       "exists": true,
       "url": "https://en.wikipedia.org/wiki/The%20Hunting%20of%20the%20Snark",
       "title": "The Hunting of the Snark"
     },
-    "Peter Pan by Barrie": {
+    "Peter Pan by J.M. Barrie": {
       "exists": true,
-      "url": "https://en.wikipedia.org/wiki/Peter%20Pan%20(play%20and%20novel)",
-      "title": "Peter Pan (play and novel)"
+      "url": "https://en.wikipedia.org/wiki/Peter%20Pan%20in%20Kensington%20Gardens",
+      "title": "Peter Pan in Kensington Gardens"
     },
-    "Paradise Lost by Milton": {
+    "Paradise Lost by John Milton": {
       "exists": true,
-      "url": "https://en.wikipedia.org/wiki/Paradise_Lost",
+      "url": "https://en.wikipedia.org/wiki/Paradise%20Lost",
       "title": "Paradise Lost"
     },
-    "Far from the Madding Crowd by Hardy": {
+    "Far from the Madding Crowd by Thomas Hardy": {
       "exists": true,
       "url": "https://en.wikipedia.org/wiki/Far%20from%20the%20Madding%20Crowd",
       "title": "Far from the Madding Crowd"
     },
-    "The Time Machine by Wells": {
+    "The Time Machine by H.G. Wells": {
       "exists": true,
-      "url": "https://en.wikipedia.org/wiki/The%20Time%20Machine",
-      "title": "The Time Machine"
+      "url": "https://en.wikipedia.org/wiki/H.%20G.%20Wells",
+      "title": "H. G. Wells"
     },
-    "The War of the Worlds by Wells": {
+    "The War of the Worlds by H.G. Wells": {
       "exists": true,
       "url": "https://en.wikipedia.org/wiki/The%20War%20of%20the%20Worlds",
       "title": "The War of the Worlds"
     },
-    "The Strange Case of Dr. Jekyll and Mr. Hyde by Stevenson": {
+    "The Strange Case of Dr. Jekyll and Mr. Hyde by Robert Louis Stevenson": {
       "exists": true,
       "url": "https://en.wikipedia.org/wiki/Strange%20Case%20of%20Dr%20Jekyll%20and%20Mr%20Hyde",
       "title": "Strange Case of Dr Jekyll and Mr Hyde"
     },
-    "A Christmas Carol in Prose; Being a Ghost Story of Christmas by Dickens": {
+    "A Christmas Carol in Prose; Being a Ghost Story of Christmas by Charles Dickens": {
       "exists": true,
       "url": "https://en.wikipedia.org/wiki/The%20Muppet%20Christmas%20Carol",
       "title": "The Muppet Christmas Carol"
     },
-    "Paradise Regained by Milton": {
+    "Paradise Regained by John Milton": {
       "exists": true,
       "url": "https://en.wikipedia.org/wiki/Paradise%20Regained",
       "title": "Paradise Regained"
@@ -877,14 +522,14 @@
       "url": "https://en.wikipedia.org/wiki/Ivanhoe",
       "title": "Ivanhoe"
     },
-    "A Tale of Two Cities by Dickens": {
+    "A Tale of Two Cities by Charles Dickens": {
       "exists": true,
       "url": "https://en.wikipedia.org/wiki/A%20Tale%20of%20Two%20Cities",
       "title": "A Tale of Two Cities"
     },
-    "Persuasion by Austen": {
+    "Persuasion by Jane Austen": {
       "exists": true,
-      "url": "https://en.wikipedia.org/wiki/Persuasion_(novel)",
+      "url": "https://en.wikipedia.org/wiki/Persuasion%20(novel)",
       "title": "Persuasion (novel)"
     },
     "The Return of Sherlock Holmes by Doyle": {
@@ -892,22 +537,22 @@
       "url": "https://en.wikipedia.org/wiki/The%20Return%20of%20Sherlock%20Holmes",
       "title": "The Return of Sherlock Holmes"
     },
-    "Tess of the d'Urbervilles: A Pure Woman by Hardy": {
+    "Tess of the d'Urbervilles: A Pure Woman by Thomas Hardy": {
       "exists": true,
       "url": "https://en.wikipedia.org/wiki/Tess%20of%20the%20d'Urbervilles",
       "title": "Tess of the d'Urbervilles"
     },
-    "Treasure Island by Stevenson": {
+    "Treasure Island by Robert Louis Stevenson": {
       "exists": true,
       "url": "https://en.wikipedia.org/wiki/Treasure%20Island",
       "title": "Treasure Island"
     },
-    "Northanger Abbey by Austen": {
+    "Northanger Abbey by Jane Austen": {
       "exists": true,
       "url": "https://en.wikipedia.org/wiki/Northanger%20Abbey",
       "title": "Northanger Abbey"
     },
-    "The Return of the Native by Hardy": {
+    "The Return of the Native by Thomas Hardy": {
       "exists": true,
       "url": "https://en.wikipedia.org/wiki/The%20Return%20of%20the%20Native",
       "title": "The Return of the Native"
@@ -917,7 +562,7 @@
       "url": "https://en.wikipedia.org/wiki/The%20Poison%20Belt",
       "title": "The Poison Belt"
     },
-    "A Child's Garden of Verses by Stevenson": {
+    "A Child's Garden of Verses by Robert Louis Stevenson": {
       "exists": true,
       "url": "https://en.wikipedia.org/wiki/A%20Child's%20Garden%20of%20Verses",
       "title": "A Child's Garden of Verses"
@@ -927,25 +572,25 @@
       "url": "https://en.wikipedia.org/wiki/The%20Lost%20World%20(Doyle%20novel)",
       "title": "The Lost World (Doyle novel)"
     },
-    "Mansfield Park by Austen": {
+    "Mansfield Park by Jane Austen": {
       "exists": true,
-      "url": "https://en.wikipedia.org/wiki/Mansfield%20Park",
-      "title": "Mansfield Park"
+      "url": "https://en.wikipedia.org/wiki/Mansfield%20Park%20(1999%20film)",
+      "title": "Mansfield Park (1999 film)"
     },
-    "The Mayor of Casterbridge by Hardy": {
+    "The Mayor of Casterbridge by Thomas Hardy": {
       "exists": true,
       "url": "https://en.wikipedia.org/wiki/The%20Mayor%20of%20Casterbridge",
       "title": "The Mayor of Casterbridge"
     },
-    "The Voyage Out by Woolf": {
+    "The Voyage Out by Virginia Woolf": {
       "exists": true,
       "url": "https://en.wikipedia.org/wiki/The%20Voyage%20Out",
       "title": "The Voyage Out"
     },
-    "Middlemarch by Eliot": {
+    "Middlemarch by T.S. Eliot": {
       "exists": true,
-      "url": "https://en.wikipedia.org/wiki/Middlemarch",
-      "title": "Middlemarch"
+      "url": "https://en.wikipedia.org/wiki/The%20Big%20Read",
+      "title": "The Big Read"
     },
     "Common Sense by Paine": {
       "exists": true,
@@ -957,7 +602,7 @@
       "url": "https://en.wikipedia.org/wiki/The%20Rime%20of%20the%20Ancient%20Mariner",
       "title": "The Rime of the Ancient Mariner"
     },
-    "Jude the Obscure by Hardy": {
+    "Jude the Obscure by Thomas Hardy": {
       "exists": true,
       "url": "https://en.wikipedia.org/wiki/Jude%20the%20Obscure",
       "title": "Jude the Obscure"
@@ -972,30 +617,30 @@
       "url": "https://en.wikipedia.org/wiki/Daddy-Long-Legs%20(novel)",
       "title": "Daddy-Long-Legs (novel)"
     },
-    "Emma by Austen": {
+    "Emma by Jane Austen": {
       "exists": true,
-      "url": "https://en.wikipedia.org/wiki/Emma_(novel)",
+      "url": "https://en.wikipedia.org/wiki/Emma%20(novel)",
       "title": "Emma (novel)"
     },
-    "The island of Doctor Moreau by Wells": {
+    "The island of Doctor Moreau by H.G. Wells": {
       "exists": true,
       "url": "https://en.wikipedia.org/wiki/The%20Island%20of%20Doctor%20Moreau",
       "title": "The Island of Doctor Moreau"
     },
-    "Sense and Sensibility by Austen": {
+    "Sense and Sensibility by Jane Austen": {
       "exists": true,
       "url": "https://en.wikipedia.org/wiki/Sense%20and%20Sensibility",
       "title": "Sense and Sensibility"
     },
     "The Haunted Hotel: A Mystery of Modern Venice by Collins": {
       "exists": true,
-      "url": "https://en.wikipedia.org/wiki/Arthur%20Conan%20Doyle",
-      "title": "Arthur Conan Doyle"
+      "url": "https://en.wikipedia.org/wiki/Eleanor%20Alice%20Burford",
+      "title": "Eleanor Alice Burford"
     },
-    "The Picture of Dorian Gray by Wilde": {
+    "The Picture of Dorian Gray by Oscar Wilde": {
       "exists": true,
-      "url": "https://en.wikipedia.org/wiki/Dorian%20Gray%20(character)",
-      "title": "Dorian Gray (character)"
+      "url": "https://en.wikipedia.org/wiki/The%20Picture%20of%20Dorian%20Gray%20(1945%20film)",
+      "title": "The Picture of Dorian Gray (1945 film)"
     },
     "The Man from Snowy River by Paterson": {
       "exists": true,
@@ -1017,7 +662,7 @@
       "url": "https://en.wikipedia.org/wiki/The%20Secret%20Sharer",
       "title": "The Secret Sharer"
     },
-    "A pair of blue eyes by Hardy": {
+    "A pair of blue eyes by Thomas Hardy": {
       "exists": true,
       "url": "https://en.wikipedia.org/wiki/A%20Pair%20of%20Blue%20Eyes",
       "title": "A Pair of Blue Eyes"
@@ -1039,13 +684,13 @@
     },
     "Webster's Unabridged Dictionary (1st 100 Pages) by Webster": {
       "exists": true,
-      "url": "https://en.wikipedia.org/wiki/List%20of%20English%20words%20of%20Persian%20origin",
-      "title": "List of English words of Persian origin"
+      "url": "https://en.wikipedia.org/wiki/Fuck",
+      "title": "Fuck"
     },
     "Webster's Unabridged Dictionary (2nd 100 Pages) by Webster": {
       "exists": true,
-      "url": "https://en.wikipedia.org/wiki/List%20of%20ethnic%20slurs",
-      "title": "List of ethnic slurs"
+      "url": "https://en.wikipedia.org/wiki/Fuck",
+      "title": "Fuck"
     },
     "Troilus and Criseyde by Chaucer": {
       "exists": true,
@@ -1062,12 +707,12 @@
       "url": "https://en.wikipedia.org/wiki/Dream%20Days",
       "title": "Dream Days"
     },
-    "Records of a Family of Engineers by Stevenson": {
+    "Records of a Family of Engineers by Robert Louis Stevenson": {
       "exists": true,
       "url": "https://en.wikipedia.org/wiki/Robert%20Stevenson%20(civil%20engineer)",
       "title": "Robert Stevenson (civil engineer)"
     },
-    "Father Damien: An Open Letter to the Reverend Dr. Hyde of Honolulu by Stevenson": {
+    "Father Damien: An Open Letter to the Reverend Dr. Hyde of Honolulu by Robert Louis Stevenson": {
       "exists": true,
       "url": "https://en.wikipedia.org/wiki/Father%20Damien",
       "title": "Father Damien"
@@ -1082,35 +727,35 @@
       "url": "https://en.wikipedia.org/wiki/The_Golden_Age_(Grahame)",
       "title": "The Golden Age (Grahame)"
     },
-    "The Ballad of Reading Gaol by Wilde": {
+    "The Ballad of Reading Gaol by Oscar Wilde": {
       "exists": true,
       "url": "https://en.wikipedia.org/wiki/The%20Ballad%20of%20Reading%20Gaol",
       "title": "The Ballad of Reading Gaol"
     },
-    "St. Ives: Being the Adventures of a French Prisoner in England by Stevenson": {
+    "St. Ives: Being the Adventures of a French Prisoner in England by Robert Louis Stevenson": {
       "exists": true,
-      "url": "https://en.wikipedia.org/wiki/St.%20Ives%20(novel)",
-      "title": "St. Ives (novel)"
+      "url": "https://en.wikipedia.org/wiki/Robert%20Louis%20Stevenson",
+      "title": "Robert Louis Stevenson"
     },
     "Verses 1889-1896 by Kipling": {
       "exists": true,
       "url": "https://en.wikipedia.org/wiki/Rudyard%20Kipling",
       "title": "Rudyard Kipling"
     },
-    "Island Nights' Entertainments by Stevenson": {
+    "Island Nights' Entertainments by Robert Louis Stevenson": {
       "exists": true,
       "url": "https://en.wikipedia.org/wiki/Island%20Nights'%20Entertainments",
       "title": "Island Nights' Entertainments"
     },
-    "Margaret Ogilvy by Barrie": {
+    "Margaret Ogilvy by J.M. Barrie": {
       "exists": true,
       "url": "https://en.wikipedia.org/wiki/J.%20M.%20Barrie",
       "title": "J. M. Barrie"
     },
-    "Fables by Stevenson": {
+    "Fables by Robert Louis Stevenson": {
       "exists": true,
-      "url": "https://en.wikipedia.org/wiki/Robert%20Louis%20Stevenson",
-      "title": "Robert Louis Stevenson"
+      "url": "https://en.wikipedia.org/wiki/The%20Merry%20Men%20and%20Other%20Tales%20and%20Fables",
+      "title": "The Merry Men and Other Tales and Fables"
     },
     "The Parasite: A Story by Doyle": {
       "exists": true,
@@ -1127,17 +772,17 @@
       "url": "https://en.wikipedia.org/wiki/Moll%20Flanders",
       "title": "Moll Flanders"
     },
-    "Weir of Hermiston: An Unfinished Romance by Stevenson": {
+    "Weir of Hermiston: An Unfinished Romance by Robert Louis Stevenson": {
       "exists": true,
       "url": "https://en.wikipedia.org/wiki/Weir%20of%20Hermiston",
       "title": "Weir of Hermiston"
     },
-    "Memories and Portraits by Stevenson": {
+    "Memories and Portraits by Robert Louis Stevenson": {
       "exists": true,
-      "url": "https://en.wikipedia.org/wiki/Memories%20and%20Portraits",
-      "title": "Memories and Portraits"
+      "url": "https://en.wikipedia.org/wiki/Robert%20Louis%20Stevenson",
+      "title": "Robert Louis Stevenson"
     },
-    "Edinburgh: Picturesque Notes by Stevenson": {
+    "Edinburgh: Picturesque Notes by Robert Louis Stevenson": {
       "exists": true,
       "url": "https://en.wikipedia.org/wiki/Edinburgh%3A%20Picturesque%20Notes",
       "title": "Edinburgh: Picturesque Notes"
@@ -1147,12 +792,12 @@
       "url": "https://en.wikipedia.org/wiki/Song%20of%20Roland",
       "title": "Song of Roland"
     },
-    "Ballads by Stevenson": {
+    "Ballads by Robert Louis Stevenson": {
       "exists": true,
       "url": "https://en.wikipedia.org/wiki/Robert%20Louis%20Stevenson",
       "title": "Robert Louis Stevenson"
     },
-    "Kidnapped by Stevenson": {
+    "Kidnapped by Robert Louis Stevenson": {
       "exists": true,
       "url": "https://en.wikipedia.org/wiki/Kidnapped%20(novel)",
       "title": "Kidnapped (novel)"
@@ -1162,17 +807,17 @@
       "url": "https://en.wikipedia.org/wiki/Round%20the%20Red%20Lamp",
       "title": "Round the Red Lamp"
     },
-    "Familiar Studies of Men and Books by Stevenson": {
+    "Familiar Studies of Men and Books by Robert Louis Stevenson": {
       "exists": true,
       "url": "https://en.wikipedia.org/wiki/Robert%20Louis%20Stevenson",
       "title": "Robert Louis Stevenson"
     },
-    "Tales and Fantasies by Stevenson": {
+    "Tales and Fantasies by Robert Louis Stevenson": {
       "exists": true,
-      "url": "https://en.wikipedia.org/wiki/Tales%20and%20Fantasies",
-      "title": "Tales and Fantasies"
+      "url": "https://en.wikipedia.org/wiki/Robert%20Louis%20Stevenson",
+      "title": "Robert Louis Stevenson"
     },
-    "Underwoods by Stevenson": {
+    "Underwoods by Robert Louis Stevenson": {
       "exists": true,
       "url": "https://en.wikipedia.org/wiki/Robert%20Louis%20Stevenson",
       "title": "Robert Louis Stevenson"
@@ -1192,12 +837,12 @@
       "url": "https://en.wikipedia.org/wiki/The%20Bride%20of%20Lammermoor",
       "title": "The Bride of Lammermoor"
     },
-    "The Woodlanders by Hardy": {
+    "The Woodlanders by Thomas Hardy": {
       "exists": true,
       "url": "https://en.wikipedia.org/wiki/The%20Woodlanders",
       "title": "The Woodlanders"
     },
-    "Essays in the Art of Writing by Stevenson": {
+    "Essays in the Art of Writing by Robert Louis Stevenson": {
       "exists": true,
       "url": "https://en.wikipedia.org/wiki/Robert%20Louis%20Stevenson",
       "title": "Robert Louis Stevenson"
@@ -1217,12 +862,12 @@
       "url": "https://en.wikipedia.org/wiki/Amy%20Foster",
       "title": "Amy Foster"
     },
-    "Adam Bede by Eliot": {
+    "Adam Bede by T.S. Eliot": {
       "exists": true,
-      "url": "https://en.wikipedia.org/wiki/Adam%20Bede",
-      "title": "Adam Bede"
+      "url": "https://en.wikipedia.org/wiki/The%20Mill%20on%20the%20Floss",
+      "title": "The Mill on the Floss"
     },
-    "The Silverado Squatters by Stevenson": {
+    "The Silverado Squatters by Robert Louis Stevenson": {
       "exists": true,
       "url": "https://en.wikipedia.org/wiki/The%20Silverado%20Squatters",
       "title": "The Silverado Squatters"
@@ -1232,7 +877,7 @@
       "url": "https://en.wikipedia.org/wiki/Robinson%20Crusoe",
       "title": "Robinson Crusoe"
     },
-    "Ann Veronica: A Modern Love Story by Wells": {
+    "Ann Veronica: A Modern Love Story by H.G. Wells": {
       "exists": true,
       "url": "https://en.wikipedia.org/wiki/Ann%20Veronica",
       "title": "Ann Veronica"
@@ -1242,17 +887,17 @@
       "url": "https://en.wikipedia.org/wiki/Joseph%20Conrad%20bibliography",
       "title": "Joseph Conrad bibliography"
     },
-    "An inland voyage by Stevenson": {
+    "An inland voyage by Robert Louis Stevenson": {
       "exists": true,
       "url": "https://en.wikipedia.org/wiki/An%20Inland%20Voyage",
       "title": "An Inland Voyage"
     },
-    "Travels with a donkey in the Cevennes by Stevenson": {
+    "Travels with a donkey in the Cevennes by Robert Louis Stevenson": {
       "exists": true,
       "url": "https://en.wikipedia.org/wiki/Travels%20with%20a%20Donkey%20in%20the%20C%C3%A9vennes",
       "title": "Travels with a Donkey in the Cévennes"
     },
-    "A Footnote to History: Eight Years of Trouble in Samoa by Stevenson": {
+    "A Footnote to History: Eight Years of Trouble in Samoa by Robert Louis Stevenson": {
       "exists": true,
       "url": "https://en.wikipedia.org/wiki/A%20Footnote%20to%20History%3A%20Eight%20Years%20of%20Trouble%20in%20Samoa",
       "title": "A Footnote to History: Eight Years of Trouble in Samoa"
@@ -1359,8 +1004,8 @@
     },
     "Thoughts of Marcus Aurelius by Marcus Aurelius": {
       "exists": true,
-      "url": "https://en.wikipedia.org/wiki/Marcus%20Aurelius",
-      "title": "Marcus Aurelius"
+      "url": "https://en.wikipedia.org/wiki/Equestrian%20Statue%20of%20Marcus%20Aurelius",
+      "title": "Equestrian Statue of Marcus Aurelius"
     },
     "Thoughts of Marcus Aurelius Antoninus by Marcus Aurelius": {
       "exists": true,
@@ -1414,8 +1059,8 @@
     },
     "A Theological-Political Treatise [Part III] by Spinoza": {
       "exists": true,
-      "url": "https://en.wikipedia.org/wiki/Baruch%20Spinoza",
-      "title": "Baruch Spinoza"
+      "url": "https://en.wikipedia.org/wiki/Spinoza's%20Ethics",
+      "title": "Spinoza's Ethics"
     },
     "A Theological-Political Treatise [Part IV] by Spinoza": {
       "exists": true,
@@ -1427,15 +1072,15 @@
       "url": "https://en.wikipedia.org/wiki/Baruch%20Spinoza",
       "title": "Baruch Spinoza"
     },
-    "The Prince by Machiavelli": {
+    "The Prince by Niccolò Machiavelli": {
       "exists": true,
       "url": "https://en.wikipedia.org/wiki/The%20Prince",
       "title": "The Prince"
     },
-    "Florentine History by Machiavelli": {
+    "Florentine History by Niccolò Machiavelli": {
       "exists": true,
-      "url": "https://en.wikipedia.org/wiki/Niccol%C3%B2%20Machiavelli",
-      "title": "Niccolò Machiavelli"
+      "url": "https://en.wikipedia.org/wiki/Florentine%20Histories",
+      "title": "Florentine Histories"
     },
     "Essays of Michel de Montaigne — Volume 01 by Montaigne": {
       "exists": true,
@@ -1557,40 +1202,40 @@
       "url": "https://en.wikipedia.org/wiki/Harvard%20Classics",
       "title": "Harvard Classics"
     },
-    "On the Duty of Civil Disobedience by Thoreau": {
+    "On the Duty of Civil Disobedience by Henry David Thoreau": {
       "exists": true,
       "url": "https://en.wikipedia.org/wiki/Civil%20Disobedience%20(essay)",
       "title": "Civil Disobedience (essay)"
     },
-    "Walden, and On The Duty Of Civil Disobedience by Thoreau": {
+    "Walden, and On The Duty Of Civil Disobedience by Henry David Thoreau": {
       "exists": true,
       "url": "https://en.wikipedia.org/wiki/Civil%20Disobedience%20(essay)",
       "title": "Civil Disobedience (essay)"
     },
-    "Walking by Thoreau": {
-      "exists": true,
-      "url": "https://en.wikipedia.org/wiki/Walking_(essay)",
-      "title": "Walking (essay)"
-    },
-    "A Week on the Concord and Merrimack Rivers by Thoreau": {
-      "exists": true,
-      "url": "https://en.wikipedia.org/wiki/A%20Week%20on%20the%20Concord%20and%20Merrimack%20Rivers",
-      "title": "A Week on the Concord and Merrimack Rivers"
-    },
-    "Wild Apples by Thoreau": {
+    "Walking by Henry David Thoreau": {
       "exists": true,
       "url": "https://en.wikipedia.org/wiki/Henry%20David%20Thoreau",
       "title": "Henry David Thoreau"
     },
-    "Essays — First Series by Emerson": {
+    "A Week on the Concord and Merrimack Rivers by Henry David Thoreau": {
       "exists": true,
-      "url": "https://en.wikipedia.org/wiki/Essays%3A%20First%20Series",
-      "title": "Essays: First Series"
+      "url": "https://en.wikipedia.org/wiki/A%20Week%20on%20the%20Concord%20and%20Merrimack%20Rivers",
+      "title": "A Week on the Concord and Merrimack Rivers"
     },
-    "Essays — Second Series by Emerson": {
+    "Wild Apples by Henry David Thoreau": {
       "exists": true,
-      "url": "https://en.wikipedia.org/wiki/Essays%3A%20Second%20Series",
-      "title": "Essays: Second Series"
+      "url": "https://en.wikipedia.org/wiki/Henry%20David%20Thoreau",
+      "title": "Henry David Thoreau"
+    },
+    "Essays — First Series by Ralph Waldo Emerson": {
+      "exists": true,
+      "url": "https://en.wikipedia.org/wiki/Ralph%20Waldo%20Emerson",
+      "title": "Ralph Waldo Emerson"
+    },
+    "Essays — Second Series by Ralph Waldo Emerson": {
+      "exists": true,
+      "url": "https://en.wikipedia.org/wiki/Ralph%20Waldo%20Emerson",
+      "title": "Ralph Waldo Emerson"
     },
     "The Communist Manifesto by Marx": {
       "exists": true,
@@ -1719,8 +1364,8 @@
     },
     "De l'amour by Baudelaire": {
       "exists": true,
-      "url": "https://en.wikipedia.org/wiki/Christine%20Jordis",
-      "title": "Christine Jordis"
+      "url": "https://en.wikipedia.org/wiki/Auguste%20Villiers%20de%20l'Isle-Adam",
+      "title": "Auguste Villiers de l'Isle-Adam"
     },
     "L'Oeuvre Poètique: Les Fleurs du Mal by Baudelaire": {
       "exists": true,
@@ -1921,8 +1566,8 @@
     },
     "Buch der Lieder by Heine": {
       "exists": true,
-      "url": "https://en.wikipedia.org/wiki/Heinrich%20Heine",
-      "title": "Heinrich Heine"
+      "url": "https://en.wikipedia.org/wiki/Der%20Doppelg%C3%A4nger",
+      "title": "Der Doppelgänger"
     },
     "Römische Elegien by Goethe": {
       "exists": true,
@@ -2046,8 +1691,8 @@
     },
     "Das Stunden-Buch by Rilke": {
       "exists": true,
-      "url": "https://en.wikipedia.org/wiki/The%20Book%20of%20Hours",
-      "title": "The Book of Hours"
+      "url": "https://en.wikipedia.org/wiki/Rainer%20Maria%20Rilke",
+      "title": "Rainer Maria Rilke"
     },
     "Zwei Prager Geschichten by Rilke": {
       "exists": true,
@@ -2183,8 +1828,8 @@
     },
     "Leopardi by De Roberto": {
       "exists": true,
-      "url": "https://en.wikipedia.org/wiki/Roberto%20Leopardi",
-      "title": "Roberto Leopardi"
+      "url": "https://en.wikipedia.org/wiki/Giacomo%20Leopardi",
+      "title": "Giacomo Leopardi"
     },
     "I Canti by Leopardi": {
       "exists": true,
@@ -2202,10 +1847,10 @@
       "url": "https://en.wikipedia.org/wiki/La%20Vita%20Nuova",
       "title": "La Vita Nuova"
     },
-    "Silas Marner by Eliot": {
+    "Silas Marner by T.S. Eliot": {
       "exists": true,
-      "url": "https://en.wikipedia.org/wiki/Silas%20Marner",
-      "title": "Silas Marner"
+      "url": "https://en.wikipedia.org/wiki/Catalepsy",
+      "title": "Catalepsy"
     },
     "Poems of William Blake by Blake": {
       "exists": true,
@@ -2222,7 +1867,7 @@
       "url": "https://en.wikipedia.org/wiki/Idylls%20of%20the%20King",
       "title": "Idylls of the King"
     },
-    "Phantasmagoria and Other Poems by Carroll": {
+    "Phantasmagoria and Other Poems by Lewis Carroll": {
       "exists": true,
       "url": "https://en.wikipedia.org/wiki/Phantasmagoria%20(poem)",
       "title": "Phantasmagoria (poem)"
@@ -2232,12 +1877,12 @@
       "url": "https://en.wikipedia.org/wiki/The%20Princess%20(Tennyson%20poem)",
       "title": "The Princess (Tennyson poem)"
     },
-    "Holiday Romance by Dickens": {
+    "Holiday Romance by Charles Dickens": {
       "exists": true,
       "url": "https://en.wikipedia.org/wiki/Charles%20Dickens%20bibliography",
       "title": "Charles Dickens bibliography"
     },
-    "Selected Poems of Oscar Wilde by Wilde": {
+    "Selected Poems of Oscar Wilde by Oscar Wilde": {
       "exists": true,
       "url": "https://en.wikipedia.org/wiki/Oscar%20Wilde",
       "title": "Oscar Wilde"
@@ -2252,17 +1897,17 @@
       "url": "https://en.wikipedia.org/wiki/Burns%20supper",
       "title": "Burns supper"
     },
-    "A Florentine Tragedy; La Sainte Courtisane by Wilde": {
+    "A Florentine Tragedy; La Sainte Courtisane by Oscar Wilde": {
       "exists": true,
-      "url": "https://en.wikipedia.org/wiki/Oscar%20Wilde",
-      "title": "Oscar Wilde"
+      "url": "https://en.wikipedia.org/wiki/Constance%20Wilde",
+      "title": "Constance Wilde"
     },
-    "The Waste Land by Eliot": {
+    "The Waste Land by T.S. Eliot": {
       "exists": true,
       "url": "https://en.wikipedia.org/wiki/The%20Waste%20Land",
       "title": "The Waste Land"
     },
-    "Prufrock and Other Observations by Eliot": {
+    "Prufrock and Other Observations by T.S. Eliot": {
       "exists": true,
       "url": "https://en.wikipedia.org/wiki/T.%20S.%20Eliot",
       "title": "T. S. Eliot"
@@ -2272,7 +1917,7 @@
       "url": "https://en.wikipedia.org/wiki/Tom%20Brown's%20School%20Days",
       "title": "Tom Brown's School Days"
     },
-    "Poems by Eliot": {
+    "Poems by T.S. Eliot": {
       "exists": true,
       "url": "https://en.wikipedia.org/wiki/T.%20S.%20Eliot",
       "title": "T. S. Eliot"
@@ -2287,7 +1932,7 @@
       "url": "https://en.wikipedia.org/wiki/The%20Rescue%20(Conrad%20novel)",
       "title": "The Rescue (Conrad novel)"
     },
-    "The Poetical Works of John Milton by Milton": {
+    "The Poetical Works of John Milton by John Milton": {
       "exists": true,
       "url": "https://en.wikipedia.org/wiki/John%20Milton",
       "title": "John Milton"
@@ -2317,15 +1962,15 @@
       "url": "https://en.wikipedia.org/wiki/Something%20Fresh",
       "title": "Something Fresh"
     },
-    "The Lifted Veil by Eliot": {
+    "The Lifted Veil by T.S. Eliot": {
       "exists": true,
-      "url": "https://en.wikipedia.org/wiki/The%20Lifted%20Veil%20(novella)",
-      "title": "The Lifted Veil (novella)"
+      "url": "https://en.wikipedia.org/wiki/George%20Henry%20Lewes",
+      "title": "George Henry Lewes"
     },
-    "Brother Jacob by Eliot": {
+    "Brother Jacob by T.S. Eliot": {
       "exists": true,
-      "url": "https://en.wikipedia.org/wiki/Brother%20Jacob",
-      "title": "Brother Jacob"
+      "url": "https://en.wikipedia.org/wiki/Christian%20Kane",
+      "title": "Christian Kane"
     },
     "A Damsel in Distress by Wodehouse": {
       "exists": true,
@@ -2360,22 +2005,22 @@
       "url": "https://en.wikipedia.org/wiki/John%20Dryden",
       "title": "John Dryden"
     },
-    "The Home Book of Verse — Volume 1 by Stevenson": {
+    "The Home Book of Verse — Volume 1 by Robert Louis Stevenson": {
       "exists": true,
       "url": "https://en.wikipedia.org/wiki/Robert%20Louis%20Stevenson",
       "title": "Robert Louis Stevenson"
     },
-    "The Home Book of Verse — Volume 2 by Stevenson": {
+    "The Home Book of Verse — Volume 2 by Robert Louis Stevenson": {
       "exists": true,
       "url": "https://en.wikipedia.org/wiki/Robert%20Louis%20Stevenson",
       "title": "Robert Louis Stevenson"
     },
-    "The Home Book of Verse — Volume 3 by Stevenson": {
+    "The Home Book of Verse — Volume 3 by Robert Louis Stevenson": {
       "exists": true,
       "url": "https://en.wikipedia.org/wiki/Robert%20Louis%20Stevenson",
       "title": "Robert Louis Stevenson"
     },
-    "The Home Book of Verse — Volume 4 by Stevenson": {
+    "The Home Book of Verse — Volume 4 by Robert Louis Stevenson": {
       "exists": true,
       "url": "https://en.wikipedia.org/wiki/Robert%20Louis%20Stevenson",
       "title": "Robert Louis Stevenson"
@@ -2390,17 +2035,17 @@
       "url": "https://en.wikipedia.org/wiki/A%20Blot%20in%20the%20'Scutcheon",
       "title": "A Blot in the 'Scutcheon"
     },
-    "Wessex Poems and Other Verses by Hardy": {
+    "Wessex Poems and Other Verses by Thomas Hardy": {
       "exists": true,
       "url": "https://en.wikipedia.org/wiki/Wessex%20Poems%20and%20Other%20Verses",
       "title": "Wessex Poems and Other Verses"
     },
-    "Poems of the Past and the Present by Hardy": {
+    "Poems of the Past and the Present by Thomas Hardy": {
       "exists": true,
       "url": "https://en.wikipedia.org/wiki/Poems%20of%20the%20Past%20and%20the%20Present",
       "title": "Poems of the Past and the Present"
     },
-    "Moments of Vision and Miscellaneous Verses by Hardy": {
+    "Moments of Vision and Miscellaneous Verses by Thomas Hardy": {
       "exists": true,
       "url": "https://en.wikipedia.org/wiki/Moments%20of%20Vision",
       "title": "Moments of Vision"
@@ -2487,53 +2132,53 @@
     },
     "The Farm That Won't Wear Out by Hopkins": {
       "exists": true,
-      "url": "https://en.wikipedia.org/wiki/List%20of%20Mayberry%20R.F.D.%20episodes",
-      "title": "List of Mayberry R.F.D. episodes"
+      "url": "https://en.wikipedia.org/wiki/List%20of%20The%20George%20Burns%20and%20Gracie%20Allen%20Show%20episodes",
+      "title": "List of The George Burns and Gracie Allen Show episodes"
     },
     "The Story of the Soil; from the Basis of Absolute Science and Real Life by Hopkins": {
       "exists": true,
       "url": "https://en.wikipedia.org/wiki/Keynesian%20economics",
       "title": "Keynesian economics"
     },
-    "The Daemon of the World by Shelley": {
+    "The Daemon of the World by Mary Shelley": {
       "exists": true,
       "url": "https://en.wikipedia.org/wiki/Queen%20Mab%20(poem)",
       "title": "Queen Mab (poem)"
     },
-    "Notes to the Complete Poetical Works of Percy Bysshe Shelley by Shelley": {
+    "Notes to the Complete Poetical Works of Percy Bysshe Shelley by Mary Shelley": {
       "exists": true,
       "url": "https://en.wikipedia.org/wiki/Mary%20Shelley",
       "title": "Mary Shelley"
     },
-    "The Witch of Atlas by Shelley": {
+    "The Witch of Atlas by Mary Shelley": {
       "exists": true,
       "url": "https://en.wikipedia.org/wiki/The%20Witch%20of%20Atlas",
       "title": "The Witch of Atlas"
     },
-    "Peter Bell the Third by Shelley": {
-      "exists": true,
-      "url": "https://en.wikipedia.org/wiki/Peter%20Bell",
-      "title": "Peter Bell"
-    },
-    "The Complete Poetical Works of Percy Bysshe Shelley — Volume 1 by Shelley": {
+    "Peter Bell the Third by Mary Shelley": {
       "exists": true,
       "url": "https://en.wikipedia.org/wiki/Mary%20Shelley",
       "title": "Mary Shelley"
     },
-    "The Complete Poetical Works of Percy Bysshe Shelley — Volume 2 by Shelley": {
+    "The Complete Poetical Works of Percy Bysshe Shelley — Volume 1 by Mary Shelley": {
       "exists": true,
       "url": "https://en.wikipedia.org/wiki/Mary%20Shelley",
       "title": "Mary Shelley"
     },
-    "The Complete Poetical Works of Percy Bysshe Shelley — Volume 3 by Shelley": {
+    "The Complete Poetical Works of Percy Bysshe Shelley — Volume 2 by Mary Shelley": {
       "exists": true,
-      "url": "https://en.wikipedia.org/wiki/Percy%20Bysshe%20Shelley",
-      "title": "Percy Bysshe Shelley"
+      "url": "https://en.wikipedia.org/wiki/Mary%20Shelley",
+      "title": "Mary Shelley"
     },
-    "The Complete Poetical Works of Percy Bysshe Shelley — Complete by Shelley": {
+    "The Complete Poetical Works of Percy Bysshe Shelley — Volume 3 by Mary Shelley": {
       "exists": true,
-      "url": "https://en.wikipedia.org/wiki/Prometheus%20Unbound%20(Shelley)",
-      "title": "Prometheus Unbound (Shelley)"
+      "url": "https://en.wikipedia.org/wiki/Mary%20Shelley",
+      "title": "Mary Shelley"
+    },
+    "The Complete Poetical Works of Percy Bysshe Shelley — Complete by Mary Shelley": {
+      "exists": true,
+      "url": "https://en.wikipedia.org/wiki/Mary%20Shelley",
+      "title": "Mary Shelley"
     },
     "Marmion: A Tale of Flodden Field in Six Cantos by Scott": {
       "exists": true,
@@ -2542,8 +2187,8 @@
     },
     "Life and Letters of Thomas Henry Huxley — Volume 1 by Huxley": {
       "exists": true,
-      "url": "https://en.wikipedia.org/wiki/Thomas%20Henry%20Huxley",
-      "title": "Thomas Henry Huxley"
+      "url": "https://en.wikipedia.org/wiki/Julian%20Huxley",
+      "title": "Julian Huxley"
     },
     "Ragnarok : the Age of Fire and Gravel by Donnelly": {
       "exists": true,
@@ -2585,7 +2230,7 @@
       "url": "https://en.wikipedia.org/wiki/Thomas%20Henry%20Huxley",
       "title": "Thomas Henry Huxley"
     },
-    "The Invisible Man: A Grotesque Romance by Wells": {
+    "The Invisible Man: A Grotesque Romance by H.G. Wells": {
       "exists": true,
       "url": "https://en.wikipedia.org/wiki/Romance%20(prose%20fiction)",
       "title": "Romance (prose fiction)"
@@ -2595,7 +2240,7 @@
       "url": "https://en.wikipedia.org/wiki/Darwiniana",
       "title": "Darwiniana"
     },
-    "A Defence of Poetry and Other Essays by Shelley": {
+    "A Defence of Poetry and Other Essays by Mary Shelley": {
       "exists": true,
       "url": "https://en.wikipedia.org/wiki/A%20Defence%20of%20Poetry",
       "title": "A Defence of Poetry"
@@ -2625,7 +2270,7 @@
       "url": "https://en.wikipedia.org/wiki/Thomas%20Henry%20Huxley",
       "title": "Thomas Henry Huxley"
     },
-    "Eeldrop and Appleplex by Eliot": {
+    "Eeldrop and Appleplex by T.S. Eliot": {
       "exists": true,
       "url": "https://en.wikipedia.org/wiki/T.%20S.%20Eliot%20bibliography",
       "title": "T. S. Eliot bibliography"
@@ -2650,17 +2295,17 @@
       "url": "https://en.wikipedia.org/wiki/Isabel%20Burton",
       "title": "Isabel Burton"
     },
-    "A Modern Utopia by Wells": {
+    "A Modern Utopia by H.G. Wells": {
       "exists": true,
       "url": "https://en.wikipedia.org/wiki/A%20Modern%20Utopia",
       "title": "A Modern Utopia"
     },
-    "Proserpine and Midas by Shelley": {
+    "Proserpine and Midas by Mary Shelley": {
       "exists": true,
       "url": "https://en.wikipedia.org/wiki/Proserpine%20(play)",
       "title": "Proserpine (play)"
     },
-    "Frankenstein by Shelley": {
+    "Frankenstein by Mary Shelley": {
       "exists": true,
       "url": "https://en.wikipedia.org/wiki/Frankenstein",
       "title": "Frankenstein"
@@ -2680,15 +2325,15 @@
       "url": "https://en.wikipedia.org/wiki/Uneasy%20Money",
       "title": "Uneasy Money"
     },
-    "The Mill on the Floss by Eliot": {
+    "The Mill on the Floss by T.S. Eliot": {
       "exists": true,
       "url": "https://en.wikipedia.org/wiki/The%20Mill%20on%20the%20Floss",
       "title": "The Mill on the Floss"
     },
-    "Inns and Taverns of Old London by Shelley": {
+    "Inns and Taverns of Old London by Mary Shelley": {
       "exists": true,
-      "url": "https://en.wikipedia.org/wiki/Boar's%20Head%20Inn%2C%20Eastcheap",
-      "title": "Boar's Head Inn, Eastcheap"
+      "url": "https://en.wikipedia.org/wiki/Bell%20Savage%20Inn",
+      "title": "Bell Savage Inn"
     },
     "Psmith in the City by Wodehouse": {
       "exists": true,
@@ -2780,7 +2425,7 @@
       "url": "https://en.wikipedia.org/wiki/Not%20George%20Washington",
       "title": "Not George Washington"
     },
-    "Ezra Pound: His Metric and Poetry by Eliot": {
+    "Ezra Pound: His Metric and Poetry by T.S. Eliot": {
       "exists": true,
       "url": "https://en.wikipedia.org/wiki/Ezra%20Pound",
       "title": "Ezra Pound"
@@ -2810,10 +2455,10 @@
       "url": "https://en.wikipedia.org/wiki/The%20Adventures%20of%20Sally",
       "title": "The Adventures of Sally"
     },
-    "Daniel Deronda by Eliot": {
+    "Daniel Deronda by T.S. Eliot": {
       "exists": true,
-      "url": "https://en.wikipedia.org/wiki/Daniel%20Deronda",
-      "title": "Daniel Deronda"
+      "url": "https://en.wikipedia.org/wiki/Edward%20Fox%20(actor)",
+      "title": "Edward Fox (actor)"
     },
     "The Last Tournament by Tennyson": {
       "exists": true,
@@ -2882,8 +2527,8 @@
     },
     "The Early Poems of Alfred Lord Tennyson by Tennyson": {
       "exists": true,
-      "url": "https://en.wikipedia.org/wiki/Emilia%20Tennyson",
-      "title": "Emilia Tennyson"
+      "url": "https://en.wikipedia.org/wiki/Alfred%2C%20Lord%20Tennyson",
+      "title": "Alfred, Lord Tennyson"
     },
     "A Man of Means by Wodehouse": {
       "exists": true,
@@ -2900,8 +2545,8 @@
     },
     "The Light of Asia by Arnold": {
       "exists": true,
-      "url": "https://en.wikipedia.org/wiki/The%20Light%20of%20Asia",
-      "title": "The Light of Asia"
+      "url": "https://en.wikipedia.org/wiki/Edwin%20Arnold",
+      "title": "Edwin Arnold"
     },
     "The Gem Collector by Wodehouse": {
       "exists": true,
@@ -2918,7 +2563,7 @@
       "url": "https://en.wikipedia.org/wiki/Thomas%20Becket",
       "title": "Thomas Becket"
     },
-    "A Modest Proposal by Swift": {
+    "A Modest Proposal by Jonathan Swift": {
       "exists": true,
       "url": "https://en.wikipedia.org/wiki/A%20Modest%20Proposal",
       "title": "A Modest Proposal"
@@ -2931,15 +2576,15 @@
       "url": "https://en.wikipedia.org/wiki/Friedrich%20Schiller",
       "title": "Friedrich Schiller"
     },
-    "Late Lyrics and Earlier by Hardy": {
+    "Late Lyrics and Earlier by Thomas Hardy": {
       "exists": true,
-      "url": "https://en.wikipedia.org/wiki/Late%20Lyrics%20and%20Earlier%20with%20Many%20Other%20Verses",
-      "title": "Late Lyrics and Earlier with Many Other Verses"
+      "url": "https://en.wikipedia.org/wiki/Thomas%20Hardy",
+      "title": "Thomas Hardy"
     },
-    "Time's Laughingstocks and Other Verses by Hardy": {
+    "Time's Laughingstocks and Other Verses by Thomas Hardy": {
       "exists": true,
-      "url": "https://en.wikipedia.org/wiki/Time's%20Laughingstocks%20and%20Other%20Verses",
-      "title": "Time's Laughingstocks and Other Verses"
+      "url": "https://en.wikipedia.org/wiki/Thomas%20Hardy",
+      "title": "Thomas Hardy"
     },
     "Four Girls and a Compact by Donnell": {
       "exists": true,
@@ -2966,10 +2611,10 @@
       "url": "https://en.wikipedia.org/wiki/Lord%20Byron",
       "title": "Lord Byron"
     },
-    "Adonais by Shelley": {
+    "Adonais by Mary Shelley": {
       "exists": true,
-      "url": "https://en.wikipedia.org/wiki/Adonais",
-      "title": "Adonais"
+      "url": "https://en.wikipedia.org/wiki/Mary%20Shelley",
+      "title": "Mary Shelley"
     },
     "The Poetical Works of William Wordsworth — Volume 1 (of 8) by Wordsworth": {
       "exists": true,
@@ -2981,10 +2626,10 @@
       "url": "https://en.wikipedia.org/wiki/Irish%20Literary%20Revival",
       "title": "Irish Literary Revival"
     },
-    "The Little House in the Fairy Wood by Eliot": {
+    "The Little House in the Fairy Wood by T.S. Eliot": {
       "exists": true,
-      "url": "https://en.wikipedia.org/wiki/The%20Children's%20Book",
-      "title": "The Children's Book"
+      "url": "https://en.wikipedia.org/wiki/Ione%20Bright",
+      "title": "Ione Bright"
     },
     "Mike and Psmith by Wodehouse": {
       "exists": true,
@@ -3006,10 +2651,10 @@
       "url": "https://en.wikipedia.org/wiki/Ray%20Stannard%20Baker",
       "title": "Ray Stannard Baker"
     },
-    "Impressions of Theophrastus Such by Eliot": {
+    "Impressions of Theophrastus Such by T.S. Eliot": {
       "exists": true,
-      "url": "https://en.wikipedia.org/wiki/Impressions%20of%20Theophrastus%20Such",
-      "title": "Impressions of Theophrastus Such"
+      "url": "https://en.wikipedia.org/wiki/Aristotle",
+      "title": "Aristotle"
     },
     "The Village in the Mountains; Conversion of Peter Bayssière; and History of a Bible by Wilder": {
       "exists": false
@@ -3070,12 +2715,12 @@
       "url": "https://en.wikipedia.org/wiki/The%20Beginnings",
       "title": "The Beginnings"
     },
-    "Prefaces and prologues to famous books by Eliot": {
+    "Prefaces and prologues to famous books by T.S. Eliot": {
       "exists": true,
-      "url": "https://en.wikipedia.org/wiki/Harvard%20Classics",
-      "title": "Harvard Classics"
+      "url": "https://en.wikipedia.org/wiki/T.%20S.%20Eliot",
+      "title": "T. S. Eliot"
     },
-    "Narrative and Lyric Poems (first series) for use in the Lower School by Stevenson": {
+    "Narrative and Lyric Poems (first series) for use in the Lower School by Robert Louis Stevenson": {
       "exists": true,
       "url": "https://en.wikipedia.org/wiki/Poetry",
       "title": "Poetry"
@@ -3140,7 +2785,7 @@
       "url": "https://en.wikipedia.org/wiki/Sex%20differences%20in%20psychology",
       "title": "Sex differences in psychology"
     },
-    "Mathilda by Shelley": {
+    "Mathilda by Mary Shelley": {
       "exists": true,
       "url": "https://en.wikipedia.org/wiki/Mathilda%20(novella)",
       "title": "Mathilda (novella)"
@@ -3160,12 +2805,12 @@
       "url": "https://en.wikipedia.org/wiki/Thomas%20Henry%20Huxley",
       "title": "Thomas Henry Huxley"
     },
-    "A Course In Wood Turning by Milton": {
+    "A Course In Wood Turning by John Milton": {
       "exists": true,
-      "url": "https://en.wikipedia.org/wiki/United%20States",
-      "title": "United States"
+      "url": "https://en.wikipedia.org/wiki/Sam%20Wood",
+      "title": "Sam Wood"
     },
-    "The Loving Ballad of Lord Bateman by Dickens": {
+    "The Loving Ballad of Lord Bateman by Charles Dickens": {
       "exists": true,
       "url": "https://en.wikipedia.org/wiki/Charles%20Dickens%20bibliography",
       "title": "Charles Dickens bibliography"
@@ -3177,8 +2822,8 @@
     },
     "Browning's Shorter Poems by Browning": {
       "exists": true,
-      "url": "https://en.wikipedia.org/wiki/Robert%20Browning",
-      "title": "Robert Browning"
+      "url": "https://en.wikipedia.org/wiki/Elizabeth%20Barrett%20Browning",
+      "title": "Elizabeth Barrett Browning"
     },
     "The Letters of Elizabeth Barrett Browning (Volume 2 of 2) by Browning": {
       "exists": true,
@@ -3190,12 +2835,12 @@
       "url": "https://en.wikipedia.org/wiki/Congregation%20of%20Windesheim",
       "title": "Congregation of Windesheim"
     },
-    "Four American Leaders by Eliot": {
+    "Four American Leaders by T.S. Eliot": {
       "exists": true,
-      "url": "https://en.wikipedia.org/wiki/Charles%20William%20Eliot",
-      "title": "Charles William Eliot"
+      "url": "https://en.wikipedia.org/wiki/T.%20S.%20Eliot%20Prize",
+      "title": "T. S. Eliot Prize"
     },
-    "Cottage Poems by Brontë": {
+    "Cottage Poems by Charlotte Brontë": {
       "exists": true,
       "url": "https://en.wikipedia.org/wiki/Patrick%20Bront%C3%AB",
       "title": "Patrick Brontë"
@@ -3220,12 +2865,12 @@
       "url": "https://en.wikipedia.org/wiki/Con%20Conrad",
       "title": "Con Conrad"
     },
-    "Scenes of Clerical Life by Eliot": {
+    "Scenes of Clerical Life by T.S. Eliot": {
       "exists": true,
-      "url": "https://en.wikipedia.org/wiki/Scenes%20of%20Clerical%20Life",
-      "title": "Scenes of Clerical Life"
+      "url": "https://en.wikipedia.org/wiki/George%20Henry%20Lewes",
+      "title": "George Henry Lewes"
     },
-    "The Last Man by Shelley": {
+    "The Last Man by Mary Shelley": {
       "exists": true,
       "url": "https://en.wikipedia.org/wiki/The%20Last%20Man",
       "title": "The Last Man"
@@ -3300,7 +2945,7 @@
       "url": "https://en.wikipedia.org/wiki/Death%20Be%20Not%20Proud",
       "title": "Death Be Not Proud"
     },
-    "Milton's Comus by Milton": {
+    "Milton's Comus by John Milton": {
       "exists": true,
       "url": "https://en.wikipedia.org/wiki/Comus%20(Milton)",
       "title": "Comus (Milton)"
@@ -3350,15 +2995,15 @@
       "url": "https://en.wikipedia.org/wiki/The%20Girl%20on%20the%20Boat%20(film)",
       "title": "The Girl on the Boat (film)"
     },
-    "O May I Join the Choir Invisible! and Other Favorite Poems by Eliot": {
+    "O May I Join the Choir Invisible! and Other Favorite Poems by T.S. Eliot": {
       "exists": true,
       "url": "https://en.wikipedia.org/wiki/James%20Stewart",
       "title": "James Stewart"
     },
-    "How Lisa Loved the King by Eliot": {
+    "How Lisa Loved the King by T.S. Eliot": {
       "exists": true,
-      "url": "https://en.wikipedia.org/wiki/George%20Eliot",
-      "title": "George Eliot"
+      "url": "https://en.wikipedia.org/wiki/The%20Moonstone%20(2016%20TV%20series)",
+      "title": "The Moonstone (2016 TV series)"
     },
     "Sonnet 43 by Browning": {
       "exists": true,
@@ -3477,8 +3122,8 @@
     },
     "Beauties of Tennyson by Tennyson": {
       "exists": true,
-      "url": "https://en.wikipedia.org/wiki/Tennyson%20Down",
-      "title": "Tennyson Down"
+      "url": "https://en.wikipedia.org/wiki/Lake%20Tennyson",
+      "title": "Lake Tennyson"
     },
     "Keats: Poems Published in 1820 by Keats": {
       "exists": true,
@@ -3495,15 +3140,15 @@
       "url": "https://en.wikipedia.org/wiki/Cycle%20for%20Declamation",
       "title": "Cycle for Declamation"
     },
-    "The Book of Humorous Verse by Wells": {
+    "The Book of Humorous Verse by H.G. Wells": {
       "exists": true,
-      "url": "https://en.wikipedia.org/wiki/Nonsense%20verse",
-      "title": "Nonsense verse"
+      "url": "https://en.wikipedia.org/wiki/G.%20K.%20Chesterton",
+      "title": "G. K. Chesterton"
     },
-    "Romola by Eliot": {
+    "Romola by T.S. Eliot": {
       "exists": true,
-      "url": "https://en.wikipedia.org/wiki/Romola",
-      "title": "Romola"
+      "url": "https://en.wikipedia.org/wiki/George%20Henry%20Lewes",
+      "title": "George Henry Lewes"
     },
     "Myths and Legends of Christmastide by Herrick": {
       "exists": true,
@@ -3545,13 +3190,13 @@
     },
     "'He Giveth His Beloved Sleep' by Browning": {
       "exists": true,
-      "url": "https://en.wikipedia.org/wiki/First%20Vision",
-      "title": "First Vision"
+      "url": "https://en.wikipedia.org/wiki/Psalm%20127",
+      "title": "Psalm 127"
     },
     "Tam O'Shanter by Burns": {
       "exists": true,
-      "url": "https://en.wikipedia.org/wiki/Tam%20o'%20Shanter",
-      "title": "Tam o' Shanter"
+      "url": "https://en.wikipedia.org/wiki/Tam%20o'%20shanter%20(cap)",
+      "title": "Tam o' shanter (cap)"
     },
     "Great Testimony against scientific cruelty by Coleridge": {
       "exists": true,
@@ -3678,10 +3323,10 @@
       "url": "https://en.wikipedia.org/wiki/McDonnell%20Douglas%20DC-10",
       "title": "McDonnell Douglas DC-10"
     },
-    "Select Conversations with an Uncle (Now Extinct) and Two Other Reminiscences by Wells": {
+    "Select Conversations with an Uncle (Now Extinct) and Two Other Reminiscences by H.G. Wells": {
       "exists": true,
-      "url": "https://en.wikipedia.org/wiki/Select%20Conversations%20with%20an%20Uncle",
-      "title": "Select Conversations with an Uncle"
+      "url": "https://en.wikipedia.org/wiki/H.%20G.%20Wells%20bibliography",
+      "title": "H. G. Wells bibliography"
     },
     "Old Rambling House by Herbert": {
       "exists": true,
@@ -3744,10 +3389,10 @@
       "url": "https://en.wikipedia.org/wiki/William%20Blake's%20Illustrations%20of%20the%20Book%20of%20Job",
       "title": "William Blake's Illustrations of the Book of Job"
     },
-    "New worlds for old: A plain account of modern socialism by Wells": {
+    "New worlds for old: A plain account of modern socialism by H.G. Wells": {
       "exists": true,
-      "url": "https://en.wikipedia.org/wiki/New%20Worlds%20for%20Old%20(Wells%20book)",
-      "title": "New Worlds for Old (Wells book)"
+      "url": "https://en.wikipedia.org/wiki/H.%20G.%20Wells%20bibliography",
+      "title": "H. G. Wells bibliography"
     },
     "In The Seven Woods: Being Poems Chiefly of the Irish Heroic Age by Yeats": {
       "exists": true,
@@ -3767,7 +3412,7 @@
     "Frondes Agrestes: Readings in 'Modern Painters' by Ruskin": {
       "exists": false
     },
-    "Milton: Minor Poems by Milton": {
+    "Milton: Minor Poems by John Milton": {
       "exists": true,
       "url": "https://en.wikipedia.org/wiki/Milton's%201645%20Poems",
       "title": "Milton's 1645 Poems"
@@ -3913,7 +3558,7 @@
       "url": "https://en.wikipedia.org/wiki/Howard%20Hughes",
       "title": "Howard Hughes"
     },
-    "Parlous Times: A Novel of Modern Diplomacy by Wells": {
+    "Parlous Times: A Novel of Modern Diplomacy by H.G. Wells": {
       "exists": false
     },
     "The Secret Battle by Herbert": {
@@ -3936,20 +3581,20 @@
       "url": "https://en.wikipedia.org/wiki/Alfred%20Hitchcock",
       "title": "Alfred Hitchcock"
     },
-    "Three Sunsets and Other Poems by Carroll": {
+    "Three Sunsets and Other Poems by Lewis Carroll": {
       "exists": true,
       "url": "https://en.wikipedia.org/wiki/Lewis%20Carroll",
       "title": "Lewis Carroll"
     },
-    "The Poems and Verses of Charles Dickens by Dickens": {
+    "The Poems and Verses of Charles Dickens by Charles Dickens": {
       "exists": true,
       "url": "https://en.wikipedia.org/wiki/Charles%20Dickens%20bibliography",
       "title": "Charles Dickens bibliography"
     },
     "Some Current Folk-Songs of the Negro by Thomas": {
       "exists": true,
-      "url": "https://en.wikipedia.org/wiki/Protest%20songs%20in%20the%20United%20States",
-      "title": "Protest songs in the United States"
+      "url": "https://en.wikipedia.org/wiki/Sea%20shanty",
+      "title": "Sea shanty"
     },
     "A Treatise on the Brewing of Beer by Hughes": {
       "exists": true,
@@ -3976,7 +3621,7 @@
       "url": "https://en.wikipedia.org/wiki/Thomas%20Carlyle",
       "title": "Thomas Carlyle"
     },
-    "An Anthology of Jugoslav Poetry; Serbian Lyrics by Stevenson": {
+    "An Anthology of Jugoslav Poetry; Serbian Lyrics by Robert Louis Stevenson": {
       "exists": false
     },
     "The Sandman: His Farm Stories by Hopkins": {
@@ -4037,10 +3682,10 @@
       "url": "https://en.wikipedia.org/wiki/Assassination%20of%20Abraham%20Lincoln",
       "title": "Assassination of Abraham Lincoln"
     },
-    "Old Celtic Romances by Joyce": {
+    "Old Celtic Romances by James Joyce": {
       "exists": true,
-      "url": "https://en.wikipedia.org/wiki/L%C3%AD%20Ban%20(mermaid)",
-      "title": "Lí Ban (mermaid)"
+      "url": "https://en.wikipedia.org/wiki/Ulysses%20(novel)",
+      "title": "Ulysses (novel)"
     },
     "Atlantic Narratives: Modern Short Stories by Thomas": {
       "exists": true,
@@ -4077,10 +3722,10 @@
       "url": "https://en.wikipedia.org/wiki/List%20of%20Green%20Acres%20episodes",
       "title": "List of Green Acres episodes"
     },
-    "A Vindication of Natural Diet. by Shelley": {
+    "A Vindication of Natural Diet. by Mary Shelley": {
       "exists": true,
-      "url": "https://en.wikipedia.org/wiki/A%20Vindication%20of%20Natural%20Diet",
-      "title": "A Vindication of Natural Diet"
+      "url": "https://en.wikipedia.org/wiki/Percy%20Bysshe%20Shelley",
+      "title": "Percy Bysshe Shelley"
     },
     "Poems by Yeats": {
       "exists": true,
@@ -4124,8 +3769,8 @@
     },
     "Theory of Groups of Finite Order by Burnside": {
       "exists": true,
-      "url": "https://en.wikipedia.org/wiki/William%20Burnside",
-      "title": "William Burnside"
+      "url": "https://en.wikipedia.org/wiki/Representation%20theory%20of%20finite%20groups",
+      "title": "Representation theory of finite groups"
     },
     "A Day with Browning by Browning": {
       "exists": true,
@@ -4139,8 +3784,8 @@
     },
     "A Day with the Poet Tennyson by Tennyson": {
       "exists": true,
-      "url": "https://en.wikipedia.org/wiki/Alfred%2C%20Lord%20Tennyson",
-      "title": "Alfred, Lord Tennyson"
+      "url": "https://en.wikipedia.org/wiki/Frederick%20Tennyson",
+      "title": "Frederick Tennyson"
     },
     "Excuse Me! by Hughes": {
       "exists": true,
@@ -4172,8 +3817,8 @@
     },
     "The Theory and Practice of Model Aeroplaning by Johnson": {
       "exists": true,
-      "url": "https://en.wikipedia.org/wiki/Aristotle",
-      "title": "Aristotle"
+      "url": "https://en.wikipedia.org/wiki/List%20of%20A%20Country%20Practice%20episodes",
+      "title": "List of A Country Practice episodes"
     },
     "Trails and Tramps in Alaska and Newfoundland by Thomas": {
       "exists": true,
@@ -4272,13 +3917,13 @@
     },
     "The Constant Prince by Coleridge": {
       "exists": true,
-      "url": "https://en.wikipedia.org/wiki/Charlotte%20Mary%20Yonge",
-      "title": "Charlotte Mary Yonge"
+      "url": "https://en.wikipedia.org/wiki/Klemens%20von%20Metternich",
+      "title": "Klemens von Metternich"
     },
     "Hugh Crichton's Romance by Coleridge": {
       "exists": true,
-      "url": "https://en.wikipedia.org/wiki/List%20of%20University%20of%20Cambridge%20people",
-      "title": "List of University of Cambridge people"
+      "url": "https://en.wikipedia.org/wiki/List%20of%20years%20in%20literature",
+      "title": "List of years in literature"
     },
     "The Harlequin Opal: A Romance. Vol. 1 (of 3) by Hume": {
       "exists": false
@@ -4360,10 +4005,10 @@
       "url": "https://en.wikipedia.org/wiki/William%20Wordsworth",
       "title": "William Wordsworth"
     },
-    "Poems of American History by Stevenson": {
+    "Poems of American History by Robert Louis Stevenson": {
       "exists": true,
-      "url": "https://en.wikipedia.org/wiki/Anne%20Stevenson",
-      "title": "Anne Stevenson"
+      "url": "https://en.wikipedia.org/wiki/Robert%20Louis%20Stevenson",
+      "title": "Robert Louis Stevenson"
     },
     "The Poetical Works of William Wordsworth — Volume 6 (of 8) by Wordsworth": {
       "exists": true,
@@ -4375,17 +4020,17 @@
       "url": "https://en.wikipedia.org/wiki/Baldur's%20Gate%203",
       "title": "Baldur's Gate 3"
     },
-    "A Vers de Société Anthology by Wells": {
+    "A Vers de Société Anthology by H.G. Wells": {
       "exists": true,
-      "url": "https://en.wikipedia.org/wiki/Carolyn%20Wells",
-      "title": "Carolyn Wells"
+      "url": "https://en.wikipedia.org/wiki/Arthur%20Rimbaud",
+      "title": "Arthur Rimbaud"
     },
     "Bill Bruce on Forest Patrol by Arnold": {
       "exists": true,
       "url": "https://en.wikipedia.org/wiki/Henry%20H.%20Arnold",
       "title": "Henry H. Arnold"
     },
-    "Narrative and Lyric Poems (Second Series) for Use in the Lower School by Stevenson": {
+    "Narrative and Lyric Poems (Second Series) for Use in the Lower School by Robert Louis Stevenson": {
       "exists": true,
       "url": "https://en.wikipedia.org/wiki/Poetry",
       "title": "Poetry"
@@ -4451,10 +4096,10 @@
       "url": "https://en.wikipedia.org/wiki/Sophia%20Jex-Blake",
       "title": "Sophia Jex-Blake"
     },
-    "Green Doors by Eliot": {
+    "Green Doors by T.S. Eliot": {
       "exists": true,
-      "url": "https://en.wikipedia.org/wiki/Harvard%20Classics",
-      "title": "Harvard Classics"
+      "url": "https://en.wikipedia.org/wiki/T.%20S.%20Eliot%20Prize",
+      "title": "T. S. Eliot Prize"
     },
     "Beautiful Wales by Thomas": {
       "exists": true,
@@ -4500,8 +4145,8 @@
     },
     "A Day with Robert Louis Stevenson by Byron": {
       "exists": true,
-      "url": "https://en.wikipedia.org/wiki/History%20of%20Kiribati",
-      "title": "History of Kiribati"
+      "url": "https://en.wikipedia.org/wiki/The%20New%20Oxford%20Book%20of%20English%20Verse%201250%E2%80%931950",
+      "title": "The New Oxford Book of English Verse 1250–1950"
     },
     "Ebony and Crystal: Poems in Verse and Prose by Smith": {
       "exists": true,
@@ -4553,8 +4198,8 @@
     },
     "Peggy Plays Off-Broadway by Hughes": {
       "exists": true,
-      "url": "https://en.wikipedia.org/wiki/The%20Iceman%20Cometh",
-      "title": "The Iceman Cometh"
+      "url": "https://en.wikipedia.org/wiki/Amy%20Madigan",
+      "title": "Amy Madigan"
     },
     "Peggy Goes Straw Hat by Hughes": {
       "exists": true,
@@ -4631,7 +4276,7 @@
       "url": "https://en.wikipedia.org/wiki/Richard%20I%20of%20England",
       "title": "Richard I of England"
     },
-    "The Sacred Wood: Essays on Poetry and Criticism by Eliot": {
+    "The Sacred Wood: Essays on Poetry and Criticism by T.S. Eliot": {
       "exists": true,
       "url": "https://en.wikipedia.org/wiki/T.%20S.%20Eliot",
       "title": "T. S. Eliot"
@@ -4649,7 +4294,7 @@
     "She Blows! And Sparm at That! by Hopkins": {
       "exists": false
     },
-    "Index of the Project Gutenberg Works of Thomas Hardy by Hardy": {
+    "Index of the Project Gutenberg Works of Thomas Hardy by Thomas Hardy": {
       "exists": true,
       "url": "https://en.wikipedia.org/wiki/Thomas%20Hardy",
       "title": "Thomas Hardy"
@@ -4659,10 +4304,10 @@
       "url": "https://en.wikipedia.org/wiki/Edward%20Thomas%20(poet)",
       "title": "Edward Thomas (poet)"
     },
-    "Ariel Dances by Eliot": {
+    "Ariel Dances by T.S. Eliot": {
       "exists": true,
-      "url": "https://en.wikipedia.org/wiki/Sylvia%20Plath",
-      "title": "Sylvia Plath"
+      "url": "https://en.wikipedia.org/wiki/T.%20S.%20Eliot%20Prize",
+      "title": "T. S. Eliot Prize"
     },
     "Reading: How to Teach It by Arnold": {
       "exists": true,
@@ -4672,7 +4317,7 @@
     "Index of the Project Gutenberg Works of Pelham Grenville Wodehouse by Wodehouse": {
       "exists": false
     },
-    "Index of the Project Gutenberg Works of George Eliot by Eliot": {
+    "Index of the Project Gutenberg Works of George Eliot by T.S. Eliot": {
       "exists": true,
       "url": "https://en.wikipedia.org/wiki/Harvard%20Classics",
       "title": "Harvard Classics"
@@ -4709,8 +4354,8 @@
     },
     "Index of the Project Gutenberg Works of Robert Browning by Browning": {
       "exists": true,
-      "url": "https://en.wikipedia.org/wiki/Robert%20Brown%20(botanist%2C%20born%201842)",
-      "title": "Robert Brown (botanist, born 1842)"
+      "url": "https://en.wikipedia.org/wiki/Index%20Librorum%20Prohibitorum",
+      "title": "Index Librorum Prohibitorum"
     },
     "Poems by Millay": {
       "exists": true,
@@ -4752,15 +4397,15 @@
       "url": "https://en.wikipedia.org/wiki/George%20William%20Russell",
       "title": "George William Russell"
     },
-    "A Finnish Grammar by Eliot": {
+    "A Finnish Grammar by T.S. Eliot": {
       "exists": true,
       "url": "https://en.wikipedia.org/wiki/Charles%20Eliot%20(diplomat)",
       "title": "Charles Eliot (diplomat)"
     },
     "The Little Gods: A Masque of the Far East by Thomas": {
       "exists": true,
-      "url": "https://en.wikipedia.org/wiki/Africa",
-      "title": "Africa"
+      "url": "https://en.wikipedia.org/wiki/Exalted%20(role-playing%20game)",
+      "title": "Exalted (role-playing game)"
     },
     "Clipped Wings by Hughes": {
       "exists": true,
@@ -4772,7 +4417,7 @@
       "url": "https://en.wikipedia.org/wiki/Leave%20It%20to%20Psmith",
       "title": "Leave It to Psmith"
     },
-    "Polite Conversation in Three Dialogues by Swift": {
+    "Polite Conversation in Three Dialogues by Jonathan Swift": {
       "exists": true,
       "url": "https://en.wikipedia.org/wiki/Cultural%20impact%20of%20Taylor%20Swift",
       "title": "Cultural impact of Taylor Swift"
@@ -4807,7 +4452,7 @@
       "url": "https://en.wikipedia.org/wiki/Stanley%20Featherstonehaugh%20Ukridge",
       "title": "Stanley Featherstonehaugh Ukridge"
     },
-    "Poems by Speranza by Wilde": {
+    "Poems by Speranza by Oscar Wilde": {
       "exists": true,
       "url": "https://en.wikipedia.org/wiki/Jane%20Wilde",
       "title": "Jane Wilde"
@@ -4844,20 +4489,18 @@
     },
     "A Year with a Whaler by Burns": {
       "exists": true,
-      "url": "https://en.wikipedia.org/wiki/Whaling%20in%20the%20United%20States",
-      "title": "Whaling in the United States"
+      "url": "https://en.wikipedia.org/wiki/Davolls%20General%20Store",
+      "title": "Davolls General Store"
     },
     "The Happy-go-lucky Morgans by Thomas": {
       "exists": true,
       "url": "https://en.wikipedia.org/wiki/Edward%20Thomas%20(poet)",
       "title": "Edward Thomas (poet)"
     },
-    "The Vanishing Comrade: A Mystery Story for Girls by Eliot": {
-      "exists": true,
-      "url": "https://en.wikipedia.org/wiki/Antoine%20de%20Saint-Exup%C3%A9ry",
-      "title": "Antoine de Saint-Exupéry"
+    "The Vanishing Comrade: A Mystery Story for Girls by T.S. Eliot": {
+      "exists": false
     },
-    "Homage to John Dryden: Three Essays on Poetry of the Seventeenth Century by Eliot": {
+    "Homage to John Dryden: Three Essays on Poetry of the Seventeenth Century by T.S. Eliot": {
       "exists": true,
       "url": "https://en.wikipedia.org/wiki/T.%20S.%20Eliot",
       "title": "T. S. Eliot"
@@ -4877,7 +4520,7 @@
       "url": "https://en.wikipedia.org/wiki/List%20of%20fatal%20shark%20attacks%20in%20Australia",
       "title": "List of fatal shark attacks in Australia"
     },
-    "Falkner: A Novel by Shelley": {
+    "Falkner: A Novel by Mary Shelley": {
       "exists": true,
       "url": "https://en.wikipedia.org/wiki/Falkner%20(novel)",
       "title": "Falkner (novel)"
@@ -4909,8 +4552,8 @@
     },
     "A History of Kansas by Arnold": {
       "exists": true,
-      "url": "https://en.wikipedia.org/wiki/Arnold%2C%20Kansas",
-      "title": "Arnold, Kansas"
+      "url": "https://en.wikipedia.org/wiki/History%20of%20Kansas",
+      "title": "History of Kansas"
     },
     "Notes on the Art Treasures at Penicuik House Midlothian by Gray": {
       "exists": false
@@ -4938,15 +4581,15 @@
       "url": "https://en.wikipedia.org/wiki/Samuel%20Johnson",
       "title": "Samuel Johnson"
     },
-    "The Heir of Mondolfo by Shelley": {
+    "The Heir of Mondolfo by Mary Shelley": {
       "exists": true,
       "url": "https://en.wikipedia.org/wiki/Mary%20Shelley%20bibliography",
       "title": "Mary Shelley bibliography"
     },
-    "The Fortunes of Perkin Warbeck: a romance by Shelley": {
+    "The Fortunes of Perkin Warbeck: a romance by Mary Shelley": {
       "exists": true,
-      "url": "https://en.wikipedia.org/wiki/The%20Fortunes%20of%20Perkin%20Warbeck",
-      "title": "The Fortunes of Perkin Warbeck"
+      "url": "https://en.wikipedia.org/wiki/Perkin%20Warbeck",
+      "title": "Perkin Warbeck"
     },
     "Summer Morning: A poem by Miller": {
       "exists": true,
@@ -5041,8 +4684,8 @@
     },
     "Women for votes by Hughes": {
       "exists": true,
-      "url": "https://en.wikipedia.org/wiki/John%20Hughes%20(filmmaker)",
-      "title": "John Hughes (filmmaker)"
+      "url": "https://en.wikipedia.org/wiki/Howard%20Hughes",
+      "title": "Howard Hughes"
     },
     "The small bachelor by Wodehouse": {
       "exists": true,
@@ -5054,7 +4697,7 @@
       "url": "https://en.wikipedia.org/wiki/Welcome%20Home%2C%20Roxy%20Carmichael",
       "title": "Welcome Home, Roxy Carmichael"
     },
-    "The sensitive plant by Shelley": {
+    "The sensitive plant by Mary Shelley": {
       "exists": true,
       "url": "https://en.wikipedia.org/wiki/Percy%20Bysshe%20Shelley",
       "title": "Percy Bysshe Shelley"
@@ -5099,7 +4742,7 @@
       "url": "https://en.wikipedia.org/wiki/List%20of%20people%20on%20the%20postage%20stamps%20of%20the%20United%20Kingdom",
       "title": "List of people on the postage stamps of the United Kingdom"
     },
-    "Ara vus prec by Eliot": {
+    "Ara vus prec by T.S. Eliot": {
       "exists": true,
       "url": "https://en.wikipedia.org/wiki/John%20Rodker",
       "title": "John Rodker"
@@ -5141,8 +4784,8 @@
     },
     "The gospel of freedom by Herrick": {
       "exists": true,
-      "url": "https://en.wikipedia.org/wiki/Thomas%20Jefferson",
-      "title": "Thomas Jefferson"
+      "url": "https://en.wikipedia.org/wiki/Xenu",
+      "title": "Xenu"
     },
     "The modern packing house by Wilder": {
       "exists": true,
@@ -5196,8 +4839,8 @@
     },
     "Fish preferred by Wodehouse": {
       "exists": true,
-      "url": "https://en.wikipedia.org/wiki/Summer%20Lightning",
-      "title": "Summer Lightning"
+      "url": "https://en.wikipedia.org/wiki/P.%20G.%20Wodehouse%20bibliography",
+      "title": "P. G. Wodehouse bibliography"
     },
     "Songs and lyrics of Robert Burns by Burns": {
       "exists": true,
@@ -5782,7 +5425,7 @@
       "url": "https://en.wikipedia.org/wiki/Thomas%20Mann",
       "title": "Thomas Mann"
     },
-    "Der Heizer: Ein Fragment by Kafka": {
+    "Der Heizer: Ein Fragment by Franz Kafka": {
       "exists": true,
       "url": "https://en.wikipedia.org/wiki/Franz%20Kafka",
       "title": "Franz Kafka"
@@ -5802,7 +5445,7 @@
       "url": "https://en.wikipedia.org/wiki/Arthur%20Schnitzler",
       "title": "Arthur Schnitzler"
     },
-    "Auf der Galerie by Kafka": {
+    "Auf der Galerie by Franz Kafka": {
       "exists": true,
       "url": "https://en.wikipedia.org/wiki/Franz%20Kafka%20bibliography",
       "title": "Franz Kafka bibliography"
@@ -5830,10 +5473,8 @@
     "Gebete für Israeliten by Wolff": {
       "exists": false
     },
-    "Großer Lärm by Kafka": {
-      "exists": true,
-      "url": "https://en.wikipedia.org/wiki/Norbert%20Walter%20Peters",
-      "title": "Norbert Walter Peters"
+    "Großer Lärm by Franz Kafka": {
+      "exists": false
     },
     "Im Sonnenschein: Novelle by Storm": {
       "exists": false
@@ -5848,12 +5489,12 @@
       "url": "https://en.wikipedia.org/wiki/Leonce%20and%20Lena",
       "title": "Leonce and Lena"
     },
-    "Das Urteil: Eine Geschichte by Kafka": {
+    "Das Urteil: Eine Geschichte by Franz Kafka": {
       "exists": true,
-      "url": "https://en.wikipedia.org/wiki/The%20Judgment",
-      "title": "The Judgment"
+      "url": "https://en.wikipedia.org/wiki/Franz%20Kafka",
+      "title": "Franz Kafka"
     },
-    "Ein Landarzt: Kleine Erzählungen by Kafka": {
+    "Ein Landarzt: Kleine Erzählungen by Franz Kafka": {
       "exists": true,
       "url": "https://en.wikipedia.org/wiki/The%20Cares%20of%20a%20Family%20Man",
       "title": "The Cares of a Family Man"
@@ -5863,7 +5504,7 @@
       "url": "https://en.wikipedia.org/wiki/Wilhelm%20Raabe",
       "title": "Wilhelm Raabe"
     },
-    "Die Verwandlung by Kafka": {
+    "Die Verwandlung by Franz Kafka": {
       "exists": true,
       "url": "https://en.wikipedia.org/wiki/The%20Metamorphosis",
       "title": "The Metamorphosis"
@@ -5873,7 +5514,7 @@
       "url": "https://en.wikipedia.org/wiki/Tonio%20Kr%C3%B6ger",
       "title": "Tonio Kröger"
     },
-    "Betrachtung by Kafka": {
+    "Betrachtung by Franz Kafka": {
       "exists": true,
       "url": "https://en.wikipedia.org/wiki/Franz%20Kafka",
       "title": "Franz Kafka"
@@ -5893,7 +5534,7 @@
     "Der Mörder: Eine Novelle by Schnitzler": {
       "exists": false
     },
-    "In der Strafkolonie by Kafka": {
+    "In der Strafkolonie by Franz Kafka": {
       "exists": true,
       "url": "https://en.wikipedia.org/wiki/In%20the%20Penal%20Colony",
       "title": "In the Penal Colony"
@@ -5923,17 +5564,15 @@
       "url": "https://en.wikipedia.org/wiki/Johannes%20Frischauf",
       "title": "Johannes Frischauf"
     },
-    "Grosser Lärm by Kafka": {
-      "exists": true,
-      "url": "https://en.wikipedia.org/wiki/Norbert%20Walter%20Peters",
-      "title": "Norbert Walter Peters"
+    "Grosser Lärm by Franz Kafka": {
+      "exists": false
     },
-    "Ein Hungerkünstler by Kafka": {
+    "Ein Hungerkünstler by Franz Kafka": {
       "exists": true,
       "url": "https://en.wikipedia.org/wiki/A%20Hunger%20Artist",
       "title": "A Hunger Artist"
     },
-    "Der Mord by Kafka": {
+    "Der Mord by Franz Kafka": {
       "exists": true,
       "url": "https://en.wikipedia.org/wiki/Franz%20Kafka%20bibliography",
       "title": "Franz Kafka bibliography"
@@ -6275,7 +5914,7 @@
       "url": "https://en.wikipedia.org/wiki/Theodor%20Lessing",
       "title": "Theodor Lessing"
     },
-    "Der Prozess: Roman by Kafka": {
+    "Der Prozess: Roman by Franz Kafka": {
       "exists": true,
       "url": "https://en.wikipedia.org/wiki/The%20Trial",
       "title": "The Trial"
@@ -6570,8 +6209,8 @@
     },
     "L'Arte by De Roberto": {
       "exists": true,
-      "url": "https://en.wikipedia.org/wiki/Roberto%20Capucci",
-      "title": "Roberto Capucci"
+      "url": "https://en.wikipedia.org/wiki/Tiramisu",
+      "title": "Tiramisu"
     },
     "Al rombo del cannone by De Roberto": {
       "exists": true,
@@ -6641,7 +6280,7 @@
       "url": "https://en.wikipedia.org/wiki/Viareggio%20Prize",
       "title": "Viareggio Prize"
     },
-    "La mandragola - La Clizia - Belfagor by Machiavelli": {
+    "La mandragola - La Clizia - Belfagor by Niccolò Machiavelli": {
       "exists": true,
       "url": "https://en.wikipedia.org/wiki/Niccol%C3%B2%20Machiavelli",
       "title": "Niccolò Machiavelli"
@@ -6930,8 +6569,8 @@
     },
     "Cádiz by Pérez Galdós": {
       "exists": true,
-      "url": "https://en.wikipedia.org/wiki/Sherry",
-      "title": "Sherry"
+      "url": "https://en.wikipedia.org/wiki/Tom%C3%A1s%20de%20Zumalac%C3%A1rregui",
+      "title": "Tomás de Zumalacárregui"
     },
     "Mare nostrum by Blasco Ibáñez": {
       "exists": true,
@@ -6965,8 +6604,8 @@
     },
     "Sangre y arena by Blasco Ibáñez": {
       "exists": true,
-      "url": "https://en.wikipedia.org/wiki/Vicente%20Blasco%20Ib%C3%A1%C3%B1ez",
-      "title": "Vicente Blasco Ibáñez"
+      "url": "https://en.wikipedia.org/wiki/Blood%20and%20Sand%20(novel)",
+      "title": "Blood and Sand (novel)"
     },
     "La condenada (cuentos) by Blasco Ibáñez": {
       "exists": true,
@@ -7344,8 +6983,8 @@
     },
     "Tristana by Pérez Galdós": {
       "exists": true,
-      "url": "https://en.wikipedia.org/wiki/Tristana%20(film)",
-      "title": "Tristana (film)"
+      "url": "https://en.wikipedia.org/wiki/Benito%20P%C3%A9rez%20Gald%C3%B3s",
+      "title": "Benito Pérez Galdós"
     },
     "El caballero encantado (cuento real... inverosí­mil) by Pérez Galdós": {
       "exists": false
@@ -7367,8 +7006,8 @@
     },
     "Napoleón en Chamartín by Pérez Galdós": {
       "exists": true,
-      "url": "https://en.wikipedia.org/wiki/Episodios%20Nacionales",
-      "title": "Episodios Nacionales"
+      "url": "https://en.wikipedia.org/wiki/Benito%20de%20San%20Juan",
+      "title": "Benito de San Juan"
     },
     "Gerona by Pérez Galdós": {
       "exists": true,
@@ -7541,77 +7180,37 @@
       "url": "https://en.wikipedia.org/wiki/Book%20of%20Mormon",
       "title": "Book of Mormon"
     },
-    "Pride and Prejudice by Jane Austen by Unknown": {
-      "exists": true,
-      "url": "https://en.wikipedia.org/wiki/Pride%20and%20Prejudice",
-      "title": "Pride and Prejudice"
-    },
-    "Frankenstein; Or, The Modern Prometheus by Mary Wollstonecraft Shelley by Unknown": {
+    "Frankenstein; Or, The Modern Prometheus by Mary Wollstonecraft Shelley": {
       "exists": true,
       "url": "https://en.wikipedia.org/wiki/Frankenstein",
       "title": "Frankenstein"
-    },
-    "Alice's Adventures in Wonderland by Lewis Carroll": {
-      "exists": true,
-      "url": "https://en.wikipedia.org/wiki/Alice%27s_Adventures_in_Wonderland",
-      "title": "Alice's Adventures in Wonderland"
-    },
-    "Alice's Adventures in Wonderland by Lewis Carroll by Unknown": {
-      "exists": true,
-      "url": "https://en.wikipedia.org/wiki/Alice%27s_Adventures_in_Wonderland",
-      "title": "Alice's Adventures in Wonderland"
     },
     "The Adventures of Sherlock Holmes by Arthur Conan Doyle": {
       "exists": true,
       "url": "https://en.wikipedia.org/wiki/The%20Adventures%20of%20Sherlock%20Holmes",
       "title": "The Adventures of Sherlock Holmes"
     },
-    "The Adventures of Sherlock Holmes by Arthur Conan Doyle by Unknown": {
-      "exists": true,
-      "url": "https://en.wikipedia.org/wiki/The%20Adventures%20of%20Sherlock%20Holmes",
-      "title": "The Adventures of Sherlock Holmes"
-    },
     "Moby Dick; Or, The Whale by Herman Melville": {
       "exists": true,
-      "url": "https://en.wikipedia.org/wiki/Moby-Dick",
-      "title": "Moby-Dick"
+      "url": "https://en.wikipedia.org/wiki/Moby%20Dick%20(whale)",
+      "title": "Moby Dick (whale)"
     },
-    "Moby Dick; Or, The Whale by Herman Melville by Unknown": {
+    "The Adventures of Tom Sawyer by Mark Twain": {
       "exists": true,
-      "url": "https://en.wikipedia.org/wiki/Moby-Dick",
-      "title": "Moby-Dick"
-    },
-    "A Tale of Two Cities by Charles Dickens by Unknown": {
-      "exists": true,
-      "url": "https://en.wikipedia.org/wiki/A%20Tale%20of%20Two%20Cities%20(1980%20film)",
-      "title": "A Tale of Two Cities (1980 film)"
-    },
-    "The Adventures of Tom Sawyer by Mark Twain by Unknown": {
-      "exists": true,
-      "url": "https://en.wikipedia.org/wiki/Tom%20Sawyer",
-      "title": "Tom Sawyer"
+      "url": "https://en.wikipedia.org/wiki/The%20Adventures%20of%20Tom%20Sawyer",
+      "title": "The Adventures of Tom Sawyer"
     },
     "Dracula by Bram Stoker": {
       "exists": true,
-      "url": "https://en.wikipedia.org/wiki/Dracula",
-      "title": "Dracula"
-    },
-    "Dracula by Bram Stoker by Unknown": {
-      "exists": true,
-      "url": "https://en.wikipedia.org/wiki/Dracula",
-      "title": "Dracula"
+      "url": "https://en.wikipedia.org/wiki/Bram%20Stoker's%20Dracula%20(1992%20film)",
+      "title": "Bram Stoker's Dracula (1992 film)"
     },
     "The Yellow Wallpaper by Charlotte Perkins Gilman": {
       "exists": true,
-      "url": "https://en.wikipedia.org/wiki/The_Yellow_Wallpaper",
+      "url": "https://en.wikipedia.org/wiki/The%20Yellow%20Wallpaper",
       "title": "The Yellow Wallpaper"
     },
-    "The Yellow Wallpaper by Charlotte Perkins Gilman by Unknown": {
-      "exists": true,
-      "url": "https://en.wikipedia.org/wiki/The_Yellow_Wallpaper",
-      "title": "The Yellow Wallpaper"
-    },
-    "A Doll's House by Henrik Ibsen by Unknown": {
+    "A Doll's House by Henrik Ibsen": {
       "exists": true,
       "url": "https://en.wikipedia.org/wiki/A%20Doll's%20House",
       "title": "A Doll's House"
@@ -7621,126 +7220,41 @@
       "url": "https://en.wikipedia.org/wiki/The%20Metamorphosis",
       "title": "The Metamorphosis"
     },
-    "Metamorphosis by Franz Kafka by Unknown": {
-      "exists": true,
-      "url": "https://en.wikipedia.org/wiki/The%20Metamorphosis",
-      "title": "The Metamorphosis"
-    },
-    "The Prince by Niccolò Machiavelli by Unknown": {
-      "exists": true,
-      "url": "https://en.wikipedia.org/wiki/The%20Prince",
-      "title": "The Prince"
-    },
-    "Ulysses by James Joyce by Unknown": {
-      "exists": true,
-      "url": "https://en.wikipedia.org/wiki/Ulysses%20(novel)",
-      "title": "Ulysses (novel)"
-    },
-    "Great Expectations by Charles Dickens by Unknown": {
+    "Great Expectations by Charles Dickens": {
       "exists": true,
       "url": "https://en.wikipedia.org/wiki/Great%20Expectations",
       "title": "Great Expectations"
-    },
-    "War and Peace by Leo Tolstoy by Unknown": {
-      "exists": true,
-      "url": "https://en.wikipedia.org/wiki/War%20and%20Peace%20(2007%20miniseries)",
-      "title": "War and Peace (2007 miniseries)"
-    },
-    "A Modest Proposal by Jonathan Swift by Unknown": {
-      "exists": true,
-      "url": "https://en.wikipedia.org/wiki/A%20Modest%20Proposal",
-      "title": "A Modest Proposal"
-    },
-    "The Picture of Dorian Gray by Oscar Wilde by Unknown": {
-      "exists": true,
-      "url": "https://en.wikipedia.org/wiki/The_Picture_of_Dorian_Gray",
-      "title": "The Picture of Dorian Gray"
-    },
-    "The Waste Land by T. S. Eliot by Unknown": {
-      "exists": true,
-      "url": "https://en.wikipedia.org/wiki/The%20Waste%20Land",
-      "title": "The Waste Land"
-    },
-    "A Christmas Carol in Prose; Being a Ghost Story of Christmas by Charles Dickens": {
-      "exists": true,
-      "url": "https://en.wikipedia.org/wiki/A_Christmas_Carol",
-      "title": "A Christmas Carol"
-    },
-    "A Christmas Carol in Prose; Being a Ghost Story of Christmas by Charles Dickens by Unknown": {
-      "exists": true,
-      "url": "https://en.wikipedia.org/wiki/A_Christmas_Carol",
-      "title": "A Christmas Carol"
-    },
-    "The Wonderful Wizard of Oz by L. Frank Baum by Unknown": {
-      "exists": true,
-      "url": "https://en.wikipedia.org/wiki/The%20Wonderful%20Wizard%20of%20Oz",
-      "title": "The Wonderful Wizard of Oz"
-    },
-    "The Call of the Wild by Jack London by Unknown": {
-      "exists": true,
-      "url": "https://en.wikipedia.org/wiki/The%20Call%20of%20the%20Wild",
-      "title": "The Call of the Wild"
-    },
-    "The Scarlet Letter by Nathaniel Hawthorne by Unknown": {
-      "exists": true,
-      "url": "https://en.wikipedia.org/wiki/The%20Scarlet%20Letter",
-      "title": "The Scarlet Letter"
-    },
-    "Jane Eyre by Charlotte Brontë by Unknown": {
-      "exists": true,
-      "url": "https://en.wikipedia.org/wiki/Jane%20Eyre",
-      "title": "Jane Eyre"
-    },
-    "Hamlet by William Shakespeare": {
-      "exists": true,
-      "url": "https://en.wikipedia.org/wiki/Ur-Hamlet",
-      "title": "Ur-Hamlet"
-    },
-    "A Midsummer Night's Dream by William Shakespeare": {
-      "exists": true,
-      "url": "https://en.wikipedia.org/wiki/Puck%20(A%20Midsummer%20Night's%20Dream)",
-      "title": "Puck (A Midsummer Night's Dream)"
-    },
-    "Macbeth by William Shakespeare": {
-      "exists": true,
-      "url": "https://en.wikipedia.org/wiki/Macbeth%20on%20screen",
-      "title": "Macbeth on screen"
-    },
-    "Romeo and Juliet by William Shakespeare": {
-      "exists": true,
-      "url": "https://en.wikipedia.org/wiki/Juliet%20%26%20Romeo%20(film)",
-      "title": "Juliet & Romeo (film)"
-    },
-    "Ulysses by James Joyce": {
-      "exists": true,
-      "url": "https://en.wikipedia.org/wiki/Ulysses_(novel)",
-      "title": "Ulysses (novel)"
-    },
-    "Pride and Prejudice by Jane Austen": {
-      "exists": true,
-      "url": "https://en.wikipedia.org/wiki/Pride%20and%20Prejudice",
-      "title": "Pride and Prejudice"
-    },
-    "1984 by George Orwell": {
-      "exists": true,
-      "url": "https://en.wikipedia.org/wiki/Nineteen_Eighty-Four",
-      "title": "Nineteen Eighty-Four"
-    },
-    "The Great Gatsby by F. Scott Fitzgerald": {
-      "exists": true,
-      "url": "https://en.wikipedia.org/wiki/The%20Great%20Gatsby",
-      "title": "The Great Gatsby"
-    },
-    "Moby Dick by Herman Melville": {
-      "exists": true,
-      "url": "https://en.wikipedia.org/wiki/Moby%20Dick%20(whale)",
-      "title": "Moby Dick (whale)"
     },
     "War and Peace by Leo Tolstoy": {
       "exists": true,
       "url": "https://en.wikipedia.org/wiki/War%20and%20Peace",
       "title": "War and Peace"
+    },
+    "The Waste Land by T. S. Eliot": {
+      "exists": true,
+      "url": "https://en.wikipedia.org/wiki/The%20Waste%20Land",
+      "title": "The Waste Land"
+    },
+    "The Wonderful Wizard of Oz by L. Frank Baum": {
+      "exists": true,
+      "url": "https://en.wikipedia.org/wiki/Adaptations%20of%20The%20Wonderful%20Wizard%20of%20Oz",
+      "title": "Adaptations of The Wonderful Wizard of Oz"
+    },
+    "The Call of the Wild by Jack London": {
+      "exists": true,
+      "url": "https://en.wikipedia.org/wiki/The%20Call%20of%20the%20Wild",
+      "title": "The Call of the Wild"
+    },
+    "The Scarlet Letter by Nathaniel Hawthorne": {
+      "exists": true,
+      "url": "https://en.wikipedia.org/wiki/The%20Scarlet%20Letter",
+      "title": "The Scarlet Letter"
+    },
+    "Jane Eyre by Charlotte Brontë": {
+      "exists": true,
+      "url": "https://en.wikipedia.org/wiki/Jane%20Eyre",
+      "title": "Jane Eyre"
     }
   },
-  "generatedAt": "2025-09-08T14:33:06.369Z"
+  "generatedAt": "2025-09-08T20:34:44.119Z"
 }

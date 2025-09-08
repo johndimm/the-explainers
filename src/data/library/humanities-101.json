@@ -1,0 +1,50 @@
+[
+  {
+    "id": "6130",
+    "title": "The Iliad",
+    "author": "Homer",
+    "directUrl": "https://www.gutenberg.org/files/6130/6130-0.txt",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Iliad",
+    "wikipediaTitle": "Iliad"
+  },
+  {
+    "id": "1727",
+    "title": "The Odyssey",
+    "author": "Homer",
+    "directUrl": "https://www.gutenberg.org/files/1727/1727-0.txt",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Odyssey",
+    "wikipediaTitle": "Odyssey"
+  },
+  {
+    "id": "2707",
+    "title": "The History of Herodotus",
+    "author": "Herodotus",
+    "directUrl": "https://www.gutenberg.org/files/2707/2707-0.txt",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Herodotus",
+    "wikipediaTitle": "Herodotus"
+  },
+  {
+    "id": "7142",
+    "title": "History of the Peloponnesian War",
+    "author": "Thucydides",
+    "directUrl": "https://www.gutenberg.org/files/7142/7142-0.txt",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/History_of_the_Peloponnesian_War",
+    "wikipediaTitle": "History of the Peloponnesian War"
+  },
+  {
+    "id": "14484",
+    "title": "The Oresteia",
+    "author": "Aeschylus",
+    "directUrl": "https://www.gutenberg.org/files/14484/14484-0.txt",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Oresteia",
+    "wikipediaTitle": "Oresteia"
+  },
+  {
+    "id": "14484",
+    "title": "Prometheus Bound",
+    "author": "Aeschylus",
+    "directUrl": "https://www.gutenberg.org/files/14484/14484-0.txt",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Prometheus_Bound",
+    "wikipediaTitle": "Prometheus Bound"
+  }
+]

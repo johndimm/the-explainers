@@ -110,9 +110,20 @@ interface WikipediaData {
 async function generateWikipediaData(): Promise<WikipediaData> {
   console.log('🔍 Generating Wikipedia data...')
   
+  // Try to load existing data first
+  let existingData: WikipediaData | null = null
+  try {
+    const existingDataPath = join(process.cwd(), 'src', 'data', 'wikipedia-data.json')
+    const existingDataContent = readFileSync(existingDataPath, 'utf-8')
+    existingData = JSON.parse(existingDataContent)
+    console.log('📂 Loaded existing Wikipedia data')
+  } catch (error) {
+    console.log('📂 No existing data found, starting fresh')
+  }
+  
   const data: WikipediaData = {
-    people: {},
-    books: {},
+    people: existingData?.people || {},
+    books: existingData?.books || {},
     generatedAt: new Date().toISOString()
   }
 
@@ -121,6 +132,12 @@ async function generateWikipediaData(): Promise<WikipediaData> {
   const allStyles = Object.values(STYLE_CATEGORIES).flat()
   
   for (const style of allStyles) {
+    // Skip if we already have data for this person
+    if (data.people[style.name]) {
+      console.log(`  ⏭️  Skipping ${style.name} (already exists)`)
+      continue
+    }
+    
     const searchTerm = getPersonWikipediaSearchTerm(style.name)
     console.log(`  Checking: ${style.name} (${searchTerm})`)
     
@@ -147,6 +164,13 @@ async function generateWikipediaData(): Promise<WikipediaData> {
       const author = book.author || (filename === 'shakespeare.json' ? 'William Shakespeare' : 'Unknown')
       const searchTerm = getBookWikipediaSearchTerm(book.title, author)
       const key = `${book.title} by ${author}`
+      
+      // Skip if we already have data for this book
+      if (data.books[key]) {
+        console.log(`  ⏭️  Skipping ${key} (already exists)`)
+        continue
+      }
+      
       console.log(`  Checking: ${key} (${searchTerm})`)
       
       try {
@@ -168,6 +192,16 @@ async function generateWikipediaData(): Promise<WikipediaData> {
 
 async function main() {
   try {
+    // Load existing data for comparison
+    let existingData: WikipediaData | null = null
+    try {
+      const existingDataPath = join(process.cwd(), 'src', 'data', 'wikipedia-data.json')
+      const existingDataContent = readFileSync(existingDataPath, 'utf-8')
+      existingData = JSON.parse(existingDataContent)
+    } catch (error) {
+      // No existing data
+    }
+    
     const data = await generateWikipediaData()
     
     // Save to file
@@ -189,6 +223,12 @@ async function main() {
     console.log(`   People: ${Object.values(data.people).filter(p => p.exists).length}/${Object.keys(data.people).length} have Wikipedia pages`)
     console.log(`   Books: ${Object.values(data.books).filter(b => b.exists).length}/${Object.keys(data.books).length} have Wikipedia pages`)
     console.log(`🕒 Generated at: ${data.generatedAt}`)
+    
+    if (existingData) {
+      const newPeople = Object.keys(data.people).length - Object.keys(existingData.people).length
+      const newBooks = Object.keys(data.books).length - Object.keys(existingData.books).length
+      console.log(`🆕 New entries: ${newPeople} people, ${newBooks} books`)
+    }
     
   } catch (error) {
     console.error('❌ Error generating Wikipedia data:', error)
