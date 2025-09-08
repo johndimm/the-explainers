@@ -237,12 +237,14 @@ export const ProfileProvider: React.FC<ProfileProviderProps> = ({ children }) =>
   }
 
   const useExplanation = (bookTitle: string, author: string, useCustomLLM: boolean) => {
+    console.log('ProfileContext: useExplanation called with:', { bookTitle, author, useCustomLLM })
     if (!canUseExplanation(bookTitle, author, useCustomLLM)) {
       return false
     }
 
     setProfile(prev => {
       const bookKey = getBookKey(bookTitle, author)
+      console.log('ProfileContext: Generated bookKey:', bookKey, 'from:', { bookTitle, author })
       const bookExplanations = prev.bookExplanations?.[bookKey] || 0
       
       let newProfile = { ...prev }
