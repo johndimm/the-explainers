@@ -7,8 +7,33 @@ export async function GET(request: NextRequest) {
   try {
     const session = await getServerSession(authOptions)
     
-    if (!session?.user?.email) {
+    // In local development, bypass authentication
+    const isLocalDev = process.env.NODE_ENV === 'development'
+    
+    if (!session?.user?.email && !isLocalDev) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
+    }
+    
+    if (isLocalDev && !session?.user?.email) {
+      // Return mock profile for local development
+      const mockProfile = {
+        email: 'local-dev@example.com',
+        age: null,
+        language: 'english',
+        education_level: 'high-school',
+        first_login: new Date(),
+        total_explanations: 0,
+        today_explanations: 0,
+        available_credits: 100,
+        book_explanations: {},
+        purchased_books: [],
+        purchased_book_details: {},
+        has_unlimited_access: true,
+        unlimited_access_expiry: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000),
+        created_at: new Date(),
+        updated_at: new Date()
+      }
+      return NextResponse.json(mockProfile)
     }
 
     const profile = await getUserProfile(session.user.email)
@@ -28,8 +53,34 @@ export async function POST(request: NextRequest) {
   try {
     const session = await getServerSession(authOptions)
     
-    if (!session?.user?.email) {
+    // In local development, bypass authentication
+    const isLocalDev = process.env.NODE_ENV === 'development'
+    
+    if (!session?.user?.email && !isLocalDev) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
+    }
+    
+    if (isLocalDev && !session?.user?.email) {
+      // In local dev, just return the mock profile without saving
+      console.log('Profile API: Local development mode - ignoring profile updates')
+      const mockProfile = {
+        email: 'local-dev@example.com',
+        age: null,
+        language: 'english',
+        education_level: 'high-school',
+        first_login: new Date(),
+        total_explanations: 0,
+        today_explanations: 0,
+        available_credits: 100,
+        book_explanations: {},
+        purchased_books: [],
+        purchased_book_details: {},
+        has_unlimited_access: true,
+        unlimited_access_expiry: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000),
+        created_at: new Date(),
+        updated_at: new Date()
+      }
+      return NextResponse.json(mockProfile)
     }
 
     const body = await request.json()

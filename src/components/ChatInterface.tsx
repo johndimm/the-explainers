@@ -1286,102 +1286,108 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ selectedText, contextInfo
             </div>
           </div>
           <div className={styles.headerControls}>
-            <div className={styles.providerSelector}>
-              <div className={styles.dropdownLabel}>
-                <span>AI Model</span>
-                <span 
-                  className={styles.helpIcon} 
-                  onClick={() => setShowHelpPopup('ai-model')}
-                  title="Click for more info"
-                >?</span>
+            {/* Dropdowns Row */}
+            <div className={styles.dropdownsRow}>
+              <div className={styles.providerSelector}>
+                <div className={styles.dropdownLabel}>
+                  <span>AI Model</span>
+                  <span 
+                    className={styles.helpIcon} 
+                    onClick={() => setShowHelpPopup('ai-model')}
+                    title="Click for more info"
+                  >?</span>
+                </div>
+                <select 
+                  value={selectedProvider} 
+                  onChange={(e) => setSelectedProvider(e.target.value as LLMProvider)}
+                  className={styles.providerSelect}
+                  disabled={isLoading}
+                >
+                  <option value="anthropic">Claude 3.5 Sonnet</option>
+                  <option value="openai">GPT-4 (OpenAI)</option>
+                  <option value="deepseek">DeepSeek Chat</option>
+                  <option value="gemini">Gemini 2.5 Flash</option>
+                </select>
               </div>
-              <select 
-                value={selectedProvider} 
-                onChange={(e) => setSelectedProvider(e.target.value as LLMProvider)}
-                className={styles.providerSelect}
-                disabled={isLoading}
-              >
-                <option value="anthropic">Claude 3.5 Sonnet</option>
-                <option value="openai">GPT-4 (OpenAI)</option>
-                <option value="deepseek">DeepSeek Chat</option>
-                <option value="gemini">Gemini 2.5 Flash</option>
-              </select>
+              <div className={styles.styleSelector}>
+                <div className={styles.dropdownLabel}>
+                  <span>Explanation Style</span>
+                  <span 
+                    className={styles.helpIcon} 
+                    onClick={() => setShowHelpPopup('style')}
+                    title="Click for more info"
+                  >?</span>
+                </div>
+                <div 
+                  ref={styleMenuRef}
+                  className={`${styles.customSelect} ${isLoading ? styles.disabled : ''}`}
+                  onClick={() => { if (!isLoading) setShowStyleMenu(!showStyleMenu) }}
+                  role="button"
+                  aria-haspopup="listbox"
+                  aria-expanded={showStyleMenu}
+                  tabIndex={0}
+                  onKeyDown={(e) => { if ((e.key === 'Enter' || e.key === ' ') && !isLoading) { e.preventDefault(); setShowStyleMenu(!showStyleMenu) } }}
+                >
+                  <span className={styles.customSelectLabel}>{getAllStyles().find(s => s.value === currentStyle)?.name || 'Neutral'}</span>
+                  <span className={styles.customSelectCaret}>▾</span>
+                  {showStyleMenu && (
+                    <div className={styles.customMenu} role="listbox">
+                      {getAllStyles().map((style) => (
+                        <div
+                          key={style.value}
+                          role="option"
+                          aria-selected={currentStyle === style.value}
+                          className={`${styles.customOption} ${currentStyle === style.value ? styles.selectedOption : ''}`}
+                          onClick={(e) => { e.stopPropagation(); setCurrentStyle(style.value as ExplanationStyle); setShowStyleMenu(false) }}
+                        >
+                          {style.name}
+                        </div>
+                      ))}
+                    </div>
+                  )}
+                </div>
+              </div>
+              <div className={styles.lengthSelector}>
+                <div className={styles.dropdownLabel}>
+                  <span>Response Length</span>
+                  <span 
+                    className={styles.helpIcon} 
+                    onClick={() => setShowHelpPopup('length')}
+                    title="Click for more info"
+                  >?</span>
+                </div>
+                <select 
+                  value={currentResponseLength} 
+                  onChange={(e) => setCurrentResponseLength(e.target.value as ResponseLength)}
+                  className={styles.lengthSelect}
+                  disabled={isLoading}
+                >
+                  <option value="brief">Brief</option>
+                  <option value="medium">Medium</option>
+                  <option value="long">Long</option>
+                </select>
+              </div>
             </div>
-            <div className={styles.styleSelector}>
-              <div className={styles.dropdownLabel}>
-                <span>Explanation Style</span>
-                <span 
-                  className={styles.helpIcon} 
-                  onClick={() => setShowHelpPopup('style')}
-                  title="Click for more info"
-                >?</span>
-              </div>
-              <div 
-                ref={styleMenuRef}
-                className={`${styles.customSelect} ${isLoading ? styles.disabled : ''}`}
-                onClick={() => { if (!isLoading) setShowStyleMenu(!showStyleMenu) }}
-                role="button"
-                aria-haspopup="listbox"
-                aria-expanded={showStyleMenu}
-                tabIndex={0}
-                onKeyDown={(e) => { if ((e.key === 'Enter' || e.key === ' ') && !isLoading) { e.preventDefault(); setShowStyleMenu(!showStyleMenu) } }}
-              >
-                <span className={styles.customSelectLabel}>{getAllStyles().find(s => s.value === currentStyle)?.name || 'Neutral'}</span>
-                <span className={styles.customSelectCaret}>▾</span>
-                {showStyleMenu && (
-                  <div className={styles.customMenu} role="listbox">
-                    {getAllStyles().map((style) => (
-                      <div
-                        key={style.value}
-                        role="option"
-                        aria-selected={currentStyle === style.value}
-                        className={`${styles.customOption} ${currentStyle === style.value ? styles.selectedOption : ''}`}
-                        onClick={(e) => { e.stopPropagation(); setCurrentStyle(style.value as ExplanationStyle); setShowStyleMenu(false) }}
-                      >
-                        {style.name}
-                      </div>
-                    ))}
-                  </div>
-                )}
-              </div>
-            </div>
-            <div className={styles.lengthSelector}>
-              <div className={styles.dropdownLabel}>
-                <span>Response Length</span>
-                <span 
-                  className={styles.helpIcon} 
-                  onClick={() => setShowHelpPopup('length')}
-                  title="Click for more info"
-                >?</span>
-              </div>
-              <select 
-                value={currentResponseLength} 
-                onChange={(e) => setCurrentResponseLength(e.target.value as ResponseLength)}
-                className={styles.lengthSelect}
-                disabled={isLoading}
-              >
-                <option value="brief">Brief</option>
-                <option value="medium">Medium</option>
-                <option value="long">Long</option>
-              </select>
-            </div>
-            <button 
-              onClick={() => handleReExplain(originalSelectedText || selectedText)}
-              disabled={isLoading || (!originalSelectedText && !selectedText && !hasChanges)}
-              className={styles.reexplainButton}
-              title={`Re-explain in selected style${(!originalSelectedText && !selectedText && !hasChanges) ? ' (no text available)' : ''}${hasChanges ? ' (settings changed)' : ''}`}
-            >
-              Re-explain{hasChanges ? ' *' : ''}
-            </button>
-            <div className={styles.saveDropdown} ref={saveDropdownRef}>
+            
+            {/* Buttons Row */}
+            <div className={styles.buttonsRow}>
               <button 
-                onClick={() => setSaveFormatDropdownOpen(!saveFormatDropdownOpen)}
-                disabled={messages.length === 0}
-                className={styles.saveButton}
-                title="Save chat history to file (includes book context, AI responses, and settings)"
+                onClick={() => handleReExplain(originalSelectedText || selectedText)}
+                disabled={isLoading || (!originalSelectedText && !selectedText && !hasChanges)}
+                className={styles.reexplainButton}
+                title={`Re-explain in selected style${(!originalSelectedText && !selectedText && !hasChanges) ? ' (no text available)' : ''}${hasChanges ? ' (settings changed)' : ''}`}
               >
-                💾 Save Chat ▼
+                Re-explain{hasChanges ? ' *' : ''}
               </button>
+              <div className={styles.saveDropdown} ref={saveDropdownRef}>
+                <button 
+                  onClick={() => setSaveFormatDropdownOpen(!saveFormatDropdownOpen)}
+                  disabled={messages.length === 0}
+                  className={styles.saveButton}
+                  title="Save chat history to file (includes book context, AI responses, and settings)"
+                >
+                  💾 Save Chat ▼
+                </button>
               {saveFormatDropdownOpen && (
                 <div className={styles.saveDropdownContent}>
                   <button 
@@ -1420,6 +1426,7 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ selectedText, contextInfo
               🗑️ Clear History
             </button>
             {/* Share button moved to inline with each response */}
+            </div>
           </div>
 {!isPageMode && <button onClick={onClose} className={styles.closeButton}>×</button>}
         </div>

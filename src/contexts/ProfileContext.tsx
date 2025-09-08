@@ -51,10 +51,28 @@ export const ProfileProvider: React.FC<ProfileProviderProps> = ({ children }) =>
     const loadProfile = async () => {
       if (status === 'loading') return
       
-      if (!session?.user?.email) {
-        // Not authenticated, use default profile
+      // In local development, bypass authentication
+      const isLocalDev = process.env.NODE_ENV === 'development' && typeof window !== 'undefined' && window.location.hostname === 'localhost'
+      
+      if (!session?.user?.email && !isLocalDev) {
+        // Not authenticated and not local dev, use default profile
         console.log('ProfileContext: Not authenticated, using default profile')
         setProfile(DEFAULT_PROFILE)
+        setIsHydrated(true)
+        return
+      }
+      
+      if (isLocalDev && !session?.user?.email) {
+        // Local dev without auth - use a mock profile
+        console.log('ProfileContext: Local development mode - using mock profile')
+        const mockProfile = {
+          ...DEFAULT_PROFILE,
+          firstLogin: new Date(),
+          availableCredits: 100, // Give some credits for testing
+          hasUnlimitedAccess: true,
+          unlimitedAccessExpiry: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000) // 30 days
+        }
+        setProfile(mockProfile)
         setIsHydrated(true)
         return
       }
@@ -91,6 +109,12 @@ export const ProfileProvider: React.FC<ProfileProviderProps> = ({ children }) =>
           
           console.log('ProfileContext: Restoring profile from database:', profileData)
           console.log('ProfileContext: Credits from database:', profileData.availableCredits)
+          console.log('ProfileContext: Unlimited access from database:', {
+            hasUnlimitedAccess: profileData.hasUnlimitedAccess,
+            unlimitedAccessExpiry: profileData.unlimitedAccessExpiry,
+            raw_has_unlimited_access: dbProfile.has_unlimited_access,
+            raw_unlimited_access_expiry: dbProfile.unlimited_access_expiry
+          })
           console.log('ProfileContext: Full database response:', dbProfile)
           setProfile(profileData)
         } else {
@@ -176,6 +200,11 @@ export const ProfileProvider: React.FC<ProfileProviderProps> = ({ children }) =>
     console.log('ProfileContext: canUseExplanation called for:', bookTitle, 'by', author)
     console.log('ProfileContext: useCustomLLM:', useCustomLLM)
     console.log('ProfileContext: current profile:', profile)
+    console.log('ProfileContext: unlimited access check:', {
+      hasUnlimitedAccess: profile.hasUnlimitedAccess,
+      unlimitedAccessExpiry: profile.unlimitedAccessExpiry,
+      type: typeof profile.unlimitedAccessExpiry
+    })
     
     // Free if using custom LLM
     if (useCustomLLM) {
