@@ -81,7 +81,9 @@ export const ProfileProvider: React.FC<ProfileProviderProps> = ({ children }) =>
       
       try {
         // Load from database
-        console.log('ProfileContext: Loading profile from database for:', session.user.email)
+        if (session?.user?.email) {
+          console.log('ProfileContext: Loading profile from database for:', session.user.email)
+        }
         const response = await fetch('/api/user/profile')
         if (response.ok) {
           const dbProfile = await response.json()

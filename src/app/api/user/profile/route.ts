@@ -36,6 +36,10 @@ export async function GET(request: NextRequest) {
       return NextResponse.json(mockProfile)
     }
 
+    if (!session?.user?.email) {
+      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
+    }
+
     const profile = await getUserProfile(session.user.email)
     
     if (!profile) {
@@ -93,6 +97,10 @@ export async function POST(request: NextRequest) {
     console.log('Profile API: Provided fields:', providedFields)
     console.log('Profile API: Body:', body)
     
+    if (!session?.user?.email) {
+      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
+    }
+
     let profile
     if (isPartialUpdate) {
       // Use partial update to preserve existing fields
