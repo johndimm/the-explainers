@@ -2,67 +2,93 @@
   {
     "id": "15462",
     "title": "Alcools",
-    "author": "Apollinaire"
+    "author": "Apollinaire",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Alcools",
+    "wikipediaTitle": "Alcools"
   },
   {
     "id": "22356",
     "title": "L'hérésiarque et Cie",
-    "author": "Apollinaire"
+    "author": "Apollinaire",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Guillaume%20Apollinaire",
+    "wikipediaTitle": "Guillaume Apollinaire"
   },
   {
     "id": "55533",
     "title": "Le flâneur des deux rives",
-    "author": "Apollinaire"
+    "author": "Apollinaire",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Guillaume%20Apollinaire",
+    "wikipediaTitle": "Guillaume Apollinaire"
   },
   {
     "id": "55569",
     "title": "Calligrammes: Poèmes de la paix et de la guerre (1913-1916)",
-    "author": "Apollinaire"
+    "author": "Apollinaire",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Calligrammes",
+    "wikipediaTitle": "Calligrammes"
   },
   {
     "id": "55638",
     "title": "Les Peintres Cubistes: [Méditations Esthétiques]",
-    "author": "Apollinaire"
+    "author": "Apollinaire",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Orphism%20(art)",
+    "wikipediaTitle": "Orphism (art)"
   },
   {
     "id": "56645",
     "title": "Le poète assassiné",
-    "author": "Apollinaire"
+    "author": "Apollinaire",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Guillaume%20Apollinaire",
+    "wikipediaTitle": "Guillaume Apollinaire"
   },
   {
     "id": "58154",
     "title": "La femme assise",
-    "author": "Apollinaire"
+    "author": "Apollinaire",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Pablo%20Picasso",
+    "wikipediaTitle": "Pablo Picasso"
   },
   {
     "id": "6099",
     "title": "Les Fleurs du Mal",
-    "author": "Baudelaire"
+    "author": "Baudelaire",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Les%20Fleurs%20du%20mal",
+    "wikipediaTitle": "Les Fleurs du mal"
   },
   {
     "id": "13792",
     "title": "Journaux intimes",
-    "author": "Baudelaire"
+    "author": "Baudelaire",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Journaux",
+    "wikipediaTitle": "Journaux"
   },
   {
     "id": "26710",
     "title": "Les épaves",
-    "author": "Baudelaire"
+    "author": "Baudelaire",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Les%20Fleurs%20du%20mal",
+    "wikipediaTitle": "Les Fleurs du mal"
   },
   {
     "id": "54456",
     "title": "De l'amour",
-    "author": "Baudelaire"
+    "author": "Baudelaire",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Christine%20Jordis",
+    "wikipediaTitle": "Christine Jordis"
   },
   {
     "id": "61565",
     "title": "L'Oeuvre Poètique: Les Fleurs du Mal",
-    "author": "Baudelaire"
+    "author": "Baudelaire",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Charvet",
+    "wikipediaTitle": "Charvet"
   },
   {
     "id": "56668",
     "title": "Une saison en enfer",
-    "author": "Rimbaud"
+    "author": "Rimbaud",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/A%20Season%20in%20Hell",
+    "wikipediaTitle": "A Season in Hell"
   },
   {
     "id": "73889",
@@ -72,7 +98,9 @@
   {
     "id": "20568",
     "title": "Hombres (Hommes)",
-    "author": "Verlaine"
+    "author": "Verlaine",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Martin%20van%20Ma%C3%ABle",
+    "wikipediaTitle": "Martin van Maële"
   },
   {
     "id": "18543",
@@ -82,22 +110,30 @@
   {
     "id": "9980",
     "title": "Platero y yo",
-    "author": "Jiménez"
+    "author": "Jiménez",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Platero%20and%20I",
+    "wikipediaTitle": "Platero and I"
   },
   {
     "id": "28927",
     "title": "La bodega",
-    "author": "Blasco Ibáñez"
+    "author": "Blasco Ibáñez",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Vicente%20Blasco%20Ib%C3%A1%C3%B1ez",
+    "wikipediaTitle": "Vicente Blasco Ibáñez"
   },
   {
     "id": "39209",
     "title": "Platero y yo",
-    "author": "Jiménez"
+    "author": "Jiménez",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Platero%20and%20I",
+    "wikipediaTitle": "Platero and I"
   },
   {
     "id": "41746",
     "title": "Flor de mayo",
-    "author": "Blasco Ibáñez"
+    "author": "Blasco Ibáñez",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Vicente%20Blasco%20Ib%C3%A1%C3%B1ez",
+    "wikipediaTitle": "Vicente Blasco Ibáñez"
   },
   {
     "id": "49437",
@@ -107,127 +143,177 @@
   {
     "id": "68525",
     "title": "Poesías completas",
-    "author": "Machado"
+    "author": "Machado",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Antonio%20Machado",
+    "wikipediaTitle": "Antonio Machado"
   },
   {
     "id": "72665",
     "title": "Romancero gitano",
-    "author": "García Lorca"
+    "author": "García Lorca",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Romancero%20gitano",
+    "wikipediaTitle": "Romancero gitano"
   },
   {
     "id": "75703",
     "title": "Libro de poemas",
-    "author": "García Lorca"
+    "author": "García Lorca",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Federico%20Garc%C3%ADa%20Lorca",
+    "wikipediaTitle": "Federico García Lorca"
   },
   {
     "id": "2054",
     "title": "Iphigenie auf Tauris",
-    "author": "Goethe"
+    "author": "Goethe",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Iphigenia%20in%20Tauris%20(Goethe)",
+    "wikipediaTitle": "Iphigenia in Tauris (Goethe)"
   },
   {
     "id": "2146",
     "title": "Egmont",
-    "author": "Goethe"
+    "author": "Goethe",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Egmont%20(play)",
+    "wikipediaTitle": "Egmont (play)"
   },
   {
     "id": "2188",
     "title": "Die Aufzeichnungen des Malte Laurids Brigge",
-    "author": "Rilke"
+    "author": "Rilke",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/The%20Notebooks%20of%20Malte%20Laurids%20Brigge",
+    "wikipediaTitle": "The Notebooks of Malte Laurids Brigge"
   },
   {
     "id": "2228",
     "title": "Reineke Fuchs",
-    "author": "Goethe"
+    "author": "Goethe",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Johann%20Wolfgang%20von%20Goethe",
+    "wikipediaTitle": "Johann Wolfgang von Goethe"
   },
   {
     "id": "2229",
     "title": "Faust: Der Tragödie erster Teil",
-    "author": "Goethe"
+    "author": "Goethe",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Faust%2C%20Part%20One",
+    "wikipediaTitle": "Faust, Part One"
   },
   {
     "id": "2230",
     "title": "Faust: Der Tragödie zweiter Teil",
-    "author": "Goethe"
+    "author": "Goethe",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Faust%2C%20Part%20Two",
+    "wikipediaTitle": "Faust, Part Two"
   },
   {
     "id": "2312",
     "title": "Hermann und Dorothea",
-    "author": "Goethe"
+    "author": "Goethe",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Hermann%20and%20Dorothea",
+    "wikipediaTitle": "Hermann and Dorothea"
   },
   {
     "id": "2319",
     "title": "West-östlicher Divan",
-    "author": "Goethe"
+    "author": "Goethe",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/West%E2%80%93%C3%B6stlicher%20Divan",
+    "wikipediaTitle": "West–östlicher Divan"
   },
   {
     "id": "2320",
     "title": "Novelle",
-    "author": "Goethe"
+    "author": "Goethe",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Johann%20Wolfgang%20von%20Goethe",
+    "wikipediaTitle": "Johann Wolfgang von Goethe"
   },
   {
     "id": "2321",
     "title": "Götz von Berlichingen mit der eisernen Hand: Ein Schauspiel",
-    "author": "Goethe"
+    "author": "Goethe",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Friedrich%20Maximilian%20von%20Klinger",
+    "wikipediaTitle": "Friedrich Maximilian von Klinger"
   },
   {
     "id": "2335",
     "title": "Wilhelm Meisters Lehrjahre — Band 1",
-    "author": "Goethe"
+    "author": "Goethe",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Wilhelm%20Meister's%20Apprenticeship",
+    "wikipediaTitle": "Wilhelm Meister's Apprenticeship"
   },
   {
     "id": "2336",
     "title": "Wilhelm Meisters Lehrjahre — Band 2",
-    "author": "Goethe"
+    "author": "Goethe",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Wilhelm%20Meister's%20Apprenticeship",
+    "wikipediaTitle": "Wilhelm Meister's Apprenticeship"
   },
   {
     "id": "2337",
     "title": "Wilhelm Meisters Lehrjahre — Band 3",
-    "author": "Goethe"
+    "author": "Goethe",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Wilhelm%20Meister's%20Apprenticeship",
+    "wikipediaTitle": "Wilhelm Meister's Apprenticeship"
   },
   {
     "id": "2338",
     "title": "Wilhelm Meisters Lehrjahre — Band 4",
-    "author": "Goethe"
+    "author": "Goethe",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Wilhelm%20Meister's%20Apprenticeship",
+    "wikipediaTitle": "Wilhelm Meister's Apprenticeship"
   },
   {
     "id": "2339",
     "title": "Wilhelm Meisters Lehrjahre — Band 5",
-    "author": "Goethe"
+    "author": "Goethe",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Wilhelm%20Meister's%20Apprenticeship",
+    "wikipediaTitle": "Wilhelm Meister's Apprenticeship"
   },
   {
     "id": "2340",
     "title": "Wilhelm Meisters Lehrjahre — Band 6",
-    "author": "Goethe"
+    "author": "Goethe",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Wilhelm%20Meister's%20Apprenticeship",
+    "wikipediaTitle": "Wilhelm Meister's Apprenticeship"
   },
   {
     "id": "2341",
     "title": "Wilhelm Meisters Lehrjahre — Band 7",
-    "author": "Goethe"
+    "author": "Goethe",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Wilhelm%20Meister's%20Apprenticeship",
+    "wikipediaTitle": "Wilhelm Meister's Apprenticeship"
   },
   {
     "id": "2342",
     "title": "Wilhelm Meisters Lehrjahre — Band 8",
-    "author": "Goethe"
+    "author": "Goethe",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Wilhelm%20Meister's%20Apprenticeship",
+    "wikipediaTitle": "Wilhelm Meister's Apprenticeship"
   },
   {
     "id": "2402",
     "title": "Briefe aus der Schweiz",
-    "author": "Goethe"
+    "author": "Goethe",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Clemens%20Brentano",
+    "wikipediaTitle": "Clemens Brentano"
   },
   {
     "id": "2403",
     "title": "Die Wahlverwandtschaften",
-    "author": "Goethe"
+    "author": "Goethe",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Elective%20Affinities",
+    "wikipediaTitle": "Elective Affinities"
   },
   {
     "id": "2404",
     "title": "Italienische Reise — Band 1",
-    "author": "Goethe"
+    "author": "Goethe",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Memoirs%20of%20a%20Good-for-Nothing",
+    "wikipediaTitle": "Memoirs of a Good-for-Nothing"
   },
   {
     "id": "2405",
     "title": "Italienische Reise — Band 2",
-    "author": "Goethe"
+    "author": "Goethe",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Memoirs%20of%20a%20Good-for-Nothing",
+    "wikipediaTitle": "Memoirs of a Good-for-Nothing"
   },
   {
     "id": "2406",
@@ -237,42 +323,58 @@
   {
     "id": "2407",
     "title": "Die Leiden des jungen Werther — Band 1",
-    "author": "Goethe"
+    "author": "Goethe",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Sophie%20von%20La%20Roche",
+    "wikipediaTitle": "Sophie von La Roche"
   },
   {
     "id": "2408",
     "title": "Die Leiden des jungen Werther — Band 2",
-    "author": "Goethe"
+    "author": "Goethe",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Sophie%20von%20La%20Roche",
+    "wikipediaTitle": "Sophie von La Roche"
   },
   {
     "id": "2409",
     "title": "Wilhelm Meisters Wanderjahre — Band 1",
-    "author": "Goethe"
+    "author": "Goethe",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Wilhelm%20Meister's%20Apprenticeship",
+    "wikipediaTitle": "Wilhelm Meister's Apprenticeship"
   },
   {
     "id": "2410",
     "title": "Wilhelm Meisters Wanderjahre — Band 2",
-    "author": "Goethe"
+    "author": "Goethe",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Wilhelm%20Meister's%20Apprenticeship",
+    "wikipediaTitle": "Wilhelm Meister's Apprenticeship"
   },
   {
     "id": "2411",
     "title": "Wilhelm Meisters Wanderjahre — Band 3",
-    "author": "Goethe"
+    "author": "Goethe",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Wilhelm%20Meister's%20Apprenticeship",
+    "wikipediaTitle": "Wilhelm Meister's Apprenticeship"
   },
   {
     "id": "2420",
     "title": "Unterhaltungen deutscher Ausgewanderten",
-    "author": "Goethe"
+    "author": "Goethe",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/The%20German%20Refugees",
+    "wikipediaTitle": "The German Refugees"
   },
   {
     "id": "3498",
     "title": "Buch der Lieder",
-    "author": "Heine"
+    "author": "Heine",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Heinrich%20Heine",
+    "wikipediaTitle": "Heinrich Heine"
   },
   {
     "id": "5325",
     "title": "Römische Elegien",
-    "author": "Goethe"
+    "author": "Goethe",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Roman%20Elegies",
+    "wikipediaTitle": "Roman Elegies"
   },
   {
     "id": "5326",
@@ -282,27 +384,37 @@
   {
     "id": "5607",
     "title": "Romanzero",
-    "author": "Heine"
+    "author": "Heine",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Heinrich%20Heine",
+    "wikipediaTitle": "Heinrich Heine"
   },
   {
     "id": "5653",
     "title": "Die Mitschuldigen",
-    "author": "Goethe"
+    "author": "Goethe",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Johann%20Wolfgang%20von%20Goethe",
+    "wikipediaTitle": "Johann Wolfgang von Goethe"
   },
   {
     "id": "6079",
     "title": "Deutschland. Ein Wintermärchen",
-    "author": "Heine"
+    "author": "Heine",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Germany.%20A%20Winter's%20Tale",
+    "wikipediaTitle": "Germany. A Winter's Tale"
   },
   {
     "id": "6383",
     "title": "Die Jungfrau von Orleans",
-    "author": "Schiller"
+    "author": "Schiller",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/The%20Maid%20of%20Orleans%20(play)",
+    "wikipediaTitle": "The Maid of Orleans (play)"
   },
   {
     "id": "6496",
     "title": "Die Braut von Messina",
-    "author": "Schiller"
+    "author": "Schiller",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/The%20Bride%20of%20Messina",
+    "wikipediaTitle": "The Bride of Messina"
   },
   {
     "id": "6498",
@@ -317,42 +429,58 @@
   {
     "id": "6518",
     "title": "Wallensteins Lager",
-    "author": "Schiller"
+    "author": "Schiller",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Wallenstein%20(trilogy%20of%20plays)",
+    "wikipediaTitle": "Wallenstein (trilogy of plays)"
   },
   {
     "id": "6525",
     "title": "Die Piccolomini",
-    "author": "Schiller"
+    "author": "Schiller",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Friedrich%20Schiller",
+    "wikipediaTitle": "Friedrich Schiller"
   },
   {
     "id": "6549",
     "title": "Wallensteins Tod",
-    "author": "Schiller"
+    "author": "Schiller",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Wallenstein%20(trilogy%20of%20plays)",
+    "wikipediaTitle": "Wallenstein (trilogy of plays)"
   },
   {
     "id": "6649",
     "title": "Einige Gedichte",
-    "author": "Schiller"
+    "author": "Schiller",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Sturm%20und%20Drang",
+    "wikipediaTitle": "Sturm und Drang"
   },
   {
     "id": "6831",
     "title": "Oden",
-    "author": "Lessing"
+    "author": "Lessing",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Greg%20Oden",
+    "wikipediaTitle": "Greg Oden"
   },
   {
     "id": "7875",
     "title": "Römische Elegien",
-    "author": "Goethe"
+    "author": "Goethe",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Roman%20Elegies",
+    "wikipediaTitle": "Roman Elegies"
   },
   {
     "id": "7939",
     "title": "Die Huldigung der Künste",
-    "author": "Schiller"
+    "author": "Schiller",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Die%20Huldigung%20der%20K%C3%BCnste",
+    "wikipediaTitle": "Die Huldigung der Künste"
   },
   {
     "id": "8895",
     "title": "Auf der Universität Lore",
-    "author": "Storm"
+    "author": "Storm",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Mermaid",
+    "wikipediaTitle": "Mermaid"
   },
   {
     "id": "10353",
@@ -362,27 +490,37 @@
   {
     "id": "10426",
     "title": "Die natürliche Tochter",
-    "author": "Goethe"
+    "author": "Goethe",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Johann%20Wolfgang%20von%20Goethe%20bibliography",
+    "wikipediaTitle": "Johann Wolfgang von Goethe bibliography"
   },
   {
     "id": "10428",
     "title": "Die Aufgeregten",
-    "author": "Goethe"
+    "author": "Goethe",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Adolf%20Muschg",
+    "wikipediaTitle": "Adolf Muschg"
   },
   {
     "id": "17657",
     "title": "Belagerung von Mainz",
-    "author": "Goethe"
+    "author": "Goethe",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Johann%20Wolfgang%20von%20Goethe%20bibliography",
+    "wikipediaTitle": "Johann Wolfgang von Goethe bibliography"
   },
   {
     "id": "17664",
     "title": "Kampagne in Frankreich",
-    "author": "Goethe"
+    "author": "Goethe",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Johann%20Jost%20Textor",
+    "wikipediaTitle": "Johann Jost Textor"
   },
   {
     "id": "19794",
     "title": "Die Leiden des jungen Werther",
-    "author": "Goethe"
+    "author": "Goethe",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/The%20Sorrows%20of%20Young%20Werther",
+    "wikipediaTitle": "The Sorrows of Young Werther"
   },
   {
     "id": "20757",
@@ -392,32 +530,44 @@
   {
     "id": "21000",
     "title": "Faust: Eine Tragödie [erster Teil]",
-    "author": "Goethe"
+    "author": "Goethe",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Goethe's%20Faust",
+    "wikipediaTitle": "Goethe's Faust"
   },
   {
     "id": "24043",
     "title": "Die Weise von Liebe und Tod des Cornets Christoph Rilke",
-    "author": "Rilke"
+    "author": "Rilke",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Rainer%20Maria%20Rilke",
+    "wikipediaTitle": "Rainer Maria Rilke"
   },
   {
     "id": "24249",
     "title": "Die Harzreise",
-    "author": "Heine"
+    "author": "Heine",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Heinrich%20Heine",
+    "wikipediaTitle": "Heinrich Heine"
   },
   {
     "id": "24288",
     "title": "Das Stunden-Buch",
-    "author": "Rilke"
+    "author": "Rilke",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/The%20Book%20of%20Hours",
+    "wikipediaTitle": "The Book of Hours"
   },
   {
     "id": "27822",
     "title": "Zwei Prager Geschichten",
-    "author": "Rilke"
+    "author": "Rilke",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Jakub%20Schikaneder",
+    "wikipediaTitle": "Jakub Schikaneder"
   },
   {
     "id": "31199",
     "title": "Die Letzten",
-    "author": "Rilke"
+    "author": "Rilke",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/J.%20P.%20Stern",
+    "wikipediaTitle": "J. P. Stern"
   },
   {
     "id": "33328",
@@ -427,27 +577,37 @@
   {
     "id": "33821",
     "title": "Erste Gedichte",
-    "author": "Rilke"
+    "author": "Rilke",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Rainer%20Maria%20Rilke",
+    "wikipediaTitle": "Rainer Maria Rilke"
   },
   {
     "id": "33863",
     "title": "Neue Gedichte",
-    "author": "Rilke"
+    "author": "Rilke",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Rainer%20Maria%20Rilke",
+    "wikipediaTitle": "Rainer Maria Rilke"
   },
   {
     "id": "33864",
     "title": "Der Neuen Gedichte: Anderer Teil",
-    "author": "Rilke"
+    "author": "Rilke",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Rainer%20Maria%20Rilke",
+    "wikipediaTitle": "Rainer Maria Rilke"
   },
   {
     "id": "34521",
     "title": "Das Buch der Bilder",
-    "author": "Rilke"
+    "author": "Rilke",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Rainer%20Maria%20Rilke",
+    "wikipediaTitle": "Rainer Maria Rilke"
   },
   {
     "id": "38402",
     "title": "Geschichten vom lieben Gott",
-    "author": "Rilke"
+    "author": "Rilke",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Rainer%20Maria%20Rilke",
+    "wikipediaTitle": "Rainer Maria Rilke"
   },
   {
     "id": "39792",
@@ -457,17 +617,23 @@
   {
     "id": "40117",
     "title": "Das Marien-Leben",
-    "author": "Rilke"
+    "author": "Rilke",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Duino%20Elegies",
+    "wikipediaTitle": "Duino Elegies"
   },
   {
     "id": "43821",
     "title": "Hymnen an die Nacht / Die Christenheit oder Europa",
-    "author": "Novalis"
+    "author": "Novalis",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Novalis",
+    "wikipediaTitle": "Novalis"
   },
   {
     "id": "45569",
     "title": "Wanderbilder aus Central-Amerika. Skizzen eines deutschen Malers",
-    "author": "Heine"
+    "author": "Heine",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Wilhelm%20Heine",
+    "wikipediaTitle": "Wilhelm Heine"
   },
   {
     "id": "45600",
@@ -477,12 +643,16 @@
   {
     "id": "46021",
     "title": "Goethes Briefe an Leipziger Freunde",
-    "author": "Goethe"
+    "author": "Goethe",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Werner%20Heiduczek",
+    "wikipediaTitle": "Werner Heiduczek"
   },
   {
     "id": "47804",
     "title": "Die Räuber: Ein Schauspiel",
-    "author": "Schiller"
+    "author": "Schiller",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Sturm%20und%20Drang",
+    "wikipediaTitle": "Sturm und Drang"
   },
   {
     "id": "49024",
@@ -502,47 +672,65 @@
   {
     "id": "997",
     "title": "Divina Commedia di Dante: Inferno",
-    "author": "Dante Alighieri"
+    "author": "Dante Alighieri",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Dante%20Alighieri",
+    "wikipediaTitle": "Dante Alighieri"
   },
   {
     "id": "998",
     "title": "Divina Commedia di Dante: Purgatorio",
-    "author": "Dante Alighieri"
+    "author": "Dante Alighieri",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Dante%20Alighieri",
+    "wikipediaTitle": "Dante Alighieri"
   },
   {
     "id": "999",
     "title": "Divina Commedia di Dante: Paradiso",
-    "author": "Dante Alighieri"
+    "author": "Dante Alighieri",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Dante%20Alighieri",
+    "wikipediaTitle": "Dante Alighieri"
   },
   {
     "id": "1000",
     "title": "La Divina Commedia di Dante: Complete",
-    "author": "Dante Alighieri"
+    "author": "Dante Alighieri",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Dante%20Alighieri",
+    "wikipediaTitle": "Dante Alighieri"
   },
   {
     "id": "1009",
     "title": "La Divina Commedia di Dante: Inferno",
-    "author": "Dante Alighieri"
+    "author": "Dante Alighieri",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Dante%20Alighieri",
+    "wikipediaTitle": "Dante Alighieri"
   },
   {
     "id": "1010",
     "title": "La Divina Commedia di Dante: Purgatorio",
-    "author": "Dante Alighieri"
+    "author": "Dante Alighieri",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Dante%20Alighieri",
+    "wikipediaTitle": "Dante Alighieri"
   },
   {
     "id": "1011",
     "title": "La Divina Commedia di Dante: Paradiso",
-    "author": "Dante Alighieri"
+    "author": "Dante Alighieri",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Dante%20Alighieri",
+    "wikipediaTitle": "Dante Alighieri"
   },
   {
     "id": "1012",
     "title": "La Divina Commedia di Dante",
-    "author": "Dante Alighieri"
+    "author": "Dante Alighieri",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Dante%20Alighieri",
+    "wikipediaTitle": "Dante Alighieri"
   },
   {
     "id": "27825",
     "title": "Isaotta Guttadàuro ed altre poesie",
-    "author": "D'Annunzio"
+    "author": "D'Annunzio",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Enrico%20Coleman",
+    "wikipediaTitle": "Enrico Coleman"
   },
   {
     "id": "45594",
@@ -562,12 +750,16 @@
   {
     "id": "53223",
     "title": "Leopardi",
-    "author": "De Roberto"
+    "author": "De Roberto",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Roberto%20Leopardi",
+    "wikipediaTitle": "Roberto Leopardi"
   },
   {
     "id": "55236",
     "title": "I Canti",
-    "author": "Leopardi"
+    "author": "Leopardi",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Tre%20Canti%20di%20Leopardi",
+    "wikipediaTitle": "Tre Canti di Leopardi"
   },
   {
     "id": "58579",
@@ -582,242 +774,294 @@
   {
     "id": "71218",
     "title": "La vita nuova",
-    "author": "Dante Alighieri"
+    "author": "Dante Alighieri",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/La%20Vita%20Nuova",
+    "wikipediaTitle": "La Vita Nuova"
   },
   {
     "id": "20",
     "title": "Paradise Lost",
-    "author": "Milton"
+    "author": "John Milton"
   },
   {
     "id": "26",
     "title": "Paradise Lost",
-    "author": "Milton"
+    "author": "John Milton"
   },
   {
     "id": "58",
     "title": "Paradise Regained",
-    "author": "Milton"
+    "author": "John Milton"
   },
   {
     "id": "82",
     "title": "Ivanhoe: A Romance",
-    "author": "Scott"
+    "author": "Scott",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Ivanhoe",
+    "wikipediaTitle": "Ivanhoe"
   },
   {
     "id": "136",
     "title": "A Child's Garden of Verses",
-    "author": "Stevenson"
+    "author": "Robert Louis Stevenson"
   },
   {
     "id": "145",
     "title": "Middlemarch",
-    "author": "Eliot"
+    "author": "T.S. Eliot"
   },
   {
     "id": "151",
     "title": "The Rime of the Ancient Mariner",
-    "author": "Coleridge"
+    "author": "Coleridge",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/The%20Rime%20of%20the%20Ancient%20Mariner",
+    "wikipediaTitle": "The Rime of the Ancient Mariner"
   },
   {
     "id": "170",
     "title": "The Haunted Hotel: A Mystery of Modern Venice",
-    "author": "Collins"
+    "author": "Collins",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Arthur%20Conan%20Doyle",
+    "wikipediaTitle": "Arthur Conan Doyle"
   },
   {
     "id": "174",
     "title": "The Picture of Dorian Gray",
-    "author": "Wilde"
+    "author": "Oscar Wilde"
   },
   {
     "id": "217",
     "title": "Sons and Lovers",
-    "author": "Lawrence"
+    "author": "Lawrence",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Sons%20and%20Lovers",
+    "wikipediaTitle": "Sons and Lovers"
   },
   {
     "id": "260",
     "title": "An Introduction to the Study of Robert Browning's Poetry",
-    "author": "Browning"
+    "author": "Browning",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Robert%20Browning",
+    "wikipediaTitle": "Robert Browning"
   },
   {
     "id": "301",
     "title": "The Ballad of Reading Gaol",
-    "author": "Wilde"
+    "author": "Oscar Wilde"
   },
   {
     "id": "323",
     "title": "Verses 1889-1896",
-    "author": "Kipling"
+    "author": "Kipling",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Rudyard%20Kipling",
+    "wikipediaTitle": "Rudyard Kipling"
   },
   {
     "id": "380",
     "title": "Weir of Hermiston: An Unfinished Romance",
-    "author": "Stevenson"
+    "author": "Robert Louis Stevenson"
   },
   {
     "id": "413",
     "title": "Ballads",
-    "author": "Stevenson"
+    "author": "Robert Louis Stevenson"
   },
   {
     "id": "507",
     "title": "Adam Bede",
-    "author": "Eliot"
+    "author": "T.S. Eliot"
   },
   {
     "id": "524",
     "title": "Ann Veronica: A Modern Love Story",
-    "author": "Wells"
+    "author": "H.G. Wells"
   },
   {
     "id": "550",
     "title": "Silas Marner",
-    "author": "Eliot"
+    "author": "T.S. Eliot"
   },
   {
     "id": "574",
     "title": "Poems of William Blake",
-    "author": "Blake"
+    "author": "Blake",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/William%20Blake",
+    "wikipediaTitle": "William Blake"
   },
   {
     "id": "604",
     "title": "Gulliver of Mars",
-    "author": "Arnold"
+    "author": "Arnold",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Lieut.%20Gullivar%20Jones%3A%20His%20Vacation",
+    "wikipediaTitle": "Lieut. Gullivar Jones: His Vacation"
   },
   {
     "id": "610",
     "title": "Idylls of the King",
-    "author": "Tennyson"
+    "author": "Tennyson",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Idylls%20of%20the%20King",
+    "wikipediaTitle": "Idylls of the King"
   },
   {
     "id": "651",
     "title": "Phantasmagoria and Other Poems",
-    "author": "Carroll"
+    "author": "Lewis Carroll"
   },
   {
     "id": "791",
     "title": "The Princess",
-    "author": "Tennyson"
+    "author": "Tennyson",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/The%20Princess%20(Tennyson%20poem)",
+    "wikipediaTitle": "The Princess (Tennyson poem)"
   },
   {
     "id": "809",
     "title": "Holiday Romance",
-    "author": "Dickens"
+    "author": "Charles Dickens"
   },
   {
     "id": "1141",
     "title": "Selected Poems of Oscar Wilde",
-    "author": "Wilde"
+    "author": "Oscar Wilde"
   },
   {
     "id": "1211",
     "title": "A Selection from the Lyrical Poems of Robert Herrick",
-    "author": "Herrick"
+    "author": "Herrick",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Robert%20Herrick%20(poet)",
+    "wikipediaTitle": "Robert Herrick (poet)"
   },
   {
     "id": "1279",
     "title": "Poems and Songs of Robert Burns",
-    "author": "Burns"
+    "author": "Burns",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Burns%20supper",
+    "wikipediaTitle": "Burns supper"
   },
   {
     "id": "1308",
     "title": "A Florentine Tragedy; La Sainte Courtisane",
-    "author": "Wilde"
+    "author": "Oscar Wilde"
   },
   {
     "id": "1321",
     "title": "The Waste Land",
-    "author": "Eliot"
+    "author": "T.S. Eliot"
   },
   {
     "id": "1459",
     "title": "Prufrock and Other Observations",
-    "author": "Eliot"
+    "author": "T.S. Eliot"
   },
   {
     "id": "1480",
     "title": "Tom Brown's School Days",
-    "author": "Hughes"
+    "author": "Hughes",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Tom%20Brown's%20School%20Days",
+    "wikipediaTitle": "Tom Brown's School Days"
   },
   {
     "id": "1567",
     "title": "Poems",
-    "author": "Eliot"
+    "author": "T.S. Eliot"
   },
   {
     "id": "1653",
     "title": "The Imitation of Christ",
-    "author": "Thomas"
+    "author": "Thomas",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/The%20Imitation%20of%20Christ",
+    "wikipediaTitle": "The Imitation of Christ"
   },
   {
     "id": "1712",
     "title": "The Rescue: A Romance of the Shallows",
-    "author": "Conrad"
+    "author": "Conrad",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/The%20Rescue%20(Conrad%20novel)",
+    "wikipediaTitle": "The Rescue (Conrad novel)"
   },
   {
     "id": "1745",
     "title": "The Poetical Works of John Milton",
-    "author": "Milton"
+    "author": "John Milton"
   },
   {
     "id": "1934",
     "title": "Songs of Innocence and of Experience",
-    "author": "Blake"
+    "author": "Blake",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Songs%20of%20Innocence%20and%20of%20Experience",
+    "wikipediaTitle": "Songs of Innocence and of Experience"
   },
   {
     "id": "1962",
     "title": "A Defence of Poesie and Poems",
-    "author": "Sidney"
+    "author": "Sidney",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/An%20Apology%20for%20Poetry",
+    "wikipediaTitle": "An Apology for Poetry"
   },
   {
     "id": "2002",
     "title": "Sonnets from the Portuguese",
-    "author": "Browning"
+    "author": "Browning",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Sonnets%20from%20the%20Portuguese",
+    "wikipediaTitle": "Sonnets from the Portuguese"
   },
   {
     "id": "2005",
     "title": "Piccadilly Jim",
-    "author": "Wodehouse"
+    "author": "Wodehouse",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Piccadilly%20Jim%20(2004%20film)",
+    "wikipediaTitle": "Piccadilly Jim (2004 film)"
   },
   {
     "id": "2042",
     "title": "Something New",
-    "author": "Wodehouse"
+    "author": "Wodehouse",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Something%20Fresh",
+    "wikipediaTitle": "Something Fresh"
   },
   {
     "id": "2165",
     "title": "The Lifted Veil",
-    "author": "Eliot"
+    "author": "T.S. Eliot"
   },
   {
     "id": "2171",
     "title": "Brother Jacob",
-    "author": "Eliot"
+    "author": "T.S. Eliot"
   },
   {
     "id": "2233",
     "title": "A Damsel in Distress",
-    "author": "Wodehouse"
+    "author": "Wodehouse",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/A%20Damsel%20in%20Distress%20(novel)",
+    "wikipediaTitle": "A Damsel in Distress (novel)"
   },
   {
     "id": "2398",
     "title": "The Renaissance: Studies in Art and Poetry",
-    "author": "Pater"
+    "author": "Pater",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Walter%20Pater",
+    "wikipediaTitle": "Walter Pater"
   },
   {
     "id": "2428",
     "title": "An Essay on Man; Moral Essays and Satires",
-    "author": "Pope"
+    "author": "Pope",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/An%20Essay%20on%20Man",
+    "wikipediaTitle": "An Essay on Man"
   },
   {
     "id": "2479",
     "title": "The Friendly Road: New Adventures in Contentment",
-    "author": "Grayson"
+    "author": "Grayson",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Ray%20Stannard%20Baker",
+    "wikipediaTitle": "Ray Stannard Baker"
   },
   {
     "id": "2490",
     "title": "Lamia",
-    "author": "Keats"
+    "author": "Keats",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Lamia",
+    "wikipediaTitle": "Lamia"
   },
   {
     "id": "2575",
@@ -827,547 +1071,711 @@
   {
     "id": "2615",
     "title": "Discourses on Satire and on Epic Poetry",
-    "author": "Dryden"
+    "author": "Dryden",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/John%20Dryden",
+    "wikipediaTitle": "John Dryden"
   },
   {
     "id": "2619",
     "title": "The Home Book of Verse — Volume 1",
-    "author": "Stevenson"
+    "author": "Robert Louis Stevenson"
   },
   {
     "id": "2620",
     "title": "The Home Book of Verse — Volume 2",
-    "author": "Stevenson"
+    "author": "Robert Louis Stevenson"
   },
   {
     "id": "2621",
     "title": "The Home Book of Verse — Volume 3",
-    "author": "Stevenson"
+    "author": "Robert Louis Stevenson"
   },
   {
     "id": "2622",
     "title": "The Home Book of Verse — Volume 4",
-    "author": "Stevenson"
+    "author": "Robert Louis Stevenson"
   },
   {
     "id": "2819",
     "title": "Barrack-room ballads",
-    "author": "Kipling"
+    "author": "Kipling",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Barrack-Room%20Ballads",
+    "wikipediaTitle": "Barrack-Room Ballads"
   },
   {
     "id": "2880",
     "title": "A Blot in the 'Scutcheon",
-    "author": "Browning"
+    "author": "Browning",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/A%20Blot%20in%20the%20'Scutcheon",
+    "wikipediaTitle": "A Blot in the 'Scutcheon"
   },
   {
     "id": "3167",
     "title": "Wessex Poems and Other Verses",
-    "author": "Hardy"
+    "author": "Thomas Hardy"
   },
   {
     "id": "3168",
     "title": "Poems of the Past and the Present",
-    "author": "Hardy"
+    "author": "Thomas Hardy"
   },
   {
     "id": "3255",
     "title": "Moments of Vision and Miscellaneous Verses",
-    "author": "Hardy"
+    "author": "Thomas Hardy"
   },
   {
     "id": "3419",
     "title": "Rebecca Mary",
-    "author": "Donnell"
+    "author": "Donnell",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/R.%20F.%20Kuang",
+    "wikipediaTitle": "R. F. Kuang"
   },
   {
     "id": "3741",
     "title": "The Writings of Thomas Paine — Volume 1 (1774-1779): The American Crisis",
-    "author": "Paine"
+    "author": "Paine",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Thomas%20Paine",
+    "wikipediaTitle": "Thomas Paine"
   },
   {
     "id": "3742",
     "title": "The Writings of Thomas Paine — Volume 2 (1779-1792): The Rights of Man",
-    "author": "Paine"
+    "author": "Paine",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Thomas%20Paine",
+    "wikipediaTitle": "Thomas Paine"
   },
   {
     "id": "3743",
     "title": "The Writings of Thomas Paine — Volume 4 (1794-1796): The Age of Reason",
-    "author": "Paine"
+    "author": "Paine",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/The%20Age%20of%20Reason",
+    "wikipediaTitle": "The Age of Reason"
   },
   {
     "id": "3756",
     "title": "Indiscretions of Archie",
-    "author": "Wodehouse"
+    "author": "Wodehouse",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Indiscretions%20of%20Archie",
+    "wikipediaTitle": "Indiscretions of Archie"
   },
   {
     "id": "3829",
     "title": "Love Among the Chickens",
-    "author": "Wodehouse"
+    "author": "Wodehouse",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Love%20Among%20the%20Chickens",
+    "wikipediaTitle": "Love Among the Chickens"
   },
   {
     "id": "4032",
     "title": "Atlantis: The Antedeluvian World",
-    "author": "Donnelly"
+    "author": "Donnelly",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Antediluvian",
+    "wikipediaTitle": "Antediluvian"
   },
   {
     "id": "4060",
     "title": "The Renaissance: studies in art and poetry",
-    "author": "Pater"
+    "author": "Pater",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Walter%20Pater",
+    "wikipediaTitle": "Walter Pater"
   },
   {
     "id": "4062",
     "title": "Gaston de Latour; an unfinished romance",
-    "author": "Pater"
+    "author": "Pater",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Walter%20Pater",
+    "wikipediaTitle": "Walter Pater"
   },
   {
     "id": "4068",
     "title": "Froudacity; West Indian Fables by James Anthony Froude Explained by J. J. Thomas",
-    "author": "Thomas"
+    "author": "Thomas",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/James%20Anthony%20Froude",
+    "wikipediaTitle": "James Anthony Froude"
   },
   {
     "id": "4075",
     "title": "The Intrusion of Jimmy",
-    "author": "Wodehouse"
+    "author": "Wodehouse",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/A%20Gentleman%20of%20Leisure",
+    "wikipediaTitle": "A Gentleman of Leisure"
   },
   {
     "id": "4078",
     "title": "The Picture of Dorian Gray",
-    "author": "Wilde"
+    "author": "Oscar Wilde"
   },
   {
     "id": "4085",
     "title": "The Adventures of Roderick Random",
-    "author": "Smollett"
+    "author": "Smollett",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/The%20Adventures%20of%20Roderick%20Random",
+    "wikipediaTitle": "The Adventures of Roderick Random"
   },
   {
     "id": "4207",
     "title": "Aesthetic Poetry",
-    "author": "Pater"
+    "author": "Pater",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Aestheticism",
+    "wikipediaTitle": "Aestheticism"
   },
   {
     "id": "4212",
     "title": "Culture and Anarchy",
-    "author": "Arnold"
+    "author": "Arnold",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Culture%20and%20Anarchy",
+    "wikipediaTitle": "Culture and Anarchy"
   },
   {
     "id": "4248",
     "title": "The Problem of the Ohio Mounds",
-    "author": "Thomas"
+    "author": "Thomas",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Wickliffe%20Mounds",
+    "wikipediaTitle": "Wickliffe Mounds"
   },
   {
     "id": "4253",
     "title": "Dramatic Romances",
-    "author": "Browning"
+    "author": "Browning",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Dramatic%20Romances%20and%20Lyrics",
+    "wikipediaTitle": "Dramatic Romances and Lyrics"
   },
   {
     "id": "4525",
     "title": "The Farm That Won't Wear Out",
-    "author": "Hopkins"
+    "author": "Hopkins",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/List%20of%20Mayberry%20R.F.D.%20episodes",
+    "wikipediaTitle": "List of Mayberry R.F.D. episodes"
   },
   {
     "id": "4527",
     "title": "The Story of the Soil; from the Basis of Absolute Science and Real Life",
-    "author": "Hopkins"
+    "author": "Hopkins",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Keynesian%20economics",
+    "wikipediaTitle": "Keynesian economics"
   },
   {
     "id": "4654",
     "title": "The Daemon of the World",
-    "author": "Shelley"
+    "author": "Mary Shelley"
   },
   {
     "id": "4695",
     "title": "Notes to the Complete Poetical Works of Percy Bysshe Shelley",
-    "author": "Shelley"
+    "author": "Mary Shelley"
   },
   {
     "id": "4696",
     "title": "The Witch of Atlas",
-    "author": "Shelley"
+    "author": "Mary Shelley"
   },
   {
     "id": "4697",
     "title": "Peter Bell the Third",
-    "author": "Shelley"
+    "author": "Mary Shelley"
   },
   {
     "id": "4797",
     "title": "The Complete Poetical Works of Percy Bysshe Shelley — Volume 1",
-    "author": "Shelley"
+    "author": "Mary Shelley"
   },
   {
     "id": "4798",
     "title": "The Complete Poetical Works of Percy Bysshe Shelley — Volume 2",
-    "author": "Shelley"
+    "author": "Mary Shelley"
   },
   {
     "id": "4799",
     "title": "The Complete Poetical Works of Percy Bysshe Shelley — Volume 3",
-    "author": "Shelley"
+    "author": "Mary Shelley"
   },
   {
     "id": "4800",
     "title": "The Complete Poetical Works of Percy Bysshe Shelley — Complete",
-    "author": "Shelley"
+    "author": "Mary Shelley"
   },
   {
     "id": "5077",
     "title": "Marmion: A Tale of Flodden Field in Six Cantos",
-    "author": "Scott"
+    "author": "Scott",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Marmion%20(poem)",
+    "wikipediaTitle": "Marmion (poem)"
   },
   {
     "id": "5084",
     "title": "Life and Letters of Thomas Henry Huxley — Volume 1",
-    "author": "Huxley"
+    "author": "Huxley",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Thomas%20Henry%20Huxley",
+    "wikipediaTitle": "Thomas Henry Huxley"
   },
   {
     "id": "5109",
     "title": "Ragnarok : the Age of Fire and Gravel",
-    "author": "Donnelly"
+    "author": "Donnelly",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Ragnarok%3A%20The%20Age%20of%20Fire%20and%20Gravel",
+    "wikipediaTitle": "Ragnarok: The Age of Fire and Gravel"
   },
   {
     "id": "5131",
     "title": "Childe Harold's Pilgrimage",
-    "author": "Byron"
+    "author": "Byron",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Childe%20Harold's%20Pilgrimage",
+    "wikipediaTitle": "Childe Harold's Pilgrimage"
   },
   {
     "id": "5134",
     "title": "Discoveries Made Upon Men and Matter and Some Poems",
-    "author": "Jonson"
+    "author": "Jonson",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Ben%20Jonson",
+    "wikipediaTitle": "Ben Jonson"
   },
   {
     "id": "5155",
     "title": "Cæsar's Column: A Story of the Twentieth Century",
-    "author": "Donnelly"
+    "author": "Donnelly",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Caesar's%20Column",
+    "wikipediaTitle": "Caesar's Column"
   },
   {
     "id": "5159",
     "title": "Celtic Literature",
-    "author": "Arnold"
+    "author": "Arnold",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Celtic%20literature",
+    "wikipediaTitle": "Celtic literature"
   },
   {
     "id": "5167",
     "title": "The Countess Cathleen",
-    "author": "Yeats"
+    "author": "Yeats",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/The%20Countess%20Cathleen",
+    "wikipediaTitle": "The Countess Cathleen"
   },
   {
     "id": "5168",
     "title": "The Land of Heart's Desire",
-    "author": "Yeats"
+    "author": "Yeats",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/The%20Land%20of%20Heart's%20Desire",
+    "wikipediaTitle": "The Land of Heart's Desire"
   },
   {
     "id": "5226",
     "title": "Life and Letters of Thomas Henry Huxley — Volume 2",
-    "author": "Huxley"
+    "author": "Huxley",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Thomas%20Henry%20Huxley",
+    "wikipediaTitle": "Thomas Henry Huxley"
   },
   {
     "id": "5230",
     "title": "The Invisible Man: A Grotesque Romance",
-    "author": "Wells"
+    "author": "H.G. Wells"
   },
   {
     "id": "5273",
     "title": "Darwiniana; Essays and Reviews Pertaining to Darwinism",
-    "author": "Gray"
+    "author": "Gray",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Darwiniana",
+    "wikipediaTitle": "Darwiniana"
   },
   {
     "id": "5428",
     "title": "A Defence of Poetry and Other Essays",
-    "author": "Shelley"
+    "author": "Mary Shelley"
   },
   {
     "id": "5625",
     "title": "Flint and Feather: Collected Verse",
-    "author": "Johnson"
+    "author": "Johnson",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/E.%20Pauline%20Johnson",
+    "wikipediaTitle": "E. Pauline Johnson"
   },
   {
     "id": "5793",
     "title": "Stories of Red Hanrahan",
-    "author": "Yeats"
+    "author": "Yeats",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Red%20Hanrahan",
+    "wikipediaTitle": "Red Hanrahan"
   },
   {
     "id": "5794",
     "title": "Rosa Alchemica",
-    "author": "Yeats"
+    "author": "Yeats",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/The%20Curse%20of%20the%20Fires%20and%20of%20the%20Shadows",
+    "wikipediaTitle": "The Curse of the Fires and of the Shadows"
   },
   {
     "id": "5795",
     "title": "The Secret Rose",
-    "author": "Yeats"
+    "author": "Yeats",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/W.%20B.%20Yeats",
+    "wikipediaTitle": "W. B. Yeats"
   },
   {
     "id": "5799",
     "title": "Life and Letters of Thomas Henry Huxley — Volume 3",
-    "author": "Huxley"
+    "author": "Huxley",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Thomas%20Henry%20Huxley",
+    "wikipediaTitle": "Thomas Henry Huxley"
   },
   {
     "id": "5982",
     "title": "Eeldrop and Appleplex",
-    "author": "Eliot"
+    "author": "T.S. Eliot"
   },
   {
     "id": "6061",
     "title": "Some Poems",
-    "author": "Scott"
+    "author": "Scott",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Yarrow%20poems%20(Wordsworth)",
+    "wikipediaTitle": "Yarrow poems (Wordsworth)"
   },
   {
     "id": "6074",
     "title": "Lady Clare",
-    "author": "Tennyson"
+    "author": "Tennyson",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Lady%20Clare",
+    "wikipediaTitle": "Lady Clare"
   },
   {
     "id": "6081",
     "title": "Biographia Literaria",
-    "author": "Coleridge"
+    "author": "Coleridge",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Biographia%20Literaria",
+    "wikipediaTitle": "Biographia Literaria"
   },
   {
     "id": "6402",
     "title": "The romance of Isabel Lady Burton",
-    "author": "Burton"
+    "author": "Burton",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Isabel%20Burton",
+    "wikipediaTitle": "Isabel Burton"
   },
   {
     "id": "6424",
     "title": "A Modern Utopia",
-    "author": "Wells"
+    "author": "H.G. Wells"
   },
   {
     "id": "6447",
     "title": "Proserpine and Midas",
-    "author": "Shelley"
+    "author": "Mary Shelley"
   },
   {
     "id": "6542",
     "title": "Frankenstein",
-    "author": "Shelley"
+    "author": "Mary Shelley"
   },
   {
     "id": "6670",
     "title": "Christmas Eve",
-    "author": "Browning"
+    "author": "Browning",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/It's%20Christmas%2C%20Eve",
+    "wikipediaTitle": "It's Christmas, Eve"
   },
   {
     "id": "6683",
     "title": "The Little Nugget",
-    "author": "Wodehouse"
+    "author": "Wodehouse",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/The%20Little%20Nugget",
+    "wikipediaTitle": "The Little Nugget"
   },
   {
     "id": "6684",
     "title": "Uneasy Money",
-    "author": "Wodehouse"
+    "author": "Wodehouse",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Uneasy%20Money",
+    "wikipediaTitle": "Uneasy Money"
   },
   {
     "id": "6688",
     "title": "The Mill on the Floss",
-    "author": "Eliot"
+    "author": "T.S. Eliot"
   },
   {
     "id": "6699",
     "title": "Inns and Taverns of Old London",
-    "author": "Shelley"
+    "author": "Mary Shelley"
   },
   {
     "id": "6753",
     "title": "Psmith in the City",
-    "author": "Wodehouse"
+    "author": "Wodehouse",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Psmith",
+    "wikipediaTitle": "Psmith"
   },
   {
     "id": "6768",
     "title": "The Man Upstairs and Other Stories",
-    "author": "Wodehouse"
+    "author": "Wodehouse",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/P.%20G.%20Wodehouse%20short%20stories%20bibliography",
+    "wikipediaTitle": "P. G. Wodehouse short stories bibliography"
   },
   {
     "id": "6836",
     "title": "Three Men and a Maid",
-    "author": "Wodehouse"
+    "author": "Wodehouse",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/P.%20G.%20Wodehouse%20bibliography",
+    "wikipediaTitle": "P. G. Wodehouse bibliography"
   },
   {
     "id": "6837",
     "title": "The Little Warrior",
-    "author": "Wodehouse"
+    "author": "Wodehouse",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Little%20Warrior",
+    "wikipediaTitle": "Little Warrior"
   },
   {
     "id": "6865",
     "title": "Four Years",
-    "author": "Yeats"
+    "author": "Yeats",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/W.%20B.%20Yeats",
+    "wikipediaTitle": "W. B. Yeats"
   },
   {
     "id": "6877",
     "title": "The Head of Kay's",
-    "author": "Wodehouse"
+    "author": "Wodehouse",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/The%20Head%20of%20Kay's",
+    "wikipediaTitle": "The Head of Kay's"
   },
   {
     "id": "6879",
     "title": "The Gold Bat",
-    "author": "Wodehouse"
+    "author": "Wodehouse",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/The%20Gold%20Bat",
+    "wikipediaTitle": "The Gold Bat"
   },
   {
     "id": "6880",
     "title": "The Coming of Bill",
-    "author": "Wodehouse"
+    "author": "Wodehouse",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/The%20Coming%20of%20Bill",
+    "wikipediaTitle": "The Coming of Bill"
   },
   {
     "id": "6927",
     "title": "The White Feather",
-    "author": "Wodehouse"
+    "author": "Wodehouse",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/White%20feather",
+    "wikipediaTitle": "White feather"
   },
   {
     "id": "6955",
     "title": "The Prince and Betty",
-    "author": "Wodehouse"
+    "author": "Wodehouse",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/The%20Prince%20and%20Betty%20(film)",
+    "wikipediaTitle": "The Prince and Betty (film)"
   },
   {
     "id": "6980",
     "title": "Tales of St. Austin's",
-    "author": "Wodehouse"
+    "author": "Wodehouse",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/P.%20G.%20Wodehouse%20bibliography",
+    "wikipediaTitle": "P. G. Wodehouse bibliography"
   },
   {
     "id": "6984",
     "title": "The Pothunters",
-    "author": "Wodehouse"
+    "author": "Wodehouse",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/The%20Pothunters",
+    "wikipediaTitle": "The Pothunters"
   },
   {
     "id": "6985",
     "title": "A Prefect's Uncle",
-    "author": "Wodehouse"
+    "author": "Wodehouse",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/A%20Prefect's%20Uncle",
+    "wikipediaTitle": "A Prefect's Uncle"
   },
   {
     "id": "7028",
     "title": "The Clicking of Cuthbert",
-    "author": "Wodehouse"
+    "author": "Wodehouse",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/The%20Clicking%20of%20Cuthbert",
+    "wikipediaTitle": "The Clicking of Cuthbert"
   },
   {
     "id": "7077",
     "title": "We Can't Have Everything: A Novel",
-    "author": "Hughes"
+    "author": "Hughes",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/We%20Can't%20Have%20Everything",
+    "wikipediaTitle": "We Can't Have Everything"
   },
   {
     "id": "7082",
     "title": "Lives of the Necromancers",
-    "author": "Godwin"
+    "author": "Godwin",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Lives%20of%20the%20Necromancers",
+    "wikipediaTitle": "Lives of the Necromancers"
   },
   {
     "id": "7227",
     "title": "Mornings in Florence",
-    "author": "Ruskin"
+    "author": "Ruskin",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/John%20Ruskin",
+    "wikipediaTitle": "John Ruskin"
   },
   {
     "id": "7230",
     "title": "Not George Washington — an Autobiographical Novel",
-    "author": "Wodehouse"
+    "author": "Wodehouse",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Not%20George%20Washington",
+    "wikipediaTitle": "Not George Washington"
   },
   {
     "id": "7275",
     "title": "Ezra Pound: His Metric and Poetry",
-    "author": "Eliot"
+    "author": "T.S. Eliot"
   },
   {
     "id": "7298",
     "title": "William Tell Told Again",
-    "author": "Wodehouse"
+    "author": "Wodehouse",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/William%20Tell%20Told%20Again",
+    "wikipediaTitle": "William Tell Told Again"
   },
   {
     "id": "7409",
     "title": "An Essay on Criticism",
-    "author": "Pope"
+    "author": "Pope",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/An%20Essay%20on%20Criticism",
+    "wikipediaTitle": "An Essay on Criticism"
   },
   {
     "id": "7423",
     "title": "Mike",
-    "author": "Wodehouse"
+    "author": "Wodehouse",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/P.%20G.%20Wodehouse",
+    "wikipediaTitle": "P. G. Wodehouse"
   },
   {
     "id": "7448",
     "title": "The Hour Glass",
-    "author": "Yeats"
+    "author": "Yeats",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/W.%20B.%20Yeats%20bibliography",
+    "wikipediaTitle": "W. B. Yeats bibliography"
   },
   {
     "id": "7464",
     "title": "The Adventures of Sally",
-    "author": "Wodehouse"
+    "author": "Wodehouse",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/The%20Adventures%20of%20Sally",
+    "wikipediaTitle": "The Adventures of Sally"
   },
   {
     "id": "7469",
     "title": "Daniel Deronda",
-    "author": "Eliot"
+    "author": "T.S. Eliot"
   },
   {
     "id": "7782",
     "title": "The Last Tournament",
-    "author": "Tennyson"
+    "author": "Tennyson",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Idylls%20of%20the%20King",
+    "wikipediaTitle": "Idylls of the King"
   },
   {
     "id": "7828",
     "title": "The Web of Life",
-    "author": "Herrick"
+    "author": "Herrick",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Robert%20Herrick%20(poet)",
+    "wikipediaTitle": "Robert Herrick (poet)"
   },
   {
     "id": "7846",
     "title": "Departmental ditties and Ballads and Barrack-room ballads",
-    "author": "Kipling"
+    "author": "Kipling",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Rudyard%20Kipling%20bibliography",
+    "wikipediaTitle": "Rudyard Kipling bibliography"
   },
   {
     "id": "8084",
     "title": "Hunting with the Bow & Arrow",
-    "author": "Pope"
+    "author": "Pope",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Saxton%20Pope",
+    "wikipediaTitle": "Saxton Pope"
   },
   {
     "id": "8113",
     "title": "Literary Love-Letters and Other Stories",
-    "author": "Herrick"
+    "author": "Herrick",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/George%20Eliot",
+    "wikipediaTitle": "George Eliot"
   },
   {
     "id": "8134",
     "title": "Together",
-    "author": "Herrick"
+    "author": "Herrick",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Herrick%2C%20Illinois",
+    "wikipediaTitle": "Herrick, Illinois"
   },
   {
     "id": "8164",
     "title": "My Man Jeeves",
-    "author": "Wodehouse"
+    "author": "Wodehouse",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/My%20Man%20Jeeves",
+    "wikipediaTitle": "My Man Jeeves"
   },
   {
     "id": "8190",
     "title": "A Wodehouse Miscellany: Articles & Stories",
-    "author": "Wodehouse"
+    "author": "Wodehouse",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/P.%20G.%20Wodehouse%20bibliography",
+    "wikipediaTitle": "P. G. Wodehouse bibliography"
   },
   {
     "id": "8208",
     "title": "Poems of Coleridge",
-    "author": "Coleridge"
+    "author": "Coleridge",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Samuel%20Taylor%20Coleridge",
+    "wikipediaTitle": "Samuel Taylor Coleridge"
   },
   {
     "id": "8209",
     "title": "Poems 1817",
-    "author": "Keats"
+    "author": "Keats",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/John%20Keats%20bibliography",
+    "wikipediaTitle": "John Keats bibliography"
   },
   {
     "id": "8227",
     "title": "Middlemarch",
-    "author": "Eliot"
+    "author": "T.S. Eliot"
   },
   {
     "id": "8489",
     "title": "Specimens of the Table Talk of Samuel Taylor Coleridge",
-    "author": "Coleridge"
+    "author": "Coleridge",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Henry%20Nelson%20Coleridge",
+    "wikipediaTitle": "Henry Nelson Coleridge"
   },
   {
     "id": "8529",
     "title": "The World Decision",
-    "author": "Herrick"
+    "author": "Herrick",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Gulf%20of%20Tonkin%20incident",
+    "wikipediaTitle": "Gulf of Tonkin incident"
   },
   {
     "id": "8557",
     "title": "Synge and the Ireland of His Time",
-    "author": "Yeats"
+    "author": "Yeats",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/John%20Millington%20Synge",
+    "wikipediaTitle": "John Millington Synge"
   },
   {
     "id": "8601",
     "title": "The Early Poems of Alfred Lord Tennyson",
-    "author": "Tennyson"
+    "author": "Tennyson",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Emilia%20Tennyson",
+    "wikipediaTitle": "Emilia Tennyson"
   },
   {
     "id": "8713",
     "title": "A Man of Means",
-    "author": "Wodehouse"
+    "author": "Wodehouse",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/A%20Man%20of%20Means",
+    "wikipediaTitle": "A Man of Means"
   },
   {
     "id": "8865",
@@ -1377,37 +1785,47 @@
   {
     "id": "8901",
     "title": "The Works of Lord Byron: Letters and Journals. Vol. 1",
-    "author": "Byron"
+    "author": "Byron",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Lord%20Byron",
+    "wikipediaTitle": "Lord Byron"
   },
   {
     "id": "8920",
     "title": "The Light of Asia",
-    "author": "Arnold"
+    "author": "Arnold",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/The%20Light%20of%20Asia",
+    "wikipediaTitle": "The Light of Asia"
   },
   {
     "id": "8931",
     "title": "The Gem Collector",
-    "author": "Wodehouse"
+    "author": "Wodehouse",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/P.%20G.%20Wodehouse%20bibliography",
+    "wikipediaTitle": "P. G. Wodehouse bibliography"
   },
   {
     "id": "8974",
     "title": "The Invisible Man: A Grotesque Romance",
-    "author": "Wells"
+    "author": "H.G. Wells"
   },
   {
     "id": "9152",
     "title": "Imogen: A Pastoral Romance",
-    "author": "Godwin"
+    "author": "Godwin",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/William%20Godwin",
+    "wikipediaTitle": "William Godwin"
   },
   {
     "id": "9162",
     "title": "Becket and other plays",
-    "author": "Tennyson"
+    "author": "Tennyson",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Thomas%20Becket",
+    "wikipediaTitle": "Thomas Becket"
   },
   {
     "id": "9273",
     "title": "A Modest Proposal",
-    "author": "Swift"
+    "author": "Jonathan Swift"
   },
   {
     "id": "9398",
@@ -1417,137 +1835,161 @@
   {
     "id": "9403",
     "title": "The Life and Works of Friedrich Schiller",
-    "author": "Thomas"
+    "author": "Thomas",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Friedrich%20Schiller",
+    "wikipediaTitle": "Friedrich Schiller"
   },
   {
     "id": "9424",
     "title": "Late Lyrics and Earlier",
-    "author": "Hardy"
+    "author": "Thomas Hardy"
   },
   {
     "id": "9430",
     "title": "Poems of the Past and the Present",
-    "author": "Hardy"
+    "author": "Thomas Hardy"
   },
   {
     "id": "9434",
     "title": "Time's Laughingstocks and Other Verses",
-    "author": "Hardy"
+    "author": "Thomas Hardy"
   },
   {
     "id": "9452",
     "title": "Wessex Poems and Other Verses",
-    "author": "Hardy"
+    "author": "Thomas Hardy"
   },
   {
     "id": "9505",
     "title": "Four Girls and a Compact",
-    "author": "Donnell"
+    "author": "Donnell",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Ralph%20Bakshi",
+    "wikipediaTitle": "Ralph Bakshi"
   },
   {
     "id": "9542",
     "title": "Graded Poetry: Seventh Year",
-    "author": "Blake"
+    "author": "Blake",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Georgia%20Alexander",
+    "wikipediaTitle": "Georgia Alexander"
   },
   {
     "id": "9631",
     "title": "Waltoniana: Inedited Remains in Verse and Prose of Izaak Walton",
-    "author": "Walton"
+    "author": "Walton",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Edward%20Sparke",
+    "wikipediaTitle": "Edward Sparke"
   },
   {
     "id": "9671",
     "title": "Daniel Deronda",
-    "author": "Eliot"
+    "author": "T.S. Eliot"
   },
   {
     "id": "9672",
     "title": "Adam Bede",
-    "author": "Eliot"
+    "author": "T.S. Eliot"
   },
   {
     "id": "9673",
     "title": "Brother Jacob",
-    "author": "Eliot"
+    "author": "T.S. Eliot"
   },
   {
     "id": "9674",
     "title": "The Lifted Veil",
-    "author": "Eliot"
+    "author": "T.S. Eliot"
   },
   {
     "id": "9675",
     "title": "The Mill on the Floss",
-    "author": "Eliot"
+    "author": "T.S. Eliot"
   },
   {
     "id": "9676",
     "title": "Silas Marner",
-    "author": "Eliot"
+    "author": "T.S. Eliot"
   },
   {
     "id": "9710",
     "title": "Holiday Romance",
-    "author": "Dickens"
+    "author": "Charles Dickens"
   },
   {
     "id": "9863",
     "title": "The Letters of Robert Burns",
-    "author": "Burns"
+    "author": "Burns",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Robert%20Burns",
+    "wikipediaTitle": "Robert Burns"
   },
   {
     "id": "9921",
     "title": "The Works of Lord Byron: Letters and Journals. Vol. 2",
-    "author": "Byron"
+    "author": "Byron",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Lord%20Byron",
+    "wikipediaTitle": "Lord Byron"
   },
   {
     "id": "10119",
     "title": "Adonais",
-    "author": "Shelley"
+    "author": "Mary Shelley"
   },
   {
     "id": "10219",
     "title": "The Poetical Works of William Wordsworth — Volume 1 (of 8)",
-    "author": "Wordsworth"
+    "author": "Wordsworth",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/William%20Wordsworth",
+    "wikipediaTitle": "William Wordsworth"
   },
   {
     "id": "10459",
     "title": "The Celtic Twilight",
-    "author": "Yeats"
+    "author": "Yeats",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Irish%20Literary%20Revival",
+    "wikipediaTitle": "Irish Literary Revival"
   },
   {
     "id": "10463",
     "title": "The Little House in the Fairy Wood",
-    "author": "Eliot"
+    "author": "T.S. Eliot"
   },
   {
     "id": "10559",
     "title": "Ballads",
-    "author": "Stevenson"
+    "author": "Robert Louis Stevenson"
   },
   {
     "id": "10586",
     "title": "Mike and Psmith",
-    "author": "Wodehouse"
+    "author": "Wodehouse",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Psmith",
+    "wikipediaTitle": "Psmith"
   },
   {
     "id": "10592",
     "title": "Adventures in Friendship",
-    "author": "Grayson"
+    "author": "Grayson",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Dick%20Grayson",
+    "wikipediaTitle": "Dick Grayson"
   },
   {
     "id": "10593",
     "title": "Great Possessions",
-    "author": "Grayson"
+    "author": "Grayson",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Dick%20Grayson",
+    "wikipediaTitle": "Dick Grayson"
   },
   {
     "id": "10605",
     "title": "Adventures in Contentment",
-    "author": "Grayson"
+    "author": "Grayson",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Ray%20Stannard%20Baker",
+    "wikipediaTitle": "Ray Stannard Baker"
   },
   {
     "id": "10762",
     "title": "Impressions of Theophrastus Such",
-    "author": "Eliot"
+    "author": "T.S. Eliot"
   },
   {
     "id": "10831",
@@ -1557,42 +1999,58 @@
   {
     "id": "10901",
     "title": "Three Young Knights",
-    "author": "Donnell"
+    "author": "Donnell",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Battle%20of%20Callann",
+    "wikipediaTitle": "Battle of Callann"
   },
   {
     "id": "11062",
     "title": "The Dozen from Lakerim",
-    "author": "Hughes"
+    "author": "Hughes",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Rupert%20Hughes",
+    "wikipediaTitle": "Rupert Hughes"
   },
   {
     "id": "11101",
     "title": "Coleridge's Ancient Mariner and Select Poems",
-    "author": "Coleridge"
+    "author": "Coleridge",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Mary%20Coleridge",
+    "wikipediaTitle": "Mary Coleridge"
   },
   {
     "id": "11986",
     "title": "The Book of American Negro Poetry",
-    "author": "Johnson"
+    "author": "Johnson",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/The%20Book%20of%20American%20Negro%20Poetry",
+    "wikipediaTitle": "The Book of American Negro Poetry"
   },
   {
     "id": "12145",
     "title": "The Poetical Works of William Wordsworth — Volume 2 (of 8)",
-    "author": "Wordsworth"
+    "author": "Wordsworth",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/William%20Wordsworth",
+    "wikipediaTitle": "William Wordsworth"
   },
   {
     "id": "12383",
     "title": "The Poetical Works of William Wordsworth — Volume 3 (of 8)",
-    "author": "Wordsworth"
+    "author": "Wordsworth",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/William%20Wordsworth",
+    "wikipediaTitle": "William Wordsworth"
   },
   {
     "id": "12628",
     "title": "Selections from the Prose Works of Matthew Arnold",
-    "author": "Arnold"
+    "author": "Arnold",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Matthew%20Arnold",
+    "wikipediaTitle": "Matthew Arnold"
   },
   {
     "id": "12713",
     "title": "The Rhyme of the Ancient Mariner",
-    "author": "Coleridge"
+    "author": "Coleridge",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/The%20Rime%20of%20the%20Ancient%20Mariner",
+    "wikipediaTitle": "The Rime of the Ancient Mariner"
   },
   {
     "id": "12881",
@@ -1607,507 +2065,671 @@
   {
     "id": "13018",
     "title": "The Letters of Elizabeth Barrett Browning (Volume 1 of 2)",
-    "author": "Browning"
+    "author": "Browning",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Elizabeth%20Barrett%20Browning",
+    "wikipediaTitle": "Elizabeth Barrett Browning"
   },
   {
     "id": "13085",
     "title": "A Diversity of Creatures",
-    "author": "Kipling"
+    "author": "Kipling",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/The%20Beginnings",
+    "wikipediaTitle": "The Beginnings"
   },
   {
     "id": "13182",
     "title": "Prefaces and prologues to famous books",
-    "author": "Eliot"
+    "author": "T.S. Eliot"
   },
   {
     "id": "13184",
     "title": "Narrative and Lyric Poems (first series) for use in the Lower School",
-    "author": "Stevenson"
+    "author": "Robert Louis Stevenson"
   },
   {
     "id": "13545",
     "title": "Mary at the Farm and Book of Recipes Compiled During Her Visit Among the \"\"Pennsylvania Germans\"\"",
-    "author": "Thomas"
+    "author": "Thomas",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Shoofly%20pie",
+    "wikipediaTitle": "Shoofly pie"
   },
   {
     "id": "13775",
     "title": "Every Step in Canning: The Cold-Pack Method",
-    "author": "Gray"
+    "author": "Gray",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Cigarette",
+    "wikipediaTitle": "Cigarette"
   },
   {
     "id": "13998",
     "title": "Ireland and the Home Rule Movement",
-    "author": "McDonnell"
+    "author": "McDonnell",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/John%20McDonnell",
+    "wikipediaTitle": "John McDonnell"
   },
   {
     "id": "14015",
     "title": "The Discovery of Witches",
-    "author": "Hopkins"
+    "author": "Hopkins",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Matthew%20Hopkins",
+    "wikipediaTitle": "Matthew Hopkins"
   },
   {
     "id": "14094",
     "title": "The Suppressed Poems of Alfred Lord Tennyson",
-    "author": "Tennyson"
+    "author": "Tennyson",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Alfred%2C%20Lord%20Tennyson",
+    "wikipediaTitle": "Alfred, Lord Tennyson"
   },
   {
     "id": "14317",
     "title": "The Sorcery Club",
-    "author": "O'Donnell"
+    "author": "O'Donnell",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Elliott%20O'Donnell",
+    "wikipediaTitle": "Elliott O'Donnell"
   },
   {
     "id": "14492",
     "title": "Notable Women of Modern China",
-    "author": "Burton"
+    "author": "Burton",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Margaret%20E.%20Burton",
+    "wikipediaTitle": "Margaret E. Burton"
   },
   {
     "id": "14870",
     "title": "Rebuilding Britain: A Survey of Problems of Reconstruction After the World War",
-    "author": "Hopkinson"
+    "author": "Hopkinson",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Applications%20of%203D%20printing",
+    "wikipediaTitle": "Applications of 3D printing"
   },
   {
     "id": "14871",
     "title": "Poems",
-    "author": "Walton"
+    "author": "Walton",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Emma%20Walton%20Hamilton",
+    "wikipediaTitle": "Emma Walton Hamilton"
   },
   {
     "id": "14952",
     "title": "Selections from Wordsworth and Tennyson",
-    "author": "Wordsworth"
+    "author": "Wordsworth",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/William%20Wordsworth",
+    "wikipediaTitle": "William Wordsworth"
   },
   {
     "id": "14953",
     "title": "Oklahoma and Other Poems",
-    "author": "Miller"
+    "author": "Miller",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Freeman%20Edwin%20Miller",
+    "wikipediaTitle": "Freeman Edwin Miller"
   },
   {
     "id": "15015",
     "title": "Sex and Society: Studies in the Social Psychology of Sex",
-    "author": "Thomas"
+    "author": "Thomas",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Sex%20differences%20in%20psychology",
+    "wikipediaTitle": "Sex differences in psychology"
   },
   {
     "id": "15153",
     "title": "The Land of Heart's Desire",
-    "author": "Yeats"
+    "author": "Yeats",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/The%20Land%20of%20Heart's%20Desire",
+    "wikipediaTitle": "The Land of Heart's Desire"
   },
   {
     "id": "15238",
     "title": "Mathilda",
-    "author": "Shelley"
+    "author": "Mary Shelley"
   },
   {
     "id": "15368",
     "title": "Fugitive Pieces",
-    "author": "Byron"
+    "author": "Byron",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Fugitive%20Pieces",
+    "wikipediaTitle": "Fugitive Pieces"
   },
   {
     "id": "15409",
     "title": "An Elegy Wrote in a Country Church Yard (1751) and The Eton College Manuscript",
-    "author": "Gray"
+    "author": "Gray",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Elegy%20Written%20in%20a%20Country%20Churchyard",
+    "wikipediaTitle": "Elegy Written in a Country Churchyard"
   },
   {
     "id": "15429",
     "title": "Thomas Henry Huxley: A Character Sketch",
-    "author": "Huxley"
+    "author": "Huxley",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Thomas%20Henry%20Huxley",
+    "wikipediaTitle": "Thomas Henry Huxley"
   },
   {
     "id": "15460",
     "title": "A Course In Wood Turning",
-    "author": "Milton"
+    "author": "John Milton"
   },
   {
     "id": "15618",
     "title": "The Loving Ballad of Lord Bateman",
-    "author": "Dickens"
+    "author": "Charles Dickens"
   },
   {
     "id": "15965",
     "title": "In Friendship's Guise",
-    "author": "Graydon"
+    "author": "Graydon",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Mystique%20(character)",
+    "wikipediaTitle": "Mystique (character)"
   },
   {
     "id": "16376",
     "title": "Browning's Shorter Poems",
-    "author": "Browning"
+    "author": "Browning",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Robert%20Browning",
+    "wikipediaTitle": "Robert Browning"
   },
   {
     "id": "16646",
     "title": "The Letters of Elizabeth Barrett Browning (Volume 2 of 2)",
-    "author": "Browning"
+    "author": "Browning",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Elizabeth%20Barrett%20Browning",
+    "wikipediaTitle": "Elizabeth Barrett Browning"
   },
   {
     "id": "16759",
     "title": "The Chronicle of the Canons Regular of Mount St. Agnes",
-    "author": "Thomas"
+    "author": "Thomas",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Congregation%20of%20Windesheim",
+    "wikipediaTitle": "Congregation of Windesheim"
   },
   {
     "id": "16931",
     "title": "Four American Leaders",
-    "author": "Eliot"
+    "author": "T.S. Eliot"
   },
   {
     "id": "17081",
     "title": "Cottage Poems",
-    "author": "Brontë"
+    "author": "Charlotte Brontë"
   },
   {
     "id": "17165",
     "title": "A Little Florida Lady",
-    "author": "Paine"
+    "author": "Paine",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/United%20States",
+    "wikipediaTitle": "United States"
   },
   {
     "id": "17393",
     "title": "Men and Women",
-    "author": "Browning"
+    "author": "Browning",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Men%20and%20Women%20(poetry%20collection)",
+    "wikipediaTitle": "Men and Women (poetry collection)"
   },
   {
     "id": "17404",
     "title": "Kinship Organisations and Group Marriage in Australia",
-    "author": "Thomas"
+    "author": "Thomas",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Bob%20Katter",
+    "wikipediaTitle": "Bob Katter"
   },
   {
     "id": "17642",
     "title": "Romance",
-    "author": "Conrad"
+    "author": "Conrad",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Con%20Conrad",
+    "wikipediaTitle": "Con Conrad"
   },
   {
     "id": "17780",
     "title": "Scenes of Clerical Life",
-    "author": "Eliot"
+    "author": "T.S. Eliot"
   },
   {
     "id": "18247",
     "title": "The Last Man",
-    "author": "Shelley"
+    "author": "Mary Shelley"
   },
   {
     "id": "18343",
     "title": "The Pied Piper of Hamelin",
-    "author": "Browning"
+    "author": "Browning",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Pied%20Piper%20of%20Hamelin",
+    "wikipediaTitle": "Pied Piper of Hamelin"
   },
   {
     "id": "18499",
     "title": "Suzanna stirs the fire",
-    "author": "Blake"
+    "author": "Blake",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Edward%20Snowden",
+    "wikipediaTitle": "Edward Snowden"
   },
   {
     "id": "18588",
     "title": "George Borrow: The Man and His Books",
-    "author": "Thomas"
+    "author": "Thomas",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/George%20Borrow",
+    "wikipediaTitle": "George Borrow"
   },
   {
     "id": "To which is Prefix'd an Account of the first Confederacy of the Six Nations",
     "title": " and Allies",
-    "author": "Thomas"
+    "author": "Thomas",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Thomas%20William%20Allies",
+    "wikipediaTitle": "Thomas William Allies"
   },
   {
     "id": "18700",
     "title": "The Mayor of Warwick",
-    "author": "Hopkins"
+    "author": "Hopkins",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Dionne%20Warwick",
+    "wikipediaTitle": "Dionne Warwick"
   },
   {
     "id": "18762",
     "title": "The Works of Lord Byron. Vol. 6",
-    "author": "Byron"
+    "author": "Byron",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Lord%20Byron",
+    "wikipediaTitle": "Lord Byron"
   },
   {
     "id": "19104",
     "title": "Secret societies and subversive movements",
-    "author": "Webster"
+    "author": "Webster",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Nesta%20Helen%20Webster",
+    "wikipediaTitle": "Nesta Helen Webster"
   },
   {
     "id": "19157",
     "title": "A Mother's List of Books for Children",
-    "author": "Arnold"
+    "author": "Arnold",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Arnold%20Schwarzenegger",
+    "wikipediaTitle": "Arnold Schwarzenegger"
   },
   {
     "id": "19392",
     "title": "The Little Tea Book",
-    "author": "Gray"
+    "author": "Gray",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Chinese%20tea%20culture",
+    "wikipediaTitle": "Chinese tea culture"
   },
   {
     "id": "19435",
     "title": "The mule-bone",
-    "author": "Hughes"
+    "author": "Hughes",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Mule%20Bone",
+    "wikipediaTitle": "Mule Bone"
   },
   {
     "id": "19508",
     "title": "A Modest Proposal",
-    "author": "Swift"
+    "author": "Jonathan Swift"
   },
   {
     "id": "19560",
     "title": "Applied Eugenics",
-    "author": "Popenoe"
+    "author": "Popenoe",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Paul%20Popenoe",
+    "wikipediaTitle": "Paul Popenoe"
   },
   {
     "id": "19656",
     "title": "One Woman's Life",
-    "author": "Herrick"
+    "author": "Herrick",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Mary%20Barr%20Clay",
+    "wikipediaTitle": "Mary Barr Clay"
   },
   {
     "id": "19722",
     "title": "A Child's Garden of Verses",
-    "author": "Stevenson"
+    "author": "Robert Louis Stevenson"
   },
   {
     "id": "19730",
     "title": "Warwick Woodlands: Things as they Were There Twenty Years Ago",
-    "author": "Herbert"
+    "author": "Herbert",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Lockheed%20U-2",
+    "wikipediaTitle": "Lockheed U-2"
   },
   {
     "id": "19784",
     "title": "Death Be Not Proud",
-    "author": "Donne"
+    "author": "Donne",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Death%20Be%20Not%20Proud",
+    "wikipediaTitle": "Death Be Not Proud"
   },
   {
     "id": "19819",
     "title": "Milton's Comus",
-    "author": "Milton"
+    "author": "John Milton"
   },
   {
     "id": "19936",
     "title": "Willie the Waif",
-    "author": "Herbert"
+    "author": "Herbert",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Passport%20to%20Shame",
+    "wikipediaTitle": "Passport to Shame"
   },
   {
     "id": "20034",
     "title": "Scottish Ghost Stories",
-    "author": "O'Donnell"
+    "author": "O'Donnell",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Elliott%20O'Donnell",
+    "wikipediaTitle": "Elliott O'Donnell"
   },
   {
     "id": "20158",
     "title": "The Works of Lord Byron. Vol. 4",
-    "author": "Byron"
+    "author": "Byron",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Lord%20Byron",
+    "wikipediaTitle": "Lord Byron"
   },
   {
     "id": "20192",
     "title": "Orrain: A Romance",
-    "author": "Levett Yeats"
+    "author": "Levett Yeats",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Sidney%20Kilner%20Levett-Yeats",
+    "wikipediaTitle": "Sidney Kilner Levett-Yeats"
   },
   {
     "id": "20257",
     "title": "A Political Romance",
-    "author": "Sterne"
+    "author": "Sterne",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/A%20Political%20Romance",
+    "wikipediaTitle": "A Political Romance"
   },
   {
     "id": "20353",
     "title": "The Best Nonsense Verses",
-    "author": "Bacon"
+    "author": "Bacon",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/East%20of%20Eden%20(novel)",
+    "wikipediaTitle": "East of Eden (novel)"
   },
   {
     "id": "20533",
     "title": "Jill the Reckless",
-    "author": "Wodehouse"
+    "author": "Wodehouse",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Jill%20the%20Reckless",
+    "wikipediaTitle": "Jill the Reckless"
   },
   {
     "id": "20591",
     "title": "Aedh Wishes for the Cloths of Heaven",
-    "author": "Yeats"
+    "author": "Yeats",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Aedh%20Wishes%20for%20the%20Cloths%20of%20Heaven",
+    "wikipediaTitle": "Aedh Wishes for the Cloths of Heaven"
   },
   {
     "id": "20596",
     "title": "The Ballad of Reading Gaol",
-    "author": "Wilde"
+    "author": "Oscar Wilde"
   },
   {
     "id": "20597",
     "title": "The Ballad of Reading Gaol",
-    "author": "Wilde"
+    "author": "Oscar Wilde"
   },
   {
     "id": "20717",
     "title": "The Girl on the Boat",
-    "author": "Wodehouse"
+    "author": "Wodehouse",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/The%20Girl%20on%20the%20Boat%20(film)",
+    "wikipediaTitle": "The Girl on the Boat (film)"
   },
   {
     "id": "20742",
     "title": "O May I Join the Choir Invisible! and Other Favorite Poems",
-    "author": "Eliot"
+    "author": "T.S. Eliot"
   },
   {
     "id": "20813",
     "title": "How Lisa Loved the King",
-    "author": "Eliot"
+    "author": "T.S. Eliot"
   },
   {
     "id": "21160",
     "title": "Songs of Innocence and of Experience",
-    "author": "Blake"
+    "author": "Blake",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Songs%20of%20Innocence%20and%20of%20Experience",
+    "wikipediaTitle": "Songs of Innocence and of Experience"
   },
   {
     "id": "21161",
     "title": "Sonnet 43",
-    "author": "Browning"
+    "author": "Browning",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Sonnets%20from%20the%20Portuguese",
+    "wikipediaTitle": "Sonnets from the Portuguese"
   },
   {
     "id": "21177",
     "title": "The Tiger",
-    "author": "Blake"
+    "author": "Blake",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Blake%20Baker",
+    "wikipediaTitle": "Blake Baker"
   },
   {
     "id": "21178",
     "title": "The Voice of the Ancient Bard",
-    "author": "Blake"
+    "author": "Blake",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/The%20Voice%20of%20the%20Ancient%20Bard",
+    "wikipediaTitle": "The Voice of the Ancient Bard"
   },
   {
     "id": "21182",
     "title": "When We Two Parted",
-    "author": "Byron"
+    "author": "Byron",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/When%20We%20Two%20Parted",
+    "wikipediaTitle": "When We Two Parted"
   },
   {
     "id": "21211",
     "title": "Silverpoints",
-    "author": "Gray"
+    "author": "Gray",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/John%20Gray%20(poet)",
+    "wikipediaTitle": "John Gray (poet)"
   },
   {
     "id": "21441",
     "title": "Don Juan: Canto I",
-    "author": "Byron"
+    "author": "Byron",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Don%20Juan%20(poem)",
+    "wikipediaTitle": "Don Juan (poem)"
   },
   {
     "id": "21589",
     "title": "The Rime of the Ancient Mariner",
-    "author": "Coleridge"
+    "author": "Coleridge",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/The%20Rime%20of%20the%20Ancient%20Mariner",
+    "wikipediaTitle": "The Rime of the Ancient Mariner"
   },
   {
     "id": "21602",
     "title": "The Waste Land",
-    "author": "Eliot"
+    "author": "T.S. Eliot"
   },
   {
     "id": "21700",
     "title": "Don Juan",
-    "author": "Byron"
+    "author": "Byron",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Don_Juan_(poem)",
+    "wikipediaTitle": "Don Juan (poem)"
   },
   {
     "id": "21811",
     "title": "The Works of Lord Byron. Vol. 3",
-    "author": "Byron"
+    "author": "Byron",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Lord%20Byron",
+    "wikipediaTitle": "Lord Byron"
   },
   {
     "id": "22295",
     "title": "On prayer and the contemplative life",
-    "author": "Thomas"
+    "author": "Thomas",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Thomas%20Keating",
+    "wikipediaTitle": "Thomas Keating"
   },
   {
     "id": "22322",
     "title": "A Legend of Old Persia and Other Poems",
-    "author": "Tennyson"
+    "author": "Tennyson",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/List%20of%20epic%20poems",
+    "wikipediaTitle": "List of epic poems"
   },
   {
     "id": "22347",
     "title": "Through Canal-Land in a Canadian Canoe",
-    "author": "Hughes"
+    "author": "Hughes",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Rideau%20Canal",
+    "wikipediaTitle": "Rideau Canal"
   },
   {
     "id": "22421",
     "title": "The Hesperides & Noble Numbers: Vol. 1 and 2",
-    "author": "Herrick"
+    "author": "Herrick",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/No%20pain%2C%20no%20gain",
+    "wikipediaTitle": "No pain, no gain"
   },
   {
     "id": "22423",
     "title": "Poems",
-    "author": "Thomas"
+    "author": "Thomas",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Do%20not%20go%20gentle%20into%20that%20good%20night",
+    "wikipediaTitle": "Do not go gentle into that good night"
   },
   {
     "id": "22447",
     "title": "Poems of Gerard Manley Hopkins",
-    "author": "Hopkins"
+    "author": "Hopkins",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Gerard%20Manley%20Hopkins",
+    "wikipediaTitle": "Gerard Manley Hopkins"
   },
   {
     "id": "22531",
     "title": "Amores: Poems",
-    "author": "Lawrence"
+    "author": "Lawrence",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/D.%20H.%20Lawrence",
+    "wikipediaTitle": "D. H. Lawrence"
   },
   {
     "id": "22696",
     "title": "Colonel Crockett's Co-operative Christmas",
-    "author": "Hughes"
+    "author": "Hughes",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/List%20of%20Timeless%20characters",
+    "wikipediaTitle": "List of Timeless characters"
   },
   {
     "id": "22726",
     "title": "New Poems",
-    "author": "Lawrence"
+    "author": "Lawrence",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/D.%20H.%20Lawrence",
+    "wikipediaTitle": "D. H. Lawrence"
   },
   {
     "id": "22732",
     "title": "Last Poems",
-    "author": "Thomas"
+    "author": "Thomas",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Do%20not%20go%20gentle%20into%20that%20good%20night",
+    "wikipediaTitle": "Do not go gentle into that good night"
   },
   {
     "id": "22734",
     "title": "Bay: A Book of Poems",
-    "author": "Lawrence"
+    "author": "Lawrence",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Howl%20(poem)",
+    "wikipediaTitle": "Howl (poem)"
   },
   {
     "id": "22847",
     "title": "Official views of the World's Columbian Exposition",
-    "author": "Arnold"
+    "author": "Arnold",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/World's%20Columbian%20Exposition",
+    "wikipediaTitle": "World's Columbian Exposition"
   },
   {
     "id": "23079",
     "title": "Sonnets from the Portuguese",
-    "author": "Browning"
+    "author": "Browning",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Sonnets%20from%20the%20Portuguese",
+    "wikipediaTitle": "Sonnets from the Portuguese"
   },
   {
     "id": "23094",
     "title": "The boy nihilist",
-    "author": "Arnold"
+    "author": "Arnold",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/List%20of%20reportedly%20haunted%20paintings",
+    "wikipediaTitle": "List of reportedly haunted paintings"
   },
   {
     "id": "23210",
     "title": "Missing Link",
-    "author": "Herbert"
+    "author": "Herbert",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Justin%20Herbert",
+    "wikipediaTitle": "Justin Herbert"
   },
   {
     "id": "23364",
     "title": "A Reversion To Type",
-    "author": "Bacon"
+    "author": "Bacon",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Francis%20Bacon",
+    "wikipediaTitle": "Francis Bacon"
   },
   {
     "id": "23597",
     "title": "Beauties of Tennyson",
-    "author": "Tennyson"
+    "author": "Tennyson",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Tennyson%20Down",
+    "wikipediaTitle": "Tennyson Down"
   },
   {
     "id": "23684",
     "title": "Keats: Poems Published in 1820",
-    "author": "Keats"
+    "author": "Keats",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Lamia%20(poem)",
+    "wikipediaTitle": "Lamia (poem)"
   },
   {
     "id": "23686",
     "title": "The Life and Adventures of Poor Puss",
-    "author": "Gray"
+    "author": "Gray",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Tom%20and%20Jerry",
+    "wikipediaTitle": "Tom and Jerry"
   },
   {
     "id": "23772",
     "title": "Devotions Upon Emergent Occasions; Together with Death's Duel",
-    "author": "Donne"
+    "author": "Donne",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Cycle%20for%20Declamation",
+    "wikipediaTitle": "Cycle for Declamation"
   },
   {
     "id": "23899",
     "title": "Psmith in the City",
-    "author": "Wodehouse"
+    "author": "Wodehouse",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Psmith",
+    "wikipediaTitle": "Psmith"
   },
   {
     "id": "23972",
     "title": "The Book of Humorous Verse",
-    "author": "Wells"
+    "author": "H.G. Wells"
   },
   {
     "id": "24020",
     "title": "Romola",
-    "author": "Eliot"
+    "author": "T.S. Eliot"
   },
   {
     "id": "24044",
     "title": "Myths and Legends of Christmastide",
-    "author": "Herrick"
+    "author": "Herrick",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Christmas%20tree",
+    "wikipediaTitle": "Christmas tree"
   },
   {
     "id": "24280",
     "title": "Endymion: A Poetic Romance",
-    "author": "Keats"
+    "author": "Keats",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Fanny%20Brawne",
+    "wikipediaTitle": "Fanny Brawne"
   },
   {
     "id": "24299",
@@ -2117,257 +2739,335 @@
   {
     "id": "24346",
     "title": "Hints towards the formation of a more comprehensive theory of life.",
-    "author": "Coleridge"
+    "author": "Coleridge",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Coleridge's%20theory%20of%20life",
+    "wikipediaTitle": "Coleridge's theory of life"
   },
   {
     "id": "24721",
     "title": "Operation Haystack",
-    "author": "Herbert"
+    "author": "Herbert",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Frank%20Herbert%20bibliography",
+    "wikipediaTitle": "Frank Herbert bibliography"
   },
   {
     "id": "25340",
     "title": "The Works of Lord Byron. Vol. 2",
-    "author": "Byron"
+    "author": "Byron",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Lord%20Byron",
+    "wikipediaTitle": "Lord Byron"
   },
   {
     "id": "25413",
     "title": "Blue Ridge Country",
-    "author": "Thomas"
+    "author": "Thomas",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Blue%20Ridge%20Parkway",
+    "wikipediaTitle": "Blue Ridge Parkway"
   },
   {
     "id": "25608",
     "title": "A Child's Garden of Verses",
-    "author": "Stevenson"
+    "author": "Robert Louis Stevenson"
   },
   {
     "id": "25609",
     "title": "A Child's Garden of Verses",
-    "author": "Stevenson"
+    "author": "Robert Louis Stevenson"
   },
   {
     "id": "25610",
     "title": "A Child's Garden of Verses",
-    "author": "Stevenson"
+    "author": "Robert Louis Stevenson"
   },
   {
     "id": "25611",
     "title": "A Child's Garden of Verses",
-    "author": "Stevenson"
+    "author": "Robert Louis Stevenson"
   },
   {
     "id": "25617",
     "title": "A Child's Garden of Verses",
-    "author": "Stevenson"
+    "author": "Robert Louis Stevenson"
   },
   {
     "id": "25639",
     "title": "Graded Memory Selections",
-    "author": "Various; Hughes"
+    "author": "Various; Hughes",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Age%20and%20health%20concerns%20about%20Joe%20Biden",
+    "wikipediaTitle": "Age and health concerns about Joe Biden"
   },
   {
     "id": "25643",
     "title": "'He Giveth His Beloved Sleep'",
-    "author": "Browning"
+    "author": "Browning",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/First%20Vision",
+    "wikipediaTitle": "First Vision"
   },
   {
     "id": "25733",
     "title": "Tam O'Shanter",
-    "author": "Burns"
+    "author": "Burns",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Tam%20o'%20Shanter",
+    "wikipediaTitle": "Tam o' Shanter"
   },
   {
     "id": "26074",
     "title": "Great Testimony against scientific cruelty",
-    "author": "Coleridge"
+    "author": "Coleridge",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Stephen%20Coleridge",
+    "wikipediaTitle": "Stephen Coleridge"
   },
   {
     "id": "26144",
     "title": "The Unicorn from the Stars and Other Plays",
-    "author": "Yeats"
+    "author": "Yeats",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Winged%20unicorn",
+    "wikipediaTitle": "Winged unicorn"
   },
   {
     "id": "26222",
     "title": "The Imitation of Christ",
-    "author": "Thomas"
+    "author": "Thomas",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/The%20Imitation%20of%20Christ",
+    "wikipediaTitle": "The Imitation of Christ"
   },
   {
     "id": "26230",
     "title": "The Picture of Dorian Gray",
-    "author": "Wilde"
+    "author": "Oscar Wilde"
   },
   {
     "id": "26246",
     "title": "The Invisible Man: A Grotesque Romance",
-    "author": "Wells"
+    "author": "H.G. Wells"
   },
   {
     "id": "26269",
     "title": "Silas Marner",
-    "author": "Eliot"
+    "author": "T.S. Eliot"
   },
   {
     "id": "26288",
     "title": "To His Coy Mistress",
-    "author": "Marvell"
+    "author": "Marvell",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/To%20His%20Coy%20Mistress",
+    "wikipediaTitle": "To His Coy Mistress"
   },
   {
     "id": "26459",
     "title": "A Child's Garden of Verses",
-    "author": "Stevenson"
+    "author": "Robert Louis Stevenson"
   },
   {
     "id": "26579",
     "title": "Love Among the Chickens",
-    "author": "Wodehouse"
+    "author": "Wodehouse",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Love%20Among%20the%20Chickens",
+    "wikipediaTitle": "Love Among the Chickens"
   },
   {
     "id": "26629",
     "title": "Werwolves",
-    "author": "O'Donnell"
+    "author": "O'Donnell",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Elliott%20O'Donnell",
+    "wikipediaTitle": "Elliott O'Donnell"
   },
   {
     "id": "26740",
     "title": "The Picture of Dorian Gray",
-    "author": "Wilde"
+    "author": "Oscar Wilde"
   },
   {
     "id": "26851",
     "title": "Tom Brown at Oxford",
-    "author": "Hughes"
+    "author": "Hughes",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Tom%20Brown's%20School%20Days",
+    "wikipediaTitle": "Tom Brown's School Days"
   },
   {
     "id": "26903",
     "title": "Determining the Age of Cattle by the Teeth",
-    "author": "Pope"
+    "author": "Pope",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Three-age%20system",
+    "wikipediaTitle": "Three-age system"
   },
   {
     "id": "26980",
     "title": "Frank H. Nelson of Cincinnati",
-    "author": "Herrick"
+    "author": "Herrick",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Henry%20David%20Thoreau",
+    "wikipediaTitle": "Henry David Thoreau"
   },
   {
     "id": "27197",
     "title": "Modern Spiritualism",
-    "author": "Smith"
+    "author": "Smith",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Spiritualism%20(movement)",
+    "wikipediaTitle": "Spiritualism (movement)"
   },
   {
     "id": "27265",
     "title": "The Wagnerian Romances",
-    "author": "Brownell"
+    "author": "Brownell",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Gertrude%20Hall",
+    "wikipediaTitle": "Gertrude Hall"
   },
   {
     "id": "27268",
     "title": "Ariadne Florentina: Six Lectures on Wood and Metal Engraving",
-    "author": "Ruskin"
+    "author": "Ruskin",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/John%20Ruskin",
+    "wikipediaTitle": "John Ruskin"
   },
   {
     "id": "27650",
     "title": "The Doers",
-    "author": "Hopkins"
+    "author": "Hopkins",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Dustin%20Hopkins",
+    "wikipediaTitle": "Dustin Hopkins"
   },
   {
     "id": "27739",
     "title": "Poetical Works of Matthew Arnold",
-    "author": "Arnold"
+    "author": "Arnold",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Matthew%20Arnold",
+    "wikipediaTitle": "Matthew Arnold"
   },
   {
     "id": "27741",
     "title": "Colonel Carter's Christmas and The Romance of an Old-Fashioned Gentleman",
-    "author": "Smith"
+    "author": "Smith",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Francis%20Hopkinson%20Smith",
+    "wikipediaTitle": "Francis Hopkinson Smith"
   },
   {
     "id": "27986",
     "title": "Judith Lynn: A Story of the Sea",
-    "author": "Donnell"
+    "author": "Donnell",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Florence%20Nightingale",
+    "wikipediaTitle": "Florence Nightingale"
   },
   {
     "id": "27987",
     "title": "Glory and the Other Girl",
-    "author": "Donnell"
+    "author": "Donnell",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/These%20Girls",
+    "wikipediaTitle": "These Girls"
   },
   {
     "id": "28041",
     "title": "Selections from the Poems and Plays of Robert Browning",
-    "author": "Browning"
+    "author": "Browning",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/The%20Lost%20Leader%20(poem)",
+    "wikipediaTitle": "The Lost Leader (poem)"
   },
   {
     "id": "28209",
     "title": "Famous Women: George Sand",
-    "author": "Thomas"
+    "author": "Thomas",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/George%20Sand",
+    "wikipediaTitle": "George Sand"
   },
   {
     "id": "28722",
     "title": "A Child's Garden of Verses",
-    "author": "Stevenson"
+    "author": "Robert Louis Stevenson"
   },
   {
     "id": "28748",
     "title": "The Sandman: His Sea Stories",
-    "author": "Hopkins"
+    "author": "Hopkins",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Extraordinary%20Popular%20Delusions%20and%20the%20Madness%20of%20Crowds",
+    "wikipediaTitle": "Extraordinary Popular Delusions and the Madness of Crowds"
   },
   {
     "id": "28880",
     "title": "Recollections of a Tour Made in Scotland A.D. 1803",
-    "author": "Wordsworth"
+    "author": "Wordsworth",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Dorothy%20Wordsworth",
+    "wikipediaTitle": "Dorothy Wordsworth"
   },
   {
     "id": "29089",
     "title": "Testimony of the Sonnets as to the Authorship of the Shakespearean Plays and Poems",
-    "author": "Johnson"
+    "author": "Johnson",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Shakespeare%20authorship%20question",
+    "wikipediaTitle": "Shakespeare authorship question"
   },
   {
     "id": "29090",
     "title": "The Complete Poetical Works of Samuel Taylor Coleridge. Vol 1 and 2",
-    "author": "Coleridge"
+    "author": "Coleridge",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/List%20of%20poems%20by%20Samuel%20Taylor%20Coleridge",
+    "wikipediaTitle": "List of poems by Samuel Taylor Coleridge"
   },
   {
     "id": "29091",
     "title": "The Complete Poetical Works of Samuel Taylor Coleridge. Vol 1 (of 2)",
-    "author": "Coleridge"
+    "author": "Coleridge",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/List%20of%20poems%20by%20Samuel%20Taylor%20Coleridge",
+    "wikipediaTitle": "List of poems by Samuel Taylor Coleridge"
   },
   {
     "id": "29092",
     "title": "The Complete Poetical Works of Samuel Taylor Coleridge. Vol 2 (of 2)",
-    "author": "Coleridge"
+    "author": "Coleridge",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/List%20of%20poems%20by%20Samuel%20Taylor%20Coleridge",
+    "wikipediaTitle": "List of poems by Samuel Taylor Coleridge"
   },
   {
     "id": "29331",
     "title": "The Crevice",
-    "author": "Burns"
+    "author": "Burns",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/William%20J.%20Burns",
+    "wikipediaTitle": "William J. Burns"
   },
   {
     "id": "29404",
     "title": "The Very Small Person",
-    "author": "Donnell"
+    "author": "Donnell",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/McDonnell%20Douglas%20DC-10",
+    "wikipediaTitle": "McDonnell Douglas DC-10"
   },
   {
     "id": "29472",
     "title": "Select Conversations with an Uncle (Now Extinct) and Two Other Reminiscences",
-    "author": "Wells"
+    "author": "H.G. Wells"
   },
   {
     "id": "29492",
     "title": "Old Rambling House",
-    "author": "Herbert"
+    "author": "Herbert",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Old%20Rambling%20House",
+    "wikipediaTitle": "Old Rambling House"
   },
   {
     "id": "29561",
     "title": "In a Little Town",
-    "author": "Hughes"
+    "author": "Hughes",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Howard%20Hughes",
+    "wikipediaTitle": "Howard Hughes"
   },
   {
     "id": "29808",
     "title": "The Man Who Wins",
-    "author": "Herrick"
+    "author": "Herrick",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/The%20Invisible%20Man's%20Revenge",
+    "wikipediaTitle": "The Invisible Man's Revenge"
   },
   {
     "id": "29828",
     "title": "Is He Popenjoy?",
-    "author": "Trollope"
+    "author": "Trollope",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Anthony%20Trollope",
+    "wikipediaTitle": "Anthony Trollope"
   },
   {
     "id": "30185",
     "title": "London Lyrics",
-    "author": "Locker-Lampson"
+    "author": "Locker-Lampson",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Frederick%20Locker-Lampson",
+    "wikipediaTitle": "Frederick Locker-Lampson"
   },
   {
     "id": "30273",
@@ -2377,17 +3077,23 @@
   {
     "id": "30351",
     "title": "The Cup of Fury: A Novel of Cities and Shipyards",
-    "author": "Hughes"
+    "author": "Hughes",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Rupert%20Hughes",
+    "wikipediaTitle": "Rupert Hughes"
   },
   {
     "id": "30357",
     "title": "Select Poems of Thomas Gray",
-    "author": "Gray"
+    "author": "Gray",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Thomas%20Gray",
+    "wikipediaTitle": "Thomas Gray"
   },
   {
     "id": "30389",
     "title": "The Prayers of St. Paul",
-    "author": "Thomas"
+    "author": "Thomas",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/St%20Paul's%20Cathedral",
+    "wikipediaTitle": "St Paul's Cathedral"
   },
   {
     "id": "30440",
@@ -2397,37 +3103,49 @@
   {
     "id": "30451",
     "title": "A Day with Keats",
-    "author": "Byron"
+    "author": "Byron",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/John%20Keats",
+    "wikipediaTitle": "John Keats"
   },
   {
     "id": "30488",
     "title": "The Green Helmet and Other Poems",
-    "author": "Yeats"
+    "author": "Yeats",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/W.%20B.%20Yeats",
+    "wikipediaTitle": "W. B. Yeats"
   },
   {
     "id": "30526",
     "title": "Illustrations of The Book of Job",
-    "author": "Blake"
+    "author": "Blake",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/William%20Blake's%20Illustrations%20of%20the%20Book%20of%20Job",
+    "wikipediaTitle": "William Blake's Illustrations of the Book of Job"
   },
   {
     "id": "30538",
     "title": "New worlds for old: A plain account of modern socialism",
-    "author": "Wells"
+    "author": "H.G. Wells"
   },
   {
     "id": "30652",
     "title": "In The Seven Woods: Being Poems Chiefly of the Irish Heroic Age",
-    "author": "Yeats"
+    "author": "Yeats",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/In%20the%20Seven%20Woods",
+    "wikipediaTitle": "In the Seven Woods"
   },
   {
     "id": "30736",
     "title": "Clark's Field",
-    "author": "Herrick"
+    "author": "Herrick",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Clark%20Gable",
+    "wikipediaTitle": "Clark Gable"
   },
   {
     "id": "30819",
     "title": "Old Roads and New Roads",
-    "author": "Donne"
+    "author": "Donne",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/William%20Bodham%20Donne",
+    "wikipediaTitle": "William Bodham Donne"
   },
   {
     "id": "31045",
@@ -2437,77 +3155,105 @@
   {
     "id": "31706",
     "title": "Milton: Minor Poems",
-    "author": "Milton"
+    "author": "John Milton"
   },
   {
     "id": "31763",
     "title": "Irish Fairy Tales",
-    "author": "Yeats"
+    "author": "Yeats",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/List%20of%20fairy%20tales",
+    "wikipediaTitle": "List of fairy tales"
   },
   {
     "id": "31867",
     "title": "History of the Sixteenth Connecticut Volunteers",
-    "author": "Blakeslee"
+    "author": "Blakeslee",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/16th%20Connecticut%20Infantry%20Regiment",
+    "wikipediaTitle": "16th Connecticut Infantry Regiment"
   },
   {
     "id": "31959",
     "title": "Seven Poems and a Fragment",
-    "author": "Yeats"
+    "author": "Yeats",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Kubla%20Khan",
+    "wikipediaTitle": "Kubla Khan"
   },
   {
     "id": "31967",
     "title": "Graded Poetry: Third Year",
-    "author": "Blake"
+    "author": "Blake",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Georgia%20Alexander",
+    "wikipediaTitle": "Georgia Alexander"
   },
   {
     "id": "32224",
     "title": "Tom Brown's School Days",
-    "author": "Hughes"
+    "author": "Hughes",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Tom%20Brown's%20School%20Days",
+    "wikipediaTitle": "Tom Brown's School Days"
   },
   {
     "id": "32233",
     "title": "The Wind Among the Reeds",
-    "author": "Yeats"
+    "author": "Yeats",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/W.%20B.%20Yeats",
+    "wikipediaTitle": "W. B. Yeats"
   },
   {
     "id": "32459",
     "title": "The Poetical Works of William Wordsworth — Volume 4 (of 8)",
-    "author": "Wordsworth"
+    "author": "Wordsworth",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/William%20Wordsworth",
+    "wikipediaTitle": "William Wordsworth"
   },
   {
     "id": "32491",
     "title": "The Wild Swans at Coole",
-    "author": "Yeats"
+    "author": "Yeats",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/The%20Wild%20Swans%20at%20Coole%20(poem)",
+    "wikipediaTitle": "The Wild Swans at Coole (poem)"
   },
   {
     "id": "32650",
     "title": "Some Personal Reminiscences of Service in the Cavalry of the Army of the Potomac",
-    "author": "Thomas"
+    "author": "Thomas",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Army%20of%20the%20Tennessee",
+    "wikipediaTitle": "Army of the Tennessee"
   },
   {
     "id": "32884",
     "title": "Ideas of Good and Evil",
-    "author": "Yeats"
+    "author": "Yeats",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/W.%20B.%20Yeats",
+    "wikipediaTitle": "W. B. Yeats"
   },
   {
     "id": "32990",
     "title": "A Day with Lord Byron",
-    "author": "Byron"
+    "author": "Byron",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Lord%20Byron",
+    "wikipediaTitle": "Lord Byron"
   },
   {
     "id": "33087",
     "title": "Discoveries: A Volume of Essays",
-    "author": "Yeats"
+    "author": "Yeats",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/W.%20B.%20Yeats",
+    "wikipediaTitle": "W. B. Yeats"
   },
   {
     "id": "33094",
     "title": "The Cutting of an Agate",
-    "author": "Yeats"
+    "author": "Yeats",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/W.%20B.%20Yeats%20bibliography",
+    "wikipediaTitle": "W. B. Yeats bibliography"
   },
   {
     "id": "33145",
     "title": "Come Out of the Kitchen! A Romance",
-    "author": "Miller"
+    "author": "Miller",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Alice%20Duer%20Miller",
+    "wikipediaTitle": "Alice Duer Miller"
   },
   {
     "id": "33251",
@@ -2517,32 +3263,44 @@
   {
     "id": "33286",
     "title": "From Bull Run to Appomattox: A Boy's View",
-    "author": "Hopkins"
+    "author": "Hopkins",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Abraham%20Lincoln",
+    "wikipediaTitle": "Abraham Lincoln"
   },
   {
     "id": "33321",
     "title": "Two plays for dancers",
-    "author": "Yeats"
+    "author": "Yeats",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/W.%20B.%20Yeats",
+    "wikipediaTitle": "W. B. Yeats"
   },
   {
     "id": "33338",
     "title": "Per Amica Silentia Lunae",
-    "author": "Yeats"
+    "author": "Yeats",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/W.%20B.%20Yeats",
+    "wikipediaTitle": "W. B. Yeats"
   },
   {
     "id": "33348",
     "title": "Reveries over Childhood and Youth",
-    "author": "Yeats"
+    "author": "Yeats",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/W.%20B.%20Yeats%20bibliography",
+    "wikipediaTitle": "W. B. Yeats bibliography"
   },
   {
     "id": "33430",
     "title": "Mosada: A dramatic poem",
-    "author": "Yeats"
+    "author": "Yeats",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/W.%20B.%20Yeats",
+    "wikipediaTitle": "W. B. Yeats"
   },
   {
     "id": "33505",
     "title": "The Trembling of the Veil",
-    "author": "Yeats"
+    "author": "Yeats",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/W.%20B.%20Yeats%20bibliography",
+    "wikipediaTitle": "W. B. Yeats bibliography"
   },
   {
     "id": "33643",
@@ -2552,137 +3310,183 @@
   {
     "id": "33777",
     "title": "Tom Brown at Rugby",
-    "author": "Hughes"
+    "author": "Hughes",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Tom%20Brown's%20School%20Days",
+    "wikipediaTitle": "Tom Brown's School Days"
   },
   {
     "id": "33887",
     "title": "Fairy and Folk Tales of the Irish Peasantry",
-    "author": "Yeats"
+    "author": "Yeats",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/List%20of%20fairy%20tales",
+    "wikipediaTitle": "List of fairy tales"
   },
   {
     "id": "33925",
     "title": "The Geological Story of the Isle of Wight",
-    "author": "Hughes"
+    "author": "Hughes",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Geology%20of%20the%20Isle%20of%20Wight",
+    "wikipediaTitle": "Geology of the Isle of Wight"
   },
   {
     "id": "34221",
     "title": "Electricity and Magnetism",
-    "author": "Gray"
+    "author": "Gray",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Electric%20charge",
+    "wikipediaTitle": "Electric charge"
   },
   {
     "id": "34263",
     "title": "The Banshee",
-    "author": "O'Donnell"
+    "author": "O'Donnell",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/The%20Cure",
+    "wikipediaTitle": "The Cure"
   },
   {
     "id": "34331",
     "title": "Minor Poems",
-    "author": "Johnson"
+    "author": "Johnson",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Lionel%20Johnson",
+    "wikipediaTitle": "Lionel Johnson"
   },
   {
     "id": "34752",
     "title": "Poems: With a Sketch of the Life and Experience of Annie R. Smith",
-    "author": "Smith"
+    "author": "Smith",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Annie%20R.%20Smith",
+    "wikipediaTitle": "Annie R. Smith"
   },
   {
     "id": "34903",
     "title": "Dress design",
-    "author": "Hughes"
+    "author": "Hughes",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Howard%20Hughes",
+    "wikipediaTitle": "Howard Hughes"
   },
   {
     "id": "34925",
     "title": "Parlous Times: A Novel of Modern Diplomacy",
-    "author": "Wells"
+    "author": "H.G. Wells"
   },
   {
     "id": "35164",
     "title": "The Secret Battle",
-    "author": "Herbert"
+    "author": "Herbert",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/The%20Secret%20Battle",
+    "wikipediaTitle": "The Secret Battle"
   },
   {
     "id": "35293",
     "title": "A day with the poet Burns",
-    "author": "Burns"
+    "author": "Burns",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Burns%20supper",
+    "wikipediaTitle": "Burns supper"
   },
   {
     "id": "35299",
     "title": "The Real Robert Burns",
-    "author": "Hughes"
+    "author": "Hughes",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Howard%20Hughes",
+    "wikipediaTitle": "Howard Hughes"
   },
   {
     "id": "35388",
     "title": "The Master of the Inn",
-    "author": "Herrick"
+    "author": "Herrick",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Alfred%20Hitchcock",
+    "wikipediaTitle": "Alfred Hitchcock"
   },
   {
     "id": "35497",
     "title": "Three Sunsets and Other Poems",
-    "author": "Carroll"
+    "author": "Lewis Carroll"
   },
   {
     "id": "35536",
     "title": "The Poems and Verses of Charles Dickens",
-    "author": "Dickens"
+    "author": "Charles Dickens"
   },
   {
     "id": "35592",
     "title": "Some Current Folk-Songs of the Negro",
-    "author": "Thomas"
+    "author": "Thomas",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Protest%20songs%20in%20the%20United%20States",
+    "wikipediaTitle": "Protest songs in the United States"
   },
   {
     "id": "35597",
     "title": "A Treatise on the Brewing of Beer",
-    "author": "Hughes"
+    "author": "Hughes",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Purl",
+    "wikipediaTitle": "Purl"
   },
   {
     "id": "35598",
     "title": "Tales from Tennyson",
-    "author": "Tennyson"
+    "author": "Tennyson",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Alfred%2C%20Lord%20Tennyson",
+    "wikipediaTitle": "Alfred, Lord Tennyson"
   },
   {
     "id": "35698",
     "title": "Letters of John Keats to His Family and Friends",
-    "author": "Keats"
+    "author": "Keats",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/George%20Keats",
+    "wikipediaTitle": "George Keats"
   },
   {
     "id": "36004",
     "title": "The Pullman boycott",
-    "author": "Burns"
+    "author": "Burns",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Pullman%20Strike",
+    "wikipediaTitle": "Pullman Strike"
   },
   {
     "id": "36074",
     "title": "Life of Robert Burns",
-    "author": "Carlyle"
+    "author": "Carlyle",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Thomas%20Carlyle",
+    "wikipediaTitle": "Thomas Carlyle"
   },
   {
     "id": "36091",
     "title": "An Anthology of Jugoslav Poetry; Serbian Lyrics",
-    "author": "Stevenson"
+    "author": "Robert Louis Stevenson"
   },
   {
     "id": "36185",
     "title": "The Sandman: His Farm Stories",
-    "author": "Hopkins"
+    "author": "Hopkins",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/List%20of%20suicides",
+    "wikipediaTitle": "List of suicides"
   },
   {
     "id": "36305",
     "title": "A Day with Walt Whitman",
-    "author": "Byron"
+    "author": "Byron",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Walt%20Whitman",
+    "wikipediaTitle": "Walt Whitman"
   },
   {
     "id": "36337",
     "title": "A Day with Samuel Taylor Coleridge",
-    "author": "Byron"
+    "author": "Byron",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Samuel%20Taylor%20Coleridge",
+    "wikipediaTitle": "Samuel Taylor Coleridge"
   },
   {
     "id": "36347",
     "title": "Holman Hunt",
-    "author": "Coleridge"
+    "author": "Coleridge",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Mary%20Coleridge",
+    "wikipediaTitle": "Mary Coleridge"
   },
   {
     "id": "36472",
     "title": "A Day with Robert Schumann",
-    "author": "Byron"
+    "author": "Byron",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Robert%20Schumann",
+    "wikipediaTitle": "Robert Schumann"
   },
   {
     "id": "36495",
@@ -2692,152 +3496,208 @@
   {
     "id": "37118",
     "title": "Concerning Sally",
-    "author": "Hopkins"
+    "author": "Hopkins",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Esek%20Hopkins",
+    "wikipediaTitle": "Esek Hopkins"
   },
   {
     "id": "37284",
     "title": "Dickens As an Educator",
-    "author": "Hughes"
+    "author": "Hughes",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Hogarth",
+    "wikipediaTitle": "Hogarth"
   },
   {
     "id": "37343",
     "title": "Caught by the Turks",
-    "author": "Yeats-Brown"
+    "author": "Yeats-Brown",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Francis%20Yeats-Brown",
+    "wikipediaTitle": "Francis Yeats-Brown"
   },
   {
     "id": "37387",
     "title": "Letters to Severall Persons of Honour",
-    "author": "Donne"
+    "author": "Donne",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/John%20Donne",
+    "wikipediaTitle": "John Donne"
   },
   {
     "id": "37609",
     "title": "The Story of Great Inventions",
-    "author": "Burns"
+    "author": "Burns",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/The%20Great%20(TV%20series)",
+    "wikipediaTitle": "The Great (TV series)"
   },
   {
     "id": "37818",
     "title": "Sketch of the life of Abraham Lincoln",
-    "author": "Arnold"
+    "author": "Arnold",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Assassination%20of%20Abraham%20Lincoln",
+    "wikipediaTitle": "Assassination of Abraham Lincoln"
   },
   {
     "id": "38041",
     "title": "Old Celtic Romances",
-    "author": "Joyce"
+    "author": "James Joyce"
   },
   {
     "id": "38172",
     "title": "Atlantic Narratives: Modern Short Stories",
-    "author": "Thomas"
+    "author": "Thomas",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Short%20story",
+    "wikipediaTitle": "Short story"
   },
   {
     "id": "38250",
     "title": "The Honour of Savelli: A Romance",
-    "author": "Levett Yeats"
+    "author": "Levett Yeats",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Sidney%20Kilner%20Levett-Yeats",
+    "wikipediaTitle": "Sidney Kilner Levett-Yeats"
   },
   {
     "id": "38306",
     "title": "A Galahad of the Creeks; The Widow Lamport",
-    "author": "Levett Yeats"
+    "author": "Levett Yeats",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Sidney%20Kilner%20Levett-Yeats",
+    "wikipediaTitle": "Sidney Kilner Levett-Yeats"
   },
   {
     "id": "38311",
     "title": "What Will People Say? A Novel",
-    "author": "Hughes"
+    "author": "Hughes",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/What%20Will%20People%20Say%3F",
+    "wikipediaTitle": "What Will People Say?"
   },
   {
     "id": "38323",
     "title": "The Chevalier d'Auriac",
-    "author": "Levett Yeats"
+    "author": "Levett Yeats",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Sidney%20Kilner%20Levett-Yeats",
+    "wikipediaTitle": "Sidney Kilner Levett-Yeats"
   },
   {
     "id": "38420",
     "title": "Tennyson and his friends",
-    "author": "Tennyson"
+    "author": "Tennyson",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Alfred%2C%20Lord%20Tennyson",
+    "wikipediaTitle": "Alfred, Lord Tennyson"
   },
   {
     "id": "38504",
     "title": "Robin's Rambles",
-    "author": "Byron"
+    "author": "Byron",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/List%20of%20Green%20Acres%20episodes",
+    "wikipediaTitle": "List of Green Acres episodes"
   },
   {
     "id": "38727",
     "title": "A Vindication of Natural Diet.",
-    "author": "Shelley"
+    "author": "Mary Shelley"
   },
   {
     "id": "38877",
     "title": "Poems",
-    "author": "Yeats"
+    "author": "Yeats",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/W.%20B.%20Yeats",
+    "wikipediaTitle": "W. B. Yeats"
   },
   {
     "id": "39373",
     "title": "Lord Kelvin: An account of his scientific life and work",
-    "author": "Gray"
+    "author": "Gray",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Lord%20Kelvin",
+    "wikipediaTitle": "Lord Kelvin"
   },
   {
     "id": "39456",
     "title": "The clammer and the submarine",
-    "author": "Hopkins"
+    "author": "Hopkins",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Communication%20with%20submarines",
+    "wikipediaTitle": "Communication with submarines"
   },
   {
     "id": "39720",
     "title": "The Abolition Crusade and Its Consequences: Four Periods of American History",
-    "author": "Herbert"
+    "author": "Herbert",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Hilary%20A.%20Herbert",
+    "wikipediaTitle": "Hilary A. Herbert"
   },
   {
     "id": "40016",
     "title": "The Last Rose of Summer",
-    "author": "Hughes"
+    "author": "Hughes",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/The%20Last%20Rose%20of%20Summer",
+    "wikipediaTitle": "The Last Rose of Summer"
   },
   {
     "id": "40060",
     "title": "The Christian Faith Under Modern Searchlights",
-    "author": "Johnson"
+    "author": "Johnson",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Bethel%20Church%20(Redding)",
+    "wikipediaTitle": "Bethel Church (Redding)"
   },
   {
     "id": "40130",
     "title": "A Day with John Milton",
-    "author": "Byron"
+    "author": "Byron",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Lord%20Byron",
+    "wikipediaTitle": "Lord Byron"
   },
   {
     "id": "40170",
     "title": "The Romance of Aircraft",
-    "author": "Smith"
+    "author": "Smith",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Douglas%20Aircraft%20Company",
+    "wikipediaTitle": "Douglas Aircraft Company"
   },
   {
     "id": "40395",
     "title": "Theory of Groups of Finite Order",
-    "author": "Burnside"
+    "author": "Burnside",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/William%20Burnside",
+    "wikipediaTitle": "William Burnside"
   },
   {
     "id": "40440",
     "title": "A Day with Browning",
-    "author": "Browning"
+    "author": "Browning",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/John%20Browning",
+    "wikipediaTitle": "John Browning"
   },
   {
     "id": "40441",
     "title": "A Day with William Shakespeare",
-    "author": "Byron"
+    "author": "Byron",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Shakespeare's%20Birthplace",
+    "wikipediaTitle": "Shakespeare's Birthplace"
   },
   {
     "id": "40442",
     "title": "A Day with the Poet Tennyson",
-    "author": "Tennyson"
+    "author": "Tennyson",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Alfred%2C%20Lord%20Tennyson",
+    "wikipediaTitle": "Alfred, Lord Tennyson"
   },
   {
     "id": "40607",
     "title": "Excuse Me!",
-    "author": "Hughes"
+    "author": "Hughes",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Excuse%20Me",
+    "wikipediaTitle": "Excuse Me"
   },
   {
     "id": "40718",
     "title": "Atlantic Narratives: Modern Short Stories; Second Series",
-    "author": "Thomas"
+    "author": "Thomas",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Short%20story",
+    "wikipediaTitle": "Short story"
   },
   {
     "id": "40823",
     "title": "Ghostly Phenomena",
-    "author": "O'Donnell"
+    "author": "O'Donnell",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Elliott%20O'Donnell",
+    "wikipediaTitle": "Elliott O'Donnell"
   },
   {
     "id": "40845",
@@ -2847,122 +3707,170 @@
   {
     "id": "41071",
     "title": "A Son of Perdition: An Occult Romance",
-    "author": "Hume"
+    "author": "Hume",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Fergus%20Hume",
+    "wikipediaTitle": "Fergus Hume"
   },
   {
     "id": "41102",
     "title": "The King's Threshold; and On Baile's Strand",
-    "author": "Yeats"
+    "author": "Yeats",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/W.%20B.%20Yeats%20bibliography",
+    "wikipediaTitle": "W. B. Yeats bibliography"
   },
   {
     "id": "41135",
     "title": "The Theory and Practice of Model Aeroplaning",
-    "author": "Johnson"
+    "author": "Johnson",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Aristotle",
+    "wikipediaTitle": "Aristotle"
   },
   {
     "id": "41166",
     "title": "Trails and Tramps in Alaska and Newfoundland",
-    "author": "Thomas"
+    "author": "Thomas",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/List%20of%20solved%20missing%20person%20cases%3A%201950%E2%80%931999",
+    "wikipediaTitle": "List of solved missing person cases: 1950–1999"
   },
   {
     "id": "41168",
     "title": "The Siege of Norwich Castle: A story of the last struggle against the Conqueror",
-    "author": "Blake"
+    "author": "Blake",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Cultural%20depictions%20of%20William%20the%20Conqueror",
+    "wikipediaTitle": "Cultural depictions of William the Conqueror"
   },
   {
     "id": "41338",
     "title": "The Memoirs of an American Citizen",
-    "author": "Herrick"
+    "author": "Herrick",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/William%20Rockefeller%20Sr.",
+    "wikipediaTitle": "William Rockefeller Sr."
   },
   {
     "id": "41345",
     "title": "Windsor Castle",
-    "author": "Thomas"
+    "author": "Thomas",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/St%20George's%20Chapel%2C%20Windsor%20Castle",
+    "wikipediaTitle": "St George's Chapel, Windsor Castle"
   },
   {
     "id": "41370",
     "title": "Stained glass of the middle ages in England and France",
-    "author": "Arnold"
+    "author": "Arnold",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Medieval%20stained%20glass",
+    "wikipediaTitle": "Medieval stained glass"
   },
   {
     "id": "41420",
     "title": "In the Days of Washington: A Story of the American Revolution",
-    "author": "Graydon"
+    "author": "Graydon",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Battle%20of%20Bunker%20Hill",
+    "wikipediaTitle": "Battle of Bunker Hill"
   },
   {
     "id": "41520",
     "title": "The Bible and Life",
-    "author": "Hughes"
+    "author": "Hughes",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/William%20Morgan%20(Bible%20translator)",
+    "wikipediaTitle": "William Morgan (Bible translator)"
   },
   {
     "id": "41557",
     "title": "Burial Mounds of the Northern Sections of the United States",
-    "author": "Thomas"
+    "author": "Thomas",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Thomas%20Jefferson",
+    "wikipediaTitle": "Thomas Jefferson"
   },
   {
     "id": "41705",
     "title": "Anima Poetæ",
-    "author": "Coleridge"
+    "author": "Coleridge",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Ernest%20Hartley%20Coleridge",
+    "wikipediaTitle": "Ernest Hartley Coleridge"
   },
   {
     "id": "41791",
     "title": "The House by the River",
-    "author": "Herbert"
+    "author": "Herbert",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/House%20by%20the%20River",
+    "wikipediaTitle": "House by the River"
   },
   {
     "id": "An Experience",
     "title": " an Illustration",
-    "author": "Gray"
+    "author": "Gray",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Asa%20Gray",
+    "wikipediaTitle": "Asa Gray"
   },
   {
     "id": "42061",
     "title": "The American Egypt: A Record of Travel in Yucatan",
-    "author": "Arnold"
+    "author": "Arnold",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/List%20of%20travel%20books",
+    "wikipediaTitle": "List of travel books"
   },
   {
     "id": "42255",
     "title": "A Little Fleet",
-    "author": "Yeats"
+    "author": "Yeats",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/W.%20B.%20Yeats",
+    "wikipediaTitle": "W. B. Yeats"
   },
   {
     "id": "42301",
     "title": "Poems",
-    "author": "Smith"
+    "author": "Smith",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Clark%20Ashton%20Smith",
+    "wikipediaTitle": "Clark Ashton Smith"
   },
   {
     "id": "42904",
     "title": "China",
-    "author": "Blake"
+    "author": "Blake",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Blake%20Ritson",
+    "wikipediaTitle": "Blake Ritson"
   },
   {
     "id": "43042",
     "title": "The Expert Maid-Servant",
-    "author": "Herrick"
+    "author": "Herrick",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/The%20Crucible",
+    "wikipediaTitle": "The Crucible"
   },
   {
     "id": "43121",
     "title": "Amethyst: The Story of a Beauty",
-    "author": "Coleridge"
+    "author": "Coleridge",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Alps",
+    "wikipediaTitle": "Alps"
   },
   {
     "id": "43148",
     "title": "An English Squire",
-    "author": "Coleridge"
+    "author": "Coleridge",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/The%20History%20of%20Tom%20Jones%2C%20a%20Foundling",
+    "wikipediaTitle": "The History of Tom Jones, a Foundling"
   },
   {
     "id": "43149",
     "title": "Waynflete",
-    "author": "Coleridge"
+    "author": "Coleridge",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/List%20of%20provosts%20of%20Eton%20College",
+    "wikipediaTitle": "List of provosts of Eton College"
   },
   {
     "id": "43150",
     "title": "The Constant Prince",
-    "author": "Coleridge"
+    "author": "Coleridge",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Charlotte%20Mary%20Yonge",
+    "wikipediaTitle": "Charlotte Mary Yonge"
   },
   {
     "id": "43162",
     "title": "Hugh Crichton's Romance",
-    "author": "Coleridge"
+    "author": "Coleridge",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/List%20of%20University%20of%20Cambridge%20people",
+    "wikipediaTitle": "List of University of Cambridge people"
   },
   {
     "id": "43187",
@@ -2982,7 +3890,9 @@
   {
     "id": "43565",
     "title": "Thomas Hardy's Dorset",
-    "author": "Hopkins"
+    "author": "Hopkins",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Thomas%20Hardy's%20Wessex",
+    "wikipediaTitle": "Thomas Hardy's Wessex"
   },
   {
     "id": "43597",
@@ -2992,32 +3902,44 @@
   {
     "id": "43611",
     "title": "The Tables of the Law; & The Adoration of the Magi",
-    "author": "Yeats"
+    "author": "Yeats",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/W.%20B.%20Yeats%20bibliography",
+    "wikipediaTitle": "W. B. Yeats bibliography"
   },
   {
     "id": "43805",
     "title": "Little Books About Old Furniture. Volume II. The Period of Queen Anne",
-    "author": "Blake"
+    "author": "Blake",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Stuart%20period",
+    "wikipediaTitle": "Stuart period"
   },
   {
     "id": "44395",
     "title": "At the Court of the Amîr: A Narrative",
-    "author": "Gray"
+    "author": "Gray",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Wikipedia",
+    "wikipediaTitle": "Wikipedia"
   },
   {
     "id": "44397",
     "title": "Haunted Places in England",
-    "author": "O'Donnell"
+    "author": "O'Donnell",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Elliott%20O'Donnell",
+    "wikipediaTitle": "Elliott O'Donnell"
   },
   {
     "id": "44919",
     "title": "Discourses in America",
-    "author": "Arnold"
+    "author": "Arnold",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Critical%20discourse%20analysis",
+    "wikipediaTitle": "Critical discourse analysis"
   },
   {
     "id": "44955",
     "title": "A short history of Rhode Island",
-    "author": "Greene"
+    "author": "Greene",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Coventry%2C%20Rhode%20Island",
+    "wikipediaTitle": "Coventry, Rhode Island"
   },
   {
     "id": "45288",
@@ -3027,117 +3949,157 @@
   {
     "id": "45315",
     "title": "The Marriage of Heaven and Hell",
-    "author": "Blake"
+    "author": "Blake",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/The%20Marriage%20of%20Heaven%20and%20Hell",
+    "wikipediaTitle": "The Marriage of Heaven and Hell"
   },
   {
     "id": "45341",
     "title": "Wager of Battle: A Tale of Saxon Slavery in Sherwood Forest",
-    "author": "Herbert"
+    "author": "Herbert",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Culture%20of%20England",
+    "wikipediaTitle": "Culture of England"
   },
   {
     "id": "45522",
     "title": "The Gospel of Slavery: A Primer of Freedom",
-    "author": "Thomas"
+    "author": "Thomas",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Lost%20Cause%20of%20the%20Confederacy",
+    "wikipediaTitle": "Lost Cause of the Confederacy"
   },
   {
     "id": "46018",
     "title": "Loyola and the Educational System of the Jesuits",
-    "author": "Hughes"
+    "author": "Hughes",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Loyola%20Marymount%20University",
+    "wikipediaTitle": "Loyola Marymount University"
   },
   {
     "id": "46304",
     "title": "The Silent Rifleman! A tale of the Texan prairies",
-    "author": "Herbert"
+    "author": "Herbert",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/List%20of%20people%20from%20Texas",
+    "wikipediaTitle": "List of people from Texas"
   },
   {
     "id": "47143",
     "title": "The Poetical Works of William Wordsworth — Volume 7 (of 8)",
-    "author": "Wordsworth"
+    "author": "Wordsworth",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/William%20Wordsworth",
+    "wikipediaTitle": "William Wordsworth"
   },
   {
     "id": "47476",
     "title": "Poems of American History",
-    "author": "Stevenson"
+    "author": "Robert Louis Stevenson"
   },
   {
     "id": "47634",
     "title": "Sons and Lovers",
-    "author": "Lawrence"
+    "author": "Lawrence",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Sons%20and%20Lovers",
+    "wikipediaTitle": "Sons and Lovers"
   },
   {
     "id": "47651",
     "title": "The Poetical Works of William Wordsworth — Volume 6 (of 8)",
-    "author": "Wordsworth"
+    "author": "Wordsworth",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/William%20Wordsworth",
+    "wikipediaTitle": "William Wordsworth"
   },
   {
     "id": "47702",
     "title": "Through the Gates of Old Romance",
-    "author": "Mills"
+    "author": "Mills",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Baldur's%20Gate%203",
+    "wikipediaTitle": "Baldur's Gate 3"
   },
   {
     "id": "48059",
     "title": "A Vers de Société Anthology",
-    "author": "Wells"
+    "author": "H.G. Wells"
   },
   {
     "id": "48377",
     "title": "Bill Bruce on Forest Patrol",
-    "author": "Arnold"
+    "author": "Arnold",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Henry%20H.%20Arnold",
+    "wikipediaTitle": "Henry H. Arnold"
   },
   {
     "id": "48484",
     "title": "Narrative and Lyric Poems (Second Series) for Use in the Lower School",
-    "author": "Stevenson"
+    "author": "Robert Louis Stevenson"
   },
   {
     "id": "49624",
     "title": "Ballad of the Lost Hare",
-    "author": "Sidney"
+    "author": "Sidney",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Harriett%20Lothrop",
+    "wikipediaTitle": "Harriett Lothrop"
   },
   {
     "id": "49723",
     "title": "The Poems of Oliver Goldsmith",
-    "author": "Goldsmith"
+    "author": "Goldsmith",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Oliver%20Goldsmith",
+    "wikipediaTitle": "Oliver Goldsmith"
   },
   {
     "id": "50021",
     "title": "An Irish precursor of Dante",
-    "author": "Boswell"
+    "author": "Boswell",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/The%20Vision%20of%20Adamn%C3%A1n",
+    "wikipediaTitle": "The Vision of Adamnán"
   },
   {
     "id": "50490",
     "title": "Legendary Heroes of Ireland",
-    "author": "Hughes"
+    "author": "Hughes",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Ragnar%20Lodbrok",
+    "wikipediaTitle": "Ragnar Lodbrok"
   },
   {
     "id": "50775",
     "title": "Twenty Years' Experience as a Ghost Hunter",
-    "author": "O'Donnell"
+    "author": "O'Donnell",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Elliott%20O'Donnell",
+    "wikipediaTitle": "Elliott O'Donnell"
   },
   {
     "id": "50908",
     "title": "A Relic of the Revolution",
-    "author": "Herbert"
+    "author": "Herbert",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Crown%20of%20thorns",
+    "wikipediaTitle": "Crown of thorns"
   },
   {
     "id": "51015",
     "title": "Moral Poison in Modern Fiction",
-    "author": "Johnson"
+    "author": "Johnson",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Knives%20Out",
+    "wikipediaTitle": "Knives Out"
   },
   {
     "id": "51540",
     "title": "Fun for the Household: A Book of Games",
-    "author": "Gray"
+    "author": "Gray",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Dick%20and%20Jane",
+    "wikipediaTitle": "Dick and Jane"
   },
   {
     "id": "51568",
     "title": "Some Haunted Houses of England & Wales.",
-    "author": "O'Donnell"
+    "author": "O'Donnell",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Elliott%20O'Donnell",
+    "wikipediaTitle": "Elliott O'Donnell"
   },
   {
     "id": "51839",
     "title": "Nacogdoches",
-    "author": "Blake"
+    "author": "Blake",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Nacogdoches%2C%20Texas",
+    "wikipediaTitle": "Nacogdoches, Texas"
   },
   {
     "id": "52102",
@@ -3152,17 +4114,21 @@
   {
     "id": "52297",
     "title": "Medical Women: Two Essays",
-    "author": "Jex-Blake"
+    "author": "Jex-Blake",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Sophia%20Jex-Blake",
+    "wikipediaTitle": "Sophia Jex-Blake"
   },
   {
     "id": "52531",
     "title": "Green Doors",
-    "author": "Eliot"
+    "author": "T.S. Eliot"
   },
   {
     "id": "52539",
     "title": "Beautiful Wales",
-    "author": "Thomas"
+    "author": "Thomas",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/R.%20S.%20Thomas",
+    "wikipediaTitle": "R. S. Thomas"
   },
   {
     "id": "52586",
@@ -3197,12 +4163,16 @@
   {
     "id": "52836",
     "title": "The Poetical Works of William Wordsworth — Volume 8 (of 8)",
-    "author": "Wordsworth"
+    "author": "Wordsworth",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/William%20Wordsworth",
+    "wikipediaTitle": "William Wordsworth"
   },
   {
     "id": "52840",
     "title": "Salvation Universal",
-    "author": "Smith"
+    "author": "Smith",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Christian%20universalism",
+    "wikipediaTitle": "Christian universalism"
   },
   {
     "id": "52956",
@@ -3222,47 +4192,65 @@
   {
     "id": "53165",
     "title": "A Day with Robert Louis Stevenson",
-    "author": "Byron"
+    "author": "Byron",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/History%20of%20Kiribati",
+    "wikipediaTitle": "History of Kiribati"
   },
   {
     "id": "53333",
     "title": "Ebony and Crystal: Poems in Verse and Prose",
-    "author": "Smith"
+    "author": "Smith",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Clark%20Ashton%20Smith",
+    "wikipediaTitle": "Clark Ashton Smith"
   },
   {
     "id": "53754",
     "title": "The Captain of the Wight: A Romance of Carisbrooke Castle in 1488",
-    "author": "Cowper"
+    "author": "Cowper",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Frank%20Cowper",
+    "wikipediaTitle": "Frank Cowper"
   },
   {
     "id": "54058",
     "title": "Love Poems and Others",
-    "author": "Lawrence"
+    "author": "Lawrence",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/D.%20H.%20Lawrence",
+    "wikipediaTitle": "D. H. Lawrence"
   },
   {
     "id": "54340",
     "title": "The Art of Architectural Modelling in Paper",
-    "author": "Richardson"
+    "author": "Richardson",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Paper%20plane",
+    "wikipediaTitle": "Paper plane"
   },
   {
     "id": "54435",
     "title": "Aurora Leigh",
-    "author": "Browning"
+    "author": "Browning",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Aurora%20Leigh",
+    "wikipediaTitle": "Aurora Leigh"
   },
   {
     "id": "54501",
     "title": "Two Dianas in Somaliland: The Record of a Shooting Trip",
-    "author": "Herbert"
+    "author": "Herbert",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Agnes%20Herbert",
+    "wikipediaTitle": "Agnes Herbert"
   },
   {
     "id": "54502",
     "title": "Vacation Rambles",
-    "author": "Hughes"
+    "author": "Hughes",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Thomas%20Hughes",
+    "wikipediaTitle": "Thomas Hughes"
   },
   {
     "id": "54985",
     "title": "Poems",
-    "author": "Arnold"
+    "author": "Arnold",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Matthew%20Arnold",
+    "wikipediaTitle": "Matthew Arnold"
   },
   {
     "id": "55042",
@@ -3272,107 +4260,147 @@
   {
     "id": "55102",
     "title": "The Wooden Hand: A Detective Story",
-    "author": "Hume"
+    "author": "Hume",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Fergus%20Hume",
+    "wikipediaTitle": "Fergus Hume"
   },
   {
     "id": "55815",
     "title": "Peggy Plays Off-Broadway",
-    "author": "Hughes"
+    "author": "Hughes",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/The%20Iceman%20Cometh",
+    "wikipediaTitle": "The Iceman Cometh"
   },
   {
     "id": "55826",
     "title": "Peggy Goes Straw Hat",
-    "author": "Hughes"
+    "author": "Hughes",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Cary%20Grant",
+    "wikipediaTitle": "Cary Grant"
   },
   {
     "id": "55830",
     "title": "Peggy on the Road",
-    "author": "Hughes"
+    "author": "Hughes",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Peggy%20Seeger",
+    "wikipediaTitle": "Peggy Seeger"
   },
   {
     "id": "55918",
     "title": "Oxford",
-    "author": "Thomas"
+    "author": "Thomas",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Oxford",
+    "wikipediaTitle": "Oxford"
   },
   {
     "id": "55933",
     "title": "Peggy Finds the Theatre",
-    "author": "Hughes"
+    "author": "Hughes",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Dusty%20Hughes%20(playwright)",
+    "wikipediaTitle": "Dusty Hughes (playwright)"
   },
   {
     "id": "55986",
     "title": "Letters of Asa Gray; Vol. 1",
-    "author": "Gray"
+    "author": "Gray",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Asa%20Gray",
+    "wikipediaTitle": "Asa Gray"
   },
   {
     "id": "55987",
     "title": "Letters of Asa Gray; Vol. 2",
-    "author": "Gray"
+    "author": "Gray",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Asa%20Gray",
+    "wikipediaTitle": "Asa Gray"
   },
   {
     "id": "56177",
     "title": "The Island of Fantasy: A Romance",
-    "author": "Hume"
+    "author": "Hume",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Fergus%20Hume",
+    "wikipediaTitle": "Fergus Hume"
   },
   {
     "id": "56361",
     "title": "The Poetical Works of William Wordsworth — Volume 5 (of 8)",
-    "author": "Wordsworth"
+    "author": "Wordsworth",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/William%20Wordsworth",
+    "wikipediaTitle": "William Wordsworth"
   },
   {
     "id": "56501",
     "title": "A Comic History of the United States",
-    "author": "Hopkins"
+    "author": "Hopkins",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/History%20of%20American%20comics",
+    "wikipediaTitle": "History of American comics"
   },
   {
     "id": "56582",
     "title": "The Gentle Persuasion: Sketches of Scottish Life",
-    "author": "Gray"
+    "author": "Gray",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Humphrey%20Bogart",
+    "wikipediaTitle": "Humphrey Bogart"
   },
   {
     "id": "56603",
     "title": "A boy in the Peninsular War",
-    "author": "Blakeney"
+    "author": "Blakeney",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/John%20Conroy",
+    "wikipediaTitle": "John Conroy"
   },
   {
     "id": "56621",
     "title": "Aurora Leigh",
-    "author": "Browning"
+    "author": "Browning",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Aurora%20Leigh",
+    "wikipediaTitle": "Aurora Leigh"
   },
   {
     "id": "57097",
     "title": "The Icknield Way",
-    "author": "Thomas"
+    "author": "Thomas",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Icknield%20Way",
+    "wikipediaTitle": "Icknield Way"
   },
   {
     "id": "57246",
     "title": "Rifles and Riflemen at the Battle of Kings Mountain",
-    "author": "United States. National Park Service; Hopkins"
+    "author": "United States. National Park Service; Hopkins",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Battle%20of%20Princeton",
+    "wikipediaTitle": "Battle of Princeton"
   },
   {
     "id": "57398",
     "title": "Education of Women",
-    "author": "Thomas"
+    "author": "Thomas",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Female%20education",
+    "wikipediaTitle": "Female education"
   },
   {
     "id": "57599",
     "title": "The Heart of England",
-    "author": "Thomas"
+    "author": "Thomas",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Richard%20I%20of%20England",
+    "wikipediaTitle": "Richard I of England"
   },
   {
     "id": "57795",
     "title": "The Sacred Wood: Essays on Poetry and Criticism",
-    "author": "Eliot"
+    "author": "T.S. Eliot"
   },
   {
     "id": "57830",
     "title": "The Common Lot",
-    "author": "Herrick"
+    "author": "Herrick",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Warren%20G.%20Harding",
+    "wikipediaTitle": "Warren G. Harding"
   },
   {
     "id": "57863",
     "title": "The Praise of Shakespeare: An English Anthology",
-    "author": "Hughes"
+    "author": "Hughes",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Ted%20Hughes",
+    "wikipediaTitle": "Ted Hughes"
   },
   {
     "id": "58028",
@@ -3382,22 +4410,26 @@
   {
     "id": "58250",
     "title": "Index of the Project Gutenberg Works of Thomas Hardy",
-    "author": "Hardy"
+    "author": "Thomas Hardy"
   },
   {
     "id": "58395",
     "title": "In Pursuit of Spring",
-    "author": "Thomas"
+    "author": "Thomas",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Edward%20Thomas%20(poet)",
+    "wikipediaTitle": "Edward Thomas (poet)"
   },
   {
     "id": "58412",
     "title": "Ariel Dances",
-    "author": "Eliot"
+    "author": "T.S. Eliot"
   },
   {
     "id": "58461",
     "title": "Reading: How to Teach It",
-    "author": "Arnold"
+    "author": "Arnold",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Teach%20For%20America",
+    "wikipediaTitle": "Teach For America"
   },
   {
     "id": "58508",
@@ -3407,242 +4439,324 @@
   {
     "id": "58777",
     "title": "Index of the Project Gutenberg Works of George Eliot",
-    "author": "Eliot"
+    "author": "T.S. Eliot"
   },
   {
     "id": "58795",
     "title": "Memoir of a Brother",
-    "author": "Hughes"
+    "author": "Hughes",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Frieda%20Hughes",
+    "wikipediaTitle": "Frieda Hughes"
   },
   {
     "id": "58845",
     "title": "Index of the Project Gutenberg Works of Alexander Pope",
-    "author": "Pope"
+    "author": "Pope",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Alexander%20Pope",
+    "wikipediaTitle": "Alexander Pope"
   },
   {
     "id": "58958",
     "title": "Horse Training by Modern Methods",
-    "author": "Pope"
+    "author": "Pope",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Machine%20learning",
+    "wikipediaTitle": "Machine learning"
   },
   {
     "id": "58983",
     "title": "Audubon the Naturalist: A History of His Life and Time. Vol. 1 (of 2)",
-    "author": "Herrick"
+    "author": "Herrick",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/John%20James%20Audubon",
+    "wikipediaTitle": "John James Audubon"
   },
   {
     "id": "58984",
     "title": "Audubon the Naturalist: A History of His Life and Time. Vol. 2 (of 2)",
-    "author": "Herrick"
+    "author": "Herrick",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/John%20James%20Audubon",
+    "wikipediaTitle": "John James Audubon"
   },
   {
     "id": "59122",
     "title": "Index of the Project Gutenberg Works of Lord Byron",
-    "author": "Byron"
+    "author": "Byron",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Lord%20Byron",
+    "wikipediaTitle": "Lord Byron"
   },
   {
     "id": "59123",
     "title": "Index of the Project Gutenberg Works of Robert Browning",
-    "author": "Browning"
+    "author": "Browning",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Robert%20Brown%20(botanist%2C%20born%201842)",
+    "wikipediaTitle": "Robert Brown (botanist, born 1842)"
   },
   {
     "id": "59167",
     "title": "Poems",
-    "author": "Millay"
+    "author": "Millay",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Edna%20St.%20Vincent%20Millay",
+    "wikipediaTitle": "Edna St. Vincent Millay"
   },
   {
     "id": "59226",
     "title": "Index of the Project Gutenberg Works of Samuel Taylor Coleridge",
-    "author": "Coleridge"
+    "author": "Coleridge",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Herbert%20Coleridge",
+    "wikipediaTitle": "Herbert Coleridge"
   },
   {
     "id": "59254",
     "title": "The Inimitable Jeeves",
-    "author": "Wodehouse"
+    "author": "Wodehouse",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/The%20Inimitable%20Jeeves",
+    "wikipediaTitle": "The Inimitable Jeeves"
   },
   {
     "id": "59279",
     "title": "Index of the Project Gutenberg Works of Alfred Lord Tennyson",
-    "author": "Tennyson"
+    "author": "Tennyson",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Alfred%2C%20Lord%20Tennyson",
+    "wikipediaTitle": "Alfred, Lord Tennyson"
   },
   {
     "id": "59463",
     "title": "His Great Adventure",
-    "author": "Herrick"
+    "author": "Herrick",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Tarzan's%20New%20York%20Adventure",
+    "wikipediaTitle": "Tarzan's New York Adventure"
   },
   {
     "id": "59571",
     "title": "Index of the Project Gutenberg Works of Robert Burns",
-    "author": "Burns"
+    "author": "Burns",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Index%20Librorum%20Prohibitorum",
+    "wikipediaTitle": "Index Librorum Prohibitorum"
   },
   {
     "id": "59672",
     "title": "A Day with Ludwig Beethoven",
-    "author": "Byron"
+    "author": "Byron",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/25%20Scottish%20Songs",
+    "wikipediaTitle": "25 Scottish Songs"
   },
   {
     "id": "59768",
     "title": "Index of the Project Gutenberg Works of William Butler Yeats",
-    "author": "Yeats"
+    "author": "Yeats",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/George%20William%20Russell",
+    "wikipediaTitle": "George William Russell"
   },
   {
     "id": "59795",
     "title": "A Finnish Grammar",
-    "author": "Eliot"
+    "author": "T.S. Eliot"
   },
   {
     "id": "59920",
     "title": "The Little Gods: A Masque of the Far East",
-    "author": "Thomas"
+    "author": "Thomas",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Africa",
+    "wikipediaTitle": "Africa"
   },
   {
     "id": "60037",
     "title": "Clipped Wings",
-    "author": "Hughes"
+    "author": "Hughes",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Clipped%20Wings%20(1937%20film)",
+    "wikipediaTitle": "Clipped Wings (1937 film)"
   },
   {
     "id": "60067",
     "title": "Leave it to Psmith",
-    "author": "Wodehouse"
+    "author": "Wodehouse",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Leave%20It%20to%20Psmith",
+    "wikipediaTitle": "Leave It to Psmith"
   },
   {
     "id": "60186",
     "title": "Polite Conversation in Three Dialogues",
-    "author": "Swift"
+    "author": "Jonathan Swift"
   },
   {
     "id": "60608",
     "title": "Satellite Passage",
-    "author": "Thomas"
+    "author": "Thomas",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Northwest%20Passage",
+    "wikipediaTitle": "Northwest Passage"
   },
   {
     "id": "60682",
     "title": "The Good Work",
-    "author": "Thomas"
+    "author": "Thomas",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Do%20not%20go%20gentle%20into%20that%20good%20night",
+    "wikipediaTitle": "Do not go gentle into that good night"
   },
   {
     "id": "60760",
     "title": "The South Country",
-    "author": "Thomas"
+    "author": "Thomas",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/South%20Asia",
+    "wikipediaTitle": "South Asia"
   },
   {
     "id": "61422",
     "title": "Stories of Romance",
-    "author": "Johnson"
+    "author": "Johnson",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Flatland%20(2007%20Johnson%20and%20Travis%20film)",
+    "wikipediaTitle": "Flatland (2007 Johnson and Travis film)"
   },
   {
     "id": "61428",
     "title": "With Lawrence in Arabia",
-    "author": "Thomas"
+    "author": "Thomas",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/T.%20E.%20Lawrence",
+    "wikipediaTitle": "T. E. Lawrence"
   },
   {
     "id": "61507",
     "title": "Ukridge",
-    "author": "Wodehouse"
+    "author": "Wodehouse",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Stanley%20Featherstonehaugh%20Ukridge",
+    "wikipediaTitle": "Stanley Featherstonehaugh Ukridge"
   },
   {
     "id": "61742",
     "title": "Poems by Speranza",
-    "author": "Wilde"
+    "author": "Oscar Wilde"
   },
   {
     "id": "62165",
     "title": "From Dixie to Canada: Romances and Realities of the Underground Railroad",
-    "author": "Johnson"
+    "author": "Johnson",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/List%20of%20people%20from%20Texas",
+    "wikipediaTitle": "List of people from Texas"
   },
   {
     "id": "62549",
     "title": "The Second Boys' Book of Model Aeroplanes",
-    "author": "Collins"
+    "author": "Collins",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/List%20of%20Desert%20Island%20Discs%20episodes%20(1961%E2%80%931970)",
+    "wikipediaTitle": "List of Desert Island Discs episodes (1961–1970)"
   },
   {
     "id": "62572",
     "title": "Milton",
-    "author": "Macaulay"
+    "author": "Macaulay",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/London%20Lions%20(basketball)",
+    "wikipediaTitle": "London Lions (basketball)"
   },
   {
     "id": "62835",
     "title": "Party sweets",
-    "author": "Blake"
+    "author": "Blake",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Confetti",
+    "wikipediaTitle": "Confetti"
   },
   {
     "id": "62893",
     "title": "Early memories; some chapters of autobiography",
-    "author": "Yeats"
+    "author": "Yeats",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/John%20Butler%20Yeats",
+    "wikipediaTitle": "John Butler Yeats"
   },
   {
     "id": "62939",
     "title": "Essays Irish and American",
-    "author": "Yeats"
+    "author": "Yeats",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/W.%20B.%20Yeats",
+    "wikipediaTitle": "W. B. Yeats"
   },
   {
     "id": "63211",
     "title": "A Year with a Whaler",
-    "author": "Burns"
+    "author": "Burns",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Whaling%20in%20the%20United%20States",
+    "wikipediaTitle": "Whaling in the United States"
   },
   {
     "id": "63268",
     "title": "The Happy-go-lucky Morgans",
-    "author": "Thomas"
+    "author": "Thomas",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Edward%20Thomas%20(poet)",
+    "wikipediaTitle": "Edward Thomas (poet)"
   },
   {
     "id": "63455",
     "title": "The Vanishing Comrade: A Mystery Story for Girls",
-    "author": "Eliot"
+    "author": "T.S. Eliot"
   },
   {
     "id": "63547",
     "title": "Homage to John Dryden: Three Essays on Poetry of the Seventeenth Century",
-    "author": "Eliot"
+    "author": "T.S. Eliot"
   },
   {
     "id": "63735",
     "title": "Subscription the disgrace of the English Church [2nd edition]",
-    "author": "Wodehouse"
+    "author": "Wodehouse",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Francis%20Dashwood%2C%2011th%20Baron%20le%20Despencer",
+    "wikipediaTitle": "Francis Dashwood, 11th Baron le Despencer"
   },
   {
     "id": "63738",
     "title": "Subscription the disgrace of the English Church [1st edition]",
-    "author": "Wodehouse"
+    "author": "Wodehouse",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Francis%20Dashwood%2C%2011th%20Baron%20le%20Despencer",
+    "wikipediaTitle": "Francis Dashwood, 11th Baron le Despencer"
   },
   {
     "id": "64173",
     "title": "The Fatal Third",
-    "author": "Thomas"
+    "author": "Thomas",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/List%20of%20fatal%20shark%20attacks%20in%20Australia",
+    "wikipediaTitle": "List of fatal shark attacks in Australia"
   },
   {
     "id": "64329",
     "title": "Falkner: A Novel",
-    "author": "Shelley"
+    "author": "Mary Shelley"
   },
   {
     "id": "64443",
     "title": "Art principles in literature",
-    "author": "Donnelly"
+    "author": "Donnelly",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Art",
+    "wikipediaTitle": "Art"
   },
   {
     "id": "65172",
     "title": "A Gentleman of Leisure",
-    "author": "Wodehouse"
+    "author": "Wodehouse",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/A%20Gentleman%20of%20Leisure",
+    "wikipediaTitle": "A Gentleman of Leisure"
   },
   {
     "id": "65362",
     "title": "Harry Fenimore's Principles",
-    "author": "Hopkins"
+    "author": "Hopkins",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Herman%20Melville",
+    "wikipediaTitle": "Herman Melville"
   },
   {
     "id": "65381",
     "title": "On Translating Homer",
-    "author": "Arnold"
+    "author": "Arnold",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/On%20Translating%20Homer",
+    "wikipediaTitle": "On Translating Homer"
   },
   {
     "id": "65501",
     "title": "My hundred favorite recipes",
-    "author": "Blake"
+    "author": "Blake",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Sheryl%20Crow",
+    "wikipediaTitle": "Sheryl Crow"
   },
   {
     "id": "65593",
     "title": "A History of Kansas",
-    "author": "Arnold"
+    "author": "Arnold",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Arnold%2C%20Kansas",
+    "wikipediaTitle": "Arnold, Kansas"
   },
   {
     "id": "65604",
@@ -3652,17 +4766,23 @@
   {
     "id": "65806",
     "title": "Christmas at Monticello with Thomas Jefferson",
-    "author": "Miller"
+    "author": "Miller",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Thomas%20Jefferson",
+    "wikipediaTitle": "Thomas Jefferson"
   },
   {
     "id": "66000",
     "title": "Selected Poems",
-    "author": "Huxley"
+    "author": "Huxley",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Aldous%20Huxley",
+    "wikipediaTitle": "Aldous Huxley"
   },
   {
     "id": "66177",
     "title": "Half Hours With Modern Scientists: Lectures and Essays",
-    "author": "Huxley"
+    "author": "Huxley",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Aldous%20Huxley",
+    "wikipediaTitle": "Aldous Huxley"
   },
   {
     "id": "66397",
@@ -3672,27 +4792,33 @@
   {
     "id": "66520",
     "title": "Poems",
-    "author": "Johnson"
+    "author": "Johnson",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Samuel%20Johnson",
+    "wikipediaTitle": "Samuel Johnson"
   },
   {
     "id": "66545",
     "title": "The Heir of Mondolfo",
-    "author": "Shelley"
+    "author": "Mary Shelley"
   },
   {
     "id": "66749",
     "title": "The Fortunes of Perkin Warbeck: a romance",
-    "author": "Shelley"
+    "author": "Mary Shelley"
   },
   {
     "id": "66946",
     "title": "Summer Morning: A poem",
-    "author": "Miller"
+    "author": "Miller",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Miller%20Wolf%20Oberman",
+    "wikipediaTitle": "Miller Wolf Oberman"
   },
   {
     "id": "66960",
     "title": "The Preaching of Islam: A History of the Propagation of the Muslim Faith",
-    "author": "Arnold"
+    "author": "Arnold",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Spread%20of%20Islam",
+    "wikipediaTitle": "Spread of Islam"
   },
   {
     "id": "67040",
@@ -3702,52 +4828,72 @@
   {
     "id": "67115",
     "title": "Their Child",
-    "author": "Herrick"
+    "author": "Herrick",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Robert%20Herrick%20(poet)",
+    "wikipediaTitle": "Robert Herrick (poet)"
   },
   {
     "id": "67145",
     "title": "Old Ninety-Nine's Cave",
-    "author": "Gray"
+    "author": "Gray",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Megabat",
+    "wikipediaTitle": "Megabat"
   },
   {
     "id": "67218",
     "title": "The Conscript Mother",
-    "author": "Herrick"
+    "author": "Herrick",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/The%20Cross%20of%20Lorraine",
+    "wikipediaTitle": "The Cross of Lorraine"
   },
   {
     "id": "67345",
     "title": "The Wonderful Adventures of Phra the Phoenician",
-    "author": "Arnold"
+    "author": "Arnold",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Edwin%20Lester%20Arnold",
+    "wikipediaTitle": "Edwin Lester Arnold"
   },
   {
     "id": "67368",
     "title": "Sam in the Suburbs",
-    "author": "Wodehouse"
+    "author": "Wodehouse",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/P.%20G.%20Wodehouse%20locations",
+    "wikipediaTitle": "P. G. Wodehouse locations"
   },
   {
     "id": "68009",
     "title": "The Last Lady of Mulberry: A Story of Italian New York",
-    "author": "Thomas"
+    "author": "Thomas",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/List%20of%20songs%20about%20New%20York%20City",
+    "wikipediaTitle": "List of songs about New York City"
   },
   {
     "id": "68051",
     "title": "Mr. Carteret and Others",
-    "author": "Gray"
+    "author": "Gray",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/David%20Gray%20(diplomat)",
+    "wikipediaTitle": "David Gray (diplomat)"
   },
   {
     "id": "68204",
     "title": "Ballads from the Danish and Original Verses",
-    "author": "Smith-Dampier"
+    "author": "Smith-Dampier",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/%C3%9Erymskvi%C3%B0a",
+    "wikipediaTitle": "Þrymskviða"
   },
   {
     "id": "68448",
     "title": "The sword of wealth",
-    "author": "Thomas"
+    "author": "Thomas",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Leviathan%20(Hobbes%20book)",
+    "wikipediaTitle": "Leviathan (Hobbes book)"
   },
   {
     "id": "68555",
     "title": "The night wire",
-    "author": "Arnold"
+    "author": "Arnold",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/The%20Night%20Wire",
+    "wikipediaTitle": "The Night Wire"
   },
   {
     "id": "68876",
@@ -3757,211 +4903,291 @@
   {
     "id": "68914",
     "title": "The traitor's way",
-    "author": "Levett Yeats"
+    "author": "Levett Yeats",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Sidney%20Kilner%20Levett-Yeats",
+    "wikipediaTitle": "Sidney Kilner Levett-Yeats"
   },
   {
     "id": "69284",
     "title": "Essay on Burns",
-    "author": "Carlyle"
+    "author": "Carlyle",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Critical%20and%20Miscellaneous%20Essays",
+    "wikipediaTitle": "Critical and Miscellaneous Essays"
   },
   {
     "id": "69438",
     "title": "Tedious brief tales of Granta and Gramarye",
-    "author": "Gray"
+    "author": "Gray",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Arthur%20Gray%20(Master%20of%20Jesus)",
+    "wikipediaTitle": "Arthur Gray (Master of Jesus)"
   },
   {
     "id": "69584",
     "title": "Gray Lensman",
-    "author": "Smith"
+    "author": "Smith",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/E.%20E.%20Smith",
+    "wikipediaTitle": "E. E. Smith"
   },
   {
     "id": "69699",
     "title": "Supplement to the catalogue of seals and whales in the British Museum",
-    "author": "Gray"
+    "author": "Gray",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Cephalopod%20size",
+    "wikipediaTitle": "Cephalopod size"
   },
   {
     "id": "69755",
     "title": "Women for votes",
-    "author": "Hughes"
+    "author": "Hughes",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/John%20Hughes%20(filmmaker)",
+    "wikipediaTitle": "John Hughes (filmmaker)"
   },
   {
     "id": "70041",
     "title": "The small bachelor",
-    "author": "Wodehouse"
+    "author": "Wodehouse",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/The%20Small%20Bachelor",
+    "wikipediaTitle": "The Small Bachelor"
   },
   {
     "id": "70087",
     "title": "Winona",
-    "author": "Hopkins"
+    "author": "Hopkins",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Welcome%20Home%2C%20Roxy%20Carmichael",
+    "wikipediaTitle": "Welcome Home, Roxy Carmichael"
   },
   {
     "id": "70189",
     "title": "The sensitive plant",
-    "author": "Shelley"
+    "author": "Mary Shelley"
   },
   {
     "id": "70222",
     "title": "Meet Mr Mulliner",
-    "author": "Wodehouse"
+    "author": "Wodehouse",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Mr.%20Mulliner",
+    "wikipediaTitle": "Mr. Mulliner"
   },
   {
     "id": "70399",
     "title": "The clammer",
-    "author": "Hopkins"
+    "author": "Hopkins",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Jermaine%20Hopkins",
+    "wikipediaTitle": "Jermaine Hopkins"
   },
   {
     "id": "70745",
     "title": "Bouncing Bet",
-    "author": "Gray"
+    "author": "Gray",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Sphinx%20chersis",
+    "wikipediaTitle": "Sphinx chersis"
   },
   {
     "id": "70877",
     "title": "The mystery at lovers' cave",
-    "author": "Berkeley"
+    "author": "Berkeley",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Anthony%20Berkeley%20Cox",
+    "wikipediaTitle": "Anthony Berkeley Cox"
   },
   {
     "id": "70950",
     "title": "In memoriam",
-    "author": "Tennyson"
+    "author": "Tennyson",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/In%20Memoriam%20A.H.H.",
+    "wikipediaTitle": "In Memoriam A.H.H."
   },
   {
     "id": "71178",
     "title": "Dora",
-    "author": "Tennyson"
+    "author": "Tennyson",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Shira%20Naor",
+    "wikipediaTitle": "Shira Naor"
   },
   {
     "id": "71804",
     "title": "The romance of Isabel Lady Burton",
-    "author": "Burton"
+    "author": "Burton",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Isabel%20Burton",
+    "wikipediaTitle": "Isabel Burton"
   },
   {
     "id": "72227",
     "title": "Divots",
-    "author": "Wodehouse"
+    "author": "Wodehouse",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/P.%20G.%20Wodehouse%20bibliography",
+    "wikipediaTitle": "P. G. Wodehouse bibliography"
   },
   {
     "id": "72318",
     "title": "The cup; and The falcon",
-    "author": "Tennyson"
+    "author": "Tennyson",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/List%20of%20people%20on%20the%20postage%20stamps%20of%20the%20United%20Kingdom",
+    "wikipediaTitle": "List of people on the postage stamps of the United Kingdom"
   },
   {
     "id": "72472",
     "title": "Ara vus prec",
-    "author": "Eliot"
+    "author": "T.S. Eliot"
   },
   {
     "id": "72551",
     "title": "The Visigothic code",
-    "author": "Scott"
+    "author": "Scott",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Visigothic%20Code",
+    "wikipediaTitle": "Visigothic Code"
   },
   {
     "id": "72904",
     "title": "Within these walls",
-    "author": "Hughes"
+    "author": "Hughes",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Howard%20Hughes",
+    "wikipediaTitle": "Howard Hughes"
   },
   {
     "id": "72972",
     "title": "Money for nothing",
-    "author": "Wodehouse"
+    "author": "Wodehouse",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Money%20for%20Nothing%20(novel)",
+    "wikipediaTitle": "Money for Nothing (novel)"
   },
   {
     "id": "72985",
     "title": "The tower",
-    "author": "Yeats"
+    "author": "Yeats",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/W.%20B.%20Yeats",
+    "wikipediaTitle": "W. B. Yeats"
   },
   {
     "id": "72987",
     "title": "Michael Robartes and the dancer",
-    "author": "Yeats"
+    "author": "Yeats",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Michael%20Robartes%20and%20the%20Dancer",
+    "wikipediaTitle": "Michael Robartes and the Dancer"
   },
   {
     "id": "72991",
     "title": "Compulsory manumission",
-    "author": "McDonnell"
+    "author": "McDonnell",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Thomas%20Moody%20(geopolitician)",
+    "wikipediaTitle": "Thomas Moody (geopolitician)"
   },
   {
     "id": "72999",
     "title": "The suspicions of Ermengarde",
-    "author": "Gray"
+    "author": "Gray",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Maxwell%20Gray",
+    "wikipediaTitle": "Maxwell Gray"
   },
   {
     "id": "73056",
     "title": "The gospel of freedom",
-    "author": "Herrick"
+    "author": "Herrick",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Thomas%20Jefferson",
+    "wikipediaTitle": "Thomas Jefferson"
   },
   {
     "id": "73350",
     "title": "The modern packing house",
-    "author": "Wilder"
+    "author": "Wilder",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/National%20Beef",
+    "wikipediaTitle": "National Beef"
   },
   {
     "id": "73390",
     "title": "Little rays of moonshine",
-    "author": "Herbert"
+    "author": "Herbert",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/A.%20P.%20Herbert",
+    "wikipediaTitle": "A. P. Herbert"
   },
   {
     "id": "73595",
     "title": "Try to remember!",
-    "author": "Herbert"
+    "author": "Herbert",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Mary%20Higgins%20Clark",
+    "wikipediaTitle": "Mary Higgins Clark"
   },
   {
     "id": "73780",
     "title": "The other Miller girl",
-    "author": "Gray"
+    "author": "Gray",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Sienna%20Miller",
+    "wikipediaTitle": "Sienna Miller"
   },
   {
     "id": "74154",
     "title": "The reaction between manganese dioxide and potassium permanganate",
-    "author": "Hopkins"
+    "author": "Hopkins",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Potassium%20permanganate",
+    "wikipediaTitle": "Potassium permanganate"
   },
   {
     "id": "74196",
     "title": "The universal directory for taking alive and destroying rats",
-    "author": "Smith"
+    "author": "Smith",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Rat",
+    "wikipediaTitle": "Rat"
   },
   {
     "id": "74284",
     "title": "Danish ballads",
-    "author": "Smith-Dampier"
+    "author": "Smith-Dampier",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Danmarks%20gamle%20Folkeviser",
+    "wikipediaTitle": "Danmarks gamle Folkeviser"
   },
   {
     "id": "74745",
     "title": "The weary blues",
-    "author": "Hughes"
+    "author": "Hughes",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/The%20Weary%20Blues",
+    "wikipediaTitle": "The Weary Blues"
   },
   {
     "id": "74934",
     "title": "Poems of evolution",
-    "author": "Smith"
+    "author": "Smith",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Sylvia%20Plath",
+    "wikipediaTitle": "Sylvia Plath"
   },
   {
     "id": "75092",
     "title": "Fix bayonets!",
-    "author": "Thomason"
+    "author": "Thomason",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/John%20Thomason",
+    "wikipediaTitle": "John Thomason"
   },
   {
     "id": "75435",
     "title": "Fish preferred",
-    "author": "Wodehouse"
+    "author": "Wodehouse",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Summer%20Lightning",
+    "wikipediaTitle": "Summer Lightning"
   },
   {
     "id": "75462",
     "title": "Songs and lyrics of Robert Burns",
-    "author": "Burns"
+    "author": "Burns",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Robert%20Burns",
+    "wikipediaTitle": "Robert Burns"
   },
   {
     "id": "75489",
     "title": "Poems",
-    "author": "Bacon"
+    "author": "Bacon",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Bacon",
+    "wikipediaTitle": "Bacon"
   },
   {
     "id": "75530",
     "title": "A high wind in Jamaica",
-    "author": "Hughes"
+    "author": "Hughes",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/A%20High%20Wind%20in%20Jamaica%20(novel)",
+    "wikipediaTitle": "A High Wind in Jamaica (novel)"
   },
   {
     "id": "75560",
     "title": "A-B-C of housekeeping",
-    "author": "Herrick"
+    "author": "Herrick",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Christine%20Terhune%20Herrick",
+    "wikipediaTitle": "Christine Terhune Herrick"
   }
 ]

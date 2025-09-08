@@ -53,7 +53,7 @@ export const WikipediaLink: React.FC<WikipediaLinkProps> = ({
     e.stopPropagation() // Prevent triggering parent click handlers
     
     if (wikipediaResult?.exists && wikipediaResult.url) {
-      window.open(wikipediaResult.url, '_blank', 'noopener,noreferrer')
+      window.open(wikipediaResult.url, 'wikipedia', 'noopener,noreferrer')
     }
     
     if (onLinkClick) {

@@ -1,0 +1,742 @@
+  Checking: Die Armen: Ein Roman by Mann (Die Armen: Ein Roman (Mann))
+    ✅ Found
+  Checking: Alte Nester: Zwei Bücher Lebensgeschichten by Raabe (Alte Nester: Zwei Bücher Lebensgeschichten (Raabe))
+    ❌ Not found
+  Checking: Die Räuber: Ein Schauspiel by Schiller (Die Räuber: Ein Schauspiel (Schiller))
+    ✅ Found
+  Checking: Diesseits: Erzählungen by Hesse (Diesseits: Erzählungen (Hesse))
+    ❌ Not found
+  Checking: Im Land des Lichts: Ein Streifzug durch Kabylie und Wüste by Wolf (Im Land des Lichts: Ein Streifzug durch Kabylie und Wüste (Wolf))
+    ❌ Not found
+  Checking: Goethes Briefe an Auguste zu Stolberg by Goethe (Goethes Briefe an Auguste zu Stolberg (Goethe))
+    ❌ Not found
+  Checking: Briefe von Goethe an Lavater aus den Jahren 1774 bis 1783 by Goethe (Briefe von Goethe an Lavater aus den Jahren 1774 bis 1783 (Goethe))
+    ❌ Not found
+  Checking: Unterm Rad by Hesse (Unterm Rad (Hesse))
+    ✅ Found
+  Checking: Die Sebalduskirche in Nürnberg by Hoffmann (Die Sebalduskirche in Nürnberg (Hoffmann))
+    ✅ Found
+  Checking: Höxter und Corvey: Erzählung by Raabe (Höxter und Corvey: Erzählung (Raabe))
+    ❌ Not found
+  Checking: Die Innerste: Erzählung by Raabe (Die Innerste: Erzählung (Raabe))
+    ❌ Not found
+  Checking: Karte und Kroki by Wolff (Karte und Kroki (Wolff))
+    ❌ Not found
+  Checking: Heinrich von Kleist's politische Schriften und andere Nachträge zu seinen Werken by Kleist (Heinrich von Kleist's politische Schriften und andere Nachträge zu seinen Werken (Kleist))
+    ❌ Not found
+  Checking: Die alte Krone: Ein Roman aus dem Spreewald by Keller (Die alte Krone: Ein Roman aus dem Spreewald (Keller))
+    ✅ Found
+  Checking: Th. M. Dostojewsky: Eine biographische Studie by Hoffmann (Th. M. Dostojewsky: Eine biographische Studie (Hoffmann))
+    ❌ Not found
+  Checking: Die Novellen um Claudia by Zweig (Die Novellen um Claudia (Zweig))
+    ✅ Found
+  Checking: L'Adultera: Roman by Fontane (L'Adultera: Roman (Fontane))
+    ✅ Found
+  Checking: Der Sachsenspiegel: Eine Geschichte aus der Hohenstaufenzeit by Wolff (Der Sachsenspiegel: Eine Geschichte aus der Hohenstaufenzeit (Wolff))
+    ❌ Not found
+  Checking: Der Stechlin: Roman by Fontane (Der Stechlin: Roman (Fontane))
+    ✅ Found
+  Checking: Nachbarn: Erzählungen by Hesse (Nachbarn: Erzählungen (Hesse))
+    ❌ Not found
+  Checking: Das Recht der Hagestolze: Eine Heiratsgeschichte aus dem Neckartal by Wolff (Das Recht der Hagestolze: Eine Heiratsgeschichte aus dem Neckartal (Wolff))
+    ❌ Not found
+  Checking: Vögelchen by Zweig (Vögelchen (Zweig))
+    ❌ Not found
+  Checking: Amok: Novellen einer Leidenschaft by Zweig (Amok: Novellen einer Leidenschaft (Zweig))
+    ✅ Found
+  Checking: Die Hohkönigsburg: Eine Fehdegeschichte aus dem Wasgau by Wolff (Die Hohkönigsburg: Eine Fehdegeschichte aus dem Wasgau (Wolff))
+    ❌ Not found
+  Checking: Schwedenklees Erlebnis by Kellermann (Schwedenklees Erlebnis (Kellermann))
+    ✅ Found
+  Checking: Umwege: Erzählungen by Hesse (Umwege: Erzählungen (Hesse))
+    ❌ Not found
+  Checking: Der Tod des Tizian. Idylle. Zwei Dichtungen by Hofmannsthal (Der Tod des Tizian. Idylle. Zwei Dichtungen (Hofmannsthal))
+    ❌ Not found
+  Checking: Gertrud by Hesse (Gertrud (Hesse))
+    ✅ Found
+  Checking: Die Geschichte meines Lebens by Keller (Die Geschichte meines Lebens (Keller))
+    ✅ Found
+  Checking: Die Heimat: Roman aus den schlesischen Bergen by Keller (Die Heimat: Roman aus den schlesischen Bergen (Keller))
+    ❌ Not found
+  Checking: Kurgast: Aufzeichnungen von einer Badener Kur by Hesse (Kurgast: Aufzeichnungen von einer Badener Kur (Hesse))
+    ✅ Found
+  Checking: Rosshalde by Hesse (Rosshalde (Hesse))
+    ✅ Found
+  Checking: Aus Indien by Hesse (Aus Indien (Hesse))
+    ✅ Found
+  Checking: Märchen by Hesse (Märchen (Hesse))
+    ✅ Found
+  Checking: Schön ist die Jugend: Zwei Erzählungen by Hesse (Schön ist die Jugend: Zwei Erzählungen (Hesse))
+    ❌ Not found
+  Checking: Der Zauberberg. Erster Band by Mann (Der Zauberberg. Erster Band (Mann))
+    ✅ Found
+  Checking: Der Zauberberg. Zweiter Band by Mann (Der Zauberberg. Zweiter Band (Mann))
+    ❌ Not found
+  Checking: Die Wiedertäufer von Münster: Drama in 5 Akten by Kellermann (Die Wiedertäufer von Münster: Drama in 5 Akten (Kellermann))
+    ❌ Not found
+  Checking: Der Krieg im Westen by Kellermann (Der Krieg im Westen (Kellermann))
+    ✅ Found
+  Checking: Die Brüder Schellenberg by Kellermann (Die Brüder Schellenberg (Kellermann))
+    ✅ Found
+  Checking: Haarmann. Die Geschichte eines Werwolfs by Lessing (Haarmann. Die Geschichte eines Werwolfs (Lessing))
+    ✅ Found
+  Checking: Der Prozess: Roman by Kafka (Der Prozess: Roman (Kafka))
+    ✅ Found
+  Checking: Zweiundzwanzig Handzeichnungen von Goethe. 1810. by Goethe (Zweiundzwanzig Handzeichnungen von Goethe. 1810. (Goethe))
+    ❌ Not found
+  Checking: Der Schimmelreiter by Storm (Der Schimmelreiter (Storm))
+    ✅ Found
+  Checking: Kriegsgefangen by Fontane (Kriegsgefangen (Fontane))
+    ✅ Found
+  Checking: Der Steppenwolf by Hesse (Der Steppenwolf (Hesse))
+    ✅ Found
+  Checking: Das Königl. Seminartheater — Altenroda — Grünlein by Keller (Das Königl. Seminartheater — Altenroda — Grünlein (Keller))
+    ❌ Not found
+  Checking: Die Elixiere des Teufels by Hoffmann (Die Elixiere des Teufels (Hoffmann))
+    ✅ Found
+  Checking: Divina Commedia di Dante: Inferno by Dante Alighieri (Divina Commedia di Dante: Inferno (Dante Alighieri))
+    ✅ Found
+  Checking: Divina Commedia di Dante: Purgatorio by Dante Alighieri (Divina Commedia di Dante: Purgatorio (Dante Alighieri))
+    ✅ Found
+  Checking: Divina Commedia di Dante: Paradiso by Dante Alighieri (Divina Commedia di Dante: Paradiso (Dante Alighieri))
+    ✅ Found
+  Checking: La Divina Commedia di Dante: Complete by Dante Alighieri (La Divina Commedia di Dante: Complete (Dante Alighieri))
+    ✅ Found
+  Checking: La Divina Commedia di Dante: Inferno by Dante Alighieri (La Divina Commedia di Dante: Inferno (Dante Alighieri))
+    ✅ Found
+  Checking: La Divina Commedia di Dante: Purgatorio by Dante Alighieri (La Divina Commedia di Dante: Purgatorio (Dante Alighieri))
+    ✅ Found
+  Checking: La Divina Commedia di Dante: Paradiso by Dante Alighieri (La Divina Commedia di Dante: Paradiso (Dante Alighieri))
+    ✅ Found
+  Checking: La Divina Commedia di Dante by Dante Alighieri (La Divina Commedia di Dante (Dante Alighieri))
+    ✅ Found
+  Checking: Orlando Furioso by Ariosto (Orlando Furioso (Ariosto))
+    ✅ Found
+  Checking: Cardello by Capuana (Cardello (Capuana))
+    ✅ Found
+  Checking: Il Benefattore by Capuana (Il Benefattore (Capuana))
+    ❌ Not found
+  Checking: Ricordi di Parigi by De Amicis (Ricordi di Parigi (De Amicis))
+    ✅ Found
+  Checking: Nel sogno by Neera (Nel sogno (Neera))
+    ❌ Not found
+  Checking: Le Amanti by Serao (Le Amanti (Serao))
+    ✅ Found
+  Checking: L'Amuleto by Neera (L'Amuleto (Neera))
+    ❌ Not found
+  Checking: Enrico IV by Pirandello (Enrico IV (Pirandello))
+    ✅ Found
+  Checking: Sei personaggi in cerca d'autore by Pirandello (Sei personaggi in cerca d'autore (Pirandello))
+    ✅ Found
+  Checking: Gli amanti: pastelli by Serao (Gli amanti: pastelli (Serao))
+    ✅ Found
+  Checking: Le avventure di Pinocchio by Collodi (Le avventure di Pinocchio (Collodi))
+    ✅ Found
+  Checking: Dal vero by Serao (Dal vero (Serao))
+    ✅ Found
+  Checking: L'infedele by Serao (L'infedele (Serao))
+    ✅ Found
+  Checking: L'indomani by Neera (L'indomani (Neera))
+    ✅ Found
+  Checking: Romanzo d'una signorina per bene by Vertua Gentile (Romanzo d'una signorina per bene (Vertua Gentile))
+    ❌ Not found
+  Checking: L'Innocente by D'Annunzio (L'Innocente (D'Annunzio))
+    ✅ Found
+  Checking: La Gioconda by D'Annunzio (La Gioconda (D'Annunzio))
+    ✅ Found
+  Checking: La favorita del Mahdi by Salgari (La favorita del Mahdi (Salgari))
+    ✅ Found
+  Checking: Documenti Umani by De Roberto (Documenti Umani (De Roberto))
+    ✅ Found
+  Checking: Ermanno Raeli by De Roberto (Ermanno Raeli (De Roberto))
+    ✅ Found
+  Checking: Fior di passione by Serao (Fior di passione (Serao))
+    ✅ Found
+  Checking: Rassegnazione: Romanzo by Capuana (Rassegnazione: Romanzo (Capuana))
+    ❌ Not found
+  Checking: Spasimo by De Roberto (Spasimo (De Roberto))
+    ✅ Found
+  Checking: Cabiria: Visione storica del terzo secolo A. C. by D'Annunzio (Cabiria: Visione storica del terzo secolo A. C. (D'Annunzio))
+    ✅ Found
+  Checking: Ricordi di Londra by De Amicis (Ricordi di Londra (De Amicis))
+    ✅ Found
+  Checking: Isaotta Guttadàuro ed altre poesie by D'Annunzio (Isaotta Guttadàuro ed altre poesie (D'Annunzio))
+    ✅ Found
+  Checking:  Cosmopolitanismo) ed altri saggi di critica letteraria ed artistica by Capuana ( Cosmopolitanismo) ed altri saggi di critica letteraria ed artistica (Capuana))
+    ❌ Not found
+  Checking: Racconti umoristici: In cerca di morte; Re per ventiquattrore by Tarchetti (Racconti umoristici: In cerca di morte; Re per ventiquattrore (Tarchetti))
+    ❌ Not found
+  Checking: Racconti fantastici by Tarchetti (Racconti fantastici (Tarchetti))
+    ✅ Found
+  Checking: Olanda by De Amicis (Olanda (De Amicis))
+    ✅ Found
+  Checking: Delitto ideale by Capuana (Delitto ideale (Capuana))
+    ❌ Not found
+  Checking: Spagna by De Amicis (Spagna (De Amicis))
+    ✅ Found
+  Checking: Marocco by De Amicis (Marocco (De Amicis))
+    ✅ Found
+  Checking: La messa di nozze; Un sogno; La bella morte by De Roberto (La messa di nozze; Un sogno; La bella morte (De Roberto))
+    ✅ Found
+  Checking: Il colore del tempo by De Roberto (Il colore del tempo (De Roberto))
+    ✅ Found
+  Checking: I divoratori: romanzo by Vivanti (I divoratori: romanzo (Vivanti))
+    ❌ Not found
+  Checking: Cronache Letterarie by Capuana (Cronache Letterarie (Capuana))
+    ❌ Not found
+  Checking: San Pantaleone by D'Annunzio (San Pantaleone (D'Annunzio))
+    ✅ Found
+  Checking: Il ferro by D'Annunzio (Il ferro (D'Annunzio))
+    ✅ Found
+  Checking: Vae victis! Romanzo by Vivanti (Vae victis! Romanzo (Vivanti))
+    ❌ Not found
+  Checking: Gli amori by De Roberto (Gli amori (De Roberto))
+    ✅ Found
+  Checking: Donna Paola by Serao (Donna Paola (Serao))
+    ✅ Found
+  Checking: Gioia! by Vivanti (Gioia! (Vivanti))
+    ✅ Found
+  Checking: Vita e avventure di Riccardo Joanna: romanzo by Serao (Vita e avventure di Riccardo Joanna: romanzo (Serao))
+    ✅ Found
+  Checking: Catania by De Roberto (Catania (De Roberto))
+    ✅ Found
+  Checking: Cristina by Serao (Cristina (Serao))
+    ✅ Found
+  Checking: La conquista di Roma by Serao (La conquista di Roma (Serao))
+    ✅ Found
+  Checking: Piccole anime by Serao (Piccole anime (Serao))
+    ✅ Found
+  Checking: Le vergini delle rocce by D'Annunzio (Le vergini delle rocce (D'Annunzio))
+    ✅ Found
+  Checking: Ricordi del 1870-71 by De Amicis (Ricordi del 1870-71 (De Amicis))
+    ✅ Found
+  Checking: Nuove "Paesane" by Capuana (Nuove "Paesane" (Capuana))
+    ✅ Found
+  Checking: Come l'onda... Novelle by Capuana (Come l'onda... Novelle (Capuana))
+    ❌ Not found
+  Checking: Il nemico è in noi by Capuana (Il nemico è in noi (Capuana))
+    ❌ Not found
+  Checking: Forse che sì forse che no by D'Annunzio (Forse che sì forse che no (D'Annunzio))
+    ✅ Found
+  Checking: Eh! la vita....: Novelle by Capuana (Eh! la vita....: Novelle (Capuana))
+    ❌ Not found
+  Checking: ...Sorella di Messalina: Romanzo by Vivanti (...Sorella di Messalina: Romanzo (Vivanti))
+    ❌ Not found
+  Checking: Dopo il divorzio by Deledda (Dopo il divorzio (Deledda))
+    ✅ Found
+  Checking: Sotto il velame: Saggio di un'interpretazione generale del poema sacro by Pascoli (Sotto il velame: Saggio di un'interpretazione generale del poema sacro (Pascoli))
+    ❌ Not found
+  Checking: La vita militare: bozzetti by De Amicis (La vita militare: bozzetti (De Amicis))
+    ✅ Found
+  Checking: La mirabile visione: Abbozzo d'una storia della Divina Comedia by Pascoli (La mirabile visione: Abbozzo d'una storia della Divina Comedia (Pascoli))
+    ❌ Not found
+  Checking: Conversazioni critiche by Carducci (Conversazioni critiche (Carducci))
+    ❌ Not found
+  Checking: Naja tripudians by Vivanti (Naja tripudians (Vivanti))
+    ✅ Found
+  Checking: Suor Giovanna della Croce: romanzo by Serao (Suor Giovanna della Croce: romanzo (Serao))
+    ✅ Found
+  Checking: Una Donna by Aleramo (Una Donna (Aleramo))
+    ✅ Found
+  Checking: L'Arte by De Roberto (L'Arte (De Roberto))
+    ✅ Found
+  Checking: Al rombo del cannone by De Roberto (Al rombo del cannone (De Roberto))
+    ✅ Found
+  Checking: L'Illusione by De Roberto (L'Illusione (De Roberto))
+    ✅ Found
+  Checking: Alle porte d'Italia by De Amicis (Alle porte d'Italia (De Amicis))
+    ✅ Found
+  Checking: Le bocche inutili: dramma in tre atti by Vivanti (Le bocche inutili: dramma in tre atti (Vivanti))
+    ❌ Not found
+  Checking: Il passaggio: Romanzo by Aleramo (Il passaggio: Romanzo (Aleramo))
+    ❌ Not found
+  Checking: Spiritismo? by Capuana (Spiritismo? (Capuana))
+    ✅ Found
+  Checking: La sorte by De Roberto (La sorte (De Roberto))
+    ✅ Found
+  Checking: Piccolo romanzo by Serao (Piccolo romanzo (Serao))
+    ✅ Found
+  Checking: I Paralipomeni del Lucifero di Mario Rapisardi by Capuana (I Paralipomeni del Lucifero di Mario Rapisardi (Capuana))
+    ❌ Not found
+  Checking: Rinaldo ardito: Frammenti inediti pubblicati sul manoscritto originale by Ariosto (Rinaldo ardito: Frammenti inediti pubblicati sul manoscritto originale (Ariosto))
+    ❌ Not found
+  Checking: Pagine sparse by De Amicis (Pagine sparse (De Amicis))
+    ✅ Found
+  Checking: Trasfigurazione: Novella by Aleramo (Trasfigurazione: Novella (Aleramo))
+    ❌ Not found
+  Checking: L'allegoria dell'autunno: Omaggio offerto a Venezia da Gabriele D'Annunzio by D'Annunzio (L'allegoria dell'autunno: Omaggio offerto a Venezia da Gabriele D'Annunzio (D'Annunzio))
+    ❌ Not found
+  Checking: Le avventure di Pinocchio: Storia di un burattino by Collodi (Le avventure di Pinocchio: Storia di un burattino (Collodi))
+    ✅ Found
+  Checking: Le Novelle della Pescara by D'Annunzio (Le Novelle della Pescara (D'Annunzio))
+    ✅ Found
+  Checking: Momenti: Liriche by Aleramo (Momenti: Liriche (Aleramo))
+    ✅ Found
+  Checking: Leopardi by De Roberto (Leopardi (De Roberto))
+    ✅ Found
+  Checking: I Canti by Leopardi (I Canti (Leopardi))
+    ✅ Found
+  Checking: La mandragola - La Clizia - Belfagor by Machiavelli (La mandragola - La Clizia - Belfagor (Machiavelli))
+    ✅ Found
+  Checking: Un cavallo nella luna: Novelle by Pirandello (Un cavallo nella luna: Novelle (Pirandello))
+    ✅ Found
+  Checking: L'umorismo by Pirandello (L'umorismo (Pirandello))
+    ✅ Found
+  Checking: Novelle by De Amicis (Novelle (De Amicis))
+    ✅ Found
+  Checking: La vecchia casa by Neera (La vecchia casa (Neera))
+    ❌ Not found
+  Checking: Una sfida al Polo by Salgari (Una sfida al Polo (Salgari))
+    ✅ Found
+  Checking: Miei Pensieri di varia Umanità by Pascoli (Miei Pensieri di varia Umanità (Pascoli))
+    ❌ Not found
+  Checking: Lirica by Vivanti (Lirica (Vivanti))
+    ✅ Found
+  Checking: Elegìe Romane by D'Annunzio (Elegìe Romane (D'Annunzio))
+    ✅ Found
+  Checking: Ritratti letterari by De Amicis (Ritratti letterari (De Amicis))
+    ✅ Found
+  Checking: Una giovinezza del secolo XIX by Neera (Una giovinezza del secolo XIX (Neera))
+    ✅ Found
+  Checking: L'invasore: dramma in tre atti by Vivanti (L'invasore: dramma in tre atti (Vivanti))
+    ❌ Not found
+  Checking: I Robinson italiani by Salgari (I Robinson italiani (Salgari))
+    ✅ Found
+  Checking: Da un carteggio inedito by Carducci (Da un carteggio inedito (Carducci))
+    ❌ Not found
+  Checking: La Carrozza di tutti by De Amicis (La Carrozza di tutti (De Amicis))
+    ✅ Found
+  Checking: Contemplazione della morte by D'Annunzio (Contemplazione della morte (D'Annunzio))
+    ❌ Not found
+  Checking: La Leda senza cigno by D'Annunzio (La Leda senza cigno (D'Annunzio))
+    ✅ Found
+  Checking: Sognando by Serao (Sognando (Serao))
+    ✅ Found
+  Checking: La fiaccola sotto il moggio by D'Annunzio (La fiaccola sotto il moggio (D'Annunzio))
+    ✅ Found
+  Checking: Le Aquile della Steppa: Romanzo by Salgari (Le Aquile della Steppa: Romanzo (Salgari))
+    ❌ Not found
+  Checking: Come prima meglio di prima: Commedia in tre atti by Pirandello (Come prima meglio di prima: Commedia in tre atti (Pirandello))
+    ❌ Not found
+  Checking: Saper vivere: Norme di buona creanza by Serao (Saper vivere: Norme di buona creanza (Serao))
+    ✅ Found
+  Checking: Lumìe di Sicilia: Commedia in un atto by Pirandello (Lumìe di Sicilia: Commedia in un atto (Pirandello))
+    ❌ Not found
+  Checking: Vestire gli ignudi: Commedia in tre atti by Pirandello (Vestire gli ignudi: Commedia in tre atti (Pirandello))
+    ❌ Not found
+  Checking: La vita di Cola di Rienzo by D'Annunzio (La vita di Cola di Rienzo (D'Annunzio))
+    ✅ Found
+  Checking: L'innesto: Commedia in tre atti by Pirandello (L'innesto: Commedia in tre atti (Pirandello))
+    ❌ Not found
+  Checking: La ragione degli altri: Commedia in tre atti by Pirandello (La ragione degli altri: Commedia in tre atti (Pirandello))
+    ❌ Not found
+  Checking: Tutto per bene: Commedia in 3 atti by Pirandello (Tutto per bene: Commedia in 3 atti (Pirandello))
+    ❌ Not found
+  Checking: La signora Morli una e due: Commedia in tre atti by Pirandello (La signora Morli una e due: Commedia in tre atti (Pirandello))
+    ❌ Not found
+  Checking: La vita che ti diedi by Pirandello (La vita che ti diedi (Pirandello))
+    ✅ Found
+  Checking: Studi sulla letteratura contemporanea by Capuana (Studi sulla letteratura contemporanea (Capuana))
+    ✅ Found
+  Checking: Le idee di una donna by Neera (Le idee di una donna (Neera))
+    ✅ Found
+  Checking: L'Uomo di Fuoco by Salgari (L'Uomo di Fuoco (Salgari))
+    ✅ Found
+  Checking: Rogo d'amore by Neera (Rogo d'amore (Neera))
+    ❌ Not found
+  Checking: Studii sulla letteratura contemporanea by Capuana (Studii sulla letteratura contemporanea (Capuana))
+    ❌ Not found
+  Checking: La vita nuova by Dante Alighieri (La vita nuova (Dante Alighieri))
+    ✅ Found
+  Checking: Ricordi d'un viaggio in Sicilia by De Amicis (Ricordi d'un viaggio in Sicilia (De Amicis))
+    ✅ Found
+  Checking: La Città dell'Oro by Salgari (La Città dell'Oro (Salgari))
+    ✅ Found
+  Checking: I pescatori di trepang by Salgari (I pescatori di trepang (Salgari))
+    ✅ Found
+  Checking: Al polo australe in velocipede by Salgari (Al polo australe in velocipede (Salgari))
+    ✅ Found
+  Checking: Lotte civili by De Amicis (Lotte civili (De Amicis))
+    ❌ Not found
+  Checking: Un dramma nell'Oceano Pacifico by Salgari (Un dramma nell'Oceano Pacifico (Salgari))
+    ✅ Found
+  Checking: Il tesoro del Presidente del Paraguay by Salgari (Il tesoro del Presidente del Paraguay (Salgari))
+    ✅ Found
+  Checking: La Celestina by Rojas (La Celestina (Rojas))
+    ✅ Found
+  Checking: Don Quijote by Cervantes Saavedra (Don Quijote (Cervantes Saavedra))
+    ✅ Found
+  Checking: Platero y yo by Jiménez (Platero y yo (Jiménez))
+    ✅ Found
+  Checking: La Fontana de Oro by Pérez Galdós (La Fontana de Oro (Pérez Galdós))
+    ✅ Found
+  Checking: Las inquietudes de Shanti Andia by Baroja (Las inquietudes de Shanti Andia (Baroja))
+    ✅ Found
+  Checking: La Tierra de Todos by Blasco Ibáñez (La Tierra de Todos (Blasco Ibáñez))
+    ✅ Found
+  Checking: El préstamo de la difunta by Blasco Ibáñez (El préstamo de la difunta (Blasco Ibáñez))
+    ✅ Found
+  Checking: Bailén by Pérez Galdós (Bailén (Pérez Galdós))
+    ✅ Found
+  Checking: El Gaucho Martín Fierro by Hernández (El Gaucho Martín Fierro (Hernández))
+    ✅ Found
+  Checking: La Barraca by Blasco Ibáñez (La Barraca (Blasco Ibáñez))
+    ✅ Found
+  Checking: La Vuelta de Martín Fierro by Hernández (La Vuelta de Martín Fierro (Hernández))
+    ✅ Found
+  Checking: Novelas y teatro by Cervantes Saavedra (Novelas y teatro (Cervantes Saavedra))
+    ✅ Found
+  Checking: Torquemada en la hoguera by Pérez Galdós (Torquemada en la hoguera (Pérez Galdós))
+    ✅ Found
+  Checking: Arroz y tartana by Blasco Ibáñez (Arroz y tartana (Blasco Ibáñez))
+    ✅ Found
+  Checking: La Catedral by Blasco Ibáñez (La Catedral (Blasco Ibáñez))
+    ✅ Found
+  Checking: Trafalgar by Pérez Galdós (Trafalgar (Pérez Galdós))
+    ✅ Found
+  Checking: Fortunata y Jacinta: dos historias de casadas by Pérez Galdós (Fortunata y Jacinta: dos historias de casadas (Pérez Galdós))
+    ✅ Found
+  Checking: Marianela by Pérez Galdós (Marianela (Pérez Galdós))
+    ✅ Found
+  Checking: Un viaje de novios by Pardo Bazán (Un viaje de novios (Pardo Bazán))
+    ✅ Found
+  Checking: Un faccioso más y algunos frailes menos by Pérez Galdós (Un faccioso más y algunos frailes menos (Pérez Galdós))
+    ✅ Found
+  Checking: La Tribuna by Pardo Bazán (La Tribuna (Pardo Bazán))
+    ✅ Found
+  Checking: Los pazos de Ulloa by Pardo Bazán (Los pazos de Ulloa (Pardo Bazán))
+    ✅ Found
+  Checking: Los muertos mandan by Blasco Ibáñez (Los muertos mandan (Blasco Ibáñez))
+    ✅ Found
+  Checking: Misericordia by Pérez Galdós (Misericordia (Pérez Galdós))
+    ✅ Found
+  Checking: Cádiz by Pérez Galdós (Cádiz (Pérez Galdós))
+    ✅ Found
+  Checking: Mare nostrum by Blasco Ibáñez (Mare nostrum (Blasco Ibáñez))
+    ✅ Found
+  Checking: El intruso by Blasco Ibáñez (El intruso (Blasco Ibáñez))
+    ✅ Found
+  Checking: Los cuatro jinetes del apocalipsis by Blasco Ibáñez (Los cuatro jinetes del apocalipsis (Blasco Ibáñez))
+    ✅ Found
+  Checking: Novelas y cuentos by Estébanez Calderón (Novelas y cuentos (Estébanez Calderón))
+    ✅ Found
+  Checking: Los argonautas by Blasco Ibáñez (Los argonautas (Blasco Ibáñez))
+    ✅ Found
+  Checking: La desheredada by Pérez Galdós (La desheredada (Pérez Galdós))
+    ✅ Found
+  Checking: Sangre y arena by Blasco Ibáñez (Sangre y arena (Blasco Ibáñez))
+    ✅ Found
+  Checking: La condenada (cuentos) by Blasco Ibáñez (La condenada (cuentos) (Blasco Ibáñez))
+    ✅ Found
+  Checking: Electra by Pérez Galdós (Electra (Pérez Galdós))
+    ✅ Found
+  Checking: La bodega by Blasco Ibáñez (La bodega (Blasco Ibáñez))
+    ✅ Found
+  Checking: Entre naranjos by Blasco Ibáñez (Entre naranjos (Blasco Ibáñez))
+    ✅ Found
+  Checking: La de Bringas by Pérez Galdós (La de Bringas (Pérez Galdós))
+    ✅ Found
+  Checking: Tormento by Pérez Galdós (Tormento (Pérez Galdós))
+    ✅ Found
+  Checking: La horda by Blasco Ibáñez (La horda (Blasco Ibáñez))
+    ✅ Found
+  Checking: Los enemigos de la mujer by Blasco Ibáñez (Los enemigos de la mujer (Blasco Ibáñez))
+    ✅ Found
+  Checking: Platero y yo by Jiménez (Platero y yo (Jiménez))
+    ✅ Found
+  Checking: Oriente by Blasco Ibáñez (Oriente (Blasco Ibáñez))
+    ✅ Found
+  Checking: La lucha por la vida: Aurora roja by Baroja (La lucha por la vida: Aurora roja (Baroja))
+    ✅ Found
+  Checking: Flor de mayo by Blasco Ibáñez (Flor de mayo (Blasco Ibáñez))
+    ✅ Found
+  Checking: Sonata de estío: memorias del marqués de Bradomín by Valle-Inclán (Sonata de estío: memorias del marqués de Bradomín (Valle-Inclán))
+    ✅ Found
+  Checking: Sonata de primavera: memorias del marqués de Bradomín by Valle-Inclán (Sonata de primavera: memorias del marqués de Bradomín (Valle-Inclán))
+    ✅ Found
+  Checking: Mala Hierba by Baroja (Mala Hierba (Baroja))
+    ❌ Not found
+  Checking: La maja desnuda by Blasco Ibáñez (La maja desnuda (Blasco Ibáñez))
+    ✅ Found
+  Checking: La lucha por la vida: Mala hierba by Baroja (La lucha por la vida: Mala hierba (Baroja))
+    ❌ Not found
+  Checking: La lucha por la vida: La busca by Baroja (La lucha por la vida: La busca (Baroja))
+    ✅ Found
+  Checking: La Tía Tula (Novela) by Unamuno (La Tía Tula (Novela) (Unamuno))
+    ✅ Found
+  Checking: Abel Sánchez: Una Historia de Pasión by Unamuno (Abel Sánchez: Una Historia de Pasión (Unamuno))
+    ✅ Found
+  Checking: Sonata de otoño; Sonata de invierno: memorias del Marqués de Bradomín by Valle-Inclán (Sonata de otoño; Sonata de invierno: memorias del Marqués de Bradomín (Valle-Inclán))
+    ✅ Found
+  Checking: Las inquietudes de Shanti Andía by Baroja (Las inquietudes de Shanti Andía (Baroja))
+    ✅ Found
+  Checking: El aprendiz de conspirador by Baroja (El aprendiz de conspirador (Baroja))
+    ❌ Not found
+  Checking: El libro de las mil noches y una noche; t. 2 by Anonymous; Blasco Ibáñez (El libro de las mil noches y una noche; t. 2 (Anonymous; Blasco Ibáñez))
+    ✅ Found
+  Checking: El Escuadrón del Brigante by Baroja (El Escuadrón del Brigante (Baroja))
+    ❌ Not found
+  Checking: El libro de las mil noches y una noche; t. 3 by Anonymous; Blasco Ibáñez (El libro de las mil noches y una noche; t. 3 (Anonymous; Blasco Ibáñez))
+    ✅ Found
+  Checking: Gloria (primera parte) by Pérez Galdós (Gloria (primera parte) (Pérez Galdós))
+    ✅ Found
+  Checking: Gloria (segunda parte) by Pérez Galdós (Gloria (segunda parte) (Pérez Galdós))
+    ✅ Found
+  Checking: Gloria (novela completa) by Pérez Galdós (Gloria (novela completa) (Pérez Galdós))
+    ✅ Found
+  Checking: Amor y Pedagogía by Unamuno (Amor y Pedagogía (Unamuno))
+    ✅ Found
+  Checking: Los Caminos del Mundo by Baroja (Los Caminos del Mundo (Baroja))
+    ✅ Found
+  Checking: Coplas por la muerte de su padre by Manrique (Coplas por la muerte de su padre (Manrique))
+    ✅ Found
+  Checking: Zaragoza by Pérez Galdós (Zaragoza (Pérez Galdós))
+    ✅ Found
+  Checking: Páginas escogidas by Machado (Páginas escogidas (Machado))
+    ❌ Not found
+  Checking: Con la Pluma y con el Sable: Crónica de 1820 a 1823 by Baroja (Con la Pluma y con el Sable: Crónica de 1820 a 1823 (Baroja))
+    ❌ Not found
+  Checking: La Quimera by Pardo Bazán (La Quimera (Pardo Bazán))
+    ✅ Found
+  Checking: Niebla (Nivola) by Unamuno (Niebla (Nivola) (Unamuno))
+    ✅ Found
+  Checking: Los Recursos de la Astucia by Baroja (Los Recursos de la Astucia (Baroja))
+    ❌ Not found
+  Checking: La Ruta del Aventurero by Baroja (La Ruta del Aventurero (Baroja))
+    ✅ Found
+  Checking: La Sirena Negra by Pardo Bazán (La Sirena Negra (Pardo Bazán))
+    ✅ Found
+  Checking: Los Contrastes de la Vida by Baroja (Los Contrastes de la Vida (Baroja))
+    ✅ Found
+  Checking: Miau by Pérez Galdós (Miau (Pérez Galdós))
+    ✅ Found
+  Checking: Insolación y Morriña (Dos historias amorosas) by Pardo Bazán (Insolación y Morriña (Dos historias amorosas) (Pardo Bazán))
+    ❌ Not found
+  Checking: La Veleta de Gastizar by Baroja (La Veleta de Gastizar (Baroja))
+    ❌ Not found
+  Checking: La novela en el tranvía by Pérez Galdós (La novela en el tranvía (Pérez Galdós))
+    ✅ Found
+  Checking: Los Caudillos de 1830 by Baroja (Los Caudillos de 1830 (Baroja))
+    ✅ Found
+  Checking: La Isabelina by Baroja (La Isabelina (Baroja))
+    ✅ Found
+  Checking: El Sabor de la Venganza by Baroja (El Sabor de la Venganza (Baroja))
+    ❌ Not found
+  Checking: Realidad: Novela en cinco Jornadas by Pérez Galdós (Realidad: Novela en cinco Jornadas (Pérez Galdós))
+    ❌ Not found
+  Checking: La Incógnita by Pérez Galdós (La Incógnita (Pérez Galdós))
+    ✅ Found
+  Checking: El Tesoro de Gastón: Novela by Pardo Bazán (El Tesoro de Gastón: Novela (Pardo Bazán))
+    ✅ Found
+  Checking: Torquemada en la cruz by Pérez Galdós (Torquemada en la cruz (Pérez Galdós))
+    ✅ Found
+  Checking: Torquemada en el purgatorio by Pérez Galdós (Torquemada en el purgatorio (Pérez Galdós))
+    ✅ Found
+  Checking: Las Furias by Baroja (Las Furias (Baroja))
+    ✅ Found
+  Checking: La media noche: visión estelar de un momento de guerra by Valle-Inclán (La media noche: visión estelar de un momento de guerra (Valle-Inclán))
+    ❌ Not found
+  Checking: Cuentos de amor by Pardo Bazán (Cuentos de amor (Pardo Bazán))
+    ✅ Found
+  Checking: El amigo Manso by Pérez Galdós (El amigo Manso (Pérez Galdós))
+    ✅ Found
+  Checking: Cuentos de navidad y reyes; cuentos de la patria; cuentos antiguos by Pardo Bazán (Cuentos de navidad y reyes; cuentos de la patria; cuentos antiguos (Pardo Bazán))
+    ❌ Not found
+  Checking: La dama joven by Pardo Bazán (La dama joven (Pardo Bazán))
+    ✅ Found
+  Checking: Torquemada y San Pedro by Pérez Galdós (Torquemada y San Pedro (Pérez Galdós))
+    ✅ Found
+  Checking: Tres novelas ejemplares y un prólogo by Unamuno (Tres novelas ejemplares y un prólogo (Unamuno))
+    ✅ Found
+  Checking: Dulce Dueño by Pardo Bazán (Dulce Dueño (Pardo Bazán))
+    ✅ Found
+  Checking: El Doctor Centeno (novela completa) by Pérez Galdós (El Doctor Centeno (novela completa) (Pérez Galdós))
+    ✅ Found
+  Checking: El Doctor Centeno (Tomo I) by Pérez Galdós (El Doctor Centeno (Tomo I) (Pérez Galdós))
+    ❌ Not found
+  Checking: El Doctor Centeno (Tomo II) by Pérez Galdós (El Doctor Centeno (Tomo II) (Pérez Galdós))
+    ❌ Not found
+  Checking: Cañas y barro: Novela by Blasco Ibáñez (Cañas y barro: Novela (Blasco Ibáñez))
+    ✅ Found
+  Checking: Los entremeses by Cervantes Saavedra (Los entremeses (Cervantes Saavedra))
+    ✅ Found
+  Checking: El Marqués de Bradomín: Coloquios Románticos by Valle-Inclán (El Marqués de Bradomín: Coloquios Románticos (Valle-Inclán))
+    ✅ Found
+  Checking: La madre naturaleza (2ª parte de Los pazos de Ulloa) by Pardo Bazán (La madre naturaleza (2ª parte de Los pazos de Ulloa) (Pardo Bazán))
+    ❌ Not found
+  Checking: Del sentimiento trágico de la vida by Unamuno (Del sentimiento trágico de la vida (Unamuno))
+    ✅ Found
+  Checking: Una Cristiana by Pardo Bazán (Una Cristiana (Pardo Bazán))
+    ✅ Found
+  Checking: El árbol de la ciencia: novela by Baroja (El árbol de la ciencia: novela (Baroja))
+    ✅ Found
+  Checking: Novelas ejemplares by Cervantes Saavedra (Novelas ejemplares (Cervantes Saavedra))
+    ✅ Found
+  Checking: Sónnica la cortesana: Novela by Blasco Ibáñez (Sónnica la cortesana: Novela (Blasco Ibáñez))
+    ❌ Not found
+  Checking: La reina Calafia (novela) by Blasco Ibáñez (La reina Calafia (novela) (Blasco Ibáñez))
+    ✅ Found
+  Checking: Lo prohibido (novela completa) by Pérez Galdós (Lo prohibido (novela completa) (Pérez Galdós))
+    ✅ Found
+  Checking: Lo prohibido (tomo 1 de 2) by Pérez Galdós (Lo prohibido (tomo 1 de 2) (Pérez Galdós))
+    ✅ Found
+  Checking: Lo prohibido (tomo 2 de 2) by Pérez Galdós (Lo prohibido (tomo 2 de 2) (Pérez Galdós))
+    ✅ Found
+  Checking: Las figuras de cera: novela by Baroja (Las figuras de cera: novela (Baroja))
+    ❌ Not found
+  Checking: La vuelta al mundo de un novelista; vol. 1/3 by Blasco Ibáñez (La vuelta al mundo de un novelista; vol. 1/3 (Blasco Ibáñez))
+    ✅ Found
+  Checking: La vuelta al mundo de un novelista; vol. 2/3 by Blasco Ibáñez (La vuelta al mundo de un novelista; vol. 2/3 (Blasco Ibáñez))
+    ✅ Found
+  Checking: Halma by Pérez Galdós (Halma (Pérez Galdós))
+    ✅ Found
+  Checking: La prueba by Pardo Bazán (La prueba (Pardo Bazán))
+    ✅ Found
+  Checking: La familia de Doctor Pedraza by Blasco Ibáñez (La familia de Doctor Pedraza (Blasco Ibáñez))
+    ✅ Found
+  Checking: El abuelo (Novela en cinco jornadas) by Pérez Galdós (El abuelo (Novela en cinco jornadas) (Pérez Galdós))
+    ❌ Not found
+  Checking: Cuentos valencianos by Blasco Ibáñez (Cuentos valencianos (Blasco Ibáñez))
+    ✅ Found
+  Checking: Tristana by Pérez Galdós (Tristana (Pérez Galdós))
+    ✅ Found
+  Checking: El caballero encantado (cuento real... inverosí­mil) by Pérez Galdós (El caballero encantado (cuento real... inverosí­mil) (Pérez Galdós))
+    ❌ Not found
+  Checking: Novelas de la Costa Azul by Blasco Ibáñez (Novelas de la Costa Azul (Blasco Ibáñez))
+    ✅ Found
+  Checking: La corte de Carlos IV by Pérez Galdós (La corte de Carlos IV (Pérez Galdós))
+    ✅ Found
+  Checking: El 19 de marzo y el 2 de mayo by Pérez Galdós (El 19 de marzo y el 2 de mayo (Pérez Galdós))
+    ✅ Found
+  Checking: Napoleón en Chamartín by Pérez Galdós (Napoleón en Chamartín (Pérez Galdós))
+    ✅ Found
+  Checking: Gerona by Pérez Galdós (Gerona (Pérez Galdós))
+    ✅ Found
+  Checking: Los valores literarios by Azorín (Los valores literarios (Azorín))
+    ✅ Found
+  Checking: Juan Martín el Empecinado by Pérez Galdós (Juan Martín el Empecinado (Pérez Galdós))
+    ✅ Found
+  Checking: Señora ama: Comedia en tres actos by Benavente (Señora ama: Comedia en tres actos (Benavente))
+    ❌ Not found
+  Checking: La batalla de los Arapiles by Pérez Galdós (La batalla de los Arapiles (Pérez Galdós))
+    ✅ Found
+  Checking: El papa del mar by Blasco Ibáñez (El papa del mar (Blasco Ibáñez))
+    ✅ Found
+  Checking: La vuelta al mundo de un novelista; vol. 3/3 by Blasco Ibáñez (La vuelta al mundo de un novelista; vol. 3/3 (Blasco Ibáñez))
+    ✅ Found
+  Checking: Tirano Banderas: Novela de tierra caliente by Valle-Inclán (Tirano Banderas: Novela de tierra caliente (Valle-Inclán))
+    ✅ Found
+  Checking: La piedra angular: novela by Pardo Bazán (La piedra angular: novela (Pardo Bazán))
+    ✅ Found
+  Checking: Poesías completas by Machado (Poesías completas (Machado))
+    ✅ Found
+  Checking: Luces de Bohemia: Esperpento by Valle-Inclán (Luces de Bohemia: Esperpento (Valle-Inclán))
+    ✅ Found
+  Checking: El equipaje del rey José by Pérez Galdós (El equipaje del rey José (Pérez Galdós))
+    ✅ Found
+  Checking: Divinas palabras by Valle-Inclán (Divinas palabras (Valle-Inclán))
+    ✅ Found
+  Checking: Memorias de un cortesano de 1815 by Pérez Galdós (Memorias de un cortesano de 1815 (Pérez Galdós))
+    ✅ Found
+  Checking: La segunda casaca by Pérez Galdós (La segunda casaca (Pérez Galdós))
+    ✅ Found
+  Checking: El Grande Oriente by Pérez Galdós (El Grande Oriente (Pérez Galdós))
+    ✅ Found
+  Checking: 7 de julio by Pérez Galdós (7 de julio (Pérez Galdós))
+    ✅ Found
+  Checking: El cisne de Vilamorta by Pardo Bazán (El cisne de Vilamorta (Pardo Bazán))
+    ✅ Found
+  Checking: Los cien mil hijos de San Luis by Pérez Galdós (Los cien mil hijos de San Luis (Pérez Galdós))
+    ✅ Found
+  Checking: El terror de 1824 by Pérez Galdós (El terror de 1824 (Pérez Galdós))
+    ✅ Found
+  Checking: Un voluntario realista by Pérez Galdós (Un voluntario realista (Pérez Galdós))
+    ✅ Found
+  Checking: Los apostólicos by Pérez Galdós (Los apostólicos (Pérez Galdós))
+    ✅ Found
+  Checking: Romancero gitano by García Lorca (Romancero gitano (García Lorca))
+    ✅ Found
+  Checking: Nazarín by Pérez Galdós (Nazarín (Pérez Galdós))
+    ✅ Found
+  Checking: El libro de las mil noches y una noche; t. 6 by Anonymous; Blasco Ibáñez (El libro de las mil noches y una noche; t. 6 (Anonymous; Blasco Ibáñez))
+    ✅ Found
+  Checking: El libro de las mil noches y una noche; t. 7 by Anonymous; Blasco Ibáñez (El libro de las mil noches y una noche; t. 7 (Anonymous; Blasco Ibáñez))
+    ❌ Not found
+  Checking: La nave de los locos by Baroja (La nave de los locos (Baroja))
+    ✅ Found
+  Checking: Zumalacárregui by Pérez Galdós (Zumalacárregui (Pérez Galdós))
+    ✅ Found
+  Checking: Vida de Don Quijote y Sancho by Unamuno (Vida de Don Quijote y Sancho (Unamuno))
+    ✅ Found
+  Checking: Mendizábal by Pérez Galdós (Mendizábal (Pérez Galdós))
+    ✅ Found
+  Checking: Libro de poemas by García Lorca (Libro de poemas (García Lorca))
+    ✅ Found
+  Checking: En tranvía by Pardo Bazán (En tranvía (Pardo Bazán))
+    ✅ Found
+  Checking: De Oñate a La Granja by Pérez Galdós (De Oñate a La Granja (Pérez Galdós))
+    ✅ Found
+  Checking: La Malquerida by Benavente (La Malquerida (Benavente))
+    ✅ Found
+  Checking: Magna Carta by King John of England (Magna Carta (King John of England))
+    ✅ Found
+  Checking: The King James Version of the Bible by Various (The King James Version of the Bible (Various))
+    ✅ Found
+  Checking: Tractatus Logico-Philosophicus by Ludwig Wittgenstein (Tractatus Logico-Philosophicus (Ludwig Wittgenstein))
+    ✅ Found
+  Checking: The Book of Mormon by Various (The Book of Mormon (Various))
+    ✅ Found
+  Checking: Pride and Prejudice by Jane Austen by Unknown (Pride and Prejudice by Jane Austen)
+    ✅ Found
+  Checking: Frankenstein; Or, The Modern Prometheus by Mary Wollstonecraft Shelley by Unknown (Frankenstein; Or, The Modern Prometheus by Mary Wollstonecraft Shelley)
+    ✅ Found
+  Checking: Alice's Adventures in Wonderland by Lewis Carroll by Unknown (Alice's Adventures in Wonderland by Lewis Carroll)
+    ✅ Found
+  Checking: The Adventures of Sherlock Holmes by Arthur Conan Doyle by Unknown (The Adventures of Sherlock Holmes by Arthur Conan Doyle)
+    ✅ Found
+  Checking: Moby Dick; Or, The Whale by Herman Melville by Unknown (Moby Dick; Or, The Whale by Herman Melville)
+    ✅ Found
+  Checking: A Tale of Two Cities by Charles Dickens by Unknown (A Tale of Two Cities by Charles Dickens)
+    ✅ Found
+  Checking: The Adventures of Tom Sawyer by Mark Twain by Unknown (The Adventures of Tom Sawyer by Mark Twain)
+    ✅ Found
+  Checking: Dracula by Bram Stoker by Unknown (Dracula by Bram Stoker)
+    ✅ Found
+  Checking: The Yellow Wallpaper by Charlotte Perkins Gilman by Unknown (The Yellow Wallpaper by Charlotte Perkins Gilman)
+    ✅ Found
+  Checking: A Doll's House by Henrik Ibsen by Unknown (A Doll's House by Henrik Ibsen)
+    ✅ Found
+  Checking: Metamorphosis by Franz Kafka by Unknown (Metamorphosis by Franz Kafka)
+    ✅ Found
+  Checking: The Prince by Niccolò Machiavelli by Unknown (The Prince by Niccolò Machiavelli)
+    ✅ Found
+  Checking: Ulysses by James Joyce by Unknown (Ulysses by James Joyce)
+    ✅ Found
+  Checking: Great Expectations by Charles Dickens by Unknown (Great Expectations by Charles Dickens)
+    ✅ Found
+  Checking: War and Peace by Leo Tolstoy by Unknown (War and Peace by Leo Tolstoy)
+    ✅ Found
+  Checking: A Modest Proposal by Jonathan Swift by Unknown (A Modest Proposal by Jonathan Swift)
+    ✅ Found
+  Checking: The Picture of Dorian Gray by Oscar Wilde by Unknown (The Picture of Dorian Gray by Oscar Wilde)
+    ✅ Found
+  Checking: The Waste Land by T. S. Eliot by Unknown (The Waste Land by T. S. Eliot)
+    ✅ Found
+  Checking: A Christmas Carol in Prose; Being a Ghost Story of Christmas by Charles Dickens by Unknown (A Christmas Carol in Prose; Being a Ghost Story of Christmas by Charles Dickens)
+    ✅ Found
+  Checking: The Wonderful Wizard of Oz by L. Frank Baum by Unknown (The Wonderful Wizard of Oz by L. Frank Baum)
+    ✅ Found
+  Checking: The Call of the Wild by Jack London by Unknown (The Call of the Wild by Jack London)
+    ✅ Found
+  Checking: The Scarlet Letter by Nathaniel Hawthorne by Unknown (The Scarlet Letter by Nathaniel Hawthorne)
+    ✅ Found
+  Checking: Jane Eyre by Charlotte Brontë by Unknown (Jane Eyre by Charlotte Brontë)
+    ✅ Found
+
+✅ Wikipedia data generated successfully!
+📁 Saved to: /Users/johndimm/Projects/the-explainers/src/data/wikipedia-data.json
+📊 Summary:
+   People: 38/38 have Wikipedia pages
+   Books: 1318/1491 have Wikipedia pages
+🕒 Generated at: 2025-09-08T03:27:16.803Z
+PS /Users/johndimm/Projects/the-explainers> 

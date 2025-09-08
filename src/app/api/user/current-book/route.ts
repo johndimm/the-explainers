@@ -7,6 +7,11 @@ export async function GET(request: NextRequest) {
   try {
     const session = await getServerSession(authOptions)
     
+    // Local development bypass
+    if (process.env.NODE_ENV === 'development' && !session?.user?.email) {
+      return NextResponse.json({ error: 'Current book not found' }, { status: 404 })
+    }
+    
     if (!session?.user?.email) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
     }

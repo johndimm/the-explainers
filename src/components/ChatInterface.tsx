@@ -6,7 +6,7 @@ import styles from './ChatInterface.module.css'
 import { SettingsData, LLMProvider, ResponseLength, ExplanationStyle } from './Settings'
 import { ProfileData } from './Profile'
 import { useProfile } from '../contexts/ProfileContext'
-import { STYLE_CATEGORIES } from './ExplainerStylesPage'
+import styleCategoriesData from '../data/style-categories.json'
 import { log } from '../utils/log'
 import { convertToHTML, convertToMarkdown, convertToPlainText } from '../utils/chatConverters'
 
@@ -53,7 +53,7 @@ const getAllStyles = () => {
   ]
   
   // Add all categories in the same order as ExplainerStyles page
-  Object.values(STYLE_CATEGORIES).flat().forEach(style => {
+  Object.values(styleCategoriesData).flat().forEach(style => {
     allStyles.push({ value: style.value as ExplanationStyle, name: style.name })
   })
   

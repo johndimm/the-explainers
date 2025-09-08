@@ -1,0 +1,62 @@
+{
+  "people": {
+    "Barack Obama": {
+      "exists": true,
+      "url": "https://en.wikipedia.org/wiki/Barack_Obama",
+      "title": "Barack Obama"
+    },
+    "Harold Bloom": {
+      "exists": true,
+      "url": "https://en.wikipedia.org/wiki/Harold_Bloom",
+      "title": "Harold Bloom"
+    },
+    "William Shakespeare": {
+      "exists": true,
+      "url": "https://en.wikipedia.org/wiki/William_Shakespeare",
+      "title": "William Shakespeare"
+    },
+    "Jerry Seinfeld": {
+      "exists": true,
+      "url": "https://en.wikipedia.org/wiki/Jerry_Seinfeld",
+      "title": "Jerry Seinfeld"
+    },
+    "Oprah Winfrey": {
+      "exists": true,
+      "url": "https://en.wikipedia.org/wiki/Oprah_Winfrey",
+      "title": "Oprah Winfrey"
+    },
+    "Carl Sagan": {
+      "exists": true,
+      "url": "https://en.wikipedia.org/wiki/Carl_Sagan",
+      "title": "Carl Sagan"
+    }
+  },
+  "books": {
+    "Hamlet by William Shakespeare": {
+      "exists": true,
+      "url": "https://en.wikipedia.org/wiki/Ur-Hamlet",
+      "title": "Ur-Hamlet"
+    },
+    "Ulysses by James Joyce": {
+      "exists": true,
+      "url": "https://en.wikipedia.org/wiki/Ulysses_(novel)",
+      "title": "Ulysses (novel)"
+    },
+    "Pride and Prejudice by Jane Austen": {
+      "exists": true,
+      "url": "https://en.wikipedia.org/wiki/Pride%20and%20Prejudice",
+      "title": "Pride and Prejudice"
+    },
+    "1984 by George Orwell": {
+      "exists": true,
+      "url": "https://en.wikipedia.org/wiki/Nineteen_Eighty-Four",
+      "title": "Nineteen Eighty-Four"
+    },
+    "A Midsummer Night's Dream by William Shakespeare": {
+      "exists": true,
+      "url": "https://en.wikipedia.org/wiki/Puck%20(A%20Midsummer%20Night's%20Dream)",
+      "title": "Puck (A Midsummer Night's Dream)"
+    }
+  },
+  "generatedAt": "2025-09-08T14:25:43.520Z"
+}

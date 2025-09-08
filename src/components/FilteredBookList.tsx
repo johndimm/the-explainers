@@ -1,9 +1,6 @@
 'use client'
 
 import React, { useState, useEffect } from 'react'
-import WikipediaLink from './WikipediaLink'
-import { getBookWikipediaSearchTerm } from '@/utils/wikipedia'
-import { checkBookWikipediaPage } from '@/utils/wikipediaStatic'
 import LoadingIndicator from './LoadingIndicator'
 
 interface Book {
@@ -12,6 +9,8 @@ interface Book {
   author?: string
   directUrl?: string
   localPath?: string
+  wikipediaUrl?: string
+  wikipediaTitle?: string
 }
 
 interface FilteredBookListProps {
@@ -33,24 +32,16 @@ export const FilteredBookList: React.FC<FilteredBookListProps> = ({
   useEffect(() => {
     const filterBooks = () => {
       setIsLoading(true)
-      const validBooks: Book[] = []
-
-      // Check each book for Wikipedia existence using static data
-      for (const book of books) {
-        try {
-          const result = checkBookWikipediaPage(book.title, book.author)
-          
-          if (result.exists) {
-            validBooks.push(book)
-          } else {
-            console.log(`Removing book "${book.title}" by ${book.author || 'Unknown'} - no Wikipedia page found`)
-          }
-        } catch (error) {
-          console.error(`Error checking Wikipedia for ${book.title}:`, error)
-          // Include the book if we can't check
-          validBooks.push(book)
+      
+      // Filter books that have Wikipedia links directly from JSON data
+      const validBooks = books.filter(book => {
+        if (book.wikipediaUrl && book.wikipediaUrl.trim() !== '') {
+          return true
+        } else {
+          console.log(`Removing book "${book.title}" by ${book.author || 'Unknown'} - no Wikipedia URL in JSON data`)
+          return false
         }
-      }
+      })
 
       setFilteredBooks(validBooks)
       setIsLoading(false)
@@ -62,7 +53,7 @@ export const FilteredBookList: React.FC<FilteredBookListProps> = ({
   if (isLoading) {
     return (
       <LoadingIndicator 
-        message="Checking Wikipedia pages for books..."
+        message="Loading books with Wikipedia links..."
         style={{ padding: '20px' }}
       />
     )
@@ -84,16 +75,36 @@ export const FilteredBookList: React.FC<FilteredBookListProps> = ({
                 <span className={styles.bookAuthor}>by {book.author}</span>
               )}
             </div>
-                      <WikipediaLink 
-                        searchTerm={getBookWikipediaSearchTerm(book.title, book.author)}
-                        type="book"
-                        style={{ 
-                          position: 'relative',
-                          zIndex: 10,
-                          fontSize: '12px',
-                          flexShrink: 0
-                        }}
-                      />
+                      {book.wikipediaUrl && (
+                        <button
+                          onClick={(e) => {
+                            e.stopPropagation()
+                            window.open(book.wikipediaUrl, '_blank', 'noopener,noreferrer')
+                          }}
+                          style={{ 
+                            position: 'relative',
+                            zIndex: 10,
+                            fontSize: '12px',
+                            flexShrink: 0,
+                            background: 'none',
+                            border: 'none',
+                            cursor: 'pointer',
+                            padding: '4px',
+                            borderRadius: '4px',
+                            color: '#0066cc',
+                            transition: 'background-color 0.2s'
+                          }}
+                          onMouseEnter={(e) => {
+                            e.currentTarget.style.backgroundColor = '#f0f8ff'
+                          }}
+                          onMouseLeave={(e) => {
+                            e.currentTarget.style.backgroundColor = 'transparent'
+                          }}
+                          title={`Learn about ${book.title} on Wikipedia`}
+                        >
+                          🔗
+                        </button>
+                      )}
           </div>
         </div>
       ))}

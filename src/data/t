@@ -1,0 +1,518 @@
+:  {
+  "critics": [
+    {
+      "name": "Harold Bloom",
+      "value": "harold-bloom",
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/Harold_Bloom",
+      "wikipediaTitle": "Harold Bloom"
+    },
+    {
+      "name": "T.S. Eliot",
+      "value": "ts-eliot",
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/T._S._Eliot",
+      "wikipediaTitle": "T. S. Eliot"
+    },
+    {
+      "name": "John Ruskin",
+      "value": "john-ruskin",
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/John_Ruskin",
+      "wikipediaTitle": "John Ruskin"
+    },
+    {
+      "name": "Samuel Johnson",
+      "value": "samuel-johnson",
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/Samuel_Johnson",
+      "wikipediaTitle": "Samuel Johnson"
+    },
+    {
+      "name": "Christopher Marlowe",
+      "value": "christopher-marlowe",
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/Christopher_Marlowe",
+      "wikipediaTitle": "Christopher Marlowe"
+    },
+    {
+      "name": "Ben Jonson",
+      "value": "ben-jonson",
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/Ben_Jonson",
+      "wikipediaTitle": "Ben Jonson"
+    },
+    {
+      "name": "Francis Bacon",
+      "value": "francis-bacon",
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/Francis_Bacon",
+      "wikipediaTitle": "Francis Bacon"
+    }
+  ],
+  "writers": [
+    {
+      "name": "David Foster Wallace",
+      "value": "david-foster-wallace",
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/David_Foster_Wallace",
+      "wikipediaTitle": "David Foster Wallace"
+    },
+    {
+      "name": "Oscar Wilde",
+      "value": "oscar-wilde",
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/Oscar_Wilde",
+      "wikipediaTitle": "Oscar Wilde"
+    },
+    {
+      "name": "Maya Angelou",
+      "value": "maya-angelou",
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/Maya_Angelou",
+      "wikipediaTitle": "Maya Angelou"
+    },
+    {
+      "name": "Douglas Adams",
+      "value": "douglas-adams",
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/Douglas_Adams",
+      "wikipediaTitle": "Douglas Adams"
+    },
+    {
+      "name": "Terry Pratchett",
+      "value": "terry-pratchett",
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/Terry_Pratchett",
+      "wikipediaTitle": "Terry Pratchett"
+    },
+    {
+      "name": "Joan Didion",
+      "value": "joan-didion",
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/Joan_Didion",
+      "wikipediaTitle": "Joan Didion"
+    },
+    {
+      "name": "David Sedaris",
+      "value": "david-sedaris",
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/David_Sedaris",
+      "wikipediaTitle": "David Sedaris"
+    },
+    {
+      "name": "Mark Twain",
+      "value": "mark-twain",
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/Mark_Twain",
+      "wikipediaTitle": "Mark Twain"
+    },
+    {
+      "name": "Rudyard Kipling",
+      "value": "rudyard-kipling",
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/Rudyard_Kipling",
+      "wikipediaTitle": "Rudyard Kipling"
+    },
+    {
+      "name": "Tom Wolfe",
+      "value": "tom-wolfe",
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/Tom_Wolfe",
+      "wikipediaTitle": "Tom Wolfe"
+    },
+    {
+      "name": "Flannery O'Connor",
+      "value": "flannery-oconnor",
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/Flannery_O'Connor",
+      "wikipediaTitle": "Flannery O'Connor"
+    },
+    {
+      "name": "Anthony Bourdain",
+      "value": "anthony-bourdain",
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/Anthony_Bourdain",
+      "wikipediaTitle": "Anthony Bourdain"
+    },
+    {
+      "name": "Bill Bryson",
+      "value": "bill-bryson",
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/Bill_Bryson",
+      "wikipediaTitle": "Bill Bryson"
+    },
+    {
+      "name": "Stephen Fry",
+      "value": "stephen-fry",
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/Stephen_Fry",
+      "wikipediaTitle": "Stephen Fry"
+    },
+    {
+      "name": "Bernard-Henri Lévy",
+      "value": "bernard-henri-levy",
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/Bernard-Henri_L%C3%A9vy",
+      "wikipediaTitle": "Bernard-Henri Lévy"
+    },
+    {
+      "name": "Michel Houellebecq",
+      "value": "michel-houellebecq",
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/Michel_Houellebecq",
+      "wikipediaTitle": "Michel Houellebecq"
+    },
+    {
+      "name": "Christopher Hitchens",
+      "value": "christopher-hitchens",
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/Christopher_Hitchens",
+      "wikipediaTitle": "Christopher Hitchens"
+    },
+    {
+      "name": "Charles Dickens",
+      "value": "charles-dickens",
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/Charles_Dickens",
+      "wikipediaTitle": "Charles Dickens"
+    },
+    {
+      "name": "Cormac McCarthy",
+      "value": "cormac-mccarthy",
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/Cormac_McCarthy",
+      "wikipediaTitle": "Cormac McCarthy"
+    },
+    {
+      "name": "Stephen King",
+      "value": "stephen-king",
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/Stephen_King",
+      "wikipediaTitle": "Stephen King"
+    },
+    {
+      "name": "William Shakespeare",
+      "value": "william-shakespeare",
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/William_Shakespeare",
+      "wikipediaTitle": "William Shakespeare"
+    },
+    {
+      "name": "Dorothy Parker",
+      "value": "dorothy-parker",
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/Dorothy_Parker",
+      "wikipediaTitle": "Dorothy Parker"
+    },
+    {
+      "name": "Ernest Hemingway",
+      "value": "ernest-hemingway",
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/Ernest_Hemingway",
+      "wikipediaTitle": "Ernest Hemingway"
+    },
+    {
+      "name": "James Joyce",
+      "value": "james-joyce",
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/James_Joyce",
+      "wikipediaTitle": "James Joyce"
+    },
+    {
+      "name": "Samuel Beckett",
+      "value": "samuel-beckett",
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/Samuel_Beckett",
+      "wikipediaTitle": "Samuel Beckett"
+    },
+    {
+      "name": "Kurt Vonnegut",
+      "value": "kurt-vonnegut",
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/Kurt_Vonnegut",
+      "wikipediaTitle": "Kurt Vonnegut"
+    }
+  ],
+  "politics": [
+    {
+      "name": "Bernie Sanders",
+      "value": "bernie-sanders",
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/Bernie_Sanders",
+      "wikipediaTitle": "Bernie Sanders"
+    },
+    {
+      "name": "Martin Luther King",
+      "value": "martin-luther-king",
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/Martin_Luther_King_Jr.",
+      "wikipediaTitle": "Martin Luther King Jr."
+    },
+    {
+      "name": "John F. Kennedy",
+      "value": "john-f-kennedy",
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/John_F._Kennedy",
+      "wikipediaTitle": "John F. Kennedy"
+    },
+    {
+      "name": "James Carville",
+      "value": "james-carville",
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/James_Carville",
+      "wikipediaTitle": "James Carville"
+    },
+    {
+      "name": "Donald Trump",
+      "value": "donald-trump",
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/Donald_Trump",
+      "wikipediaTitle": "Donald Trump"
+    },
+    {
+      "name": "George W. Bush",
+      "value": "george-w-bush",
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/George_W._Bush",
+      "wikipediaTitle": "George W. Bush"
+    },
+    {
+      "name": "Barack Obama",
+      "value": "barack-obama",
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/Barack_Obama",
+      "wikipediaTitle": "Barack Obama"
+    }
+  ],
+  "comedians": [
+    {
+      "name": "Jerry Seinfeld",
+      "value": "jerry-seinfeld",
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/Jerry_Seinfeld",
+      "wikipediaTitle": "Jerry Seinfeld"
+    },
+    {
+      "name": "Louis C.K.",
+      "value": "louis-ck",
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/Louis_C.K.",
+      "wikipediaTitle": "Louis C.K."
+    },
+    {
+      "name": "Dave Chappelle",
+      "value": "dave-chappelle",
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/Dave_Chappelle",
+      "wikipediaTitle": "Dave Chappelle"
+    },
+    {
+      "name": "Tina Fey",
+      "value": "tina-fey",
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/Tina_Fey",
+      "wikipediaTitle": "Tina Fey"
+    },
+    {
+      "name": "Amy Poehler",
+      "value": "amy-poehler",
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/Amy_Poehler",
+      "wikipediaTitle": "Amy Poehler"
+    },
+    {
+      "name": "Ricky Gervais",
+      "value": "ricky-gervais",
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/Ricky_Gervais",
+      "wikipediaTitle": "Ricky Gervais"
+    },
+    {
+      "name": "Sarah Silverman",
+      "value": "sarah-silverman",
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/Sarah_Silverman",
+      "wikipediaTitle": "Sarah Silverman"
+    },
+    {
+      "name": "John Mulaney",
+      "value": "john-mulaney",
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/John_Mulaney",
+      "wikipediaTitle": "John Mulaney"
+    },
+    {
+      "name": "Ali Wong",
+      "value": "ali-wong",
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/Ali_Wong",
+      "wikipediaTitle": "Ali Wong"
+    },
+    {
+      "name": "Bo Burnham",
+      "value": "bo-burnham",
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/Bo_Burnham",
+      "wikipediaTitle": "Bo Burnham"
+    },
+    {
+      "name": "Andrew Dice Clay",
+      "value": "andrew-dice-clay",
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/Andrew_Dice_Clay",
+      "wikipediaTitle": "Andrew Dice Clay"
+    },
+    {
+      "name": "Anthony Jeselnik",
+      "value": "anthony-jeselnik",
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/Anthony_Jeselnik",
+      "wikipediaTitle": "Anthony Jeselnik"
+    },
+    {
+      "name": "Doug Stanhope",
+      "value": "doug-stanhope",
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/Doug_Stanhope",
+      "wikipediaTitle": "Doug Stanhope"
+    },
+    {
+      "name": "Jim Norton",
+      "value": "jim-norton",
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/Jim_Norton",
+      "wikipediaTitle": "Jim Norton"
+    },
+    {
+      "name": "Jim Jefferies",
+      "value": "jim-jefferies",
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/Jim_Jefferies",
+      "wikipediaTitle": "Jim Jefferies"
+    },
+    {
+      "name": "Daniel Tosh",
+      "value": "daniel-tosh",
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/Daniel_Tosh",
+      "wikipediaTitle": "Daniel Tosh"
+    },
+    {
+      "name": "Andy Andrist",
+      "value": "andy-andrist",
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/Andy_Andrist",
+      "wikipediaTitle": "Andy Andrist"
+    },
+    {
+      "name": "Bill Burr",
+      "value": "bill-burr",
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/Bill_Burr",
+      "wikipediaTitle": "Bill Burr"
+    },
+    {
+      "name": "Lewis Black",
+      "value": "lewis-black",
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/Lewis_Black",
+      "wikipediaTitle": "Lewis Black"
+    },
+    {
+      "name": "George Carlin",
+      "value": "george-carlin",
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/George_Carlin",
+      "wikipediaTitle": "George Carlin"
+    },
+    {
+      "name": "Sam Kinison",
+      "value": "sam-kinison",
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/Sam_Kinison",
+      "wikipediaTitle": "Sam Kinison"
+    },
+    {
+      "name": "Paul Mooney",
+      "value": "paul-mooney",
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/Paul_Mooney",
+      "wikipediaTitle": "Paul Mooney"
+    },
+    {
+      "name": "Bill Hicks",
+      "value": "bill-hicks",
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/Bill_Hicks",
+      "wikipediaTitle": "Bill Hicks"
+    },
+    {
+      "name": "Bob Saget",
+      "value": "bob-saget",
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/Bob_Saget",
+      "wikipediaTitle": "Bob Saget"
+    },
+    {
+      "name": "Norm MacDonald",
+      "value": "norm-macdonald",
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/Norm_Macdonald",
+      "wikipediaTitle": "Norm Macdonald"
+    }
+  ],
+  "talkShowHosts": [
+    {
+      "name": "Oprah Winfrey",
+      "value": "oprah-winfrey",
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/Oprah_Winfrey",
+      "wikipediaTitle": "Oprah Winfrey"
+    },
+    {
+      "name": "David Letterman",
+      "value": "david-letterman",
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/David_Letterman",
+      "wikipediaTitle": "David Letterman"
+    },
+    {
+      "name": "Conan O'Brien",
+      "value": "conan-obrien",
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/Conan_O'Brien",
+      "wikipediaTitle": "Conan O'Brien"
+    },
+    {
+      "name": "Stephen Colbert",
+      "value": "stephen-colbert",
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/Stephen_Colbert",
+      "wikipediaTitle": "Stephen Colbert"
+    },
+    {
+      "name": "Jimmy Fallon",
+      "value": "jimmy-fallon",
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/Jimmy_Fallon",
+      "wikipediaTitle": "Jimmy Fallon"
+    },
+    {
+      "name": "Ellen DeGeneres",
+      "value": "ellen-degeneres",
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/Ellen_DeGeneres",
+      "wikipediaTitle": "Ellen DeGeneres"
+    },
+    {
+      "name": "Trevor Noah",
+      "value": "trevor-noah",
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/Trevor_Noah",
+      "wikipediaTitle": "Trevor Noah"
+    },
+    {
+      "name": "John Oliver",
+      "value": "john-oliver",
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/John_Oliver",
+      "wikipediaTitle": "John Oliver"
+    },
+    {
+      "name": "Jon Stewart",
+      "value": "jon-stewart",
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/Jon_Stewart",
+      "wikipediaTitle": "Jon Stewart"
+    },
+    {
+      "name": "Howard Stern",
+      "value": "howard-stern",
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/Howard_Stern",
+      "wikipediaTitle": "Howard Stern"
+    },
+    {
+      "name": "Bill Maher",
+      "value": "bill-maher",
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/Bill_Maher",
+      "wikipediaTitle": "Bill Maher"
+    }
+  ],
+  "other": [
+    {
+      "name": "Carl Sagan",
+      "value": "carl-sagan",
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/Carl_Sagan",
+      "wikipediaTitle": "Carl Sagan"
+    },
+    {
+      "name": "Neil deGrasse Tyson",
+      "value": "neil-degrasse-tyson",
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/Neil_deGrasse_Tyson",
+      "wikipediaTitle": "Neil deGrasse Tyson"
+    },
+    {
+      "name": "Humphrey Bogart",
+      "value": "humphrey-bogart",
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/Humphrey_Bogart",
+      "wikipediaTitle": "Humphrey Bogart"
+    },
+    {
+      "name": "Marilyn Monroe",
+      "value": "marilyn-monroe",
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/Marilyn_Monroe",
+      "wikipediaTitle": "Marilyn Monroe"
+    },
+    {
+      "name": "Louis Theroux",
+      "value": "louis-theroux",
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/Louis_Theroux",
+      "wikipediaTitle": "Louis Theroux"
+    },
+    {
+      "name": "Robin Williams",
+      "value": "robin-williams",
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/Robin_Williams",
+      "wikipediaTitle": "Robin Williams"
+    },
+    {
+      "name": "Aaron Sorkin",
+      "value": "aaron-sorkin",
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/Aaron_Sorkin",
+      "wikipediaTitle": "Aaron Sorkin"
+    },
+    {
+      "name": "Woody Allen",
+      "value": "woody-allen",
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/Woody_Allen",
+      "wikipediaTitle": "Woody Allen"
+    }
+  ]
+}

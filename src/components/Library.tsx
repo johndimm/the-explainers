@@ -3,8 +3,6 @@
 import React, { useState, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
 import styles from './Library.module.css'
-import WikipediaLink from './WikipediaLink'
-import { getBookWikipediaSearchTerm } from '@/utils/wikipedia'
 import FilteredBookList from './FilteredBookList'
 
 interface Book {
@@ -13,6 +11,8 @@ interface Book {
   author?: string
   directUrl?: string
   localPath?: string
+  wikipediaUrl?: string
+  wikipediaTitle?: string
 }
 
 interface LibraryCategory {

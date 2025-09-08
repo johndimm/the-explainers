@@ -15,8 +15,6 @@ function LibraryContent() {
   const handleBookSelect = (title: string, author: string, url: string) => {
     // Navigate to reader with book data
     try {
-      // Save current-book and persist purchase details URL for later deep-linking
-      localStorage.setItem('current-book', JSON.stringify({ title, author, url }))
       purchaseBook(title, author, url)
       
       // Show confirmation

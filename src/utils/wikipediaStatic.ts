@@ -41,11 +41,84 @@ export function checkPersonWikipediaPage(name: string): WikipediaResult {
  */
 export function checkBookWikipediaPage(title: string, author?: string): WikipediaResult {
   const data = wikipediaData as WikipediaData
-  const key = `${title} by ${author || 'Unknown'}`
-  const result = data.books[key]
+  
+  // Map of shortened author names to full names
+  const authorMapping: { [key: string]: string } = {
+    'Austen': 'Jane Austen',
+    'Joyce': 'James Joyce',
+    'Carroll': 'Lewis Carroll',
+    'Dickens': 'Charles Dickens',
+    'Twain': 'Mark Twain',
+    'Melville': 'Herman Melville',
+    'Fitzgerald': 'F. Scott Fitzgerald',
+    'Hemingway': 'Ernest Hemingway',
+    'Woolf': 'Virginia Woolf',
+    'Orwell': 'George Orwell',
+    'Lee': 'Harper Lee',
+    'Tolstoy': 'Leo Tolstoy',
+    'Dostoyevsky': 'Fyodor Dostoyevsky',
+    'Kafka': 'Franz Kafka',
+    'Wilde': 'Oscar Wilde',
+    'Steinbeck': 'John Steinbeck',
+    'Faulkner': 'William Faulkner',
+    'Poe': 'Edgar Allan Poe',
+    'Hawthorne': 'Nathaniel Hawthorne',
+    'Thoreau': 'Henry David Thoreau',
+    'Emerson': 'Ralph Waldo Emerson',
+    'Whitman': 'Walt Whitman',
+    'Dickinson': 'Emily Dickinson',
+    'Frost': 'Robert Frost',
+    'Eliot': 'T.S. Eliot'
+  }
+  
+  // First try with the provided author (or 'Unknown' if none)
+  let key = `${title} by ${author || 'Unknown'}`
+  let result = data.books[key]
   
   if (result) {
     return result
+  }
+  
+  // If author is provided, try with full name mapping
+  if (author && authorMapping[author]) {
+    const fullAuthor = authorMapping[author]
+    const fullKey = `${title} by ${fullAuthor}`
+    result = data.books[fullKey]
+    if (result) {
+      return result
+    }
+  }
+  
+  // If no author provided, try common authors for well-known works
+  if (!author) {
+    // Try William Shakespeare for classic plays
+    const shakespeareKey = `${title} by William Shakespeare`
+    result = data.books[shakespeareKey]
+    if (result) {
+      return result
+    }
+    
+    // Try other common authors for classic literature
+    const commonAuthors = [
+      'Jane Austen',
+      'Charles Dickens', 
+      'Mark Twain',
+      'Herman Melville',
+      'F. Scott Fitzgerald',
+      'Ernest Hemingway',
+      'Virginia Woolf',
+      'James Joyce',
+      'George Orwell',
+      'Harper Lee'
+    ]
+    
+    for (const commonAuthor of commonAuthors) {
+      const commonKey = `${title} by ${commonAuthor}`
+      result = data.books[commonKey]
+      if (result) {
+        return result
+      }
+    }
   }
   
   // No Wikipedia page found

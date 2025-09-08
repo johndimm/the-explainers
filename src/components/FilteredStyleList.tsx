@@ -1,16 +1,14 @@
 'use client'
 
-import React, { useState, useEffect } from 'react'
+import React from 'react'
 import { ExplanationStyle } from './Settings'
-import WikipediaLink from './WikipediaLink'
-import { getPersonWikipediaSearchTerm } from '@/utils/wikipedia'
-import { checkPersonWikipediaPage } from '@/utils/wikipediaStatic'
-import LoadingIndicator from './LoadingIndicator'
 
 interface StyleOption {
   value: ExplanationStyle
   name: string
   description: string
+  wikipediaUrl?: string
+  wikipediaTitle?: string
 }
 
 interface FilteredStyleListProps {
@@ -28,46 +26,8 @@ export const FilteredStyleList: React.FC<FilteredStyleListProps> = ({
   getPhotoSrc,
   stylesCss
 }) => {
-  const [filteredStyles, setFilteredStyles] = useState<StyleOption[]>([])
-  const [isLoading, setIsLoading] = useState(true)
-
-  useEffect(() => {
-    const filterStyles = () => {
-      setIsLoading(true)
-      const validStyles: StyleOption[] = []
-
-      // Check each style for Wikipedia existence using static data
-      for (const style of styles) {
-        try {
-          const result = checkPersonWikipediaPage(style.name)
-          
-          if (result.exists) {
-            validStyles.push(style)
-          } else {
-            console.log(`Removing style "${style.name}" - no Wikipedia page found`)
-          }
-        } catch (error) {
-          console.error(`Error checking Wikipedia for ${style.name}:`, error)
-          // Include the style if we can't check
-          validStyles.push(style)
-        }
-      }
-
-      setFilteredStyles(validStyles)
-      setIsLoading(false)
-    }
-
-    filterStyles()
-  }, [styles])
-
-  if (isLoading) {
-    return (
-      <LoadingIndicator 
-        message="Checking Wikipedia pages for explainer styles..."
-        style={{ padding: '20px' }}
-      />
-    )
-  }
+  // Filter styles that have Wikipedia links (embedded in the data)
+  const filteredStyles = styles.filter(style => style.wikipediaUrl)
 
   return (
     <div className={stylesCss.styleGrid}>
@@ -107,14 +67,38 @@ export const FilteredStyleList: React.FC<FilteredStyleListProps> = ({
           <div className={stylesCss.styleInfo}>
             <div className={stylesCss.styleName} style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
               {style.name}
-              <WikipediaLink 
-                searchTerm={getPersonWikipediaSearchTerm(style.name)}
-                style={{ 
-                  position: 'relative',
-                  zIndex: 10,
-                  fontSize: '12px'
-                }}
-              />
+              {style.wikipediaUrl && (
+                <button
+                  onClick={(e) => {
+                    e.stopPropagation()
+                    window.open(style.wikipediaUrl, 'wikipedia', 'noopener,noreferrer')
+                  }}
+                  style={{
+                    background: 'none',
+                    border: 'none',
+                    cursor: 'pointer',
+                    padding: '4px',
+                    borderRadius: '4px',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    fontSize: '12px',
+                    color: '#0066cc',
+                    transition: 'background-color 0.2s',
+                    position: 'relative',
+                    zIndex: 10
+                  }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.backgroundColor = '#f0f8ff'
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.backgroundColor = 'transparent'
+                  }}
+                  title={`Learn about ${style.name} on Wikipedia`}
+                >
+                  🔗
+                </button>
+              )}
             </div>
             <div className={stylesCss.styleDescription}>{style.description}</div>
           </div>

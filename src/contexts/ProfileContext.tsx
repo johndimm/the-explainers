@@ -68,7 +68,7 @@ export const ProfileProvider: React.FC<ProfileProviderProps> = ({ children }) =>
         const mockProfile = {
           ...DEFAULT_PROFILE,
           firstLogin: new Date(),
-          availableCredits: 100, // Give some credits for testing
+          availableCredits: 0, // Start with 0 credits
           hasUnlimitedAccess: true,
           unlimitedAccessExpiry: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000) // 30 days
         }
