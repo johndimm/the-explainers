@@ -298,7 +298,7 @@ const Library: React.FC<LibraryProps> = ({ onBookSelect, onBackToCurrentBook }) 
                 alignItems: 'center',
                 gap: '8px',
                 padding: '12px 20px',
-                background: '#ff4500',
+                background: '#3b82f6',
                 color: 'white',
                 border: 'none',
                 borderRadius: '10px',
@@ -306,20 +306,20 @@ const Library: React.FC<LibraryProps> = ({ onBookSelect, onBackToCurrentBook }) 
                 fontSize: '14px',
                 fontWeight: '600',
                 transition: 'all 0.2s',
-                boxShadow: '0 2px 4px rgba(255, 69, 0, 0.2)'
+                boxShadow: '0 2px 4px rgba(59, 130, 246, 0.2)'
               }}
               onMouseOver={(e) => {
-                e.currentTarget.style.background = '#e03e00'
+                e.currentTarget.style.background = '#2563eb'
                 e.currentTarget.style.transform = 'translateY(-1px)'
-                e.currentTarget.style.boxShadow = '0 4px 8px rgba(255, 69, 0, 0.3)'
+                e.currentTarget.style.boxShadow = '0 4px 8px rgba(59, 130, 246, 0.3)'
               }}
               onMouseOut={(e) => {
-                e.currentTarget.style.background = '#ff4500'
+                e.currentTarget.style.background = '#3b82f6'
                 e.currentTarget.style.transform = 'translateY(0)'
-                e.currentTarget.style.boxShadow = '0 2px 4px rgba(255, 69, 0, 0.2)'
+                e.currentTarget.style.boxShadow = '0 2px 4px rgba(59, 130, 246, 0.2)'
               }}
             >
-              <span style={{ fontSize: '16px' }}>🔴</span>
+              <span style={{ fontSize: '16px' }}>💬</span>
               Reddit Forum
             </button>
             
