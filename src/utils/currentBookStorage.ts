@@ -18,6 +18,8 @@ export const getCurrentBook = async (): Promise<CurrentBook | null> => {
         url: dbBook.url
       }
     }
+    // 404 is expected when no current book exists or no user session
+    // Don't log this as an error
   } catch (error) {
     console.error('Error loading current book from database:', error)
   }

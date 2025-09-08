@@ -1,0 +1,121 @@
+[
+  {
+    "id": "1497",
+    "title": "The Republic",
+    "author": "Plato",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Republic_(Plato)",
+    "wikipediaTitle": "Republic (Plato)"
+  },
+  {
+    "id": "1571",
+    "title": "Critias",
+    "author": "Plato",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Critias_(dialogue)",
+    "wikipediaTitle": "Critias (dialogue)"
+  },
+  {
+    "id": "1572",
+    "title": "Timaeus",
+    "author": "Plato",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Timaeus_(dialogue)",
+    "wikipediaTitle": "Timaeus (dialogue)"
+  },
+  {
+    "id": "1579",
+    "title": "Lysis",
+    "author": "Plato",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Lysis_(dialogue)",
+    "wikipediaTitle": "Lysis (dialogue)"
+  },
+  {
+    "id": "1580",
+    "title": "Charmides",
+    "author": "Plato",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Charmides%20(dialogue)",
+    "wikipediaTitle": "Charmides (dialogue)"
+  },
+  {
+    "id": "1584",
+    "title": "Laches",
+    "author": "Plato",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Laches%20(dialogue)",
+    "wikipediaTitle": "Laches (dialogue)"
+  },
+  {
+    "id": "1591",
+    "title": "Protagoras",
+    "author": "Plato",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Protagoras_(dialogue)",
+    "wikipediaTitle": "Protagoras (dialogue)"
+  },
+  {
+    "id": "1598",
+    "title": "Euthydemus",
+    "author": "Plato",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Euthydemus%20(dialogue)",
+    "wikipediaTitle": "Euthydemus (dialogue)"
+  },
+  {
+    "id": "1600",
+    "title": "Symposium",
+    "author": "Plato",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Symposium_(Plato)",
+    "wikipediaTitle": "Symposium (Plato)"
+  },
+  {
+    "id": "1616",
+    "title": "Cratylus",
+    "author": "Plato",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Cratylus_(dialogue)",
+    "wikipediaTitle": "Cratylus (dialogue)"
+  },
+  {
+    "id": "1635",
+    "title": "Ion",
+    "author": "Plato",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Ion_(dialogue)",
+    "wikipediaTitle": "Ion (dialogue)"
+  },
+  {
+    "id": "1636",
+    "title": "Phaedrus",
+    "author": "Plato",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Phaedrus_(dialogue)",
+    "wikipediaTitle": "Phaedrus (dialogue)"
+  },
+  {
+    "id": "1642",
+    "title": "Euthyphro",
+    "author": "Plato",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Euthyphro",
+    "wikipediaTitle": "Euthyphro"
+  },
+  {
+    "id": "1643",
+    "title": "Meno",
+    "author": "Plato",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Meno",
+    "wikipediaTitle": "Meno"
+  },
+  {
+    "id": "1656",
+    "title": "Apology",
+    "author": "Plato",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Apology_(Plato)",
+    "wikipediaTitle": "Apology (Plato)"
+  },
+  {
+    "id": "1657",
+    "title": "Crito",
+    "author": "Plato",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Crito",
+    "wikipediaTitle": "Crito"
+  },
+  {
+    "id": "1658",
+    "title": "Phaedo",
+    "author": "Plato",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Phaedo",
+    "wikipediaTitle": "Phaedo"
+  }
+]

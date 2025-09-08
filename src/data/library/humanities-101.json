@@ -35,16 +35,48 @@
     "id": "14484",
     "title": "The Oresteia",
     "author": "Aeschylus",
-    "directUrl": "https://www.gutenberg.org/files/14484/14484-0.txt",
+    "directUrl": "https://www.gutenberg.org/ebooks/14484.txt.utf-8",
     "wikipediaUrl": "https://en.wikipedia.org/wiki/Oresteia",
     "wikipediaTitle": "Oresteia"
   },
   {
-    "id": "14484",
+    "id": "27458",
     "title": "Prometheus Bound",
     "author": "Aeschylus",
-    "directUrl": "https://www.gutenberg.org/files/14484/14484-0.txt",
+    "directUrl": "https://www.gutenberg.org/ebooks/27458.txt.utf-8",
     "wikipediaUrl": "https://en.wikipedia.org/wiki/Prometheus_Bound",
     "wikipediaTitle": "Prometheus Bound"
+  },
+  {
+    "id": "31",
+    "title": "Oedipus Rex",
+    "author": "Sophocles",
+    "directUrl": "https://www.gutenberg.org/files/31/31-0.txt",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Oedipus_Rex",
+    "wikipediaTitle": "Oedipus Rex"
+  },
+  {
+    "id": "1112",
+    "title": "Antigone",
+    "author": "Sophocles",
+    "directUrl": "https://www.gutenberg.org/files/1112/1112-0.txt",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Antigone",
+    "wikipediaTitle": "Antigone"
+  },
+  {
+    "id": "2563",
+    "title": "The Frogs",
+    "author": "Aristophanes",
+    "directUrl": "https://www.gutenberg.org/files/2563/2563-0.txt",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/The_Frogs",
+    "wikipediaTitle": "The Frogs"
+  },
+  {
+    "id": "8438",
+    "title": "Nicomachean Ethics",
+    "author": "Aristotle",
+    "directUrl": "https://www.gutenberg.org/files/8438/8438-0.txt",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Nicomachean_Ethics",
+    "wikipediaTitle": "Nicomachean Ethics"
   }
 ]

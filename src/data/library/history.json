@@ -1,10 +1,66 @@
 [
   {
-    "id": "1422",
+    "id": "25717",
     "title": "The Decline and Fall of the Roman Empire",
     "author": "Edward Gibbon",
-    "directUrl": "https://www.gutenberg.org/files/1422/1422-0.txt",
+    "directUrl": "https://www.gutenberg.org/files/25717/25717-0.txt",
     "wikipediaUrl": "https://en.wikipedia.org/wiki/The_History_of_the_Decline_and_Fall_of_the_Roman_Empire",
     "wikipediaTitle": "The History of the Decline and Fall of the Roman Empire"
+  },
+  {
+    "id": "45368",
+    "title": "The Outline of History",
+    "author": "H.G. Wells",
+    "directUrl": "https://www.gutenberg.org/files/45368/45368-0.txt",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/The_Outline_of_History",
+    "wikipediaTitle": "The Outline of History"
+  },
+  {
+    "id": "14960",
+    "title": "The Eighteen Christian Centuries",
+    "author": "James White",
+    "directUrl": "https://www.gutenberg.org/files/14960/14960-0.txt",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Christianity",
+    "wikipediaTitle": "Christianity"
+  },
+  {
+    "id": "1232",
+    "title": "The Prince",
+    "author": "Niccol\u00f2 Machiavelli",
+    "directUrl": "https://www.gutenberg.org/files/1232/1232-0.txt",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/The_Prince",
+    "wikipediaTitle": "The Prince"
+  },
+  {
+    "id": "132",
+    "title": "The Art of War",
+    "author": "Sun Tzu",
+    "directUrl": "https://www.gutenberg.org/files/132/132-0.txt",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/The_Art_of_War",
+    "wikipediaTitle": "The Art of War"
+  },
+  {
+    "id": "6400",
+    "title": "The Twelve Caesars",
+    "author": "Suetonius",
+    "directUrl": "https://www.gutenberg.org/files/6400/6400-0.txt",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/The_Twelve_Caesars",
+    "wikipediaTitle": "The Twelve Caesars"
+  },
+  {
+    "id": "1069",
+    "title": "Commentaries on the Gallic War",
+    "author": "Julius Caesar",
+    "directUrl": "https://www.gutenberg.org/files/1069/1069-0.txt",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Commentarii_de_Bello_Gallico",
+    "wikipediaTitle": "Commentarii de Bello Gallico"
+  },
+  {
+    "id": "674",
+    "title": "Lives of the Noble Grecians and Romans",
+    "author": "Plutarch",
+    "directUrl": "https://www.gutenberg.org/files/674/674-0.txt",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Parallel_Lives",
+    "wikipediaTitle": "Parallel Lives"
   }
 ]

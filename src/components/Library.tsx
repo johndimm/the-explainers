@@ -19,6 +19,7 @@ interface LibraryCategory {
   name: string
   books: Book[]
   visibleCount: number
+  filteredBooks?: Book[]
 }
 
 interface LibraryProps {
@@ -30,6 +31,7 @@ const CATEGORY_FILES = [
   'shakespeare.json',
   'english-literature.json', 
   'philosophers.json',
+  'plato.json',
   'poetry.json',
   'french-literature.json',
   'german-literature.json',
@@ -83,9 +85,16 @@ const Library: React.FC<LibraryProps> = ({ onBookSelect, onBackToCurrentBook }) 
 
         // Limit English Literature to 100 top entries
         const limitedBooks = filename === 'english-literature.json' ? books.slice(0, 100) : books
+        
+        // Filter books that have Wikipedia URLs (same logic as FilteredBookList)
+        const booksWithWikipedia = limitedBooks.filter(book => 
+          book.wikipediaUrl && book.wikipediaUrl.trim() !== ''
+        )
+        
         return {
           name: categoryName,
           books: limitedBooks,
+          filteredBooks: booksWithWikipedia,
           visibleCount: 10
         }
       })
@@ -102,7 +111,7 @@ const Library: React.FC<LibraryProps> = ({ onBookSelect, onBackToCurrentBook }) 
   const showMoreBooks = (categoryIndex: number) => {
     setCategories(prev => prev.map((category, index) => 
       index === categoryIndex 
-        ? { ...category, visibleCount: Math.min(category.visibleCount + 10, category.books.length) }
+        ? { ...category, visibleCount: Math.min(category.visibleCount + 10, category.filteredBooks?.length || category.books.length) }
         : category
     ))
   }
@@ -241,18 +250,18 @@ const Library: React.FC<LibraryProps> = ({ onBookSelect, onBackToCurrentBook }) 
             <div key={category.name} className={styles.category}>
               <h2 className={styles.categoryTitle}>{category.name}</h2>
               <FilteredBookList
-                books={category.books.slice(0, category.visibleCount)}
+                books={category.filteredBooks?.slice(0, category.visibleCount) || category.books.slice(0, category.visibleCount)}
                 categoryName={category.name}
                 onBookClick={handleBookClick}
                 styles={styles}
               />
               
-              {category.visibleCount < category.books.length && (
+              {category.visibleCount < (category.filteredBooks?.length || category.books.length) && (
                 <button 
                   onClick={() => showMoreBooks(categoryIndex)}
                   className={styles.moreButton}
                 >
-                  More ({category.books.length - category.visibleCount} remaining)
+                  More ({(category.filteredBooks?.length || category.books.length) - category.visibleCount} remaining)
                 </button>
               )}
             </div>

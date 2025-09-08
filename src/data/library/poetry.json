@@ -1,784 +1,5 @@
 [
   {
-    "id": "15462",
-    "title": "Alcools",
-    "author": "Apollinaire",
-    "wikipediaUrl": "https://en.wikipedia.org/wiki/Alcools",
-    "wikipediaTitle": "Alcools"
-  },
-  {
-    "id": "22356",
-    "title": "L'hérésiarque et Cie",
-    "author": "Apollinaire",
-    "wikipediaUrl": "https://en.wikipedia.org/wiki/Guillaume%20Apollinaire",
-    "wikipediaTitle": "Guillaume Apollinaire"
-  },
-  {
-    "id": "55533",
-    "title": "Le flâneur des deux rives",
-    "author": "Apollinaire",
-    "wikipediaUrl": "https://en.wikipedia.org/wiki/Guillaume%20Apollinaire",
-    "wikipediaTitle": "Guillaume Apollinaire"
-  },
-  {
-    "id": "55569",
-    "title": "Calligrammes: Poèmes de la paix et de la guerre (1913-1916)",
-    "author": "Apollinaire",
-    "wikipediaUrl": "https://en.wikipedia.org/wiki/Calligrammes",
-    "wikipediaTitle": "Calligrammes"
-  },
-  {
-    "id": "55638",
-    "title": "Les Peintres Cubistes: [Méditations Esthétiques]",
-    "author": "Apollinaire",
-    "wikipediaUrl": "https://en.wikipedia.org/wiki/Orphism%20(art)",
-    "wikipediaTitle": "Orphism (art)"
-  },
-  {
-    "id": "56645",
-    "title": "Le poète assassiné",
-    "author": "Apollinaire",
-    "wikipediaUrl": "https://en.wikipedia.org/wiki/Guillaume%20Apollinaire",
-    "wikipediaTitle": "Guillaume Apollinaire"
-  },
-  {
-    "id": "58154",
-    "title": "La femme assise",
-    "author": "Apollinaire",
-    "wikipediaUrl": "https://en.wikipedia.org/wiki/Guillaume%20Apollinaire",
-    "wikipediaTitle": "Guillaume Apollinaire"
-  },
-  {
-    "id": "6099",
-    "title": "Les Fleurs du Mal",
-    "author": "Baudelaire",
-    "wikipediaUrl": "https://en.wikipedia.org/wiki/Les%20Fleurs%20du%20mal",
-    "wikipediaTitle": "Les Fleurs du mal"
-  },
-  {
-    "id": "13792",
-    "title": "Journaux intimes",
-    "author": "Baudelaire",
-    "wikipediaUrl": "https://en.wikipedia.org/wiki/Journaux",
-    "wikipediaTitle": "Journaux"
-  },
-  {
-    "id": "26710",
-    "title": "Les épaves",
-    "author": "Baudelaire",
-    "wikipediaUrl": "https://en.wikipedia.org/wiki/Les%20Fleurs%20du%20mal",
-    "wikipediaTitle": "Les Fleurs du mal"
-  },
-  {
-    "id": "54456",
-    "title": "De l'amour",
-    "author": "Baudelaire",
-    "wikipediaUrl": "https://en.wikipedia.org/wiki/Christine%20Jordis",
-    "wikipediaTitle": "Christine Jordis"
-  },
-  {
-    "id": "61565",
-    "title": "L'Oeuvre Poètique: Les Fleurs du Mal",
-    "author": "Baudelaire",
-    "wikipediaUrl": "https://en.wikipedia.org/wiki/Charvet",
-    "wikipediaTitle": "Charvet"
-  },
-  {
-    "id": "56668",
-    "title": "Une saison en enfer",
-    "author": "Rimbaud",
-    "wikipediaUrl": "https://en.wikipedia.org/wiki/A%20Season%20in%20Hell",
-    "wikipediaTitle": "A Season in Hell"
-  },
-  {
-    "id": "73889",
-    "title": "Voyage en Abyssinie et au Harrar",
-    "author": "Rimbaud"
-  },
-  {
-    "id": "20568",
-    "title": "Hombres (Hommes)",
-    "author": "Verlaine",
-    "wikipediaUrl": "https://en.wikipedia.org/wiki/Martin%20van%20Ma%C3%ABle",
-    "wikipediaTitle": "Martin van Maële"
-  },
-  {
-    "id": "18543",
-    "title": "Abrégé de l'Histoire universelle depuis Charlemagne jusques à Charlequint (Tome 1)",
-    "author": "Voltaire"
-  },
-  {
-    "id": "9980",
-    "title": "Platero y yo",
-    "author": "Jiménez",
-    "wikipediaUrl": "https://en.wikipedia.org/wiki/Platero%20and%20I",
-    "wikipediaTitle": "Platero and I"
-  },
-  {
-    "id": "28927",
-    "title": "La bodega",
-    "author": "Blasco Ibáñez",
-    "wikipediaUrl": "https://en.wikipedia.org/wiki/Vicente%20Blasco%20Ib%C3%A1%C3%B1ez",
-    "wikipediaTitle": "Vicente Blasco Ibáñez"
-  },
-  {
-    "id": "39209",
-    "title": "Platero y yo",
-    "author": "Jiménez",
-    "wikipediaUrl": "https://en.wikipedia.org/wiki/Platero%20and%20I",
-    "wikipediaTitle": "Platero and I"
-  },
-  {
-    "id": "41746",
-    "title": "Flor de mayo",
-    "author": "Blasco Ibáñez",
-    "wikipediaUrl": "https://en.wikipedia.org/wiki/Vicente%20Blasco%20Ib%C3%A1%C3%B1ez",
-    "wikipediaTitle": "Vicente Blasco Ibáñez"
-  },
-  {
-    "id": "49437",
-    "title": "Páginas escogidas",
-    "author": "Machado"
-  },
-  {
-    "id": "68525",
-    "title": "Poesías completas",
-    "author": "Machado",
-    "wikipediaUrl": "https://en.wikipedia.org/wiki/Antonio%20Machado",
-    "wikipediaTitle": "Antonio Machado"
-  },
-  {
-    "id": "72665",
-    "title": "Romancero gitano",
-    "author": "García Lorca",
-    "wikipediaUrl": "https://en.wikipedia.org/wiki/Romancero%20gitano",
-    "wikipediaTitle": "Romancero gitano"
-  },
-  {
-    "id": "75703",
-    "title": "Libro de poemas",
-    "author": "García Lorca",
-    "wikipediaUrl": "https://en.wikipedia.org/wiki/Federico%20Garc%C3%ADa%20Lorca",
-    "wikipediaTitle": "Federico García Lorca"
-  },
-  {
-    "id": "2054",
-    "title": "Iphigenie auf Tauris",
-    "author": "Goethe",
-    "wikipediaUrl": "https://en.wikipedia.org/wiki/Iphigenia%20in%20Tauris%20(Goethe)",
-    "wikipediaTitle": "Iphigenia in Tauris (Goethe)"
-  },
-  {
-    "id": "2146",
-    "title": "Egmont",
-    "author": "Goethe",
-    "wikipediaUrl": "https://en.wikipedia.org/wiki/Egmont%20(play)",
-    "wikipediaTitle": "Egmont (play)"
-  },
-  {
-    "id": "2188",
-    "title": "Die Aufzeichnungen des Malte Laurids Brigge",
-    "author": "Rilke",
-    "wikipediaUrl": "https://en.wikipedia.org/wiki/The%20Notebooks%20of%20Malte%20Laurids%20Brigge",
-    "wikipediaTitle": "The Notebooks of Malte Laurids Brigge"
-  },
-  {
-    "id": "2228",
-    "title": "Reineke Fuchs",
-    "author": "Goethe",
-    "wikipediaUrl": "https://en.wikipedia.org/wiki/Johann%20Wolfgang%20von%20Goethe",
-    "wikipediaTitle": "Johann Wolfgang von Goethe"
-  },
-  {
-    "id": "2229",
-    "title": "Faust: Der Tragödie erster Teil",
-    "author": "Goethe",
-    "wikipediaUrl": "https://en.wikipedia.org/wiki/Faust%2C%20Part%20One",
-    "wikipediaTitle": "Faust, Part One"
-  },
-  {
-    "id": "2230",
-    "title": "Faust: Der Tragödie zweiter Teil",
-    "author": "Goethe",
-    "wikipediaUrl": "https://en.wikipedia.org/wiki/Faust%2C%20Part%20Two",
-    "wikipediaTitle": "Faust, Part Two"
-  },
-  {
-    "id": "2312",
-    "title": "Hermann und Dorothea",
-    "author": "Goethe",
-    "wikipediaUrl": "https://en.wikipedia.org/wiki/Hermann%20and%20Dorothea",
-    "wikipediaTitle": "Hermann and Dorothea"
-  },
-  {
-    "id": "2319",
-    "title": "West-östlicher Divan",
-    "author": "Goethe",
-    "wikipediaUrl": "https://en.wikipedia.org/wiki/West%E2%80%93%C3%B6stlicher%20Divan",
-    "wikipediaTitle": "West–östlicher Divan"
-  },
-  {
-    "id": "2320",
-    "title": "Novelle",
-    "author": "Goethe",
-    "wikipediaUrl": "https://en.wikipedia.org/wiki/Johann%20Wolfgang%20von%20Goethe",
-    "wikipediaTitle": "Johann Wolfgang von Goethe"
-  },
-  {
-    "id": "2321",
-    "title": "Götz von Berlichingen mit der eisernen Hand: Ein Schauspiel",
-    "author": "Goethe",
-    "wikipediaUrl": "https://en.wikipedia.org/wiki/Friedrich%20Maximilian%20von%20Klinger",
-    "wikipediaTitle": "Friedrich Maximilian von Klinger"
-  },
-  {
-    "id": "2335",
-    "title": "Wilhelm Meisters Lehrjahre — Band 1",
-    "author": "Goethe",
-    "wikipediaUrl": "https://en.wikipedia.org/wiki/Wilhelm%20Meister's%20Apprenticeship",
-    "wikipediaTitle": "Wilhelm Meister's Apprenticeship"
-  },
-  {
-    "id": "2336",
-    "title": "Wilhelm Meisters Lehrjahre — Band 2",
-    "author": "Goethe",
-    "wikipediaUrl": "https://en.wikipedia.org/wiki/Wilhelm%20Meister's%20Apprenticeship",
-    "wikipediaTitle": "Wilhelm Meister's Apprenticeship"
-  },
-  {
-    "id": "2337",
-    "title": "Wilhelm Meisters Lehrjahre — Band 3",
-    "author": "Goethe",
-    "wikipediaUrl": "https://en.wikipedia.org/wiki/Wilhelm%20Meister's%20Apprenticeship",
-    "wikipediaTitle": "Wilhelm Meister's Apprenticeship"
-  },
-  {
-    "id": "2338",
-    "title": "Wilhelm Meisters Lehrjahre — Band 4",
-    "author": "Goethe",
-    "wikipediaUrl": "https://en.wikipedia.org/wiki/Wilhelm%20Meister's%20Apprenticeship",
-    "wikipediaTitle": "Wilhelm Meister's Apprenticeship"
-  },
-  {
-    "id": "2339",
-    "title": "Wilhelm Meisters Lehrjahre — Band 5",
-    "author": "Goethe",
-    "wikipediaUrl": "https://en.wikipedia.org/wiki/Wilhelm%20Meister's%20Apprenticeship",
-    "wikipediaTitle": "Wilhelm Meister's Apprenticeship"
-  },
-  {
-    "id": "2340",
-    "title": "Wilhelm Meisters Lehrjahre — Band 6",
-    "author": "Goethe",
-    "wikipediaUrl": "https://en.wikipedia.org/wiki/Wilhelm%20Meister's%20Apprenticeship",
-    "wikipediaTitle": "Wilhelm Meister's Apprenticeship"
-  },
-  {
-    "id": "2341",
-    "title": "Wilhelm Meisters Lehrjahre — Band 7",
-    "author": "Goethe",
-    "wikipediaUrl": "https://en.wikipedia.org/wiki/Wilhelm%20Meister's%20Apprenticeship",
-    "wikipediaTitle": "Wilhelm Meister's Apprenticeship"
-  },
-  {
-    "id": "2342",
-    "title": "Wilhelm Meisters Lehrjahre — Band 8",
-    "author": "Goethe",
-    "wikipediaUrl": "https://en.wikipedia.org/wiki/Wilhelm%20Meister's%20Apprenticeship",
-    "wikipediaTitle": "Wilhelm Meister's Apprenticeship"
-  },
-  {
-    "id": "2402",
-    "title": "Briefe aus der Schweiz",
-    "author": "Goethe",
-    "wikipediaUrl": "https://en.wikipedia.org/wiki/Clemens%20Brentano",
-    "wikipediaTitle": "Clemens Brentano"
-  },
-  {
-    "id": "2403",
-    "title": "Die Wahlverwandtschaften",
-    "author": "Goethe",
-    "wikipediaUrl": "https://en.wikipedia.org/wiki/Elective%20Affinities",
-    "wikipediaTitle": "Elective Affinities"
-  },
-  {
-    "id": "2404",
-    "title": "Italienische Reise — Band 1",
-    "author": "Goethe",
-    "wikipediaUrl": "https://en.wikipedia.org/wiki/Memoirs%20of%20a%20Good-for-Nothing",
-    "wikipediaTitle": "Memoirs of a Good-for-Nothing"
-  },
-  {
-    "id": "2405",
-    "title": "Italienische Reise — Band 2",
-    "author": "Goethe",
-    "wikipediaUrl": "https://en.wikipedia.org/wiki/Memoirs%20of%20a%20Good-for-Nothing",
-    "wikipediaTitle": "Memoirs of a Good-for-Nothing"
-  },
-  {
-    "id": "2406",
-    "title": "Die Geschwister: Ein Schauspiel in einem Akt",
-    "author": "Goethe"
-  },
-  {
-    "id": "2407",
-    "title": "Die Leiden des jungen Werther — Band 1",
-    "author": "Goethe",
-    "wikipediaUrl": "https://en.wikipedia.org/wiki/Sophie%20von%20La%20Roche",
-    "wikipediaTitle": "Sophie von La Roche"
-  },
-  {
-    "id": "2408",
-    "title": "Die Leiden des jungen Werther — Band 2",
-    "author": "Goethe",
-    "wikipediaUrl": "https://en.wikipedia.org/wiki/Sophie%20von%20La%20Roche",
-    "wikipediaTitle": "Sophie von La Roche"
-  },
-  {
-    "id": "2409",
-    "title": "Wilhelm Meisters Wanderjahre — Band 1",
-    "author": "Goethe",
-    "wikipediaUrl": "https://en.wikipedia.org/wiki/Wilhelm%20Meister's%20Apprenticeship",
-    "wikipediaTitle": "Wilhelm Meister's Apprenticeship"
-  },
-  {
-    "id": "2410",
-    "title": "Wilhelm Meisters Wanderjahre — Band 2",
-    "author": "Goethe",
-    "wikipediaUrl": "https://en.wikipedia.org/wiki/Wilhelm%20Meister's%20Apprenticeship",
-    "wikipediaTitle": "Wilhelm Meister's Apprenticeship"
-  },
-  {
-    "id": "2411",
-    "title": "Wilhelm Meisters Wanderjahre — Band 3",
-    "author": "Goethe",
-    "wikipediaUrl": "https://en.wikipedia.org/wiki/Wilhelm%20Meister's%20Apprenticeship",
-    "wikipediaTitle": "Wilhelm Meister's Apprenticeship"
-  },
-  {
-    "id": "2420",
-    "title": "Unterhaltungen deutscher Ausgewanderten",
-    "author": "Goethe",
-    "wikipediaUrl": "https://en.wikipedia.org/wiki/The%20German%20Refugees",
-    "wikipediaTitle": "The German Refugees"
-  },
-  {
-    "id": "3498",
-    "title": "Buch der Lieder",
-    "author": "Heine",
-    "wikipediaUrl": "https://en.wikipedia.org/wiki/Heinrich%20Heine",
-    "wikipediaTitle": "Heinrich Heine"
-  },
-  {
-    "id": "5325",
-    "title": "Römische Elegien",
-    "author": "Goethe",
-    "wikipediaUrl": "https://en.wikipedia.org/wiki/Roman%20Elegies",
-    "wikipediaTitle": "Roman Elegies"
-  },
-  {
-    "id": "5326",
-    "title": "Venetianische Epigramme",
-    "author": "Goethe"
-  },
-  {
-    "id": "5607",
-    "title": "Romanzero",
-    "author": "Heine",
-    "wikipediaUrl": "https://en.wikipedia.org/wiki/Heinrich%20Heine",
-    "wikipediaTitle": "Heinrich Heine"
-  },
-  {
-    "id": "5653",
-    "title": "Die Mitschuldigen",
-    "author": "Goethe",
-    "wikipediaUrl": "https://en.wikipedia.org/wiki/Johann%20Wolfgang%20von%20Goethe",
-    "wikipediaTitle": "Johann Wolfgang von Goethe"
-  },
-  {
-    "id": "6079",
-    "title": "Deutschland. Ein Wintermärchen",
-    "author": "Heine",
-    "wikipediaUrl": "https://en.wikipedia.org/wiki/Germany.%20A%20Winter's%20Tale",
-    "wikipediaTitle": "Germany. A Winter's Tale"
-  },
-  {
-    "id": "6383",
-    "title": "Die Jungfrau von Orleans",
-    "author": "Schiller",
-    "wikipediaUrl": "https://en.wikipedia.org/wiki/The%20Maid%20of%20Orleans%20(play)",
-    "wikipediaTitle": "The Maid of Orleans (play)"
-  },
-  {
-    "id": "6496",
-    "title": "Die Braut von Messina",
-    "author": "Schiller",
-    "wikipediaUrl": "https://en.wikipedia.org/wiki/The%20Bride%20of%20Messina",
-    "wikipediaTitle": "The Bride of Messina"
-  },
-  {
-    "id": "6498",
-    "title": "Kabale und Liebe: Ein bürgerliches Trauerspiel",
-    "author": "Schiller"
-  },
-  {
-    "id": "6499",
-    "title": "Die Verschwörung des Fiesco zu Genua: Ein republikanisches Trauerspiel",
-    "author": "Schiller"
-  },
-  {
-    "id": "6518",
-    "title": "Wallensteins Lager",
-    "author": "Schiller",
-    "wikipediaUrl": "https://en.wikipedia.org/wiki/Wallenstein%20(trilogy%20of%20plays)",
-    "wikipediaTitle": "Wallenstein (trilogy of plays)"
-  },
-  {
-    "id": "6525",
-    "title": "Die Piccolomini",
-    "author": "Schiller",
-    "wikipediaUrl": "https://en.wikipedia.org/wiki/Friedrich%20Schiller",
-    "wikipediaTitle": "Friedrich Schiller"
-  },
-  {
-    "id": "6549",
-    "title": "Wallensteins Tod",
-    "author": "Schiller",
-    "wikipediaUrl": "https://en.wikipedia.org/wiki/Wallenstein%20(trilogy%20of%20plays)",
-    "wikipediaTitle": "Wallenstein (trilogy of plays)"
-  },
-  {
-    "id": "6649",
-    "title": "Einige Gedichte",
-    "author": "Schiller",
-    "wikipediaUrl": "https://en.wikipedia.org/wiki/Sturm%20und%20Drang",
-    "wikipediaTitle": "Sturm und Drang"
-  },
-  {
-    "id": "6831",
-    "title": "Oden",
-    "author": "Lessing",
-    "wikipediaUrl": "https://en.wikipedia.org/wiki/Greg%20Oden",
-    "wikipediaTitle": "Greg Oden"
-  },
-  {
-    "id": "7875",
-    "title": "Römische Elegien",
-    "author": "Goethe",
-    "wikipediaUrl": "https://en.wikipedia.org/wiki/Roman%20Elegies",
-    "wikipediaTitle": "Roman Elegies"
-  },
-  {
-    "id": "7939",
-    "title": "Die Huldigung der Künste",
-    "author": "Schiller",
-    "wikipediaUrl": "https://en.wikipedia.org/wiki/Die%20Huldigung%20der%20K%C3%BCnste",
-    "wikipediaTitle": "Die Huldigung der Künste"
-  },
-  {
-    "id": "8895",
-    "title": "Auf der Universität Lore",
-    "author": "Storm",
-    "wikipediaUrl": "https://en.wikipedia.org/wiki/Mermaid",
-    "wikipediaTitle": "Mermaid"
-  },
-  {
-    "id": "10353",
-    "title": "Satyros oder Der vergötterte Waldteufel",
-    "author": "Goethe"
-  },
-  {
-    "id": "10426",
-    "title": "Die natürliche Tochter",
-    "author": "Goethe",
-    "wikipediaUrl": "https://en.wikipedia.org/wiki/Johann%20Wolfgang%20von%20Goethe%20bibliography",
-    "wikipediaTitle": "Johann Wolfgang von Goethe bibliography"
-  },
-  {
-    "id": "10428",
-    "title": "Die Aufgeregten",
-    "author": "Goethe",
-    "wikipediaUrl": "https://en.wikipedia.org/wiki/Adolf%20Muschg",
-    "wikipediaTitle": "Adolf Muschg"
-  },
-  {
-    "id": "17657",
-    "title": "Belagerung von Mainz",
-    "author": "Goethe",
-    "wikipediaUrl": "https://en.wikipedia.org/wiki/Johann%20Wolfgang%20von%20Goethe%20bibliography",
-    "wikipediaTitle": "Johann Wolfgang von Goethe bibliography"
-  },
-  {
-    "id": "17664",
-    "title": "Kampagne in Frankreich",
-    "author": "Goethe",
-    "wikipediaUrl": "https://en.wikipedia.org/wiki/Johann%20Jost%20Textor",
-    "wikipediaTitle": "Johann Jost Textor"
-  },
-  {
-    "id": "19794",
-    "title": "Die Leiden des jungen Werther",
-    "author": "Goethe",
-    "wikipediaUrl": "https://en.wikipedia.org/wiki/The%20Sorrows%20of%20Young%20Werther",
-    "wikipediaTitle": "The Sorrows of Young Werther"
-  },
-  {
-    "id": "20757",
-    "title": "Darwinismus und Sozialismus: Der Kampf um das Dasein und die Moderne Gesellschaft",
-    "author": "Büchner"
-  },
-  {
-    "id": "21000",
-    "title": "Faust: Eine Tragödie [erster Teil]",
-    "author": "Goethe",
-    "wikipediaUrl": "https://en.wikipedia.org/wiki/Goethe's%20Faust",
-    "wikipediaTitle": "Goethe's Faust"
-  },
-  {
-    "id": "24043",
-    "title": "Die Weise von Liebe und Tod des Cornets Christoph Rilke",
-    "author": "Rilke",
-    "wikipediaUrl": "https://en.wikipedia.org/wiki/Rainer%20Maria%20Rilke",
-    "wikipediaTitle": "Rainer Maria Rilke"
-  },
-  {
-    "id": "24249",
-    "title": "Die Harzreise",
-    "author": "Heine",
-    "wikipediaUrl": "https://en.wikipedia.org/wiki/Heinrich%20Heine",
-    "wikipediaTitle": "Heinrich Heine"
-  },
-  {
-    "id": "24288",
-    "title": "Das Stunden-Buch",
-    "author": "Rilke",
-    "wikipediaUrl": "https://en.wikipedia.org/wiki/The%20Book%20of%20Hours",
-    "wikipediaTitle": "The Book of Hours"
-  },
-  {
-    "id": "27822",
-    "title": "Zwei Prager Geschichten",
-    "author": "Rilke",
-    "wikipediaUrl": "https://en.wikipedia.org/wiki/Jakub%20Schikaneder",
-    "wikipediaTitle": "Jakub Schikaneder"
-  },
-  {
-    "id": "31199",
-    "title": "Die Letzten",
-    "author": "Rilke",
-    "wikipediaUrl": "https://en.wikipedia.org/wiki/J.%20P.%20Stern",
-    "wikipediaTitle": "J. P. Stern"
-  },
-  {
-    "id": "33328",
-    "title": "Flaubert und die Herkunft des modernen Romans",
-    "author": "Mann"
-  },
-  {
-    "id": "33821",
-    "title": "Erste Gedichte",
-    "author": "Rilke",
-    "wikipediaUrl": "https://en.wikipedia.org/wiki/Rainer%20Maria%20Rilke",
-    "wikipediaTitle": "Rainer Maria Rilke"
-  },
-  {
-    "id": "33863",
-    "title": "Neue Gedichte",
-    "author": "Rilke",
-    "wikipediaUrl": "https://en.wikipedia.org/wiki/Rainer%20Maria%20Rilke",
-    "wikipediaTitle": "Rainer Maria Rilke"
-  },
-  {
-    "id": "33864",
-    "title": "Der Neuen Gedichte: Anderer Teil",
-    "author": "Rilke",
-    "wikipediaUrl": "https://en.wikipedia.org/wiki/Rainer%20Maria%20Rilke",
-    "wikipediaTitle": "Rainer Maria Rilke"
-  },
-  {
-    "id": "34521",
-    "title": "Das Buch der Bilder",
-    "author": "Rilke",
-    "wikipediaUrl": "https://en.wikipedia.org/wiki/Rainer%20Maria%20Rilke",
-    "wikipediaTitle": "Rainer Maria Rilke"
-  },
-  {
-    "id": "38402",
-    "title": "Geschichten vom lieben Gott",
-    "author": "Rilke",
-    "wikipediaUrl": "https://en.wikipedia.org/wiki/Rainer%20Maria%20Rilke",
-    "wikipediaTitle": "Rainer Maria Rilke"
-  },
-  {
-    "id": "39792",
-    "title": "Das Lied vom blöden Ritter",
-    "author": "Heine"
-  },
-  {
-    "id": "40117",
-    "title": "Das Marien-Leben",
-    "author": "Rilke",
-    "wikipediaUrl": "https://en.wikipedia.org/wiki/Duino%20Elegies",
-    "wikipediaTitle": "Duino Elegies"
-  },
-  {
-    "id": "43821",
-    "title": "Hymnen an die Nacht / Die Christenheit oder Europa",
-    "author": "Novalis",
-    "wikipediaUrl": "https://en.wikipedia.org/wiki/Novalis",
-    "wikipediaTitle": "Novalis"
-  },
-  {
-    "id": "45569",
-    "title": "Wanderbilder aus Central-Amerika. Skizzen eines deutschen Malers",
-    "author": "Heine",
-    "wikipediaUrl": "https://en.wikipedia.org/wiki/Wilhelm%20Heine",
-    "wikipediaTitle": "Wilhelm Heine"
-  },
-  {
-    "id": "45600",
-    "title": "Almansor: Eine Tragödie",
-    "author": "Heine"
-  },
-  {
-    "id": "46021",
-    "title": "Goethes Briefe an Leipziger Freunde",
-    "author": "Goethe",
-    "wikipediaUrl": "https://en.wikipedia.org/wiki/Werner%20Heiduczek",
-    "wikipediaTitle": "Werner Heiduczek"
-  },
-  {
-    "id": "47804",
-    "title": "Die Räuber: Ein Schauspiel",
-    "author": "Schiller",
-    "wikipediaUrl": "https://en.wikipedia.org/wiki/Sturm%20und%20Drang",
-    "wikipediaTitle": "Sturm und Drang"
-  },
-  {
-    "id": "49024",
-    "title": "Goethes Briefe an Auguste zu Stolberg",
-    "author": "Goethe"
-  },
-  {
-    "id": "49593",
-    "title": "Briefe von Goethe an Lavater aus den Jahren 1774 bis 1783",
-    "author": "Goethe"
-  },
-  {
-    "id": "73038",
-    "title": "Zweiundzwanzig Handzeichnungen von Goethe. 1810.",
-    "author": "Goethe"
-  },
-  {
-    "id": "997",
-    "title": "Divina Commedia di Dante: Inferno",
-    "author": "Dante Alighieri",
-    "wikipediaUrl": "https://en.wikipedia.org/wiki/Dante%20Alighieri",
-    "wikipediaTitle": "Dante Alighieri"
-  },
-  {
-    "id": "998",
-    "title": "Divina Commedia di Dante: Purgatorio",
-    "author": "Dante Alighieri",
-    "wikipediaUrl": "https://en.wikipedia.org/wiki/Dante%20Alighieri",
-    "wikipediaTitle": "Dante Alighieri"
-  },
-  {
-    "id": "999",
-    "title": "Divina Commedia di Dante: Paradiso",
-    "author": "Dante Alighieri",
-    "wikipediaUrl": "https://en.wikipedia.org/wiki/Dante%20Alighieri",
-    "wikipediaTitle": "Dante Alighieri"
-  },
-  {
-    "id": "1000",
-    "title": "La Divina Commedia di Dante: Complete",
-    "author": "Dante Alighieri",
-    "wikipediaUrl": "https://en.wikipedia.org/wiki/Dante%20Alighieri",
-    "wikipediaTitle": "Dante Alighieri"
-  },
-  {
-    "id": "1009",
-    "title": "La Divina Commedia di Dante: Inferno",
-    "author": "Dante Alighieri",
-    "wikipediaUrl": "https://en.wikipedia.org/wiki/Dante%20Alighieri",
-    "wikipediaTitle": "Dante Alighieri"
-  },
-  {
-    "id": "1010",
-    "title": "La Divina Commedia di Dante: Purgatorio",
-    "author": "Dante Alighieri",
-    "wikipediaUrl": "https://en.wikipedia.org/wiki/Dante%20Alighieri",
-    "wikipediaTitle": "Dante Alighieri"
-  },
-  {
-    "id": "1011",
-    "title": "La Divina Commedia di Dante: Paradiso",
-    "author": "Dante Alighieri",
-    "wikipediaUrl": "https://en.wikipedia.org/wiki/Dante%20Alighieri",
-    "wikipediaTitle": "Dante Alighieri"
-  },
-  {
-    "id": "1012",
-    "title": "La Divina Commedia di Dante",
-    "author": "Dante Alighieri",
-    "wikipediaUrl": "https://en.wikipedia.org/wiki/Dante%20Alighieri",
-    "wikipediaTitle": "Dante Alighieri"
-  },
-  {
-    "id": "27825",
-    "title": "Isaotta Guttadàuro ed altre poesie",
-    "author": "D'Annunzio",
-    "wikipediaUrl": "https://en.wikipedia.org/wiki/Enrico%20Coleman",
-    "wikipediaTitle": "Enrico Coleman"
-  },
-  {
-    "id": "45594",
-    "title": "Sotto il velame: Saggio di un'interpretazione generale del poema sacro",
-    "author": "Pascoli"
-  },
-  {
-    "id": "46082",
-    "title": "La mirabile visione: Abbozzo d'una storia della Divina Comedia",
-    "author": "Pascoli"
-  },
-  {
-    "id": "46843",
-    "title": "Conversazioni critiche",
-    "author": "Carducci"
-  },
-  {
-    "id": "53223",
-    "title": "Leopardi",
-    "author": "De Roberto",
-    "wikipediaUrl": "https://en.wikipedia.org/wiki/Roberto%20Leopardi",
-    "wikipediaTitle": "Roberto Leopardi"
-  },
-  {
-    "id": "55236",
-    "title": "I Canti",
-    "author": "Leopardi",
-    "wikipediaUrl": "https://en.wikipedia.org/wiki/Tre%20Canti%20di%20Leopardi",
-    "wikipediaTitle": "Tre Canti di Leopardi"
-  },
-  {
-    "id": "58579",
-    "title": "Miei Pensieri di varia Umanità",
-    "author": "Pascoli"
-  },
-  {
-    "id": "62339",
-    "title": "Da un carteggio inedito",
-    "author": "Carducci"
-  },
-  {
-    "id": "71218",
-    "title": "La vita nuova",
-    "author": "Dante Alighieri",
-    "wikipediaUrl": "https://en.wikipedia.org/wiki/La%20Vita%20Nuova",
-    "wikipediaTitle": "La Vita Nuova"
-  },
-  {
     "id": "20",
     "title": "Paradise Lost",
     "author": "John Milton"
@@ -1077,22 +298,22 @@
   },
   {
     "id": "2619",
-    "title": "The Home Book of Verse — Volume 1",
+    "title": "The Home Book of Verse \u2014 Volume 1",
     "author": "Robert Louis Stevenson"
   },
   {
     "id": "2620",
-    "title": "The Home Book of Verse — Volume 2",
+    "title": "The Home Book of Verse \u2014 Volume 2",
     "author": "Robert Louis Stevenson"
   },
   {
     "id": "2621",
-    "title": "The Home Book of Verse — Volume 3",
+    "title": "The Home Book of Verse \u2014 Volume 3",
     "author": "Robert Louis Stevenson"
   },
   {
     "id": "2622",
-    "title": "The Home Book of Verse — Volume 4",
+    "title": "The Home Book of Verse \u2014 Volume 4",
     "author": "Robert Louis Stevenson"
   },
   {
@@ -1133,21 +354,21 @@
   },
   {
     "id": "3741",
-    "title": "The Writings of Thomas Paine — Volume 1 (1774-1779): The American Crisis",
+    "title": "The Writings of Thomas Paine \u2014 Volume 1 (1774-1779): The American Crisis",
     "author": "Paine",
     "wikipediaUrl": "https://en.wikipedia.org/wiki/Thomas%20Paine",
     "wikipediaTitle": "Thomas Paine"
   },
   {
     "id": "3742",
-    "title": "The Writings of Thomas Paine — Volume 2 (1779-1792): The Rights of Man",
+    "title": "The Writings of Thomas Paine \u2014 Volume 2 (1779-1792): The Rights of Man",
     "author": "Paine",
     "wikipediaUrl": "https://en.wikipedia.org/wiki/Thomas%20Paine",
     "wikipediaTitle": "Thomas Paine"
   },
   {
     "id": "3743",
-    "title": "The Writings of Thomas Paine — Volume 4 (1794-1796): The Age of Reason",
+    "title": "The Writings of Thomas Paine \u2014 Volume 4 (1794-1796): The Age of Reason",
     "author": "Paine",
     "wikipediaUrl": "https://en.wikipedia.org/wiki/The%20Age%20of%20Reason",
     "wikipediaTitle": "The Age of Reason"
@@ -1200,11 +421,6 @@
     "author": "Wodehouse",
     "wikipediaUrl": "https://en.wikipedia.org/wiki/A%20Gentleman%20of%20Leisure",
     "wikipediaTitle": "A Gentleman of Leisure"
-  },
-  {
-    "id": "4078",
-    "title": "The Picture of Dorian Gray",
-    "author": "Oscar Wilde"
   },
   {
     "id": "4085",
@@ -1277,22 +493,22 @@
   },
   {
     "id": "4797",
-    "title": "The Complete Poetical Works of Percy Bysshe Shelley — Volume 1",
+    "title": "The Complete Poetical Works of Percy Bysshe Shelley \u2014 Volume 1",
     "author": "Mary Shelley"
   },
   {
     "id": "4798",
-    "title": "The Complete Poetical Works of Percy Bysshe Shelley — Volume 2",
+    "title": "The Complete Poetical Works of Percy Bysshe Shelley \u2014 Volume 2",
     "author": "Mary Shelley"
   },
   {
     "id": "4799",
-    "title": "The Complete Poetical Works of Percy Bysshe Shelley — Volume 3",
+    "title": "The Complete Poetical Works of Percy Bysshe Shelley \u2014 Volume 3",
     "author": "Mary Shelley"
   },
   {
     "id": "4800",
-    "title": "The Complete Poetical Works of Percy Bysshe Shelley — Complete",
+    "title": "The Complete Poetical Works of Percy Bysshe Shelley \u2014 Complete",
     "author": "Mary Shelley"
   },
   {
@@ -1304,7 +520,7 @@
   },
   {
     "id": "5084",
-    "title": "Life and Letters of Thomas Henry Huxley — Volume 1",
+    "title": "Life and Letters of Thomas Henry Huxley \u2014 Volume 1",
     "author": "Huxley",
     "wikipediaUrl": "https://en.wikipedia.org/wiki/Thomas%20Henry%20Huxley",
     "wikipediaTitle": "Thomas Henry Huxley"
@@ -1332,7 +548,7 @@
   },
   {
     "id": "5155",
-    "title": "Cæsar's Column: A Story of the Twentieth Century",
+    "title": "C\u00e6sar's Column: A Story of the Twentieth Century",
     "author": "Donnelly",
     "wikipediaUrl": "https://en.wikipedia.org/wiki/Caesar's%20Column",
     "wikipediaTitle": "Caesar's Column"
@@ -1360,7 +576,7 @@
   },
   {
     "id": "5226",
-    "title": "Life and Letters of Thomas Henry Huxley — Volume 2",
+    "title": "Life and Letters of Thomas Henry Huxley \u2014 Volume 2",
     "author": "Huxley",
     "wikipediaUrl": "https://en.wikipedia.org/wiki/Thomas%20Henry%20Huxley",
     "wikipediaTitle": "Thomas Henry Huxley"
@@ -1412,7 +628,7 @@
   },
   {
     "id": "5799",
-    "title": "Life and Letters of Thomas Henry Huxley — Volume 3",
+    "title": "Life and Letters of Thomas Henry Huxley \u2014 Volume 3",
     "author": "Huxley",
     "wikipediaUrl": "https://en.wikipedia.org/wiki/Thomas%20Henry%20Huxley",
     "wikipediaTitle": "Thomas Henry Huxley"
@@ -1617,7 +833,7 @@
   },
   {
     "id": "7230",
-    "title": "Not George Washington — an Autobiographical Novel",
+    "title": "Not George Washington \u2014 an Autobiographical Novel",
     "author": "Wodehouse",
     "wikipediaUrl": "https://en.wikipedia.org/wiki/Not%20George%20Washington",
     "wikipediaTitle": "Not George Washington"
@@ -1936,7 +1152,7 @@
   },
   {
     "id": "10219",
-    "title": "The Poetical Works of William Wordsworth — Volume 1 (of 8)",
+    "title": "The Poetical Works of William Wordsworth \u2014 Volume 1 (of 8)",
     "author": "Wordsworth",
     "wikipediaUrl": "https://en.wikipedia.org/wiki/William%20Wordsworth",
     "wikipediaTitle": "William Wordsworth"
@@ -1993,7 +1209,7 @@
   },
   {
     "id": "10831",
-    "title": "The Village in the Mountains; Conversion of Peter Bayssière; and History of a Bible",
+    "title": "The Village in the Mountains; Conversion of Peter Bayssi\u00e8re; and History of a Bible",
     "author": "Wilder"
   },
   {
@@ -2026,14 +1242,14 @@
   },
   {
     "id": "12145",
-    "title": "The Poetical Works of William Wordsworth — Volume 2 (of 8)",
+    "title": "The Poetical Works of William Wordsworth \u2014 Volume 2 (of 8)",
     "author": "Wordsworth",
     "wikipediaUrl": "https://en.wikipedia.org/wiki/William%20Wordsworth",
     "wikipediaTitle": "William Wordsworth"
   },
   {
     "id": "12383",
-    "title": "The Poetical Works of William Wordsworth — Volume 3 (of 8)",
+    "title": "The Poetical Works of William Wordsworth \u2014 Volume 3 (of 8)",
     "author": "Wordsworth",
     "wikipediaUrl": "https://en.wikipedia.org/wiki/William%20Wordsworth",
     "wikipediaTitle": "William Wordsworth"
@@ -2249,7 +1465,7 @@
   {
     "id": "17081",
     "title": "Cottage Poems",
-    "author": "Charlotte Brontë"
+    "author": "Charlotte Bront\u00eb"
   },
   {
     "id": "17165",
@@ -2358,11 +1574,6 @@
     "author": "Hughes",
     "wikipediaUrl": "https://en.wikipedia.org/wiki/Mule%20Bone",
     "wikipediaTitle": "Mule Bone"
-  },
-  {
-    "id": "19508",
-    "title": "A Modest Proposal",
-    "author": "Jonathan Swift"
   },
   {
     "id": "19560",
@@ -2540,11 +1751,6 @@
     "author": "Coleridge",
     "wikipediaUrl": "https://en.wikipedia.org/wiki/The%20Rime%20of%20the%20Ancient%20Mariner",
     "wikipediaTitle": "The Rime of the Ancient Mariner"
-  },
-  {
-    "id": "21602",
-    "title": "The Waste Land",
-    "author": "T.S. Eliot"
   },
   {
     "id": "21700",
@@ -2832,11 +2038,6 @@
     "wikipediaTitle": "The Imitation of Christ"
   },
   {
-    "id": "26230",
-    "title": "The Picture of Dorian Gray",
-    "author": "Oscar Wilde"
-  },
-  {
     "id": "26246",
     "title": "The Invisible Man: A Grotesque Romance",
     "author": "H.G. Wells"
@@ -2871,11 +2072,6 @@
     "author": "O'Donnell",
     "wikipediaUrl": "https://en.wikipedia.org/wiki/Elliott%20O'Donnell",
     "wikipediaTitle": "Elliott O'Donnell"
-  },
-  {
-    "id": "26740",
-    "title": "The Picture of Dorian Gray",
-    "author": "Oscar Wilde"
   },
   {
     "id": "26851",
@@ -3201,7 +2397,7 @@
   },
   {
     "id": "32459",
-    "title": "The Poetical Works of William Wordsworth — Volume 4 (of 8)",
+    "title": "The Poetical Works of William Wordsworth \u2014 Volume 4 (of 8)",
     "author": "Wordsworth",
     "wikipediaUrl": "https://en.wikipedia.org/wiki/William%20Wordsworth",
     "wikipediaTitle": "William Wordsworth"
@@ -3730,7 +2926,7 @@
     "title": "Trails and Tramps in Alaska and Newfoundland",
     "author": "Thomas",
     "wikipediaUrl": "https://en.wikipedia.org/wiki/List%20of%20solved%20missing%20person%20cases%3A%201950%E2%80%931999",
-    "wikipediaTitle": "List of solved missing person cases: 1950–1999"
+    "wikipediaTitle": "List of solved missing person cases: 1950\u20131999"
   },
   {
     "id": "41168",
@@ -3783,7 +2979,7 @@
   },
   {
     "id": "41705",
-    "title": "Anima Poetæ",
+    "title": "Anima Poet\u00e6",
     "author": "Coleridge",
     "wikipediaUrl": "https://en.wikipedia.org/wiki/Ernest%20Hartley%20Coleridge",
     "wikipediaTitle": "Ernest Hartley Coleridge"
@@ -3915,7 +3111,7 @@
   },
   {
     "id": "44395",
-    "title": "At the Court of the Amîr: A Narrative",
+    "title": "At the Court of the Am\u00eer: A Narrative",
     "author": "Gray",
     "wikipediaUrl": "https://en.wikipedia.org/wiki/Wikipedia",
     "wikipediaTitle": "Wikipedia"
@@ -3983,7 +3179,7 @@
   },
   {
     "id": "47143",
-    "title": "The Poetical Works of William Wordsworth — Volume 7 (of 8)",
+    "title": "The Poetical Works of William Wordsworth \u2014 Volume 7 (of 8)",
     "author": "Wordsworth",
     "wikipediaUrl": "https://en.wikipedia.org/wiki/William%20Wordsworth",
     "wikipediaTitle": "William Wordsworth"
@@ -4002,7 +3198,7 @@
   },
   {
     "id": "47651",
-    "title": "The Poetical Works of William Wordsworth — Volume 6 (of 8)",
+    "title": "The Poetical Works of William Wordsworth \u2014 Volume 6 (of 8)",
     "author": "Wordsworth",
     "wikipediaUrl": "https://en.wikipedia.org/wiki/William%20Wordsworth",
     "wikipediaTitle": "William Wordsworth"
@@ -4016,7 +3212,7 @@
   },
   {
     "id": "48059",
-    "title": "A Vers de Société Anthology",
+    "title": "A Vers de Soci\u00e9t\u00e9 Anthology",
     "author": "H.G. Wells"
   },
   {
@@ -4050,7 +3246,7 @@
     "title": "An Irish precursor of Dante",
     "author": "Boswell",
     "wikipediaUrl": "https://en.wikipedia.org/wiki/The%20Vision%20of%20Adamn%C3%A1n",
-    "wikipediaTitle": "The Vision of Adamnán"
+    "wikipediaTitle": "The Vision of Adamn\u00e1n"
   },
   {
     "id": "50490",
@@ -4162,7 +3358,7 @@
   },
   {
     "id": "52836",
-    "title": "The Poetical Works of William Wordsworth — Volume 8 (of 8)",
+    "title": "The Poetical Works of William Wordsworth \u2014 Volume 8 (of 8)",
     "author": "Wordsworth",
     "wikipediaUrl": "https://en.wikipedia.org/wiki/William%20Wordsworth",
     "wikipediaTitle": "William Wordsworth"
@@ -4322,7 +3518,7 @@
   },
   {
     "id": "56361",
-    "title": "The Poetical Works of William Wordsworth — Volume 5 (of 8)",
+    "title": "The Poetical Works of William Wordsworth \u2014 Volume 5 (of 8)",
     "author": "Wordsworth",
     "wikipediaUrl": "https://en.wikipedia.org/wiki/William%20Wordsworth",
     "wikipediaTitle": "William Wordsworth"
@@ -4636,7 +3832,7 @@
     "title": "The Second Boys' Book of Model Aeroplanes",
     "author": "Collins",
     "wikipediaUrl": "https://en.wikipedia.org/wiki/List%20of%20Desert%20Island%20Discs%20episodes%20(1961%E2%80%931970)",
-    "wikipediaTitle": "List of Desert Island Discs episodes (1961–1970)"
+    "wikipediaTitle": "List of Desert Island Discs episodes (1961\u20131970)"
   },
   {
     "id": "62572",
@@ -4879,7 +4075,7 @@
     "title": "Ballads from the Danish and Original Verses",
     "author": "Smith-Dampier",
     "wikipediaUrl": "https://en.wikipedia.org/wiki/%C3%9Erymskvi%C3%B0a",
-    "wikipediaTitle": "Þrymskviða"
+    "wikipediaTitle": "\u00derymskvi\u00f0a"
   },
   {
     "id": "68448",
