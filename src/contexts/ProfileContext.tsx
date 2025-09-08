@@ -304,14 +304,22 @@ export const ProfileProvider: React.FC<ProfileProviderProps> = ({ children }) =>
       const dbProfile = {
         ...newProfile,
         available_credits: newProfile.availableCredits,
-        book_explanations: newProfile.bookExplanations
+        book_explanations: newProfile.bookExplanations,
+        purchased_book_details: newProfile.purchasedBookDetails,
+        has_unlimited_access: newProfile.hasUnlimitedAccess,
+        unlimited_access_expiry: newProfile.unlimitedAccessExpiry
       }
       delete (dbProfile as any).availableCredits
       delete (dbProfile as any).bookExplanations
+      delete (dbProfile as any).purchasedBookDetails
+      delete (dbProfile as any).hasUnlimitedAccess
+      delete (dbProfile as any).unlimitedAccessExpiry
       
       console.log('ProfileContext: Saving to database:', {
         available_credits: dbProfile.available_credits,
         book_explanations: dbProfile.book_explanations,
+        has_unlimited_access: dbProfile.has_unlimited_access,
+        unlimited_access_expiry: dbProfile.unlimited_access_expiry,
         totalExplanations: newProfile.totalExplanations,
         todayExplanations: newProfile.todayExplanations
       })

@@ -259,6 +259,133 @@ export async function createOrUpdateUserProfile(profile: Partial<UserProfile> & 
   }
 }
 
+// Partial update function for specific fields only
+export async function updateUserProfileFields(email: string, updates: Partial<UserProfile>): Promise<UserProfile> {
+  const client = await pool.connect()
+  
+  try {
+    const now = new Date()
+    const fields: string[] = []
+    const values: any[] = []
+    let paramCount = 1
+    
+    // Build dynamic SET clause based on provided fields
+    if (updates.age !== undefined) {
+      fields.push(`age = $${paramCount}`)
+      values.push(updates.age)
+      paramCount++
+    }
+    if (updates.language !== undefined) {
+      fields.push(`language = $${paramCount}`)
+      values.push(updates.language)
+      paramCount++
+    }
+    if (updates.education_level !== undefined) {
+      fields.push(`education_level = $${paramCount}`)
+      values.push(updates.education_level)
+      paramCount++
+    }
+    if (updates.first_login !== undefined) {
+      fields.push(`first_login = $${paramCount}`)
+      values.push(updates.first_login)
+      paramCount++
+    }
+    if (updates.total_explanations !== undefined) {
+      fields.push(`total_explanations = $${paramCount}`)
+      values.push(updates.total_explanations)
+      paramCount++
+    }
+    if (updates.today_explanations !== undefined) {
+      fields.push(`today_explanations = $${paramCount}`)
+      values.push(updates.today_explanations)
+      paramCount++
+    }
+    if (updates.available_credits !== undefined) {
+      fields.push(`available_credits = $${paramCount}`)
+      values.push(updates.available_credits)
+      paramCount++
+    }
+    if (updates.book_explanations !== undefined) {
+      fields.push(`book_explanations = $${paramCount}`)
+      values.push(JSON.stringify(updates.book_explanations))
+      paramCount++
+    }
+    if (updates.purchased_books !== undefined) {
+      fields.push(`purchased_books = $${paramCount}`)
+      values.push(updates.purchased_books)
+      paramCount++
+    }
+    if (updates.purchased_book_details !== undefined) {
+      fields.push(`purchased_book_details = $${paramCount}`)
+      values.push(JSON.stringify(updates.purchased_book_details))
+      paramCount++
+    }
+    if (updates.has_unlimited_access !== undefined) {
+      fields.push(`has_unlimited_access = $${paramCount}`)
+      values.push(updates.has_unlimited_access)
+      paramCount++
+    }
+    if (updates.unlimited_access_expiry !== undefined) {
+      fields.push(`unlimited_access_expiry = $${paramCount}`)
+      values.push(updates.unlimited_access_expiry)
+      paramCount++
+    }
+    
+    // Always update the updated_at timestamp
+    fields.push(`updated_at = $${paramCount}`)
+    values.push(now)
+    paramCount++
+    
+    // Add email as the last parameter
+    values.push(email)
+    
+    if (fields.length === 1) {
+      // Only updated_at was set, no actual fields to update
+      throw new Error('No fields to update')
+    }
+    
+    const query = `
+      UPDATE user_profiles 
+      SET ${fields.join(', ')}
+      WHERE email = $${paramCount}
+      RETURNING *
+    `
+    
+    console.log('Partial update query:', query)
+    console.log('Values:', values)
+    
+    const result = await client.query(query, values)
+    
+    if (result.rows.length === 0) {
+      throw new Error('User profile not found')
+    }
+    
+    const row = result.rows[0]
+    return {
+      email: row.email,
+      age: row.age,
+      language: row.language,
+      education_level: row.education_level,
+      first_login: row.first_login,
+      total_explanations: row.total_explanations,
+      today_explanations: row.today_explanations,
+      available_credits: row.available_credits,
+      book_explanations: row.book_explanations || {},
+      purchased_books: row.purchased_books || [],
+      purchased_book_details: row.purchased_book_details || {},
+      has_unlimited_access: row.has_unlimited_access,
+      unlimited_access_expiry: row.unlimited_access_expiry,
+      created_at: row.created_at,
+      updated_at: row.updated_at
+    }
+  } catch (error) {
+    console.error('Error partially updating user profile:', error)
+    throw error
+  } finally {
+    client.release()
+  }
+}
+
 // Settings operations
 export async function getUserSettings(email: string): Promise<UserSettings | null> {
   const client = await pool.connect()

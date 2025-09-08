@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { getServerSession } from 'next-auth'
 import { authOptions } from '@/lib/auth'
-import { getUserProfile, createOrUpdateUserProfile } from '@/lib/database'
+import { getUserProfile, createOrUpdateUserProfile, updateUserProfileFields } from '@/lib/database'
 
 export async function GET(request: NextRequest) {
   try {
@@ -33,10 +33,26 @@ export async function POST(request: NextRequest) {
     }
 
     const body = await request.json()
-    const profile = await createOrUpdateUserProfile({
-      email: session.user.email,
-      ...body
-    })
+    
+    // Check if this is a partial update (only specific fields provided)
+    const providedFields = Object.keys(body).filter(key => key !== 'email')
+    const isPartialUpdate = providedFields.length < 10 // Less than all fields
+    
+    console.log('Profile API: Update type:', isPartialUpdate ? 'partial' : 'full')
+    console.log('Profile API: Provided fields:', providedFields)
+    console.log('Profile API: Body:', body)
+    
+    let profile
+    if (isPartialUpdate) {
+      // Use partial update to preserve existing fields
+      profile = await updateUserProfileFields(session.user.email, body)
+    } else {
+      // Use full update for complete profile replacement
+      profile = await createOrUpdateUserProfile({
+        email: session.user.email,
+        ...body
+      })
+    }
 
     return NextResponse.json(profile)
   } catch (error) {
