@@ -39,7 +39,7 @@ const Pricing: React.FC<PricingProps> = ({ isOpen, onClose, bookTitle, author, i
     onClose()
   }
 
-  const handleUnlimitedAccess = (duration: 'hour' | 'month' | 'year') => {
+  const handleUnlimitedAccess = (duration: 'month') => {
     console.log('Pricing: granting unlimited access for duration:', duration)
     grantUnlimitedAccess(duration)
     
@@ -277,48 +277,25 @@ const Pricing: React.FC<PricingProps> = ({ isOpen, onClose, bookTitle, author, i
             borderRadius: '12px',
             padding: '20px'
           }}>
-            <h3 style={{ margin: '0 0 12px 0', color: '#f59e0b' }}>⚡ Unlimited Access</h3>
-            <div style={{ display: 'grid', gap: '8px' }}>
-              <button
-                onClick={() => handleUnlimitedAccess('hour')}
-                style={{
-                  background: '#f59e0b',
-                  color: 'white',
-                  border: 'none',
-                  padding: '8px 16px',
-                  borderRadius: '6px',
-                  cursor: 'pointer'
-                }}
-              >
-                1 Day - $1
-              </button>
-              <button
-                onClick={() => handleUnlimitedAccess('month')}
-                style={{
-                  background: '#f59e0b',
-                  color: 'white',
-                  border: 'none',
-                  padding: '8px 16px',
-                  borderRadius: '6px',
-                  cursor: 'pointer'
-                }}
-              >
-                1 Month - $5
-              </button>
-              <button
-                onClick={() => handleUnlimitedAccess('year')}
-                style={{
-                  background: '#f59e0b',
-                  color: 'white',
-                  border: 'none',
-                  padding: '8px 16px',
-                  borderRadius: '6px',
-                  cursor: 'pointer'
-                }}
-              >
-                1 Year - $25
-              </button>
-            </div>
+            <h3 style={{ margin: '0 0 12px 0', color: '#f59e0b' }}>⚡ Unlimited Access - $5</h3>
+            <p style={{ margin: '0 0 16px 0', color: '#666' }}>
+              Get unlimited explanations for all books for 1 month
+            </p>
+            <button
+              onClick={() => handleUnlimitedAccess('month')}
+              style={{
+                background: '#f59e0b',
+                color: 'white',
+                border: 'none',
+                padding: '12px 24px',
+                borderRadius: '8px',
+                cursor: 'pointer',
+                fontWeight: 'bold',
+                width: '100%'
+              }}
+            >
+              1 Month Unlimited - $5
+            </button>
           </div>
         </div>
 

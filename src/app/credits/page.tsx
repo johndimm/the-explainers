@@ -11,6 +11,9 @@ function CreditsContent() {
   const { profile, addCredits, purchaseBook, grantUnlimitedAccess } = useProfile()
   const [currentTime, setCurrentTime] = useState(new Date())
   const [showMobileMenu, setShowMobileMenu] = useState(false)
+  const [showCreditConfirmation, setShowCreditConfirmation] = useState(false)
+  const [purchasedCredits, setPurchasedCredits] = useState(0)
+  const [showUnlimitedConfirmation, setShowUnlimitedConfirmation] = useState(false)
   const menuRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
@@ -59,18 +62,25 @@ function CreditsContent() {
   }
 
   const handlePurchaseCredits = (amount: number) => {
-    addCredits(amount)
+    setPurchasedCredits(amount)
+    setShowCreditConfirmation(true)
+  }
+
+  const confirmCreditPurchase = () => {
+    addCredits(purchasedCredits)
+    setShowCreditConfirmation(false)
     router.push('/reader')
   }
 
-  const handleUnlimitedAccess = (duration: 'hour' | 'month' | 'year') => {
+  const handleUnlimitedAccess = (duration: 'month') => {
     console.log('Credits page: granting unlimited access for duration:', duration)
-    grantUnlimitedAccess(duration)
-    
-    // Small delay to ensure profile context has updated before navigating
-    setTimeout(() => {
-      router.push('/reader')
-    }, 100)
+    setShowUnlimitedConfirmation(true)
+  }
+
+  const confirmUnlimitedPurchase = () => {
+    grantUnlimitedAccess('month')
+    setShowUnlimitedConfirmation(false)
+    router.push('/reader')
   }
 
   // Helper to format remaining time for unlimited access
@@ -546,54 +556,25 @@ function CreditsContent() {
               borderRadius: '16px',
               padding: '24px'
             }}>
-              <h3 style={{ margin: '0 0 12px 0', color: '#f59e0b', fontSize: '18px' }}>⚡ Unlimited Access</h3>
+              <h3 style={{ margin: '0 0 12px 0', color: '#f59e0b', fontSize: '18px' }}>⚡ Unlimited Access - $5</h3>
               <p style={{ margin: '0 0 16px 0', color: '#666' }}>
-                Unlimited explanations for all books
+                Get unlimited explanations for all books for 1 month
               </p>
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
-                <button
-                  onClick={() => handleUnlimitedAccess('hour')}
-                  style={{
-                    background: '#f59e0b',
-                    color: 'white',
-                    border: 'none',
-                    padding: '12px 20px',
-                    borderRadius: '6px',
-                    cursor: 'pointer',
-                    fontWeight: '500'
-                  }}
-                >
-                  1 Day - $1
-                </button>
-                <button
-                  onClick={() => handleUnlimitedAccess('month')}
-                  style={{
-                    background: '#f59e0b',
-                    color: 'white',
-                    border: 'none',
-                    padding: '12px 20px',
-                    borderRadius: '6px',
-                    cursor: 'pointer',
-                    fontWeight: '500'
-                  }}
-                >
-                  1 Month - $5
-                </button>
-                <button
-                  onClick={() => handleUnlimitedAccess('year')}
-                  style={{
-                    background: '#f59e0b',
-                    color: 'white',
-                    border: 'none',
-                    padding: '12px 20px',
-                    borderRadius: '6px',
-                    cursor: 'pointer',
-                    fontWeight: '500'
-                  }}
-                >
-                  1 Year - $25
-                </button>
-              </div>
+              <button
+                onClick={() => handleUnlimitedAccess('month')}
+                style={{
+                  background: '#f59e0b',
+                  color: 'white',
+                  border: 'none',
+                  padding: '12px 24px',
+                  borderRadius: '8px',
+                  cursor: 'pointer',
+                  fontWeight: 'bold',
+                  width: '100%'
+                }}
+              >
+                1 Month Unlimited - $5
+              </button>
             </div>
           </div>
 
@@ -638,6 +619,156 @@ function CreditsContent() {
           </div>
         </div>
       </main>
+
+      {/* Credit Purchase Confirmation Dialog */}
+      {showCreditConfirmation && (
+        <div style={{
+          position: 'fixed',
+          top: 0,
+          left: 0,
+          right: 0,
+          bottom: 0,
+          background: 'rgba(0, 0, 0, 0.5)',
+          zIndex: 1000,
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+          padding: '20px'
+        }}>
+          <div style={{
+            background: 'white',
+            borderRadius: '16px',
+            width: '100%',
+            maxWidth: '400px',
+            padding: '24px',
+            boxShadow: '0 10px 25px rgba(0,0,0,0.2)'
+          }}>
+            <h3 style={{ 
+              margin: '0 0 16px 0', 
+              color: '#10b981',
+              fontSize: '20px',
+              textAlign: 'center'
+            }}>
+              ✅ Purchase Confirmed!
+            </h3>
+            <p style={{ 
+              margin: '0 0 24px 0', 
+              color: '#666',
+              textAlign: 'center',
+              fontSize: '16px'
+            }}>
+              You've successfully purchased <strong>{purchasedCredits} credits</strong> for $5!
+            </p>
+            <div style={{ display: 'flex', gap: '12px' }}>
+              <button
+                onClick={() => setShowCreditConfirmation(false)}
+                style={{
+                  flex: 1,
+                  background: '#f3f4f6',
+                  color: '#374151',
+                  border: 'none',
+                  padding: '12px 24px',
+                  borderRadius: '8px',
+                  cursor: 'pointer',
+                  fontWeight: '500'
+                }}
+              >
+                Stay Here
+              </button>
+              <button
+                onClick={confirmCreditPurchase}
+                style={{
+                  flex: 1,
+                  background: '#10b981',
+                  color: 'white',
+                  border: 'none',
+                  padding: '12px 24px',
+                  borderRadius: '8px',
+                  cursor: 'pointer',
+                  fontWeight: 'bold'
+                }}
+              >
+                Start Reading
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Unlimited Access Confirmation Dialog */}
+      {showUnlimitedConfirmation && (
+        <div style={{
+          position: 'fixed',
+          top: 0,
+          left: 0,
+          right: 0,
+          bottom: 0,
+          background: 'rgba(0, 0, 0, 0.5)',
+          zIndex: 1000,
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+          padding: '20px'
+        }}>
+          <div style={{
+            background: 'white',
+            borderRadius: '16px',
+            width: '100%',
+            maxWidth: '400px',
+            padding: '24px',
+            boxShadow: '0 10px 25px rgba(0,0,0,0.2)'
+          }}>
+            <h3 style={{ 
+              margin: '0 0 16px 0', 
+              color: '#f59e0b',
+              fontSize: '20px',
+              textAlign: 'center'
+            }}>
+              ⚡ Purchase Confirmed!
+            </h3>
+            <p style={{ 
+              margin: '0 0 24px 0', 
+              color: '#666',
+              textAlign: 'center',
+              fontSize: '16px'
+            }}>
+              You've successfully purchased <strong>1 month of unlimited access</strong> for $5!
+            </p>
+            <div style={{ display: 'flex', gap: '12px' }}>
+              <button
+                onClick={() => setShowUnlimitedConfirmation(false)}
+                style={{
+                  flex: 1,
+                  background: '#f3f4f6',
+                  color: '#374151',
+                  border: 'none',
+                  padding: '12px 24px',
+                  borderRadius: '8px',
+                  cursor: 'pointer',
+                  fontWeight: '500'
+                }}
+              >
+                Stay Here
+              </button>
+              <button
+                onClick={confirmUnlimitedPurchase}
+                style={{
+                  flex: 1,
+                  background: '#f59e0b',
+                  color: 'white',
+                  border: 'none',
+                  padding: '12px 24px',
+                  borderRadius: '8px',
+                  cursor: 'pointer',
+                  fontWeight: 'bold'
+                }}
+              >
+                Start Reading
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   )
 }

@@ -16,7 +16,7 @@ interface ProfileContextType {
   getBookExplanationsUsed: (bookTitle: string, author: string) => number
   addCredits: (amount: number) => void
   purchaseBook: (bookTitle: string, author: string, url?: string) => void
-  grantUnlimitedAccess: (duration: 'hour' | 'month' | 'year') => void
+  grantUnlimitedAccess: (duration: 'month') => void
   removePurchasedBook: (bookTitle: string, author: string) => void
 }
 
@@ -324,11 +324,17 @@ export const ProfileProvider: React.FC<ProfileProviderProps> = ({ children }) =>
       }
       console.log('ProfileContext: New credits:', newProfile.availableCredits)
       
-      // Save to database
+      // Save to database - convert camelCase to snake_case
+      const dbProfile = {
+        ...newProfile,
+        available_credits: newProfile.availableCredits
+      }
+      delete (dbProfile as any).availableCredits
+      
       fetch('/api/user/profile', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(newProfile)
+        body: JSON.stringify(dbProfile)
       }).catch(error => console.error('Error saving profile to database:', error))
       
       return newProfile
@@ -401,25 +407,12 @@ export const ProfileProvider: React.FC<ProfileProviderProps> = ({ children }) =>
     })
   }
 
-  const grantUnlimitedAccess = (duration: 'hour' | 'month' | 'year') => {
+  const grantUnlimitedAccess = (duration: 'month') => {
     console.log('ProfileContext: grantUnlimitedAccess called with duration:', duration)
     setProfile(prev => {
       const now = new Date()
-      let expiryTime: Date
-      
-      switch (duration) {
-        case 'hour':
-          expiryTime = new Date(now.getTime() + 24 * 60 * 60 * 1000) // 1 day
-          break
-        case 'month':
-          expiryTime = new Date(now.getTime() + 30 * 24 * 60 * 60 * 1000) // 30 days
-          break
-        case 'year':
-          expiryTime = new Date(now.getTime() + 365 * 24 * 60 * 60 * 1000) // 365 days
-          break
-        default:
-          expiryTime = new Date(now.getTime() + 60 * 60 * 1000) // Default to 1 hour
-      }
+      // Only 1 month option available
+      const expiryTime = new Date(now.getTime() + 30 * 24 * 60 * 60 * 1000) // 30 days
       
       const newProfile = {
         ...prev,
