@@ -2,6 +2,7 @@
 
 import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react'
 import { useSession, signIn, signOut } from 'next-auth/react'
+import { log } from '../utils/log'
 
 interface User {
   name?: string | null
@@ -48,19 +49,19 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   }
 
   const handleSignOut = async () => {
-    console.log('Sign out started')
+    log('Sign out started')
     setIsLoading(true)
     try {
       // Sign out without redirect so the session state can update
       await signOut({ redirect: false })
-      console.log('SignOut completed')
+      log('SignOut completed')
       // Force session refresh
       await update()
-      console.log('Session updated')
+      log('Session updated')
     } catch (error) {
       console.error('Sign out error:', error)
     } finally {
-      console.log('Sign out finally block')
+      log('Sign out finally block')
       setIsLoading(false)
     }
   }

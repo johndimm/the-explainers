@@ -1,12 +1,13 @@
 import { NextRequest, NextResponse } from 'next/server'
+import { log } from '@/utils/log'
 
 export async function GET(request: NextRequest) {
   try {
     const { searchParams } = new URL(request.url)
     const path = searchParams.get('path')
     
-    console.log('GET /api/download-text called with path:', path)
-    console.log('Full URL:', request.url)
+    log('GET /api/download-text called with path:', path)
+    log('Full URL:', request.url)
     
     if (!path) {
       return NextResponse.json({ error: 'Path parameter is required' }, { status: 400 })
@@ -35,10 +36,10 @@ export async function GET(request: NextRequest) {
       
       const text = fs.readFileSync(bookPath, 'utf-8')
       
-      console.log(`Reading file: ${bookPath}`)
-      console.log(`File size: ${text.length} characters`)
-      console.log(`First 200 chars: ${text.substring(0, 200)}`)
-      console.log(`Last 200 chars: ${text.substring(text.length - 200)}`)
+      log(`Reading file: ${bookPath}`)
+      log(`File size: ${text.length} characters`)
+      log(`First 200 chars: ${text.substring(0, 200)}`)
+      log(`Last 200 chars: ${text.substring(text.length - 200)}`)
       
       // Return the text directly as plain text instead of JSON
       return new Response(text, {

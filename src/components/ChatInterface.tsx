@@ -160,7 +160,7 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ selectedText, contextInfo
     }
     
     setShowClearConfirm(false)
-    console.log('Chat history cleared')
+    log('Chat history cleared')
   }
 
   const shareToGitHub = () => {
@@ -375,7 +375,7 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ selectedText, contextInfo
     const hasStyleChange = currentStyle !== settings.explanationStyle
     const hasLengthChange = currentResponseLength !== settings.responseLength
     const newHasChanges = hasProviderChange || hasStyleChange || hasLengthChange
-    console.log('hasChanges calculation:', { hasProviderChange, hasStyleChange, hasLengthChange, newHasChanges, selectedProvider, currentStyle, currentResponseLength, settingsProvider: settings.llmProvider, settingsStyle: settings.explanationStyle, settingsLength: settings.responseLength })
+    log('hasChanges calculation:', { hasProviderChange, hasStyleChange, hasLengthChange, newHasChanges, selectedProvider, currentStyle, currentResponseLength, settingsProvider: settings.llmProvider, settingsStyle: settings.explanationStyle, settingsLength: settings.responseLength })
     setHasChanges(newHasChanges)
   }, [selectedProvider, currentStyle, currentResponseLength, settings.llmProvider, settings.explanationStyle, settings.responseLength])
 
@@ -612,6 +612,17 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ selectedText, contextInfo
     }
   }
 
+  // Convert Roman numerals to Arabic numerals
+  const romanToArabic = (roman: string): string => {
+    const romanMap: { [key: string]: number } = {
+      'I': 1, 'II': 2, 'III': 3, 'IV': 4, 'V': 5,
+      'VI': 6, 'VII': 7, 'VIII': 8, 'IX': 9, 'X': 10,
+      'XI': 11, 'XII': 12, 'XIII': 13, 'XIV': 14, 'XV': 15,
+      'XVI': 16, 'XVII': 17, 'XVIII': 18, 'XIX': 19, 'XX': 20
+    }
+    return romanMap[roman.toUpperCase()]?.toString() || roman
+  }
+
   const createContextualPrompt = (text: string, context: ContextInfo | null): string => {
     log('ChatInterface: Profile data:', profile)
     let prompt = `Please explain this text: "${text}"`
@@ -675,8 +686,9 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ selectedText, contextInfo
   }
 
   const searchAndEmbedVideo = async (text: string) => {
-    log('Automatically searching for video with quote:', text)
-    log('Using context info:', contextInfo)
+    console.log('🔍 YOUTUBE SEARCH TRIGGERED:', text)
+    log('youtube', 'Automatically searching for video with quote:', text)
+    log('youtube', 'Using context info:', contextInfo)
     
     try {
       // Build a richer search query using context information
@@ -691,17 +703,63 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ selectedText, contextInfo
         searchTerms.push(contextInfo.speaker)
       }
       
-      // Add act/scene information for plays
+      // Add act/scene information for plays with both Roman and Arabic numerals
       if (contextInfo?.act && contextInfo?.scene) {
+        // Convert Roman numerals to Arabic for better YouTube matching
+        const actArabic = romanToArabic(contextInfo.act)
+        const sceneArabic = romanToArabic(contextInfo.scene)
+        
+        // Add both Roman and Arabic versions
         searchTerms.push(`Act ${contextInfo.act}`)
+        searchTerms.push(`Act ${actArabic}`)
         searchTerms.push(`Scene ${contextInfo.scene}`)
+        searchTerms.push(`Scene ${sceneArabic}`)
+        
+        // Add specific combinations that YouTube will understand
+        searchTerms.push(`Act ${actArabic} Scene ${sceneArabic}`)
+        searchTerms.push(`Act ${contextInfo.act} Scene ${contextInfo.scene}`)
       }
       
       // Add performance/scene keywords
       searchTerms.push('performance', 'scene')
       
+      // Create a more targeted search query
+      if (contextInfo?.act && contextInfo?.scene) {
+        const actArabic = romanToArabic(contextInfo.act)
+        const sceneArabic = romanToArabic(contextInfo.scene)
+        
+        // Create a specific search phrase that YouTube will understand better
+        const specificQuery = `"${text}" ${bookTitle} "Act ${actArabic} Scene ${sceneArabic}" performance`
+        console.log('🎯 SPECIFIC QUERY:', specificQuery)
+        
+        // Use the specific query instead of the complex search terms
+        searchTerms = [specificQuery]
+      }
+      
       const searchQuery = searchTerms.join(' ').trim()
-      log('Enhanced YouTube search query:', searchQuery)
+      console.log('🔍 YOUTUBE QUERY DEBUG:')
+      console.log('Original text:', text)
+      console.log('Context info:', contextInfo)
+      console.log('Search terms array:', searchTerms)
+      console.log('Final query:', searchQuery)
+      console.log('Roman to Arabic conversion:', {
+        act: contextInfo?.act ? romanToArabic(contextInfo.act) : 'N/A',
+        scene: contextInfo?.scene ? romanToArabic(contextInfo.scene) : 'N/A'
+      })
+      
+      log('youtube', 'Enhanced YouTube search query:', searchQuery)
+      log('youtube', 'Query construction details:', {
+        originalText: text,
+        bookTitle,
+        author,
+        contextInfo: {
+          act: contextInfo?.act,
+          scene: contextInfo?.scene,
+          speaker: contextInfo?.speaker
+        },
+        searchTerms,
+        finalQuery: searchQuery
+      })
       
       const response = await fetch('/api/youtube-search', {
         method: 'POST',
@@ -719,7 +777,13 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ selectedText, contextInfo
       }
       
       const data = await response.json()
-      log('Auto YouTube search results:', data)
+      console.log('🎬 YOUTUBE RESULTS DEBUG:')
+      console.log('API response:', data)
+      console.log('Found videos:', data.videos?.map((v: any) => ({ title: v.title, id: v.id })))
+      console.log('First video title:', data.videos?.[0]?.title)
+      
+      log('youtube', 'Auto YouTube search results:', data)
+      log('youtube', 'Found videos:', data.videos?.map((v: any) => ({ title: v.title, id: v.id })))
       
       if (data.videos && data.videos.length > 0) {
         // Add video message to chat automatically
@@ -788,11 +852,11 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ selectedText, contextInfo
     const promptText = createContextualPrompt(text, contextInfo)
     
     // CURSOR HELPER: Log the full prompt being sent to the LLM for re-explain
-    console.log('🔄 RE-EXPLAIN PROMPT SENT TO LLM 🔄')
-    console.log('='.repeat(80))
-    console.log(promptText)
-    console.log('='.repeat(80))
-    console.log('Context info:', contextInfo)
+    log('🔄 RE-EXPLAIN PROMPT SENT TO LLM 🔄')
+    log('='.repeat(80))
+    log(promptText)
+    log('='.repeat(80))
+    log('Context info:', contextInfo)
     
     log('Re-explain prompt sent to LLM:')
     log('Profile language in re-explain:', profile.language)
@@ -885,11 +949,11 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ selectedText, contextInfo
     const promptText = createContextualPrompt(text, contextInfo)
     
     // CURSOR HELPER: Log the full prompt being sent to the LLM
-    console.log('🚀 FULL PROMPT SENT TO LLM 🚀')
-    console.log('='.repeat(80))
-    console.log(promptText)
-    console.log('='.repeat(80))
-    console.log('Context info:', contextInfo)
+    log('🚀 FULL PROMPT SENT TO LLM 🚀')
+    log('='.repeat(80))
+    log(promptText)
+    log('='.repeat(80))
+    log('Context info:', contextInfo)
     
     log('Full prompt sent to LLM:')
     log('Profile language in sendMessage:', profile.language)

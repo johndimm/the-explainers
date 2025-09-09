@@ -6,6 +6,7 @@ import ChatInterface from '@/components/ChatInterface'
 import { useSettings } from '@/contexts/SettingsContext'
 import { useProfile } from '@/contexts/ProfileContext'
 import { useAuth } from '@/contexts/AuthContext'
+import { log } from '@/utils/log'
 
 function ChatContent() {
   const { settings, updateSettings } = useSettings()
@@ -16,13 +17,13 @@ function ChatContent() {
 
   // Check for context data from text selection
   useEffect(() => {
-    console.log('Chat page: Checking for chatContext in sessionStorage')
+    log('Chat page: Checking for chatContext in sessionStorage')
     const storedContext = sessionStorage.getItem('chatContext')
-    console.log('Chat page: storedContext:', storedContext)
+    log('Chat page: storedContext:', storedContext)
     if (storedContext) {
       try {
         const parsedContext = JSON.parse(storedContext)
-        console.log('Chat page: parsedContext:', parsedContext)
+        log('Chat page: parsedContext:', parsedContext)
         setContextData(parsedContext)
         // Don't clear it immediately - let it persist for refreshes
         // It will be cleared when navigating to a new selection
@@ -176,7 +177,7 @@ function ChatContent() {
           <ChatInterface
             selectedText={(() => {
               const text = contextData?.selectedText || "";
-              console.log('Chat page: Passing selectedText to ChatInterface:', text);
+              log('Chat page: Passing selectedText to ChatInterface:', text);
               return text;
             })()}
             contextInfo={contextData?.contextInfo || null}

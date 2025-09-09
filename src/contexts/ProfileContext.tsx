@@ -3,6 +3,7 @@
 import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react'
 import { useSession } from 'next-auth/react'
 import { ProfileData, Language, EducationLevel } from '../components/Profile'
+import { log } from '../utils/log'
 
 interface ProfileContextType {
   profile: ProfileData
@@ -56,7 +57,7 @@ export const ProfileProvider: React.FC<ProfileProviderProps> = ({ children }) =>
       
       if (!session?.user?.email && !isLocalDev) {
         // Not authenticated and not local dev, use default profile
-        console.log('ProfileContext: Not authenticated, using default profile')
+        log('ProfileContext: Not authenticated, using default profile')
         setProfile(DEFAULT_PROFILE)
         setIsHydrated(true)
         return
@@ -64,7 +65,7 @@ export const ProfileProvider: React.FC<ProfileProviderProps> = ({ children }) =>
       
       if (isLocalDev && !session?.user?.email) {
         // Local dev without auth - use a mock profile
-        console.log('ProfileContext: Local development mode - using mock profile')
+        log('ProfileContext: Local development mode - using mock profile')
         const mockProfile = {
           ...DEFAULT_PROFILE,
           firstLogin: new Date(),
@@ -82,12 +83,12 @@ export const ProfileProvider: React.FC<ProfileProviderProps> = ({ children }) =>
       try {
         // Load from database
         if (session?.user?.email) {
-          console.log('ProfileContext: Loading profile from database for:', session.user.email)
+          log('ProfileContext: Loading profile from database for:', session.user.email)
         }
         const response = await fetch('/api/user/profile')
         if (response.ok) {
           const dbProfile = await response.json()
-          console.log('ProfileContext: Loading profile from database:', dbProfile)
+          log('ProfileContext: Loading profile from database:', dbProfile)
           
           // Convert database format to ProfileData format
           const profileData: ProfileData = {
@@ -109,19 +110,19 @@ export const ProfileProvider: React.FC<ProfileProviderProps> = ({ children }) =>
             ;(profileData as any).purchasedBookDetails = dbProfile.purchased_book_details
           }
           
-          console.log('ProfileContext: Restoring profile from database:', profileData)
-          console.log('ProfileContext: Credits from database:', profileData.availableCredits)
-          console.log('ProfileContext: Unlimited access from database:', {
+          log('ProfileContext: Restoring profile from database:', profileData)
+          log('ProfileContext: Credits from database:', profileData.availableCredits)
+          log('ProfileContext: Unlimited access from database:', {
             hasUnlimitedAccess: profileData.hasUnlimitedAccess,
             unlimitedAccessExpiry: profileData.unlimitedAccessExpiry,
             raw_has_unlimited_access: dbProfile.has_unlimited_access,
             raw_unlimited_access_expiry: dbProfile.unlimited_access_expiry
           })
-          console.log('ProfileContext: Full database response:', dbProfile)
+          log('ProfileContext: Full database response:', dbProfile)
           setProfile(profileData)
         } else {
           // No profile in database, create default
-          console.log('ProfileContext: No profile in database, creating default')
+          log('ProfileContext: No profile in database, creating default')
           const newProfile = { ...DEFAULT_PROFILE, firstLogin: new Date() }
           setProfile(newProfile)
           
@@ -148,8 +149,8 @@ export const ProfileProvider: React.FC<ProfileProviderProps> = ({ children }) =>
   }, [session, status])
 
   const updateProfile = async (newProfile: ProfileData) => {
-    console.log('ProfileContext: updateProfile called with:', newProfile)
-    console.log('ProfileContext: Current profile before update:', profile)
+    log('ProfileContext: updateProfile called with:', newProfile)
+    log('ProfileContext: Current profile before update:', profile)
     setProfile(newProfile)
     
     // Save to database
@@ -160,7 +161,7 @@ export const ProfileProvider: React.FC<ProfileProviderProps> = ({ children }) =>
         body: JSON.stringify(newProfile)
       })
       if (response.ok) {
-        console.log('ProfileContext: Profile updated in database')
+        log('ProfileContext: Profile updated in database')
       } else {
         console.error('ProfileContext: Failed to update profile in database')
       }
@@ -199,10 +200,10 @@ export const ProfileProvider: React.FC<ProfileProviderProps> = ({ children }) =>
   }
 
   const canUseExplanation = (bookTitle: string, author: string, useCustomLLM: boolean) => {
-    console.log('ProfileContext: canUseExplanation called for:', bookTitle, 'by', author)
-    console.log('ProfileContext: useCustomLLM:', useCustomLLM)
-    console.log('ProfileContext: current profile:', profile)
-    console.log('ProfileContext: unlimited access check:', {
+    log('ProfileContext: canUseExplanation called for:', bookTitle, 'by', author)
+    log('ProfileContext: useCustomLLM:', useCustomLLM)
+    log('ProfileContext: current profile:', profile)
+    log('ProfileContext: unlimited access check:', {
       hasUnlimitedAccess: profile.hasUnlimitedAccess,
       unlimitedAccessExpiry: profile.unlimitedAccessExpiry,
       type: typeof profile.unlimitedAccessExpiry
@@ -210,7 +211,7 @@ export const ProfileProvider: React.FC<ProfileProviderProps> = ({ children }) =>
     
     // Free if using custom LLM
     if (useCustomLLM) {
-      console.log('ProfileContext: using custom LLM - access granted')
+      log('ProfileContext: using custom LLM - access granted')
       return true
     }
     
@@ -222,28 +223,28 @@ export const ProfileProvider: React.FC<ProfileProviderProps> = ({ children }) =>
         ? profile.unlimitedAccessExpiry 
         : new Date(profile.unlimitedAccessExpiry)
       
-      console.log('ProfileContext: checking unlimited access - now:', now, 'expiry:', expiry)
-      console.log('ProfileContext: hasUnlimitedAccess:', profile.hasUnlimitedAccess)
-      console.log('ProfileContext: expiry type:', typeof profile.unlimitedAccessExpiry)
-      console.log('ProfileContext: expiry instanceof Date:', profile.unlimitedAccessExpiry instanceof Date)
-      console.log('ProfileContext: access expired?', now >= expiry)
+      log('ProfileContext: checking unlimited access - now:', now, 'expiry:', expiry)
+      log('ProfileContext: hasUnlimitedAccess:', profile.hasUnlimitedAccess)
+      log('ProfileContext: expiry type:', typeof profile.unlimitedAccessExpiry)
+      log('ProfileContext: expiry instanceof Date:', profile.unlimitedAccessExpiry instanceof Date)
+      log('ProfileContext: access expired?', now >= expiry)
       
       if (now < expiry) {
-        console.log('ProfileContext: unlimited access valid - access granted')
+        log('ProfileContext: unlimited access valid - access granted')
         return true
       } else {
-        console.log('ProfileContext: unlimited access expired')
+        log('ProfileContext: unlimited access expired')
       }
     } else {
-      console.log('ProfileContext: no unlimited access or no expiry date')
+      log('ProfileContext: no unlimited access or no expiry date')
     }
     
     const bookKey = getBookKey(bookTitle, author)
-    console.log('ProfileContext: generated bookKey:', bookKey)
-    console.log('ProfileContext: purchasedBooks array:', profile.purchasedBooks)
-    console.log('ProfileContext: purchasedBooks type:', typeof profile.purchasedBooks)
-    console.log('ProfileContext: purchasedBooks length:', profile.purchasedBooks?.length)
-    console.log('ProfileContext: bookKey generation details:', { 
+    log('ProfileContext: generated bookKey:', bookKey)
+    log('ProfileContext: purchasedBooks array:', profile.purchasedBooks)
+    log('ProfileContext: purchasedBooks type:', typeof profile.purchasedBooks)
+    log('ProfileContext: purchasedBooks length:', profile.purchasedBooks?.length)
+    log('ProfileContext: bookKey generation details:', { 
       originalTitle: bookTitle, 
       originalAuthor: author,
       combined: `${bookTitle}-${author}`,
@@ -253,52 +254,52 @@ export const ProfileProvider: React.FC<ProfileProviderProps> = ({ children }) =>
     
     // Free if book is purchased
     const isPurchased = profile.purchasedBooks?.includes(bookKey)
-    console.log('ProfileContext: book purchased check result:', isPurchased)
-    console.log('ProfileContext: checking each purchased book:')
+    log('ProfileContext: book purchased check result:', isPurchased)
+    log('ProfileContext: checking each purchased book:')
     profile.purchasedBooks?.forEach((book, index) => {
-      console.log(`  [${index}]: "${book}" === "${bookKey}" ? ${book === bookKey}`)
+      log(`  [${index}]: "${book}" === "${bookKey}" ? ${book === bookKey}`)
     })
     
     if (isPurchased) {
-      console.log('ProfileContext: book purchased - access granted')
+      log('ProfileContext: book purchased - access granted')
       return true
     }
     
     // Check if under 3 free explanations for this book
     const bookExplanations = profile.bookExplanations?.[bookKey] || 0
-    console.log('ProfileContext: book explanations used:', bookExplanations)
+    log('ProfileContext: book explanations used:', bookExplanations)
     if (bookExplanations < 3) {
-      console.log('ProfileContext: under 3 free explanations - access granted')
+      log('ProfileContext: under 3 free explanations - access granted')
       return true
     }
     
     // Check if has available credits
     const hasCredits = (profile.availableCredits || 0) > 0
-    console.log('ProfileContext: available credits:', profile.availableCredits, 'has credits:', hasCredits)
+    log('ProfileContext: available credits:', profile.availableCredits, 'has credits:', hasCredits)
     if (hasCredits) {
-      console.log('ProfileContext: has credits - access granted')
+      log('ProfileContext: has credits - access granted')
     } else {
-      console.log('ProfileContext: no credits - access denied')
+      log('ProfileContext: no credits - access denied')
     }
     return hasCredits
   }
 
   const useExplanation = (bookTitle: string, author: string, useCustomLLM: boolean) => {
-    console.log('ProfileContext: useExplanation called with:', { bookTitle, author, useCustomLLM })
+    log('ProfileContext: useExplanation called with:', { bookTitle, author, useCustomLLM })
     if (!canUseExplanation(bookTitle, author, useCustomLLM)) {
       return false
     }
 
     setProfile(prev => {
       const bookKey = getBookKey(bookTitle, author)
-      console.log('ProfileContext: Generated bookKey:', bookKey, 'from:', { bookTitle, author })
+      log('ProfileContext: Generated bookKey:', bookKey, 'from:', { bookTitle, author })
       const bookExplanations = prev.bookExplanations?.[bookKey] || 0
       
       let newProfile = { ...prev }
       
       // If unlimited access, no cost and no tracking
       if (prev.hasUnlimitedAccess && prev.unlimitedAccessExpiry && new Date() < new Date(prev.unlimitedAccessExpiry)) {
-        console.log('ProfileContext: unlimited access - no tracking needed')
+        log('ProfileContext: unlimited access - no tracking needed')
         return prev
       }
       
@@ -323,12 +324,12 @@ export const ProfileProvider: React.FC<ProfileProviderProps> = ({ children }) =>
         }
       } else {
         // Use a credit
-        console.log('ProfileContext: Using a credit. Previous credits:', prev.availableCredits)
+        log('ProfileContext: Using a credit. Previous credits:', prev.availableCredits)
         newProfile = {
           ...prev,
           availableCredits: Math.max(0, (prev.availableCredits || 0) - 1)
         }
-        console.log('ProfileContext: New credits after deduction:', newProfile.availableCredits)
+        log('ProfileContext: New credits after deduction:', newProfile.availableCredits)
       }
       
       // Save to database with correct field names
@@ -346,7 +347,7 @@ export const ProfileProvider: React.FC<ProfileProviderProps> = ({ children }) =>
       delete (dbProfile as any).hasUnlimitedAccess
       delete (dbProfile as any).unlimitedAccessExpiry
       
-      console.log('ProfileContext: Saving to database:', {
+      log('ProfileContext: Saving to database:', {
         available_credits: dbProfile.available_credits,
         book_explanations: dbProfile.book_explanations,
         has_unlimited_access: dbProfile.has_unlimited_access,
@@ -373,14 +374,14 @@ export const ProfileProvider: React.FC<ProfileProviderProps> = ({ children }) =>
   }
 
   const addCredits = (amount: number) => {
-    console.log('ProfileContext: addCredits called with amount:', amount)
+    log('ProfileContext: addCredits called with amount:', amount)
     setProfile(prev => {
-      console.log('ProfileContext: Previous credits:', prev.availableCredits)
+      log('ProfileContext: Previous credits:', prev.availableCredits)
       const newProfile = {
         ...prev,
         availableCredits: (prev.availableCredits || 0) + amount
       }
-      console.log('ProfileContext: New credits:', newProfile.availableCredits)
+      log('ProfileContext: New credits:', newProfile.availableCredits)
       
       // Save to database - convert camelCase to snake_case
       const dbProfile = {
@@ -474,7 +475,7 @@ export const ProfileProvider: React.FC<ProfileProviderProps> = ({ children }) =>
   }
 
   const grantUnlimitedAccess = (duration: 'month') => {
-    console.log('ProfileContext: grantUnlimitedAccess called with duration:', duration)
+    log('ProfileContext: grantUnlimitedAccess called with duration:', duration)
     setProfile(prev => {
       const now = new Date()
       // Only 1 month option available
@@ -485,8 +486,8 @@ export const ProfileProvider: React.FC<ProfileProviderProps> = ({ children }) =>
         hasUnlimitedAccess: true,
         unlimitedAccessExpiry: expiryTime
       }
-      console.log('ProfileContext: granting unlimited access until:', expiryTime)
-      console.log('ProfileContext: new profile with unlimited access:', newProfile)
+      log('ProfileContext: granting unlimited access until:', expiryTime)
+      log('ProfileContext: new profile with unlimited access:', newProfile)
       
       // Save to database - convert camelCase to snake_case
       const dbProfile = {
@@ -503,7 +504,7 @@ export const ProfileProvider: React.FC<ProfileProviderProps> = ({ children }) =>
       delete (dbProfile as any).hasUnlimitedAccess
       delete (dbProfile as any).unlimitedAccessExpiry
       
-      console.log('ProfileContext: Saving unlimited access to database:', {
+      log('ProfileContext: Saving unlimited access to database:', {
         has_unlimited_access: dbProfile.has_unlimited_access,
         unlimited_access_expiry: dbProfile.unlimited_access_expiry
       })

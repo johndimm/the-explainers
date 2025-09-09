@@ -3,6 +3,7 @@
 import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react'
 import { useSession } from 'next-auth/react'
 import { SettingsData, LLMProvider, ResponseLength, FontFamily, ReadingMode, ExplanationStyle } from '../components/Settings'
+import { log } from '../utils/log'
 
 interface SettingsContextType {
   settings: SettingsData
@@ -43,12 +44,12 @@ export const SettingsProvider: React.FC<SettingsProviderProps> = ({ children }) 
       }
 
       try {
-        console.log('SettingsContext: Loading settings from database for:', session.user.email)
+        log('SettingsContext: Loading settings from database for:', session.user.email)
         const response = await fetch('/api/user/settings')
         
         if (response.ok) {
           const dbSettings = await response.json()
-          console.log('SettingsContext: Loaded settings from database:', dbSettings)
+          log('SettingsContext: Loaded settings from database:', dbSettings)
           
           // Convert database settings to SettingsData format
           const convertedSettings: SettingsData = {
@@ -66,7 +67,7 @@ export const SettingsProvider: React.FC<SettingsProviderProps> = ({ children }) 
           setSettings(convertedSettings)
         } else if (response.status === 404) {
           // No settings found, use defaults
-          console.log('SettingsContext: No settings found, using defaults')
+          log('SettingsContext: No settings found, using defaults')
         } else {
           console.error('SettingsContext: Error loading settings:', response.statusText)
         }

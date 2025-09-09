@@ -237,14 +237,14 @@ export const extractContextInfo = (selectedText: string, fullText: string, bookT
 
   const searchText = fullText.substring(0, selectedIndex + selectedText.length)
   
-  // Shakespeare-specific context (Act & Scene)
-  const actMatches = searchText.match(/\bACT\s+([IVXLCDM]+)\b/gi)
+  // Shakespeare-specific context (Act & Scene) - support both Roman and Arabic numerals
+  const actMatches = searchText.match(/\bACT\s+([IVXLCDM]+|\d+)\b/gi)
   if (actMatches) {
     const lastActMatch = actMatches[actMatches.length - 1]
     act = lastActMatch.replace(/\bACT\s+/i, '').trim()
   }
 
-  const sceneMatches = searchText.match(/\bSCENE\s+([IVXLCDM]+)\b/gi)
+  const sceneMatches = searchText.match(/\bSCENE\s+([IVXLCDM]+|\d+)\b/gi)
   if (sceneMatches) {
     const lastSceneMatch = sceneMatches[sceneMatches.length - 1]
     scene = lastSceneMatch.replace(/\bSCENE\s+/i, '').trim()
@@ -434,11 +434,12 @@ export const useBookmarkRestoreAndSave = (
           if (response.ok) {
             const bookmark = await response.json()
             const position = bookmark.scroll_position
+            // Use a very short delay to allow content to render first
             setTimeout(() => {
               if (textReaderRef.current) {
                 textReaderRef.current.scrollTop = position
               }
-            }, 300)
+            }, 10)
             return
           }
         } catch (error) {
@@ -451,11 +452,12 @@ export const useBookmarkRestoreAndSave = (
       const savedPosition = typeof window !== 'undefined' ? localStorage.getItem(bookmarkKey) : null
       if (savedPosition) {
         const position = parseInt(savedPosition)
+        // Use a very short delay to allow content to render first
         setTimeout(() => {
           if (textReaderRef.current) {
             textReaderRef.current.scrollTop = position
           }
-        }, 300)
+        }, 10)
       }
     }
 

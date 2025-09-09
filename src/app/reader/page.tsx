@@ -5,6 +5,7 @@ import TextReader from '@/components/TextReader'
 import { useSettings } from '@/contexts/SettingsContext'
 import { useProfile } from '@/contexts/ProfileContext'
 import { useRouter, useSearchParams } from 'next/navigation'
+import { log } from '@/utils/log'
 
 function ReaderContent() {
   const [bookText, setBookText] = useState('')
@@ -51,7 +52,7 @@ function ReaderContent() {
         const response = await fetch('/api/user/current-book')
         if (response.ok) {
           const dbBook = await response.json()
-          console.log('Restoring saved book from database:', dbBook)
+          log('Restoring saved book from database:', dbBook)
           
           if (dbBook.url) {
             handleBookSelect(dbBook.title, dbBook.author, dbBook.url)
@@ -67,7 +68,7 @@ function ReaderContent() {
       if (savedBook) {
         try {
           const parsedBook = JSON.parse(savedBook)
-          console.log('Restoring saved book from localStorage:', parsedBook)
+          log('Restoring saved book from localStorage:', parsedBook)
           
           if (parsedBook.url) {
             handleBookSelect(parsedBook.title, parsedBook.author, parsedBook.url)
@@ -138,7 +139,7 @@ function ReaderContent() {
         }
       }
       
-      console.log('Setting book text:', {
+      log('Setting book text:', {
         textLength: text.length,
         firstChars: text.substring(0, 100),
         hasNewlines: text.includes('\n'),

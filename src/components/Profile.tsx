@@ -3,6 +3,7 @@
 import React, { useState, useEffect, useRef } from 'react'
 import { useRouter } from 'next/navigation'
 import styles from './Profile.module.css'
+import { log } from '../utils/log'
 
 export type EducationLevel = 'elementary' | 'middle-school' | 'high-school' | 'college' | 'graduate'
 export type Language = 'english' | 'spanish' | 'french' | 'german' | 'italian' | 'portuguese' | 'chinese' | 'japanese' | 'korean' | 'arabic' | 'hindi' | 'russian'
@@ -38,7 +39,7 @@ const Profile: React.FC<ProfileProps> = ({ isOpen, onClose, profile, onProfileCh
 
   // Sync localProfile when profile prop changes (e.g., when restored from localStorage)
   useEffect(() => {
-    console.log('Profile: Syncing localProfile with profile prop:', profile)
+    log('Profile: Syncing localProfile with profile prop:', profile)
     setIsSyncing(true)
     setLocalProfile(profile)
     // Reset syncing flag after a short delay
@@ -65,15 +66,15 @@ const Profile: React.FC<ProfileProps> = ({ isOpen, onClose, profile, onProfileCh
   useEffect(() => {
     // Don't auto-save when syncing with restored profile
     if (isSyncing) {
-      console.log('Profile: Skipping auto-save during sync')
+      log('Profile: Skipping auto-save during sync')
       return
     }
     
     if (JSON.stringify(localProfile) !== JSON.stringify(profile)) {
-      console.log('Profile changes detected, auto-saving...', localProfile)
+      log('Profile changes detected, auto-saving...', localProfile)
       const timeoutId = setTimeout(() => {
         onProfileChange(localProfile)
-        console.log('Profile saved to localStorage')
+        log('Profile saved to localStorage')
       }, 500) // Debounce auto-save by 500ms
       
       return () => clearTimeout(timeoutId)

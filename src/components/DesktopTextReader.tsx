@@ -21,6 +21,29 @@ const DesktopTextReader: React.FC<ReaderCommonProps> = ({ text, bookTitle = 'Rom
 
   useBookmarkRestoreAndSave(textReaderRef, text, bookTitle, author)
   
+  // Global mouse up listener to catch selections that extend outside the text content
+  React.useEffect(() => {
+    const handleGlobalMouseUp = () => {
+      // Small delay to ensure selection is complete
+      setTimeout(() => {
+        const selection = window.getSelection()
+        const t = selection?.toString().trim() || ''
+        log('DesktopTextReader: global mouseup selection', { text: t, length: t.length, hasSelection: !!selection })
+        
+        if (t.length > 0) {
+          setSelectedText(t)
+          setShowConfirmDialog(true)
+        } else {
+          // Only clear selection if no text was selected (single click)
+          window.getSelection()?.removeAllRanges()
+        }
+      }, 10)
+    }
+
+    document.addEventListener('mouseup', handleGlobalMouseUp)
+    return () => document.removeEventListener('mouseup', handleGlobalMouseUp)
+  }, [])
+  
   // Calculate pages for scroll navigation
   React.useEffect(() => {
     if (textReaderRef.current) {
@@ -81,18 +104,6 @@ const DesktopTextReader: React.FC<ReaderCommonProps> = ({ text, bookTitle = 'Rom
     }
   }, [pageMap.pageRanges, currentPage, settings.textFont])
 
-  const handleMouseUp = () => {
-    // Small delay to ensure selection is complete
-    setTimeout(() => {
-      const selection = window.getSelection()
-      const t = selection?.toString().trim() || ''
-      log('DesktopTextReader: mouseup selection', { text: t, length: t.length, hasSelection: !!selection })
-      if (t.length > 0) {
-        setSelectedText(t)
-        setShowConfirmDialog(true)
-      }
-    }, 10)
-  }
 
   const handleCancel = () => {
     setShowConfirmDialog(false)
@@ -232,11 +243,6 @@ const DesktopTextReader: React.FC<ReaderCommonProps> = ({ text, bookTitle = 'Rom
       <div
         ref={textContentRef}
         className={styles.textContent}
-        onMouseDown={() => {
-          // Clear any previous selection when starting a new selection
-          window.getSelection()?.removeAllRanges()
-        }}
-        onMouseUp={handleMouseUp}
         style={{ userSelect: 'text', fontFamily: settings.textFont, position: 'relative' }}
       >
 

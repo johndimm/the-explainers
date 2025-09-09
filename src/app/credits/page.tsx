@@ -4,6 +4,7 @@ import { useState, useEffect, useRef } from 'react'
 import { useRouter } from 'next/navigation'
 import { SettingsProvider } from '@/contexts/SettingsContext'
 import { ProfileProvider, useProfile } from '@/contexts/ProfileContext'
+import { log } from '@/utils/log'
 
 function CreditsContent() {
   const router = useRouter()
@@ -73,7 +74,7 @@ function CreditsContent() {
   }
 
   const handleUnlimitedAccess = (duration: 'month') => {
-    console.log('Credits page: granting unlimited access for duration:', duration)
+    log('Credits page: granting unlimited access for duration:', duration)
     setShowUnlimitedConfirmation(true)
   }
 

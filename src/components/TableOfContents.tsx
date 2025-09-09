@@ -46,8 +46,8 @@ export const TableOfContents: React.FC<TableOfContentsProps> = ({
       let level = 0
       let title = ''
       
-      // Shakespeare-specific patterns (same as extractContextInfo)
-      if (match = line.match(/\bACT\s+([IVXLCDM]+)\b/i)) {
+      // Shakespeare-specific patterns (same as extractContextInfo) - support both Roman and Arabic numerals
+      if (match = line.match(/\bACT\s+([IVXLCDM]+|\d+)\b/i)) {
         level = 1
         title = `Act ${match[1]}`
         
@@ -64,7 +64,7 @@ export const TableOfContents: React.FC<TableOfContentsProps> = ({
           title += `: ${context}`
         }
       }
-      else if (match = line.match(/\bSCENE\s+([IVXLCDM]+)\b/i)) {
+      else if (match = line.match(/\bSCENE\s+([IVXLCDM]+|\d+)\b/i)) {
         level = 2
         title = `Scene ${match[1]}`
         

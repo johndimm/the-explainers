@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server'
 import { getServerSession } from 'next-auth'
 import { authOptions } from '@/lib/auth'
 import { getUserProfile, createOrUpdateUserProfile, updateUserProfileFields } from '@/lib/database'
+import { log } from '@/utils/log'
 
 export async function GET(request: NextRequest) {
   try {
@@ -66,7 +67,7 @@ export async function POST(request: NextRequest) {
     
     if (isLocalDev && !session?.user?.email) {
       // In local dev, just return the mock profile without saving
-      console.log('Profile API: Local development mode - ignoring profile updates')
+      log('Profile API: Local development mode - ignoring profile updates')
       const mockProfile = {
         email: 'local-dev@example.com',
         age: null,
@@ -93,9 +94,9 @@ export async function POST(request: NextRequest) {
     const providedFields = Object.keys(body).filter(key => key !== 'email')
     const isPartialUpdate = providedFields.length < 10 // Less than all fields
     
-    console.log('Profile API: Update type:', isPartialUpdate ? 'partial' : 'full')
-    console.log('Profile API: Provided fields:', providedFields)
-    console.log('Profile API: Body:', body)
+    log('Profile API: Update type:', isPartialUpdate ? 'partial' : 'full')
+    log('Profile API: Provided fields:', providedFields)
+    log('Profile API: Body:', body)
     
     if (!session?.user?.email) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })

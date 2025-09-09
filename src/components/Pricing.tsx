@@ -2,6 +2,7 @@
 
 import React from 'react'
 import { useProfile } from '../contexts/ProfileContext'
+import { log } from '../utils/log'
 
 interface PricingProps {
   isOpen: boolean
@@ -40,7 +41,7 @@ const Pricing: React.FC<PricingProps> = ({ isOpen, onClose, bookTitle, author, i
   }
 
   const handleUnlimitedAccess = (duration: 'month') => {
-    console.log('Pricing: granting unlimited access for duration:', duration)
+    log('Pricing: granting unlimited access for duration:', duration)
     grantUnlimitedAccess(duration)
     
     // Small delay to ensure profile context has updated before closing

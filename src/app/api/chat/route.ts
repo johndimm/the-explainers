@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server'
 import OpenAI from 'openai'
 import Anthropic from '@anthropic-ai/sdk'
 import { GoogleGenerativeAI } from '@google/generative-ai'
+import { log } from '@/utils/log'
 
 export interface ChatMessage {
   role: 'user' | 'assistant'
@@ -35,7 +36,7 @@ async function callOpenAI(messages: ChatMessage[], responseLength: string, style
   const maxTokens = responseLength === 'brief' ? 200 : responseLength === 'medium' ? 500 : 1000
   
   try {
-    console.log('Testing OpenAI with model: gpt-4o')
+    log('Testing OpenAI with model: gpt-4o')
     const completion = await openai.chat.completions.create({
       model: 'gpt-4o',
       messages: messages.map(msg => ({

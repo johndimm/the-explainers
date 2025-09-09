@@ -1,9 +1,10 @@
 import { NextRequest, NextResponse } from 'next/server'
+import { log, error } from '../../../utils/log'
 
 async function searchYouTube(searchQuery: string) {
   try {
     const searchUrl = `https://www.youtube.com/results?search_query=${encodeURIComponent(searchQuery)}`
-    console.log('Searching YouTube URL:', searchUrl)
+    log('youtube', 'Searching YouTube URL:', searchUrl)
     
     const response = await fetch(searchUrl, {
       headers: {
@@ -41,8 +42,8 @@ async function searchYouTube(searchQuery: string) {
       }
     }
     
-    console.log('Found video IDs:', videoIds)
-    console.log('Found video titles:', videoTitles)
+    log('youtube','Found video IDs:', videoIds)
+    log('youtube','Found video titles:', videoTitles)
     
     const videos = videoIds.map((id, index) => ({
       id,
@@ -53,7 +54,7 @@ async function searchYouTube(searchQuery: string) {
     return videos
     
   } catch (error) {
-    console.error('YouTube search error:', error)
+    error('YouTube search error:', error)
     return []
   }
 }
@@ -62,19 +63,20 @@ export async function POST(req: NextRequest) {
   try {
     const { query, bookTitle, author } = await req.json()
     
-    console.log('YouTube search request:', { query, bookTitle, author })
+    console.log('🎬 YOUTUBE API CALLED:', { query, bookTitle, author })
+    log('youtube','YouTube search request:', { query, bookTitle, author })
     
-    // Create a comprehensive search query for better results
-    const searchTerms = `"${query}" ${bookTitle} Shakespeare performance scene`
+    // Use the query as-is from the frontend (it's already been enhanced with context)
+    const searchTerms = query
     
-    console.log('YouTube search terms:', searchTerms)
+    log('youtube','YouTube search terms (using frontend query):', searchTerms)
     
     // Try the dynamic search first
     let videos = await searchYouTube(searchTerms)
     
     // If dynamic search fails, fall back to curated videos for famous quotes
     if (videos.length === 0) {
-      console.log('Dynamic search failed, checking for famous quotes...')
+      log('youtube','Dynamic search failed, checking for famous quotes...')
       
       // Curated videos for very famous quotes (as backup when search fails)
       if (bookTitle.toLowerCase().includes('hamlet') && 
@@ -108,7 +110,7 @@ export async function POST(req: NextRequest) {
       
       // If still no videos, try searching for general book content
       if (videos.length === 0) {
-        console.log('No quote-specific videos found, trying general book search...')
+        log('youtube','No quote-specific videos found, trying general book search...')
         const bookVideos = await searchYouTube(`${bookTitle} ${author} performance scene`)
         
         // Only show book videos if they seem relevant (contain book title AND Shakespeare)
@@ -133,7 +135,7 @@ export async function POST(req: NextRequest) {
         })
         
         if (relevantVideos.length > 0) {
-          console.log(`Found ${relevantVideos.length} relevant videos for ${bookTitle}`)
+          log('youtube',`Found ${relevantVideos.length} relevant videos for ${bookTitle}`)
           videos = relevantVideos.slice(0, 1) // Take just the first relevant one
         } else {
           // Last resort: try a very short excerpt
@@ -152,7 +154,7 @@ export async function POST(req: NextRequest) {
         const actNumber = actMatch[1]
         const sceneNumber = sceneMatch[1]
         
-        console.log(`Looking for videos matching Act ${actNumber}, Scene ${sceneNumber}`)
+        log('youtube',`Looking for videos matching Act ${actNumber}, Scene ${sceneNumber}`)
         
         // Score videos based on title matches
         const scoredVideos = videos.map(video => {
@@ -183,13 +185,13 @@ export async function POST(req: NextRequest) {
         // Sort by score (highest first)
         scoredVideos.sort((a, b) => b.score - a.score)
         
-        console.log('Video scores:', scoredVideos.map(v => ({ title: v.title, score: v.score })))
+        log('youtube','Video scores:', scoredVideos.map(v => ({ title: v.title, score: v.score })))
         
         videos = scoredVideos
       }
     }
     
-    console.log('Final video results:', videos.slice(0, 1))
+    log('youtube','Final video results:', videos.slice(0, 1))
     
     return NextResponse.json({
       success: true,
@@ -198,7 +200,7 @@ export async function POST(req: NextRequest) {
     })
     
   } catch (error) {
-    console.error('YouTube search error:', error)
+    error('YouTube search error:', error)
     return NextResponse.json(
       { 
         success: false, 

@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect } from 'react'
 import LoadingIndicator from './LoadingIndicator'
+import { log } from '../utils/log'
 
 interface Book {
   id: string | number
@@ -38,7 +39,7 @@ export const FilteredBookList: React.FC<FilteredBookListProps> = ({
         if (book.wikipediaUrl && book.wikipediaUrl.trim() !== '') {
           return true
         } else {
-          console.log(`Removing book "${book.title}" by ${book.author || 'Unknown'} - no Wikipedia URL in JSON data`)
+          log(`Removing book "${book.title}" by ${book.author || 'Unknown'} - no Wikipedia URL in JSON data`)
           return false
         }
       })
