@@ -2,7 +2,6 @@
 
 import { useEffect } from 'react'
 import { useRouter } from 'next/navigation'
-import PWAInstaller from '@/components/PWAInstaller'
 import { SettingsProvider } from '@/contexts/SettingsContext'
 import { ProfileProvider } from '@/contexts/ProfileContext'
 
@@ -31,7 +30,7 @@ function HomeContent() {
 
   return (
     <div>
-      <PWAInstaller />
+      {/* PWA disabled */}
     </div>
   )
 }

@@ -574,6 +574,21 @@ const Settings: React.FC<SettingsProps> = ({ isOpen, onClose, settings, onSettin
           <button onClick={handleReset} className={styles.resetButton}>
             Reset to Defaults
           </button>
+          <button 
+            onClick={() => window.open('/clear-cache.html', '_blank')}
+            style={{
+              background: '#ef4444',
+              color: 'white',
+              border: 'none',
+              padding: '12px 24px',
+              borderRadius: '8px',
+              cursor: 'pointer',
+              fontSize: '14px',
+              marginLeft: '10px'
+            }}
+          >
+            Clear Cache
+          </button>
           <div style={{ fontSize: '14px', color: '#666', textAlign: 'center', padding: '16px' }}>
             Changes are saved automatically
           </div>
