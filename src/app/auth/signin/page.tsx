@@ -33,17 +33,9 @@ export default function SignIn() {
   const handleMobileGoogleSignIn = async () => {
     setIsLoading(true)
     try {
-      // For iOS, clear any cached auth state first
-      localStorage.removeItem('next-auth.session-token')
-      sessionStorage.clear()
-      
-      // Add a small delay to ensure state is cleared
-      await new Promise(resolve => setTimeout(resolve, 100))
-      
-      // Use NextAuth with cache busting
-      const timestamp = Date.now()
+      // For iOS, use the callback page to handle OAuth properly
       await signIn('google', { 
-        callbackUrl: `/chat?t=${timestamp}`,
+        callbackUrl: '/auth/callback',
         redirect: true
       })
     } catch (error) {

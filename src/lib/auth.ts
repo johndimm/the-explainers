@@ -11,7 +11,9 @@ export const authOptions: AuthOptions = {
           prompt: "select_account",
           access_type: "offline",
           response_type: "code",
-          scope: "openid email profile"
+          scope: "openid email profile",
+          // Add state parameter for better mobile handling
+          state: "mobile_auth"
         }
       }
     })
@@ -31,14 +33,30 @@ export const authOptions: AuthOptions = {
     },
     async redirect({ url, baseUrl }) {
       // Handle mobile redirects properly
-      if (url.startsWith("/")) return `${baseUrl}${url}`
-      else if (new URL(url).origin === baseUrl) return url
+      log('NextAuth redirect callback:', { url, baseUrl })
+      
+      // If it's a relative URL, make it absolute
+      if (url.startsWith("/")) {
+        const redirectUrl = `${baseUrl}${url}`
+        log('NextAuth redirect: relative URL ->', redirectUrl)
+        return redirectUrl
+      }
+      
+      // If it's an absolute URL from the same origin, use it
+      if (url.startsWith(baseUrl)) {
+        log('NextAuth redirect: same origin URL ->', url)
+        return url
+      }
+      
+      // Default to base URL
+      log('NextAuth redirect: default to baseUrl ->', baseUrl)
       return baseUrl
     }
   },
   pages: {
     signIn: '/auth/signin',
     signOut: '/',
+    error: '/auth/signin', // Redirect errors back to sign-in
   },
   secret: process.env.NEXTAUTH_SECRET,
   // Ensure proper session handling
@@ -66,6 +84,19 @@ export const authOptions: AuthOptions = {
         path: '/',
         secure: process.env.NODE_ENV === 'production'
       }
+    }
+  },
+  // Add debug configuration for mobile
+  debug: process.env.NODE_ENV === 'development',
+  logger: {
+    error(code, metadata) {
+      log('NextAuth Error:', { code, metadata })
+    },
+    warn(code) {
+      log('NextAuth Warning:', code)
+    },
+    debug(code, metadata) {
+      log('NextAuth Debug:', { code, metadata })
     }
   }
 }
