@@ -7,13 +7,47 @@ import { useEffect, useState } from 'react'
 export default function SignIn() {
   const router = useRouter()
   const [isLoading, setIsLoading] = useState(false)
+  const [isIOS, setIsIOS] = useState(false)
+
+  useEffect(() => {
+    // Detect iOS devices
+    const userAgent = navigator.userAgent || navigator.vendor || (window as any).opera
+    const isIOSDevice = /iPad|iPhone|iPod/.test(userAgent)
+    setIsIOS(isIOSDevice)
+  }, [])
 
   const handleGoogleSignIn = async () => {
     setIsLoading(true)
     try {
-      await signIn('google', { callbackUrl: '/chat' })
+      // Force account selection on mobile
+      await signIn('google', { 
+        callbackUrl: '/chat',
+        redirect: true
+      })
     } catch (error) {
       console.error('Sign in error:', error)
+      setIsLoading(false)
+    }
+  }
+
+  const handleMobileGoogleSignIn = async () => {
+    setIsLoading(true)
+    try {
+      // For iOS, clear any cached auth state first
+      localStorage.removeItem('next-auth.session-token')
+      sessionStorage.clear()
+      
+      // Add a small delay to ensure state is cleared
+      await new Promise(resolve => setTimeout(resolve, 100))
+      
+      // Use NextAuth with cache busting
+      const timestamp = Date.now()
+      await signIn('google', { 
+        callbackUrl: `/chat?t=${timestamp}`,
+        redirect: true
+      })
+    } catch (error) {
+      console.error('iOS Sign in error:', error)
       setIsLoading(false)
     }
   }
@@ -61,8 +95,22 @@ export default function SignIn() {
           Sign in to access the AI chat feature
         </p>
         
+        {isIOS && (
+          <div style={{
+            background: '#fef3c7',
+            border: '1px solid #f59e0b',
+            borderRadius: '8px',
+            padding: '12px',
+            marginBottom: '24px',
+            fontSize: '14px',
+            color: '#92400e'
+          }}>
+            <strong>iPhone users:</strong> If you don't see the account selection screen, try refreshing the page and signing in again.
+          </div>
+        )}
+        
         <button
-          onClick={handleGoogleSignIn}
+          onClick={isIOS ? handleMobileGoogleSignIn : handleGoogleSignIn}
           disabled={isLoading}
           style={{
             width: '100%',

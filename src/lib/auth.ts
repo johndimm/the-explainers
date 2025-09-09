@@ -6,6 +6,14 @@ export const authOptions: AuthOptions = {
     GoogleProvider({
       clientId: process.env.GOOGLE_CLIENT_ID!,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET!,
+      authorization: {
+        params: {
+          prompt: "select_account",
+          access_type: "offline",
+          response_type: "code",
+          scope: "openid email profile"
+        }
+      }
     })
   ],
   callbacks: {
@@ -21,6 +29,12 @@ export const authOptions: AuthOptions = {
       session.accessToken = token.accessToken as string
       return session
     },
+    async redirect({ url, baseUrl }) {
+      // Handle mobile redirects properly
+      if (url.startsWith("/")) return `${baseUrl}${url}`
+      else if (new URL(url).origin === baseUrl) return url
+      return baseUrl
+    }
   },
   pages: {
     signIn: '/auth/signin',
@@ -39,6 +53,19 @@ export const authOptions: AuthOptions = {
     },
     session: async (message) => {
       console.log('NextAuth session event:', message)
+    }
+  },
+  // Mobile-specific configuration
+  useSecureCookies: process.env.NODE_ENV === 'production',
+  cookies: {
+    sessionToken: {
+      name: `next-auth.session-token`,
+      options: {
+        httpOnly: true,
+        sameSite: 'lax',
+        path: '/',
+        secure: process.env.NODE_ENV === 'production'
+      }
     }
   }
 }

@@ -40,7 +40,11 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   const handleSignIn = async () => {
     setIsLoading(true)
     try {
-      await signIn('google', { callbackUrl: window.location.href })
+      // Force account selection and proper redirect on mobile
+      await signIn('google', { 
+        callbackUrl: window.location.href,
+        redirect: true
+      })
     } catch (error) {
       console.error('Sign in error:', error)
     } finally {
