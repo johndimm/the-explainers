@@ -232,76 +232,214 @@
 
 @media (max-width: 768px) {
   .chatContainer {
-    width: 95%;
-    height: 90%;
-    margin: 20px;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    border-radius: 0;
+    max-height: none;
   }
   
   .chatHeader {
-    padding: 12px 16px;
-    flex-direction: column;
-    gap: 8px;
-    align-items: flex-start;
+    padding: 8px 12px;
+    flex-direction: column !important;
+    gap: 8px !important;
+    align-items: flex-start !important;
+    min-height: auto !important;
+  }
+  
+  .chatHeader h3 {
+    font-size: 16px;
+    margin: 0;
   }
   
   .headerControls {
-    width: 100%;
-    gap: 12px;
+    width: 100% !important;
+    display: grid !important;
+    grid-template-columns: 1fr auto !important;
+    gap: 12px !important;
+    align-items: center !important;
+    flex-direction: row !important;
   }
   
   .dropdownsRow {
-    flex-direction: column;
-    gap: 8px;
-    align-items: stretch;
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 4px !important;
+    align-items: flex-start !important;
+    grid-column: 1 !important;
   }
   
   .buttonsRow {
-    flex-direction: column;
-    gap: 8px;
-    align-items: stretch;
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 4px !important;
+    align-items: flex-end !important;
+    grid-column: 2 !important;
+    align-self: center !important;
+  }
+  
+  .providerSelector, .styleSelector, .lengthSelector {
+    min-width: 0;
+    width: 100%;
+  }
+  
+  .dropdownLabel {
+    font-size: 9px;
+    gap: 2px;
+    margin-bottom: 2px;
   }
   
   .providerSelect, .styleSelect, .lengthSelect {
-    min-width: 80px;
-    font-size: 12px;
+    width: 100%;
+    font-size: 11px;
+    padding: 6px 8px;
+    min-width: 0;
+  }
+  
+  .customSelect {
+    width: 100%;
+    padding: 6px 8px;
+    min-width: 0;
+  }
+  
+  .customSelectLabel {
+    font-size: 11px;
   }
   
   .reexplainButton {
-    font-size: 12px;
-    padding: 4px 8px;
+    font-size: 10px;
+    padding: 6px 8px;
+    min-width: 60px;
+    width: 100%;
   }
   
   .saveButton {
-    font-size: 12px;
-    padding: 4px 8px;
+    font-size: 10px;
+    padding: 6px 8px;
+    min-width: 60px;
+    width: 100%;
   }
   
   .shareButton {
-    font-size: 12px;
-    padding: 4px 8px;
+    font-size: 10px;
+    padding: 6px 8px;
+    min-width: 60px;
+    width: 100%;
   }
   
   .ratingButton {
-    font-size: 11px;
-    padding: 3px 6px;
+    font-size: 9px;
+    padding: 4px 6px;
+    min-width: 50px;
+    width: 100%;
   }
   
   .messageActions {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 8px;
+    flex-direction: row;
+    align-items: center;
+    gap: 6px;
+    flex-wrap: wrap;
   }
   
   .messagesContainer {
-    padding: 16px;
+    padding: 12px;
+    flex: 1;
+    min-height: 0;
   }
   
   .inputContainer {
-    padding: 12px 16px;
+    padding: 8px 12px;
   }
   
   .message {
     max-width: 90%;
+  }
+  
+  .messageContent {
+    padding: 8px 12px;
+    font-size: 14px;
+  }
+  
+  .messageInput {
+    font-size: 16px; /* Prevents zoom on iOS */
+    padding: 10px 14px;
+  }
+  
+  .sendButton {
+    padding: 10px 16px;
+    font-size: 14px;
+    min-width: 50px;
+  }
+  
+  /* Hide less important elements on very small screens */
+  .helpIcon {
+    display: none;
+  }
+  
+  /* Make status text more compact */
+  .chatHeader > div:first-child > div {
+    font-size: 11px;
+    margin-top: 2px;
+  }
+}
+
+/* Extra small screens - further optimize */
+@media (max-width: 480px) {
+  .chatHeader {
+    padding: 6px 8px;
+    min-height: 50px;
+  }
+  
+  .chatHeader h3 {
+    font-size: 14px;
+  }
+  
+  .dropdownsRow {
+    gap: 4px;
+  }
+  
+  .buttonsRow {
+    gap: 4px;
+  }
+  
+  .providerSelect, .styleSelect, .lengthSelect {
+    min-width: 50px;
+    font-size: 10px;
+    padding: 3px 4px;
+  }
+  
+  .customSelect {
+    min-width: 50px;
+    padding: 3px 4px;
+  }
+  
+  .customSelectLabel {
+    font-size: 10px;
+  }
+  
+  .reexplainButton, .saveButton, .shareButton {
+    font-size: 9px;
+    padding: 3px 4px;
+    min-width: 40px;
+  }
+  
+  .ratingButton {
+    font-size: 8px;
+    padding: 2px 3px;
+    min-width: 30px;
+  }
+  
+  .messagesContainer {
+    padding: 8px;
+  }
+  
+  .inputContainer {
+    padding: 6px 8px;
+  }
+  
+  .messageContent {
+    padding: 6px 10px;
+    font-size: 13px;
   }
 }
 

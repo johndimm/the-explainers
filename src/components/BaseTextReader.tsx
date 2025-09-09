@@ -304,9 +304,34 @@ export const extractContextInfo = (selectedText: string, fullText: string, bookT
   
   if (isPlay) {
     const textBeforeSelection = fullText.substring(0, selectedIndex)
-    // More specific regex for actual stage directions
-    const stageDirections = textBeforeSelection.match(/\n\s*Enter\s+[A-Z][A-Z\s&']+[^\r\n]*|\n\s*Exit\s+[A-Z][A-Z\s&']+[^\r\n]*|\n\s*Exeunt[^\r\n]*/gi) || []
+    
+    // Find the current scene to limit character detection to recent stage directions
+    let sceneStartIndex = 0
+    if (scene) {
+      const sceneMatches = textBeforeSelection.match(new RegExp(`\\bSCENE\\s+${scene}\\b`, 'gi'))
+      if (sceneMatches) {
+        const lastSceneMatch = sceneMatches[sceneMatches.length - 1]
+        sceneStartIndex = textBeforeSelection.lastIndexOf(lastSceneMatch)
+      }
+    }
+    
+    // Only look at stage directions from the current scene onwards
+    const sceneText = textBeforeSelection.substring(sceneStartIndex)
+    const stageDirections = sceneText.match(/\n\s*(Enter|Exit|Exeunt)\s+[A-Z][A-Z\s&']+[^\r\n]*/gi) || []
     const currentCharacters = new Set<string>()
+    
+    // Each scene starts fresh - no characters carry over from previous scenes
+    // The empty Set above ensures we start with zero characters for each new scene
+    
+    // Common character names to filter out invalid ones
+    const validCharacterNames = new Set([
+      'LEAR', 'GONERIL', 'REGAN', 'CORDELIA', 'KENT', 'GLOUCESTER', 'EDGAR', 'EDMUND',
+      'ALBANY', 'CORNWALL', 'OSWALD', 'FOOL', 'GENTLEMAN', 'CURAN', 'ATTENDANTS',
+      'HAMLET', 'CLAUDIUS', 'GERTRUDE', 'POLONIUS', 'OPHELIA', 'LAERTES', 'HORATIO',
+      'MACBETH', 'LADY MACBETH', 'BANQUO', 'MACDUFF', 'MALCOLM', 'DUNCAN',
+      'ROMEO', 'JULIET', 'MERCUTIO', 'BENVOLIO', 'TYBALT', 'NURSE', 'FRIAR LAURENCE',
+      'OTHELLO', 'DESDEMONA', 'IAGO', 'CASSIO', 'EMILIA', 'BRABANTIO'
+    ])
     
     stageDirections.forEach(direction => {
       const trimmedDirection = direction.trim()
@@ -321,7 +346,15 @@ export const extractContextInfo = (selectedText: string, fullText: string, bookT
           const characters = characterList
             .split(/\s+and\s+|,\s*/)
             .map(c => c.trim().toUpperCase())
-            .filter(c => c.length > 0 && !c.includes('SERVANT') && !c.includes('PAGE'))
+            .filter(c => {
+              // Filter out invalid character names
+              if (c.length === 0) return false
+              if (c.includes('SERVANT') || c.includes('PAGE')) return false
+              if (c.includes('WITH') || c.includes('DISGUISED') || c.includes('MEETING')) return false
+              if (c.includes('LED BY') || c.includes('AS A') || c.includes('AND')) return false
+              // Only include if it's a known character or looks like a proper name
+              return validCharacterNames.has(c) || /^[A-Z]{2,}$/.test(c)
+            })
           characters.forEach(char => currentCharacters.add(char))
         }
       } else if (isExit || isExeunt) {
@@ -334,12 +367,31 @@ export const extractContextInfo = (selectedText: string, fullText: string, bookT
             const characters = characterList
               .split(/\s+and\s+|,\s*/)
               .map(c => c.trim().toUpperCase())
-              .filter(c => c.length > 0)
+              .filter(c => {
+                if (c.length === 0) return false
+                if (c.includes('WITH') || c.includes('DISGUISED') || c.includes('MEETING')) return false
+                if (c.includes('LED BY') || c.includes('AS A') || c.includes('AND')) return false
+                return validCharacterNames.has(c) || /^[A-Z]{2,}$/.test(c)
+              })
             characters.forEach(char => currentCharacters.delete(char))
           }
         }
       }
     })
+    
+    // If we have very few characters, try to get a more reasonable list by looking at recent dialogue
+    if (currentCharacters.size < 3) {
+      // Look for character names in recent dialogue (last 500 characters)
+      const recentText = textBeforeSelection.substring(Math.max(0, textBeforeSelection.length - 500))
+      const dialogueMatches = recentText.match(/\n([A-Z][A-Z\s&']+)\s*\./g) || []
+      dialogueMatches.forEach(match => {
+        const characterName = match.replace(/\n|\s*\./g, '').trim().toUpperCase()
+        if (validCharacterNames.has(characterName) || /^[A-Z]{2,}$/.test(characterName)) {
+          currentCharacters.add(characterName)
+        }
+      })
+    }
+    
     charactersOnStage = Array.from(currentCharacters)
   }
 
@@ -459,9 +511,29 @@ export const useSearchCore = (
   onNavigateToPage?: (pageNum: number) => void,
   pageMap?: PageMap // Use PageMap instead of just pages array
 ) => {
-  const [searchQuery, setSearchQuery] = useState('')
+  // Persist search query in localStorage so it survives navigation
+  const [searchQuery, setSearchQuery] = useState(() => {
+    if (typeof window !== 'undefined') {
+      return localStorage.getItem('reader-search-query') || ''
+    }
+    return ''
+  })
   const [searchResults, setSearchResults] = useState<{ index: number, length: number }[]>([])
   const [currentSearchIndex, setCurrentSearchIndex] = useState(-1)
+
+  // Save search query to localStorage whenever it changes
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      localStorage.setItem('reader-search-query', searchQuery)
+    }
+  }, [searchQuery])
+
+  // Auto-perform search when component loads with a persisted query
+  useEffect(() => {
+    if (searchQuery.trim() && text) {
+      handleSearch(searchQuery)
+    }
+  }, [text]) // Only run when text changes, not on every searchQuery change
 
   const handleSearch = (query: string) => {
     if (!query.trim()) {
@@ -471,6 +543,7 @@ export const useSearchCore = (
     }
     const results: { index: number, length: number }[] = []
     const regex = buildFlexibleRegex(query)
+    
     if (!regex) {
       setSearchResults([])
       setCurrentSearchIndex(-1)
@@ -549,12 +622,15 @@ export const useSearchCore = (
 
     const parts: React.ReactNode[] = []
     let lastIndex = 0
-    let currentIndex = 0
 
-    // Find all occurrences of the search query in the current text
-    while (true) {
-      const index = textToRender.indexOf(query, currentIndex)
-      if (index === -1) break
+    // Use the same regex as the search function for case-insensitive highlighting
+    const regex = buildFlexibleRegex(query)
+    if (!regex) return textToRender
+
+    let match: RegExpExecArray | null
+    while ((match = regex.exec(textToRender)) !== null) {
+      const index = match.index
+      const matchedText = match[0]
 
       // Add text before the match
       if (index > lastIndex) {
@@ -564,9 +640,9 @@ export const useSearchCore = (
       // Check if this match corresponds to the current search result
       const isCurrentResult = searchResults[currentSearchIndex] && 
         searchResults[currentSearchIndex].index >= 0 &&
-        textToRender.slice(index, index + query.length) === query
+        searchResults[currentSearchIndex].index === index
 
-      // Add the highlighted match
+      // Add the highlighted match (use the actual matched text, not the query)
       parts.push(
         <span 
           key={`search-${index}`}
@@ -577,12 +653,12 @@ export const useSearchCore = (
             borderRadius: '2px'
           }}
         >
-          {query}
+          {matchedText}
         </span>
       )
 
-      lastIndex = index + query.length
-      currentIndex = index + 1 // Move past this match to find next one
+      lastIndex = index + matchedText.length
+      regex.lastIndex = index + Math.max(1, matchedText.length)
     }
 
     // Add remaining text
@@ -591,6 +667,15 @@ export const useSearchCore = (
     }
 
     return <>{parts}</>
+  }
+
+  const clearSearch = () => {
+    setSearchQuery('')
+    setSearchResults([])
+    setCurrentSearchIndex(-1)
+    if (typeof window !== 'undefined') {
+      localStorage.removeItem('reader-search-query')
+    }
   }
 
   return {
@@ -602,7 +687,8 @@ export const useSearchCore = (
     handleSearch,
     nextSearchResult,
     prevSearchResult,
-    renderTextWithSearchHighlight
+    renderTextWithSearchHighlight,
+    clearSearch
   }
 }
 

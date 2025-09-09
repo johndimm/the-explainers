@@ -559,7 +559,8 @@ const MobileTextReader: React.FC<ReaderCommonProps> = ({ text, bookTitle = 'Rome
     handleSearch,
     nextSearchResult,
     prevSearchResult,
-    renderTextWithSearchHighlight
+    renderTextWithSearchHighlight,
+    clearSearch
   } = useSearchCore(text, textReaderRef, textContentRef, goToPage, pageMap)
 
   const expandToWordBoundaries = (range: Range): Range => {
@@ -749,7 +750,7 @@ const MobileTextReader: React.FC<ReaderCommonProps> = ({ text, bookTitle = 'Rome
             <span>{currentSearchIndex + 1} of {searchResults.length}</span>
             <button onClick={prevSearchResult} style={{ padding: '2px 6px', border: '1px solid #ddd', borderRadius: '2px', background: 'white', cursor: 'pointer', fontSize: '11px' }}>↑</button>
             <button onClick={nextSearchResult} style={{ padding: '2px 6px', border: '1px solid #ddd', borderRadius: '2px', background: 'white', cursor: 'pointer', fontSize: '11px' }}>↓</button>
-            <button onClick={() => { setSearchQuery(''); handleSearch(''); setCurrentSearchIndex(-1) }} style={{ padding: '2px 8px', border: 'none', background: 'none', cursor: 'pointer', fontSize: '11px', color: '#999' }}>clear</button>
+            <button onClick={clearSearch} style={{ padding: '2px 8px', border: 'none', background: 'none', cursor: 'pointer', fontSize: '11px', color: '#999' }}>clear</button>
           </div>
         )}
       </div>

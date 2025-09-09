@@ -20,7 +20,6 @@ interface LibraryCategory {
   name: string
   books: Book[]
   visibleCount: number
-  filteredBooks?: Book[]
 }
 
 interface LibraryProps {
@@ -60,13 +59,18 @@ const Library: React.FC<LibraryProps> = ({ onBookSelect, onBackToCurrentBook }) 
       setFilteredCategories(categories)
     } else {
       const query = searchQuery.toLowerCase()
-      const filtered = categories.map(category => ({
-        ...category,
-        books: category.books.filter(book => 
+      const filtered = categories.map(category => {
+        const matchingBooks = category.books.filter(book => 
           book.title.toLowerCase().includes(query) ||
           (book.author && book.author.toLowerCase().includes(query))
         )
-      })).filter(category => category.books.length > 0)
+        
+        return {
+          ...category,
+          books: matchingBooks,
+          visibleCount: Math.max(matchingBooks.length, 50) // Show all search results
+        }
+      }).filter(category => category.books.length > 0)
       
       setFilteredCategories(filtered)
     }
@@ -87,15 +91,14 @@ const Library: React.FC<LibraryProps> = ({ onBookSelect, onBackToCurrentBook }) 
         // Limit English Literature to 100 top entries
         const limitedBooks = filename === 'english-literature.json' ? books.slice(0, 100) : books
         
-        // Filter books that have Wikipedia URLs (same logic as FilteredBookList)
+        // Filter books that have Wikipedia URLs and overwrite the original array
         const booksWithWikipedia = limitedBooks.filter(book => 
           book.wikipediaUrl && book.wikipediaUrl.trim() !== ''
         )
         
         return {
           name: categoryName,
-          books: limitedBooks,
-          filteredBooks: booksWithWikipedia,
+          books: booksWithWikipedia,
           visibleCount: 10
         }
       })
@@ -111,7 +114,7 @@ const Library: React.FC<LibraryProps> = ({ onBookSelect, onBackToCurrentBook }) 
 
   const showMoreBooks = (categoryIndex: number) => {
     const category = categories[categoryIndex]
-    const totalBooks = category.filteredBooks?.length || category.books.length
+    const totalBooks = category.books.length
     
     // If category has more than 50 books, show popup instead of expanding
     if (totalBooks > 50) {
@@ -269,20 +272,20 @@ const Library: React.FC<LibraryProps> = ({ onBookSelect, onBackToCurrentBook }) 
             <div key={category.name} className={styles.category}>
               <h2 className={styles.categoryTitle}>{category.name}</h2>
               <FilteredBookList
-                books={category.filteredBooks?.slice(0, category.visibleCount) || category.books.slice(0, category.visibleCount)}
+                books={category.books.slice(0, category.visibleCount)}
                 categoryName={category.name}
                 onBookClick={handleBookClick}
                 styles={styles}
               />
               
-              {category.visibleCount < (category.filteredBooks?.length || category.books.length) && (
+              {category.visibleCount < category.books.length && (
                 <button 
                   onClick={() => showMoreBooks(categoryIndex)}
                   className={styles.moreButton}
                 >
-                  {(category.filteredBooks?.length || category.books.length) > 50 
-                    ? `View All ${category.filteredBooks?.length || category.books.length} Books`
-                    : `More (${(category.filteredBooks?.length || category.books.length) - category.visibleCount} remaining)`
+                  {category.books.length > 50 
+                    ? `View All ${category.books.length} Books`
+                    : `More (${category.books.length - category.visibleCount} remaining)`
                   }
                 </button>
               )}
@@ -406,7 +409,7 @@ const Library: React.FC<LibraryProps> = ({ onBookSelect, onBackToCurrentBook }) 
           isOpen={!!popupCategory}
           onClose={closePopup}
           categoryName={popupCategory.name}
-          books={popupCategory.filteredBooks || popupCategory.books}
+          books={popupCategory.books}
           onBookClick={handleBookClick}
         />
       )}

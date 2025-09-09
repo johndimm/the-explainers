@@ -32,15 +32,18 @@ Before diving in, consider setting up your profile and preferences:
 - **Reading Interface**: Clean, distraction-free text display
 - **Text Selection**: Simply highlight any passage with your mouse or finger
 - **Bookmarks**: Your reading position is automatically saved
-- **Search**: Find specific words or phrases within the current text
+- **Advanced Search**: Find specific words or phrases with case-insensitive search and persistent search queries
+- **Search Highlighting**: All matching terms are highlighted in the text with navigation between results
+- **Wikipedia Integration**: Click the 🔗 icon next to book titles to learn more about the work or author
 
 ### AI Explanations
 When you select text, the AI provides context-aware explanations including:
 - **Unfamiliar Words**: Definitions and contextual meanings
 - **Complex Phrases**: Breaking down difficult sentence structures
 - **Plot Context**: What's happening at this moment in the story
-- **Character Analysis**: Who's speaking and why
+- **Character Analysis**: Who's speaking and why, with accurate character tracking for plays
 - **Historical Context**: Background information when relevant
+- **Scene Context**: For plays, identifies the current act, scene, and characters present on stage
 
 ### Library
 Access hundreds of classic texts organized by category:
@@ -48,10 +51,12 @@ Access hundreds of classic texts organized by category:
 #### Built-in Collections
 - **Shakespeare**: Complete works including plays and sonnets
 - **English Literature**: Classic novels and poetry
-- **Philosophy**: Works by great thinkers
+- **Philosophy**: Works by great thinkers including 20th-century philosophers
+- **Plato**: Dedicated collection of Plato's complete works
 - **Poetry**: Collections from various periods
 - **International Literature**: French, German, Italian, and Spanish classics
-- **Historical Documents**: Important historical texts
+- **History**: Important historical documents and texts
+- **Humanities 101**: Essential classical works from Homer to Aristotle
 - **Project Gutenberg Top Books**: Most popular public domain works
 
 #### Custom Content
@@ -92,9 +97,11 @@ Choose from 50+ unique explanation personalities, each bringing their own voice 
 ### Reading a Text
 1. **Select a Book**: Click "Library" to browse available texts
 2. **Navigate**: Use the text reader to scroll through content
-3. **Select Passages**: Highlight any confusing text
-4. **Get Explanations**: The chat interface appears automatically
-5. **Ask Follow-ups**: Continue the conversation with additional questions
+3. **Search**: Use the search bar to find specific words or phrases (search persists across navigation)
+4. **Wikipedia Links**: Click the 🔗 icon next to book titles for additional context
+5. **Select Passages**: Highlight any confusing text
+6. **Get Explanations**: The chat interface appears automatically
+7. **Ask Follow-ups**: Continue the conversation with additional questions
 
 ### Customizing Explanations
 1. **Change AI Provider**: Select between GPT-4, Claude, DeepSeek, or Gemini
@@ -111,9 +118,10 @@ Choose from 50+ unique explanation personalities, each bringing their own voice 
 
 ### Context-Aware Analysis
 The app provides enhanced context for structured texts:
-- **Plays**: Automatically detects acts, scenes, speakers, and characters on stage
+- **Plays**: Automatically detects acts, scenes, speakers, and accurately tracks characters present on stage
 - **Poetry**: Recognizes verse structure and literary devices
 - **Novels**: Identifies chapters and narrative structure
+- **Search Integration**: Search queries persist across navigation and text selection
 
 ### Multi-Language Support
 - Set your preferred language in Profile settings
@@ -138,6 +146,12 @@ The app provides enhanced context for structured texts:
 - **Include Context**: Select enough text to provide meaningful context
 - **Experiment**: Try different selection sizes to see what works best
 
+### Search Features
+- **Persistent Search**: Your search query stays active even when you select text or navigate
+- **Case-Insensitive**: Search works regardless of capitalization
+- **Navigation**: Use the up/down arrows to jump between search results
+- **Clear Search**: Use the "clear" button to remove search highlighting
+
 ### Explanation Styles
 - **Match the Content**: Use literary critics for literature, scientists for scientific texts
 - **Try Different Voices**: Each personality offers unique insights
@@ -155,6 +169,8 @@ The app provides enhanced context for structured texts:
 - **Selection Not Working**: Ensure you're selecting complete words or phrases
 - **AI Not Responding**: Verify your internet connection and try again
 - **Wrong Language**: Check your Profile settings for language preferences
+- **Search Not Working**: Try refreshing the page or clearing your search and starting over
+- **Wikipedia Links Not Loading**: Check your internet connection or try a different book
 
 ### Getting Help
 - Use the chat interface to ask questions about the app itself

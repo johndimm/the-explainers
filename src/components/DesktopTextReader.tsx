@@ -173,12 +173,22 @@ const DesktopTextReader: React.FC<ReaderCommonProps> = ({ text, bookTitle = 'Rom
     handleSearch,
     nextSearchResult,
     prevSearchResult,
-    renderTextWithSearchHighlight
+    renderTextWithSearchHighlight,
+    clearSearch
   } = useSearchCore(text, textReaderRef, textContentRef, goToPage, pageMap)
 
   return (
     <div ref={textReaderRef} className={styles.textReader}>
-      <div style={{ padding: '16px', borderBottom: '1px solid #e9ecef' }}>
+      {/* Sticky Search Bar */}
+      <div style={{ 
+        position: 'sticky', 
+        top: '0px', 
+        padding: '16px', 
+        borderBottom: '1px solid #e9ecef',
+        backgroundColor: 'white', 
+        zIndex: 50,
+        boxShadow: '0 2px 4px rgba(0,0,0,0.1)'
+      }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '8px' }}>
           <input
             type="text"
@@ -214,7 +224,7 @@ const DesktopTextReader: React.FC<ReaderCommonProps> = ({ text, bookTitle = 'Rom
             <span>{currentSearchIndex + 1} of {searchResults.length}</span>
             <button onClick={prevSearchResult} style={{ padding: '2px 6px', border: '1px solid #ddd', borderRadius: '2px', background: 'white', cursor: 'pointer', fontSize: '11px' }}>↑</button>
             <button onClick={nextSearchResult} style={{ padding: '2px 6px', border: '1px solid #ddd', borderRadius: '2px', background: 'white', cursor: 'pointer', fontSize: '11px' }}>↓</button>
-            <button onClick={() => { setSearchQuery(''); handleSearch(''); setCurrentSearchIndex(-1) }} style={{ padding: '2px 8px', border: 'none', background: 'none', cursor: 'pointer', fontSize: '11px', color: '#999' }}>clear</button>
+            <button onClick={clearSearch} style={{ padding: '2px 8px', border: 'none', background: 'none', cursor: 'pointer', fontSize: '11px', color: '#999' }}>clear</button>
           </div>
         )}
       </div>

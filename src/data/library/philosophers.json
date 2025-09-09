@@ -31,6 +31,7 @@
     "id": "226",
     "title": "Cicero's Orations",
     "author": "Cicero",
+    "directUrl": "https://www.gutenberg.org/ebooks/226.txt.utf-8",
     "wikipediaUrl": "https://en.wikipedia.org/wiki/Cicero",
     "wikipediaTitle": "Cicero"
   },
@@ -520,5 +521,77 @@
     "directUrl": "https://www.gutenberg.org/ebooks/author/45722",
     "wikipediaUrl": "https://en.wikipedia.org/wiki/G._E._Moore",
     "wikipediaTitle": "G. E. Moore"
+  },
+  {
+    "id": "1228",
+    "title": "On the Origin of Species",
+    "author": "Charles Darwin",
+    "directUrl": "https://www.gutenberg.org/ebooks/1228.txt.utf-8",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/On_the_Origin_of_Species",
+    "wikipediaTitle": "On the Origin of Species"
+  },
+  {
+    "id": "2300",
+    "title": "The Descent of Man",
+    "author": "Charles Darwin",
+    "directUrl": "https://www.gutenberg.org/ebooks/2300.txt.utf-8",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/The_Descent_of_Man",
+    "wikipediaTitle": "The Descent of Man"
+  },
+  {
+    "id": "944",
+    "title": "The Voyage of the Beagle",
+    "author": "Charles Darwin",
+    "directUrl": "https://www.gutenberg.org/ebooks/944.txt.utf-8",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/The_Voyage_of_the_Beagle",
+    "wikipediaTitle": "The Voyage of the Beagle"
+  },
+  {
+    "id": "2087",
+    "title": "The Expression of the Emotions in Man and Animals",
+    "author": "Charles Darwin",
+    "directUrl": "https://www.gutenberg.org/ebooks/2087.txt.utf-8",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/The_Expression_of_the_Emotions_in_Man_and_Animals",
+    "wikipediaTitle": "The Expression of the Emotions in Man and Animals"
+  },
+  {
+    "id": "28233",
+    "title": "Philosophiae Naturalis Principia Mathematica",
+    "author": "Isaac Newton",
+    "directUrl": "https://www.gutenberg.org/ebooks/28233.txt.utf-8",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Philosophi%C3%A6_Naturalis_Principia_Mathematica",
+    "wikipediaTitle": "Philosophi\u00e6 Naturalis Principia Mathematica"
+  },
+  {
+    "id": "18269",
+    "title": "Pascal's Pens\u00e9es",
+    "author": "Blaise Pascal",
+    "directUrl": "https://www.gutenberg.org/ebooks/18269.txt.utf-8",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Pens%C3%A9es",
+    "wikipediaTitle": "Pens\u00e9es"
+  },
+  {
+    "id": "21076",
+    "title": "The First Six Books of the Elements of Euclid",
+    "author": "Euclid",
+    "directUrl": "https://www.gutenberg.org/ebooks/21076.txt.utf-8",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Euclid%27s_Elements",
+    "wikipediaTitle": "Euclid's Elements"
+  },
+  {
+    "id": "59",
+    "title": "Discourse on the Method",
+    "author": "Ren\u00e9 Descartes",
+    "directUrl": "https://www.gutenberg.org/ebooks/59.txt.utf-8",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Discourse_on_the_Method",
+    "wikipediaTitle": "Discourse on the Method"
+  },
+  {
+    "id": "10615",
+    "title": "An Essay Concerning Human Understanding",
+    "author": "John Locke",
+    "directUrl": "https://www.gutenberg.org/ebooks/10615.txt.utf-8",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/An_Essay_Concerning_Human_Understanding",
+    "wikipediaTitle": "An Essay Concerning Human Understanding"
   }
 ]
