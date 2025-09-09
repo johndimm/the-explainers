@@ -61,7 +61,8 @@ const getAllStyles = () => {
 }
 
 const ChatInterface: React.FC<ChatInterfaceProps> = ({ selectedText, contextInfo, settings, profile, onClose, onSettingsChange, bookTitle, author, isPageMode = false }) => {
-  log('ChatInterface: Received settings:', settings)
+  console.log('ChatInterface: Received settings:', settings)
+  console.log('ChatInterface: Initial explanationStyle:', settings.explanationStyle)
   const router = useRouter()
   const [messages, setMessages] = useState<Message[]>([])
   const [inputValue, setInputValue] = useState('')
@@ -381,14 +382,31 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ selectedText, contextInfo
 
   // Keep local chat controls in sync with global settings unless user changes them here
   useEffect(() => {
-    log('ChatInterface: settings.llmProvider changed to:', settings.llmProvider)
-    setSelectedProvider(settings.llmProvider)
-  }, [settings.llmProvider])
+    console.log('ChatInterface: settings.llmProvider changed to:', settings.llmProvider)
+    console.log('ChatInterface: Current selectedProvider:', selectedProvider)
+    if (selectedProvider !== settings.llmProvider) {
+      console.log('ChatInterface: Provider mismatch detected, updating from', selectedProvider, 'to', settings.llmProvider)
+      setSelectedProvider(settings.llmProvider)
+    } else {
+      console.log('ChatInterface: Provider already in sync, no update needed')
+    }
+  }, [settings.llmProvider, selectedProvider])
 
   useEffect(() => {
-    log('ChatInterface: settings.explanationStyle changed to:', settings.explanationStyle)
+    console.log('ChatInterface: settings.explanationStyle changed to:', settings.explanationStyle)
+    console.log('ChatInterface: Full settings object:', settings)
     setCurrentStyle(settings.explanationStyle)
   }, [settings.explanationStyle])
+
+  // Force re-initialization when settings change
+  useEffect(() => {
+    console.log('ChatInterface: Settings changed, re-initializing state')
+    console.log('ChatInterface: New settings:', settings)
+    console.log('ChatInterface: Updating selectedProvider from', selectedProvider, 'to', settings.llmProvider)
+    setSelectedProvider(settings.llmProvider)
+    setCurrentStyle(settings.explanationStyle)
+    setCurrentResponseLength(settings.responseLength)
+  }, [settings])
 
   useEffect(() => {
     log('ChatInterface: settings.responseLength changed to:', settings.responseLength)
@@ -1363,7 +1381,15 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ selectedText, contextInfo
                 </div>
                 <select 
                   value={selectedProvider} 
-                  onChange={(e) => setSelectedProvider(e.target.value as LLMProvider)}
+                  onChange={(e) => {
+                    const newProvider = e.target.value as LLMProvider
+                    setSelectedProvider(newProvider)
+                    // Update global settings immediately
+                    onSettingsChange({
+                      ...settings,
+                      llmProvider: newProvider
+                    })
+                  }}
                   className={styles.providerSelect}
                   disabled={isLoading}
                 >
@@ -1402,7 +1428,17 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ selectedText, contextInfo
                           role="option"
                           aria-selected={currentStyle === style.value}
                           className={`${styles.customOption} ${currentStyle === style.value ? styles.selectedOption : ''}`}
-                          onClick={(e) => { e.stopPropagation(); setCurrentStyle(style.value as ExplanationStyle); setShowStyleMenu(false) }}
+                          onClick={(e) => { 
+                            e.stopPropagation(); 
+                            const newStyle = style.value as ExplanationStyle
+                            setCurrentStyle(newStyle); 
+                            setShowStyleMenu(false)
+                            // Update global settings immediately
+                            onSettingsChange({
+                              ...settings,
+                              explanationStyle: newStyle
+                            })
+                          }}
                         >
                           {style.name}
                         </div>
@@ -1422,7 +1458,15 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ selectedText, contextInfo
                 </div>
                 <select 
                   value={currentResponseLength} 
-                  onChange={(e) => setCurrentResponseLength(e.target.value as ResponseLength)}
+                  onChange={(e) => {
+                    const newLength = e.target.value as ResponseLength
+                    setCurrentResponseLength(newLength)
+                    // Update global settings immediately
+                    onSettingsChange({
+                      ...settings,
+                      responseLength: newLength
+                    })
+                  }}
                   className={styles.lengthSelect}
                   disabled={isLoading}
                 >

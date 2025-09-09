@@ -2,8 +2,6 @@
 
 import ExplainerStylesPage from '@/components/ExplainerStylesPage'
 import { useSettings } from '@/contexts/SettingsContext'
-import { SettingsProvider } from '@/contexts/SettingsContext'
-import { ProfileProvider } from '@/contexts/ProfileContext'
 
 function StylesContent() {
   const { settings, updateSettings } = useSettings()
@@ -12,6 +10,7 @@ function StylesContent() {
     <ExplainerStylesPage
       selectedStyle={settings.explanationStyle}
       onStyleChange={(style) => {
+        console.log('ExplainersPage: Style change requested:', style, 'Current settings:', settings)
         updateSettings({ ...settings, explanationStyle: style })
       }}
     />
@@ -19,11 +18,5 @@ function StylesContent() {
 }
 
 export default function ExplainersPage() {
-  return (
-    <ProfileProvider>
-      <SettingsProvider>
-        <StylesContent />
-      </SettingsProvider>
-    </ProfileProvider>
-  )
+  return <StylesContent />
 }

@@ -134,39 +134,40 @@ const ExplainerStylesPage: React.FC<ExplainerStylesPageProps> = ({
   selectedStyle, 
   onStyleChange 
 }) => {
-  const [showConfirmModal, setShowConfirmModal] = useState(false)
-  const [selectedStyleName, setSelectedStyleName] = useState('')
   const router = useRouter()
 
   const handleStyleSelect = (style: ExplanationStyle) => {
-    const styleCategories = getStyleCategories()
-    const allStyles = Object.values(styleCategories).flat()
-    const selectedStyleData = allStyles.find(s => s.value === style)
-    
-    if (selectedStyleData) {
-      setSelectedStyleName(selectedStyleData.name)
-      setShowConfirmModal(true)
-    }
-  }
-
-  const handleConfirm = () => {
-    onStyleChange(selectedStyle)
-    setShowConfirmModal(false)
-    router.push('/chat')
-  }
-
-  const handleCancel = () => {
-    setShowConfirmModal(false)
+    console.log('ExplainerStylesPage: Style selected:', style)
+    onStyleChange(style)
+    // Don't redirect - let user stay on the page to see their selection
   }
 
   const styleCategories = getStyleCategories()
 
+  // Get the current selected style info
+  const allStyles = Object.values(styleCategories).flat()
+  const currentStyleData = allStyles.find(s => s.value === selectedStyle)
+
   return (
     <div className={stylesCss.container}>
-      <div className={stylesCss.header}>
+      <div className={stylesCss.pageHeader}>
         <h1>Choose Your Explainer Style</h1>
         <p>Select a style to see how different voices would explain your text</p>
       </div>
+
+      {currentStyleData && (
+        <div className={stylesCss.selectedStyle}>
+          <img 
+            src={getPhotoSrc(currentStyleData.value)} 
+            alt={currentStyleData.name}
+            className={stylesCss.selectedPhoto}
+          />
+          <div className={stylesCss.selectedText}>
+            <h2>{currentStyleData.name}</h2>
+            <p>{currentStyleData.description}</p>
+          </div>
+        </div>
+      )}
 
       {Object.entries(styleCategories).map(([categoryName, styles]) => (
         <div key={categoryName} className={stylesCss.categorySection}>
@@ -183,29 +184,6 @@ const ExplainerStylesPage: React.FC<ExplainerStylesPageProps> = ({
         </div>
       ))}
 
-      {showConfirmModal && (
-        <div className={stylesCss.modalOverlay}>
-          <div className={stylesCss.modal}>
-            <h3>Confirm Style Selection</h3>
-            <p>You've selected <strong>{selectedStyleName}</strong> as your explainer style.</p>
-            <p>This will change how the AI explains your text. Continue?</p>
-            <div className={stylesCss.modalButtons}>
-              <button 
-                className={stylesCss.cancelButton} 
-                onClick={handleCancel}
-              >
-                Cancel
-              </button>
-              <button 
-                className={stylesCss.confirmButton} 
-                onClick={handleConfirm}
-              >
-                Continue
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
     </div>
   )
 }

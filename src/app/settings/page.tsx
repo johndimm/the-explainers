@@ -3,8 +3,6 @@
 import Settings from '@/components/Settings'
 import { useSettings } from '@/contexts/SettingsContext'
 import { useRouter } from 'next/navigation'
-import { SettingsProvider } from '@/contexts/SettingsContext'
-import { ProfileProvider } from '@/contexts/ProfileContext'
 
 function SettingsContent() {
   const { settings, updateSettings } = useSettings()
@@ -23,11 +21,5 @@ function SettingsContent() {
 }
 
 export default function SettingsPage() {
-  return (
-    <ProfileProvider>
-      <SettingsProvider>
-        <SettingsContent />
-      </SettingsProvider>
-    </ProfileProvider>
-  )
+  return <SettingsContent />
 }

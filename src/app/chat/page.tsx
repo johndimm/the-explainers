@@ -14,6 +14,14 @@ function ChatContent() {
   const { user, isAuthenticated, isLoading } = useAuth()
   const router = useRouter()
   const [contextData, setContextData] = useState<any>(null)
+  
+  console.log('ChatContent: Current settings:', settings)
+  console.log('ChatContent: Current explanationStyle:', settings.explanationStyle)
+
+  // Monitor settings changes
+  useEffect(() => {
+    console.log('ChatContent: Settings changed to:', settings)
+  }, [settings])
 
   // Check for context data from text selection
   useEffect(() => {
@@ -214,6 +222,7 @@ function ChatContent() {
           </p>
           
           <ChatInterface
+            key={`chat-${settings.explanationStyle}-${settings.llmProvider}-${settings.responseLength}`}
             selectedText={(() => {
               const text = contextData?.selectedText || "";
               log('Chat page: Passing selectedText to ChatInterface:', text);

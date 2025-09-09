@@ -65,6 +65,7 @@ const Settings: React.FC<SettingsProps> = ({ isOpen, onClose, settings, onSettin
   const router = useRouter()
 
   useEffect(() => {
+    console.log('Settings: settings prop changed to:', settings)
     setLocalSettings(settings)
     setShowCustomFields(settings.llmProvider === 'custom')
   }, [settings])
@@ -88,7 +89,11 @@ const Settings: React.FC<SettingsProps> = ({ isOpen, onClose, settings, onSettin
   // Auto-save when settings change
   useEffect(() => {
     if (JSON.stringify(localSettings) !== JSON.stringify(settings)) {
+      console.log('Settings: Local settings changed, will auto-save in 500ms')
+      console.log('Settings: Local settings:', localSettings)
+      console.log('Settings: Current global settings:', settings)
       const timeoutId = setTimeout(() => {
+        console.log('Settings: Auto-saving settings:', localSettings)
         onSettingsChange(localSettings)
       }, 500) // Debounce auto-save by 500ms
       
@@ -97,7 +102,13 @@ const Settings: React.FC<SettingsProps> = ({ isOpen, onClose, settings, onSettin
   }, [localSettings, settings, onSettingsChange])
 
   const handleProviderChange = (provider: LLMProvider) => {
-    setLocalSettings(prev => ({ ...prev, llmProvider: provider }))
+    console.log('Settings: handleProviderChange called with:', provider)
+    console.log('Settings: Current localSettings:', localSettings)
+    setLocalSettings(prev => {
+      const newSettings = { ...prev, llmProvider: provider }
+      console.log('Settings: New localSettings will be:', newSettings)
+      return newSettings
+    })
     setShowCustomFields(provider === 'custom')
   }
 
@@ -352,7 +363,10 @@ const Settings: React.FC<SettingsProps> = ({ isOpen, onClose, settings, onSettin
                   name="llmProvider"
                   value="openai"
                   checked={localSettings.llmProvider === 'openai'}
-                  onChange={() => handleProviderChange('openai')}
+                  onChange={() => {
+                    console.log('Settings: OpenAI radio clicked')
+                    handleProviderChange('openai')
+                  }}
                 />
                 <span>GPT-4 (OpenAI)</span>
               </label>
@@ -362,7 +376,10 @@ const Settings: React.FC<SettingsProps> = ({ isOpen, onClose, settings, onSettin
                   name="llmProvider"
                   value="anthropic"
                   checked={localSettings.llmProvider === 'anthropic'}
-                  onChange={() => handleProviderChange('anthropic')}
+                  onChange={() => {
+                    console.log('Settings: Anthropic radio clicked')
+                    handleProviderChange('anthropic')
+                  }}
                 />
                 <span>Claude (Anthropic)</span>
               </label>
@@ -372,7 +389,10 @@ const Settings: React.FC<SettingsProps> = ({ isOpen, onClose, settings, onSettin
                   name="llmProvider"
                   value="deepseek"
                   checked={localSettings.llmProvider === 'deepseek'}
-                  onChange={() => handleProviderChange('deepseek')}
+                  onChange={() => {
+                    console.log('Settings: DeepSeek radio clicked')
+                    handleProviderChange('deepseek')
+                  }}
                 />
                 <span>DeepSeek</span>
               </label>
@@ -382,7 +402,10 @@ const Settings: React.FC<SettingsProps> = ({ isOpen, onClose, settings, onSettin
                   name="llmProvider"
                   value="gemini"
                   checked={localSettings.llmProvider === 'gemini'}
-                  onChange={() => handleProviderChange('gemini')}
+                  onChange={() => {
+                    console.log('Settings: Gemini radio clicked')
+                    handleProviderChange('gemini')
+                  }}
                 />
                 <span>Gemini (Google) - Default</span>
               </label>

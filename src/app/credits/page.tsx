@@ -2,8 +2,7 @@
 
 import { useState, useEffect, useRef } from 'react'
 import { useRouter } from 'next/navigation'
-import { SettingsProvider } from '@/contexts/SettingsContext'
-import { ProfileProvider, useProfile } from '@/contexts/ProfileContext'
+import { useProfile } from '@/contexts/ProfileContext'
 import { log } from '@/utils/log'
 
 function CreditsContent() {
@@ -775,11 +774,5 @@ function CreditsContent() {
 }
 
 export default function CreditsPage() {
-  return (
-    <ProfileProvider>
-      <SettingsProvider>
-        <CreditsContent />
-      </SettingsProvider>
-    </ProfileProvider>
-  )
+  return <CreditsContent />
 }

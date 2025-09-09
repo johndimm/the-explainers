@@ -95,14 +95,18 @@ export const SettingsProvider: React.FC<SettingsProviderProps> = ({ children }) 
   }, [session, status])
 
   const updateSettings = async (newSettings: SettingsData) => {
+    console.log('SettingsContext: updateSettings called with:', newSettings)
+    console.log('SettingsContext: Previous settings:', settings)
     setSettings(newSettings)
     
     // Save to localStorage for backward compatibility
     localStorage.setItem('explainer-settings', JSON.stringify(newSettings))
+    console.log('SettingsContext: Saved to localStorage')
     
     // Save to database if authenticated
     if (session?.user?.email) {
       try {
+        console.log('SettingsContext: Saving to database for user:', session.user.email)
         await fetch('/api/user/settings', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
@@ -118,6 +122,7 @@ export const SettingsProvider: React.FC<SettingsProviderProps> = ({ children }) 
             custom_model_name: newSettings.customModelName
           })
         })
+        console.log('SettingsContext: Successfully saved to database')
       } catch (error) {
         console.error('Error saving settings to database:', error)
       }
