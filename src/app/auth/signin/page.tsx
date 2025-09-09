@@ -33,9 +33,27 @@ export default function SignIn() {
   const handleMobileGoogleSignIn = async () => {
     setIsLoading(true)
     try {
-      // For iOS, use the callback page to handle OAuth properly
+      // For iOS, clear all possible cached data first
+      if (isIOS) {
+        // Clear all storage
+        localStorage.clear()
+        sessionStorage.clear()
+        
+        // Clear NextAuth cookies specifically
+        document.cookie.split(";").forEach(function(c) { 
+          document.cookie = c.replace(/^ +/, "").replace(/=.*/, "=;expires=" + new Date().toUTCString() + ";path=/"); 
+        })
+        
+        // Add a delay to ensure clearing is complete
+        await new Promise(resolve => setTimeout(resolve, 500))
+      }
+      
+      // Use cache-busting parameters for iOS
+      const timestamp = Date.now()
+      const randomId = Math.random().toString(36).substring(7)
+      
       await signIn('google', { 
-        callbackUrl: '/auth/callback',
+        callbackUrl: `/auth/callback?t=${timestamp}&r=${randomId}`,
         redirect: true
       })
     } catch (error) {
@@ -97,7 +115,30 @@ export default function SignIn() {
             fontSize: '14px',
             color: '#92400e'
           }}>
-            <strong>iPhone users:</strong> If you don't see the account selection screen, try refreshing the page and signing in again.
+            <strong>iPhone users:</strong> If authentication doesn't work, try the cache clearing option below.
+            <button
+              onClick={() => {
+                localStorage.clear()
+                sessionStorage.clear()
+                document.cookie.split(";").forEach(function(c) { 
+                  document.cookie = c.replace(/^ +/, "").replace(/=.*/, "=;expires=" + new Date().toUTCString() + ";path=/"); 
+                })
+                window.location.reload()
+              }}
+              style={{
+                display: 'block',
+                marginTop: '8px',
+                padding: '8px 16px',
+                background: '#f59e0b',
+                color: 'white',
+                border: 'none',
+                borderRadius: '4px',
+                cursor: 'pointer',
+                fontSize: '12px'
+              }}
+            >
+              Clear Cache & Reload
+            </button>
           </div>
         )}
         
