@@ -1,7 +1,7 @@
 'use client'
 
 import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react'
-import { useSession, signIn, signOut } from 'next-auth/react'
+import { useSession, signIn, signOut, getSession } from 'next-auth/react'
 import { log } from '../utils/log'
 
 interface User {
@@ -47,7 +47,9 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
           log(`AuthContext: Session refresh attempt ${i + 1}`)
           await update()
           await new Promise(resolve => setTimeout(resolve, 1000))
-          if (session?.user) {
+          // Check if we have a session after the update
+          const currentSession = await getSession()
+          if (currentSession?.user) {
             log('AuthContext: Session refresh successful')
             break
           }
@@ -55,7 +57,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
       }
       retrySession()
     }
-  }, [status, isLoading, update, session])
+  }, [status, isLoading, update])
 
   const user = session?.user || null
   const isAuthenticated = !!user
