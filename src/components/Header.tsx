@@ -24,7 +24,7 @@ export default function Header() {
   }, [showMobileMenu])
 
   useEffect(() => {
-    // Update subtitle based on current book
+    // Update subtitle based on current book from database
     const updateSubtitle = async () => {
       try {
         const currentBook = await getCurrentBook()
@@ -41,25 +41,19 @@ export default function Header() {
 
     updateSubtitle()
 
-    // Listen for storage changes to update subtitle when current book changes
-    const handleStorageChange = (e: StorageEvent) => {
-      if (e.key === 'current-book') {
-        updateSubtitle()
+    // Listen for custom events that indicate book changes
+    const handleBookChange = (event: CustomEvent) => {
+      if (event.detail && event.detail.title && event.detail.author) {
+        setSubtitle(`${event.detail.title} by ${event.detail.author}`)
+      } else {
+        setSubtitle('understand difficult texts')
       }
     }
 
-    window.addEventListener('storage', handleStorageChange)
-
-    // Also listen for custom events that might indicate book changes
-    const handleBookChange = () => {
-      updateSubtitle()
-    }
-
-    window.addEventListener('currentBookChanged', handleBookChange)
+    window.addEventListener('currentBookChanged', handleBookChange as EventListener)
 
     return () => {
-      window.removeEventListener('storage', handleStorageChange)
-      window.removeEventListener('currentBookChanged', handleBookChange)
+      window.removeEventListener('currentBookChanged', handleBookChange as EventListener)
     }
   }, [])
 

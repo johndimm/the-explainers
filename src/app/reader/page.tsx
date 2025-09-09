@@ -48,7 +48,7 @@ function ReaderContent() {
     // Check if there's a saved current book
     const loadCurrentBook = async () => {
       try {
-        // Try database first
+        // Load from database only
         const response = await fetch('/api/user/current-book')
         if (response.ok) {
           const dbBook = await response.json()
@@ -62,22 +62,6 @@ function ReaderContent() {
       } catch (error) {
         console.error('Error loading current book from database:', error)
       }
-
-      // Fallback to localStorage
-      const savedBook = localStorage.getItem('current-book')
-      if (savedBook) {
-        try {
-          const parsedBook = JSON.parse(savedBook)
-          log('Restoring saved book from localStorage:', parsedBook)
-          
-          if (parsedBook.url) {
-            handleBookSelect(parsedBook.title, parsedBook.author, parsedBook.url)
-            return
-          }
-        } catch (error) {
-          console.error('Error loading saved book from localStorage:', error)
-        }
-      }
       
       router.push('/library')
     }
@@ -90,9 +74,6 @@ function ReaderContent() {
     const newBook = { title, author, url }
     setCurrentBook({ title, author })
     
-    // Save to localStorage for backward compatibility
-    localStorage.setItem('current-book', JSON.stringify(newBook))
-    
     // Save to database
     try {
       await fetch('/api/user/current-book', {
@@ -102,6 +83,13 @@ function ReaderContent() {
       })
     } catch (error) {
       console.error('Error saving current book to database:', error)
+    }
+    
+    // Dispatch custom event to notify header of the change
+    if (typeof window !== 'undefined') {
+      window.dispatchEvent(new CustomEvent('currentBookChanged', { 
+        detail: { title, author } 
+      }))
     }
     
     try {
