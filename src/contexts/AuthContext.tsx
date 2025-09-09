@@ -29,10 +29,33 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   const [isLoading, setIsLoading] = useState(true)
 
   useEffect(() => {
+    log('AuthContext: Session status changed:', status)
+    log('AuthContext: Session data:', session)
     if (status !== 'loading') {
       setIsLoading(false)
     }
-  }, [status])
+  }, [status, session])
+
+  // Force session refresh on mobile after OAuth redirect
+  useEffect(() => {
+    const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent)
+    if (isMobile && status === 'unauthenticated' && !isLoading) {
+      log('AuthContext: Mobile device detected, forcing session refresh')
+      // Try multiple times with delays for mobile OAuth issues
+      const retrySession = async () => {
+        for (let i = 0; i < 3; i++) {
+          log(`AuthContext: Session refresh attempt ${i + 1}`)
+          await update()
+          await new Promise(resolve => setTimeout(resolve, 1000))
+          if (session?.user) {
+            log('AuthContext: Session refresh successful')
+            break
+          }
+        }
+      }
+      retrySession()
+    }
+  }, [status, isLoading, update, session])
 
   const user = session?.user || null
   const isAuthenticated = !!user

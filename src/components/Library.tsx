@@ -141,8 +141,8 @@ const Library: React.FC<LibraryProps> = ({ onBookSelect, onBackToCurrentBook }) 
       return `/api/download-text?path=${encodeURIComponent(book.localPath)}`
     }
     // For books without localPath or directUrl, construct Project Gutenberg URL
-    // Most books use their ID to construct the URL
-    return `https://www.gutenberg.org/files/${book.id}/${book.id}-0.txt`
+    // Use the correct Gutenberg cache URL format
+    return `https://www.gutenberg.org/cache/epub/${book.id}/pg${book.id}.txt`
   }
 
   const handleBookClick = (book: Book, categoryName: string) => {

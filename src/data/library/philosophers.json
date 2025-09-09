@@ -31,7 +31,7 @@
     "id": "226",
     "title": "Cicero's Orations",
     "author": "Cicero",
-    "directUrl": "https://www.gutenberg.org/ebooks/226.txt.utf-8",
+    "directUrl": "https://www.gutenberg.org/cache/epub/226.txt",
     "wikipediaUrl": "https://en.wikipedia.org/wiki/Cicero",
     "wikipediaTitle": "Cicero"
   },
@@ -430,7 +430,7 @@
     "id": "5827",
     "title": "How We Think",
     "author": "John Dewey",
-    "directUrl": "https://www.gutenberg.org/ebooks/5827.txt.utf-8",
+    "directUrl": "https://www.gutenberg.org/cache/epub/5827.txt",
     "wikipediaUrl": "https://en.wikipedia.org/wiki/How_We_Think",
     "wikipediaTitle": "How We Think"
   },
@@ -438,7 +438,7 @@
     "id": "852",
     "title": "Democracy and Education",
     "author": "John Dewey",
-    "directUrl": "https://www.gutenberg.org/ebooks/852.txt.utf-8",
+    "directUrl": "https://www.gutenberg.org/cache/epub/852.txt",
     "wikipediaUrl": "https://en.wikipedia.org/wiki/Democracy_and_Education",
     "wikipediaTitle": "Democracy and Education"
   },
@@ -446,7 +446,7 @@
     "id": "41386",
     "title": "Human Nature and Conduct",
     "author": "John Dewey",
-    "directUrl": "https://www.gutenberg.org/ebooks/41386.txt.utf-8",
+    "directUrl": "https://www.gutenberg.org/cache/epub/41386.txt",
     "wikipediaUrl": "https://en.wikipedia.org/wiki/Human_Nature_and_Conduct",
     "wikipediaTitle": "Human Nature and Conduct"
   },
@@ -454,7 +454,7 @@
     "id": "71000",
     "title": "The Public and Its Problems",
     "author": "John Dewey",
-    "directUrl": "https://www.gutenberg.org/ebooks/71000.txt.utf-8",
+    "directUrl": "https://www.gutenberg.org/cache/epub/71000.txt",
     "wikipediaUrl": "https://en.wikipedia.org/wiki/The_Public_and_Its_Problems",
     "wikipediaTitle": "The Public and Its Problems"
   },
@@ -462,7 +462,7 @@
     "id": "40089",
     "title": "Reconstruction in Philosophy",
     "author": "John Dewey",
-    "directUrl": "https://www.gutenberg.org/ebooks/40089.txt.utf-8",
+    "directUrl": "https://www.gutenberg.org/cache/epub/40089.txt",
     "wikipediaUrl": "https://en.wikipedia.org/wiki/Reconstruction_in_Philosophy",
     "wikipediaTitle": "Reconstruction in Philosophy"
   },
@@ -478,7 +478,7 @@
     "id": "15776",
     "title": "The Economic Consequences of the Peace",
     "author": "John Maynard Keynes",
-    "directUrl": "https://www.gutenberg.org/ebooks/15776.txt.utf-8",
+    "directUrl": "https://www.gutenberg.org/cache/epub/15776.txt",
     "wikipediaUrl": "https://en.wikipedia.org/wiki/The_Economic_Consequences_of_the_Peace",
     "wikipediaTitle": "The Economic Consequences of the Peace"
   },
@@ -486,7 +486,7 @@
     "id": "32625",
     "title": "A Treatise on Probability",
     "author": "John Maynard Keynes",
-    "directUrl": "https://www.gutenberg.org/ebooks/32625.txt.utf-8",
+    "directUrl": "https://www.gutenberg.org/cache/epub/32625.txt",
     "wikipediaUrl": "https://en.wikipedia.org/wiki/A_Treatise_on_Probability",
     "wikipediaTitle": "A Treatise on Probability"
   },
@@ -494,7 +494,7 @@
     "id": "keynes-monetary",
     "title": "A Tract on Monetary Reform",
     "author": "John Maynard Keynes",
-    "directUrl": "https://www.gutenberg.org/ebooks/author/6280",
+    "directUrl": "https://www.gutenberg.org/cache/epub/author/6280",
     "wikipediaUrl": "https://en.wikipedia.org/wiki/A_Tract_on_Monetary_Reform",
     "wikipediaTitle": "A Tract on Monetary Reform"
   },
@@ -502,7 +502,7 @@
     "id": "moore-principia",
     "title": "Principia Ethica",
     "author": "G.E. Moore",
-    "directUrl": "https://www.gutenberg.org/ebooks/author/45722",
+    "directUrl": "https://www.gutenberg.org/cache/epub/author/45722",
     "wikipediaUrl": "https://en.wikipedia.org/wiki/Principia_Ethica",
     "wikipediaTitle": "Principia Ethica"
   },
@@ -518,7 +518,7 @@
     "id": "moore-studies",
     "title": "Philosophical Studies",
     "author": "G.E. Moore",
-    "directUrl": "https://www.gutenberg.org/ebooks/author/45722",
+    "directUrl": "https://www.gutenberg.org/cache/epub/author/45722",
     "wikipediaUrl": "https://en.wikipedia.org/wiki/G._E._Moore",
     "wikipediaTitle": "G. E. Moore"
   },
@@ -526,7 +526,7 @@
     "id": "1228",
     "title": "On the Origin of Species",
     "author": "Charles Darwin",
-    "directUrl": "https://www.gutenberg.org/ebooks/1228.txt.utf-8",
+    "directUrl": "https://www.gutenberg.org/cache/epub/1228.txt",
     "wikipediaUrl": "https://en.wikipedia.org/wiki/On_the_Origin_of_Species",
     "wikipediaTitle": "On the Origin of Species"
   },
@@ -534,7 +534,7 @@
     "id": "2300",
     "title": "The Descent of Man",
     "author": "Charles Darwin",
-    "directUrl": "https://www.gutenberg.org/ebooks/2300.txt.utf-8",
+    "directUrl": "https://www.gutenberg.org/cache/epub/2300.txt",
     "wikipediaUrl": "https://en.wikipedia.org/wiki/The_Descent_of_Man",
     "wikipediaTitle": "The Descent of Man"
   },
@@ -542,7 +542,7 @@
     "id": "944",
     "title": "The Voyage of the Beagle",
     "author": "Charles Darwin",
-    "directUrl": "https://www.gutenberg.org/ebooks/944.txt.utf-8",
+    "directUrl": "https://www.gutenberg.org/cache/epub/944.txt",
     "wikipediaUrl": "https://en.wikipedia.org/wiki/The_Voyage_of_the_Beagle",
     "wikipediaTitle": "The Voyage of the Beagle"
   },
@@ -550,7 +550,7 @@
     "id": "2087",
     "title": "The Expression of the Emotions in Man and Animals",
     "author": "Charles Darwin",
-    "directUrl": "https://www.gutenberg.org/ebooks/2087.txt.utf-8",
+    "directUrl": "https://www.gutenberg.org/cache/epub/2087.txt",
     "wikipediaUrl": "https://en.wikipedia.org/wiki/The_Expression_of_the_Emotions_in_Man_and_Animals",
     "wikipediaTitle": "The Expression of the Emotions in Man and Animals"
   },
@@ -558,7 +558,7 @@
     "id": "28233",
     "title": "Philosophiae Naturalis Principia Mathematica",
     "author": "Isaac Newton",
-    "directUrl": "https://www.gutenberg.org/ebooks/28233.txt.utf-8",
+    "directUrl": "https://www.gutenberg.org/cache/epub/28233.txt",
     "wikipediaUrl": "https://en.wikipedia.org/wiki/Philosophi%C3%A6_Naturalis_Principia_Mathematica",
     "wikipediaTitle": "Philosophi\u00e6 Naturalis Principia Mathematica"
   },
@@ -566,7 +566,7 @@
     "id": "18269",
     "title": "Pascal's Pens\u00e9es",
     "author": "Blaise Pascal",
-    "directUrl": "https://www.gutenberg.org/ebooks/18269.txt.utf-8",
+    "directUrl": "https://www.gutenberg.org/cache/epub/18269.txt",
     "wikipediaUrl": "https://en.wikipedia.org/wiki/Pens%C3%A9es",
     "wikipediaTitle": "Pens\u00e9es"
   },
@@ -574,7 +574,7 @@
     "id": "21076",
     "title": "The First Six Books of the Elements of Euclid",
     "author": "Euclid",
-    "directUrl": "https://www.gutenberg.org/ebooks/21076.txt.utf-8",
+    "directUrl": "https://www.gutenberg.org/cache/epub/21076.txt",
     "wikipediaUrl": "https://en.wikipedia.org/wiki/Euclid%27s_Elements",
     "wikipediaTitle": "Euclid's Elements"
   },
@@ -582,7 +582,7 @@
     "id": "59",
     "title": "Discourse on the Method",
     "author": "Ren\u00e9 Descartes",
-    "directUrl": "https://www.gutenberg.org/ebooks/59.txt.utf-8",
+    "directUrl": "https://www.gutenberg.org/cache/epub/59.txt",
     "wikipediaUrl": "https://en.wikipedia.org/wiki/Discourse_on_the_Method",
     "wikipediaTitle": "Discourse on the Method"
   },
@@ -590,7 +590,7 @@
     "id": "10615",
     "title": "An Essay Concerning Human Understanding",
     "author": "John Locke",
-    "directUrl": "https://www.gutenberg.org/ebooks/10615.txt.utf-8",
+    "directUrl": "https://www.gutenberg.org/cache/epub/10615.txt",
     "wikipediaUrl": "https://en.wikipedia.org/wiki/An_Essay_Concerning_Human_Understanding",
     "wikipediaTitle": "An Essay Concerning Human Understanding"
   }

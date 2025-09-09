@@ -36,7 +36,9 @@ function ChatContent() {
   // Redirect to sign-in if not authenticated (except in development)
   useEffect(() => {
     const isDev = process.env.NODE_ENV === 'development'
+    log('Chat page: Auth check - isLoading:', isLoading, 'isAuthenticated:', isAuthenticated, 'isDev:', isDev)
     if (!isLoading && !isAuthenticated && !isDev) {
+      log('Chat page: Redirecting to sign-in')
       router.push('/auth/signin')
     }
   }, [isLoading, isAuthenticated, router])
@@ -82,7 +84,44 @@ function ChatContent() {
   // Don't render chat if not authenticated (except in development)
   const isDev = process.env.NODE_ENV === 'development'
   if (!isAuthenticated && !isDev) {
-    return null
+    return (
+      <div style={{
+        minHeight: '100vh',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        background: '#fafafa',
+        padding: '20px'
+      }}>
+        <div style={{
+          textAlign: 'center',
+          padding: '40px',
+          background: 'white',
+          borderRadius: '16px',
+          boxShadow: '0 4px 12px rgba(0, 0, 0, 0.1)',
+          maxWidth: '400px'
+        }}>
+          <h2 style={{ margin: '0 0 16px 0', color: '#1a1a1a' }}>Authentication Required</h2>
+          <p style={{ margin: '0 0 24px 0', color: '#666' }}>
+            Please sign in to access the AI chat feature.
+          </p>
+          <button
+            onClick={() => router.push('/auth/signin')}
+            style={{
+              padding: '12px 24px',
+              background: '#8b5cf6',
+              color: 'white',
+              border: 'none',
+              borderRadius: '8px',
+              fontSize: '16px',
+              cursor: 'pointer'
+            }}
+          >
+            Sign In
+          </button>
+        </div>
+      </div>
+    )
   }
 
   return (

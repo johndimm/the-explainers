@@ -3,7 +3,7 @@
     "id": "6130",
     "title": "The Iliad",
     "author": "Homer",
-    "directUrl": "https://www.gutenberg.org/files/6130/6130-0.txt",
+    "directUrl": "https://www.gutenberg.org/cache/epub/6130/pg6130.txt",
     "wikipediaUrl": "https://en.wikipedia.org/wiki/Iliad",
     "wikipediaTitle": "Iliad"
   },
@@ -11,7 +11,7 @@
     "id": "1727",
     "title": "The Odyssey",
     "author": "Homer",
-    "directUrl": "https://www.gutenberg.org/files/1727/1727-0.txt",
+    "directUrl": "https://www.gutenberg.org/cache/epub/1727/pg1727.txt",
     "wikipediaUrl": "https://en.wikipedia.org/wiki/Odyssey",
     "wikipediaTitle": "Odyssey"
   },
@@ -19,7 +19,7 @@
     "id": "2707",
     "title": "The History of Herodotus",
     "author": "Herodotus",
-    "directUrl": "https://www.gutenberg.org/files/2707/2707-0.txt",
+    "directUrl": "https://www.gutenberg.org/cache/epub/2707/pg2707.txt",
     "wikipediaUrl": "https://en.wikipedia.org/wiki/Herodotus",
     "wikipediaTitle": "Herodotus"
   },
@@ -27,7 +27,7 @@
     "id": "7142",
     "title": "History of the Peloponnesian War",
     "author": "Thucydides",
-    "directUrl": "https://www.gutenberg.org/files/7142/7142-0.txt",
+    "directUrl": "https://www.gutenberg.org/cache/epub/7142/pg7142.txt",
     "wikipediaUrl": "https://en.wikipedia.org/wiki/History_of_the_Peloponnesian_War",
     "wikipediaTitle": "History of the Peloponnesian War"
   },
@@ -35,7 +35,7 @@
     "id": "14484",
     "title": "The Oresteia",
     "author": "Aeschylus",
-    "directUrl": "https://www.gutenberg.org/ebooks/14484.txt.utf-8",
+    "directUrl": "https://www.gutenberg.org/cache/epub/14484/pg14484.txt",
     "wikipediaUrl": "https://en.wikipedia.org/wiki/Oresteia",
     "wikipediaTitle": "Oresteia"
   },
@@ -43,7 +43,7 @@
     "id": "27458",
     "title": "Prometheus Bound",
     "author": "Aeschylus",
-    "directUrl": "https://www.gutenberg.org/ebooks/27458.txt.utf-8",
+    "directUrl": "https://www.gutenberg.org/cache/epub/27458/pg27458.txt",
     "wikipediaUrl": "https://en.wikipedia.org/wiki/Prometheus_Bound",
     "wikipediaTitle": "Prometheus Bound"
   },
@@ -51,7 +51,7 @@
     "id": "31",
     "title": "Oedipus Rex",
     "author": "Sophocles",
-    "directUrl": "https://www.gutenberg.org/files/31/31-0.txt",
+    "directUrl": "https://www.gutenberg.org/cache/epub/31/pg31.txt",
     "wikipediaUrl": "https://en.wikipedia.org/wiki/Oedipus_Rex",
     "wikipediaTitle": "Oedipus Rex"
   },
@@ -59,7 +59,7 @@
     "id": "1112",
     "title": "Antigone",
     "author": "Sophocles",
-    "directUrl": "https://www.gutenberg.org/files/1112/1112-0.txt",
+    "directUrl": "https://www.gutenberg.org/cache/epub/1112/pg1112.txt",
     "wikipediaUrl": "https://en.wikipedia.org/wiki/Antigone",
     "wikipediaTitle": "Antigone"
   },
@@ -67,7 +67,7 @@
     "id": "2563",
     "title": "The Frogs",
     "author": "Aristophanes",
-    "directUrl": "https://www.gutenberg.org/files/2563/2563-0.txt",
+    "directUrl": "https://www.gutenberg.org/cache/epub/2563/pg2563.txt",
     "wikipediaUrl": "https://en.wikipedia.org/wiki/The_Frogs",
     "wikipediaTitle": "The Frogs"
   },
@@ -75,7 +75,7 @@
     "id": "8438",
     "title": "Nicomachean Ethics",
     "author": "Aristotle",
-    "directUrl": "https://www.gutenberg.org/files/8438/8438-0.txt",
+    "directUrl": "https://www.gutenberg.org/cache/epub/8438/pg8438.txt",
     "wikipediaUrl": "https://en.wikipedia.org/wiki/Nicomachean_Ethics",
     "wikipediaTitle": "Nicomachean Ethics"
   }
