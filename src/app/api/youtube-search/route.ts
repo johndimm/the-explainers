@@ -53,8 +53,8 @@ async function searchYouTube(searchQuery: string) {
     
     return videos
     
-  } catch (error) {
-    error('YouTube search error:', error)
+  } catch (err) {
+    error('YouTube search error:', err instanceof Error ? err.message : String(err))
     return []
   }
 }
@@ -199,8 +199,8 @@ export async function POST(req: NextRequest) {
       videos: videos.slice(0, 1) // Return the highest-scored result
     })
     
-  } catch (error) {
-    error('YouTube search error:', error)
+  } catch (err) {
+    error('YouTube search error:', err instanceof Error ? err.message : String(err))
     return NextResponse.json(
       { 
         success: false, 
