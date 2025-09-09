@@ -854,7 +854,7 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ selectedText, contextInfo
     // CURSOR HELPER: Log the full prompt being sent to the LLM for re-explain
     log('🔄 RE-EXPLAIN PROMPT SENT TO LLM 🔄')
     log('='.repeat(80))
-    log(promptText)
+    log('chat', promptText)
     log('='.repeat(80))
     log('Context info:', contextInfo)
     
@@ -951,7 +951,7 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ selectedText, contextInfo
     // CURSOR HELPER: Log the full prompt being sent to the LLM
     log('🚀 FULL PROMPT SENT TO LLM 🚀')
     log('='.repeat(80))
-    log(promptText)
+    log('chat', promptText)
     log('='.repeat(80))
     log('Context info:', contextInfo)
     

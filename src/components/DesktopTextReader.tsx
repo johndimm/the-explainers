@@ -7,7 +7,7 @@ import { useRouter } from 'next/navigation'
 import { log } from '../utils/log'
 
 const DesktopTextReader: React.FC<ReaderCommonProps> = ({ text, bookTitle = 'Romeo and Juliet', author = 'William Shakespeare', settings, profile, onSettingsChange }) => {
-  log('DesktopTextReader rendering with text length:', text?.length)
+  log('desktop', 'DesktopTextReader rendering with text length:', text?.length)
   const router = useRouter()
   const textReaderRef = useRef<HTMLDivElement>(null)
   const textContentRef = useRef<HTMLDivElement>(null)
@@ -28,7 +28,7 @@ const DesktopTextReader: React.FC<ReaderCommonProps> = ({ text, bookTitle = 'Rom
       setTimeout(() => {
         const selection = window.getSelection()
         const t = selection?.toString().trim() || ''
-        log('DesktopTextReader: global mouseup selection', { text: t, length: t.length, hasSelection: !!selection })
+        log('desktop', 'DesktopTextReader: global mouseup selection', { text: t, length: t.length, hasSelection: !!selection })
         
         if (t.length > 0) {
           setSelectedText(t)
@@ -55,7 +55,7 @@ const DesktopTextReader: React.FC<ReaderCommonProps> = ({ text, bookTitle = 'Rom
       const calculatedPageMap = calculatePageContent(text, pageHeight, lineHeight, charsPerLine)
       setPageMap(calculatedPageMap)
       setCurrentPage(0)
-      log('DesktopTextReader: calculated pages for scroll navigation', { pageCount: calculatedPageMap.pages.length, charsPerLine, lineHeight })
+      log('desktop', 'DesktopTextReader: calculated pages for scroll navigation', { pageCount: calculatedPageMap.pages.length, charsPerLine, lineHeight })
     }
   }, [text, settings.textFont, pageHeight])
 

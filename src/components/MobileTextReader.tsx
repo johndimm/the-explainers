@@ -7,7 +7,7 @@ import { useRouter } from 'next/navigation'
 import { log, warn } from '../utils/log'
 
 const MobileTextReader: React.FC<ReaderCommonProps> = ({ text, bookTitle = 'Romeo and Juliet', author = 'William Shakespeare', settings, profile, onSettingsChange }) => {
-  log('MobileTextReader rendering with text length:', text?.length)
+  log('mobile','mobile', 'MobileTextReader rendering with text length:', text?.length)
   const router = useRouter()
   const textReaderRef = useRef<HTMLDivElement>(null)
   const textContentRef = useRef<HTMLDivElement>(null)
@@ -37,8 +37,8 @@ const MobileTextReader: React.FC<ReaderCommonProps> = ({ text, bookTitle = 'Rome
   
   // Simple Android text selection function
   const selectAndroidWord = (pos: { x: number; y: number }) => {
-    log('=== ANDROID TEXT SELECTION DEBUG ===')
-    log('Input pos:', pos)
+    log('mobile','=== ANDROID TEXT SELECTION DEBUG ===')
+    log('mobile','Input pos:', pos)
     
     // Use the browser's built-in text selection capabilities
     try {
@@ -48,7 +48,7 @@ const MobileTextReader: React.FC<ReaderCommonProps> = ({ text, bookTitle = 'Rome
       // Get the text element
       const textElement = textContentRef.current
       if (!textElement) {
-        log('ERROR: No text element found')
+        log('mobile','ERROR: No text element found')
         setDebugMessage('ERROR: No text element found')
         return
       }
@@ -56,13 +56,13 @@ const MobileTextReader: React.FC<ReaderCommonProps> = ({ text, bookTitle = 'Rome
       // Create a range at the touch point
       const range = document.caretRangeFromPoint(pos.x, pos.y)
       if (!range) {
-        log('ERROR: Could not create range at point, trying fallback')
+        log('mobile','ERROR: Could not create range at point, trying fallback')
         setDebugMessage('ERROR: Could not create range at point, trying fallback')
         
         // Fallback: try to get element at point and find text
         const element = document.elementFromPoint(pos.x, pos.y)
         if (element && element.textContent) {
-          log('Fallback: Found element with text content')
+          log('mobile','Fallback: Found element with text content')
           const fallbackText = element.textContent
           const rect = element.getBoundingClientRect()
           const charIndex = Math.floor(((pos.x - rect.left) / rect.width) * fallbackText.length)
@@ -80,12 +80,12 @@ const MobileTextReader: React.FC<ReaderCommonProps> = ({ text, bookTitle = 'Rome
           }
           
           const fallbackWord = fallbackText.substring(wordStart, wordEnd).trim()
-          log('Fallback selected word:', fallbackWord)
+          log('mobile','Fallback selected word:', fallbackWord)
           
           if (fallbackWord && fallbackWord.length > 2) {
             androidSelectedWordRef.current = fallbackWord
             setDebugMessage(`Android fallback selected: "${fallbackWord}" - lift finger to confirm`)
-            log('SUCCESS: Fallback word stored in ref')
+            log('mobile','SUCCESS: Fallback word stored in ref')
             return
           }
         }
@@ -94,12 +94,12 @@ const MobileTextReader: React.FC<ReaderCommonProps> = ({ text, bookTitle = 'Rome
         return
       }
       
-      log('Range created:', range)
-      log('Range start:', range.startContainer, range.startOffset)
+      log('mobile','Range created:', range)
+      log('mobile','Range start:', range.startContainer, range.startOffset)
       
       // Get the text content around the range
       const textContent = range.startContainer.textContent || ''
-      log('Text content:', textContent.substring(0, 100))
+      log('mobile','Text content:', textContent.substring(0, 100))
       
       // Find word boundaries manually
       let wordStart = range.startOffset
@@ -119,28 +119,28 @@ const MobileTextReader: React.FC<ReaderCommonProps> = ({ text, bookTitle = 'Rome
       range.setStart(range.startContainer, wordStart)
       range.setEnd(range.startContainer, wordEnd)
       
-      log('Range after expand:', range)
-      log('Selected text:', range.toString())
+      log('mobile','Range after expand:', range)
+      log('mobile','Selected text:', range.toString())
       
       const selectedWord = range.toString().trim()
-      log('Selected word:', selectedWord)
+      log('mobile','Selected word:', selectedWord)
       
       if (selectedWord && selectedWord.length > 2) {
         // Store the word but don't show dialog yet
         androidSelectedWordRef.current = selectedWord
         setDebugMessage(`Android selected: "${selectedWord}" - lift finger to confirm`)
-        log('SUCCESS: Word stored in ref')
+        log('mobile','SUCCESS: Word stored in ref')
       } else {
-        log('ERROR: No valid word found')
+        log('mobile','ERROR: No valid word found')
         setDebugMessage('ERROR: No valid word found')
       }
       
     } catch (error) {
-      log('ERROR in Android text selection:', error)
+      log('mobile','ERROR in Android text selection:', error)
       setDebugMessage('ERROR in text selection')
     }
     
-    log('=== END ANDROID DEBUG ===')
+    log('mobile','=== END ANDROID DEBUG ===')
   }
   
   // Initialize zoom level from sessionStorage or default
@@ -224,7 +224,7 @@ const MobileTextReader: React.FC<ReaderCommonProps> = ({ text, bookTitle = 'Rome
       const calculatedPageMap = calculatePageContent(text, pageHeight, lineHeight, charsPerLine)
       setPageMap(calculatedPageMap)
       setCurrentPage(0)
-      log('MobileTextReader: calculated pages for scroll navigation', { pageCount: calculatedPageMap.pages.length, charsPerLine, lineHeight })
+      log('mobile','MobileTextReader: calculated pages for scroll navigation', { pageCount: calculatedPageMap.pages.length, charsPerLine, lineHeight })
     }
   }, [text, settings.textFont, pageHeight])
 
@@ -274,7 +274,7 @@ const MobileTextReader: React.FC<ReaderCommonProps> = ({ text, bookTitle = 'Rome
         const selection = window.getSelection()
         const selectedText = selection?.toString().trim()
         
-        log('Selection change check:', {
+        log('mobile','Selection change check:', {
           hasSelection: !!selection,
           selectionText: selectedText,
           selectionLength: selectedText?.length || 0,
@@ -282,7 +282,7 @@ const MobileTextReader: React.FC<ReaderCommonProps> = ({ text, bookTitle = 'Rome
         })
         
         if (selectedText && selectedText.length > 0) {
-          log('Text selected via selection change:', selectedText)
+          log('mobile','Text selected via selection change:', selectedText)
           setSelectedText(selectedText)
           setShowConfirmDialog(true)
           // Clear the selection after showing the dialog
@@ -330,11 +330,11 @@ const MobileTextReader: React.FC<ReaderCommonProps> = ({ text, bookTitle = 'Rome
 
   // Simple native text selection handlers
   const handleTouchStart = (e: React.TouchEvent) => {
-    log('Touch start detected')
+    log('mobile','Touch start detected')
 
     // Handle multi-touch for zoom
     if (e.touches.length === 2) {
-      log('Two finger touch detected - zoom mode')
+      log('mobile','Two finger touch detected - zoom mode')
       const touch1 = e.touches[0]
       const touch2 = e.touches[1]
       const initialDistance = Math.sqrt(
@@ -356,7 +356,7 @@ const MobileTextReader: React.FC<ReaderCommonProps> = ({ text, bookTitle = 'Rome
     if ('vibrate' in navigator && !e.currentTarget.hasAttribute('data-vibration-primed') && !isScrolling && !recentlyScrolled) {
       // Don't vibrate on initial touch anymore - wait for long press
       e.currentTarget.setAttribute('data-vibration-primed', 'true')
-      log('Vibration API primed (no initial vibration)')
+      log('mobile','Vibration API primed (no initial vibration)')
     }
 
     // Set up long press detection for vibration (only if not scrolling and haven't recently scrolled)
@@ -376,7 +376,7 @@ const MobileTextReader: React.FC<ReaderCommonProps> = ({ text, bookTitle = 'Rome
             const deltaY = Math.abs(currentTouch.clientY - touchStartY)
             if (deltaX < touchMoveThreshold && deltaY < touchMoveThreshold) {
               navigator.vibrate(50)
-              log('Vibration triggered on long press')
+              log('mobile','Vibration triggered on long press')
             }
           }
         }
@@ -422,7 +422,7 @@ const MobileTextReader: React.FC<ReaderCommonProps> = ({ text, bookTitle = 'Rome
   }, [])
 
   const handleMouseUp = (e: React.MouseEvent) => {
-    log('Mouse up detected')
+    log('mobile','Mouse up detected')
     
     // Prevent default browser behavior (Google search bar, etc.)
     e.preventDefault()
@@ -434,7 +434,7 @@ const MobileTextReader: React.FC<ReaderCommonProps> = ({ text, bookTitle = 'Rome
       const selectedText = selection?.toString().trim()
       
       if (selectedText && selectedText.length > 0) {
-        log('Text selected via mouse up:', selectedText)
+        log('mobile','Text selected via mouse up:', selectedText)
         setSelectedText(selectedText)
         setShowConfirmDialog(true)
         // Clear the selection after showing the dialog
@@ -448,19 +448,19 @@ const MobileTextReader: React.FC<ReaderCommonProps> = ({ text, bookTitle = 'Rome
   }
 
   const handleTouchMove = (e: React.TouchEvent) => {
-    log('Touch move detected, touches:', e.touches.length)
+    log('mobile','Touch move detected, touches:', e.touches.length)
     
     // Clear any pending vibration timer if user is moving
     const timerId = e.currentTarget.getAttribute('data-long-press-timer')
     if (timerId) {
       clearTimeout(parseInt(timerId))
       e.currentTarget.removeAttribute('data-long-press-timer')
-      log('Cancelled vibration timer due to touch move')
+      log('mobile','Cancelled vibration timer due to touch move')
     }
     
     // Handle pinch to zoom
     if (e.touches.length === 2) {
-      log('Two finger touch move - zoom mode')
+      log('mobile','Two finger touch move - zoom mode')
       e.preventDefault()
       const touch1 = e.touches[0]
       const touch2 = e.touches[1]
@@ -472,12 +472,12 @@ const MobileTextReader: React.FC<ReaderCommonProps> = ({ text, bookTitle = 'Rome
       const initialDistance = parseFloat(e.currentTarget.getAttribute('data-initial-distance') || '0')
       const initialZoom = parseFloat(e.currentTarget.getAttribute('data-initial-zoom') || '1')
       
-      log('Zoom calculation:', { currentDistance, initialDistance, initialZoom })
+      log('mobile','Zoom calculation:', { currentDistance, initialDistance, initialZoom })
       
       if (initialDistance > 0) {
         const scale = currentDistance / initialDistance
         const newZoom = Math.max(0.5, Math.min(3, initialZoom * scale))
-        log('Setting zoom to:', newZoom)
+        log('mobile','Setting zoom to:', newZoom)
         setZoomLevel(newZoom)
       }
     } else if (e.touches.length === 1) {
@@ -497,7 +497,7 @@ const MobileTextReader: React.FC<ReaderCommonProps> = ({ text, bookTitle = 'Rome
         if (timerId) {
           clearTimeout(parseInt(timerId))
           e.currentTarget.removeAttribute('data-long-press-timer')
-          log('Cancelled vibration due to movement threshold')
+          log('mobile','Cancelled vibration due to movement threshold')
         }
       }
     }
@@ -603,7 +603,7 @@ const MobileTextReader: React.FC<ReaderCommonProps> = ({ text, bookTitle = 'Rome
 
   const handleLongPress = (startX: number, startY: number, endX: number, endY: number): string => {
     try {
-      log('handleLongPress called', { startX, startY, endX, endY })
+      log('mobile','handleLongPress called', { startX, startY, endX, endY })
       
       // Try multiple methods to get text ranges for iPhone compatibility
       const startRange = caretRangeAtPoint(startX, startY) || 
@@ -615,11 +615,11 @@ const MobileTextReader: React.FC<ReaderCommonProps> = ({ text, bookTitle = 'Rome
                       document.elementFromPoint?.(endY, endY)?.ownerDocument?.createRange?.()
       
       if (!startRange || !endRange) {
-        log('caretRangeAtPoint failed', { startRange: !!startRange, endRange: !!endRange })
+        log('mobile','caretRangeAtPoint failed', { startRange: !!startRange, endRange: !!endRange })
         
         // iPhone fallback: only if standard method failed AND we're on iPhone
         if (isIPhone) {
-          log('trying iPhone fallback method')
+          log('mobile','trying iPhone fallback method')
           return handleLongPressIPhone(startX, startY, endX, endY)
         }
         
@@ -646,26 +646,26 @@ const MobileTextReader: React.FC<ReaderCommonProps> = ({ text, bookTitle = 'Rome
       const selectedText = expandedRange.toString().trim()
       
       if (selectedText.length > 2) {
-        log('handleLongPress: selected text', { text: selectedText, length: selectedText.length })
+        log('mobile','handleLongPress: selected text', { text: selectedText, length: selectedText.length })
         return selectedText
       }
       
       return ''
     } catch (error) {
-      log('handleLongPress error:', error)
+      log('mobile','handleLongPress error:', error)
       return ''
     }
   }
 
   const handleLongPressIPhone = (startX: number, startY: number, endX: number, endY: number): string => {
     try {
-      log('handleLongPressIPhone called')
+      log('mobile','handleLongPressIPhone called')
       
       const startElement = document.elementFromPoint(startX, startY)
       const endElement = document.elementFromPoint(endX, endY)
       
       if (!startElement || !endElement) {
-        log('elementFromPoint returned null')
+        log('mobile','elementFromPoint returned null')
         return ''
       }
       
@@ -681,7 +681,7 @@ const MobileTextReader: React.FC<ReaderCommonProps> = ({ text, bookTitle = 'Rome
       }
       
       if (!textContainer || !endTextContainer || !textContainer.textContent || !endTextContainer.textContent) {
-        log('could not find text containers')
+        log('mobile','could not find text containers')
         return ''
       }
       
@@ -712,13 +712,13 @@ const MobileTextReader: React.FC<ReaderCommonProps> = ({ text, bookTitle = 'Rome
       const selectedText = text.substring(wordStart, wordEnd).trim()
       
       if (selectedText.length > 2) {
-        log('iPhone fallback: selected text', { text: selectedText, length: selectedText.length })
+        log('mobile','iPhone fallback: selected text', { text: selectedText, length: selectedText.length })
         return selectedText
       }
       
       return ''
     } catch (error) {
-      log('handleLongPressIPhone error:', error)
+      log('mobile','handleLongPressIPhone error:', error)
       return ''
     }
   }

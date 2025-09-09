@@ -257,7 +257,7 @@ export const ProfileProvider: React.FC<ProfileProviderProps> = ({ children }) =>
     log('ProfileContext: book purchased check result:', isPurchased)
     log('ProfileContext: checking each purchased book:')
     profile.purchasedBooks?.forEach((book, index) => {
-      log(`  [${index}]: "${book}" === "${bookKey}" ? ${book === bookKey}`)
+      log('profile', `  [${index}]: "${book}" === "${bookKey}" ? ${book === bookKey}`)
     })
     
     if (isPurchased) {

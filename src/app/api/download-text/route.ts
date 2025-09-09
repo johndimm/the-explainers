@@ -36,10 +36,10 @@ export async function GET(request: NextRequest) {
       
       const text = fs.readFileSync(bookPath, 'utf-8')
       
-      log(`Reading file: ${bookPath}`)
-      log(`File size: ${text.length} characters`)
-      log(`First 200 chars: ${text.substring(0, 200)}`)
-      log(`Last 200 chars: ${text.substring(text.length - 200)}`)
+      log('api', `Reading file: ${bookPath}`)
+      log('api', `File size: ${text.length} characters`)
+      log('api', `First 200 chars: ${text.substring(0, 200)}`)
+      log('api', `Last 200 chars: ${text.substring(text.length - 200)}`)
       
       // Return the text directly as plain text instead of JSON
       return new Response(text, {
