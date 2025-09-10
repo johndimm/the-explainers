@@ -352,12 +352,12 @@ const Settings: React.FC<SettingsProps> = ({ isOpen, onClose, settings, onSettin
       </header>
       
       <div style={{ marginTop: '0' }}>
-        <div className={styles.settingsContainer} style={{ margin: '20px auto', maxWidth: '600px', boxShadow: 'none', border: 'none', overflow: 'visible', maxHeight: 'none' }}>
+        <div className={styles.settingsContainer}>
           <div className={styles.settingsHeader}>
             <h2>Settings</h2>
           </div>
 
-        <div className={styles.settingsContent} style={{ overflow: 'visible', maxHeight: 'none' }}>
+        <div className={styles.settingsContent}>
           <div className={styles.settingGroup}>
             <h3>Language Model</h3>
             <div className={styles.radioGroup}>
