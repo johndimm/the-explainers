@@ -583,8 +583,8 @@ const cleanTextLineBreaks = (text: string, isMobile: boolean = false): string =>
   
   // For mobile/narrow screens, clean up awkward breaks
   return text
-    // Replace single line breaks between non-empty lines with spaces
-    .replace(/([^\n])\n([^\n])/g, '$1 $2')
+    // Replace single line breaks between non-empty lines with spaces, but not for Scene lines
+    .replace(/([^\n])\n([^\n])(?!.*Scene)/g, '$1 $2')
     // Add blank line before speaker names (all caps, ends with period, but not ACT/SCENE/Contents)
     .replace(/([^\n])([A-Z][A-Z\s]*[A-Z]\.)(?!.*ACT|.*Scene|.*Contents)/g, '$1\n\n$2')
     // Add line break after speaker names
