@@ -18,6 +18,8 @@ const DEFAULT_SETTINGS: SettingsData = {
   responseLength: 'brief',
   textFont: 'serif',
   chatFont: 'sans-serif',
+  textFontSize: 18,
+  chatFontSize: 16,
   readingMode: 'scroll',
   explanationStyle: 'neutral'
 }
@@ -107,21 +109,23 @@ export const SettingsProvider: React.FC<SettingsProviderProps> = ({ children }) 
     if (session?.user?.email) {
       try {
         console.log('SettingsContext: Saving to database for user:', session.user.email)
-        await fetch('/api/user/settings', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            llm_provider: newSettings.llmProvider,
-            response_length: newSettings.responseLength,
-            text_font: newSettings.textFont,
-            chat_font: newSettings.chatFont,
-            reading_mode: newSettings.readingMode,
-            explanation_style: newSettings.explanationStyle,
-            custom_api_key: newSettings.customApiKey,
-            custom_api_url: newSettings.customApiUrl,
-            custom_model_name: newSettings.customModelName
-          })
-        })
+              await fetch('/api/user/settings', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                  llm_provider: newSettings.llmProvider,
+                  response_length: newSettings.responseLength,
+                  text_font: newSettings.textFont,
+                  chat_font: newSettings.chatFont,
+                  text_font_size: newSettings.textFontSize,
+                  chat_font_size: newSettings.chatFontSize,
+                  reading_mode: newSettings.readingMode,
+                  explanation_style: newSettings.explanationStyle,
+                  custom_api_key: newSettings.customApiKey,
+                  custom_api_url: newSettings.customApiUrl,
+                  custom_model_name: newSettings.customModelName
+                })
+              })
         console.log('SettingsContext: Successfully saved to database')
       } catch (error) {
         console.error('Error saving settings to database:', error)

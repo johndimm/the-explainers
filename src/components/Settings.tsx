@@ -34,6 +34,8 @@ export interface SettingsData {
   responseLength: ResponseLength
   textFont: FontFamily
   chatFont: FontFamily
+  textFontSize: number
+  chatFontSize: number
   readingMode: ReadingMode
   explanationStyle: ExplanationStyle
   customApiKey?: string
@@ -53,6 +55,8 @@ const DEFAULT_SETTINGS: SettingsData = {
   responseLength: 'brief',
   textFont: 'serif',
   chatFont: 'sans-serif',
+  textFontSize: 18,
+  chatFontSize: 16,
   readingMode: 'scroll',
   explanationStyle: 'neutral'
 }
@@ -525,6 +529,48 @@ const Settings: React.FC<SettingsProps> = ({ isOpen, onClose, settings, onSettin
                   onChange={(e) => setLocalSettings(prev => ({ ...prev, textFont: e.target.value as FontFamily }))}
                 />
                 <span style={{ fontFamily: 'monospace' }}>Monospace - Fixed width</span>
+              </label>
+            </div>
+          </div>
+
+          <div className={styles.settingGroup}>
+            <h3>Text Reader Font Size</h3>
+            <div className={styles.rangeGroup}>
+              <label className={styles.rangeLabel}>
+                <span>Font Size: {localSettings.textFontSize}px</span>
+                <input
+                  type="range"
+                  min="12"
+                  max="24"
+                  value={localSettings.textFontSize}
+                  onChange={(e) => setLocalSettings(prev => ({ ...prev, textFontSize: parseInt(e.target.value) }))}
+                  className={styles.rangeInput}
+                />
+                <div className={styles.rangeLabels}>
+                  <span>12px</span>
+                  <span>24px</span>
+                </div>
+              </label>
+            </div>
+          </div>
+
+          <div className={styles.settingGroup}>
+            <h3>Chat Font Size</h3>
+            <div className={styles.rangeGroup}>
+              <label className={styles.rangeLabel}>
+                <span>Font Size: {localSettings.chatFontSize}px</span>
+                <input
+                  type="range"
+                  min="12"
+                  max="20"
+                  value={localSettings.chatFontSize}
+                  onChange={(e) => setLocalSettings(prev => ({ ...prev, chatFontSize: parseInt(e.target.value) }))}
+                  className={styles.rangeInput}
+                />
+                <div className={styles.rangeLabels}>
+                  <span>12px</span>
+                  <span>20px</span>
+                </div>
               </label>
             </div>
           </div>

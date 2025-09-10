@@ -768,12 +768,14 @@ const MobileTextReader: React.FC<ReaderCommonProps> = ({ text, bookTitle = 'Rome
           userSelect: 'text', 
           WebkitTouchCallout: 'none', 
           WebkitTapHighlightColor: 'transparent',
-          touchAction: 'pan-y pinch-zoom', fontFamily: settings.textFont,
+          touchAction: 'pan-y pinch-zoom', 
+          fontFamily: settings.textFont,
+          '--text-font-size': `${settings.textFontSize}px`,
           transform: `scale(${zoomLevel})`,
           transformOrigin: 'top left',
           width: `${100 / zoomLevel}%`,
           position: 'relative'
-        }}
+        } as React.CSSProperties}
       >
         {/* Scroll mode page navigation zones - disabled to avoid interfering with text selection */}
         

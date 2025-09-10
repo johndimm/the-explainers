@@ -15,7 +15,7 @@
   margin: 0 auto;
   text-align: left;
   font-family: 'Georgia', 'Times New Roman', serif;
-  font-size: 18px;
+  font-size: var(--text-font-size, 18px);
   line-height: 1.7;
   white-space: pre-line;
   word-wrap: break-word;
@@ -44,7 +44,7 @@
   .textContent {
     max-width: none;
     margin: 0;
-    font-size: 17px;
+    font-size: var(--text-font-size, 17px);
     line-height: 1.6;
     padding: 20px 16px;
     border-radius: 8px;

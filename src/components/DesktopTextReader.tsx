@@ -243,7 +243,12 @@ const DesktopTextReader: React.FC<ReaderCommonProps> = ({ text, bookTitle = 'Rom
       <div
         ref={textContentRef}
         className={styles.textContent}
-        style={{ userSelect: 'text', fontFamily: settings.textFont, position: 'relative' }}
+        style={{ 
+          userSelect: 'text', 
+          fontFamily: settings.textFont, 
+          position: 'relative',
+          '--text-font-size': `${settings.textFontSize}px`
+        } as React.CSSProperties}
       >
 
         

@@ -573,26 +573,10 @@ export const useBookmarkRestoreAndSave = (
 }
 
 // Function to clean up awkward line breaks in text
-// For mobile/narrow screens: remove single line breaks between non-empty lines
-// For desktop/wide screens: keep original formatting
+// Keep original formatting on all screen sizes - no text processing
 const cleanTextLineBreaks = (text: string, isMobile: boolean = false): string => {
-  if (!isMobile) {
-    // For desktop/wide screens, keep original formatting
-    return text
-  }
-  
-  // For mobile/narrow screens, clean up awkward breaks
+  // Always return original text - no processing
   return text
-    // Replace single line breaks between non-empty lines with spaces, but not for Scene lines
-    .replace(/([^\n])\n([^\n])(?!.*Scene)/g, '$1 $2')
-    // Add blank line before speaker names (all caps, ends with period, but not ACT/SCENE/Contents)
-    .replace(/([^\n])([A-Z][A-Z\s]*[A-Z]\.)(?!.*ACT|.*Scene|.*Contents)/g, '$1\n\n$2')
-    // Add line break after speaker names
-    .replace(/([A-Z][A-Z\s]*[A-Z]\.)([^\n])(?!.*ACT|.*Scene|.*Contents)/g, '$1\n$2')
-    // Clean up multiple spaces
-    .replace(/[ \t]+/g, ' ')
-    // Clean up multiple line breaks (keep max 2)
-    .replace(/\n{3,}/g, '\n\n')
 }
 
 export const useSearchCore = (
