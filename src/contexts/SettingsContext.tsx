@@ -59,6 +59,8 @@ export const SettingsProvider: React.FC<SettingsProviderProps> = ({ children }) 
             responseLength: dbSettings.response_length as ResponseLength,
             textFont: dbSettings.text_font as FontFamily,
             chatFont: dbSettings.chat_font as FontFamily,
+            textFontSize: dbSettings.text_font_size || 18,
+            chatFontSize: dbSettings.chat_font_size || 16,
             readingMode: dbSettings.reading_mode as ReadingMode,
             explanationStyle: dbSettings.explanation_style as ExplanationStyle,
             customApiKey: dbSettings.custom_api_key,

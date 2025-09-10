@@ -31,6 +31,8 @@ export interface UserSettings {
   response_length: string
   text_font: string
   chat_font: string
+  text_font_size: number
+  chat_font_size: number
   reading_mode: string
   explanation_style: string
   custom_api_key?: string
@@ -90,6 +92,8 @@ export async function initializeDatabase() {
         response_length VARCHAR(20) DEFAULT 'brief',
         text_font VARCHAR(20) DEFAULT 'serif',
         chat_font VARCHAR(20) DEFAULT 'sans-serif',
+        text_font_size INTEGER DEFAULT 18,
+        chat_font_size INTEGER DEFAULT 16,
         reading_mode VARCHAR(20) DEFAULT 'scroll',
         explanation_style VARCHAR(50) DEFAULT 'neutral',
         custom_api_key TEXT,
@@ -121,6 +125,16 @@ export async function initializeDatabase() {
         updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
         PRIMARY KEY (email, book_title, book_author)
       )
+    `)
+
+    // Add font size columns to existing user_settings table if they don't exist
+    await client.query(`
+      ALTER TABLE user_settings 
+      ADD COLUMN IF NOT EXISTS text_font_size INTEGER DEFAULT 18
+    `)
+    await client.query(`
+      ALTER TABLE user_settings 
+      ADD COLUMN IF NOT EXISTS chat_font_size INTEGER DEFAULT 16
     `)
 
     // Create indexes for better performance
@@ -407,6 +421,8 @@ export async function getUserSettings(email: string): Promise<UserSettings | nul
       response_length: row.response_length,
       text_font: row.text_font,
       chat_font: row.chat_font,
+      text_font_size: row.text_font_size || 18,
+      chat_font_size: row.chat_font_size || 16,
       reading_mode: row.reading_mode,
       explanation_style: row.explanation_style,
       custom_api_key: row.custom_api_key,
@@ -431,16 +447,18 @@ export async function createOrUpdateUserSettings(settings: Partial<UserSettings>
     const result = await client.query(`
       INSERT INTO user_settings (
         email, llm_provider, response_length, text_font, chat_font,
-        reading_mode, explanation_style, custom_api_key, custom_api_url,
-        custom_model_name, created_at, updated_at
+        text_font_size, chat_font_size, reading_mode, explanation_style, 
+        custom_api_key, custom_api_url, custom_model_name, created_at, updated_at
       ) VALUES (
-        $1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12
+        $1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14
       )
       ON CONFLICT (email) DO UPDATE SET
         llm_provider = EXCLUDED.llm_provider,
         response_length = EXCLUDED.response_length,
         text_font = EXCLUDED.text_font,
         chat_font = EXCLUDED.chat_font,
+        text_font_size = EXCLUDED.text_font_size,
+        chat_font_size = EXCLUDED.chat_font_size,
         reading_mode = EXCLUDED.reading_mode,
         explanation_style = EXCLUDED.explanation_style,
         custom_api_key = EXCLUDED.custom_api_key,
@@ -454,6 +472,8 @@ export async function createOrUpdateUserSettings(settings: Partial<UserSettings>
       settings.response_length || 'brief',
       settings.text_font || 'serif',
       settings.chat_font || 'sans-serif',
+      settings.text_font_size || 18,
+      settings.chat_font_size || 16,
       settings.reading_mode || 'scroll',
       settings.explanation_style || 'neutral',
       settings.custom_api_key || null,
@@ -470,6 +490,8 @@ export async function createOrUpdateUserSettings(settings: Partial<UserSettings>
       response_length: row.response_length,
       text_font: row.text_font,
       chat_font: row.chat_font,
+      text_font_size: row.text_font_size || 18,
+      chat_font_size: row.chat_font_size || 16,
       reading_mode: row.reading_mode,
       explanation_style: row.explanation_style,
       custom_api_key: row.custom_api_key,
