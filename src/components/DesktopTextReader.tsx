@@ -248,7 +248,7 @@ const DesktopTextReader: React.FC<ReaderCommonProps> = ({ text, bookTitle = 'Rom
 
         
         <pre style={{ 
-          whiteSpace: 'pre-wrap', 
+          whiteSpace: 'pre-line', 
           wordWrap: 'break-word',
           overflowWrap: 'break-word',
           margin: 0, 
@@ -256,7 +256,7 @@ const DesktopTextReader: React.FC<ReaderCommonProps> = ({ text, bookTitle = 'Rom
           fontSize: 'inherit',
           lineHeight: 'inherit'
         }}>
-          {renderTextWithSearchHighlight(text, false)}
+          {renderTextWithSearchHighlight(text, false, 0, false)}
         </pre>
       </div>
 

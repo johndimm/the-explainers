@@ -572,6 +572,28 @@ export const useBookmarkRestoreAndSave = (
   }, [bookTitle, author, text, textReaderRef, session])
 }
 
+// Function to clean up awkward line breaks in text
+// For mobile/narrow screens: remove single line breaks between non-empty lines
+// For desktop/wide screens: keep original formatting
+const cleanTextLineBreaks = (text: string, isMobile: boolean = false): string => {
+  if (!isMobile) {
+    // For desktop/wide screens, keep original formatting
+    return text
+  }
+  
+  // For mobile/narrow screens, clean up awkward breaks
+  return text
+    // Replace single line breaks between non-empty lines with spaces
+    .replace(/([^\n])\n([^\n])/g, '$1 $2')
+    // Add line breaks before and after speaker names (all caps, ends with period, but not Roman numerals)
+    .replace(/([^\n])([A-Z][A-Z\s]*[A-Z]\.)(?![^IVX]*[IVX]+)/g, '$1\n$2')
+    .replace(/([A-Z][A-Z\s]*[A-Z]\.)([^\n])(?![^IVX]*[IVX]+)/g, '$1\n$2')
+    // Clean up multiple spaces
+    .replace(/[ \t]+/g, ' ')
+    // Clean up multiple line breaks
+    .replace(/\n{3,}/g, '\n\n')
+}
+
 export const useSearchCore = (
   text: string,
   textReaderRef: React.RefObject<HTMLDivElement | null>,
@@ -679,30 +701,35 @@ export const useSearchCore = (
     scrollToSearchResult(newIndex, searchResults)
   }
 
-  const renderTextWithSearchHighlight = (textToRender: string, isPageMode: boolean = false, currentPageIndex: number = 0) => {
+  const renderTextWithSearchHighlight = (textToRender: string, isPageMode: boolean = false, currentPageIndex: number = 0, isMobile: boolean = false) => {
+    // Clean up awkward line breaks first (only for mobile)
+    const cleanedText = cleanTextLineBreaks(textToRender, isMobile)
+    console.log('Text cleaning - original length:', textToRender.length, 'cleaned length:', cleanedText.length, 'isMobile:', isMobile)
+    console.log('Sample of cleaned text:', cleanedText.substring(0, 200))
+    
     if (searchResults.length === 0 || !searchQuery.trim()) {
-      return textToRender
+      return cleanedText
     }
 
     // Simple approach: find and highlight the search query text in the current text
     const query = searchQuery.trim()
-    if (!query) return textToRender
+    if (!query) return cleanedText
 
     const parts: React.ReactNode[] = []
     let lastIndex = 0
 
     // Use the same regex as the search function for case-insensitive highlighting
     const regex = buildFlexibleRegex(query)
-    if (!regex) return textToRender
+    if (!regex) return cleanedText
 
     let match: RegExpExecArray | null
-    while ((match = regex.exec(textToRender)) !== null) {
+    while ((match = regex.exec(cleanedText)) !== null) {
       const index = match.index
       const matchedText = match[0]
 
       // Add text before the match
       if (index > lastIndex) {
-        parts.push(textToRender.slice(lastIndex, index))
+        parts.push(cleanedText.slice(lastIndex, index))
       }
 
       // Check if this match corresponds to the current search result
@@ -730,8 +757,8 @@ export const useSearchCore = (
     }
 
     // Add remaining text
-    if (lastIndex < textToRender.length) {
-      parts.push(textToRender.slice(lastIndex))
+    if (lastIndex < cleanedText.length) {
+      parts.push(cleanedText.slice(lastIndex))
     }
 
     return <>{parts}</>

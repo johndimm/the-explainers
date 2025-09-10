@@ -725,7 +725,7 @@ const MobileTextReader: React.FC<ReaderCommonProps> = ({ text, bookTitle = 'Rome
 
   const renderText = () => {
     // Always render the full text with search highlighting
-    return renderTextWithSearchHighlight(text, false)
+    return renderTextWithSearchHighlight(text, false, 0, true)
   }
 
   return (
