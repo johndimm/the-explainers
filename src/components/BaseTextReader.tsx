@@ -585,12 +585,13 @@ const cleanTextLineBreaks = (text: string, isMobile: boolean = false): string =>
   return text
     // Replace single line breaks between non-empty lines with spaces
     .replace(/([^\n])\n([^\n])/g, '$1 $2')
-    // Add line breaks before and after speaker names (all caps, ends with period, but not Roman numerals)
-    .replace(/([^\n])([A-Z][A-Z\s]*[A-Z]\.)(?![^IVX]*[IVX]+)/g, '$1\n$2')
-    .replace(/([A-Z][A-Z\s]*[A-Z]\.)([^\n])(?![^IVX]*[IVX]+)/g, '$1\n$2')
+    // Add blank line before speaker names (all caps, ends with period, but not ACT/SCENE/Contents)
+    .replace(/([^\n])([A-Z][A-Z\s]*[A-Z]\.)(?!.*ACT|.*Scene|.*Contents)/g, '$1\n\n$2')
+    // Add line break after speaker names
+    .replace(/([A-Z][A-Z\s]*[A-Z]\.)([^\n])(?!.*ACT|.*Scene|.*Contents)/g, '$1\n$2')
     // Clean up multiple spaces
     .replace(/[ \t]+/g, ' ')
-    // Clean up multiple line breaks
+    // Clean up multiple line breaks (keep max 2)
     .replace(/\n{3,}/g, '\n\n')
 }
 
