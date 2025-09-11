@@ -694,16 +694,16 @@ export const useSearchCore = (
 
     // Use the same regex as the search function for case-insensitive highlighting
     const regex = buildFlexibleRegex(query)
-    if (!regex) return cleanedText
+    if (!regex) return textToRender
 
     let match: RegExpExecArray | null
-    while ((match = regex.exec(cleanedText)) !== null) {
+    while ((match = regex.exec(textToRender)) !== null) {
       const index = match.index
       const matchedText = match[0]
 
       // Add text before the match
       if (index > lastIndex) {
-        parts.push(cleanedText.slice(lastIndex, index))
+        parts.push(textToRender.slice(lastIndex, index))
       }
 
       // Check if this match corresponds to the current search result
@@ -731,8 +731,8 @@ export const useSearchCore = (
     }
 
     // Add remaining text
-    if (lastIndex < cleanedText.length) {
-      parts.push(cleanedText.slice(lastIndex))
+    if (lastIndex < textToRender.length) {
+      parts.push(textToRender.slice(lastIndex))
     }
 
     return <>{parts}</>
