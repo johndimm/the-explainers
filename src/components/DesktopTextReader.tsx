@@ -2,6 +2,7 @@
 
 import React, { useRef, useState } from 'react'
 import styles from './TextReader.module.css'
+import ChatInterface from './ChatInterface'
 import { ReaderCommonProps, useBookmarkRestoreAndSave, useSearchCore, extractContextInfo, calculatePageContent, estimateCharsPerLine, PageMap } from './BaseTextReader'
 import { useRouter } from 'next/navigation'
 import { log } from '../utils/log'
@@ -13,6 +14,8 @@ const DesktopTextReader: React.FC<ReaderCommonProps> = ({ text, bookTitle = 'Rom
   const textContentRef = useRef<HTMLDivElement>(null)
   const [showConfirmDialog, setShowConfirmDialog] = useState(false)
   const [selectedText, setSelectedText] = useState('')
+  const [showChatModal, setShowChatModal] = useState(false)
+  const [chatContext, setChatContext] = useState<any>(null)
   
   // Page calculation state for scroll navigation
   const [pageMap, setPageMap] = useState<PageMap>({ pages: [], pageRanges: [] })
@@ -113,8 +116,9 @@ const DesktopTextReader: React.FC<ReaderCommonProps> = ({ text, bookTitle = 'Rom
 
   const handleExplain = () => {
     const context = extractContextInfo(selectedText, text, bookTitle, author)
-    sessionStorage.setItem('chatContext', JSON.stringify({ selectedText, contextInfo: context, bookTitle, author }))
-    router.push('/chat')
+    const chatData = { selectedText, contextInfo: context, bookTitle, author }
+    setChatContext(chatData)
+    setShowChatModal(true)
     setShowConfirmDialog(false)
     setSelectedText('')
   }
@@ -271,6 +275,27 @@ const DesktopTextReader: React.FC<ReaderCommonProps> = ({ text, bookTitle = 'Rom
             <button onClick={handleExplain} style={{ padding: '8px 16px', border: 'none', borderRadius: '4px', background: '#007bff', color: 'white', cursor: 'pointer' }}>Explain</button>
           </div>
         </div>
+      )}
+
+      {/* Chat Modal */}
+      {showChatModal && (
+        <ChatInterface
+          selectedText={chatContext?.selectedText || ""}
+          contextInfo={chatContext?.contextInfo || null}
+          settings={settings}
+          profile={profile}
+          onClose={() => {
+            // Store context for page chat to use
+            if (chatContext) {
+              sessionStorage.setItem('chatContext', JSON.stringify(chatContext))
+            }
+            setShowChatModal(false)
+          }}
+          onSettingsChange={onSettingsChange}
+          bookTitle={chatContext?.bookTitle || bookTitle}
+          author={chatContext?.author || author}
+          isPageMode={false}
+        />
       )}
     </div>
   )

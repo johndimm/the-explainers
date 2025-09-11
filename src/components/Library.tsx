@@ -180,7 +180,7 @@ const Library: React.FC<LibraryProps> = ({ onBookSelect, onBackToCurrentBook }) 
 
   return (
     <div>
-      <div className={styles.library}>
+      <div className={styles.library} style={{ marginTop: '60px' }}>
         <div className={styles.header}>
           <h1 style={{ marginTop: 4 }}>Library</h1>
           <p style={{ marginTop: 4 }}>

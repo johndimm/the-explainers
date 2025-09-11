@@ -5,12 +5,12 @@ import React from 'react'
 export default function AboutPage() {
   return (
     <div style={{ 
-      marginTop: '0', 
+      marginTop: '60px', 
       fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, sans-serif', 
       lineHeight: '1.6', 
       color: '#333', 
       maxWidth: '800px', 
-      margin: '0 auto', 
+      margin: '60px auto 0 auto', 
       padding: '20px', 
       backgroundColor: '#f9f9f9' 
     }}>

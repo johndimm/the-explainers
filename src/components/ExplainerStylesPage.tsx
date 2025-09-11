@@ -186,7 +186,7 @@ const ExplainerStylesPage: React.FC<ExplainerStylesPageProps> = ({
   const currentStyleData = allStyles.find(s => s.value === selectedStyle)
 
   return (
-    <div className={stylesCss.container}>
+    <div className={stylesCss.container} style={{ marginTop: '60px' }}>
       <div className={stylesCss.pageHeader}>
         <h1>Choose Your Explainer Style</h1>
         <p>Select a style to see how different voices would explain your text</p>

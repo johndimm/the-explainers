@@ -2,6 +2,7 @@
 
 import React, { useRef, useState, useEffect } from 'react'
 import styles from './TextReader.module.css'
+import ChatInterface from './ChatInterface'
 import { ReaderCommonProps, useBookmarkRestoreAndSave, useSearchCore, extractContextInfo, calculatePageContent, estimateCharsPerLine, PageMap } from './BaseTextReader'
 import { useRouter } from 'next/navigation'
 import { log, warn } from '../utils/log'
@@ -17,6 +18,8 @@ const MobileTextReader: React.FC<ReaderCommonProps> = ({ text, bookTitle = 'Rome
   const [isInSelectionMode, setIsInSelectionMode] = useState(false)
   const longPressTimer = useRef<NodeJS.Timeout | null>(null)
   const [debugMessage, setDebugMessage] = useState('')
+  const [showChatModal, setShowChatModal] = useState(false)
+  const [chatContext, setChatContext] = useState<any>(null)
   
   // Page calculation state for scroll navigation
   const [pageMap, setPageMap] = useState<PageMap>({ pages: [], pageRanges: [] })
@@ -311,8 +314,9 @@ const MobileTextReader: React.FC<ReaderCommonProps> = ({ text, bookTitle = 'Rome
 
   const handleExplain = () => {
     const context = extractContextInfo(selectedText, text, bookTitle, author)
-    sessionStorage.setItem('chatContext', JSON.stringify({ selectedText, contextInfo: context, bookTitle, author }))
-    router.push('/chat')
+    const chatData = { selectedText, contextInfo: context, bookTitle, author }
+    setChatContext(chatData)
+    setShowChatModal(true)
     setShowConfirmDialog(false)
     setSelectedText('')
     setHighlightedText('')
@@ -872,6 +876,27 @@ const MobileTextReader: React.FC<ReaderCommonProps> = ({ text, bookTitle = 'Rome
             </button>
           )}
         </>
+      )}
+
+      {/* Chat Modal */}
+      {showChatModal && (
+        <ChatInterface
+          selectedText={chatContext?.selectedText || ""}
+          contextInfo={chatContext?.contextInfo || null}
+          settings={settings}
+          profile={profile}
+          onClose={() => {
+            // Store context for page chat to use
+            if (chatContext) {
+              sessionStorage.setItem('chatContext', JSON.stringify(chatContext))
+            }
+            setShowChatModal(false)
+          }}
+          onSettingsChange={onSettingsChange}
+          bookTitle={chatContext?.bookTitle || bookTitle}
+          author={chatContext?.author || author}
+          isPageMode={false}
+        />
       )}
     </div>
   )

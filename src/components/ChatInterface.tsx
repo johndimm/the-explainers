@@ -319,25 +319,31 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ selectedText, contextInfo
       setOriginalSelectedText(selectedText)
       initializedRef.current = true
       
-      // Check if we have context data (meaning user clicked "explain" button)
-      // If so, automatically explain. If not, just show the quote.
-      const storedContext = sessionStorage.getItem('chatContext')
-      if (storedContext) {
-        try {
-          const parsedContext = JSON.parse(storedContext)
-          if (parsedContext.selectedText === selectedText) {
-            // User clicked "explain" button - auto-explain
-            handleExplainText(selectedText)
-            // Clear the context data so it's not used again
-            sessionStorage.removeItem('chatContext')
+      // For modal mode (isPageMode = false), always auto-explain
+      // For page mode, check if we have context data (meaning user clicked "explain" button)
+      if (!isPageMode) {
+        // Modal mode - always auto-explain
+        handleExplainText(selectedText)
+      } else {
+        // Page mode - check for stored context
+        const storedContext = sessionStorage.getItem('chatContext')
+        if (storedContext) {
+          try {
+            const parsedContext = JSON.parse(storedContext)
+            if (parsedContext.selectedText === selectedText) {
+              // User clicked "explain" button - auto-explain
+              handleExplainText(selectedText)
+              // Clear the context data so it's not used again
+              sessionStorage.removeItem('chatContext')
+            }
+          } catch (error) {
+            console.error('Error parsing chat context:', error)
           }
-        } catch (error) {
-          console.error('Error parsing chat context:', error)
         }
+        // If no context data, just show the quote (user clicked "chat" in hamburger)
       }
-      // If no context data, just show the quote (user clicked "chat" in hamburger)
     }
-  }, [selectedText])
+  }, [selectedText, isPageMode])
 
   // Click outside handler for save dropdown
   useEffect(() => {
@@ -1521,7 +1527,11 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ selectedText, contextInfo
 {!isPageMode && <button onClick={onClose} className={styles.closeButton}>×</button>}
         </div>
         
-        <div className={styles.messagesContainer} ref={messagesContainerRef}>
+        <div 
+          className={styles.messagesContainer} 
+          ref={messagesContainerRef}
+          style={messages.length === 0 ? { flex: '0 0 auto', minHeight: '100px' } : {}}
+        >
           {!showFullHistory && messages.length > 2 && (
             <div style={{ textAlign: 'center', marginBottom: '16px' }}>
               <button 
