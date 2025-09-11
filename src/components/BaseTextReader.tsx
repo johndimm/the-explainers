@@ -425,10 +425,10 @@ const extractContextFromIndex = (selectedIndex: number, selectedLength: number, 
         } else {
           const characterMatch = trimmedDirection.match(/(?:Exit|Exeunt)\s+(.+)/i)
           if (characterMatch) {
-            const characterList = characterMatch[1].replace(/\.$/, '').replace(/\]$/, '').replace(/_$/, '')
+            const characterList = characterMatch[1].replace(/[\.\]_]+$/g, '')
             const characters = characterList
               .split(/\s+and\s+|,\s*/)
-              .map(c => c.trim().toUpperCase())
+              .map(c => c.trim().toUpperCase().replace(/[\.\]_]+$/g, ''))
               .filter(c => {
                 if (c.length === 0) return false
                 if (c.includes('WITH') || c.includes('DISGUISED') || c.includes('MEETING')) return false
@@ -444,13 +444,32 @@ const extractContextFromIndex = (selectedIndex: number, selectedLength: number, 
     })
     
     // If we have very few characters, try to get a more reasonable list by looking at recent dialogue
+    // But only add characters who haven't exited
     if (currentCharacters.size < 3) {
       // Look for character names in recent dialogue (last 500 characters)
       const recentText = textBeforeSelection.substring(Math.max(0, textBeforeSelection.length - 500))
       const dialogueMatches = recentText.match(/\n([A-Z][A-Z\s&']+)\s*\./g) || []
+      
+      // Get list of characters who have exited in the recent text
+      const recentExits = recentText.match(/(?:\[)?_?(Exit|Exeunt)_?\s+[A-Z][A-Z\s&']+[^\r\n]*(?:\])?/gi) || []
+      const exitedCharacters = new Set()
+      
+      recentExits.forEach(exitDirection => {
+        const characterMatch = exitDirection.match(/(?:Exit|Exeunt)\s+(.+)/i)
+        if (characterMatch) {
+          const characterList = characterMatch[1].replace(/[\.\]_]+$/g, '')
+          const characters = characterList
+            .split(/\s+and\s+|,\s*/)
+            .map(c => c.trim().toUpperCase().replace(/[\.\]_]+$/g, ''))
+            .filter(c => c.length > 0)
+          characters.forEach(char => exitedCharacters.add(char))
+        }
+      })
+      
       dialogueMatches.forEach(match => {
         const characterName = match.replace(/\n|\s*\./g, '').trim().toUpperCase()
-        if (validCharacterNames.has(characterName) || /^[A-Z]{2,}$/.test(characterName)) {
+        // Only add if it's a valid character name and they haven't exited
+        if ((validCharacterNames.has(characterName) || /^[A-Z]{2,}$/.test(characterName)) && !exitedCharacters.has(characterName)) {
           currentCharacters.add(characterName)
         }
       })
