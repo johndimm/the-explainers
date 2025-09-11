@@ -453,7 +453,7 @@ const extractContextFromIndex = (selectedIndex: number, selectedLength: number, 
               if (c.includes('ARMED') || c.includes('SWORDS') || c.includes('BUCKLERS')) return false
               if (c.includes('AND') && !c.match(/^[A-Z]+$/)) return false // Skip compound descriptions
               // Only include if it's a known character or looks like a proper name
-              return validCharacterNames.has(c) || /^[A-Z]{2,}$/.test(c)
+              return characterNames.has(c) || (/^[A-Z][A-Z\s&']+$/.test(c) && c.length >= 2)
             })
           characters.forEach(char => currentCharacters.add(char))
         }
