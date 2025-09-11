@@ -548,6 +548,30 @@ export const useBookmarkRestoreAndSave = (
       const title = bookTitle || 'Untitled'
       const auth = author || 'Unknown'
 
+      // Wait for content to be fully rendered before attempting restoration
+      const restorePosition = (position: number, source: string) => {
+        console.log(`Attempting to restore bookmark from ${source} to position:`, position)
+        // Use a longer delay and wait for scrollHeight to be available
+        const attemptRestore = (attempts = 0) => {
+          if (attempts > 10) {
+            console.log('Bookmark restoration failed after 10 attempts')
+            return // Give up after 10 attempts
+          }
+          
+          if (textReaderRef.current && textReaderRef.current.scrollHeight > 0) {
+            const maxScroll = textReaderRef.current.scrollHeight - textReaderRef.current.clientHeight
+            const safePosition = Math.min(position, maxScroll)
+            textReaderRef.current.scrollTop = safePosition
+            console.log(`Bookmark restored from ${source} to position:`, safePosition, `(max: ${maxScroll})`)
+          } else {
+            console.log(`Attempt ${attempts + 1}: Content not ready (scrollHeight: ${textReaderRef.current?.scrollHeight || 0})`)
+            setTimeout(() => attemptRestore(attempts + 1), 100)
+          }
+        }
+        
+        setTimeout(() => attemptRestore(), 200) // Initial delay
+      }
+
       // Try to load from database first if user is authenticated
       if (session?.user?.email) {
         try {
@@ -555,50 +579,12 @@ export const useBookmarkRestoreAndSave = (
           if (response.ok) {
             const bookmark = await response.json()
             const position = bookmark.scroll_position
-            // Use a very short delay to allow content to render first
-            setTimeout(() => {
-              if (textReaderRef.current) {
-                textReaderRef.current.scrollTop = position
-              }
-            }, 10)
+            restorePosition(position, 'database')
             return
           }
         } catch (error) {
           console.error('Error loading bookmark from database:', error)
         }
-      } else {
-        // No database bookmark - scroll past Project Gutenberg header
-        setTimeout(() => {
-          if (textReaderRef.current) {
-            // Find the start of book marker and scroll past it
-            // Try multiple variations of the Project Gutenberg marker
-            const markers = [
-              "*** START OF THE PROJECT GUTENBERG EBOOK",
-              "*** START OF THIS PROJECT GUTENBERG EBOOK",
-              "*** START OF THE PROJECT GUTENBERG",
-              "START OF THE PROJECT GUTENBERG"
-            ]
-            
-            let startIndex = -1
-            for (const marker of markers) {
-              startIndex = text.indexOf(marker)
-              if (startIndex !== -1) {
-                console.log('Found Project Gutenberg marker:', marker, 'at position:', startIndex)
-                break
-              }
-            }
-            
-            if (startIndex !== -1) {
-              // Calculate scroll position to the marker
-              const textPercentage = startIndex / text.length
-              const targetPosition = textPercentage * textReaderRef.current.scrollHeight
-              console.log('Scrolling to marker position:', targetPosition, 'textPercentage:', textPercentage)
-              textReaderRef.current.scrollTop = Math.max(0, targetPosition)
-            } else {
-              console.log('No Project Gutenberg marker found in text')
-            }
-          }
-        }, 100) // Slightly longer delay to ensure content is rendered
       }
 
       // Fallback to localStorage for backward compatibility or non-authenticated users
@@ -606,50 +592,45 @@ export const useBookmarkRestoreAndSave = (
       const savedPosition = typeof window !== 'undefined' ? localStorage.getItem(bookmarkKey) : null
       if (savedPosition) {
         const position = parseInt(savedPosition)
-        // Use a very short delay to allow content to render first
-        setTimeout(() => {
-          if (textReaderRef.current) {
-            textReaderRef.current.scrollTop = position
-          }
-        }, 10)
-      } else {
-        // No saved bookmark - scroll past Project Gutenberg header
-        setTimeout(() => {
-          if (textReaderRef.current) {
-            // Find the start of book marker and scroll past it
-            // Try multiple variations of the Project Gutenberg marker
-            const markers = [
-              "*** START OF THE PROJECT GUTENBERG EBOOK",
-              "*** START OF THIS PROJECT GUTENBERG EBOOK",
-              "*** START OF THE PROJECT GUTENBERG",
-              "START OF THE PROJECT GUTENBERG"
-            ]
-            
-            let startIndex = -1
-            for (const marker of markers) {
-              startIndex = text.indexOf(marker)
-              if (startIndex !== -1) {
-                console.log('Found Project Gutenberg marker:', marker, 'at position:', startIndex)
-                break
-              }
-            }
-            
-            if (startIndex !== -1) {
-              // Calculate scroll position to the marker
-              const textPercentage = startIndex / text.length
-              const targetPosition = textPercentage * textReaderRef.current.scrollHeight
-              console.log('Scrolling to marker position:', targetPosition, 'textPercentage:', textPercentage)
-              textReaderRef.current.scrollTop = Math.max(0, targetPosition)
-            } else {
-              console.log('No Project Gutenberg marker found in text')
-            }
-          }
-        }, 100) // Slightly longer delay to ensure content is rendered
+        restorePosition(position, 'localStorage')
+        return
       }
+
+      // No saved bookmark - scroll past Project Gutenberg header
+      setTimeout(() => {
+        if (textReaderRef.current) {
+          // Find the start of book marker and scroll past it
+          const markers = [
+            "*** START OF THE PROJECT GUTENBERG EBOOK",
+            "*** START OF THIS PROJECT GUTENBERG EBOOK",
+            "*** START OF THE PROJECT GUTENBERG",
+            "START OF THE PROJECT GUTENBERG"
+          ]
+          
+          let startIndex = -1
+          for (const marker of markers) {
+            startIndex = text.indexOf(marker)
+            if (startIndex !== -1) {
+              console.log('Found Project Gutenberg marker:', marker, 'at position:', startIndex)
+              break
+            }
+          }
+          
+          if (startIndex !== -1 && textReaderRef.current.scrollHeight > 0) {
+            // Calculate scroll position to the marker
+            const textPercentage = startIndex / text.length
+            const targetPosition = textPercentage * textReaderRef.current.scrollHeight
+            console.log('Scrolling to marker position:', targetPosition, 'textPercentage:', textPercentage)
+            textReaderRef.current.scrollTop = Math.max(0, targetPosition)
+          } else {
+            console.log('No Project Gutenberg marker found in text or content not ready')
+          }
+        }
+      }, 300) // Longer delay for Project Gutenberg header scrolling
     }
 
     loadBookmark()
-  }, [text, bookTitle, author, textReaderRef, session])
+  }, [text, bookTitle, author, session?.user?.email])
 
   useEffect(() => {
     const handleScroll = () => {
