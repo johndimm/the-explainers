@@ -475,6 +475,12 @@ const MobileTextReader: React.FC<ReaderCommonProps> = ({ text, bookTitle = 'Rome
         const newFontSize = Math.max(12, Math.min(32, initialFontSize * scale))
         log('mobile','Setting font size to:', newFontSize)
         setCurrentFontSize(newFontSize)
+        
+        // Save the new font size to the database
+        onSettingsChange({
+          ...settings,
+          textFontSize: newFontSize
+        })
       }
     } else if (e.touches.length === 1) {
       // For single touch, check if movement exceeds threshold
