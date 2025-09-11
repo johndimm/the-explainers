@@ -273,7 +273,7 @@
   .buttonsRow {
     display: flex !important;
     flex-direction: column !important;
-    gap: 4px !important;
+    gap: 8px !important;
     align-items: flex-end !important;
     grid-column: 2 !important;
     align-self: center !important;
@@ -308,24 +308,27 @@
   }
   
   .reexplainButton {
-    font-size: 10px;
-    padding: 6px 8px;
-    min-width: 60px;
-    width: 100%;
+    font-size: 11px;
+    padding: 8px 12px;
+    min-width: 80px;
+    max-width: 120px;
+    width: auto;
   }
   
   .saveButton {
-    font-size: 10px;
-    padding: 6px 8px;
-    min-width: 60px;
-    width: 100%;
+    font-size: 11px;
+    padding: 8px 12px;
+    min-width: 80px;
+    max-width: 120px;
+    width: auto;
   }
   
   .shareButton {
-    font-size: 10px;
-    padding: 6px 8px;
-    min-width: 60px;
-    width: 100%;
+    font-size: 11px;
+    padding: 8px 12px;
+    min-width: 80px;
+    max-width: 120px;
+    width: auto;
   }
   
   .ratingButton {
@@ -400,7 +403,7 @@
   }
   
   .buttonsRow {
-    gap: 4px;
+    gap: 6px;
   }
   
   .providerSelect, .styleSelect, .lengthSelect {
@@ -419,9 +422,11 @@
   }
   
   .reexplainButton, .saveButton, .shareButton {
-    font-size: 9px;
-    padding: 3px 4px;
-    min-width: 40px;
+    font-size: 10px;
+    padding: 6px 8px;
+    min-width: 60px;
+    max-width: 100px;
+    width: auto;
   }
   
   .ratingButton {
@@ -460,7 +465,7 @@
 .buttonsRow {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 16px;
   flex-wrap: wrap;
 }
 
@@ -637,7 +642,7 @@
 }
 
 .reexplainButton {
-  padding: 6px 12px;
+  padding: 8px 14px;
   background: #28a745;
   color: white;
   border: none;
@@ -659,7 +664,7 @@
 }
 
 .saveButton {
-  padding: 6px 12px;
+  padding: 8px 14px;
   background: #17a2b8;
   color: white;
   border: none;
@@ -681,7 +686,7 @@
 }
 
 .shareButton {
-  padding: 6px 12px;
+  padding: 8px 14px;
   background: #ff6b35;
   color: white;
   border: none;
