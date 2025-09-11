@@ -271,11 +271,24 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ selectedText, contextInfo
     return messages
   }
 
+  // Track the previous message count to only scroll when new messages are added
+  const prevMessageCountRef = useRef(0)
+  
   useEffect(() => {
-    if (messages.length > 0 && messages[messages.length - 1].role === 'assistant') {
+    const currentMessageCount = messages.length
+    const prevMessageCount = prevMessageCountRef.current
+    
+    // Only scroll if we have messages AND the count increased (new message added)
+    if (currentMessageCount > 0 && currentMessageCount > prevMessageCount && messages[messages.length - 1].role === 'assistant') {
       // Only scroll when a new assistant message is added
+      console.log('Chat: New assistant message detected, scrolling to bottom')
       setTimeout(() => scrollToLatestResponse(), 100)
+    } else if (currentMessageCount > 0 && currentMessageCount === prevMessageCount) {
+      console.log('Chat: Message count unchanged, not scrolling (prev:', prevMessageCount, 'current:', currentMessageCount, ')')
     }
+    
+    // Update the previous count
+    prevMessageCountRef.current = currentMessageCount
   }, [messages])
 
   // Load chat history from sessionStorage
