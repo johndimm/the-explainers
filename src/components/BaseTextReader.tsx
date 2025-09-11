@@ -219,12 +219,52 @@ export const convertToPagePositionLegacy = (fullTextPosition: number, pages: str
   return { pageIndex: pages.length - 1, pagePosition: 0 }
 }
 
-export const extractContextInfo = (selectedText: string, fullText: string, bookTitle?: string, author?: string) => {
-  const selectedIndex = fullText.indexOf(selectedText)
-  if (selectedIndex === -1) return null
+// Helper function to normalize text for better matching
+const normalizeText = (text: string): string => {
+  return text
+    .replace(/['']/g, "'") // Replace smart quotes with regular apostrophes
+    .replace(/[""]/g, '"') // Replace smart double quotes with regular quotes
+    .replace(/–/g, '-')    // Replace en-dash with regular dash
+    .replace(/—/g, '-')    // Replace em-dash with regular dash
+    .replace(/\s+/g, ' ')  // Normalize whitespace
+    .trim()
+}
 
+export const extractContextInfo = (selectedText: string, fullText: string, bookTitle?: string, author?: string) => {
+  // Normalize both texts to handle character encoding differences
+  const normalizedSelectedText = normalizeText(selectedText)
+  const normalizedFullText = normalizeText(fullText)
+  
+  const selectedIndex = normalizedFullText.indexOf(normalizedSelectedText)
+  if (selectedIndex === -1) {
+    // If still not found, try a more flexible search
+    const words = normalizedSelectedText.split(/\s+/)
+    if (words.length > 0) {
+      // Try to find the first few words
+      const searchText = words.slice(0, Math.min(3, words.length)).join(' ')
+      const flexibleIndex = normalizedFullText.indexOf(searchText)
+      if (flexibleIndex !== -1) {
+        // Found a partial match, use the original text for context extraction
+        const originalIndex = fullText.indexOf(searchText)
+        if (originalIndex !== -1) {
+          return extractContextFromIndex(originalIndex, selectedText.length, fullText, bookTitle, author)
+        }
+      }
+    }
+    return null
+  }
+  
+  // Convert back to original text index if we used normalized text
+  const originalIndex = fullText.indexOf(normalizedSelectedText) !== -1 
+    ? fullText.indexOf(normalizedSelectedText)
+    : selectedIndex
+    
+  return extractContextFromIndex(originalIndex, selectedText.length, fullText, bookTitle, author)
+}
+
+const extractContextFromIndex = (selectedIndex: number, selectedLength: number, fullText: string, bookTitle?: string, author?: string) => {
   const beforeText = fullText.substring(Math.max(0, selectedIndex - 1000), selectedIndex)
-  const afterText = fullText.substring(selectedIndex + selectedText.length, Math.min(fullText.length, selectedIndex + selectedText.length + 500))
+  const afterText = fullText.substring(selectedIndex + selectedLength, Math.min(fullText.length, selectedIndex + selectedLength + 500))
 
   let act: string | null = null
   let scene: string | null = null
@@ -235,7 +275,7 @@ export const extractContextInfo = (selectedText: string, fullText: string, bookT
   let part: string | null = null
   let book: string | null = null
 
-  const searchText = fullText.substring(0, selectedIndex + selectedText.length)
+  const searchText = fullText.substring(0, selectedIndex + selectedLength)
   
   // Shakespeare-specific context (Act & Scene) - support both Roman and Arabic numerals
   const actMatches = searchText.match(/\bACT\s+([IVXLCDM]+|\d+)\b/gi)
@@ -352,6 +392,8 @@ export const extractContextInfo = (selectedText: string, fullText: string, bookT
               if (c.includes('SERVANT') || c.includes('PAGE')) return false
               if (c.includes('WITH') || c.includes('DISGUISED') || c.includes('MEETING')) return false
               if (c.includes('LED BY') || c.includes('AS A') || c.includes('AND')) return false
+              if (c.includes('ARMED') || c.includes('SWORDS') || c.includes('BUCKLERS')) return false
+              if (c.includes('AND') && !c.match(/^[A-Z]+$/)) return false // Skip compound descriptions
               // Only include if it's a known character or looks like a proper name
               return validCharacterNames.has(c) || /^[A-Z]{2,}$/.test(c)
             })
@@ -371,6 +413,8 @@ export const extractContextInfo = (selectedText: string, fullText: string, bookT
                 if (c.length === 0) return false
                 if (c.includes('WITH') || c.includes('DISGUISED') || c.includes('MEETING')) return false
                 if (c.includes('LED BY') || c.includes('AS A') || c.includes('AND')) return false
+                if (c.includes('ARMED') || c.includes('SWORDS') || c.includes('BUCKLERS')) return false
+                if (c.includes('AND') && !c.match(/^[A-Z]+$/)) return false // Skip compound descriptions
                 return validCharacterNames.has(c) || /^[A-Z]{2,}$/.test(c)
               })
             characters.forEach(char => currentCharacters.delete(char))
@@ -406,7 +450,7 @@ export const extractContextInfo = (selectedText: string, fullText: string, bookT
     section,
     part,
     book,
-    selectedText,
+    selectedText: fullText.substring(selectedIndex, selectedIndex + selectedLength),
     beforeContext: beforeText.slice(-200),
     afterContext: afterText.slice(0, 200)
   }
