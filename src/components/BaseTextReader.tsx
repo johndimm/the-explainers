@@ -377,7 +377,7 @@ const extractContextFromIndex = (selectedIndex: number, selectedLength: number, 
     
     // Only look at stage directions from the current scene onwards
     const sceneText = textBeforeSelection.substring(sceneStartIndex)
-    const stageDirections = sceneText.match(/\n\s*(Enter|Exit|Exeunt)\s+[A-Z][A-Z\s&']+[^\r\n]*/gi) || []
+    const stageDirections = sceneText.match(/(?:\[)?_?(Enter|Exit|Exeunt)_?\s+[A-Z][A-Z\s&']+[^\r\n]*(?:\])?/gi) || []
     const currentCharacters = new Set<string>()
     
     // Each scene starts fresh - no characters carry over from previous scenes
@@ -425,7 +425,7 @@ const extractContextFromIndex = (selectedIndex: number, selectedLength: number, 
         } else {
           const characterMatch = trimmedDirection.match(/(?:Exit|Exeunt)\s+(.+)/i)
           if (characterMatch) {
-            const characterList = characterMatch[1].replace(/\.$/, '')
+            const characterList = characterMatch[1].replace(/\.$/, '').replace(/\]$/, '').replace(/_$/, '')
             const characters = characterList
               .split(/\s+and\s+|,\s*/)
               .map(c => c.trim().toUpperCase())
