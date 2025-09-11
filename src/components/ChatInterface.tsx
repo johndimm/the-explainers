@@ -61,8 +61,6 @@ const getAllStyles = () => {
 }
 
 const ChatInterface: React.FC<ChatInterfaceProps> = ({ selectedText, contextInfo, settings, profile, onClose, onSettingsChange, bookTitle, author, isPageMode = false }) => {
-  console.log('ChatInterface: Received settings:', settings)
-  console.log('ChatInterface: Initial explanationStyle:', settings.explanationStyle)
   const router = useRouter()
   const [messages, setMessages] = useState<Message[]>([])
   const [inputValue, setInputValue] = useState('')
@@ -382,27 +380,17 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ selectedText, contextInfo
 
   // Keep local chat controls in sync with global settings unless user changes them here
   useEffect(() => {
-    console.log('ChatInterface: settings.llmProvider changed to:', settings.llmProvider)
-    console.log('ChatInterface: Current selectedProvider:', selectedProvider)
     if (selectedProvider !== settings.llmProvider) {
-      console.log('ChatInterface: Provider mismatch detected, updating from', selectedProvider, 'to', settings.llmProvider)
       setSelectedProvider(settings.llmProvider)
-    } else {
-      console.log('ChatInterface: Provider already in sync, no update needed')
     }
   }, [settings.llmProvider, selectedProvider])
 
   useEffect(() => {
-    console.log('ChatInterface: settings.explanationStyle changed to:', settings.explanationStyle)
-    console.log('ChatInterface: Full settings object:', settings)
     setCurrentStyle(settings.explanationStyle)
   }, [settings.explanationStyle])
 
   // Force re-initialization when settings change
   useEffect(() => {
-    console.log('ChatInterface: Settings changed, re-initializing state')
-    console.log('ChatInterface: New settings:', settings)
-    console.log('ChatInterface: Updating selectedProvider from', selectedProvider, 'to', settings.llmProvider)
     setSelectedProvider(settings.llmProvider)
     setCurrentStyle(settings.explanationStyle)
     setCurrentResponseLength(settings.responseLength)
@@ -704,7 +692,6 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ selectedText, contextInfo
   }
 
   const searchAndEmbedVideo = async (text: string) => {
-    console.log('🔍 YOUTUBE SEARCH TRIGGERED:', text)
     log('youtube', 'Automatically searching for video with quote:', text)
     log('youtube', 'Using context info:', contextInfo)
     
@@ -748,22 +735,12 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ selectedText, contextInfo
         
         // Create a specific search phrase that YouTube will understand better
         const specificQuery = `"${text}" ${bookTitle} "Act ${actArabic} Scene ${sceneArabic}" performance`
-        console.log('🎯 SPECIFIC QUERY:', specificQuery)
         
         // Use the specific query instead of the complex search terms
         searchTerms = [specificQuery]
       }
       
       const searchQuery = searchTerms.join(' ').trim()
-      console.log('🔍 YOUTUBE QUERY DEBUG:')
-      console.log('Original text:', text)
-      console.log('Context info:', contextInfo)
-      console.log('Search terms array:', searchTerms)
-      console.log('Final query:', searchQuery)
-      console.log('Roman to Arabic conversion:', {
-        act: contextInfo?.act ? romanToArabic(contextInfo.act) : 'N/A',
-        scene: contextInfo?.scene ? romanToArabic(contextInfo.scene) : 'N/A'
-      })
       
       log('youtube', 'Enhanced YouTube search query:', searchQuery)
       log('youtube', 'Query construction details:', {
@@ -795,10 +772,6 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ selectedText, contextInfo
       }
       
       const data = await response.json()
-      console.log('🎬 YOUTUBE RESULTS DEBUG:')
-      console.log('API response:', data)
-      console.log('Found videos:', data.videos?.map((v: any) => ({ title: v.title, id: v.id })))
-      console.log('First video title:', data.videos?.[0]?.title)
       
       log('youtube', 'Auto YouTube search results:', data)
       log('youtube', 'Found videos:', data.videos?.map((v: any) => ({ title: v.title, id: v.id })))
@@ -966,17 +939,12 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ selectedText, contextInfo
 
     const promptText = createContextualPrompt(text, contextInfo)
     
-    // CURSOR HELPER: Log the full prompt being sent to the LLM
-    log('🚀 FULL PROMPT SENT TO LLM 🚀')
-    log('='.repeat(80))
-    log('chat', promptText)
-    log('='.repeat(80))
-    log('Context info:', contextInfo)
-    
-    log('Full prompt sent to LLM:')
-    log('Profile language in sendMessage:', profile.language)
-    log('Prompt text:', promptText)
-    log('Context info:', contextInfo)
+    // Log the full prompt being sent to the LLM
+    log('prompt', '🚀 FULL PROMPT SENT TO LLM 🚀')
+    log('prompt', '='.repeat(80))
+    log('prompt', promptText)
+    log('prompt', '='.repeat(80))
+    log('prompt', 'Context info:', contextInfo)
     
     // Display only the selected text to the user, not the full prompt
     const userMessage: Message = {

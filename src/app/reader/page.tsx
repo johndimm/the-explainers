@@ -4,6 +4,7 @@ import { useState, useEffect, useRef, Suspense } from 'react'
 import TextReader from '@/components/TextReader'
 import { useSettings } from '@/contexts/SettingsContext'
 import { useProfile } from '@/contexts/ProfileContext'
+import { useAuth } from '@/contexts/AuthContext'
 import { useRouter, useSearchParams } from 'next/navigation'
 import { log } from '@/utils/log'
 
@@ -15,6 +16,7 @@ function ReaderContent() {
   const menuRef = useRef<HTMLDivElement>(null)
   const { settings, updateSettings } = useSettings()
   const { profile } = useProfile()
+  const { isAuthenticated, isLoading: authLoading } = useAuth()
   const router = useRouter()
   const searchParams = useSearchParams()
 
@@ -35,6 +37,14 @@ function ReaderContent() {
   }, [showMobileMenu])
 
   useEffect(() => {
+    console.log('Reader: Auth state - isLoading:', authLoading, 'isAuthenticated:', isAuthenticated)
+    
+    // Don't try to load anything until authentication is resolved
+    if (authLoading) {
+      console.log('Reader: Waiting for authentication...')
+      return
+    }
+
     // Check URL parameters for book selection
     const title = searchParams.get('title')
     const author = searchParams.get('author') 
@@ -50,24 +60,29 @@ function ReaderContent() {
       try {
         // Load from database only
         const response = await fetch('/api/user/current-book')
+        console.log('Reader: Current book API response status:', response.status)
+        
         if (response.ok) {
           const dbBook = await response.json()
-          log('Restoring saved book from database:', dbBook)
+          console.log('Reader: Restoring saved book from database:', dbBook)
           
           if (dbBook.url) {
             handleBookSelect(dbBook.title, dbBook.author, dbBook.url)
             return
           }
+        } else {
+          console.log('Reader: No current book found, status:', response.status)
         }
       } catch (error) {
-        console.error('Error loading current book from database:', error)
+        console.error('Reader: Error loading current book from database:', error)
       }
       
+      console.log('Reader: Redirecting to library - no current book found')
       router.push('/library')
     }
 
     loadCurrentBook()
-  }, [searchParams, router])
+  }, [searchParams, router, authLoading])
 
   const handleBookSelect = async (title: string, author: string, url: string) => {
     setLoading(true)

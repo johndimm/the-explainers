@@ -6,13 +6,21 @@ import { getUserCurrentBook, createOrUpdateUserCurrentBook } from '@/lib/databas
 export async function GET(request: NextRequest) {
   try {
     const session = await getServerSession(authOptions)
+    console.log('Current book API - session:', session ? 'exists' : 'null')
+    console.log('Current book API - user email:', session?.user?.email)
     
-    // Local development bypass
+    // In development, if no session, try to get the current book for the default user
     if (process.env.NODE_ENV === 'development' && !session?.user?.email) {
+      console.log('Current book API - development mode, trying default user')
+      const currentBook = await getUserCurrentBook('john.r.dimm@gmail.com')
+      if (currentBook) {
+        return NextResponse.json(currentBook)
+      }
       return NextResponse.json({ error: 'Current book not found' }, { status: 404 })
     }
     
     if (!session?.user?.email) {
+      console.log('Current book API - no user email, returning 401')
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
     }
 

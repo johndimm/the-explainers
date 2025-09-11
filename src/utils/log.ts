@@ -1,5 +1,5 @@
 // List of enabled log labels - only these will show in console
-const ENABLED_LABELS = ['youtube', 'video', 'search']
+const ENABLED_LABELS = ['prompt']
 
 export const log = (label: string, ...args: unknown[]) => {
   if (typeof console !== 'undefined' && console.log) {

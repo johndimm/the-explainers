@@ -572,12 +572,6 @@ export const useBookmarkRestoreAndSave = (
   }, [bookTitle, author, text, textReaderRef, session])
 }
 
-// Function to clean up awkward line breaks in text
-// Keep original formatting on all screen sizes - no text processing
-const cleanTextLineBreaks = (text: string, isMobile: boolean = false): string => {
-  // Always return original text - no processing
-  return text
-}
 
 export const useSearchCore = (
   text: string,
@@ -687,18 +681,13 @@ export const useSearchCore = (
   }
 
   const renderTextWithSearchHighlight = (textToRender: string, isPageMode: boolean = false, currentPageIndex: number = 0, isMobile: boolean = false) => {
-    // Clean up awkward line breaks first (only for mobile)
-    const cleanedText = cleanTextLineBreaks(textToRender, isMobile)
-    console.log('Text cleaning - original length:', textToRender.length, 'cleaned length:', cleanedText.length, 'isMobile:', isMobile)
-    console.log('Sample of cleaned text:', cleanedText.substring(0, 200))
-    
     if (searchResults.length === 0 || !searchQuery.trim()) {
-      return cleanedText
+      return textToRender
     }
 
     // Simple approach: find and highlight the search query text in the current text
     const query = searchQuery.trim()
-    if (!query) return cleanedText
+    if (!query) return textToRender
 
     const parts: React.ReactNode[] = []
     let lastIndex = 0

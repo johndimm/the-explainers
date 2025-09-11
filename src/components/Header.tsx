@@ -28,6 +28,7 @@ export default function Header() {
     const updateSubtitle = async () => {
       try {
         const currentBook = await getCurrentBook()
+        console.log('Header: Current book loaded:', currentBook)
         if (currentBook && currentBook.title && currentBook.author) {
           setSubtitle(`${currentBook.title} by ${currentBook.author}`)
         } else {

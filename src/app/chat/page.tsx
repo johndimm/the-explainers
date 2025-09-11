@@ -15,12 +15,10 @@ function ChatContent() {
   const router = useRouter()
   const [contextData, setContextData] = useState<any>(null)
   
-  console.log('ChatContent: Current settings:', settings)
-  console.log('ChatContent: Current explanationStyle:', settings.explanationStyle)
 
   // Monitor settings changes
   useEffect(() => {
-    console.log('ChatContent: Settings changed to:', settings)
+    // Settings changed
   }, [settings])
 
   // Check for context data from text selection
