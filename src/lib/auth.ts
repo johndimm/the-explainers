@@ -12,10 +12,7 @@ export const authOptions: AuthOptions = {
           prompt: "select_account",
           access_type: "offline",
           response_type: "code",
-          scope: "openid email profile",
-          // Add cache-busting parameters for mobile
-          state: `mobile_auth_${Date.now()}`,
-          nonce: Math.random().toString(36).substring(7)
+          scope: "openid email profile"
         }
       }
     })

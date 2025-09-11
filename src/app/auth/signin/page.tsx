@@ -19,7 +19,6 @@ export default function SignIn() {
   const handleGoogleSignIn = async () => {
     setIsLoading(true)
     try {
-      // Force account selection on mobile
       await signIn('google', { 
         callbackUrl: '/chat',
         redirect: true
@@ -48,12 +47,8 @@ export default function SignIn() {
         await new Promise(resolve => setTimeout(resolve, 500))
       }
       
-      // Use cache-busting parameters for iOS
-      const timestamp = Date.now()
-      const randomId = Math.random().toString(36).substring(7)
-      
       await signIn('google', { 
-        callbackUrl: `/auth/callback?t=${timestamp}&r=${randomId}`,
+        callbackUrl: '/chat',
         redirect: true
       })
     } catch (error) {
