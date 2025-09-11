@@ -229,6 +229,48 @@ const normalizeText = (text: string): string => {
     // Removed whitespace normalization - it was causing text matching issues
 }
 
+const extractDramatisPersonae = (fullText: string): Set<string> => {
+  const characterNames = new Set<string>()
+  
+  // Look for "Dramatis Personæ" or similar variations
+  const dramatisMatch = fullText.match(/(?:Dramatis Personæ|Dramatis Personae|Characters|Cast of Characters|Persons of the Play)/i)
+  
+  if (dramatisMatch) {
+    const startIndex = dramatisMatch.index! + dramatisMatch[0].length
+    // Look for the end of the character list (usually when we hit "ACT" or similar)
+    const endMatch = fullText.substring(startIndex).match(/\b(?:ACT|SCENE|THE END|EPILOGUE|PROLOGUE)\b/i)
+    const endIndex = endMatch ? startIndex + endMatch.index! : startIndex + 2000 // Limit to 2000 chars if no clear end
+    
+    const characterListText = fullText.substring(startIndex, endIndex)
+    
+    // Extract character names from the list
+    // Format is typically: "CHARACTER NAME, description." or "CHARACTER NAME."
+    const characterMatches = characterListText.match(/^([A-Z][A-Z\s&'.-]+?)(?:\s*,\s*[^.\r\n]*)?\.?\s*$/gm)
+    
+    if (characterMatches) {
+      characterMatches.forEach(match => {
+        // Clean up the character name
+        const characterName = match
+          .replace(/,\s*.*$/, '') // Remove description after comma
+          .replace(/\.$/, '') // Remove trailing period
+          .trim()
+          .toUpperCase()
+        
+        // Only add if it looks like a character name
+        if (characterName.length >= 2 && 
+            /^[A-Z][A-Z\s&'.-]+$/.test(characterName) &&
+            !characterName.includes('THE END') &&
+            !characterName.includes('ACT') &&
+            !characterName.includes('SCENE')) {
+          characterNames.add(characterName)
+        }
+      })
+    }
+  }
+  
+  return characterNames
+}
+
 export const extractContextInfo = (selectedText: string, fullText: string, bookTitle?: string, author?: string) => {
   // Try to find the selected text in the original text
   let selectedIndex = fullText.indexOf(selectedText)
@@ -365,6 +407,9 @@ const extractContextFromIndex = (selectedIndex: number, selectedLength: number, 
   if (isPlay) {
     const textBeforeSelection = fullText.substring(0, selectedIndex)
     
+    // Extract character list from Dramatis Personæ at the beginning of the play
+    const characterNames = extractDramatisPersonae(fullText)
+    
     // Find the current scene to limit character detection to recent stage directions
     let sceneStartIndex = 0
     if (scene) {
@@ -383,21 +428,14 @@ const extractContextFromIndex = (selectedIndex: number, selectedLength: number, 
     // Each scene starts fresh - no characters carry over from previous scenes
     // The empty Set above ensures we start with zero characters for each new scene
     
-    // Common character names to filter out invalid ones
-    const validCharacterNames = new Set([
-      'LEAR', 'GONERIL', 'REGAN', 'CORDELIA', 'KENT', 'GLOUCESTER', 'EDGAR', 'EDMUND',
-      'ALBANY', 'CORNWALL', 'OSWALD', 'FOOL', 'GENTLEMAN', 'CURAN', 'ATTENDANTS',
-      'HAMLET', 'CLAUDIUS', 'GERTRUDE', 'POLONIUS', 'OPHELIA', 'LAERTES', 'HORATIO',
-      'MACBETH', 'LADY MACBETH', 'BANQUO', 'MACDUFF', 'MALCOLM', 'DUNCAN',
-      'ROMEO', 'JULIET', 'MERCUTIO', 'BENVOLIO', 'TYBALT', 'NURSE', 'FRIAR LAURENCE',
-      'OTHELLO', 'DESDEMONA', 'IAGO', 'CASSIO', 'EMILIA', 'BRABANTIO'
-    ])
+    // No hardcoded character names - let the system detect characters automatically
+    // based on patterns and context
     
     stageDirections.forEach(direction => {
       const trimmedDirection = direction.trim()
-      const isEnter = /^Enter/i.test(trimmedDirection)
-      const isExit = /^Exit/i.test(trimmedDirection)
-      const isExeunt = /^Exeunt/i.test(trimmedDirection)
+      const isEnter = /^.*?Enter/i.test(trimmedDirection)
+      const isExit = /^.*?Exit/i.test(trimmedDirection)
+      const isExeunt = /^.*?Exeunt/i.test(trimmedDirection)
       
       if (isEnter) {
         const characterMatch = trimmedDirection.match(/Enter\s+(.+)/i)
@@ -435,7 +473,7 @@ const extractContextFromIndex = (selectedIndex: number, selectedLength: number, 
                 if (c.includes('LED BY') || c.includes('AS A') || c.includes('AND')) return false
                 if (c.includes('ARMED') || c.includes('SWORDS') || c.includes('BUCKLERS')) return false
                 if (c.includes('AND') && !c.match(/^[A-Z]+$/)) return false // Skip compound descriptions
-                return validCharacterNames.has(c) || /^[A-Z]{2,}$/.test(c)
+                return characterNames.has(c) || (/^[A-Z][A-Z\s&']+$/.test(c) && c.length >= 2)
               })
             characters.forEach(char => currentCharacters.delete(char))
           }
@@ -469,7 +507,7 @@ const extractContextFromIndex = (selectedIndex: number, selectedLength: number, 
       dialogueMatches.forEach(match => {
         const characterName = match.replace(/\n|\s*\./g, '').trim().toUpperCase()
         // Only add if it's a valid character name and they haven't exited
-        if ((validCharacterNames.has(characterName) || /^[A-Z]{2,}$/.test(characterName)) && !exitedCharacters.has(characterName)) {
+        if ((characterNames.has(characterName) || (/^[A-Z][A-Z\s&']+$/.test(characterName) && characterName.length >= 2)) && !exitedCharacters.has(characterName)) {
           currentCharacters.add(characterName)
         }
       })
