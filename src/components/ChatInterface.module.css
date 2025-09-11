@@ -33,6 +33,7 @@
   background: #f8f9fa;
   border-radius: 12px 12px 0 0;
   gap: 16px;
+  flex-shrink: 0;
 }
 
 .chatHeader h3 {

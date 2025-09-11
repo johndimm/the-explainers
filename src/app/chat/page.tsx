@@ -145,7 +145,7 @@ function ChatContent() {
       `}</style>
       
       <div style={{ 
-        marginTop: '0', 
+        marginTop: '60px', 
         minHeight: 'calc(100vh - 60px)', 
         padding: '20px', 
         background: '#fafafa' 

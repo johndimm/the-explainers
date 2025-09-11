@@ -80,6 +80,7 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ selectedText, contextInfo
   const [saveFormatDropdownOpen, setSaveFormatDropdownOpen] = useState(false)
   const [showClearConfirm, setShowClearConfirm] = useState(false)
   const latestResponseRef = useRef<HTMLDivElement>(null)
+  const messagesContainerRef = useRef<HTMLDivElement>(null)
   const inputRef = useRef<HTMLInputElement>(null)
   const styleMenuRef = useRef<HTMLDivElement>(null)
   const saveDropdownRef = useRef<HTMLDivElement>(null)
@@ -1507,7 +1508,7 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ selectedText, contextInfo
 {!isPageMode && <button onClick={onClose} className={styles.closeButton}>×</button>}
         </div>
         
-        <div className={styles.messagesContainer}>
+        <div className={styles.messagesContainer} ref={messagesContainerRef}>
           {!showFullHistory && messages.length > 2 && (
             <div style={{ textAlign: 'center', marginBottom: '16px' }}>
               <button 
