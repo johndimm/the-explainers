@@ -165,6 +165,28 @@ const ExplainerStylesPage: React.FC<ExplainerStylesPageProps> = ({
           <div className={stylesCss.selectedText}>
             <h2>{currentStyleData.name}</h2>
             <p>{currentStyleData.description}</p>
+            {currentStyleData.wikipediaUrl && (
+              <a 
+                href={currentStyleData.wikipediaUrl} 
+                target="_blank" 
+                rel="noopener noreferrer"
+                style={{
+                  color: '#3b82f6',
+                  textDecoration: 'none',
+                  fontSize: '12px',
+                  fontWeight: '500',
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  gap: '4px',
+                  marginTop: '8px'
+                }}
+                onMouseEnter={(e) => e.currentTarget.style.textDecoration = 'underline'}
+                onMouseLeave={(e) => e.currentTarget.style.textDecoration = 'none'}
+              >
+                <span>🔗</span>
+                Wikipedia
+              </a>
+            )}
           </div>
         </div>
       )}

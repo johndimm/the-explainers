@@ -72,14 +72,23 @@ export default function Header() {
   }
 
   return (
-    <header style={{
-      background: 'white', borderBottom: '1px solid #e0e0e0',
+    <header 
+      className="app-header"
+      style={{
+      background: 'white', 
+      borderBottom: '1px solid #e0e0e0',
       maxWidth: '1024px',
       margin: '0 auto',
       width: '100%',
-      position: 'sticky',
+      position: 'fixed',
       top: '0',
-      zIndex: 1000
+      left: '50%',
+      transform: 'translateX(-50%)',
+      zIndex: 99999,
+      boxShadow: '0 2px 4px rgba(0,0,0,0.1)',
+      isolation: 'isolate',
+      willChange: 'transform',
+      contain: 'layout style paint'
     }}>
       <div style={{
         width: '100%',
@@ -167,15 +176,15 @@ export default function Header() {
           </button>
           {showMobileMenu && (
             <div style={{ 
-              position: 'absolute', 
-              top: '100%', 
-              right: 0, 
+              position: 'fixed', 
+              top: '60px',
+              right: '20px',
               background: 'white', 
               border: '1px solid #e0e0e0', 
               borderRadius: '8px', 
               boxShadow: '0 4px 12px rgba(0,0,0,0.15)', 
               minWidth: '200px', 
-              zIndex: 1000,
+              zIndex: 100000,
               maxHeight: '80vh',
               overflowY: 'auto'
             }}>

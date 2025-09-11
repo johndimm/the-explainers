@@ -19,7 +19,7 @@ export default function ClientLayout({ children }: { children: React.ReactNode }
               minHeight: 'calc(100vh - 60px)',
               maxWidth: '1024px',
               margin: '0 auto',
-              padding: '0 20px'
+              padding: '80px 20px 0 20px'
             }}>
               {children}
             </main>
