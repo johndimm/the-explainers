@@ -60,8 +60,11 @@ export default function Header() {
 
   const handleAuthAction = async () => {
     if (isAuthenticated) {
-      setShowMobileMenu(false)
-      await handleSignOut()
+      const confirmed = window.confirm('Are you sure you want to sign out?')
+      if (confirmed) {
+        setShowMobileMenu(false)
+        await handleSignOut()
+      }
     } else {
       await signIn()
       setShowMobileMenu(false)
@@ -73,7 +76,10 @@ export default function Header() {
       background: 'white', borderBottom: '1px solid #e0e0e0',
       maxWidth: '1024px',
       margin: '0 auto',
-      width: '100%'
+      width: '100%',
+      position: 'sticky',
+      top: '0',
+      zIndex: 1000
     }}>
       <div style={{
         width: '100%',

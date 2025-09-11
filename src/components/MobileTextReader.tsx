@@ -28,6 +28,10 @@ const MobileTextReader: React.FC<ReaderCommonProps> = ({ text, bookTitle = 'Rome
   const isIPhone = /iPhone|iPod/.test(navigator.userAgent)
   const isAndroid = /Android/.test(navigator.userAgent)
   
+  // Pinch-to-zoom font size handling
+  const [fontSize, setFontSize] = useState(settings.textFontSize)
+  const lastPinchDistance = useRef<number | null>(null)
+  
   // Text selection state
   const [highlightedText, setHighlightedText] = useState('')
   const selectionModeRef = useRef(false)
@@ -143,14 +147,8 @@ const MobileTextReader: React.FC<ReaderCommonProps> = ({ text, bookTitle = 'Rome
     log('mobile','=== END ANDROID DEBUG ===')
   }
   
-  // Initialize zoom level from sessionStorage or default
-  const [zoomLevel, setZoomLevel] = useState(() => {
-    if (typeof window !== 'undefined') {
-      const saved = sessionStorage.getItem('textReaderZoomLevel')
-      return saved ? parseFloat(saved) : 1
-    }
-    return 1
-  })
+  // Font size state for pinch-to-zoom
+  const [currentFontSize, setCurrentFontSize] = useState(settings.textFontSize)
   
   const [isScrolling, setIsScrolling] = useState(false)
   const scrollTimeoutRef = useRef<NodeJS.Timeout | null>(null)
@@ -158,12 +156,10 @@ const MobileTextReader: React.FC<ReaderCommonProps> = ({ text, bookTitle = 'Rome
   const scrollVelocityRef = useRef<number>(0)
   const lastScrollPosition = useRef<number>(0)
 
-  // Save zoom level to sessionStorage whenever it changes
+  // Update font size when settings change
   useEffect(() => {
-    if (typeof window !== 'undefined') {
-      sessionStorage.setItem('textReaderZoomLevel', zoomLevel.toString())
-    }
-  }, [zoomLevel])
+    setCurrentFontSize(settings.textFontSize)
+  }, [settings.textFontSize])
 
   // Handle scroll events to hide/show navigation buttons and prevent unwanted vibrations
   useEffect(() => {
@@ -332,9 +328,9 @@ const MobileTextReader: React.FC<ReaderCommonProps> = ({ text, bookTitle = 'Rome
   const handleTouchStart = (e: React.TouchEvent) => {
     log('mobile','Touch start detected')
 
-    // Handle multi-touch for zoom
+    // Handle multi-touch for font size adjustment
     if (e.touches.length === 2) {
-      log('mobile','Two finger touch detected - zoom mode')
+      log('mobile','Two finger touch detected - font size mode')
       const touch1 = e.touches[0]
       const touch2 = e.touches[1]
       const initialDistance = Math.sqrt(
@@ -342,8 +338,8 @@ const MobileTextReader: React.FC<ReaderCommonProps> = ({ text, bookTitle = 'Rome
         Math.pow(touch2.clientY - touch1.clientY, 2)
       )
       e.currentTarget.setAttribute('data-initial-distance', initialDistance.toString())
-      e.currentTarget.setAttribute('data-initial-zoom', zoomLevel.toString())
-      e.currentTarget.setAttribute('data-zoom-mode', 'true')
+      e.currentTarget.setAttribute('data-initial-font-size', currentFontSize.toString())
+      e.currentTarget.setAttribute('data-font-size-mode', 'true')
       return // Exit early, don't do text selection or vibration
     }
 
@@ -458,9 +454,9 @@ const MobileTextReader: React.FC<ReaderCommonProps> = ({ text, bookTitle = 'Rome
       log('mobile','Cancelled vibration timer due to touch move')
     }
     
-    // Handle pinch to zoom
+    // Handle pinch to change font size
     if (e.touches.length === 2) {
-      log('mobile','Two finger touch move - zoom mode')
+      log('mobile','Two finger touch move - font size mode')
       e.preventDefault()
       const touch1 = e.touches[0]
       const touch2 = e.touches[1]
@@ -470,15 +466,15 @@ const MobileTextReader: React.FC<ReaderCommonProps> = ({ text, bookTitle = 'Rome
       )
       
       const initialDistance = parseFloat(e.currentTarget.getAttribute('data-initial-distance') || '0')
-      const initialZoom = parseFloat(e.currentTarget.getAttribute('data-initial-zoom') || '1')
+      const initialFontSize = parseFloat(e.currentTarget.getAttribute('data-initial-font-size') || settings.textFontSize.toString())
       
-      log('mobile','Zoom calculation:', { currentDistance, initialDistance, initialZoom })
+      log('mobile','Font size calculation:', { currentDistance, initialDistance, initialFontSize })
       
       if (initialDistance > 0) {
         const scale = currentDistance / initialDistance
-        const newZoom = Math.max(0.5, Math.min(3, initialZoom * scale))
-        log('mobile','Setting zoom to:', newZoom)
-        setZoomLevel(newZoom)
+        const newFontSize = Math.max(12, Math.min(32, initialFontSize * scale))
+        log('mobile','Setting font size to:', newFontSize)
+        setCurrentFontSize(newFontSize)
       }
     } else if (e.touches.length === 1) {
       // For single touch, check if movement exceeds threshold
@@ -768,12 +764,10 @@ const MobileTextReader: React.FC<ReaderCommonProps> = ({ text, bookTitle = 'Rome
           userSelect: 'text', 
           WebkitTouchCallout: 'none', 
           WebkitTapHighlightColor: 'transparent',
-          touchAction: 'pan-y pinch-zoom', 
+          touchAction: 'pan-y', 
           fontFamily: settings.textFont,
-          '--text-font-size': `${settings.textFontSize}px`,
-          transform: `scale(${zoomLevel})`,
-          transformOrigin: 'top left',
-          width: `${100 / zoomLevel}%`,
+          '--text-font-size': `${currentFontSize}px`,
+          fontSize: `${currentFontSize}px`,
           position: 'relative'
         } as React.CSSProperties}
       >

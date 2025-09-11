@@ -41,7 +41,10 @@ export async function POST(request: NextRequest) {
   try {
     const session = await getServerSession(authOptions)
     
-    if (!session?.user?.email) {
+    // In development, if no session, use the default user
+    const userEmail = session?.user?.email || (process.env.NODE_ENV === 'development' ? 'john.r.dimm@gmail.com' : null)
+    
+    if (!userEmail) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
     }
 
@@ -53,7 +56,7 @@ export async function POST(request: NextRequest) {
     }
 
     const currentBook = await createOrUpdateUserCurrentBook({
-      email: session.user.email,
+      email: userEmail,
       title,
       author,
       url
