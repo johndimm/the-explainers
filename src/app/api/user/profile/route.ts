@@ -90,13 +90,65 @@ export async function POST(request: NextRequest) {
 
     const body = await request.json()
     
+    // Convert frontend field names to database field names
+    const convertFrontendToDatabase = (frontendData: any) => {
+      const converted = { ...frontendData }
+      
+      // Convert camelCase to snake_case for database fields
+      if (converted.educationLevel !== undefined) {
+        converted.education_level = converted.educationLevel
+        delete converted.educationLevel
+      }
+      if (converted.firstLogin !== undefined) {
+        converted.first_login = converted.firstLogin
+        delete converted.firstLogin
+      }
+      if (converted.totalExplanations !== undefined) {
+        converted.total_explanations = converted.totalExplanations
+        delete converted.totalExplanations
+      }
+      if (converted.todayExplanations !== undefined) {
+        converted.today_explanations = converted.todayExplanations
+        delete converted.todayExplanations
+      }
+      if (converted.availableCredits !== undefined) {
+        converted.available_credits = converted.availableCredits
+        delete converted.availableCredits
+      }
+      if (converted.bookExplanations !== undefined) {
+        converted.book_explanations = converted.bookExplanations
+        delete converted.bookExplanations
+      }
+      if (converted.purchasedBooks !== undefined) {
+        converted.purchased_books = converted.purchasedBooks
+        delete converted.purchasedBooks
+      }
+      if (converted.purchasedBookDetails !== undefined) {
+        converted.purchased_book_details = converted.purchasedBookDetails
+        delete converted.purchasedBookDetails
+      }
+      if (converted.hasUnlimitedAccess !== undefined) {
+        converted.has_unlimited_access = converted.hasUnlimitedAccess
+        delete converted.hasUnlimitedAccess
+      }
+      if (converted.unlimitedAccessExpiry !== undefined) {
+        converted.unlimited_access_expiry = converted.unlimitedAccessExpiry
+        delete converted.unlimitedAccessExpiry
+      }
+      
+      return converted
+    }
+    
+    const dbBody = convertFrontendToDatabase(body)
+    
     // Check if this is a partial update (only specific fields provided)
-    const providedFields = Object.keys(body).filter(key => key !== 'email')
+    const providedFields = Object.keys(dbBody).filter(key => key !== 'email')
     const isPartialUpdate = providedFields.length < 10 // Less than all fields
     
     log('Profile API: Update type:', isPartialUpdate ? 'partial' : 'full')
     log('Profile API: Provided fields:', providedFields)
-    log('Profile API: Body:', body)
+    log('Profile API: Original body:', body)
+    log('Profile API: Converted body:', dbBody)
     
     if (!session?.user?.email) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
@@ -105,12 +157,12 @@ export async function POST(request: NextRequest) {
     let profile
     if (isPartialUpdate) {
       // Use partial update to preserve existing fields
-      profile = await updateUserProfileFields(session.user.email, body)
+      profile = await updateUserProfileFields(session.user.email, dbBody)
     } else {
       // Use full update for complete profile replacement
       profile = await createOrUpdateUserProfile({
         email: session.user.email,
-        ...body
+        ...dbBody
       })
     }
 

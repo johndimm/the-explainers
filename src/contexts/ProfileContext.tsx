@@ -335,12 +335,14 @@ export const ProfileProvider: React.FC<ProfileProviderProps> = ({ children }) =>
       // Save to database with correct field names
       const dbProfile = {
         ...newProfile,
+        education_level: newProfile.educationLevel,
         available_credits: newProfile.availableCredits,
         book_explanations: newProfile.bookExplanations,
         purchased_book_details: newProfile.purchasedBookDetails,
         has_unlimited_access: newProfile.hasUnlimitedAccess,
         unlimited_access_expiry: newProfile.unlimitedAccessExpiry
       }
+      delete (dbProfile as any).educationLevel
       delete (dbProfile as any).availableCredits
       delete (dbProfile as any).bookExplanations
       delete (dbProfile as any).purchasedBookDetails
@@ -386,12 +388,14 @@ export const ProfileProvider: React.FC<ProfileProviderProps> = ({ children }) =>
       // Save to database - convert camelCase to snake_case
       const dbProfile = {
         ...newProfile,
+        education_level: newProfile.educationLevel,
         available_credits: newProfile.availableCredits,
         book_explanations: newProfile.bookExplanations,
         purchased_book_details: newProfile.purchasedBookDetails,
         has_unlimited_access: newProfile.hasUnlimitedAccess,
         unlimited_access_expiry: newProfile.unlimitedAccessExpiry
       }
+      delete (dbProfile as any).educationLevel
       delete (dbProfile as any).availableCredits
       delete (dbProfile as any).bookExplanations
       delete (dbProfile as any).purchasedBookDetails
@@ -492,12 +496,14 @@ export const ProfileProvider: React.FC<ProfileProviderProps> = ({ children }) =>
       // Save to database - convert camelCase to snake_case
       const dbProfile = {
         ...newProfile,
+        education_level: newProfile.educationLevel,
         available_credits: newProfile.availableCredits,
         book_explanations: newProfile.bookExplanations,
         purchased_book_details: newProfile.purchasedBookDetails,
         has_unlimited_access: newProfile.hasUnlimitedAccess,
         unlimited_access_expiry: newProfile.unlimitedAccessExpiry
       }
+      delete (dbProfile as any).educationLevel
       delete (dbProfile as any).availableCredits
       delete (dbProfile as any).bookExplanations
       delete (dbProfile as any).purchasedBookDetails
