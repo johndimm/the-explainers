@@ -219,47 +219,52 @@ export const convertToPagePositionLegacy = (fullTextPosition: number, pages: str
   return { pageIndex: pages.length - 1, pagePosition: 0 }
 }
 
-// Helper function to normalize text for better matching
+// Helper function to handle only essential character encoding issues
 const normalizeText = (text: string): string => {
   return text
     .replace(/['']/g, "'") // Replace smart quotes with regular apostrophes
     .replace(/[""]/g, '"') // Replace smart double quotes with regular quotes
     .replace(/–/g, '-')    // Replace en-dash with regular dash
     .replace(/—/g, '-')    // Replace em-dash with regular dash
-    .replace(/\s+/g, ' ')  // Normalize whitespace
-    .trim()
+    // Removed whitespace normalization - it was causing text matching issues
 }
 
 export const extractContextInfo = (selectedText: string, fullText: string, bookTitle?: string, author?: string) => {
-  // Normalize both texts to handle character encoding differences
-  const normalizedSelectedText = normalizeText(selectedText)
-  const normalizedFullText = normalizeText(fullText)
+  // Try to find the selected text in the original text
+  let selectedIndex = fullText.indexOf(selectedText)
   
-  const selectedIndex = normalizedFullText.indexOf(normalizedSelectedText)
   if (selectedIndex === -1) {
-    // If still not found, try a more flexible search
-    const words = normalizedSelectedText.split(/\s+/)
-    if (words.length > 0) {
-      // Try to find the first few words
-      const searchText = words.slice(0, Math.min(3, words.length)).join(' ')
-      const flexibleIndex = normalizedFullText.indexOf(searchText)
-      if (flexibleIndex !== -1) {
-        // Found a partial match, use the original text for context extraction
-        const originalIndex = fullText.indexOf(searchText)
-        if (originalIndex !== -1) {
-          return extractContextFromIndex(originalIndex, selectedText.length, fullText, bookTitle, author)
+    // If not found, try with minimal character encoding fixes
+    const normalizedSelectedText = normalizeText(selectedText)
+    const normalizedFullText = normalizeText(fullText)
+    
+    selectedIndex = normalizedFullText.indexOf(normalizedSelectedText)
+    
+    if (selectedIndex === -1) {
+      // If still not found, try a flexible search with first few words
+      const words = normalizedSelectedText.split(/\s+/)
+      if (words.length > 0) {
+        const searchText = words.slice(0, Math.min(3, words.length)).join(' ')
+        const flexibleIndex = normalizedFullText.indexOf(searchText)
+        if (flexibleIndex !== -1) {
+          // Found a partial match, use the original text for context extraction
+          const originalIndex = fullText.indexOf(searchText)
+          if (originalIndex !== -1) {
+            return extractContextFromIndex(originalIndex, selectedText.length, fullText, bookTitle, author)
+          }
         }
       }
+      return null
     }
-    return null
-  }
-  
-  // Convert back to original text index if we used normalized text
-  const originalIndex = fullText.indexOf(normalizedSelectedText) !== -1 
-    ? fullText.indexOf(normalizedSelectedText)
-    : selectedIndex
     
-  return extractContextFromIndex(originalIndex, selectedText.length, fullText, bookTitle, author)
+    // Convert back to original text index if we used normalized text
+    const originalIndex = fullText.indexOf(normalizedSelectedText)
+    if (originalIndex !== -1) {
+      selectedIndex = originalIndex
+    }
+  }
+
+  return extractContextFromIndex(selectedIndex, selectedText.length, fullText, bookTitle, author)
 }
 
 const extractContextFromIndex = (selectedIndex: number, selectedLength: number, fullText: string, bookTitle?: string, author?: string) => {
