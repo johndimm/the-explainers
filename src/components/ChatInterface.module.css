@@ -242,10 +242,18 @@
   
   .chatHeader {
     padding: 8px 12px;
-    flex-direction: column !important;
+    flex-direction: row !important;
     gap: 8px !important;
     align-items: flex-start !important;
     min-height: auto !important;
+    position: relative;
+  }
+  
+  .closeButton {
+    position: absolute;
+    top: 8px;
+    right: 12px;
+    z-index: 10;
   }
   
   .chatHeader h3 {
@@ -392,6 +400,14 @@
   .chatHeader {
     padding: 6px 8px;
     min-height: 50px;
+    position: relative;
+  }
+  
+  .closeButton {
+    position: absolute;
+    top: 6px;
+    right: 8px;
+    z-index: 10;
   }
   
   .chatHeader h3 {

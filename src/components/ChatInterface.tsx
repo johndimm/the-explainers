@@ -1524,7 +1524,7 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ selectedText, contextInfo
             {/* Share button moved to inline with each response */}
             </div>
           </div>
-{!isPageMode && <button onClick={onClose} className={styles.closeButton}>×</button>}
+          {!isPageMode && <button onClick={onClose} className={styles.closeButton}>×</button>}
         </div>
         
         <div 
