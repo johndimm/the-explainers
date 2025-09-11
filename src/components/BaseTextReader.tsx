@@ -329,15 +329,30 @@ const extractContextFromIndex = (selectedIndex: number, selectedLength: number, 
     chapter = lastRomanMatch.replace(/\.\s*\n$/, '').trim()
   }
 
-  const speakerMatches = beforeText.match(/\n([A-Z][A-Z\s&']+)\./g)
-  if (speakerMatches && speakerMatches.length > 0) {
-    const lastSpeakerMatch = speakerMatches[speakerMatches.length - 1]
-    const speakerName = lastSpeakerMatch.replace(/^\n/, '').replace(/\.$/, '').trim()
-    speaker = speakerName.replace(/\[.*?\]/g, '').trim()
-    if (speaker.includes('_') || speaker.length < 2) {
-      speaker = null
+  // Find the most recent speaker before the selection
+  // Look for speaker patterns and find the one closest to the selection
+  const speakerRegex = /\n([A-Z][A-Z\s&']+)\./g
+  let speakerMatch
+  let lastValidSpeaker = null
+  let lastValidIndex = -1
+  
+  // Find all speaker matches and get the one closest to the selection
+  while ((speakerMatch = speakerRegex.exec(beforeText)) !== null) {
+    const speakerName = speakerMatch[1].trim()
+    const matchIndex = speakerMatch.index
+    
+    // Skip if speaker name contains underscores or is too short
+    if (!speakerName.includes('_') && speakerName.length >= 2) {
+      const cleanSpeakerName = speakerName.replace(/\[.*?\]/g, '').trim()
+      // Keep the speaker that appears closest to the selection (highest index)
+      if (matchIndex > lastValidIndex) {
+        lastValidSpeaker = cleanSpeakerName
+        lastValidIndex = matchIndex
+      }
     }
   }
+  
+  speaker = lastValidSpeaker
 
   // Only extract stage directions and characters for plays (texts with Acts/Scenes)
   const isPlay = act !== null || scene !== null
@@ -583,8 +598,10 @@ export const useBookmarkRestoreAndSave = (
         const title = bookTitle || 'Untitled'
         const auth = author || 'Unknown'
 
-        // Save to database if user is authenticated
-        if (session?.user?.email) {
+        // Save to database if user is authenticated or in development mode
+        const isLocalDev = process.env.NODE_ENV === 'development' && typeof window !== 'undefined' && window.location.hostname === 'localhost'
+        
+        if (session?.user?.email || isLocalDev) {
           try {
             await fetch('/api/user/bookmark', {
               method: 'POST',

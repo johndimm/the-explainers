@@ -7,7 +7,10 @@ export async function GET(request: NextRequest) {
   try {
     const session = await getServerSession(authOptions)
     
-    if (!session?.user?.email) {
+    // In development, if no session, try to get the bookmark for the default user
+    const userEmail = session?.user?.email || (process.env.NODE_ENV === 'development' ? 'john.r.dimm@gmail.com' : null)
+    
+    if (!userEmail) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
     }
 
@@ -17,7 +20,7 @@ export async function GET(request: NextRequest) {
 
     if (bookTitle && bookAuthor) {
       // Get specific bookmark
-      const bookmark = await getUserBookmark(session.user.email, bookTitle, bookAuthor)
+      const bookmark = await getUserBookmark(userEmail, bookTitle, bookAuthor)
       
       if (!bookmark) {
         return NextResponse.json({ error: 'Bookmark not found' }, { status: 404 })
@@ -26,7 +29,7 @@ export async function GET(request: NextRequest) {
       return NextResponse.json(bookmark)
     } else {
       // Get all bookmarks for user
-      const bookmarks = await getAllUserBookmarks(session.user.email)
+      const bookmarks = await getAllUserBookmarks(userEmail)
       return NextResponse.json(bookmarks)
     }
   } catch (error) {
@@ -39,7 +42,10 @@ export async function POST(request: NextRequest) {
   try {
     const session = await getServerSession(authOptions)
     
-    if (!session?.user?.email) {
+    // In development, if no session, use the default user
+    const userEmail = session?.user?.email || (process.env.NODE_ENV === 'development' ? 'john.r.dimm@gmail.com' : null)
+    
+    if (!userEmail) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
     }
 
@@ -51,7 +57,7 @@ export async function POST(request: NextRequest) {
     }
 
     const bookmark = await createOrUpdateUserBookmark({
-      email: session.user.email,
+      email: userEmail,
       book_title: bookTitle,
       book_author: bookAuthor,
       scroll_position: scrollPosition
