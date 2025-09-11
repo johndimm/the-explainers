@@ -135,6 +135,20 @@ const ExplainerStylesPage: React.FC<ExplainerStylesPageProps> = ({
   onStyleChange 
 }) => {
   const router = useRouter()
+  const [searchQuery, setSearchQuery] = useState('')
+  const [filteredCategories, setFilteredCategories] = useState<{ [key: string]: StyleOption[] }>({})
+
+  // Listen for header search events
+  useEffect(() => {
+    const handleHeaderSearch = (event: CustomEvent) => {
+      if (event.detail.type === 'people') {
+        setSearchQuery(event.detail.query)
+      }
+    }
+
+    window.addEventListener('headerSearch', handleHeaderSearch as EventListener)
+    return () => window.removeEventListener('headerSearch', handleHeaderSearch as EventListener)
+  }, [])
 
   const handleStyleSelect = (style: ExplanationStyle) => {
     console.log('ExplainerStylesPage: Style selected:', style)
@@ -143,6 +157,29 @@ const ExplainerStylesPage: React.FC<ExplainerStylesPageProps> = ({
   }
 
   const styleCategories = getStyleCategories()
+
+  // Filter categories based on search query
+  useEffect(() => {
+    if (searchQuery.trim() === '') {
+      setFilteredCategories(styleCategories)
+    } else {
+      const query = searchQuery.toLowerCase()
+      const filtered: { [key: string]: StyleOption[] } = {}
+      
+      for (const [categoryName, styles] of Object.entries(styleCategories)) {
+        const matchingStyles = styles.filter(style => 
+          style.name.toLowerCase().includes(query) ||
+          style.description.toLowerCase().includes(query)
+        )
+        
+        if (matchingStyles.length > 0) {
+          filtered[categoryName] = matchingStyles
+        }
+      }
+      
+      setFilteredCategories(filtered)
+    }
+  }, [searchQuery, styleCategories])
 
   // Get the current selected style info
   const allStyles = Object.values(styleCategories).flat()
@@ -153,6 +190,19 @@ const ExplainerStylesPage: React.FC<ExplainerStylesPageProps> = ({
       <div className={stylesCss.pageHeader}>
         <h1>Choose Your Explainer Style</h1>
         <p>Select a style to see how different voices would explain your text</p>
+        {searchQuery.trim() !== '' && (
+          <div style={{ 
+            marginTop: '8px', 
+            padding: '8px 12px', 
+            background: '#f0f9ff', 
+            border: '1px solid #0ea5e9', 
+            borderRadius: '6px',
+            fontSize: '14px',
+            color: '#0ea5e9'
+          }}>
+            🔍 Searching for "{searchQuery}" - Found {Object.values(filteredCategories).flat().length} people
+          </div>
+        )}
       </div>
 
       {currentStyleData && (
@@ -191,20 +241,32 @@ const ExplainerStylesPage: React.FC<ExplainerStylesPageProps> = ({
         </div>
       )}
 
-      {Object.entries(styleCategories).map(([categoryName, styles]) => (
-        <div key={categoryName} className={stylesCss.categorySection}>
-          <h2 className={stylesCss.categoryTitle}>
-            {categoryName.charAt(0).toUpperCase() + categoryName.slice(1)}
-          </h2>
-          <FilteredStyleList
-            styles={styles}
-            selectedStyle={selectedStyle}
-            onStyleSelect={handleStyleSelect}
-            getPhotoSrc={getPhotoSrc}
-            stylesCss={stylesCss}
-          />
+      {Object.keys(filteredCategories).length === 0 && searchQuery.trim() !== '' ? (
+        <div style={{ 
+          textAlign: 'center', 
+          padding: '40px 20px',
+          color: '#666'
+        }}>
+          <div style={{ fontSize: '48px', marginBottom: '16px' }}>🔍</div>
+          <div style={{ fontSize: '18px', marginBottom: '8px' }}>No people found matching "{searchQuery}"</div>
+          <div style={{ fontSize: '14px' }}>Try searching for a different name or description</div>
         </div>
-      ))}
+      ) : (
+        Object.entries(filteredCategories).map(([categoryName, styles]) => (
+          <div key={categoryName} className={stylesCss.categorySection}>
+            <h2 className={stylesCss.categoryTitle}>
+              {categoryName.charAt(0).toUpperCase() + categoryName.slice(1)}
+            </h2>
+            <FilteredStyleList
+              styles={styles}
+              selectedStyle={selectedStyle}
+              onStyleSelect={handleStyleSelect}
+              getPhotoSrc={getPhotoSrc}
+              stylesCss={stylesCss}
+            />
+          </div>
+        ))
+      )}
 
     </div>
   )

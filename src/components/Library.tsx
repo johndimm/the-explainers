@@ -48,6 +48,18 @@ const Library: React.FC<LibraryProps> = ({ onBookSelect, onBackToCurrentBook }) 
   const [searchQuery, setSearchQuery] = useState('')
   const [filteredCategories, setFilteredCategories] = useState<LibraryCategory[]>([])
   const [popupCategory, setPopupCategory] = useState<LibraryCategory | null>(null)
+
+  // Listen for header search events
+  useEffect(() => {
+    const handleHeaderSearch = (event: CustomEvent) => {
+      if (event.detail.type === 'books') {
+        setSearchQuery(event.detail.query)
+      }
+    }
+
+    window.addEventListener('headerSearch', handleHeaderSearch as EventListener)
+    return () => window.removeEventListener('headerSearch', handleHeaderSearch as EventListener)
+  }, [])
   const router = useRouter()
 
   useEffect(() => {

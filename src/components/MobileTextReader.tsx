@@ -565,6 +565,19 @@ const MobileTextReader: React.FC<ReaderCommonProps> = ({ text, bookTitle = 'Rome
     clearSearch
   } = useSearchCore(text, textReaderRef, textContentRef, goToPage, pageMap)
 
+  // Listen for header search events
+  React.useEffect(() => {
+    const handleHeaderSearch = (event: CustomEvent) => {
+      if (event.detail.type === 'text') {
+        setSearchQuery(event.detail.query)
+        handleSearch(event.detail.query)
+      }
+    }
+
+    window.addEventListener('headerSearch', handleHeaderSearch as EventListener)
+    return () => window.removeEventListener('headerSearch', handleHeaderSearch as EventListener)
+  }, [handleSearch])
+
   const expandToWordBoundaries = (range: Range): Range => {
     const expandedRange = range.cloneRange()
     const startContainer = range.startContainer
@@ -732,30 +745,6 @@ const MobileTextReader: React.FC<ReaderCommonProps> = ({ text, bookTitle = 'Rome
 
   return (
     <div ref={textReaderRef} className={styles.textReader}>
-      {/* Search Bar */}
-      <div style={{
-        position: 'sticky', top: '0px', padding: '8px 0', marginBottom: '16px',
-        backgroundColor: 'white', borderBottom: '1px solid #e0e0e0', zIndex: 50
-      }}>
-        <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-          <input
-            type="text"
-            placeholder="Search..."
-            value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
-            onKeyDown={(e) => { if (e.key === 'Enter') handleSearch(searchQuery) }}
-            style={{ flex: 1, padding: '4px 8px', margin: 0, border: '1px solid #ddd', borderRadius: '4px', fontSize: '13px', outline: 'none', backgroundColor: 'white' }}
-          />
-        </div>
-        {searchResults.length > 0 && (
-          <div style={{ marginTop: '2px', fontSize: '11px', color: '#666', display: 'flex', alignItems: 'center', gap: '6px' }}>
-            <span>{currentSearchIndex + 1} of {searchResults.length}</span>
-            <button onClick={prevSearchResult} style={{ padding: '2px 6px', border: '1px solid #ddd', borderRadius: '2px', background: 'white', cursor: 'pointer', fontSize: '11px' }}>↑</button>
-            <button onClick={nextSearchResult} style={{ padding: '2px 6px', border: '1px solid #ddd', borderRadius: '2px', background: 'white', cursor: 'pointer', fontSize: '11px' }}>↓</button>
-            <button onClick={clearSearch} style={{ padding: '2px 8px', border: 'none', background: 'none', cursor: 'pointer', fontSize: '11px', color: '#999' }}>clear</button>
-          </div>
-        )}
-      </div>
 
       <div
         ref={textContentRef}

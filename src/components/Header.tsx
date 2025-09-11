@@ -1,17 +1,40 @@
 'use client'
 
 import React, { useEffect, useRef, useState } from 'react'
-import { useRouter } from 'next/navigation'
+import { useRouter, usePathname } from 'next/navigation'
 import { useAuth } from '@/contexts/AuthContext'
 import { getCurrentBook } from '@/utils/currentBookStorage'
 
 export default function Header() {
   const router = useRouter()
+  const pathname = usePathname()
   const { user, isAuthenticated, isLoading, signIn, signOut: handleSignOut } = useAuth()
   const [showMobileMenu, setShowMobileMenu] = useState(false)
   const menuRef = useRef<HTMLDivElement>(null)
   const [subtitle, setSubtitle] = useState<string>('understand difficult texts')
+  const [searchQuery, setSearchQuery] = useState('')
+  const [showSearch, setShowSearch] = useState(false)
 
+  // Determine search context based on current page
+  const getSearchContext = () => {
+    if (pathname === '/reader') return { show: true, placeholder: 'Search in text...', type: 'text' }
+    if (pathname === '/library') return { show: true, placeholder: 'Search books...', type: 'books' }
+    if (pathname === '/explainers') return { show: true, placeholder: 'Search people...', type: 'people' }
+    return { show: false, placeholder: '', type: '' }
+  }
+
+  const searchContext = getSearchContext()
+
+  const handleSearch = () => {
+    if (!searchQuery.trim()) return
+    
+    // Dispatch search event for the current page to handle
+    if (typeof window !== 'undefined') {
+      window.dispatchEvent(new CustomEvent('headerSearch', { 
+        detail: { query: searchQuery, type: searchContext.type } 
+      }))
+    }
+  }
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -87,107 +110,72 @@ export default function Header() {
       zIndex: 99999,
       boxShadow: '0 2px 4px rgba(0,0,0,0.1)',
       isolation: 'isolate',
-      willChange: 'transform',
-      contain: 'layout style paint'
+      willChange: 'transform'
     }}>
       <div style={{
         width: '100%',
         display: 'flex',
         justifyContent: 'space-between',
-        alignItems: 'center',
+        alignItems: 'flex-start',
         padding: '8px 20px',
         boxSizing: 'border-box'
       }}>
         <div style={{ flex: 1 }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '12px', height: '40px' }}>
             <h1 style={{ margin: 0, fontSize: '18px', fontWeight: 'bold', color: '#333', lineHeight: '1.2' }}>The Explainers</h1>
-            <button
-              onClick={() => window.open('https://reddit.com/r/TheExplainersApp', '_blank')}
-              style={{
-                background: 'none',
-                border: 'none',
-                cursor: 'pointer',
-                padding: '2px 6px',
-                borderRadius: '4px',
-                fontSize: '10px',
-                color: '#ff6b35',
-                fontWeight: '500',
-                textDecoration: 'none',
-                display: 'flex',
-                alignItems: 'center',
-                gap: '2px',
-                transition: 'all 0.2s'
-              }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.background = '#fff5f2'
-                e.currentTarget.style.color = '#e55a2b'
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.background = 'none'
-                e.currentTarget.style.color = '#ff6b35'
-              }}
-              title="Join our Reddit community"
-            >
-              <span style={{ fontSize: '8px' }}>🔗</span>
-              Reddit
-            </button>
             
-            <button
-              onClick={() => window.open('https://github.com/johndimm/the-explainers/discussions', '_blank')}
-              style={{
-                background: 'none',
-                border: 'none',
-                cursor: 'pointer',
-                padding: '2px 6px',
-                borderRadius: '4px',
-                fontSize: '10px',
-                color: '#2ea44f',
-                fontWeight: '500',
-                textDecoration: 'none',
-                display: 'flex',
-                alignItems: 'center',
-                gap: '2px',
-                transition: 'all 0.2s'
-              }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.background = '#f0f9f0'
-                e.currentTarget.style.color = '#2c974b'
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.background = 'none'
-                e.currentTarget.style.color = '#2ea44f'
-              }}
-              title="Join our GitHub Discussions community"
-            >
-              <span style={{ fontSize: '8px' }}>🐙</span>
-              GitHub
-            </button>
+            {searchContext.show && (
+              <input
+                type="text"
+                placeholder={searchContext.placeholder}
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                onKeyDown={(e) => e.key === 'Enter' && handleSearch()}
+                style={{
+                  flex: 1,
+                  padding: '6px 8px',
+                  border: '1px solid #ddd',
+                  borderRadius: '4px',
+                  fontSize: '12px',
+                  outline: 'none',
+                  height: '28px',
+                  boxSizing: 'border-box',
+                  minWidth: '120px'
+                }}
+              />
+            )}
           </div>
           <p style={{ margin: 0, fontSize: '11px', color: '#666', lineHeight: '1.2' }}>
             {subtitle}
           </p>
         </div>
-        <div ref={menuRef} style={{ position: 'relative' }}>
+        <div ref={menuRef} style={{ position: 'relative', display: 'flex', alignItems: 'center', height: '40px', marginTop: '0' }}>
           <button 
-            onClick={() => setShowMobileMenu(!showMobileMenu)}
+            onClick={() => {
+              console.log('Hamburger clicked, current state:', showMobileMenu)
+              setShowMobileMenu(!showMobileMenu)
+            }}
             style={{ padding: '8px', background: 'none', border: 'none', cursor: 'pointer', fontSize: '18px', color: '#333' }}
           >
             ☰
           </button>
           {showMobileMenu && (
-            <div style={{ 
-              position: 'fixed', 
-              top: '60px',
-              right: '20px',
-              background: 'white', 
-              border: '1px solid #e0e0e0', 
-              borderRadius: '8px', 
-              boxShadow: '0 4px 12px rgba(0,0,0,0.15)', 
-              minWidth: '200px', 
-              zIndex: 100000,
-              maxHeight: '80vh',
-              overflowY: 'auto'
-            }}>
+            <div 
+              style={{ 
+                position: 'absolute', 
+                top: '100%',
+                right: '0',
+                background: 'white', 
+                border: '1px solid #e0e0e0', 
+                borderRadius: '8px', 
+                boxShadow: '0 4px 12px rgba(0,0,0,0.15)', 
+                minWidth: '200px', 
+                zIndex: 100000,
+                maxHeight: '80vh',
+                overflowY: 'auto'
+              }}
+              onLoad={() => console.log('Mobile menu div loaded')}
+            >
               <button onClick={() => { router.push('/reader'); setShowMobileMenu(false) }} style={{ display: 'block', width: '100%', padding: '12px 16px', background: 'none', border: 'none', textAlign: 'left', cursor: 'pointer', borderBottom: '1px solid #f0f0f0' }}>📖 Reader</button>
               <button onClick={() => { router.push('/chat'); setShowMobileMenu(false) }} style={{ display: 'block', width: '100%', padding: '12px 16px', background: 'none', border: 'none', textAlign: 'left', cursor: 'pointer', borderBottom: '1px solid #f0f0f0' }}>💬 Chat</button>
               <button onClick={() => { router.push('/library'); setShowMobileMenu(false) }} style={{ display: 'block', width: '100%', padding: '12px 16px', background: 'none', border: 'none', textAlign: 'left', cursor: 'pointer', borderBottom: '1px solid #f0f0f0' }}>📚 Library</button>

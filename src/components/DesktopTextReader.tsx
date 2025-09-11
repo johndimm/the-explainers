@@ -188,57 +188,21 @@ const DesktopTextReader: React.FC<ReaderCommonProps> = ({ text, bookTitle = 'Rom
     clearSearch
   } = useSearchCore(text, textReaderRef, textContentRef, goToPage, pageMap)
 
+  // Listen for header search events
+  React.useEffect(() => {
+    const handleHeaderSearch = (event: CustomEvent) => {
+      if (event.detail.type === 'text') {
+        setSearchQuery(event.detail.query)
+        handleSearch(event.detail.query)
+      }
+    }
+
+    window.addEventListener('headerSearch', handleHeaderSearch as EventListener)
+    return () => window.removeEventListener('headerSearch', handleHeaderSearch as EventListener)
+  }, [handleSearch])
+
   return (
     <div ref={textReaderRef} className={styles.textReader}>
-      {/* Sticky Search Bar */}
-      <div style={{ 
-        position: 'sticky', 
-        top: '0px', 
-        padding: '16px', 
-        borderBottom: '1px solid #e9ecef',
-        backgroundColor: 'white', 
-        zIndex: 50,
-        boxShadow: '0 2px 4px rgba(0,0,0,0.1)'
-      }}>
-        <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '8px' }}>
-          <input
-            type="text"
-            placeholder="Search in text..."
-            value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
-            onKeyPress={(e) => e.key === 'Enter' && handleSearch(searchQuery)}
-            style={{
-              flex: 1,
-              padding: '8px 12px',
-              border: '1px solid #dee2e6',
-              borderRadius: '4px',
-              fontSize: '14px'
-            }}
-          />
-          <button
-            onClick={() => handleSearch(searchQuery)}
-            style={{
-              padding: '8px 16px',
-              border: 'none',
-              borderRadius: '4px',
-              background: '#007bff',
-              color: 'white',
-              cursor: 'pointer',
-              fontSize: '14px'
-            }}
-          >
-            Search
-          </button>
-        </div>
-        {searchResults.length > 0 && (
-          <div style={{ marginTop: '4px', fontSize: '12px', color: '#666', display: 'flex', alignItems: 'center', gap: '8px' }}>
-            <span>{currentSearchIndex + 1} of {searchResults.length}</span>
-            <button onClick={prevSearchResult} style={{ padding: '2px 6px', border: '1px solid #ddd', borderRadius: '2px', background: 'white', cursor: 'pointer', fontSize: '11px' }}>↑</button>
-            <button onClick={nextSearchResult} style={{ padding: '2px 6px', border: '1px solid #ddd', borderRadius: '2px', background: 'white', cursor: 'pointer', fontSize: '11px' }}>↓</button>
-            <button onClick={clearSearch} style={{ padding: '2px 8px', border: 'none', background: 'none', cursor: 'pointer', fontSize: '11px', color: '#999' }}>clear</button>
-          </div>
-        )}
-      </div>
 
       <div
         ref={textContentRef}
