@@ -26,15 +26,19 @@ interface AuthProviderProps {
 
 export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   const { data: session, status, update } = useSession()
-  const [isLoading, setIsLoading] = useState(true)
+  
+  // In local development, start with loading false to bypass auth delays
+  const isLocalDev = process.env.NODE_ENV === 'development' && typeof window !== 'undefined' && window.location.hostname === 'localhost'
+  const [isLoading, setIsLoading] = useState(!isLocalDev)
 
   useEffect(() => {
     log('AuthContext: Session status changed:', status)
     log('AuthContext: Session data:', session)
-    if (status !== 'loading') {
+    
+    if (status !== 'loading' || isLocalDev) {
       setIsLoading(false)
     }
-  }, [status, session])
+  }, [status, session, isLocalDev])
 
   // Force session refresh on mobile after OAuth redirect
   useEffect(() => {

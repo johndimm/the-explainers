@@ -39,8 +39,11 @@ function ReaderContent() {
   useEffect(() => {
     console.log('Reader: Auth state - isLoading:', authLoading, 'isAuthenticated:', isAuthenticated)
     
-    // Don't try to load anything until authentication is resolved
-    if (authLoading) {
+    // In local development, bypass authentication loading
+    const isLocalDev = process.env.NODE_ENV === 'development' && typeof window !== 'undefined' && window.location.hostname === 'localhost'
+    
+    // Don't try to load anything until authentication is resolved (unless in local dev)
+    if (authLoading && !isLocalDev) {
       console.log('Reader: Waiting for authentication...')
       return
     }
