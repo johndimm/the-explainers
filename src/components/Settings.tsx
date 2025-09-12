@@ -353,33 +353,15 @@ const Settings: React.FC<SettingsProps> = ({ isOpen, onClose, settings, onSettin
       
       <div style={{ marginTop: '60px' }}>
         <div className={styles.settingsContainer} style={{ margin: '20px auto', maxWidth: '600px', boxShadow: 'none', border: 'none', position: 'static', transform: 'none', overflow: 'visible', maxHeight: 'none' }}>
-          <div style={{ 
-            background: 'white', 
-            borderRadius: '8px', 
-            padding: '30px', 
-            boxShadow: '0 2px 10px rgba(0,0,0,0.1)',
-            border: '1px solid #e9ecef',
-            marginBottom: '20px'
-          }}>
-            <h1 style={{ 
-              color: '#8b5cf6', 
-              borderBottom: '3px solid #8b5cf6', 
-              paddingBottom: '10px', 
-              marginBottom: '15px',
-              marginTop: '0',
-              fontSize: '28px',
-              fontWeight: '600'
-            }}>
-              Settings
-            </h1>
-            <p style={{ 
-              margin: '0',
-              color: '#666',
-              fontSize: '16px',
-              lineHeight: '1.5'
-            }}>
-              Configure your AI explanation preferences
-            </p>
+          <div className="card">
+            <div className="card-body">
+              <h1 className="page-title">
+                Settings
+              </h1>
+              <p className="page-subtitle">
+                Configure your AI explanation preferences
+              </p>
+            </div>
           </div>
 
         <div className={styles.settingsContent}>

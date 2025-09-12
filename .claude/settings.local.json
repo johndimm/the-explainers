@@ -13,7 +13,10 @@
       "WebFetch(domain:commons.wikimedia.org)",
       "WebFetch(domain:commons.wikimedia.org)",
       "Bash(curl:*)",
-      "Bash(rm:*)"
+      "Bash(rm:*)",
+      "Read(//var/folders/8r/xfkpcfl14f33jkyfz9l9mhr40000gp/T/TemporaryItems/NSIRD_screencaptureui_xpcQm6/**)",
+      "Read(//var/folders/8r/xfkpcfl14f33jkyfz9l9mhr40000gp/T/TemporaryItems/NSIRD_screencaptureui_lZvXUp/**)",
+      "Read(//var/folders/8r/xfkpcfl14f33jkyfz9l9mhr40000gp/T/TemporaryItems/NSIRD_screencaptureui_mii0jf/**)"
     ],
     "deny": [],
     "ask": []

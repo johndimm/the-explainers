@@ -190,7 +190,6 @@ const ExplainerStylesPage: React.FC<ExplainerStylesPageProps> = ({
     <PageLayout 
       title="Choose Your Explainer Style" 
       subtitle="Select a style to see how different voices would explain your text"
-      maxWidth="1200px"
     >
       <div className={stylesCss.container} style={{ marginTop: '0' }}>
         {searchQuery.trim() !== '' && (

@@ -101,7 +101,7 @@ function CreditsContent() {
   }
 
   return (
-    <div style={{ minHeight: '100vh', background: '#fafafa' }}>
+    <div className="min-h-screen bg-white">
       <PageTitle title="Credits & Usage" subtitle="Manage your credits and purchase options" />
       <style jsx>{`
         @media (max-width: 768px) {
@@ -334,23 +334,17 @@ function CreditsContent() {
       </header>
 
       {/* Main Content */}
-      <main style={{ maxWidth: '800px', margin: '0 auto', padding: '40px 20px', marginTop: '0' }} className="mobile-padding">
+      <main className="container">
         {/* Free Demo Banner */}
-        <div style={{
-          background: 'linear-gradient(135deg, #10b981, #059669)',
-          color: 'white',
-          padding: '24px',
-          borderRadius: '16px',
-          marginBottom: '32px',
-          textAlign: 'center',
-          boxShadow: '0 4px 12px rgba(16, 185, 129, 0.3)'
-        }}>
-          <div style={{ fontSize: '28px', marginBottom: '12px' }}>🎉 Currently FREE!</div>
-          <div style={{ fontSize: '18px', marginBottom: '8px', fontWeight: '600' }}>
-            All explanations are free during our demo period
-          </div>
-          <div style={{ fontSize: '16px', opacity: '0.9' }}>
-            No actual payments will be processed • Try unlimited explanations now
+        <div className="card mb-8" style={{ background: 'linear-gradient(135deg, var(--color-success), var(--color-success-hover))' }}>
+          <div className="card-body text-center text-white">
+            <div className="text-3xl mb-3">🎉 Currently FREE!</div>
+            <h3 className="text-xl mb-2 font-semibold">
+              All explanations are free during our demo period
+            </h3>
+            <p className="m-0 opacity-90">
+              No actual payments will be processed • Try unlimited explanations now
+            </p>
           </div>
         </div>
 

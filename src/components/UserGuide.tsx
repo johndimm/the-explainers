@@ -8,8 +8,6 @@ const UserGuide: React.FC = () => {
     <PageLayout 
       title="User Guide" 
       subtitle="Learn how to use The Explainers to understand difficult texts"
-      maxWidth="1200px"
-      backgroundColor="#f9f9f9"
     >
       <div style={{ background: 'white', borderRadius: '8px', padding: '40px', boxShadow: '0 2px 10px rgba(0,0,0,0.1)' }}>
 

@@ -1,72 +1,78 @@
 'use client'
 
-import React, { useEffect, useRef, useState } from 'react'
-import { useRouter } from 'next/navigation'
+import React from 'react'
 import PageLayout from '@/components/PageLayout'
 
-const captions: string[] = [
-  "I'm reading Macbeth",
-  'What does this mean?',
-  'Start a chat with AI about it',
-  "Ah, that's what it means"
+const demoSteps = [
+  {
+    title: "I'm reading Macbeth",
+    description: "Start by selecting a passage from classic literature",
+    image: "/explainer-demo-screenshots/1.jpg"
+  },
+  {
+    title: "What does this mean?",
+    description: "Highlight text that you want explained",
+    image: "/explainer-demo-screenshots/2.jpg"
+  },
+  {
+    title: "Start a chat with AI about it", 
+    description: "Get instant AI explanations in different styles",
+    image: "/explainer-demo-screenshots/3.jpg"
+  },
+  {
+    title: "Ah, that's what it means",
+    description: "Understand complex literature with clear explanations",
+    image: "/explainer-demo-screenshots/4.jpg"
+  }
 ]
 
 export default function DemoPage() {
-  const router = useRouter()
-  const [showMobileMenu, setShowMobileMenu] = useState(false)
-  const menuRef = useRef<HTMLDivElement>(null)
-
-  useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
-      if (menuRef.current && !menuRef.current.contains(event.target as Node)) {
-        setShowMobileMenu(false)
-      }
-    }
-    if (showMobileMenu) {
-      document.addEventListener('mousedown', handleClickOutside)
-    }
-    return () => document.removeEventListener('mousedown', handleClickOutside)
-  }, [showMobileMenu])
-
   return (
     <PageLayout 
       title="Demo" 
       subtitle="A quick walkthrough: select a passage and get an AI explanation"
-      maxWidth="1120px"
     >
-      <style jsx>{`
-        :root { --ink:#111; --paper:#fff; --cream:#fff3b0; --shadow:rgba(0,0,0,0.12); }
-        @media (max-width: 768px) { .mobile-padding { padding: 8px !important; } }
-        .grid { display: grid; gap: 32px 24px; grid-template-columns: repeat(2, 1fr); }
-        @media (max-width: 768px) { .grid { grid-template-columns: 1fr; gap: 24px; } }
-        .panel { background: var(--paper); border: 2px solid var(--ink); border-radius: 10px; overflow: hidden; box-shadow: 3px 3px 0 var(--ink), 0 6px 18px var(--shadow); transition: transform .15s ease, box-shadow .15s ease; }
-        .panel:hover { transform: translateY(-2px); box-shadow: 6px 6px 0 var(--ink), 0 10px 24px var(--shadow); }
-        .imgWrap { position: relative; background: #fafafa; padding: 12px; border-top: 2px solid var(--ink); }
-        .frame { background: #fff; border: 1px solid #e5e7eb; border-radius: 8px; overflow: hidden; width: 90%; margin: 0 auto; box-shadow: 0 2px 10px rgba(0,0,0,0.06); }
-        .img { width: 100%; height: auto; display: block; }
-        .badge { position: absolute; top: 12px; left: 12px; width: 28px; height: 28px; border-radius: 999px; background: var(--ink); color: #fff; display: flex; align-items: center; justifyContent: center; font-weight: 800; font-size: 12px; box-shadow: 1px 1px 0 rgba(0,0,0,.5); }
-        .caption { background: var(--cream); border-bottom: 2px solid var(--ink); padding: 12px 14px; font-weight: 700; color: #111827; font-size: 13px; line-height: 1.5; font-style: italic; }
-        .subtitle { margin: 6px 0 0 0; color: #6b7280; font-size: 14px; }
-      `}</style>
+      <div className="demo-grid">
+        {demoSteps.map((step, idx) => (
+          <div key={idx} className="demo-step">
+            <div className="demo-step-header">
+              <div className="demo-step-number">
+                {idx + 1}
+              </div>
+              <div>
+                <h3 className="demo-step-title">{step.title}</h3>
+                <p className="demo-step-description">{step.description}</p>
+              </div>
+            </div>
+            <div className="demo-screenshot">
+              <img 
+                src={step.image} 
+                alt={step.title}
+                className="demo-screenshot-image"
+                loading="lazy"
+              />
+            </div>
+          </div>
+        ))}
+      </div>
 
-          <section className="grid">
-            {captions.map((caption, idx) => {
-              const displayNumber = idx + 1
-              const imageNumber = idx + 1 // Use first 4 images directly
-              const src = `/explainer-demo-screenshots/${imageNumber}.jpg`
-              return (
-                <figure key={idx} className="panel">
-                  <figcaption className="caption">{caption}</figcaption>
-                  <div className="imgWrap">
-                    <div className="badge">{displayNumber}</div>
-                    <div className="frame">
-                      <img className="img" src={src} alt={caption} loading="lazy" />
-                    </div>
-                  </div>
-                </figure>
-              )
-            })}
-          </section>
+      <div className="mt-12 text-center">
+        <div className="card" style={{ background: 'linear-gradient(135deg, var(--color-purple-light), var(--color-primary-light))' }}>
+          <div className="card-body">
+            <div className="w-16 h-16 bg-white rounded-full flex items-center justify-center text-3xl shadow-sm mx-auto mb-4">
+              📚
+            </div>
+            <h3 className="text-xl font-semibold mb-4">Ready to explore literature?</h3>
+            <p className="text-gray-700 leading-relaxed mb-6 max-w-lg mx-auto">
+              Try out The Explainers with your favorite books. Get instant AI explanations 
+              in different voices and styles to deepen your understanding.
+            </p>
+            <a href="/library" className="btn btn-primary btn-lg">
+              Start Reading
+            </a>
+          </div>
+        </div>
+      </div>
     </PageLayout>
   )
 }
