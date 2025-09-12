@@ -16,7 +16,12 @@
       "Bash(rm:*)",
       "Read(//var/folders/8r/xfkpcfl14f33jkyfz9l9mhr40000gp/T/TemporaryItems/NSIRD_screencaptureui_xpcQm6/**)",
       "Read(//var/folders/8r/xfkpcfl14f33jkyfz9l9mhr40000gp/T/TemporaryItems/NSIRD_screencaptureui_lZvXUp/**)",
-      "Read(//var/folders/8r/xfkpcfl14f33jkyfz9l9mhr40000gp/T/TemporaryItems/NSIRD_screencaptureui_mii0jf/**)"
+      "Read(//var/folders/8r/xfkpcfl14f33jkyfz9l9mhr40000gp/T/TemporaryItems/NSIRD_screencaptureui_mii0jf/**)",
+      "Read(//var/folders/8r/xfkpcfl14f33jkyfz9l9mhr40000gp/T/TemporaryItems/NSIRD_screencaptureui_m7ZuGg/**)",
+      "Read(//var/folders/8r/xfkpcfl14f33jkyfz9l9mhr40000gp/T/TemporaryItems/NSIRD_screencaptureui_YF1C8U/**)",
+      "Bash(find:*)",
+      "Read(//var/folders/8r/xfkpcfl14f33jkyfz9l9mhr40000gp/T/TemporaryItems/NSIRD_screencaptureui_cmF5IG/**)",
+      "Read(//var/folders/8r/xfkpcfl14f33jkyfz9l9mhr40000gp/T/TemporaryItems/NSIRD_screencaptureui_QvYZEQ/**)"
     ],
     "deny": [],
     "ask": []

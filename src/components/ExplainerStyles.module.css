@@ -16,8 +16,18 @@
   background: white;
   max-width: 1200px;
   width: 100%;
+  max-height: 90vh;
   margin: 0 auto;
   padding: 20px;
+  overflow-y: auto;
+  border-radius: 12px;
+}
+
+.pageContainer {
+  max-width: none;
+  width: 100%;
+  margin: 0;
+  padding: 0;
 }
 
 .pageHeader {
@@ -272,8 +282,8 @@
   }
   
   .selectedPhoto {
-    width: 140px;
-    height: 112px;
+    width: 180px;
+    height: 180px;
     object-fit: contain;
     object-position: center;
   }
@@ -299,8 +309,8 @@
 }
 
 .selectedPhoto {
-  width: 160px;
-  height: 128px;
+  width: 200px;
+  height: 200px;
   border-radius: 8px;
   object-fit: contain;
   object-position: center;

@@ -16,10 +16,9 @@ export default function ClientLayout({ children }: { children: React.ReactNode }
             <MigrationBanner />
             <Header />
             <main style={{ 
-              minHeight: 'calc(100vh - 60px)',
               maxWidth: '1024px',
               margin: '0 auto',
-              padding: '20px 20px 0 20px'
+              padding: '20px 20px 60px 20px'
             }}>
               {children}
             </main>
