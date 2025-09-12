@@ -83,29 +83,14 @@ export const SettingsProvider: React.FC<SettingsProviderProps> = ({ children }) 
     loadSettings()
   }, [session, status])
 
-  // Fallback to localStorage for non-authenticated users
-  useEffect(() => {
-    if (status === 'loading' || session?.user?.email) return
-    
-    const savedSettings = localStorage.getItem('explainer-settings')
-    if (savedSettings) {
-      try {
-        const parsed = JSON.parse(savedSettings)
-        setSettings({ ...DEFAULT_SETTINGS, ...parsed })
-      } catch (error) {
-        console.error('Error loading settings from localStorage:', error)
-      }
-    }
-  }, [session, status])
+  // Use default settings for non-authenticated users
 
   const updateSettings = async (newSettings: SettingsData) => {
     console.log('SettingsContext: updateSettings called with:', newSettings)
     console.log('SettingsContext: Previous settings:', settings)
     setSettings(newSettings)
     
-    // Save to localStorage for backward compatibility
-    localStorage.setItem('explainer-settings', JSON.stringify(newSettings))
-    console.log('SettingsContext: Saved to localStorage')
+    // Settings saved to database only
     
     // Save to database if authenticated
     if (session?.user?.email) {

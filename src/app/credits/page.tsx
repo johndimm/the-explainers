@@ -34,16 +34,19 @@ function CreditsContent() {
   }, [showMobileMenu])
 
   useEffect(() => {
-    // Get the current book from localStorage
-    const savedBook = localStorage.getItem('current-book')
-    if (savedBook) {
+    // Get the current book from database via API
+    const loadCurrentBook = async () => {
       try {
-        const parsedBook = JSON.parse(savedBook)
-        setCurrentBook({ title: parsedBook.title || '', author: parsedBook.author || '' })
+        const response = await fetch('/api/user/current-book')
+        if (response.ok) {
+          const book = await response.json()
+          setCurrentBook({ title: book.title || '', author: book.author || '' })
+        }
       } catch (error) {
         console.error('Error loading current book:', error)
       }
     }
+    loadCurrentBook()
   }, [])
 
   // Update current time every minute for countdown display

@@ -19,8 +19,7 @@ const CustomBooksPage: React.FC = () => {
     const title = bookTitle.trim()
     const authorName = author.trim() || 'Unknown'
     
-    // Save current-book and persist purchase details URL for later deep-linking
-    localStorage.setItem('current-book', JSON.stringify({ title: title, author: authorName, url: customUrl }))
+    // Save current book to database and persist purchase details
     purchaseBook(title, authorName, customUrl)
     
     router.push(`/reader?title=${encodeURIComponent(title)}&author=${encodeURIComponent(authorName)}&url=${encodeURIComponent(customUrl)}`)
@@ -39,7 +38,6 @@ const CustomBooksPage: React.FC = () => {
       const blob = new Blob([text], { type: 'text/plain' })
       const url = URL.createObjectURL(blob)
       
-      localStorage.setItem('current-book', JSON.stringify({ title: title, author: authorName, url: url }))
       purchaseBook(title, authorName, url)
       
       router.push(`/reader?title=${encodeURIComponent(title)}&author=${encodeURIComponent(authorName)}&url=${encodeURIComponent(url)}`)
@@ -56,7 +54,6 @@ const CustomBooksPage: React.FC = () => {
     const blob = new Blob([pastedText], { type: 'text/plain' })
     const url = URL.createObjectURL(blob)
     
-    localStorage.setItem('current-book', JSON.stringify({ title: title, author: authorName, url: url }))
     purchaseBook(title, authorName, url)
     
     router.push(`/reader?title=${encodeURIComponent(title)}&author=${encodeURIComponent(authorName)}&url=${encodeURIComponent(url)}`)

@@ -4,7 +4,6 @@ import { SettingsProvider } from '@/contexts/SettingsContext'
 import { ProfileProvider } from '@/contexts/ProfileContext'
 import { AuthProvider } from '@/contexts/AuthContext'
 import Header from '@/components/Header'
-import { MigrationBanner } from '@/components/MigrationBanner'
 import React from 'react'
 
 export default function ClientLayout({ children }: { children: React.ReactNode }) {
@@ -13,7 +12,6 @@ export default function ClientLayout({ children }: { children: React.ReactNode }
       <ProfileProvider>
         <SettingsProvider>
           <div>
-            <MigrationBanner />
             <Header />
             <main style={{ 
               maxWidth: '1024px',

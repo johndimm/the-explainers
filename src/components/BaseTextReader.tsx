@@ -587,14 +587,7 @@ export const useBookmarkRestoreAndSave = (
         }
       }
 
-      // Fallback to localStorage for backward compatibility or non-authenticated users
-      const bookmarkKey = `bookmark-${title}-${auth}`
-      const savedPosition = typeof window !== 'undefined' ? localStorage.getItem(bookmarkKey) : null
-      if (savedPosition) {
-        const position = parseInt(savedPosition)
-        restorePosition(position, 'localStorage')
-        return
-      }
+      // No saved bookmark found in database
 
       // No saved bookmark - scroll past Project Gutenberg header
       setTimeout(() => {
@@ -660,9 +653,7 @@ export const useBookmarkRestoreAndSave = (
           }
         }
 
-        // Also save to localStorage for backward compatibility or non-authenticated users
-        const bookmarkKey = `bookmark-${title}-${auth}`
-        localStorage.setItem(bookmarkKey, scrollPosition.toString())
+        // Bookmark saved to database
       }, 500)
     }
 
@@ -684,29 +675,13 @@ export const useSearchCore = (
   onNavigateToPage?: (pageNum: number) => void,
   pageMap?: PageMap // Use PageMap instead of just pages array
 ) => {
-  // Persist search query in localStorage so it survives navigation
-  const [searchQuery, setSearchQuery] = useState(() => {
-    if (typeof window !== 'undefined') {
-      return localStorage.getItem('reader-search-query') || ''
-    }
-    return ''
-  })
+  const [searchQuery, setSearchQuery] = useState('')
   const [searchResults, setSearchResults] = useState<{ index: number, length: number }[]>([])
   const [currentSearchIndex, setCurrentSearchIndex] = useState(-1)
 
-  // Save search query to localStorage whenever it changes
-  useEffect(() => {
-    if (typeof window !== 'undefined') {
-      localStorage.setItem('reader-search-query', searchQuery)
-    }
-  }, [searchQuery])
+  // Search query state managed locally
 
-  // Auto-perform search when component loads with a persisted query
-  useEffect(() => {
-    if (searchQuery.trim() && text) {
-      handleSearch(searchQuery)
-    }
-  }, [text]) // Only run when text changes, not on every searchQuery change
+  // Search functionality
 
   const handleSearch = (query: string) => {
     if (!query.trim()) {
@@ -846,9 +821,6 @@ export const useSearchCore = (
     setSearchQuery('')
     setSearchResults([])
     setCurrentSearchIndex(-1)
-    if (typeof window !== 'undefined') {
-      localStorage.removeItem('reader-search-query')
-    }
   }
 
   return {

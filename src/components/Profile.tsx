@@ -37,7 +37,7 @@ const Profile: React.FC<ProfileProps> = ({ isOpen, onClose, profile, onProfileCh
   const menuRef = useRef<HTMLDivElement>(null)
   const router = useRouter()
 
-  // Sync localProfile when profile prop changes (e.g., when restored from localStorage)
+  // Sync localProfile when profile prop changes
   useEffect(() => {
     log('Profile: Syncing localProfile with profile prop:', profile)
     setIsSyncing(true)
@@ -74,7 +74,7 @@ const Profile: React.FC<ProfileProps> = ({ isOpen, onClose, profile, onProfileCh
       log('Profile changes detected, auto-saving...', localProfile)
       const timeoutId = setTimeout(() => {
         onProfileChange(localProfile)
-        log('Profile saved to localStorage')
+        log('Profile saved to database')
       }, 500) // Debounce auto-save by 500ms
       
       return () => clearTimeout(timeoutId)

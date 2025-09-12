@@ -32,12 +32,8 @@ export default function SignIn() {
   const handleMobileGoogleSignIn = async () => {
     setIsLoading(true)
     try {
-      // For iOS, clear all possible cached data first
+      // For iOS, clear cookies only (no localStorage)
       if (isIOS) {
-        // Clear all storage
-        localStorage.clear()
-        sessionStorage.clear()
-        
         // Clear NextAuth cookies specifically
         document.cookie.split(";").forEach(function(c) { 
           document.cookie = c.replace(/^ +/, "").replace(/=.*/, "=;expires=" + new Date().toUTCString() + ";path=/"); 
@@ -113,8 +109,7 @@ export default function SignIn() {
             <strong>iPhone users:</strong> If authentication doesn't work, try the cache clearing option below.
             <button
               onClick={() => {
-                localStorage.clear()
-                sessionStorage.clear()
+                // Clear cookies only (no localStorage)
                 document.cookie.split(";").forEach(function(c) { 
                   document.cookie = c.replace(/^ +/, "").replace(/=.*/, "=;expires=" + new Date().toUTCString() + ";path=/"); 
                 })
