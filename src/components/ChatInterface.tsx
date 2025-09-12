@@ -1326,7 +1326,7 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ selectedText, contextInfo
     <div className={isPageMode ? '' : styles.chatOverlay}>
       <div className={isPageMode ? '' : styles.chatContainer} style={isPageMode ? { height: '100%', display: 'flex', flexDirection: 'column' } : {}}>
         <div className={styles.chatHeader}>
-          <div>
+          <div className={styles.headerTitle}>
             <h3>Text Explanation</h3>
             <div style={{ fontSize: '13px', color: '#8b5cf6', marginTop: '4px', fontWeight: '500' }}>
               {(() => {

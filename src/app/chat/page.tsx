@@ -3,6 +3,7 @@
 import { useState, useRef, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
 import ChatInterface from '@/components/ChatInterface'
+import PageLayout from '@/components/PageLayout'
 import { useSettings } from '@/contexts/SettingsContext'
 import { useProfile } from '@/contexts/ProfileContext'
 import { useAuth } from '@/contexts/AuthContext'
@@ -52,37 +53,13 @@ function ChatContent() {
   // Show loading state while checking authentication
   if (isLoading) {
     return (
-      <div style={{
-        minHeight: '100vh',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        background: '#fafafa'
-      }}>
-        <div style={{
-          textAlign: 'center',
-          padding: '40px',
-          background: 'white',
-          borderRadius: '16px',
-          boxShadow: '0 4px 12px rgba(0, 0, 0, 0.1)'
-        }}>
-          <div style={{
-            width: '32px',
-            height: '32px',
-            border: '3px solid #f3f3f3',
-            borderTop: '3px solid #8b5cf6',
-            borderRadius: '50%',
-            animation: 'spin 1s linear infinite',
-            margin: '0 auto 16px'
-          }} />
-          <p style={{ margin: 0, color: '#666' }}>Loading...</p>
+      <div className="min-h-screen flex items-center justify-center bg-white">
+        <div className="card text-center">
+          <div className="card-body">
+            <div className="w-8 h-8 border-4 border-gray-200 border-t-purple-600 rounded-full animate-spin mx-auto mb-4" />
+            <p className="m-0 text-gray-600">Loading...</p>
+          </div>
         </div>
-        <style jsx>{`
-          @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-          }
-        `}</style>
       </div>
     )
   }
@@ -91,133 +68,69 @@ function ChatContent() {
   const isDev = process.env.NODE_ENV === 'development'
   if (!isAuthenticated && !isDev) {
     return (
-      <div style={{
-        minHeight: '100vh',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        background: '#fafafa',
-        padding: '20px'
-      }}>
-        <div style={{
-          textAlign: 'center',
-          padding: '40px',
-          background: 'white',
-          borderRadius: '16px',
-          boxShadow: '0 4px 12px rgba(0, 0, 0, 0.1)',
-          maxWidth: '400px'
-        }}>
-          <h2 style={{ margin: '0 0 16px 0', color: '#1a1a1a' }}>Authentication Required</h2>
-          <p style={{ margin: '0 0 24px 0', color: '#666' }}>
-            Please sign in to access the AI chat feature.
-          </p>
-          <button
-            onClick={() => router.push('/auth/signin')}
-            style={{
-              padding: '12px 24px',
-              background: '#8b5cf6',
-              color: 'white',
-              border: 'none',
-              borderRadius: '8px',
-              fontSize: '16px',
-              cursor: 'pointer'
-            }}
-          >
-            Sign In
-          </button>
+      <div className="min-h-screen flex items-center justify-center bg-white p-6">
+        <div className="card max-w-md mx-auto text-center">
+          <div className="card-body">
+            <div className="w-16 h-16 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-4">
+              🔒
+            </div>
+            <h2 className="text-xl font-semibold mb-4">Authentication Required</h2>
+            <p className="text-gray-600 mb-6">
+              Please sign in to access the AI chat feature.
+            </p>
+            <button
+              onClick={() => router.push('/auth/signin')}
+              className="btn btn-primary"
+            >
+              Sign In
+            </button>
+          </div>
         </div>
       </div>
     )
   }
 
   return (
-    <div>
-      <style jsx>{`
-        @media (max-width: 768px) {
-          .mobile-padding {
-            padding: 8px !important;
-          }
-          .mobile-card {
-            border-radius: 12px !important;
-            padding: 16px !important;
-          }
-        }
-      `}</style>
-      
-      <div style={{ 
-        marginTop: '60px', 
-        minHeight: 'calc(100vh - 60px)', 
-        padding: '20px', 
-        background: '#fafafa' 
-      }} className="mobile-padding">
-        <div style={{
-          maxWidth: '800px',
-          margin: '0 auto',
-          background: 'white',
-          borderRadius: '16px',
-          padding: '24px',
-          boxShadow: '0 1px 3px rgba(0, 0, 0, 0.1), 0 1px 2px rgba(0, 0, 0, 0.06)',
-          minHeight: '600px',
-          display: 'flex',
-          flexDirection: 'column'
-        }} className="mobile-card">
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '20px' }}>
-            <div style={{ flex: 1 }}>
-              <h2 style={{ margin: '0 0 8px 0', fontSize: '24px', fontWeight: '600', color: '#1a1a1a' }}>
-                Chat with AI
-              </h2>
+    <PageLayout 
+      title="Chat with AI"
+      subtitle="Ask questions or get explanations about any text. Chat history is preserved during your session."
+    >
+      <div className="card">
+        <div className="card-body">
+          {/* User Info & Context */}
+          <div className="flex justify-between items-start mb-4">
+            <div className="flex-1">
               {user?.email && (
-                <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '8px' }}>
+                <div className="flex items-center gap-2 mb-2">
                   {user?.image && (
                     <img 
                       src={user.image} 
                       alt={user.name || 'User'} 
-                      style={{ 
-                        width: '24px', 
-                        height: '24px', 
-                        borderRadius: '50%',
-                        border: '2px solid #e0e0e0'
-                      }} 
+                      className="w-6 h-6 rounded-full border-2 border-gray-200" 
                     />
                   )}
-                  <p style={{ margin: '0', color: '#666', fontSize: '14px' }}>
+                  <p className="m-0 text-gray-600 text-sm">
                     Signed in as {user.email}
                   </p>
                 </div>
               )}
               {contextData?.bookTitle && (
-                <p style={{ margin: '0', color: '#8b5cf6', fontSize: '14px', fontWeight: '500' }}>
-                  Discussing: {contextData.bookTitle} by {contextData.author}
-                </p>
+                <div className="bg-purple-50 border border-purple-200 rounded-lg p-3">
+                  <p className="m-0 text-purple-700 text-sm font-medium">
+                    📖 Discussing: {contextData.bookTitle} by {contextData.author}
+                  </p>
+                </div>
               )}
             </div>
             {contextData && (
               <button
                 onClick={() => router.push('/reader')}
-                style={{
-                  background: '#8b5cf6',
-                  color: 'white',
-                  border: 'none',
-                  padding: '10px 16px',
-                  borderRadius: '8px',
-                  cursor: 'pointer',
-                  fontSize: '14px',
-                  fontWeight: '600',
-                  display: 'flex',
-                  alignItems: 'center',
-                  gap: '8px',
-                  transition: 'background 0.2s'
-                }}
-                onMouseOver={(e) => e.currentTarget.style.background = '#7c3aed'}
-                onMouseOut={(e) => e.currentTarget.style.background = '#8b5cf6'}
+                className="btn btn-secondary btn-sm"
               >
                 ← Back to Reader
               </button>
             )}
           </div>
-          <p style={{ margin: '0 0 24px 0', color: '#666', fontSize: '16px' }}>
-            Ask questions or get explanations about any text. Chat history is preserved during your session.
-          </p>
           
           <ChatInterface
             key={`chat-${settings.explanationStyle}-${settings.llmProvider}-${settings.responseLength}`}
@@ -237,7 +150,7 @@ function ChatContent() {
           />
         </div>
       </div>
-    </div>
+    </PageLayout>
   )
 }
 

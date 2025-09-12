@@ -14,10 +14,10 @@
 .chatContainer {
   background: white;
   border-radius: 12px;
-  width: 95%;
-  max-width: 800px;
-  height: 85%;
-  max-height: 600px;
+  width: 98%;
+  max-width: 1000px;
+  height: 95%;
+  max-height: 800px;
   display: flex;
   flex-direction: column;
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
@@ -26,20 +26,29 @@
 
 .chatHeader {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 16px 20px;
+  flex-direction: column;
+  padding: 1px 6px;
   border-bottom: 1px solid #e0e0e0;
   background: #f8f9fa;
   border-radius: 12px 12px 0 0;
-  gap: 16px;
+  gap: 1px;
   flex-shrink: 0;
+  position: relative;
+}
+
+.headerTitle {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  margin-bottom: 0;
+  padding: 0;
 }
 
 .chatHeader h3 {
   margin: 0;
   color: #333;
-  font-size: 18px;
+  font-size: 10px;
 }
 
 .closeButton {
@@ -56,6 +65,10 @@
   justify-content: center;
   border-radius: 50%;
   transition: background-color 0.2s;
+  position: absolute;
+  top: 8px;
+  right: 12px;
+  z-index: 10;
 }
 
 .closeButton:hover {
@@ -65,10 +78,10 @@
 .messagesContainer {
   flex: 1;
   overflow-y: auto;
-  padding: 20px;
+  padding: 4px 8px;
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 4px;
 }
 
 .message {
@@ -242,10 +255,7 @@
   
   .chatHeader {
     padding: 8px 12px;
-    flex-direction: row !important;
-    gap: 8px !important;
-    align-items: flex-start !important;
-    min-height: auto !important;
+    gap: 8px;
     position: relative;
   }
   
@@ -262,34 +272,26 @@
   }
   
   .headerControls {
-    width: 100% !important;
-    display: grid !important;
-    grid-template-columns: 1fr auto !important;
-    gap: 12px !important;
-    align-items: center !important;
-    flex-direction: row !important;
+    width: 100%;
+    gap: 8px;
   }
   
   .dropdownsRow {
-    display: flex !important;
-    flex-direction: column !important;
-    gap: 4px !important;
-    align-items: flex-start !important;
-    grid-column: 1 !important;
+    gap: 3px;
+    justify-content: center;
+    flex-wrap: wrap;
   }
   
   .buttonsRow {
-    display: flex !important;
-    flex-direction: column !important;
-    gap: 8px !important;
-    align-items: flex-end !important;
-    grid-column: 2 !important;
-    align-self: center !important;
+    gap: 4px;
+    justify-content: center;
+    flex-wrap: wrap;
   }
   
   .providerSelector, .styleSelector, .lengthSelector {
     min-width: 0;
-    width: 100%;
+    flex: 1;
+    max-width: 110px;
   }
   
   .dropdownLabel {
@@ -316,26 +318,26 @@
   }
   
   .reexplainButton {
-    font-size: 11px;
-    padding: 8px 12px;
-    min-width: 80px;
-    max-width: 120px;
+    font-size: 9px;
+    padding: 4px 6px;
+    min-width: 50px;
+    max-width: 70px;
     width: auto;
   }
   
   .saveButton {
-    font-size: 11px;
-    padding: 8px 12px;
-    min-width: 80px;
-    max-width: 120px;
+    font-size: 9px;
+    padding: 4px 6px;
+    min-width: 50px;
+    max-width: 70px;
     width: auto;
   }
   
   .shareButton {
-    font-size: 11px;
-    padding: 8px 12px;
-    min-width: 80px;
-    max-width: 120px;
+    font-size: 9px;
+    padding: 4px 6px;
+    min-width: 50px;
+    max-width: 70px;
     width: auto;
   }
   
@@ -399,7 +401,7 @@
 @media (max-width: 480px) {
   .chatHeader {
     padding: 6px 8px;
-    min-height: 50px;
+    gap: 6px;
     position: relative;
   }
   
@@ -415,17 +417,20 @@
   }
   
   .dropdownsRow {
-    gap: 4px;
+    gap: 2px;
+    flex-wrap: wrap;
   }
   
   .buttonsRow {
-    gap: 6px;
+    gap: 3px;
+    justify-content: center;
   }
   
   .providerSelect, .styleSelect, .lengthSelect {
-    min-width: 50px;
-    font-size: 10px;
-    padding: 3px 4px;
+    min-width: 0;
+    max-width: 90px;
+    font-size: 8px;
+    padding: 2px 3px;
   }
   
   .customSelect {
@@ -438,10 +443,10 @@
   }
   
   .reexplainButton, .saveButton, .shareButton {
-    font-size: 10px;
-    padding: 6px 8px;
-    min-width: 60px;
-    max-width: 100px;
+    font-size: 8px;
+    padding: 3px 5px;
+    min-width: 45px;
+    max-width: 60px;
     width: auto;
   }
   
@@ -468,21 +473,26 @@
 .headerControls {
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 2px;
+  width: 100%;
 }
 
 .dropdownsRow {
   display: flex;
   align-items: center;
-  gap: 16px;
+  gap: 3px;
   flex-wrap: wrap;
+  justify-content: center;
 }
 
 .buttonsRow {
   display: flex;
   align-items: center;
-  gap: 16px;
+  gap: 3px;
   flex-wrap: wrap;
+  justify-content: center;
+  max-width: 100%;
+  overflow: hidden;
 }
 
 .providerSelector {
@@ -658,16 +668,19 @@
 }
 
 .reexplainButton {
-  padding: 8px 14px;
+  padding: 6px 10px;
   background: #28a745;
   color: white;
   border: none;
   border-radius: 6px;
   cursor: pointer;
-  font-size: 14px;
+  font-size: 12px;
   font-weight: 500;
   transition: background-color 0.2s;
   white-space: nowrap;
+  min-width: 70px;
+  max-width: 100px;
+  flex-shrink: 1;
 }
 
 .reexplainButton:hover:not(:disabled) {
@@ -680,16 +693,19 @@
 }
 
 .saveButton {
-  padding: 8px 14px;
+  padding: 6px 10px;
   background: #17a2b8;
   color: white;
   border: none;
   border-radius: 6px;
   cursor: pointer;
-  font-size: 14px;
+  font-size: 12px;
   font-weight: 500;
   transition: background-color 0.2s;
   white-space: nowrap;
+  min-width: 70px;
+  max-width: 100px;
+  flex-shrink: 1;
 }
 
 .saveButton:hover:not(:disabled) {
@@ -702,16 +718,19 @@
 }
 
 .shareButton {
-  padding: 8px 14px;
+  padding: 6px 10px;
   background: #ff6b35;
   color: white;
   border: none;
   border-radius: 6px;
   cursor: pointer;
-  font-size: 14px;
+  font-size: 12px;
   font-weight: 500;
   transition: background-color 0.2s;
   white-space: nowrap;
+  min-width: 70px;
+  max-width: 100px;
+  flex-shrink: 1;
 }
 
 .shareButton:hover:not(:disabled) {
@@ -1435,7 +1454,7 @@
 
 /* Quote Display Styles */
 .quoteDisplay {
-  margin: 16px 20px;
+  margin: 4px 20px 16px 20px;
   padding: 16px;
   background: #f8f9fa;
   border: 1px solid #e0e0e0;

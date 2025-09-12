@@ -1,107 +1,107 @@
 'use client'
 
 import React from 'react'
+import PageLayout from '@/components/PageLayout'
 
 export default function AboutPage() {
   return (
-    <div style={{ 
-      marginTop: '60px', 
-      fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, sans-serif', 
-      lineHeight: '1.6', 
-      color: '#333', 
-      maxWidth: '800px', 
-      margin: '60px auto 0 auto', 
-      padding: '20px', 
-      backgroundColor: '#f9f9f9' 
-    }}>
-      <div style={{ background: 'white', borderRadius: '8px', padding: '40px', boxShadow: '0 2px 10px rgba(0,0,0,0.1)' }}>
-        <h1 style={{ color: '#8b5cf6', borderBottom: '3px solid #8b5cf6', paddingBottom: '10px', marginBottom: '30px' }}>
-          About The Explainers
-        </h1>
-
-        <div style={{ background: '#f0f9ff', border: '1px solid #0ea5e9', borderRadius: '8px', padding: '20px', marginBottom: '30px' }}>
-          <h2 style={{ color: '#0369a1', marginTop: '0', marginBottom: '15px' }}>🤖 AI-Generated Code</h2>
-          <p style={{ margin: '0', fontSize: '16px', color: '#0369a1' }}>
-            <strong>This entire application was written by AI.</strong> The code is completely untouched by human hands.
-          </p>
-        </div>
-
-        <div style={{ display: 'grid', gap: '24px' }}>
-          <div style={{ background: '#f8f9fa', padding: '24px', borderRadius: '12px', border: '1px solid #e9ecef' }}>
-            <h3 style={{ color: '#495057', marginTop: '0', marginBottom: '12px' }}>👨‍💻 Author</h3>
-            <p style={{ margin: '0 0 12px 0', fontSize: '16px' }}>
-              <strong>John Dimm</strong>
+    <PageLayout 
+      title="About The Explainers"
+      subtitle="Learn more about this AI-powered literary analysis platform"
+    >
+      <div className="space-y-8">
+        <div className="card" style={{ background: 'linear-gradient(135deg, var(--color-primary-light), var(--color-purple-light))' }}>
+          <div className="card-body">
+            <div className="flex items-center gap-4 mb-4">
+              <div className="w-12 h-12 bg-white rounded-lg flex items-center justify-center text-2xl shadow-sm">
+                🤖
+              </div>
+              <h3 className="text-xl font-semibold text-gray-900 m-0">AI-Generated Code</h3>
+            </div>
+            <p className="text-gray-700 leading-relaxed m-0">
+              <strong>This entire application was written by AI.</strong> The code is completely untouched by human hands, 
+              demonstrating the remarkable capabilities of modern AI development tools.
             </p>
-            <a 
-              href="https://www.linkedin.com/in/johndimm/" 
-              target="_blank" 
-              rel="noopener noreferrer"
-              style={{ 
-                color: '#007bff', 
-                textDecoration: 'none',
-                padding: '8px 16px',
-                background: '#e3f2fd',
-                borderRadius: '6px',
-                display: 'inline-block',
-                fontSize: '14px'
-              }}
-            >
-              📱 View on LinkedIn
-            </a>
-          </div>
-
-          <div style={{ background: '#f8f9fa', padding: '24px', borderRadius: '12px', border: '1px solid #e9ecef' }}>
-            <h3 style={{ color: '#495057', marginTop: '0', marginBottom: '12px' }}>📅 Development Period</h3>
-            <p style={{ margin: '0', fontSize: '16px' }}>
-              Written in <strong>July and August 2025</strong>
-            </p>
-          </div>
-
-          <div style={{ background: '#f8f9fa', padding: '24px', borderRadius: '12px', border: '1px solid #e9ecef' }}>
-            <h3 style={{ color: '#495057', marginTop: '0', marginBottom: '12px' }}>💻 Development Process</h3>
-            <p style={{ margin: '0', fontSize: '16px' }}>
-              Built through <strong>vibe programming</strong> with Claude, then refined with Cursor
-            </p>
-          </div>
-
-          <div style={{ background: '#f8f9fa', padding: '24px', borderRadius: '12px', border: '1px solid #e9ecef' }}>
-            <h3 style={{ color: '#495057', marginTop: '0', marginBottom: '12px' }}>🔗 Open Source</h3>
-            <p style={{ margin: '0 0 12px 0', fontSize: '16px' }}>
-              The complete source code is available on GitHub
-            </p>
-            <a 
-              href="https://github.com/johndimm/the-explainers" 
-              target="_blank" 
-              rel="noopener noreferrer"
-              style={{ 
-                color: '#007bff', 
-                textDecoration: 'none',
-                padding: '8px 16px',
-                background: '#e3f2fd',
-                borderRadius: '6px',
-                display: 'inline-block',
-                fontSize: '14px'
-              }}
-            >
-              📂 View on GitHub
-            </a>
           </div>
         </div>
 
-        <div style={{ 
-          marginTop: '32px', 
-          padding: '20px', 
-          background: '#fff3cd', 
-          border: '1px solid #ffeaa7', 
-          borderRadius: '8px',
-          textAlign: 'center'
-        }}>
-          <p style={{ margin: '0', fontSize: '16px', color: '#856404' }}>
-            <strong>🚀 Innovation:</strong> This project demonstrates the power of AI-assisted development, 
-            where human creativity and AI capabilities combine to create sophisticated applications.
-          </p>
+        <div className="grid md:grid-cols-2 gap-6">
+          <div className="card">
+            <div className="card-body">
+              <div className="flex items-center gap-3 mb-4">
+                <span className="text-2xl">👨‍💻</span>
+                <h3 className="text-lg font-semibold m-0">Author</h3>
+              </div>
+              <p className="font-semibold text-gray-900 mb-4">John Dimm</p>
+              <a 
+                href="https://www.linkedin.com/in/johndimm/" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="btn btn-primary btn-sm"
+              >
+                📱 View on LinkedIn
+              </a>
+            </div>
+          </div>
+
+          <div className="card">
+            <div className="card-body">
+              <div className="flex items-center gap-3 mb-4">
+                <span className="text-2xl">📅</span>
+                <h3 className="text-lg font-semibold m-0">Development Period</h3>
+              </div>
+              <p className="m-0">
+                Written in <strong>July and August 2025</strong>
+              </p>
+            </div>
+          </div>
+
+          <div className="card">
+            <div className="card-body">
+              <div className="flex items-center gap-3 mb-4">
+                <span className="text-2xl">💻</span>
+                <h3 className="text-lg font-semibold m-0">Development Process</h3>
+              </div>
+              <p className="m-0">
+                Built through <strong>vibe programming</strong> with Claude, then refined with Cursor
+              </p>
+            </div>
+          </div>
+
+          <div className="card">
+            <div className="card-body">
+              <div className="flex items-center gap-3 mb-4">
+                <span className="text-2xl">🔗</span>
+                <h3 className="text-lg font-semibold m-0">Open Source</h3>
+              </div>
+              <p className="mb-4">
+                The complete source code is available on GitHub
+              </p>
+              <a 
+                href="https://github.com/johndimm/the-explainers" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="btn btn-secondary btn-sm"
+              >
+                📂 View on GitHub
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <div className="card" style={{ background: 'linear-gradient(135deg, var(--color-warning-light), var(--color-success-light))' }}>
+          <div className="card-body text-center">
+            <div className="w-16 h-16 bg-white rounded-full flex items-center justify-center text-3xl shadow-sm mx-auto mb-4">
+              🚀
+            </div>
+            <h3 className="text-xl font-semibold mb-4">Innovation in AI Development</h3>
+            <p className="text-gray-700 leading-relaxed max-w-2xl mx-auto m-0">
+              This project demonstrates the power of AI-assisted development, where human creativity and 
+              AI capabilities combine to create sophisticated applications that push the boundaries of what's possible.
+            </p>
+          </div>
         </div>
       </div>
-    </div>
+    </PageLayout>
   )
 }

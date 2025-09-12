@@ -5,6 +5,7 @@ import { useRouter } from 'next/navigation'
 import styles from './Library.module.css'
 import FilteredBookList from './FilteredBookList'
 import CategoryPopup from './CategoryPopup'
+import PageLayout from './PageLayout'
 
 interface Book {
   id: string | number
@@ -175,242 +176,126 @@ const Library: React.FC<LibraryProps> = ({ onBookSelect, onBackToCurrentBook }) 
   }
 
   if (loading) {
-    return <div className={styles.loading}>Loading library...</div>
+    return (
+      <PageLayout title="Library" subtitle="Loading your book collection...">
+        <div className="card text-center">
+          <div className="card-body">
+            <div className="w-8 h-8 border-4 border-gray-200 border-t-purple-600 rounded-full animate-spin mx-auto mb-4" />
+            <p className="m-0 text-gray-600">Loading library...</p>
+          </div>
+        </div>
+      </PageLayout>
+    )
   }
 
   return (
-    <div>
-      <div className={styles.library} style={{ marginTop: '60px' }}>
-        <div className={styles.header}>
-          <h1 style={{ marginTop: 4 }}>Library</h1>
-          <p style={{ marginTop: 4 }}>
-            Choose a book to read and explore
-            {searchQuery.trim() !== '' && (
-              <span style={{ 
-                display: 'block', 
-                fontSize: '14px', 
-                color: '#0ea5e9', 
-                marginTop: '4px',
-                fontWeight: '500'
-              }}>
-                🔍 Searching for "{searchQuery}"
-              </span>
-            )}
-          </p>
-          
-          {/* Search Bar */}
-          <div className={styles.searchContainer}>
-            <input
-              type="text"
-              placeholder="Search books by title or author... (Press Esc to clear)"
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              onKeyDown={(e) => {
-                if (e.key === 'Escape') {
-                  setSearchQuery('')
-                  e.currentTarget.blur()
-                }
-              }}
-              className={styles.searchInput}
-            />
-            
-            {/* Search Results Summary */}
-            {searchQuery.trim() !== '' && (
-              <div className={styles.searchResults}>
-                <span>🔍</span>
-                <span>
-                  Found {filteredCategories.reduce((total, cat) => total + cat.books.length, 0)} books 
-                  in {filteredCategories.length} categories
-                </span>
-                {searchQuery.trim() !== '' && (
-                  <button
-                    onClick={() => setSearchQuery('')}
-                    className={styles.clearSearchButton}
-                  >
-                    Clear search
-                  </button>
-                )}
+    <PageLayout 
+      title="Library" 
+      subtitle="Choose a book to read and explore"
+    >
+      <div className="space-y-6">
+        {searchQuery.trim() !== '' && (
+          <div className="card" style={{ background: 'linear-gradient(135deg, var(--color-primary-light), var(--color-purple-light))' }}>
+            <div className="card-body">
+              <div className="flex items-center gap-3">
+                <span className="text-xl">🔍</span>
+                <p className="m-0 font-medium">Searching for "{searchQuery}"</p>
               </div>
-            )}
+            </div>
           </div>
-          
-          <div style={{ 
-            background: '#f0f9ff', 
-            border: '1px solid #0ea5e9', 
-            borderRadius: '8px', 
-            padding: '12px 16px', 
-            marginTop: '12px',
-            fontSize: '14px',
-            color: '#0369a1'
-          }}>
-            <strong>📚 Project Gutenberg Integration:</strong> This library shows a small sample from <a href="https://www.gutenberg.org/" target="_blank" rel="noopener noreferrer" style={{ color: '#0369a1', textDecoration: 'underline' }}>Project Gutenberg</a>'s collection of over 75,000 free eBooks. You can also load any other book from Gutenberg, use a URL from any site that provides plain text, upload a text file from your computer, or copy/paste text directly.
+        )}
+        
+        <div className="card" style={{ background: 'linear-gradient(135deg, var(--color-primary-light), var(--color-success-light))' }}>
+          <div className="card-body">
+            <div className="flex items-center gap-3 mb-3">
+              <span className="text-xl">📚</span>
+              <h3 className="text-lg font-semibold m-0">Project Gutenberg Integration</h3>
+            </div>
+            <p className="m-0 text-sm leading-relaxed">
+              This library shows a small sample from <a href="https://www.gutenberg.org/" target="_blank" rel="noopener noreferrer" className="text-blue-600 underline hover:text-blue-800">Project Gutenberg</a>'s collection of over 75,000 free eBooks. You can also load any other book from Gutenberg, use a URL from any site that provides plain text, upload a text file from your computer, or copy/paste text directly.
+            </p>
           </div>
         </div>
 
-        <div className={styles.customSection}>
+        <div className="text-center">
           <button 
             onClick={() => router.push('/custom-books')}
-            className={styles.customBooksButton}
-            style={{
-              padding: '12px 20px',
-              fontSize: '14px',
-              fontWeight: '500',
-              background: '#8b5cf6',
-              color: 'white',
-              border: 'none',
-              borderRadius: '8px',
-              cursor: 'pointer',
-              transition: 'background-color 0.2s',
-              marginBottom: '24px'
-            }}
-            onMouseOver={(e) => e.currentTarget.style.background = '#7c3aed'}
-            onMouseOut={(e) => e.currentTarget.style.background = '#8b5cf6'}
+            className="btn btn-primary btn-lg"
           >
-            Need a different book or text?
+            📖 Need a different book or text?
           </button>
         </div>
 
-        <div className={styles.categories}>
+        <div className="space-y-8">
           {filteredCategories.length === 0 && searchQuery.trim() !== '' ? (
-            <div className={styles.noResults}>
-              <div className={styles.noResultsIcon}>🔍</div>
-              <div>No books found matching "{searchQuery}"</div>
-              <div className={styles.noResultsText}>
-                Try searching for a different title or author
+            <div className="card text-center">
+              <div className="card-body">
+                <div className="w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center text-3xl mx-auto mb-4">
+                  🔍
+                </div>
+                <h3 className="text-xl font-semibold mb-2">No books found</h3>
+                <p className="text-gray-600 mb-0">
+                  No books found matching "{searchQuery}". Try searching for a different title or author.
+                </p>
               </div>
             </div>
           ) : (
             filteredCategories.map((category, categoryIndex) => (
-            <div key={category.name} className={styles.category}>
-              <h2 className={styles.categoryTitle}>{category.name}</h2>
-              <FilteredBookList
-                books={category.books.slice(0, category.visibleCount)}
-                categoryName={category.name}
-                onBookClick={handleBookClick}
-                styles={styles}
-              />
-              
-              {category.visibleCount < category.books.length && (
-                <button 
-                  onClick={() => showMoreBooks(categoryIndex)}
-                  className={styles.moreButton}
-                >
-                  {category.books.length > 50 
-                    ? `View All ${category.books.length} Books`
-                    : `More (${category.books.length - category.visibleCount} remaining)`
-                  }
-                </button>
-              )}
+            <div key={category.name} className="card">
+              <div className="card-body">
+                <h2 className="text-2xl font-bold mb-6 text-gray-900">{category.name}</h2>
+                <FilteredBookList
+                  books={category.books.slice(0, category.visibleCount)}
+                  categoryName={category.name}
+                  onBookClick={handleBookClick}
+                  styles={styles}
+                />
+                
+                {category.visibleCount < category.books.length && (
+                  <div className="text-center mt-6">
+                    <button 
+                      onClick={() => showMoreBooks(categoryIndex)}
+                      className="btn btn-secondary"
+                    >
+                      {category.books.length > 50 
+                        ? `View All ${category.books.length} Books`
+                        : `Show More (${category.books.length - category.visibleCount} remaining)`
+                      }
+                    </button>
+                  </div>
+                )}
+              </div>
             </div>
           ))
           )}
         </div>
 
         {/* Community Section - redesigned */}
-        <div style={{ 
-          marginTop: '64px', 
-          padding: '32px 24px',
-          background: 'linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%)',
-          borderRadius: '16px',
-          border: '1px solid #e2e8f0'
-        }}>
-          <div style={{ textAlign: 'center', marginBottom: '24px' }}>
-            <div style={{ 
-              fontSize: '24px', 
-              marginBottom: '8px',
-              fontWeight: '700',
-              color: '#1e293b'
-            }}>
-              💬 Join Our Community
+        <div className="card" style={{ background: 'linear-gradient(135deg, var(--color-background-secondary), var(--color-background-tertiary))' }}>
+          <div className="card-body text-center">
+            <div className="w-16 h-16 bg-white rounded-full flex items-center justify-center text-3xl shadow-sm mx-auto mb-4">
+              💬
             </div>
-            <p style={{ 
-              fontSize: '16px', 
-              color: '#64748b',
-              margin: '0',
-              lineHeight: '1.5'
-            }}>
+            <h3 className="text-xl font-semibold mb-3">Join Our Community</h3>
+            <p className="text-gray-600 mb-6">
               Have suggestions? Found a bug? Want to discuss books?
             </p>
-          </div>
-          
-          <div style={{ 
-            display: 'flex', 
-            gap: '16px', 
-            justifyContent: 'center',
-            flexWrap: 'wrap'
-          }}>
-            <button 
-              onClick={() => window.open('https://reddit.com/r/TheExplainersApp', '_blank')}
-              style={{
-                display: 'flex',
-                alignItems: 'center',
-                gap: '8px',
-                padding: '12px 20px',
-                background: '#3b82f6',
-                color: 'white',
-                border: 'none',
-                borderRadius: '10px',
-                cursor: 'pointer',
-                fontSize: '14px',
-                fontWeight: '600',
-                transition: 'all 0.2s',
-                boxShadow: '0 2px 4px rgba(59, 130, 246, 0.2)'
-              }}
-              onMouseOver={(e) => {
-                e.currentTarget.style.background = '#2563eb'
-                e.currentTarget.style.transform = 'translateY(-1px)'
-                e.currentTarget.style.boxShadow = '0 4px 8px rgba(59, 130, 246, 0.3)'
-              }}
-              onMouseOut={(e) => {
-                e.currentTarget.style.background = '#3b82f6'
-                e.currentTarget.style.transform = 'translateY(0)'
-                e.currentTarget.style.boxShadow = '0 2px 4px rgba(59, 130, 246, 0.2)'
-              }}
-            >
-              <span style={{ fontSize: '16px' }}>💬</span>
-              Reddit Forum
-            </button>
             
-            <button 
-              onClick={() => window.open('https://github.com/johndimm/the-explainers/discussions', '_blank')}
-              style={{
-                display: 'flex',
-                alignItems: 'center',
-                gap: '8px',
-                padding: '12px 20px',
-                background: '#24292e',
-                color: 'white',
-                border: 'none',
-                borderRadius: '10px',
-                cursor: 'pointer',
-                fontSize: '14px',
-                fontWeight: '600',
-                transition: 'all 0.2s',
-                boxShadow: '0 2px 4px rgba(36, 41, 46, 0.2)'
-              }}
-              onMouseOver={(e) => {
-                e.currentTarget.style.background = '#1a1e22'
-                e.currentTarget.style.transform = 'translateY(-1px)'
-                e.currentTarget.style.boxShadow = '0 4px 8px rgba(36, 41, 46, 0.3)'
-              }}
-              onMouseOut={(e) => {
-                e.currentTarget.style.background = '#24292e'
-                e.currentTarget.style.transform = 'translateY(0)'
-                e.currentTarget.style.boxShadow = '0 2px 4px rgba(36, 41, 46, 0.2)'
-              }}
-            >
-              <span style={{ fontSize: '16px' }}>🐙</span>
-              GitHub Discussions
-            </button>
-          </div>
-          
-          <div style={{ 
-            textAlign: 'center', 
-            marginTop: '16px',
-            fontSize: '12px',
-            color: '#94a3b8'
-          }}>
-            Join r/TheExplainersApp or GitHub Discussions
+            <div className="flex gap-4 justify-center flex-wrap">
+              <button 
+                onClick={() => window.open('https://reddit.com/r/TheExplainersApp', '_blank')}
+                className="btn btn-primary"
+              >
+                💬 Reddit Forum
+              </button>
+              
+              <button 
+                onClick={() => window.open('https://github.com/johndimm/the-explainers/discussions', '_blank')}
+                className="btn btn-secondary"
+              >
+                🐙 GitHub Discussions
+              </button>
+            </div>
           </div>
         </div>
       </div>
@@ -425,7 +310,7 @@ const Library: React.FC<LibraryProps> = ({ onBookSelect, onBackToCurrentBook }) 
           onBookClick={handleBookClick}
         />
       )}
-    </div>
+    </PageLayout>
   )
 }
 

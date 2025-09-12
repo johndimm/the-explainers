@@ -345,6 +345,9 @@
 
 .bookList {
   padding: 0 20px 20px 20px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px 24px;
 }
 
 .bookItem {
@@ -519,6 +522,8 @@
   
   .bookList {
     padding: 0 15px 15px 15px;
+    grid-template-columns: 1fr;
+    gap: 4px;
   }
   
   .bookItem {

@@ -4,6 +4,7 @@ import { useState, useEffect, useRef } from 'react'
 import { useRouter } from 'next/navigation'
 import { useProfile } from '@/contexts/ProfileContext'
 import { log } from '@/utils/log'
+import PageTitle from '@/components/PageTitle'
 
 function CreditsContent() {
   const router = useRouter()
@@ -100,7 +101,8 @@ function CreditsContent() {
   }
 
   return (
-    <div style={{ minHeight: '100vh', background: '#fafafa' }}>
+    <div className="min-h-screen bg-white">
+      <PageTitle title="Credits & Usage" subtitle="Manage your credits and purchase options" />
       <style jsx>{`
         @media (max-width: 768px) {
           .mobile-padding {
@@ -332,23 +334,17 @@ function CreditsContent() {
       </header>
 
       {/* Main Content */}
-      <main style={{ maxWidth: '800px', margin: '0 auto', padding: '40px 20px', marginTop: '0' }} className="mobile-padding">
+      <main className="container">
         {/* Free Demo Banner */}
-        <div style={{
-          background: 'linear-gradient(135deg, #10b981, #059669)',
-          color: 'white',
-          padding: '24px',
-          borderRadius: '16px',
-          marginBottom: '32px',
-          textAlign: 'center',
-          boxShadow: '0 4px 12px rgba(16, 185, 129, 0.3)'
-        }}>
-          <div style={{ fontSize: '28px', marginBottom: '12px' }}>🎉 Currently FREE!</div>
-          <div style={{ fontSize: '18px', marginBottom: '8px', fontWeight: '600' }}>
-            All explanations are free during our demo period
-          </div>
-          <div style={{ fontSize: '16px', opacity: '0.9' }}>
-            No actual payments will be processed • Try unlimited explanations now
+        <div className="card mb-8" style={{ background: 'linear-gradient(135deg, var(--color-success), var(--color-success-hover))' }}>
+          <div className="card-body text-center text-white">
+            <div className="text-3xl mb-3">🎉 Currently FREE!</div>
+            <h3 className="text-xl mb-2 font-semibold">
+              All explanations are free during our demo period
+            </h3>
+            <p className="m-0 opacity-90">
+              No actual payments will be processed • Try unlimited explanations now
+            </p>
           </div>
         </div>
 
@@ -369,31 +365,44 @@ function CreditsContent() {
             )}
           </div>
           
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(150px, 1fr))', gap: '24px', marginBottom: '20px' }}>
-            <div style={{ textAlign: 'center' }}>
-              <div style={{ fontSize: '36px', fontWeight: 'bold', color: '#8b5cf6', marginBottom: '8px' }}>
-                {profile.availableCredits || 0}
+          <div style={{ 
+            display: 'flex', 
+            justifyContent: 'space-between', 
+            alignItems: 'center',
+            background: 'linear-gradient(135deg, #8b5cf6, #7c3aed)',
+            color: 'white',
+            padding: '16px 20px',
+            borderRadius: '12px',
+            marginBottom: '20px'
+          }}>
+            <div style={{ display: 'flex', gap: '32px', alignItems: 'center' }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                <span style={{ fontSize: '24px', fontWeight: 'bold' }}>{profile.availableCredits || 0}</span>
+                <span style={{ fontSize: '14px', opacity: '0.9' }}>Credits</span>
               </div>
-              <div style={{ fontSize: '14px', color: '#666' }}>Available Credits</div>
-            </div>
-            <div style={{ textAlign: 'center' }}>
-              <div style={{ fontSize: '36px', fontWeight: 'bold', color: '#10b981', marginBottom: '8px' }}>
-                {profile.totalExplanations || 0}
+              <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                <span style={{ fontSize: '24px', fontWeight: 'bold' }}>{profile.totalExplanations || 0}</span>
+                <span style={{ fontSize: '14px', opacity: '0.9' }}>Total</span>
               </div>
-              <div style={{ fontSize: '14px', color: '#666' }}>Total Explanations</div>
-            </div>
-            <div style={{ textAlign: 'center' }}>
-              <div style={{ fontSize: '36px', fontWeight: 'bold', color: '#f59e0b', marginBottom: '8px' }}>
-                {profile.todayExplanations || 0}
+              <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                <span style={{ fontSize: '24px', fontWeight: 'bold' }}>{profile.todayExplanations || 0}</span>
+                <span style={{ fontSize: '14px', opacity: '0.9' }}>Today</span>
               </div>
-              <div style={{ fontSize: '14px', color: '#666' }}>Today</div>
-            </div>
-            <div style={{ textAlign: 'center' }}>
-              <div style={{ fontSize: '36px', fontWeight: 'bold', color: '#ef4444', marginBottom: '8px' }}>
-                {profile.purchasedBooks?.length || 0}
+              <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                <span style={{ fontSize: '24px', fontWeight: 'bold' }}>{profile.purchasedBooks?.length || 0}</span>
+                <span style={{ fontSize: '14px', opacity: '0.9' }}>Books</span>
               </div>
-              <div style={{ fontSize: '14px', color: '#666' }}>Books Owned</div>
             </div>
+            
+            {profile.hasUnlimitedAccess && profile.unlimitedAccessExpiry && new Date() < new Date(profile.unlimitedAccessExpiry) && (
+              <div style={{ display: 'flex', alignItems: 'center', gap: '8px', background: 'rgba(255,255,255,0.2)', padding: '8px 12px', borderRadius: '8px' }}>
+                <span style={{ fontSize: '16px' }}>⚡</span>
+                <div>
+                  <div style={{ fontSize: '14px', fontWeight: '600' }}>Unlimited Access</div>
+                  <div style={{ fontSize: '12px', opacity: '0.9' }}>{getUnlimitedRemaining() || 'expiring soon'}</div>
+                </div>
+              </div>
+            )}
           </div>
           
           {/* Owned Books */}
@@ -451,20 +460,6 @@ function CreditsContent() {
             </div>
           )}
 
-          {/* Unlimited Access Status */}
-          {profile.hasUnlimitedAccess && profile.unlimitedAccessExpiry && new Date() < new Date(profile.unlimitedAccessExpiry) && (
-            <div style={{
-              background: 'linear-gradient(135deg, #8b5cf6, #7c3aed)',
-              color: 'white',
-              padding: '20px',
-              borderRadius: '12px',
-              marginTop: '20px',
-              textAlign: 'center'
-            }}>
-              <div style={{ fontSize: '20px', marginBottom: '8px', fontWeight: '600' }}>⚡ Unlimited Access Active!</div>
-              <div style={{ fontSize: '14px', opacity: '0.9' }}>{getUnlimitedRemaining() || 'expiring soon'}</div>
-            </div>
-          )}
           
           {profile.firstLogin && (
             <div style={{ textAlign: 'center', fontSize: '14px', color: '#666', paddingTop: '20px', borderTop: '1px solid #f0f0f0', marginTop: '20px' }}>

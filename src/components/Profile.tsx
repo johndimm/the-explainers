@@ -319,17 +319,22 @@ const Profile: React.FC<ProfileProps> = ({ isOpen, onClose, profile, onProfileCh
         </div>
       </header>
       
-      <div style={{ marginTop: '0' }}>
+      <div style={{ marginTop: '60px' }}>
         <div className={styles.modal} style={{ margin: '20px auto', maxWidth: '600px', boxShadow: 'none', border: 'none', position: 'static', transform: 'none', overflow: 'visible', maxHeight: 'none' }}>
-          <div className={styles.header}>
-            <h2>Profile</h2>
+          <div className="card">
+            <div className="card-body">
+              <h1 className="page-title">
+                Profile
+              </h1>
+              <p className="page-subtitle">
+                Set your preferences for personalized explanations
+              </p>
+            </div>
           </div>
 
         <div className={styles.content}>
 
           <div className={styles.section}>
-            <h3>Personal Information</h3>
-            <p className={styles.subtitle}>Help us customize explanations for your needs</p>
             
             <div className={styles.field}>
               <label htmlFor="age">Age</label>

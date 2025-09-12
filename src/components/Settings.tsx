@@ -351,10 +351,17 @@ const Settings: React.FC<SettingsProps> = ({ isOpen, onClose, settings, onSettin
         </div>
       </header>
       
-      <div style={{ marginTop: '0' }}>
-        <div className={styles.settingsContainer}>
-          <div className={styles.settingsHeader}>
-            <h2>Settings</h2>
+      <div style={{ marginTop: '60px' }}>
+        <div className={styles.settingsContainer} style={{ margin: '20px auto', maxWidth: '600px', boxShadow: 'none', border: 'none', position: 'static', transform: 'none', overflow: 'visible', maxHeight: 'none' }}>
+          <div className="card">
+            <div className="card-body">
+              <h1 className="page-title">
+                Settings
+              </h1>
+              <p className="page-subtitle">
+                Configure your AI explanation preferences
+              </p>
+            </div>
           </div>
 
         <div className={styles.settingsContent}>
