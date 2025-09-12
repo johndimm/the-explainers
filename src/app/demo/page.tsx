@@ -2,6 +2,7 @@
 
 import React, { useEffect, useRef, useState } from 'react'
 import { useRouter } from 'next/navigation'
+import PageLayout from '@/components/PageLayout'
 
 const captions: string[] = [
   "I'm reading Macbeth",
@@ -28,7 +29,11 @@ export default function DemoPage() {
   }, [showMobileMenu])
 
   return (
-    <div>
+    <PageLayout 
+      title="Demo" 
+      subtitle="A quick walkthrough: select a passage and get an AI explanation"
+      maxWidth="1120px"
+    >
       <style jsx>{`
         :root { --ink:#111; --paper:#fff; --cream:#fff3b0; --shadow:rgba(0,0,0,0.12); }
         @media (max-width: 768px) { .mobile-padding { padding: 8px !important; } }
@@ -43,13 +48,6 @@ export default function DemoPage() {
         .caption { background: var(--cream); border-bottom: 2px solid var(--ink); padding: 12px 14px; font-weight: 700; color: #111827; font-size: 13px; line-height: 1.5; font-style: italic; }
         .subtitle { margin: 6px 0 0 0; color: #6b7280; font-size: 14px; }
       `}</style>
-
-      <main style={{ marginTop: '60px', minHeight: 'calc(100vh - 60px)', padding: '20px', background: '#fafafa' }} className="mobile-padding">
-        <div style={{ maxWidth: '1120px', margin: '0 auto' }}>
-          <header style={{ marginBottom: '16px' }}>
-            <h2 style={{ margin: 0, fontSize: '22px', fontWeight: 800, color: '#111827', letterSpacing: '-0.02em' }}>Demo</h2>
-            <p className="subtitle">A quick walkthrough: select a passage and get an AI explanation.</p>
-          </header>
 
           <section className="grid">
             {captions.map((caption, idx) => {
@@ -69,8 +67,6 @@ export default function DemoPage() {
               )
             })}
           </section>
-        </div>
-      </main>
-    </div>
+    </PageLayout>
   )
 }

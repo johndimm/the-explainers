@@ -3,6 +3,7 @@
 import { useState, useRef, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
 import ChatInterface from '@/components/ChatInterface'
+import PageLayout from '@/components/PageLayout'
 import { useSettings } from '@/contexts/SettingsContext'
 import { useProfile } from '@/contexts/ProfileContext'
 import { useAuth } from '@/contexts/AuthContext'
@@ -144,15 +145,11 @@ function ChatContent() {
         }
       `}</style>
       
-      <div style={{ 
-        marginTop: '60px', 
-        minHeight: 'calc(100vh - 60px)', 
-        padding: '20px', 
-        background: '#fafafa' 
-      }} className="mobile-padding">
+      <PageLayout 
+        title="Chat with AI"
+        maxWidth="1200px"
+      >
         <div style={{
-          maxWidth: '800px',
-          margin: '0 auto',
           background: 'white',
           borderRadius: '16px',
           padding: '24px',
@@ -163,9 +160,6 @@ function ChatContent() {
         }} className="mobile-card">
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '20px' }}>
             <div style={{ flex: 1 }}>
-              <h2 style={{ margin: '0 0 8px 0', fontSize: '24px', fontWeight: '600', color: '#1a1a1a' }}>
-                Chat with AI
-              </h2>
               {user?.email && (
                 <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '8px' }}>
                   {user?.image && (
@@ -236,7 +230,7 @@ function ChatContent() {
             isPageMode={true}
           />
         </div>
-      </div>
+      </PageLayout>
     </div>
   )
 }

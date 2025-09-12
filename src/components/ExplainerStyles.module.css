@@ -272,8 +272,8 @@
   }
   
   .selectedPhoto {
-    width: 70px;
-    height: 56px;
+    width: 140px;
+    height: 112px;
     object-fit: contain;
     object-position: center;
   }
@@ -299,8 +299,8 @@
 }
 
 .selectedPhoto {
-  width: 80px;
-  height: 64px;
+  width: 160px;
+  height: 128px;
   border-radius: 8px;
   object-fit: contain;
   object-position: center;

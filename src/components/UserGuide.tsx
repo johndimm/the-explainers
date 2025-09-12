@@ -1,14 +1,17 @@
 'use client'
 
 import React from 'react'
+import PageLayout from './PageLayout'
 
 const UserGuide: React.FC = () => {
   return (
-    <div style={{ marginTop: '0', fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, sans-serif', lineHeight: '1.6', color: '#333', maxWidth: '800px', margin: '0 auto', padding: '20px', backgroundColor: '#f9f9f9' }}>
+    <PageLayout 
+      title="User Guide" 
+      subtitle="Learn how to use The Explainers to understand difficult texts"
+      maxWidth="1200px"
+      backgroundColor="#f9f9f9"
+    >
       <div style={{ background: 'white', borderRadius: '8px', padding: '40px', boxShadow: '0 2px 10px rgba(0,0,0,0.1)' }}>
-        <h1 style={{ color: '#8b5cf6', borderBottom: '3px solid #8b5cf6', paddingBottom: '10px', marginBottom: '30px' }}>
-          The Explainers - User Guide
-        </h1>
 
         <div style={{ background: '#fff3cd', border: '1px solid #ffeaa7', borderRadius: '4px', padding: '15px', margin: '15px 0' }}>
           <strong>Welcome to The Explainers!</strong> This app helps you understand difficult texts by providing AI-powered explanations of selected passages. Whether you're tackling Shakespeare, philosophy, or classic literature, we make challenging texts accessible.
@@ -98,7 +101,7 @@ const UserGuide: React.FC = () => {
 
 
       </div>
-    </div>
+    </PageLayout>
   )
 }
 

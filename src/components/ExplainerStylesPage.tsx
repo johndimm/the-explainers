@@ -1,11 +1,12 @@
 'use client'
 
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useMemo } from 'react'
 import { useRouter } from 'next/navigation'
 import { ExplanationStyle } from './Settings'
 import stylesCss from './ExplainerStyles.module.css'
 import FilteredStyleList from './FilteredStyleList'
 import styleCategoriesData from '@/data/style-categories.json'
+import PageLayout from './PageLayout'
 
 const getPhotoSrc = (value: ExplanationStyle) => {
   if (value === 'william-shakespeare') return '/icon-512x512.png'
@@ -156,7 +157,7 @@ const ExplainerStylesPage: React.FC<ExplainerStylesPageProps> = ({
     // Don't redirect - let user stay on the page to see their selection
   }
 
-  const styleCategories = getStyleCategories()
+  const styleCategories = useMemo(() => getStyleCategories(), [])
 
   // Filter categories based on search query
   useEffect(() => {
@@ -186,24 +187,30 @@ const ExplainerStylesPage: React.FC<ExplainerStylesPageProps> = ({
   const currentStyleData = allStyles.find(s => s.value === selectedStyle)
 
   return (
-    <div className={stylesCss.container} style={{ marginTop: '60px' }}>
-      <div className={stylesCss.pageHeader}>
-        <h1>Choose Your Explainer Style</h1>
-        <p>Select a style to see how different voices would explain your text</p>
+    <PageLayout 
+      title="Choose Your Explainer Style" 
+      subtitle="Select a style to see how different voices would explain your text"
+      maxWidth="1200px"
+    >
+      <div className={stylesCss.container} style={{ marginTop: '0' }}>
         {searchQuery.trim() !== '' && (
           <div style={{ 
-            marginTop: '8px', 
-            padding: '8px 12px', 
-            background: '#f0f9ff', 
-            border: '1px solid #0ea5e9', 
-            borderRadius: '6px',
-            fontSize: '14px',
-            color: '#0ea5e9'
+            padding: '0 20px',
+            marginBottom: '20px'
           }}>
-            🔍 Searching for "{searchQuery}" - Found {Object.values(filteredCategories).flat().length} people
+            <div style={{ 
+              background: 'white',
+              padding: '12px 20px',
+              borderRadius: '8px',
+              boxShadow: '0 2px 4px rgba(0,0,0,0.1)',
+              fontSize: '14px',
+              color: '#0ea5e9',
+              fontWeight: '500'
+            }}>
+              🔍 Searching for "{searchQuery}" - Found {Object.values(filteredCategories).flat().length} people
+            </div>
           </div>
         )}
-      </div>
 
       {currentStyleData && (
         <div className={stylesCss.selectedStyle}>
@@ -268,7 +275,8 @@ const ExplainerStylesPage: React.FC<ExplainerStylesPageProps> = ({
         ))
       )}
 
-    </div>
+      </div>
+    </PageLayout>
   )
 }
 

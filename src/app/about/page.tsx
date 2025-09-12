@@ -1,23 +1,16 @@
 'use client'
 
 import React from 'react'
+import PageLayout from '@/components/PageLayout'
 
 export default function AboutPage() {
   return (
-    <div style={{ 
-      marginTop: '60px', 
-      fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, sans-serif', 
-      lineHeight: '1.6', 
-      color: '#333', 
-      maxWidth: '800px', 
-      margin: '60px auto 0 auto', 
-      padding: '20px', 
-      backgroundColor: '#f9f9f9' 
-    }}>
+    <PageLayout 
+      title="About The Explainers" 
+      maxWidth="1200px"
+      backgroundColor="#f9f9f9"
+    >
       <div style={{ background: 'white', borderRadius: '8px', padding: '40px', boxShadow: '0 2px 10px rgba(0,0,0,0.1)' }}>
-        <h1 style={{ color: '#8b5cf6', borderBottom: '3px solid #8b5cf6', paddingBottom: '10px', marginBottom: '30px' }}>
-          About The Explainers
-        </h1>
 
         <div style={{ background: '#f0f9ff', border: '1px solid #0ea5e9', borderRadius: '8px', padding: '20px', marginBottom: '30px' }}>
           <h2 style={{ color: '#0369a1', marginTop: '0', marginBottom: '15px' }}>🤖 AI-Generated Code</h2>
@@ -102,6 +95,6 @@ export default function AboutPage() {
           </p>
         </div>
       </div>
-    </div>
+    </PageLayout>
   )
 }

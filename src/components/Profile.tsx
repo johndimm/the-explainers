@@ -319,10 +319,35 @@ const Profile: React.FC<ProfileProps> = ({ isOpen, onClose, profile, onProfileCh
         </div>
       </header>
       
-      <div style={{ marginTop: '0' }}>
+      <div style={{ marginTop: '60px' }}>
         <div className={styles.modal} style={{ margin: '20px auto', maxWidth: '600px', boxShadow: 'none', border: 'none', position: 'static', transform: 'none', overflow: 'visible', maxHeight: 'none' }}>
-          <div className={styles.header}>
-            <h2>Profile</h2>
+          <div style={{ 
+            background: 'white', 
+            borderRadius: '8px', 
+            padding: '30px', 
+            boxShadow: '0 2px 10px rgba(0,0,0,0.1)',
+            border: '1px solid #e9ecef',
+            marginBottom: '20px'
+          }}>
+            <h1 style={{ 
+              color: '#8b5cf6', 
+              borderBottom: '3px solid #8b5cf6', 
+              paddingBottom: '10px', 
+              marginBottom: '15px',
+              marginTop: '0',
+              fontSize: '28px',
+              fontWeight: '600'
+            }}>
+              Profile
+            </h1>
+            <p style={{ 
+              margin: '0',
+              color: '#666',
+              fontSize: '16px',
+              lineHeight: '1.5'
+            }}>
+              Set your preferences for personalized explanations
+            </p>
           </div>
 
         <div className={styles.content}>

@@ -5,6 +5,7 @@ import { useRouter } from 'next/navigation'
 import styles from './Library.module.css'
 import FilteredBookList from './FilteredBookList'
 import CategoryPopup from './CategoryPopup'
+import PageLayout from './PageLayout'
 
 interface Book {
   id: string | number
@@ -179,60 +180,28 @@ const Library: React.FC<LibraryProps> = ({ onBookSelect, onBackToCurrentBook }) 
   }
 
   return (
-    <div>
-      <div className={styles.library} style={{ marginTop: '60px' }}>
+    <PageLayout 
+      title="Library" 
+      subtitle="Choose a book to read and explore"
+      maxWidth="1200px"
+    >
+      <div className={styles.library} style={{ marginTop: '0' }}>
         <div className={styles.header}>
-          <h1 style={{ marginTop: 4 }}>Library</h1>
-          <p style={{ marginTop: 4 }}>
-            Choose a book to read and explore
-            {searchQuery.trim() !== '' && (
-              <span style={{ 
-                display: 'block', 
-                fontSize: '14px', 
-                color: '#0ea5e9', 
-                marginTop: '4px',
-                fontWeight: '500'
-              }}>
-                🔍 Searching for "{searchQuery}"
-              </span>
-            )}
-          </p>
+          {searchQuery.trim() !== '' && (
+            <div style={{ 
+              padding: '12px 20px',
+              borderRadius: '8px',
+              boxShadow: '0 2px 4px rgba(0,0,0,0.1)',
+              fontSize: '14px',
+              color: '#0ea5e9',
+              fontWeight: '500',
+              background: 'white',
+              marginBottom: '20px'
+            }}>
+              🔍 Searching for "{searchQuery}"
+            </div>
+          )}
           
-          {/* Search Bar */}
-          <div className={styles.searchContainer}>
-            <input
-              type="text"
-              placeholder="Search books by title or author... (Press Esc to clear)"
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              onKeyDown={(e) => {
-                if (e.key === 'Escape') {
-                  setSearchQuery('')
-                  e.currentTarget.blur()
-                }
-              }}
-              className={styles.searchInput}
-            />
-            
-            {/* Search Results Summary */}
-            {searchQuery.trim() !== '' && (
-              <div className={styles.searchResults}>
-                <span>🔍</span>
-                <span>
-                  Found {filteredCategories.reduce((total, cat) => total + cat.books.length, 0)} books 
-                  in {filteredCategories.length} categories
-                </span>
-                {searchQuery.trim() !== '' && (
-                  <button
-                    onClick={() => setSearchQuery('')}
-                    className={styles.clearSearchButton}
-                  >
-                    Clear search
-                  </button>
-                )}
-              </div>
-            )}
-          </div>
           
           <div style={{ 
             background: '#f0f9ff', 
@@ -425,7 +394,7 @@ const Library: React.FC<LibraryProps> = ({ onBookSelect, onBackToCurrentBook }) 
           onBookClick={handleBookClick}
         />
       )}
-    </div>
+    </PageLayout>
   )
 }
 
