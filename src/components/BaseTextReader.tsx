@@ -2,6 +2,7 @@
 
 import React, { useEffect, useRef, useState } from 'react'
 import { useSession } from 'next-auth/react'
+import { log } from '../utils/log'
 
 // Shared types pulled from existing components
 import { SettingsData } from './Settings'
@@ -547,49 +548,57 @@ export const useBookmarkRestoreAndSave = (
       if (!text || text.length < 100) return
       const title = bookTitle || 'Untitled'
       const auth = author || 'Unknown'
+      
 
       // Wait for content to be fully rendered before attempting restoration
       const restorePosition = (position: number, source: string) => {
-        console.log(`Attempting to restore bookmark from ${source} to position:`, position)
         // Use a longer delay and wait for scrollHeight to be available
         const attemptRestore = (attempts = 0) => {
-          if (attempts > 10) {
-            console.log('Bookmark restoration failed after 10 attempts')
-            return // Give up after 10 attempts
+          if (attempts > 20) {
+            return // Give up after 20 attempts
           }
           
           if (textReaderRef.current && textReaderRef.current.scrollHeight > 0) {
             const maxScroll = textReaderRef.current.scrollHeight - textReaderRef.current.clientHeight
             const safePosition = Math.min(position, maxScroll)
             textReaderRef.current.scrollTop = safePosition
-            console.log(`Bookmark restored from ${source} to position:`, safePosition, `(max: ${maxScroll})`)
           } else {
-            console.log(`Attempt ${attempts + 1}: Content not ready (scrollHeight: ${textReaderRef.current?.scrollHeight || 0})`)
-            setTimeout(() => attemptRestore(attempts + 1), 100)
+            setTimeout(() => attemptRestore(attempts + 1), 200) // Increased delay between attempts
           }
         }
         
-        setTimeout(() => attemptRestore(), 200) // Initial delay
+        setTimeout(() => attemptRestore(), 500) // Increased initial delay
       }
 
-      // Try to load from database first if user is authenticated
-      if (session?.user?.email) {
+      // Try to load from database first if user is authenticated or in development
+      // Wait a bit for session to be fully loaded
+      await new Promise(resolve => setTimeout(resolve, 100))
+      
+      const userEmail = session?.user?.email || (process.env.NODE_ENV === 'development' ? 'john.r.dimm@gmail.com' : null)
+      
+      if (userEmail) {
         try {
           const response = await fetch(`/api/user/bookmark?bookTitle=${encodeURIComponent(title)}&bookAuthor=${encodeURIComponent(auth)}`)
+          log('bookmark', 'Bookmark API response status:', response.status)
+          
           if (response.ok) {
             const bookmark = await response.json()
+            log('bookmark', 'Bookmark found in database:', bookmark)
             const position = bookmark.scroll_position
             restorePosition(position, 'database')
             return
+          } else {
+            log('bookmark', 'No bookmark found in database (404)')
           }
         } catch (error) {
-          console.error('Error loading bookmark from database:', error)
+          log('bookmark', 'Error loading bookmark from database:', error)
         }
+      } else {
+        log('bookmark', 'No session found and not in development mode, skipping bookmark restoration')
       }
 
-      // No saved bookmark found in database
-
-      // No saved bookmark - scroll past Project Gutenberg header
+      // No saved bookmark found in database - scroll past Project Gutenberg header for new books
+      log('bookmark', 'No bookmark found in database, checking for Project Gutenberg header')
       setTimeout(() => {
         if (textReaderRef.current) {
           // Find the start of book marker and scroll past it
@@ -604,7 +613,7 @@ export const useBookmarkRestoreAndSave = (
           for (const marker of markers) {
             startIndex = text.indexOf(marker)
             if (startIndex !== -1) {
-              console.log('Found Project Gutenberg marker:', marker, 'at position:', startIndex)
+              log('bookmark', 'Found Project Gutenberg marker:', marker, 'at position:', startIndex)
               break
             }
           }
@@ -613,10 +622,10 @@ export const useBookmarkRestoreAndSave = (
             // Calculate scroll position to the marker
             const textPercentage = startIndex / text.length
             const targetPosition = textPercentage * textReaderRef.current.scrollHeight
-            console.log('Scrolling to marker position:', targetPosition, 'textPercentage:', textPercentage)
+            log('bookmark', 'Scrolling to marker position:', targetPosition, 'textPercentage:', textPercentage)
             textReaderRef.current.scrollTop = Math.max(0, targetPosition)
           } else {
-            console.log('No Project Gutenberg marker found in text or content not ready')
+            log('bookmark', 'No Project Gutenberg marker found in text or content not ready')
           }
         }
       }, 300) // Longer delay for Project Gutenberg header scrolling
@@ -626,9 +635,21 @@ export const useBookmarkRestoreAndSave = (
   }, [text, bookTitle, author, session?.user?.email])
 
   useEffect(() => {
+    log('bookmark', 'Setting up scroll effect, textReaderRef:', textReaderRef.current)
+    
     const handleScroll = () => {
-      if (!textReaderRef.current) return
-      const scrollPosition = textReaderRef.current.scrollTop
+      log('bookmark', 'Scroll event fired!')
+      
+      // Get scroll position from the scrollable element
+      let scrollPosition = 0
+      if (textReaderRef.current) {
+        scrollPosition = textReaderRef.current.scrollTop
+        log('bookmark', 'Using element scroll position:', scrollPosition)
+      } else {
+        log('bookmark', 'No textReaderRef element found')
+      }
+      
+      log('bookmark', 'Scroll detected, position:', scrollPosition)
       if (scrollTimeoutRef.current) clearTimeout(scrollTimeoutRef.current)
       scrollTimeoutRef.current = setTimeout(async () => {
         const title = bookTitle || 'Untitled'
@@ -636,10 +657,14 @@ export const useBookmarkRestoreAndSave = (
 
         // Save to database if user is authenticated or in development mode
         const isLocalDev = process.env.NODE_ENV === 'development' && typeof window !== 'undefined' && window.location.hostname === 'localhost'
+        const userEmail = session?.user?.email || (isLocalDev ? 'john.r.dimm@gmail.com' : null)
         
-        if (session?.user?.email || isLocalDev) {
+        log('bookmark', `Session email: ${session?.user?.email}, isLocalDev: ${isLocalDev}, userEmail: ${userEmail}`)
+        
+        if (userEmail) {
           try {
-            await fetch('/api/user/bookmark', {
+            log('bookmark', `Saving bookmark: ${title} by ${auth} at position ${scrollPosition}`)
+            const response = await fetch('/api/user/bookmark', {
               method: 'POST',
               headers: { 'Content-Type': 'application/json' },
               body: JSON.stringify({
@@ -648,20 +673,49 @@ export const useBookmarkRestoreAndSave = (
                 scrollPosition: scrollPosition
               })
             })
+            
+            if (response.ok) {
+              log('bookmark', `Bookmark saved successfully: ${title} by ${auth} at position ${scrollPosition}`)
+            } else {
+              log('bookmark', `Failed to save bookmark: ${response.status} ${response.statusText}`)
+            }
           } catch (error) {
-            console.error('Error saving bookmark to database:', error)
+            log('bookmark', 'Error saving bookmark to database:', error)
           }
+        } else {
+          log('bookmark', 'No session and not in dev mode, skipping bookmark save')
         }
 
         // Bookmark saved to database
       }, 500)
     }
 
-    const el = textReaderRef.current
-    if (!el) return
-    setTimeout(() => el.addEventListener('scroll', handleScroll), 100)
+    // Try both window scroll and element scroll
+    log('bookmark', 'Setting up scroll handlers for both window and element')
+    
+    const setupScrollHandlers = () => {
+      // Window scroll (most likely)
+      window.addEventListener('scroll', handleScroll)
+      log('bookmark', 'Window scroll handler attached')
+      
+      // Element scroll (if element is scrollable)
+      const el = textReaderRef.current
+      if (el) {
+        el.addEventListener('scroll', handleScroll)
+        log('bookmark', 'Element scroll handler attached')
+      } else {
+        log('bookmark', 'No textReaderRef element found for scroll handler')
+      }
+    }
+    
+    setTimeout(setupScrollHandlers, 100)
+    
     return () => {
-      el.removeEventListener('scroll', handleScroll)
+      window.removeEventListener('scroll', handleScroll)
+      const el = textReaderRef.current
+      if (el) {
+        el.removeEventListener('scroll', handleScroll)
+      }
       if (scrollTimeoutRef.current) clearTimeout(scrollTimeoutRef.current)
     }
   }, [bookTitle, author, text, textReaderRef, session])

@@ -605,14 +605,21 @@ export async function createOrUpdateUserBookmark(bookmark: UserBookmark): Promis
   
   try {
     const now = new Date()
-    const result = await client.query(`
+    const query = `
       INSERT INTO user_bookmarks (email, book_title, book_author, scroll_position, updated_at)
       VALUES ($1, $2, $3, $4, $5)
       ON CONFLICT (email, book_title, book_author) DO UPDATE SET
         scroll_position = EXCLUDED.scroll_position,
         updated_at = EXCLUDED.updated_at
       RETURNING *
-    `, [bookmark.email, bookmark.book_title, bookmark.book_author, bookmark.scroll_position, now])
+    `
+    const params = [bookmark.email, bookmark.book_title, bookmark.book_author, bookmark.scroll_position, now]
+    
+    const result = await client.query(query, params)
+    
+    if (result.rows.length === 0) {
+      throw new Error('No rows returned from INSERT query')
+    }
     
     const row = result.rows[0]
     return {
