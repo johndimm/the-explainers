@@ -1,0 +1,122 @@
+2234:ACT I.
+2244:SCENE I. An Apartment in the Duke’s Palace.
+2295: Enter Orsino, Duke of Illyria, Curio, and other Lords; Musicians
+3365: Enter Valentine.
+4251:SCENE II. The sea-coast.
+4279: Enter Viola, a Captain and Sailors.
+7151:SCENE III. A Room in Olivia’s House.
+7193: Enter Sir Toby and Maria.
+9244: Enter Sir Andrew.
+10716: [_Exit Maria._]
+13570:SCENE IV. A Room in the Duke’s Palace.
+13614: Enter Valentine and Viola in man’s attire.
+14020: Enter Duke, Curio and Attendants.
+15642:SCENE V. A Room in Olivia’s House.
+15682: Enter Maria and Clown.
+17037: [_Exit Maria._]
+17051: Enter Olivia with Malvolio.
+20225: Enter Maria.
+20619: [_Exit Maria._]
+20750: [_Exit Malvolio._]
+21028: Enter Sir Toby.
+21582: [_Exit Olivia._]
+22010: [_Exit Clown._]
+22030: Enter Malvolio.
+23269: [_Exit Malvolio._]
+23283: Enter Maria.
+23404: Enter Viola.
+25850: [_Exit Maria._]
+29029: [_Exit Viola._]
+29516: Enter Malvolio.
+29947: [_Exit Malvolio._]
+30147: [_Exit Olivia._]
+30167:ACT II.
+30178:SCENE I. The sea-coast.
+30207: Enter Antonio and Sebastian.
+32216: [_Exit Sebastian._]
+32459: [_Exit Antonio._]
+32473:SCENE II. A street.
+32496: Enter Viola; Malvolio at several doors.
+33286: [_Exit Malvolio._]
+34393: [_Exit Viola._]
+34407:SCENE III. A Room in Olivia’s House.
+34449: Enter Sir Toby and Sir Andrew.
+35128: Enter Clown.
+37747: Enter Maria.
+38462: Enter Malvolio.
+40293: [_Exit Malvolio._]
+42737: [_Exit Maria._]
+43390:SCENE IV. A Room in the Duke’s Palace.
+43434: Enter Duke, Viola, Curio and others.
+44049: [_Exit Curio. Music plays._]
+45387: Enter Curio and Clown.
+46980: [_Exit Clown._]
+49180:SCENE V. Olivia’s garden.
+49211: Enter Sir Toby, Sir Andrew and Fabian.
+49807: Enter Maria.
+50334: [_Exit Maria._]
+50354: Enter Malvolio.
+57442: [_Exit Malvolio._]
+57718: Enter Maria.
+58783:ACT III.
+58795:SCENE I. Olivia’s garden.
+58828: Enter Viola and Clown with a tabor.
+61590: [_Exit Clown._]
+62020: Enter Sir Toby and Sir Andrew.
+62734: Enter Olivia and Maria.
+66581:SCENE II. A Room in Olivia’s House.
+66622: Enter Sir Toby, Sir Andrew and Fabian.
+69133: [_Exit Sir Andrew._]
+69740: Enter Maria.
+70690:SCENE III. A street.
+70714: Enter Sebastian and Antonio.
+73113:SCENE IV. Olivia’s garden.
+73145: Enter Olivia and Maria.
+73856: Enter Malvolio.
+75559: Enter Servant.
+75760: [_Exit Servant._]
+77068: Enter Sir Toby, Fabian and Maria.
+78873: [_Exit Malvolio._]
+79604: Enter Sir Andrew.
+81455: [_Exit Maria._]
+82144: Enter Olivia and Viola.
+83218: [_Exit Olivia._]
+83232: Enter Sir Toby and Fabian.
+85283: [_Exit Sir Toby._]
+86030: Enter Sir Toby and Sir Andrew.
+86952: Enter Fabian and Viola.
+87929: Enter Antonio.
+88378: Enter Officers.
+91528: [_Exit Viola._]
+91952: [_Exit Fabian._]
+92089:ACT IV.
+92100:SCENE I. The Street before Olivia’s House.
+92150: Enter Sebastian and Clown.
+93225: Enter Sir Andrew, Sir Toby and Fabian.
+93646: [_Exit Clown._]
+94313: Enter Olivia.
+95384:SCENE II. A Room in Olivia’s House.
+95425: Enter Maria and Clown.
+95609: [_Exit Maria._]
+96004: Enter Sir Toby and Maria.
+101344: [_Exit Clown._]
+101358:SCENE III. Olivia’s Garden.
+101391: Enter Sebastian.
+102402: Enter Olivia and a Priest.
+103106:ACT V.
+103116:SCENE I. The Street before Olivia’s House.
+103166: Enter Clown and Fabian.
+103453: Enter Duke, Viola, Curio and Lords.
+105331: [_Exit Clown._]
+105351: Enter Antonio and Officers.
+107517: Enter Olivia and Attendants.
+109699: [_Exit an Attendant._]
+110158: Enter Priest.
+111157: Enter Sir Andrew.
+111937: Enter Sir Toby, drunk, led by the Clown.
+112938: Enter Sebastian.
+116240: Enter Clown, with a letter and Fabian.
+117841: [_Exit Fabian._]
+118433: Enter Fabian and Malvolio.
+120947: [_Exit Malvolio._]
+122299: [_Exit Duke._]

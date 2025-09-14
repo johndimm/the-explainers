@@ -14,6 +14,8 @@ export default function Header() {
   const [subtitle, setSubtitle] = useState<string>('understand difficult texts')
   const [searchQuery, setSearchQuery] = useState('')
   const [showSearch, setShowSearch] = useState(false)
+  const [currentSearchIndex, setCurrentSearchIndex] = useState(0)
+  const [totalSearchResults, setTotalSearchResults] = useState(0)
 
   // Determine search context based on current page
   const getSearchContext = () => {
@@ -28,10 +30,30 @@ export default function Header() {
   const handleSearch = () => {
     if (!searchQuery.trim()) return
     
+    // Reset search index when performing new search
+    setCurrentSearchIndex(0)
+    setTotalSearchResults(0)
+    
     // Dispatch search event for the current page to handle
     if (typeof window !== 'undefined') {
       window.dispatchEvent(new CustomEvent('headerSearch', { 
         detail: { query: searchQuery, type: searchContext.type } 
+      }))
+    }
+  }
+
+  const handleNextSearch = () => {
+    if (typeof window !== 'undefined') {
+      window.dispatchEvent(new CustomEvent('headerSearchNext', { 
+        detail: { type: searchContext.type } 
+      }))
+    }
+  }
+
+  const handlePrevSearch = () => {
+    if (typeof window !== 'undefined') {
+      window.dispatchEvent(new CustomEvent('headerSearchPrev', { 
+        detail: { type: searchContext.type } 
       }))
     }
   }
@@ -81,6 +103,19 @@ export default function Header() {
     }
   }, [])
 
+  // Listen for search result updates from text readers
+  useEffect(() => {
+    const handleSearchResultUpdate = (event: CustomEvent) => {
+      if (event.detail.type === 'text') {
+        setCurrentSearchIndex(event.detail.currentIndex || 0)
+        setTotalSearchResults(event.detail.totalResults || 0)
+      }
+    }
+
+    window.addEventListener('searchResultUpdate', handleSearchResultUpdate as EventListener)
+    return () => window.removeEventListener('searchResultUpdate', handleSearchResultUpdate as EventListener)
+  }, [])
+
   const handleAuthAction = async () => {
     if (isAuthenticated) {
       const confirmed = window.confirm('Are you sure you want to sign out?')
@@ -125,24 +160,91 @@ export default function Header() {
             <h1 style={{ margin: 0, fontSize: '18px', fontWeight: 'bold', color: '#333', lineHeight: '1.2' }}>The Explainers</h1>
             
             {searchContext.show && (
-              <input
-                type="text"
-                placeholder={searchContext.placeholder}
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                onKeyDown={(e) => e.key === 'Enter' && handleSearch()}
-                style={{
-                  flex: 1,
-                  padding: '6px 8px',
-                  border: '1px solid #ddd',
-                  borderRadius: '4px',
-                  fontSize: '12px',
-                  outline: 'none',
-                  height: '28px',
-                  boxSizing: 'border-box',
-                  minWidth: '120px'
-                }}
-              />
+              <div style={{ position: 'relative', display: 'flex', alignItems: 'center', flex: 1, maxWidth: '400px' }}>
+                <input
+                  type="text"
+                  placeholder="Search..."
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  onKeyDown={(e) => {
+                    if (e.key === 'Enter') {
+                      handleSearch()
+                    } else if (e.key === 'ArrowUp' || e.key === 'ArrowDown') {
+                      e.preventDefault()
+                      if (e.key === 'ArrowUp') {
+                        handlePrevSearch()
+                      } else {
+                        handleNextSearch()
+                      }
+                    }
+                  }}
+                  style={{
+                    padding: '8px 12px',
+                    border: '1px solid #ddd',
+                    borderRadius: '6px',
+                    fontSize: '14px',
+                    width: '100%',
+                    backgroundColor: 'white',
+                    color: 'black',
+                    paddingRight: '40px' // Make room for arrows
+                  }}
+                  onClick={(e) => {
+                    e.stopPropagation()
+                    e.currentTarget.focus()
+                  }}
+                  autoFocus={false}
+                  readOnly={false}
+                  disabled={false}
+                />
+                <div style={{
+                  position: 'absolute',
+                  right: '8px',
+                  display: 'flex',
+                  flexDirection: 'column',
+                  gap: '2px'
+                }}>
+                  <button
+                    type="button"
+                    onClick={handlePrevSearch}
+                    disabled={currentSearchIndex === 0}
+                    style={{
+                      width: '16px',
+                      height: '12px',
+                      border: 'none',
+                      background: 'none',
+                      cursor: currentSearchIndex === 0 ? 'not-allowed' : 'pointer',
+                      fontSize: '10px',
+                      color: currentSearchIndex === 0 ? '#ccc' : '#666',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center'
+                    }}
+                    title={`Previous result (${currentSearchIndex}/${totalSearchResults})`}
+                  >
+                    ▲
+                  </button>
+                  <button
+                    type="button"
+                    onClick={handleNextSearch}
+                    disabled={currentSearchIndex >= totalSearchResults - 1}
+                    style={{
+                      width: '16px',
+                      height: '12px',
+                      border: 'none',
+                      background: 'none',
+                      cursor: currentSearchIndex >= totalSearchResults - 1 ? 'not-allowed' : 'pointer',
+                      fontSize: '10px',
+                      color: currentSearchIndex >= totalSearchResults - 1 ? '#ccc' : '#666',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center'
+                    }}
+                    title={`Next result (${currentSearchIndex + 1}/${totalSearchResults})`}
+                  >
+                    ▼
+                  </button>
+                </div>
+              </div>
             )}
           </div>
           <p style={{ margin: 0, fontSize: '11px', color: '#666', lineHeight: '1.2' }}>

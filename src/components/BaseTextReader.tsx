@@ -273,30 +273,117 @@ const extractDramatisPersonae = (fullText: string): Set<string> => {
 }
 
 export const extractContextInfo = (selectedText: string, fullText: string, bookTitle?: string, author?: string) => {
-  // Try to find the selected text in the original text
+  console.log('🔍 EXTRACT CONTEXT INFO DEBUG:')
+  console.log('Selected text:', JSON.stringify(selectedText))
+  console.log('Selected text length:', selectedText.length)
+  console.log('Full text length:', fullText.length)
+  console.log('First 200 chars of full text:', JSON.stringify(fullText.substring(0, 200)))
+  
+  // Search for Olivia's actual quote in the text with different line break formats
+  const oliviaQuote1 = "There is no slander in an allowed fool"
+  const oliviaQuote2 = "There is\r\nno slander in an allowed fool"
+  const oliviaQuote3 = "There is\nno slander in an allowed fool"
+  
+  const oliviaIndex1 = fullText.indexOf(oliviaQuote1)
+  const oliviaIndex2 = fullText.indexOf(oliviaQuote2)
+  const oliviaIndex3 = fullText.indexOf(oliviaQuote3)
+  
+  console.log('🔍 SEARCHING FOR OLIVIA QUOTE WITH DIFFERENT LINE BREAKS:')
+  console.log('Quote 1 (no breaks):', oliviaIndex1)
+  console.log('Quote 2 (\\r\\n):', oliviaIndex2)
+  console.log('Quote 3 (\\n):', oliviaIndex3)
+  
+  const foundIndex = Math.max(oliviaIndex1, oliviaIndex2, oliviaIndex3)
+  if (foundIndex !== -1) {
+    const oliviaContext = fullText.substring(Math.max(0, foundIndex - 200), foundIndex + 200)
+    console.log('Olivia context (400 chars around quote):', JSON.stringify(oliviaContext))
+  }
+  
+  // Normalize line breaks in selected text to match stored text format
+  const normalizedSelectedText = selectedText.replace(/\n/g, '\r\n')
+  console.log('Normalized selected text:', JSON.stringify(normalizedSelectedText))
+  
+  // Try to find the selected text in the original text (both formats)
   let selectedIndex = fullText.indexOf(selectedText)
+  let normalizedIndex = fullText.indexOf(normalizedSelectedText)
+  
+  console.log('Original text index:', selectedIndex)
+  console.log('Normalized text index:', normalizedIndex)
+  
+  // Use the normalized version if it's found
+  if (normalizedIndex !== -1) {
+    selectedIndex = normalizedIndex
+    console.log('Using normalized text index:', selectedIndex)
+  }
+  
+  // If found, check if it's preceded by OLIVIA to make sure we found the right occurrence
+  if (selectedIndex !== -1) {
+    const textBeforeFound = fullText.substring(Math.max(0, selectedIndex - 100), selectedIndex)
+    const hasOliviaBefore = /OLIVIA\.?\s*$/m.test(textBeforeFound.split('\n').slice(-3).join('\n'))
+    
+    console.log('Text before first occurrence (last 100 chars):', JSON.stringify(textBeforeFound))
+    console.log('Has OLIVIA before first occurrence:', hasOliviaBefore)
+    
+    if (!hasOliviaBefore) {
+      // This is not Olivia's speech, search for the next occurrence
+      console.log('First occurrence is not Olivia, searching for next occurrence...')
+      let searchStart = selectedIndex + 1
+      let occurrenceCount = 1
+      while (true) {
+        const nextIndex = fullText.indexOf(selectedText, searchStart)
+        if (nextIndex === -1) {
+          console.log(`No more occurrences found after ${occurrenceCount} attempts`)
+          break
+        }
+        
+        occurrenceCount++
+        const textBeforeNext = fullText.substring(Math.max(0, nextIndex - 100), nextIndex)
+        const hasOliviaBeforeNext = /OLIVIA\.?\s*$/m.test(textBeforeNext.split('\n').slice(-3).join('\n'))
+        
+        console.log(`Occurrence ${occurrenceCount} at index ${nextIndex}:`, JSON.stringify(textBeforeNext))
+        console.log(`Has OLIVIA before occurrence ${occurrenceCount}:`, hasOliviaBeforeNext)
+        
+        if (hasOliviaBeforeNext) {
+          selectedIndex = nextIndex
+          console.log(`✅ FOUND CORRECT OCCURRENCE at index ${selectedIndex}`)
+          break
+        }
+        searchStart = nextIndex + 1
+      }
+    } else {
+      console.log('✅ First occurrence is correct (has OLIVIA before)')
+    }
+  }
   
   if (selectedIndex === -1) {
+    console.log('❌ SELECTED TEXT NOT FOUND - TRYING FALLBACK LOGIC')
     // If not found, try with minimal character encoding fixes
     const normalizedSelectedText = normalizeText(selectedText)
     const normalizedFullText = normalizeText(fullText)
     
     selectedIndex = normalizedFullText.indexOf(normalizedSelectedText)
+    console.log('Normalized text search index:', selectedIndex)
     
     if (selectedIndex === -1) {
+      console.log('❌ NORMALIZED TEXT ALSO NOT FOUND - TRYING FLEXIBLE SEARCH')
       // If still not found, try a flexible search with first few words
       const words = normalizedSelectedText.split(/\s+/)
       if (words.length > 0) {
         const searchText = words.slice(0, Math.min(3, words.length)).join(' ')
+        console.log('Trying flexible search with:', JSON.stringify(searchText))
         const flexibleIndex = normalizedFullText.indexOf(searchText)
+        console.log('Flexible search index:', flexibleIndex)
         if (flexibleIndex !== -1) {
           // Found a partial match, use the original text for context extraction
           const originalIndex = fullText.indexOf(searchText)
+          console.log('Original text index for partial match:', originalIndex)
           if (originalIndex !== -1) {
+            console.log('🚨 USING FALLBACK LOGIC - THIS IS WRONG!')
             return extractContextFromIndex(originalIndex, selectedText.length, fullText, bookTitle, author)
           }
         }
       }
+      console.log('❌ ALL FALLBACK ATTEMPTS FAILED')
       return null
     }
     
@@ -310,9 +397,392 @@ export const extractContextInfo = (selectedText: string, fullText: string, bookT
   return extractContextFromIndex(selectedIndex, selectedText.length, fullText, bookTitle, author)
 }
 
+// Character tracking cache for Shakespeare plays
+const characterMapCache = new Map<string, Array<{position: number, characters: string[], act?: string, scene?: string}>>()
+
+// Import dynamic character map generator (for logging only)
+import { logCharacterMap } from '../utils/dynamicCharacterMap'
+
+// Efficient character tracking for Shakespeare plays using dynamic character map
+const getCharactersOnStageAtPosition = (position: number, fullText: string): string[] => {
+  // Check if this is a Shakespeare play
+  const isShakespeare = fullText.includes('ACT') && fullText.includes('SCENE') && 
+                       (fullText.includes('Enter ') || fullText.includes('_Enter_') || fullText.includes('[Enter'))
+  
+  if (!isShakespeare) {
+    log('character-map', `⚠️ Not a Shakespeare play - no character tracking`)
+    return []
+  }
+  
+  // Use cached character map or generate new one
+  const playKey = fullText.substring(0, 100)
+  let characterMap = characterMapCache.get(playKey)
+  
+  if (!characterMap) {
+    log('character-map', `🔍 Generating character map for play using 2-scan approach`)
+    characterMap = buildCharacterMap(fullText, playKey)
+    characterMapCache.set(playKey, characterMap)
+    
+    // Log the character map to console  
+    log('character-map', `🎭 Character map generated with ${characterMap.length} entries`)
+    characterMap.forEach((entry, index) => {
+      log('character-map', `  ${index + 1}. Position ${entry.position}: [${entry.characters.join(', ')}]${entry.act ? ` (ACT ${entry.act})` : ''}${entry.scene ? ` (SCENE ${entry.scene})` : ''}`)
+    })
+  }
+  
+  // Find the most recent character state before this position
+  let currentCharacters: string[] = []
+  
+  for (const entry of characterMap) {
+    if (entry.position <= position) {
+      currentCharacters = entry.characters
+    } else {
+      break
+    }
+  }
+  
+  log('character-map', `🔍 Characters at position ${position}: [${currentCharacters.join(', ')}]`)
+  return currentCharacters
+}
+
+// Build character map when text loads (call this from the text reader component)
+export const buildCharacterMapForText = (fullText: string) => {
+  const playKey = fullText.substring(0, 100)
+  
+  // Check if this is a Shakespeare play
+  const isShakespeare = fullText.includes('ACT') && fullText.includes('SCENE') && 
+                       (fullText.includes('Enter ') || fullText.includes('_Enter_') || fullText.includes('[Enter'))
+  
+  if (isShakespeare && !characterMapCache.has(playKey)) {
+    log('character-map', `🎭 Building character map for Shakespeare play using 2-scan approach`)
+    const characterMap = buildCharacterMap(fullText, playKey)
+    characterMapCache.set(playKey, characterMap)
+    
+    // Log the character map to console when file is loaded
+    log('character-map', `🎭 Character map built with ${characterMap.length} entries`)
+  }
+}
+
+// Old implementation removed - now using dynamic character map generator
+
+// Build a complete character map for a Shakespeare play using 2-scan approach
+const buildCharacterMap = (fullText: string, playKey: string) => {
+  interface StructuralEvent {
+    offset: number
+    type: 'ACT' | 'SCENE' | 'ENTER' | 'EXIT' | 'EXEUNT'
+    content: string
+    act?: string
+    scene?: string
+    characters?: string[]
+  }
+  
+  interface SpeakerEvent {
+    offset: number
+    speaker: string
+  }
+  
+  interface GenericExitEvent {
+    offset: number
+    type: 'GENERIC_EXIT'
+  }
+  
+  // SCAN 1: Extract structural elements
+  const structuralEvents: StructuralEvent[] = []
+  const lines = fullText.split('\n')
+  let position = 0
+  let currentAct = ''
+  let currentScene = ''
+  
+  // Regex patterns from README.txt
+  const SPEAKERS = /^[A-Z]{3,}\.\s*$/
+  const ACTS = /ACT [IV]+\./
+  const SCENES = /SCENE [IV]+\./
+  const ENTERS = /^\s*Enter/
+  const EXITS = /_Exit /
+  const EXEUNTS = /_Exeunt_/
+  
+  for (let i = 0; i < lines.length; i++) {
+    const line = lines[i]
+    const lineOffset = position
+    
+    // Check for ACT
+    if (ACTS.test(line)) {
+      const actMatch = line.match(/ACT ([IV]+)\./)
+      if (actMatch) {
+        currentAct = actMatch[1]
+        structuralEvents.push({
+          offset: lineOffset,
+          type: 'ACT',
+          content: line.trim(),
+          act: currentAct
+        })
+      }
+    }
+    // Check for SCENE
+    else if (SCENES.test(line)) {
+      const sceneMatch = line.match(/SCENE ([IV]+)\./)
+      if (sceneMatch) {
+        currentScene = sceneMatch[1]
+        structuralEvents.push({
+          offset: lineOffset,
+          type: 'SCENE',
+          content: line.trim(),
+          act: currentAct,
+          scene: currentScene
+        })
+      }
+    }
+    // Check for Enter
+    else if (ENTERS.test(line)) {
+      const enterMatch = line.match(/^\s*Enter\s+(.+)/i)
+      if (enterMatch) {
+        const characters = parseCharacterList(enterMatch[1])
+        structuralEvents.push({
+          offset: lineOffset,
+          type: 'ENTER',
+          content: line.trim(),
+          act: currentAct,
+          scene: currentScene,
+          characters
+        })
+      }
+    }
+    // Check for specific Exit
+    else if (EXITS.test(line) && !line.includes('[_Exit._]')) {
+      const exitMatch = line.match(/\[_Exit\s+([A-Z][A-Z\s&']+)\._?\]/i)
+      if (exitMatch) {
+        const characters = parseCharacterList(exitMatch[1])
+        structuralEvents.push({
+          offset: lineOffset,
+          type: 'EXIT',
+          content: line.trim(),
+          act: currentAct,
+          scene: currentScene,
+          characters
+        })
+      }
+    }
+    // Check for Exeunt (all exit)
+    else if (EXEUNTS.test(line)) {
+      structuralEvents.push({
+        offset: lineOffset,
+        type: 'EXEUNT',
+        content: line.trim(),
+        act: currentAct,
+        scene: currentScene,
+        characters: [] // Empty means all characters exit
+      })
+    }
+    
+    position += line.length + 1 // +1 for newline
+  }
+  
+  // SCAN 2: Extract speakers and generic exits
+  const speakerEvents: SpeakerEvent[] = []
+  const genericExitEvents: GenericExitEvent[] = []
+  position = 0
+  
+  for (let i = 0; i < lines.length; i++) {
+    const line = lines[i]
+    const lineOffset = position
+    
+    // Check for speakers
+    if (SPEAKERS.test(line.trim())) {
+      const speaker = line.trim().replace('.', '')
+      speakerEvents.push({
+        offset: lineOffset,
+        speaker
+      })
+    }
+    // Check for generic exits
+    else if (line.includes('[_Exit._]')) {
+      genericExitEvents.push({
+        offset: lineOffset,
+        type: 'GENERIC_EXIT'
+      })
+    }
+    
+    position += line.length + 1
+  }
+  
+  // Resolve generic exits to explicit exits
+  const explicitExits: StructuralEvent[] = []
+  let lastSpeaker = ''
+  let speakerIndex = 0
+  let exitIndex = 0
+  
+  // Process events in chronological order
+  while (speakerIndex < speakerEvents.length && exitIndex < genericExitEvents.length) {
+    const speaker = speakerEvents[speakerIndex]
+    const exit = genericExitEvents[exitIndex]
+    
+    if (speaker.offset < exit.offset) {
+      lastSpeaker = speaker.speaker
+      speakerIndex++
+    } else {
+      // Generic exit found - assign to last speaker
+      if (lastSpeaker) {
+        explicitExits.push({
+          offset: exit.offset,
+          type: 'EXIT',
+          content: `[_Exit ${lastSpeaker}._]`,
+          characters: [lastSpeaker]
+        })
+      }
+      exitIndex++
+    }
+  }
+  
+  // Merge structural events with explicit exits and sort by offset
+  const allEvents = [...structuralEvents, ...explicitExits].sort((a, b) => a.offset - b.offset)
+  
+  // Build character map from merged events
+  const characterMap: Array<{position: number, characters: string[], act?: string, scene?: string}> = []
+  let currentCharacters = new Set<string>()
+  let lastCharacterState: string[] = []
+  
+  const addEntryIfChanged = (position: number, characters: string[], act?: string, scene?: string) => {
+    const sortedCharacters = [...characters].sort()
+    
+    if (JSON.stringify(sortedCharacters) !== JSON.stringify(lastCharacterState)) {
+      characterMap.push({position, characters: sortedCharacters, act, scene})
+      lastCharacterState = sortedCharacters
+    }
+  }
+  
+  for (const event of allEvents) {
+    switch (event.type) {
+      case 'SCENE':
+        // New scene - clear all characters
+        currentCharacters.clear()
+        addEntryIfChanged(event.offset, [], event.act, event.scene)
+        break
+        
+      case 'ENTER':
+        if (event.characters) {
+          event.characters.forEach(char => currentCharacters.add(char))
+          addEntryIfChanged(event.offset, Array.from(currentCharacters), event.act, event.scene)
+        }
+        break
+        
+      case 'EXIT':
+        if (event.characters) {
+          event.characters.forEach(char => currentCharacters.delete(char))
+          addEntryIfChanged(event.offset, Array.from(currentCharacters), event.act, event.scene)
+        }
+        break
+        
+      case 'EXEUNT':
+        // All characters exit
+        currentCharacters.clear()
+        addEntryIfChanged(event.offset, [], event.act, event.scene)
+        break
+    }
+  }
+  
+  log('character-map', `🎭 Built character map with ${characterMap.length} entries using 2-scan approach`)
+  return characterMap
+}
+
+// Parse character list from stage directions
+const parseCharacterList = (characterText: string): string[] => {
+  const characters: string[] = []
+  
+  // First split by commas and "and"
+  const parts = characterText.split(/,\s*|\s+and\s+/)
+  
+  for (const part of parts) {
+    const trimmed = part.trim().toUpperCase().replace(/[\.\]_]+$/g, '')
+    
+    // Skip stage directions and act/scene markers
+    if (isStageDirectionOrMarker(trimmed)) {
+      continue
+    }
+    
+    // Handle "with" pattern: "Olivia with Malvolio" -> ["OLIVIA", "MALVOLIO"]
+    if (trimmed.toLowerCase().includes(' with ')) {
+      const withParts = trimmed.split(/\s+with\s+/i)
+      withParts.forEach(p => {
+        const cleanName = p.trim()
+        if (isValidCharacterName(cleanName)) {
+          characters.push(cleanName)
+        }
+      })
+    } else {
+      // Regular character name
+      if (isValidCharacterName(trimmed)) {
+        characters.push(trimmed)
+      }
+    }
+  }
+  
+  return characters
+}
+
+// Check if a string is a stage direction or act/scene marker
+const isStageDirectionOrMarker = (text: string): boolean => {
+  const lowerText = text.toLowerCase()
+  
+  // Common stage directions
+  const stageDirections = [
+    'enter', 'exit', 'exeunt', 'aside', 'within', 'above', 'below',
+    'act', 'scene', 'prologue', 'epilogue', 'chorus', 'music',
+    'flourish', 'alarm', 'retreat', 'drum', 'trumpet'
+  ]
+  
+  // Check if it starts with common stage directions
+  for (const direction of stageDirections) {
+    if (lowerText.startsWith(direction)) {
+      return true
+    }
+  }
+  
+  // Check for act/scene patterns
+  if (/^act\s+[ivxlcdm\d]+$/i.test(text)) return true
+  if (/^scene\s+[ivxlcdm\d]+$/i.test(text)) return true
+  
+  return false
+}
+
+// Check if a string is a valid character name
+const isValidCharacterName = (text: string): boolean => {
+  // Must be at least 2 characters
+  if (text.length < 2) return false
+  
+  // Must match character name pattern
+  if (!/^[A-Z][A-Z\s&']+$/.test(text)) return false
+  
+  // Must not be a stage direction or marker
+  if (isStageDirectionOrMarker(text)) return false
+  
+  // Additional character name validation
+  // Character names should have at least one space or be single words
+  const words = text.split(/\s+/)
+  if (words.length === 1 && words[0].length < 3) return false // Single short words are likely not character names
+  
+  return true
+}
+
 const extractContextFromIndex = (selectedIndex: number, selectedLength: number, fullText: string, bookTitle?: string, author?: string) => {
   const beforeText = fullText.substring(Math.max(0, selectedIndex - 1000), selectedIndex)
   const afterText = fullText.substring(selectedIndex + selectedLength, Math.min(fullText.length, selectedIndex + selectedLength + 500))
+  const textBeforeSelection = fullText.substring(0, selectedIndex)
+  const selectedText = fullText.substring(selectedIndex, selectedIndex + selectedLength)
+
+  console.log('🔍 CONTEXT EXTRACTION DEBUG:')
+  console.log('Selected index:', selectedIndex)
+  console.log('Selected length:', selectedLength)
+  console.log('Selected text:', JSON.stringify(selectedText))
+  console.log('Text before selection (last 200 chars):', JSON.stringify(textBeforeSelection.slice(-200)))
+  console.log('Text before selection (last 500 chars):', JSON.stringify(textBeforeSelection.slice(-500)))
+  
+  // Show the context that should end with the selected text
+  const contextEnding = fullText.substring(Math.max(0, selectedIndex - 300), selectedIndex + selectedLength)
+  console.log('🔍 CONTEXT ENDING WITH SELECTED TEXT (last 300 chars + selection):', JSON.stringify(contextEnding))
+  
+  // Show what comes after the selected text
+  const contextAfter = fullText.substring(selectedIndex + selectedLength, selectedIndex + selectedLength + 100)
+  console.log('🔍 CONTEXT AFTER SELECTED TEXT (next 100 chars):', JSON.stringify(contextAfter))
 
   let act: string | null = null
   let scene: string | null = null
@@ -326,17 +796,20 @@ const extractContextFromIndex = (selectedIndex: number, selectedLength: number, 
   const searchText = fullText.substring(0, selectedIndex + selectedLength)
   
   // Shakespeare-specific context (Act & Scene) - support both Roman and Arabic numerals
-  const actMatches = searchText.match(/\bACT\s+([IVXLCDM]+|\d+)\b/gi)
+  // Look for ACT markers in a much larger context window
+  const contextForActScene = fullText.substring(Math.max(0, selectedIndex - 5000), selectedIndex)
+  const actMatches = contextForActScene.match(/\bACT\s+([IVXLCDM]+|\d+)\b/gi)
   if (actMatches) {
     const lastActMatch = actMatches[actMatches.length - 1]
     act = lastActMatch.replace(/\bACT\s+/i, '').trim()
   }
 
-  const sceneMatches = searchText.match(/\bSCENE\s+([IVXLCDM]+|\d+)\b/gi)
+  const sceneMatches = contextForActScene.match(/\bSCENE\s+([IVXLCDM]+|\d+)\b/gi)
   if (sceneMatches) {
     const lastSceneMatch = sceneMatches[sceneMatches.length - 1]
     scene = lastSceneMatch.replace(/\bSCENE\s+/i, '').trim()
   }
+  
 
   // General book context (Chapter, Section, Part, Book)
   const chapterMatches = searchText.match(/\bCHAPTER\s+([IVXLCDM0-9]+)\b/gi)
@@ -377,144 +850,41 @@ const extractContextFromIndex = (selectedIndex: number, selectedLength: number, 
     chapter = lastRomanMatch.replace(/\.\s*\n$/, '').trim()
   }
 
-  // Find the most recent speaker before the selection
-  // Look for speaker patterns and find the one closest to the selection
-  const speakerRegex = /\n([A-Z][A-Z\s&']+)\./g
-  let speakerMatch
-  let lastValidSpeaker = null
-  let lastValidIndex = -1
+  // Simple speaker detection: find the last ALL CAPS line before the selection
+  const lines = textBeforeSelection.split('\n')
   
-  // Find all speaker matches and get the one closest to the selection
-  while ((speakerMatch = speakerRegex.exec(beforeText)) !== null) {
-    const speakerName = speakerMatch[1].trim()
-    const matchIndex = speakerMatch.index
-    
-    // Skip if speaker name contains underscores or is too short
-    if (!speakerName.includes('_') && speakerName.length >= 2) {
-      const cleanSpeakerName = speakerName.replace(/\[.*?\]/g, '').trim()
-      // Keep the speaker that appears closest to the selection (highest index)
-      if (matchIndex > lastValidIndex) {
-        lastValidSpeaker = cleanSpeakerName
-        lastValidIndex = matchIndex
-      }
+  console.log('🔍 SPEAKER DETECTION DEBUG:')
+  console.log('Total lines before selection:', lines.length)
+  console.log('Last 10 lines before selection:')
+  lines.slice(-10).forEach((line, idx) => {
+    console.log(`  Line ${lines.length - 10 + idx}:`, JSON.stringify(line))
+  })
+  
+  // Look backwards through lines to find the last ALL CAPS line
+  for (let i = lines.length - 1; i >= 0; i--) {
+    const line = lines[i].trim()
+    console.log(`  Checking line ${i}: "${line}" - ALL CAPS test: ${/^[A-Z][A-Z\s&'\.]+$/.test(line)}, length: ${line.length}`)
+    // Check if line is ALL CAPS (with optional punctuation)
+    if (/^[A-Z][A-Z\s&'\.]+$/.test(line) && line.length > 1) {
+      // Remove trailing punctuation
+      speaker = line.replace(/[\.]+$/, '').trim()
+      console.log('✅ FOUND SPEAKER:', speaker)
+      break
     }
   }
   
-  speaker = lastValidSpeaker
+  if (!speaker) {
+    console.log('❌ NO SPEAKER FOUND')
+  }
 
   // Only extract stage directions and characters for plays (texts with Acts/Scenes)
   const isPlay = act !== null || scene !== null
   
+  
   if (isPlay) {
-    const textBeforeSelection = fullText.substring(0, selectedIndex)
-    
-    // Extract character list from Dramatis Personæ at the beginning of the play
-    const characterNames = extractDramatisPersonae(fullText)
-    
-    // Find the current scene to limit character detection to recent stage directions
-    let sceneStartIndex = 0
-    if (scene) {
-      const sceneMatches = textBeforeSelection.match(new RegExp(`\\bSCENE\\s+${scene}\\b`, 'gi'))
-      if (sceneMatches) {
-        const lastSceneMatch = sceneMatches[sceneMatches.length - 1]
-        sceneStartIndex = textBeforeSelection.lastIndexOf(lastSceneMatch)
-      }
-    }
-    
-    // Only look at stage directions from the current scene onwards
-    const sceneText = textBeforeSelection.substring(sceneStartIndex)
-    const stageDirections = sceneText.match(/(?:\[)?_?(Enter|Exit|Exeunt)_?\s+[A-Z][A-Z\s&']+[^\r\n]*(?:\])?/gi) || []
-    const currentCharacters = new Set<string>()
-    
-    // Each scene starts fresh - no characters carry over from previous scenes
-    // The empty Set above ensures we start with zero characters for each new scene
-    
-    // No hardcoded character names - let the system detect characters automatically
-    // based on patterns and context
-    
-    stageDirections.forEach(direction => {
-      const trimmedDirection = direction.trim()
-      const isEnter = /^.*?Enter/i.test(trimmedDirection)
-      const isExit = /^.*?Exit/i.test(trimmedDirection)
-      const isExeunt = /^.*?Exeunt/i.test(trimmedDirection)
-      
-      if (isEnter) {
-        const characterMatch = trimmedDirection.match(/Enter\s+(.+)/i)
-        if (characterMatch) {
-          const characterList = characterMatch[1].replace(/\.$/, '')
-          const characters = characterList
-            .split(/\s+and\s+|,\s*/)
-            .map(c => c.trim().toUpperCase())
-            .filter(c => {
-              // Filter out invalid character names
-              if (c.length === 0) return false
-              if (c.includes('SERVANT') || c.includes('PAGE')) return false
-              if (c.includes('WITH') || c.includes('DISGUISED') || c.includes('MEETING')) return false
-              if (c.includes('LED BY') || c.includes('AS A') || c.includes('AND')) return false
-              if (c.includes('ARMED') || c.includes('SWORDS') || c.includes('BUCKLERS')) return false
-              if (c.includes('AND') && !c.match(/^[A-Z]+$/)) return false // Skip compound descriptions
-              // Only include if it's a known character or looks like a proper name
-              return characterNames.has(c) || (/^[A-Z][A-Z\s&']+$/.test(c) && c.length >= 2)
-            })
-          characters.forEach(char => currentCharacters.add(char))
-        }
-      } else if (isExit || isExeunt) {
-        if (isExeunt && trimmedDirection.toLowerCase().includes('all')) {
-          currentCharacters.clear()
-        } else {
-          const characterMatch = trimmedDirection.match(/(?:Exit|Exeunt)\s+(.+)/i)
-          if (characterMatch) {
-            const characterList = characterMatch[1].replace(/[\.\]_]+$/g, '')
-            const characters = characterList
-              .split(/\s+and\s+|,\s*/)
-              .map(c => c.trim().toUpperCase().replace(/[\.\]_]+$/g, ''))
-              .filter(c => {
-                if (c.length === 0) return false
-                if (c.includes('WITH') || c.includes('DISGUISED') || c.includes('MEETING')) return false
-                if (c.includes('LED BY') || c.includes('AS A') || c.includes('AND')) return false
-                if (c.includes('ARMED') || c.includes('SWORDS') || c.includes('BUCKLERS')) return false
-                if (c.includes('AND') && !c.match(/^[A-Z]+$/)) return false // Skip compound descriptions
-                return characterNames.has(c) || (/^[A-Z][A-Z\s&']+$/.test(c) && c.length >= 2)
-              })
-            characters.forEach(char => currentCharacters.delete(char))
-          }
-        }
-      }
-    })
-    
-    // If we have very few characters, try to get a more reasonable list by looking at recent dialogue
-    // But only add characters who haven't exited
-    if (currentCharacters.size < 3) {
-      // Look for character names in recent dialogue (last 500 characters)
-      const recentText = textBeforeSelection.substring(Math.max(0, textBeforeSelection.length - 500))
-      const dialogueMatches = recentText.match(/\n([A-Z][A-Z\s&']+)\s*\./g) || []
-      
-      // Get list of characters who have exited in the recent text
-      const recentExits = recentText.match(/(?:\[)?_?(Exit|Exeunt)_?\s+[A-Z][A-Z\s&']+[^\r\n]*(?:\])?/gi) || []
-      const exitedCharacters = new Set()
-      
-      recentExits.forEach(exitDirection => {
-        const characterMatch = exitDirection.match(/(?:Exit|Exeunt)\s+(.+)/i)
-        if (characterMatch) {
-          const characterList = characterMatch[1].replace(/[\.\]_]+$/g, '')
-          const characters = characterList
-            .split(/\s+and\s+|,\s*/)
-            .map(c => c.trim().toUpperCase().replace(/[\.\]_]+$/g, ''))
-            .filter(c => c.length > 0)
-          characters.forEach(char => exitedCharacters.add(char))
-        }
-      })
-      
-      dialogueMatches.forEach(match => {
-        const characterName = match.replace(/\n|\s*\./g, '').trim().toUpperCase()
-        // Only add if it's a valid character name and they haven't exited
-        if ((characterNames.has(characterName) || (/^[A-Z][A-Z\s&']+$/.test(characterName) && characterName.length >= 2)) && !exitedCharacters.has(characterName)) {
-          currentCharacters.add(characterName)
-        }
-      })
-    }
-    
-    charactersOnStage = Array.from(currentCharacters)
+    // For Shakespeare plays, use efficient character tracking
+    charactersOnStage = getCharactersOnStageAtPosition(selectedIndex, fullText)
+    console.log('🔍 Characters on stage:', charactersOnStage)
   }
 
   return {
@@ -548,7 +918,7 @@ export const useBookmarkRestoreAndSave = (
       if (!text || text.length < 100) return
       const title = bookTitle || 'Untitled'
       const auth = author || 'Unknown'
-      
+
 
       // Wait for content to be fully rendered before attempting restoration
       const restorePosition = (position: number, source: string) => {
@@ -599,8 +969,8 @@ export const useBookmarkRestoreAndSave = (
 
       // No saved bookmark found in database - scroll past Project Gutenberg header for new books
       log('bookmark', 'No bookmark found in database, checking for Project Gutenberg header')
-      setTimeout(() => {
-        if (textReaderRef.current) {
+        setTimeout(() => {
+          if (textReaderRef.current) {
           // Find the start of book marker and scroll past it
           const markers = [
             "*** START OF THE PROJECT GUTENBERG EBOOK",
@@ -699,7 +1069,7 @@ export const useBookmarkRestoreAndSave = (
       log('bookmark', 'Window scroll handler attached')
       
       // Element scroll (if element is scrollable)
-      const el = textReaderRef.current
+    const el = textReaderRef.current
       if (el) {
         el.addEventListener('scroll', handleScroll)
         log('bookmark', 'Element scroll handler attached')
@@ -714,7 +1084,7 @@ export const useBookmarkRestoreAndSave = (
       window.removeEventListener('scroll', handleScroll)
       const el = textReaderRef.current
       if (el) {
-        el.removeEventListener('scroll', handleScroll)
+      el.removeEventListener('scroll', handleScroll)
       }
       if (scrollTimeoutRef.current) clearTimeout(scrollTimeoutRef.current)
     }

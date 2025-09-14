@@ -3,7 +3,7 @@
 import React, { useRef, useState } from 'react'
 import styles from './TextReader.module.css'
 import ChatInterface from './ChatInterface'
-import { ReaderCommonProps, useBookmarkRestoreAndSave, useSearchCore, extractContextInfo, calculatePageContent, estimateCharsPerLine, PageMap } from './BaseTextReader'
+import { ReaderCommonProps, useBookmarkRestoreAndSave, useSearchCore, extractContextInfo, calculatePageContent, estimateCharsPerLine, PageMap, buildCharacterMapForText } from './BaseTextReader'
 import { useRouter } from 'next/navigation'
 import { log } from '../utils/log'
 
@@ -26,7 +26,20 @@ const DesktopTextReader: React.FC<ReaderCommonProps> = ({ text, bookTitle = 'Rom
   
   // Global mouse up listener to catch selections that extend outside the text content
   React.useEffect(() => {
-    const handleGlobalMouseUp = () => {
+    const handleGlobalMouseUp = (e: MouseEvent) => {
+      // Don't interfere with input fields, buttons, or other interactive elements
+      const target = e.target as HTMLElement
+      if (target && (
+        target.tagName === 'INPUT' ||
+        target.tagName === 'TEXTAREA' ||
+        target.tagName === 'BUTTON' ||
+        target.tagName === 'SELECT' ||
+        target.contentEditable === 'true' ||
+        target.closest('input, textarea, button, select, [contenteditable]')
+      )) {
+        return // Don't handle mouseup on interactive elements
+      }
+
       // Small delay to ensure selection is complete
       setTimeout(() => {
         const selection = window.getSelection()
@@ -34,6 +47,7 @@ const DesktopTextReader: React.FC<ReaderCommonProps> = ({ text, bookTitle = 'Rom
         log('desktop', 'DesktopTextReader: global mouseup selection', { text: t, length: t.length, hasSelection: !!selection })
         
         if (t.length > 0) {
+          console.log('🔍 SETTING SELECTED TEXT (DESKTOP):', JSON.stringify(t))
           setSelectedText(t)
           setShowConfirmDialog(true)
         } else {
@@ -47,9 +61,9 @@ const DesktopTextReader: React.FC<ReaderCommonProps> = ({ text, bookTitle = 'Rom
     return () => document.removeEventListener('mouseup', handleGlobalMouseUp)
   }, [])
   
-  // Calculate pages for scroll navigation
+  // Calculate pages for scroll navigation and build character map
   React.useEffect(() => {
-    if (textReaderRef.current) {
+    if (textReaderRef.current && text) {
       const containerWidth = textReaderRef.current.clientWidth
       const fontSize = parseInt(getComputedStyle(textReaderRef.current).fontSize) || 16
       const lineHeight = parseInt(getComputedStyle(textReaderRef.current).lineHeight) || 24
@@ -59,6 +73,9 @@ const DesktopTextReader: React.FC<ReaderCommonProps> = ({ text, bookTitle = 'Rom
       setPageMap(calculatedPageMap)
       setCurrentPage(0)
       log('desktop', 'DesktopTextReader: calculated pages for scroll navigation', { pageCount: calculatedPageMap.pages.length, charsPerLine, lineHeight })
+      
+      // Build character map for Shakespeare plays
+      buildCharacterMapForText(text)
     }
   }, [text, settings.textFont, pageHeight])
 
@@ -115,6 +132,9 @@ const DesktopTextReader: React.FC<ReaderCommonProps> = ({ text, bookTitle = 'Rom
   }
 
   const handleExplain = () => {
+    console.log('🔍 HANDLE EXPLAIN DEBUG:')
+    console.log('selectedText state:', JSON.stringify(selectedText))
+    console.log('selectedText length:', selectedText?.length)
     const context = extractContextInfo(selectedText, text, bookTitle, author)
     const chatData = { selectedText, contextInfo: context, bookTitle, author }
     setChatContext(chatData)
@@ -195,15 +215,51 @@ const DesktopTextReader: React.FC<ReaderCommonProps> = ({ text, bookTitle = 'Rom
   // Listen for header search events
   React.useEffect(() => {
     const handleHeaderSearch = (event: CustomEvent) => {
+      console.log('DesktopTextReader: Received headerSearch event:', event.detail)
       if (event.detail.type === 'text') {
+        console.log('DesktopTextReader: Processing text search for:', event.detail.query)
         setSearchQuery(event.detail.query)
         handleSearch(event.detail.query)
       }
     }
 
+    const handleHeaderSearchNext = (event: CustomEvent) => {
+      if (event.detail.type === 'text') {
+        console.log('DesktopTextReader: Next search result')
+        nextSearchResult()
+      }
+    }
+
+    const handleHeaderSearchPrev = (event: CustomEvent) => {
+      if (event.detail.type === 'text') {
+        console.log('DesktopTextReader: Previous search result')
+        prevSearchResult()
+      }
+    }
+
     window.addEventListener('headerSearch', handleHeaderSearch as EventListener)
-    return () => window.removeEventListener('headerSearch', handleHeaderSearch as EventListener)
-  }, [handleSearch])
+    window.addEventListener('headerSearchNext', handleHeaderSearchNext as EventListener)
+    window.addEventListener('headerSearchPrev', handleHeaderSearchPrev as EventListener)
+    
+    return () => {
+      window.removeEventListener('headerSearch', handleHeaderSearch as EventListener)
+      window.removeEventListener('headerSearchNext', handleHeaderSearchNext as EventListener)
+      window.removeEventListener('headerSearchPrev', handleHeaderSearchPrev as EventListener)
+    }
+  }, [handleSearch, nextSearchResult, prevSearchResult])
+
+  // Dispatch search result updates to header
+  React.useEffect(() => {
+    if (typeof window !== 'undefined' && searchResults.length > 0) {
+      window.dispatchEvent(new CustomEvent('searchResultUpdate', {
+        detail: {
+          type: 'text',
+          currentIndex: currentSearchIndex,
+          totalResults: searchResults.length
+        }
+      }))
+    }
+  }, [currentSearchIndex, searchResults.length])
 
   return (
     <div ref={textReaderRef} className={styles.textReader}>

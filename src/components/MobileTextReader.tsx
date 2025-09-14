@@ -3,7 +3,7 @@
 import React, { useRef, useState, useEffect } from 'react'
 import styles from './TextReader.module.css'
 import ChatInterface from './ChatInterface'
-import { ReaderCommonProps, useBookmarkRestoreAndSave, useSearchCore, extractContextInfo, calculatePageContent, estimateCharsPerLine, PageMap } from './BaseTextReader'
+import { ReaderCommonProps, useBookmarkRestoreAndSave, useSearchCore, extractContextInfo, calculatePageContent, estimateCharsPerLine, PageMap, buildCharacterMapForText } from './BaseTextReader'
 import { useRouter } from 'next/navigation'
 import { log, warn } from '../utils/log'
 
@@ -212,9 +212,9 @@ const MobileTextReader: React.FC<ReaderCommonProps> = ({ text, bookTitle = 'Rome
 
   useBookmarkRestoreAndSave(textReaderRef, text, bookTitle, author)
   
-  // Calculate pages for scroll navigation
+  // Calculate pages for scroll navigation and build character map
   useEffect(() => {
-    if (textReaderRef.current) {
+    if (textReaderRef.current && text) {
       const containerWidth = textReaderRef.current.clientWidth
       const fontSize = parseInt(getComputedStyle(textReaderRef.current).fontSize) || 16
       const lineHeight = parseInt(getComputedStyle(textReaderRef.current).lineHeight) || 24
@@ -224,6 +224,9 @@ const MobileTextReader: React.FC<ReaderCommonProps> = ({ text, bookTitle = 'Rome
       setPageMap(calculatedPageMap)
       setCurrentPage(0)
       log('mobile','MobileTextReader: calculated pages for scroll navigation', { pageCount: calculatedPageMap.pages.length, charsPerLine, lineHeight })
+      
+      // Build character map for Shakespeare plays
+      buildCharacterMapForText(text)
     }
   }, [text, settings.textFont, pageHeight])
 
@@ -313,6 +316,9 @@ const MobileTextReader: React.FC<ReaderCommonProps> = ({ text, bookTitle = 'Rome
   }
 
   const handleExplain = () => {
+    console.log('🔍 HANDLE EXPLAIN DEBUG (MOBILE):')
+    console.log('selectedText state:', JSON.stringify(selectedText))
+    console.log('selectedText length:', selectedText?.length)
     const context = extractContextInfo(selectedText, text, bookTitle, author)
     const chatData = { selectedText, contextInfo: context, bookTitle, author }
     setChatContext(chatData)
@@ -398,28 +404,29 @@ const MobileTextReader: React.FC<ReaderCommonProps> = ({ text, bookTitle = 'Rome
   }
 
   // Add global event listener to prevent browser selection behavior
-  useEffect(() => {
-    const preventSelectionBehavior = (e: Event) => {
-      // Prevent the browser's default text selection behavior
-      if (e.type === 'selectionchange') {
-        const selection = window.getSelection()
-        if (selection && selection.toString().trim()) {
-          // Clear any browser selection UI
-          setTimeout(() => {
-            if (selection.toString().trim()) {
-              // Our dialog will handle this
-            }
-          }, 10)
-        }
-      }
-    }
+  // TEMPORARILY DISABLED - might be interfering with text input
+  // useEffect(() => {
+  //   const preventSelectionBehavior = (e: Event) => {
+  //     // Prevent the browser's default text selection behavior
+  //     if (e.type === 'selectionchange') {
+  //       const selection = window.getSelection()
+  //       if (selection && selection.toString().trim()) {
+  //         // Clear any browser selection UI
+  //         setTimeout(() => {
+  //           if (selection.toString().trim()) {
+  //             // Our dialog will handle this
+  //           }
+  //         }, 10)
+  //       }
+  //     }
+  //   }
 
-    document.addEventListener('selectionchange', preventSelectionBehavior)
+  //   document.addEventListener('selectionchange', preventSelectionBehavior)
     
-    return () => {
-      document.removeEventListener('selectionchange', preventSelectionBehavior)
-    }
-  }, [])
+  //   return () => {
+  //     document.removeEventListener('selectionchange', preventSelectionBehavior)
+  //   }
+  // }, [])
 
   const handleMouseUp = (e: React.MouseEvent) => {
     log('mobile','Mouse up detected')
@@ -578,9 +585,43 @@ const MobileTextReader: React.FC<ReaderCommonProps> = ({ text, bookTitle = 'Rome
       }
     }
 
+    const handleHeaderSearchNext = (event: CustomEvent) => {
+      if (event.detail.type === 'text') {
+        console.log('MobileTextReader: Next search result')
+        nextSearchResult()
+      }
+    }
+
+    const handleHeaderSearchPrev = (event: CustomEvent) => {
+      if (event.detail.type === 'text') {
+        console.log('MobileTextReader: Previous search result')
+        prevSearchResult()
+      }
+    }
+
     window.addEventListener('headerSearch', handleHeaderSearch as EventListener)
-    return () => window.removeEventListener('headerSearch', handleHeaderSearch as EventListener)
-  }, [handleSearch])
+    window.addEventListener('headerSearchNext', handleHeaderSearchNext as EventListener)
+    window.addEventListener('headerSearchPrev', handleHeaderSearchPrev as EventListener)
+    
+    return () => {
+      window.removeEventListener('headerSearch', handleHeaderSearch as EventListener)
+      window.removeEventListener('headerSearchNext', handleHeaderSearchNext as EventListener)
+      window.removeEventListener('headerSearchPrev', handleHeaderSearchPrev as EventListener)
+    }
+  }, [handleSearch, nextSearchResult, prevSearchResult])
+
+  // Dispatch search result updates to header
+  React.useEffect(() => {
+    if (typeof window !== 'undefined' && searchResults.length > 0) {
+      window.dispatchEvent(new CustomEvent('searchResultUpdate', {
+        detail: {
+          type: 'text',
+          currentIndex: currentSearchIndex,
+          totalResults: searchResults.length
+        }
+      }))
+    }
+  }, [currentSearchIndex, searchResults.length])
 
   const expandToWordBoundaries = (range: Range): Range => {
     const expandedRange = range.cloneRange()
