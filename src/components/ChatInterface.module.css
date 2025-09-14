@@ -277,27 +277,69 @@
   }
   
   .dropdownsRow {
-    gap: 3px;
+    gap: 6px;
     justify-content: center;
     flex-wrap: wrap;
+    padding: 0 4px;
   }
   
   .buttonsRow {
-    gap: 4px;
+    gap: 6px;
     justify-content: center;
     flex-wrap: wrap;
+    padding: 0 2px;
   }
   
   .providerSelector, .styleSelector, .lengthSelector {
     min-width: 0;
     flex: 1;
-    max-width: 110px;
+    max-width: 100px;
+  }
+  
+  .styleSelector {
+    max-width: 90px; /* Shorter for "Style" */
+  }
+  
+  .lengthSelector {
+    max-width: 110px; /* "Length" instead of "Response Length" */
+    min-width: 100px;
   }
   
   .dropdownLabel {
-    font-size: 9px;
+    font-size: 8px;
     gap: 2px;
     margin-bottom: 2px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 100%;
+  }
+  
+  /* Use shorter labels on mobile */
+  .styleSelector .dropdownLabel span:first-child::after {
+    content: "Style";
+  }
+  .styleSelector .dropdownLabel span:first-child {
+    text-indent: -9999px;
+    line-height: 0;
+  }
+  .styleSelector .dropdownLabel span:first-child::after {
+    text-indent: 0;
+    display: block;
+    line-height: initial;
+  }
+  
+  .lengthSelector .dropdownLabel span:first-child::after {
+    content: "Length";
+  }
+  .lengthSelector .dropdownLabel span:first-child {
+    text-indent: -9999px;
+    line-height: 0;
+  }
+  .lengthSelector .dropdownLabel span:first-child::after {
+    text-indent: 0;
+    display: block;
+    line-height: initial;
   }
   
   .providerSelect, .styleSelect, .lengthSelect {
@@ -305,6 +347,15 @@
     font-size: 11px;
     padding: 6px 8px;
     min-width: 0;
+    text-align: left;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+  }
+  
+  .lengthSelect {
+    padding: 6px 4px; /* Reduce padding for more text space */
+    font-size: 10px;   /* Slightly smaller font for longer text */
   }
   
   .customSelect {
@@ -318,10 +369,10 @@
   }
   
   .reexplainButton {
-    font-size: 9px;
+    font-size: 8px;
     padding: 4px 6px;
-    min-width: 50px;
-    max-width: 70px;
+    min-width: 45px;
+    max-width: 65px;
     width: auto;
   }
   
@@ -447,6 +498,14 @@
     padding: 3px 5px;
     min-width: 45px;
     max-width: 60px;
+    width: auto;
+  }
+  
+  .clearButton {
+    font-size: 8px;
+    padding: 3px 5px;
+    min-width: 50px;
+    max-width: 70px;
     width: auto;
   }
   

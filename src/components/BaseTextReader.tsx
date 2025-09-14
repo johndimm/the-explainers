@@ -401,7 +401,7 @@ export const extractContextInfo = (selectedText: string, fullText: string, bookT
 const characterMapCache = new Map<string, Array<{position: number, characters: string[], act?: string, scene?: string}>>()
 
 // Import dynamic character map generator (for logging only)
-import { logCharacterMap } from '../utils/dynamicCharacterMap'
+// import { logCharacterMap } from '../utils/dynamicCharacterMap'
 
 // Efficient character tracking for Shakespeare plays using dynamic character map
 const getCharactersOnStageAtPosition = (position: number, fullText: string): string[] => {
@@ -428,21 +428,68 @@ const getCharactersOnStageAtPosition = (position: number, fullText: string): str
     characterMap.forEach((entry, index) => {
       log('character-map', `  ${index + 1}. Position ${entry.position}: [${entry.characters.join(', ')}]${entry.act ? ` (ACT ${entry.act})` : ''}${entry.scene ? ` (SCENE ${entry.scene})` : ''}`)
     })
+  } else {
+    log('character-map', `🔍 Using cached character map with ${characterMap.length} entries`)
   }
   
   // Find the most recent character state before this position
   let currentCharacters: string[] = []
   
-  for (const entry of characterMap) {
+  log('character-map', `🔍 Looking up position ${position} in character map with ${characterMap.length} entries`)
+  
+  // More efficient: work backwards from the end to find the right entry
+  for (let i = characterMap.length - 1; i >= 0; i--) {
+    const entry = characterMap[i]
     if (entry.position <= position) {
       currentCharacters = entry.characters
-    } else {
+      log('character-map', `🔍 ✅ Found entry at position ${entry.position}: [${entry.characters.join(', ')}]`)
       break
     }
   }
   
-  log('character-map', `🔍 Characters at position ${position}: [${currentCharacters.join(', ')}]`)
+  log('character-map', `🔍 Final characters at position ${position}: [${currentCharacters.join(', ')}]`)
   return currentCharacters
+}
+
+// Get the full character map entry at a position (including act/scene)
+const getCharacterMapEntryAtPosition = (position: number, fullText: string): {position: number, characters: string[], act?: string, scene?: string} | null => {
+  // Check if this is a Shakespeare play
+  const isShakespeare = fullText.includes('ACT') && fullText.includes('SCENE') && 
+                       (fullText.includes('Enter ') || fullText.includes('_Enter_') || fullText.includes('[Enter'))
+  
+  if (!isShakespeare) {
+    return null
+  }
+  
+  // Use cached character map or generate new one
+  const playKey = fullText.substring(0, 100)
+  let characterMap = characterMapCache.get(playKey)
+  
+  if (!characterMap) {
+    characterMap = buildCharacterMap(fullText, playKey)
+    characterMapCache.set(playKey, characterMap)
+  }
+  
+  // Find the most recent character map entry before this position
+  let lastEntry = null
+  
+  // More efficient: work backwards from the end to find the right entry
+  for (let i = characterMap.length - 1; i >= 0; i--) {
+    const entry = characterMap[i]
+    if (entry.position <= position) {
+      lastEntry = entry
+      break
+    }
+  }
+  
+  if (lastEntry) {
+    console.log('🔍 Character map entry at position', position, ':', lastEntry)
+    console.log('🔍 Act/Scene from character map:', lastEntry.act, lastEntry.scene)
+  } else {
+    console.log('🔍 No character map entry found before position', position)
+  }
+  
+  return lastEntry
 }
 
 // Build character map when text loads (call this from the text reader component)
@@ -460,6 +507,18 @@ export const buildCharacterMapForText = (fullText: string) => {
     
     // Log the character map to console when file is loaded
     log('character-map', `🎭 Character map built with ${characterMap.length} entries`)
+    
+    // Print the character map in the user's format
+    console.log('CHARACTER MAP (Runtime Generated):')
+    console.log('=====================================')
+    characterMap.forEach((entry, index) => {
+      const actScene = entry.act && entry.scene ? `ACT ${entry.act} SCENE ${entry.scene}` : 
+                       entry.act ? `ACT ${entry.act}` : 
+                       entry.scene ? `SCENE ${entry.scene}` : 'UNKNOWN'
+      console.log(`${entry.position} ${actScene} [${entry.characters.join(', ')}]`)
+    })
+    console.log('=====================================')
+    console.log(`Total entries: ${characterMap.length}`)
   }
 }
 
@@ -640,42 +699,49 @@ const buildCharacterMap = (fullText: string, playKey: string) => {
   const characterMap: Array<{position: number, characters: string[], act?: string, scene?: string}> = []
   let currentCharacters = new Set<string>()
   let lastCharacterState: string[] = []
+  let mapCurrentAct = ''
+  let mapCurrentScene = ''
   
-  const addEntryIfChanged = (position: number, characters: string[], act?: string, scene?: string) => {
+  const addEntryIfChanged = (position: number, characters: string[]) => {
     const sortedCharacters = [...characters].sort()
     
     if (JSON.stringify(sortedCharacters) !== JSON.stringify(lastCharacterState)) {
-      characterMap.push({position, characters: sortedCharacters, act, scene})
+      characterMap.push({position, characters: sortedCharacters, act: mapCurrentAct, scene: mapCurrentScene})
       lastCharacterState = sortedCharacters
     }
   }
   
   for (const event of allEvents) {
     switch (event.type) {
+      case 'ACT':
+        mapCurrentAct = event.act || ''
+        break
+        
       case 'SCENE':
+        mapCurrentScene = event.scene || ''
         // New scene - clear all characters
         currentCharacters.clear()
-        addEntryIfChanged(event.offset, [], event.act, event.scene)
+        addEntryIfChanged(event.offset, [])
         break
         
       case 'ENTER':
         if (event.characters) {
           event.characters.forEach(char => currentCharacters.add(char))
-          addEntryIfChanged(event.offset, Array.from(currentCharacters), event.act, event.scene)
+          addEntryIfChanged(event.offset, Array.from(currentCharacters))
         }
         break
         
       case 'EXIT':
         if (event.characters) {
           event.characters.forEach(char => currentCharacters.delete(char))
-          addEntryIfChanged(event.offset, Array.from(currentCharacters), event.act, event.scene)
+          addEntryIfChanged(event.offset, Array.from(currentCharacters))
         }
         break
         
       case 'EXEUNT':
         // All characters exit
         currentCharacters.clear()
-        addEntryIfChanged(event.offset, [], event.act, event.scene)
+        addEntryIfChanged(event.offset, [])
         break
     }
   }
@@ -850,41 +916,33 @@ const extractContextFromIndex = (selectedIndex: number, selectedLength: number, 
     chapter = lastRomanMatch.replace(/\.\s*\n$/, '').trim()
   }
 
-  // Simple speaker detection: find the last ALL CAPS line before the selection
-  const lines = textBeforeSelection.split('\n')
+  // Much simpler speaker detection: find the most recent speaker pattern
+  const speakerMatch = textBeforeSelection.match(/([A-Z][A-Z\s&'\.]+)\.\s*$/m)
+  speaker = speakerMatch ? speakerMatch[1].replace(/\.+$/, '').trim() : null
   
-  console.log('🔍 SPEAKER DETECTION DEBUG:')
-  console.log('Total lines before selection:', lines.length)
-  console.log('Last 10 lines before selection:')
-  lines.slice(-10).forEach((line, idx) => {
-    console.log(`  Line ${lines.length - 10 + idx}:`, JSON.stringify(line))
-  })
-  
-  // Look backwards through lines to find the last ALL CAPS line
-  for (let i = lines.length - 1; i >= 0; i--) {
-    const line = lines[i].trim()
-    console.log(`  Checking line ${i}: "${line}" - ALL CAPS test: ${/^[A-Z][A-Z\s&'\.]+$/.test(line)}, length: ${line.length}`)
-    // Check if line is ALL CAPS (with optional punctuation)
-    if (/^[A-Z][A-Z\s&'\.]+$/.test(line) && line.length > 1) {
-      // Remove trailing punctuation
-      speaker = line.replace(/[\.]+$/, '').trim()
-      console.log('✅ FOUND SPEAKER:', speaker)
-      break
-    }
-  }
-  
-  if (!speaker) {
-    console.log('❌ NO SPEAKER FOUND')
+  console.log('🔍 SPEAKER DETECTION:')
+  console.log('Speaker found:', speaker)
+  if (speakerMatch) {
+    console.log('Speaker context:', speakerMatch[0])
   }
 
-  // Only extract stage directions and characters for plays (texts with Acts/Scenes)
-  const isPlay = act !== null || scene !== null
+  // Check if this is a Shakespeare play by looking for ACT/SCENE markers
+  const isShakespearePlay = fullText.includes('ACT') && fullText.includes('SCENE') && 
+                           (fullText.includes('Enter ') || fullText.includes('_Enter_') || fullText.includes('[Enter'))
   
-  
-  if (isPlay) {
-    // For Shakespeare plays, use efficient character tracking
+  if (isShakespearePlay) {
+    // For Shakespeare plays, use character map lookup
+    console.log('🔍 Shakespeare play detected - looking up characters at selectedIndex:', selectedIndex)
     charactersOnStage = getCharactersOnStageAtPosition(selectedIndex, fullText)
-    console.log('🔍 Characters on stage:', charactersOnStage)
+    console.log('🔍 Characters on stage from character map:', charactersOnStage)
+    
+    // Also get act/scene from character map lookup
+    const characterMapEntry = getCharacterMapEntryAtPosition(selectedIndex, fullText)
+    if (characterMapEntry) {
+      act = characterMapEntry.act || null
+      scene = characterMapEntry.scene || null
+      console.log('🔍 Act/Scene from character map:', act, scene)
+    }
   }
 
   return {
