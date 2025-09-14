@@ -651,7 +651,26 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ selectedText, contextInfo
 
   const createContextualPrompt = (text: string, context: ContextInfo | null): string => {
     log('ChatInterface: Profile data:', profile)
-    let prompt = `Please explain this text: "${text}"`
+    
+    // Use complete speech if available, otherwise use the selected text
+    const completeSpeech = (context as any)?.completeSpeech
+    const hasCompleteSpeech = completeSpeech && completeSpeech !== text
+    
+    let prompt
+    if (hasCompleteSpeech) {
+      // Find the selected text within the complete speech and highlight it
+      const selectedStart = completeSpeech.indexOf(text)
+      if (selectedStart !== -1) {
+        const beforeSelected = completeSpeech.substring(0, selectedStart)
+        const afterSelected = completeSpeech.substring(selectedStart + text.length)
+        prompt = `Please explain this text from ${context?.speaker}:\n\n"${beforeSelected}[SELECTED: ${text}]${afterSelected}"`
+      } else {
+        // Fallback if selected text not found in complete speech
+        prompt = `Please explain this text: "${text}"\n\nFull speech from ${context?.speaker}: "${completeSpeech}"`
+      }
+    } else {
+      prompt = `Please explain this text: "${text}"`
+    }
     
     if (context) {
       prompt += `\n\nContext Information:`

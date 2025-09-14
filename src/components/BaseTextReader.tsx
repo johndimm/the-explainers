@@ -916,15 +916,60 @@ const extractContextFromIndex = (selectedIndex: number, selectedLength: number, 
     chapter = lastRomanMatch.replace(/\.\s*\n$/, '').trim()
   }
 
-  // Much simpler speaker detection: find the most recent speaker pattern
-  const speakerMatch = textBeforeSelection.match(/([A-Z][A-Z\s&'\.]+)\.\s*$/m)
-  speaker = speakerMatch ? speakerMatch[1].replace(/\.+$/, '').trim() : null
+  // Find the most recent speaker and extract their complete speech
+  const lines = textBeforeSelection.split('\n')
+  let foundSpeaker = false
+  let speakerStartIndex = -1
+  
+  for (let i = lines.length - 1; i >= 0 && !foundSpeaker; i--) {
+    const line = lines[i].trim()
+    
+    // Check if this line is a speaker name
+    if (/^[A-Z][A-Z\s&'\.]+\.$/.test(line)) {
+      // Look ahead to see if this speaker is followed by actual dialogue
+      let hasDialogue = false
+      for (let j = i + 1; j < lines.length && j < i + 5; j++) {
+        const nextLine = lines[j].trim()
+        // If we find actual dialogue (contains lowercase letters), this is our speaker
+        if (nextLine && /[a-z]/.test(nextLine) && !nextLine.startsWith('[') && !nextLine.startsWith('_')) {
+          hasDialogue = true
+          break
+        }
+      }
+      
+      if (hasDialogue) {
+        speaker = line.replace(/\.$/, '').trim()
+        speakerStartIndex = i
+        foundSpeaker = true
+      }
+    }
+  }
   
   console.log('🔍 SPEAKER DETECTION:')
   console.log('Speaker found:', speaker)
-  if (speakerMatch) {
-    console.log('Speaker context:', speakerMatch[0])
+  console.log('Speaker starts at line:', speakerStartIndex)
+  
+  // Extract the complete speech from this speaker
+  let completeSpeech = ''
+  if (foundSpeaker && speakerStartIndex >= 0) {
+    // Get all lines from the speaker until we hit another speaker or end of text
+    const speechLines = []
+    for (let i = speakerStartIndex + 1; i < lines.length; i++) {
+      const line = lines[i].trim()
+      // Stop if we hit another speaker or empty line followed by speaker
+      if (/^[A-Z][A-Z\s&'\.]+\.$/.test(line) || (line === '' && i + 1 < lines.length && /^[A-Z][A-Z\s&'\.]+\.$/.test(lines[i + 1]?.trim()))) {
+        break
+      }
+      if (line && !line.startsWith('[') && !line.startsWith('_')) {
+        speechLines.push(line)
+      }
+    }
+    completeSpeech = speechLines.join(' ')
   }
+  
+  console.log('🔍 COMPLETE SPEECH:')
+  console.log('Complete speech length:', completeSpeech.length)
+  console.log('Complete speech preview:', completeSpeech.substring(0, 200) + '...')
 
   // Check if this is a Shakespeare play by looking for ACT/SCENE markers
   const isShakespearePlay = fullText.includes('ACT') && fullText.includes('SCENE') && 
@@ -957,6 +1002,7 @@ const extractContextFromIndex = (selectedIndex: number, selectedLength: number, 
     part,
     book,
     selectedText: fullText.substring(selectedIndex, selectedIndex + selectedLength),
+    completeSpeech: completeSpeech || fullText.substring(selectedIndex, selectedIndex + selectedLength),
     beforeContext: beforeText.slice(-200),
     afterContext: afterText.slice(0, 200)
   }
