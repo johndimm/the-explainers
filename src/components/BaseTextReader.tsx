@@ -933,7 +933,7 @@ const extractContextFromIndex = (selectedIndex: number, selectedLength: number, 
       // Check if this speaker's speech continues to or through the selection
       let speechContinues = false
       
-      // Look ahead from this speaker to see if their speech continues
+      // Look ahead from this speaker to see if their speech contains the selected text
       for (let j = i + 1; j < allLines.length; j++) {
         const nextLine = allLines[j].trim()
         
@@ -945,6 +945,13 @@ const extractContextFromIndex = (selectedIndex: number, selectedLength: number, 
         // If we find dialogue that contains the selected text or is close to it
         if (nextLine && /[a-z]/.test(nextLine) && !nextLine.startsWith('[') && !nextLine.startsWith('_')) {
           speechContinues = true
+          
+          // Check if this dialogue line contains the selected text
+          if (nextLine.includes(selectedText.trim())) {
+            foundSpeaker = true
+            break
+          }
+          
           // If this dialogue is in the "after" section (after selection), this is our speaker
           if (j >= beforeLines.length) {
             foundSpeaker = true
