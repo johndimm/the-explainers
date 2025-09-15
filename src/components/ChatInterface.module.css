@@ -551,7 +551,6 @@
   flex-wrap: wrap;
   justify-content: center;
   max-width: 100%;
-  overflow: hidden;
 }
 
 .providerSelector {
@@ -1468,16 +1467,13 @@
 }
 
 .saveDropdownContent {
-  position: absolute;
-  bottom: 100%;
-  left: 0;
+  position: fixed;
   background: white;
   border: 1px solid #ddd;
   border-radius: 6px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  z-index: 1000;
+  z-index: 10000;
   min-width: 140px;
-  margin-bottom: 4px;
 }
 
 .saveOption {

@@ -78,6 +78,7 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ selectedText, contextInfo
   const [shareFormData, setShareFormData] = useState<{ title: string; content: string } | null>(null)
   const [shareDropdownOpen, setShareDropdownOpen] = useState<string | null>(null)
   const [saveFormatDropdownOpen, setSaveFormatDropdownOpen] = useState(false)
+  const [saveDropdownPosition, setSaveDropdownPosition] = useState({ top: 0, left: 0 })
   const [showClearConfirm, setShowClearConfirm] = useState(false)
   const latestResponseRef = useRef<HTMLDivElement>(null)
   const messagesContainerRef = useRef<HTMLDivElement>(null)
@@ -92,7 +93,11 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ selectedText, contextInfo
   }
 
   const saveChatHistory = (format: 'json' | 'html' | 'markdown' | 'text' = 'json') => {
-    if (messages.length === 0) return
+    console.log('🔍 SAVE CHAT HISTORY:', { format, messagesLength: messages.length })
+    if (messages.length === 0) {
+      console.log('❌ No messages to save')
+      return
+    }
     
     const chatData = {
       bookTitle,
@@ -137,16 +142,23 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ selectedText, contextInfo
         extension = 'json';
     }
     
+    console.log('🔍 Creating download:', { contentLength: content.length, mimeType, extension })
+    
     const blob = new Blob([content], { type: mimeType })
     const url = URL.createObjectURL(blob)
     const a = document.createElement('a')
     a.href = url
     a.download = `chat-history-${bookTitle.replace(/[^a-z0-9]/gi, '-')}-${new Date().toISOString().split('T')[0]}.${extension}`
+    
+    console.log('🔍 Download filename:', a.download)
+    
     document.body.appendChild(a)
     a.click()
     document.body.removeChild(a)
     URL.revokeObjectURL(url)
     setSaveFormatDropdownOpen(false)
+    
+    console.log('✅ Download triggered successfully')
   }
 
   const clearChatHistory = () => {
@@ -313,6 +325,23 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ selectedText, contextInfo
       sessionStorage.setItem('chatHistory', JSON.stringify(messages))
     }
   }, [messages, isPageMode])
+
+  // Close save dropdown when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (saveFormatDropdownOpen && saveDropdownRef.current) {
+        const target = event.target as Node
+        if (!saveDropdownRef.current.contains(target)) {
+          setSaveFormatDropdownOpen(false)
+        }
+      }
+    }
+
+    if (saveFormatDropdownOpen) {
+      document.addEventListener('mousedown', handleClickOutside)
+      return () => document.removeEventListener('mousedown', handleClickOutside)
+    }
+  }, [saveFormatDropdownOpen])
 
   useEffect(() => {
     if (selectedText && !initializedRef.current) {
@@ -1496,7 +1525,21 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ selectedText, contextInfo
               </button>
               <div className={styles.saveDropdown} ref={saveDropdownRef}>
                 <button 
-                  onClick={() => setSaveFormatDropdownOpen(!saveFormatDropdownOpen)}
+                  onClick={(e) => {
+                    console.log('🔍 SAVE BUTTON CLICKED:', { messagesLength: messages.length, disabled: messages.length === 0, currentDropdownOpen: saveFormatDropdownOpen })
+                    
+                    if (!saveFormatDropdownOpen) {
+                      // Calculate position when opening
+                      const rect = e.currentTarget.getBoundingClientRect()
+                      setSaveDropdownPosition({
+                        top: rect.bottom + 4,
+                        left: rect.left
+                      })
+                    }
+                    
+                    setSaveFormatDropdownOpen(!saveFormatDropdownOpen)
+                    console.log('🔍 DROPDOWN SHOULD NOW BE:', !saveFormatDropdownOpen)
+                  }}
                   disabled={messages.length === 0}
                   className={styles.saveButton}
                   title="Save chat history to file (includes book context, AI responses, and settings)"
@@ -1504,28 +1547,46 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ selectedText, contextInfo
                   💾 Save Chat ▼
                 </button>
               {saveFormatDropdownOpen && (
-                <div className={styles.saveDropdownContent}>
+                <div 
+                  className={styles.saveDropdownContent}
+                  style={{
+                    top: `${saveDropdownPosition.top}px`,
+                    left: `${saveDropdownPosition.left}px`
+                  }}
+                >
                   <button 
                     className={styles.saveOption}
-                    onClick={() => saveChatHistory('json')}
+                    onClick={() => {
+                      console.log('🔍 JSON SAVE CLICKED')
+                      saveChatHistory('json')
+                    }}
                   >
                     📄 JSON
                   </button>
                   <button 
                     className={styles.saveOption}
-                    onClick={() => saveChatHistory('html')}
+                    onClick={() => {
+                      console.log('🔍 HTML SAVE CLICKED')
+                      saveChatHistory('html')
+                    }}
                   >
                     🌐 HTML
                   </button>
                   <button 
                     className={styles.saveOption}
-                    onClick={() => saveChatHistory('markdown')}
+                    onClick={() => {
+                      console.log('🔍 MARKDOWN SAVE CLICKED')
+                      saveChatHistory('markdown')
+                    }}
                   >
                     📝 Markdown
                   </button>
                   <button 
                     className={styles.saveOption}
-                    onClick={() => saveChatHistory('text')}
+                    onClick={() => {
+                      console.log('🔍 TEXT SAVE CLICKED')
+                      saveChatHistory('text')
+                    }}
                   >
                     📋 Plain Text
                   </button>
