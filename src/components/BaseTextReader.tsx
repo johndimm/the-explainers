@@ -916,31 +916,46 @@ const extractContextFromIndex = (selectedIndex: number, selectedLength: number, 
     chapter = lastRomanMatch.replace(/\.\s*\n$/, '').trim()
   }
 
-  // Find the most recent speaker and extract their complete speech
-  const lines = textBeforeSelection.split('\n')
+  // Find the speaker by looking for the speaker whose speech contains the selected text
+  // We need to check both before and after the selection to find the correct speaker
+  const beforeLines = textBeforeSelection.split('\n')
+  const afterLines = afterText.split('\n')
+  const allLines = [...beforeLines, ...afterLines]
   let foundSpeaker = false
   let speakerStartIndex = -1
   
-  for (let i = lines.length - 1; i >= 0 && !foundSpeaker; i--) {
-    const line = lines[i].trim()
+  // Look backwards from the selection point to find the most recent speaker
+  for (let i = beforeLines.length - 1; i >= 0 && !foundSpeaker; i--) {
+    const line = beforeLines[i].trim()
     
     // Check if this line is a speaker name
     if (/^[A-Z][A-Z\s&'\.]+\.$/.test(line)) {
-      // Look ahead to see if this speaker is followed by actual dialogue
-      let hasDialogue = false
-      for (let j = i + 1; j < lines.length && j < i + 5; j++) {
-        const nextLine = lines[j].trim()
-        // If we find actual dialogue (contains lowercase letters), this is our speaker
-        if (nextLine && /[a-z]/.test(nextLine) && !nextLine.startsWith('[') && !nextLine.startsWith('_')) {
-          hasDialogue = true
+      // Check if this speaker's speech continues to or through the selection
+      let speechContinues = false
+      
+      // Look ahead from this speaker to see if their speech continues
+      for (let j = i + 1; j < allLines.length; j++) {
+        const nextLine = allLines[j].trim()
+        
+        // If we hit another speaker, stop looking
+        if (/^[A-Z][A-Z\s&'\.]+\.$/.test(nextLine)) {
           break
+        }
+        
+        // If we find dialogue that contains the selected text or is close to it
+        if (nextLine && /[a-z]/.test(nextLine) && !nextLine.startsWith('[') && !nextLine.startsWith('_')) {
+          speechContinues = true
+          // If this dialogue is in the "after" section (after selection), this is our speaker
+          if (j >= beforeLines.length) {
+            foundSpeaker = true
+            break
+          }
         }
       }
       
-      if (hasDialogue) {
+      if (foundSpeaker) {
         speaker = line.replace(/\.$/, '').trim()
         speakerStartIndex = i
-        foundSpeaker = true
       }
     }
   }
@@ -954,10 +969,10 @@ const extractContextFromIndex = (selectedIndex: number, selectedLength: number, 
   if (foundSpeaker && speakerStartIndex >= 0) {
     // Get all lines from the speaker until we hit another speaker or end of text
     const speechLines = []
-    for (let i = speakerStartIndex + 1; i < lines.length; i++) {
-      const line = lines[i].trim()
+    for (let i = speakerStartIndex + 1; i < allLines.length; i++) {
+      const line = allLines[i].trim()
       // Stop if we hit another speaker or empty line followed by speaker
-      if (/^[A-Z][A-Z\s&'\.]+\.$/.test(line) || (line === '' && i + 1 < lines.length && /^[A-Z][A-Z\s&'\.]+\.$/.test(lines[i + 1]?.trim()))) {
+      if (/^[A-Z][A-Z\s&'\.]+\.$/.test(line) || (line === '' && i + 1 < allLines.length && /^[A-Z][A-Z\s&'\.]+\.$/.test(allLines[i + 1]?.trim()))) {
         break
       }
       if (line && !line.startsWith('[') && !line.startsWith('_')) {
@@ -1026,17 +1041,21 @@ export const useBookmarkRestoreAndSave = (
 
       // Wait for content to be fully rendered before attempting restoration
       const restorePosition = (position: number, source: string) => {
+        console.log('🔍 RESTORE POSITION:', { position, source, textReaderRef: textReaderRef.current })
         // Use a longer delay and wait for scrollHeight to be available
         const attemptRestore = (attempts = 0) => {
           if (attempts > 20) {
+            console.log('❌ Failed to restore position after 20 attempts')
             return // Give up after 20 attempts
           }
           
           if (textReaderRef.current && textReaderRef.current.scrollHeight > 0) {
             const maxScroll = textReaderRef.current.scrollHeight - textReaderRef.current.clientHeight
             const safePosition = Math.min(position, maxScroll)
+            console.log('✅ Restoring position:', { position, maxScroll, safePosition, scrollHeight: textReaderRef.current.scrollHeight })
             textReaderRef.current.scrollTop = safePosition
           } else {
+            console.log(`⏳ Attempt ${attempts + 1}: Waiting for content to load...`)
             setTimeout(() => attemptRestore(attempts + 1), 200) // Increased delay between attempts
           }
         }
@@ -1059,10 +1078,12 @@ export const useBookmarkRestoreAndSave = (
             const bookmark = await response.json()
             log('bookmark', 'Bookmark found in database:', bookmark)
             const position = bookmark.scroll_position
+            console.log('🔍 Bookmark loaded from database:', { position, bookmark })
             restorePosition(position, 'database')
             return
           } else {
             log('bookmark', 'No bookmark found in database (404)')
+            console.log('❌ No bookmark found in database (404)')
           }
         } catch (error) {
           log('bookmark', 'Error loading bookmark from database:', error)
@@ -1138,26 +1159,31 @@ export const useBookmarkRestoreAndSave = (
         if (userEmail) {
           try {
             log('bookmark', `Saving bookmark: ${title} by ${auth} at position ${scrollPosition}`)
-            const response = await fetch('/api/user/bookmark', {
-              method: 'POST',
-              headers: { 'Content-Type': 'application/json' },
-              body: JSON.stringify({
-                bookTitle: title,
-                bookAuthor: auth,
-                scrollPosition: scrollPosition
+            console.log('🔍 SAVING BOOKMARK:', { title, auth, scrollPosition })
+              const response = await fetch('/api/user/bookmark', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                  bookTitle: title,
+                  bookAuthor: auth,
+                  scrollPosition: Math.round(scrollPosition) // Round to integer for database compatibility
+                })
               })
-            })
             
             if (response.ok) {
               log('bookmark', `Bookmark saved successfully: ${title} by ${auth} at position ${scrollPosition}`)
+              console.log('✅ Bookmark saved successfully')
             } else {
               log('bookmark', `Failed to save bookmark: ${response.status} ${response.statusText}`)
+              console.log('❌ Failed to save bookmark:', response.status, response.statusText)
             }
           } catch (error) {
             log('bookmark', 'Error saving bookmark to database:', error)
+            console.log('❌ Error saving bookmark:', error)
           }
         } else {
           log('bookmark', 'No session and not in dev mode, skipping bookmark save')
+          console.log('❌ No session, skipping bookmark save')
         }
 
         // Bookmark saved to database
@@ -1257,6 +1283,18 @@ export const useSearchCore = (
         const targetElement = highlightedElements[resultIndex] as HTMLElement
         if (targetElement) {
           targetElement.scrollIntoView({ behavior: 'smooth', block: 'center', inline: 'nearest' })
+          
+          // Save bookmark after scrolling to search result
+          setTimeout(async () => {
+            if (textReaderRef.current) {
+              const scrollPosition = textReaderRef.current.scrollTop
+              console.log('🔍 Saving bookmark after search navigation to position:', scrollPosition)
+              
+              // Trigger the scroll event to save bookmark
+              const scrollEvent = new Event('scroll')
+              window.dispatchEvent(scrollEvent)
+            }
+          }, 500)
           return
         }
       }
@@ -1268,6 +1306,14 @@ export const useSearchCore = (
           const textPercentage = result.index / text.length
           const targetPosition = textPercentage * scrollContainer.scrollHeight * 0.8
           scrollContainer.scrollTop = Math.max(0, targetPosition - 200)
+          
+          // Save bookmark after scrolling to search result
+          setTimeout(() => {
+            console.log('🔍 Saving bookmark after search navigation (scroll mode)')
+            // Trigger the scroll event to save bookmark
+            const scrollEvent = new Event('scroll')
+            window.dispatchEvent(scrollEvent)
+          }, 500)
         }
       }
     }, 100)
