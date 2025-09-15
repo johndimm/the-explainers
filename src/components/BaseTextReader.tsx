@@ -916,54 +916,19 @@ const extractContextFromIndex = (selectedIndex: number, selectedLength: number, 
     chapter = lastRomanMatch.replace(/\.\s*\n$/, '').trim()
   }
 
-  // Find the speaker by looking for the speaker whose speech contains the selected text
-  // We need to check both before and after the selection to find the correct speaker
+  // Simple speaker detection: find the most recent speaker name before the selection
   const beforeLines = textBeforeSelection.split('\n')
-  const afterLines = afterText.split('\n')
-  const allLines = [...beforeLines, ...afterLines]
-  let foundSpeaker = false
   let speakerStartIndex = -1
   
   // Look backwards from the selection point to find the most recent speaker
-  for (let i = beforeLines.length - 1; i >= 0 && !foundSpeaker; i--) {
+  for (let i = beforeLines.length - 1; i >= 0; i--) {
     const line = beforeLines[i].trim()
     
-    // Check if this line is a speaker name
+    // Check if this line is a speaker name (ALL CAPS followed by period)
     if (/^[A-Z][A-Z\s&'\.]+\.$/.test(line)) {
-      // Check if this speaker's speech continues to or through the selection
-      let speechContinues = false
-      
-      // Look ahead from this speaker to see if their speech contains the selected text
-      for (let j = i + 1; j < allLines.length; j++) {
-        const nextLine = allLines[j].trim()
-        
-        // If we hit another speaker, stop looking
-        if (/^[A-Z][A-Z\s&'\.]+\.$/.test(nextLine)) {
-          break
-        }
-        
-        // If we find dialogue that contains the selected text or is close to it
-        if (nextLine && /[a-z]/.test(nextLine) && !nextLine.startsWith('[') && !nextLine.startsWith('_')) {
-          speechContinues = true
-          
-          // Check if this dialogue line contains the selected text
-          if (nextLine.includes(selectedText.trim())) {
-            foundSpeaker = true
-            break
-          }
-          
-          // If this dialogue is in the "after" section (after selection), this is our speaker
-          if (j >= beforeLines.length) {
-            foundSpeaker = true
-            break
-          }
-        }
-      }
-      
-      if (foundSpeaker) {
-        speaker = line.replace(/\.$/, '').trim()
-        speakerStartIndex = i
-      }
+      speaker = line.replace(/\.$/, '').trim()
+      speakerStartIndex = i
+      break
     }
   }
   
@@ -973,8 +938,9 @@ const extractContextFromIndex = (selectedIndex: number, selectedLength: number, 
   
   // Extract the complete speech from this speaker
   let completeSpeech = ''
-  if (foundSpeaker && speakerStartIndex >= 0) {
+  if (speaker && speakerStartIndex >= 0) {
     // Get all lines from the speaker until we hit another speaker or end of text
+    const allLines = [...beforeLines, ...afterText.split('\n')]
     const speechLines = []
     for (let i = speakerStartIndex + 1; i < allLines.length; i++) {
       const line = allLines[i].trim()

@@ -1659,7 +1659,7 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ selectedText, contextInfo
                           style={{ textDecoration: 'none', display: 'inline-flex', alignItems: 'center', justifyContent: 'center' }}
                           title="Open this quote on Playphrase"
                         >
-                          Is this quote in the movies?
+                          In movies?
                         </a>
                       </div>
                     )}
