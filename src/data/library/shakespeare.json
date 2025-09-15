@@ -162,7 +162,9 @@
   {
     "id": 1531,
     "title": "Othello, the Moor of Venice",
-    "author": "William Shakespeare"
+    "author": "William Shakespeare",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Othello",
+    "wikipediaTitle": "Othello"
   },
   {
     "id": 1537,
