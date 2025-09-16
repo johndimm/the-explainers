@@ -133,7 +133,6 @@ function ChatContent() {
           </div>
           
           <ChatInterface
-            key={`chat-${settings.explanationStyle}-${settings.llmProvider}-${settings.responseLength}`}
             selectedText={(() => {
               const text = contextData?.selectedText || "";
               log('Chat page: Passing selectedText to ChatInterface:', text);

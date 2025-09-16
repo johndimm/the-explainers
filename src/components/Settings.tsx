@@ -72,8 +72,7 @@ const MODEL_OPTIONS: Record<LLMProvider, { model: LLMModel, label: string, descr
   ],
   anthropic: [
     { model: 'claude-3-5-sonnet', label: 'Claude 3.5 Sonnet', description: 'Latest and most capable' },
-    { model: 'claude-3-opus', label: 'Claude 3 Opus', description: 'Most powerful' },
-    { model: 'claude-3-sonnet', label: 'Claude 3 Sonnet', description: 'Balanced performance' }
+    // Filtered to only models supported by your key
   ],
   deepseek: [
     { model: 'deepseek-chat', label: 'DeepSeek Chat', description: 'General purpose' },
@@ -91,6 +90,17 @@ const MODEL_OPTIONS: Record<LLMProvider, { model: LLMModel, label: string, descr
 
 const Settings: React.FC<SettingsProps> = ({ isOpen, onClose, settings, onSettingsChange }) => {
   const [localSettings, setLocalSettings] = useState<SettingsData>(settings)
+  const [providerModels, setProviderModels] = useState<Record<LLMProvider, LLMModel>>({
+    gemini: 'gemini-1.5-flash',
+    anthropic: 'claude-3-5-sonnet',
+    openai: 'gpt-4o',
+    deepseek: 'deepseek-chat',
+    custom: 'custom'
+  })
+
+  // Single source of truth for provider display order across Settings and Chat
+  const PROVIDER_ORDER: LLMProvider[] = ['gemini','anthropic','openai','deepseek','custom']
+  const allProviders: LLMProvider[] = PROVIDER_ORDER
   const [showCustomFields, setShowCustomFields] = useState(settings.llmProvider === 'custom')
   const [showMobileMenu, setShowMobileMenu] = useState(false)
   const menuRef = useRef<HTMLDivElement>(null)
@@ -100,6 +110,17 @@ const Settings: React.FC<SettingsProps> = ({ isOpen, onClose, settings, onSettin
     console.log('Settings: settings prop changed to:', settings)
     setLocalSettings(settings)
     setShowCustomFields(settings.llmProvider === 'custom')
+    // Load per-provider model mapping from localStorage on first sync
+    try {
+      const stored = localStorage.getItem('providerModels')
+      if (stored) {
+        const parsed = JSON.parse(stored)
+        setProviderModels(prev => ({ ...prev, ...parsed }))
+      } else {
+        // Initialize mapping based on current settings
+        setProviderModels(prev => ({ ...prev, [settings.llmProvider]: (settings.llmModel as LLMModel) || prev[settings.llmProvider] }))
+      }
+    } catch {}
   }, [settings])
 
   useEffect(() => {
@@ -140,7 +161,33 @@ const Settings: React.FC<SettingsProps> = ({ isOpen, onClose, settings, onSettin
       const defaultModel = MODEL_OPTIONS[localSettings.llmProvider][0].model
       setLocalSettings(prev => ({ ...prev, llmModel: defaultModel }))
     }
+    // Keep mapping in sync for current provider
+    setProviderModels(prev => ({ ...prev, [localSettings.llmProvider]: (localSettings.llmModel || MODEL_OPTIONS[localSettings.llmProvider][0].model) as LLMModel }))
+    try { localStorage.setItem('providerModels', JSON.stringify({ ...providerModels, [localSettings.llmProvider]: (localSettings.llmModel || MODEL_OPTIONS[localSettings.llmProvider][0].model) })) } catch {}
   }, [localSettings.llmProvider, localSettings.llmModel])
+
+  // Log current provider/model selection for debugging
+  useEffect(() => {
+    const currentModel = providerModels[localSettings.llmProvider] || localSettings.llmModel || MODEL_OPTIONS[localSettings.llmProvider][0].model
+    console.log('Settings selection:', { provider: localSettings.llmProvider, model: currentModel })
+  }, [localSettings.llmProvider, localSettings.llmModel, providerModels])
+
+  // Ensure every provider always has a valid selected model in state/localStorage
+  useEffect(() => {
+    let changed = false
+    const fixed: Record<LLMProvider, LLMModel> = { ...providerModels }
+    for (const p of allProviders) {
+      const options = MODEL_OPTIONS[p].map(o => o.model)
+      if (!fixed[p] || !options.includes(fixed[p])) {
+        fixed[p] = MODEL_OPTIONS[p][0].model as LLMModel
+        changed = true
+      }
+    }
+    if (changed) {
+      setProviderModels(fixed)
+      try { localStorage.setItem('providerModels', JSON.stringify(fixed)) } catch {}
+    }
+  }, [providerModels])
 
 
   const handleReset = () => {
@@ -391,10 +438,46 @@ const Settings: React.FC<SettingsProps> = ({ isOpen, onClose, settings, onSettin
           </div>
 
         <div className={styles.settingsContent}>
+          {/* Default Provider selection */}
+          <div className={styles.settingGroup}>
+            <h3>Default Provider</h3>
+            <div className={styles.radioGroup}>
+              {PROVIDER_ORDER.map((provider) => (
+                <label key={`provider-${provider}`} className={styles.radioLabel}>
+                  <input
+                    type="radio"
+                    name="defaultProvider"
+                    value={provider}
+                    checked={localSettings.llmProvider === provider}
+                    onChange={() => {
+                      const nextModel = providerModels[provider] || MODEL_OPTIONS[provider][0].model
+                      setLocalSettings(prev => ({ ...prev, llmProvider: provider, llmModel: nextModel }))
+                      setShowCustomFields(provider === 'custom')
+                    }}
+                  />
+                  <span>
+                    {provider === 'gemini' ? 'Google Gemini' :
+                     provider === 'anthropic' ? 'Anthropic Claude' :
+                     provider === 'openai' ? 'OpenAI' :
+                     provider === 'deepseek' ? 'DeepSeek' :
+                     'Custom (BYO LLM)'}
+                    {provider !== 'custom' && (
+                      <span style={{ color: '#666', marginLeft: 8 }}>
+                        – {MODEL_OPTIONS[provider].find(m => m.model === providerModels[provider])?.label || MODEL_OPTIONS[provider][0].label}
+                      </span>
+                    )}
+                  </span>
+                </label>
+              ))}
+            </div>
+          </div>
+
           <div className={styles.settingGroup}>
             <h3>Language Model</h3>
             <div className={styles.radioGroup}>
-              {Object.entries(MODEL_OPTIONS).map(([provider, models]) => (
+              {PROVIDER_ORDER.map((provider) => {
+                const models = MODEL_OPTIONS[provider]
+                return (
                 <div key={provider}>
                   {/* Provider Header */}
                   <div style={{ 
@@ -404,10 +487,19 @@ const Settings: React.FC<SettingsProps> = ({ isOpen, onClose, settings, onSettin
                     fontSize: '16px'
                   }}>
                     {provider === 'openai' ? 'OpenAI' :
-                     provider === 'anthropic' ? 'Anthropic' :
+                     provider === 'anthropic' ? 'Anthropic Claude' :
                      provider === 'deepseek' ? 'DeepSeek' :
-                     provider === 'gemini' ? 'Google Gemini - Default' :
+                     provider === 'gemini' ? 'Google Gemini' :
                      'Bring Your Own LLM (BYOLLM)'}
+                    {provider !== 'custom' && (
+                      <span style={{ color: '#666', marginLeft: 8 }}>
+                        – {(() => {
+                          const p = provider as LLMProvider
+                          const selected = providerModels[p] || MODEL_OPTIONS[p][0].model
+                          return MODEL_OPTIONS[p].find(m => m.model === selected)?.label || MODEL_OPTIONS[p][0].label
+                        })()}
+                      </span>
+                    )}
                   </div>
                   
                   {/* Models under this provider */}
@@ -416,15 +508,21 @@ const Settings: React.FC<SettingsProps> = ({ isOpen, onClose, settings, onSettin
                       <label key={option.model} className={styles.radioLabel}>
                         <input
                           type="radio"
-                          name="llmSelection"
+                          name={`llmSelection-${provider}`}
                           value={`${provider}-${option.model}`}
-                          checked={localSettings.llmProvider === provider && localSettings.llmModel === option.model}
+                          checked={(providerModels[provider as LLMProvider] || MODEL_OPTIONS[provider as LLMProvider][0].model) === option.model}
                           onChange={() => {
-                            setLocalSettings(prev => ({ 
-                              ...prev, 
-                              llmProvider: provider as LLMProvider,
-                              llmModel: option.model
-                            }))
+                            // Update provider-specific default without switching default provider
+                            const p = provider as LLMProvider
+                            setProviderModels(prev => {
+                              const updated = { ...prev, [p]: option.model }
+                              try { localStorage.setItem('providerModels', JSON.stringify(updated)) } catch {}
+                              return updated
+                            })
+                            // If this provider is currently selected as default, sync llmModel
+                            if (localSettings.llmProvider === provider) {
+                              setLocalSettings(prev => ({ ...prev, llmModel: option.model }))
+                            }
                             setShowCustomFields(provider === 'custom')
                           }}
                         />
@@ -440,7 +538,7 @@ const Settings: React.FC<SettingsProps> = ({ isOpen, onClose, settings, onSettin
                     ))}
                   </div>
                 </div>
-              ))}
+              )})}
             </div>
 
             {showCustomFields && (

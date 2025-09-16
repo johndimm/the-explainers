@@ -3,7 +3,7 @@
 import React, { useState, useRef, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
 import styles from './ChatInterface.module.css'
-import { SettingsData, LLMProvider, ResponseLength, ExplanationStyle } from './Settings'
+import { SettingsData, LLMProvider, ResponseLength, ExplanationStyle, LLMModel } from './Settings'
 import { ProfileData } from './Profile'
 import { useProfile } from '../contexts/ProfileContext'
 import styleCategoriesData from '../data/style-categories.json'
@@ -20,6 +20,7 @@ interface Message {
   videoId?: string
   videoTitle?: string
   rating?: 'good' | 'bad' | null
+  model?: string
 }
 
 interface ContextInfo {
@@ -87,6 +88,32 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ selectedText, contextInfo
   const saveDropdownRef = useRef<HTMLDivElement>(null)
   const initializedRef = useRef(false)
   const { canUseExplanation, useExplanation, getBookExplanationsUsed } = useProfile()
+
+  const getProviderLabel = (provider: LLMProvider, _model?: LLMModel) => (
+    provider === 'gemini' ? 'Google Gemini' :
+    provider === 'openai' ? 'OpenAI' :
+    provider === 'anthropic' ? 'Anthropic Claude' :
+    provider === 'deepseek' ? 'DeepSeek' :
+    'Custom LLM'
+  )
+
+  const getModelLabel = (model?: string) => {
+    if (!model) return ''
+    switch (model) {
+      case 'gemini-2.0-flash': return 'Gemini 2.0 Flash'
+      case 'gemini-1.5-pro': return 'Gemini 1.5 Pro'
+      case 'gemini-1.5-flash': return 'Gemini 1.5 Flash'
+      case 'gpt-4o': return 'GPT-4o'
+      case 'gpt-4-turbo': return 'GPT-4 Turbo'
+      case 'gpt-4': return 'GPT-4'
+      case 'claude-3-5-sonnet': return 'Claude 3.5 Sonnet'
+      case 'claude-3-opus': return 'Claude 3 Opus'
+      case 'claude-3-sonnet': return 'Claude 3 Sonnet'
+      case 'deepseek-chat': return 'DeepSeek Chat'
+      case 'deepseek-coder': return 'DeepSeek Coder'
+      default: return model
+    }
+  }
 
   const scrollToLatestResponse = () => {
     latestResponseRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' })
@@ -424,26 +451,30 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ selectedText, contextInfo
     const hasLengthChange = currentResponseLength !== settings.responseLength
     const newHasChanges = hasProviderChange || hasStyleChange || hasLengthChange
     log('hasChanges calculation:', { hasProviderChange, hasStyleChange, hasLengthChange, newHasChanges, selectedProvider, currentStyle, currentResponseLength, settingsProvider: settings.llmProvider, settingsStyle: settings.explanationStyle, settingsLength: settings.responseLength })
-    setHasChanges(newHasChanges)
+    // Only set to true automatically; do not clear a user-triggered change
+    if (newHasChanges) setHasChanges(true)
   }, [selectedProvider, currentStyle, currentResponseLength, settings.llmProvider, settings.explanationStyle, settings.responseLength])
 
-  // Keep local chat controls in sync with global settings unless user changes them here
+  // Initialize provider from settings only on first mount
   useEffect(() => {
-    if (selectedProvider !== settings.llmProvider) {
+    if (!initializedRef.current) {
       setSelectedProvider(settings.llmProvider)
     }
-  }, [settings.llmProvider, selectedProvider])
+  }, [settings.llmProvider])
 
   useEffect(() => {
-    setCurrentStyle(settings.explanationStyle)
+    if (!initializedRef.current) {
+      setCurrentStyle(settings.explanationStyle)
+    }
   }, [settings.explanationStyle])
 
-  // Force re-initialization when settings change
+  // Mark initialized after first render pass
   useEffect(() => {
-    setSelectedProvider(settings.llmProvider)
-    setCurrentStyle(settings.explanationStyle)
-    setCurrentResponseLength(settings.responseLength)
-  }, [settings])
+    if (!initializedRef.current) {
+      setCurrentResponseLength(settings.responseLength)
+      initializedRef.current = true
+    }
+  }, [])
 
   useEffect(() => {
     log('ChatInterface: settings.responseLength changed to:', settings.responseLength)
@@ -470,8 +501,65 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ selectedText, contextInfo
   // Don't auto-save immediately - let user see changes and use re-explain button
   // Settings will be saved when re-explain is used or when component unmounts
 
+  // Resolve model for a given provider using per-provider mapping
+  const resolveModelFor = (provider: LLMProvider, settingsModel?: LLMModel): string | undefined => {
+    try {
+      const stored = localStorage.getItem('providerModels')
+      if (stored) {
+        const map = JSON.parse(stored)
+        if (map && map[provider]) return map[provider]
+      }
+    } catch {}
+    if (settingsModel) {
+      if (provider === 'gemini' && settingsModel.startsWith('gemini-')) return settingsModel
+      if (provider === 'openai' && settingsModel.startsWith('gpt-')) return settingsModel
+      if (provider === 'deepseek' && settingsModel.startsWith('deepseek-')) return settingsModel
+      if (provider === 'anthropic' && settingsModel.startsWith('claude-')) return settingsModel
+    }
+    switch (provider) {
+      case 'gemini': return 'gemini-1.5-flash'
+      case 'openai': return 'gpt-4o'
+      case 'deepseek': return 'deepseek-chat'
+      case 'anthropic': return undefined
+      default: return undefined
+    }
+  }
+
+  // Print current provider + model whenever selection changes
+  useEffect(() => {
+    const model = resolveModelFor(selectedProvider, settings.llmModel)
+    console.log('Chat selection:', { provider: selectedProvider, model })
+  }, [selectedProvider, settings.llmModel])
+
 
   const callLLM = async (messages: Message[]): Promise<string> => {
+    // Choose an appropriate model based on provider and current settings
+    const chooseModelForProvider = (provider: LLMProvider, settingsModel?: LLMModel): string | undefined => {
+      // Prefer provider-specific mapping from localStorage if available
+      try {
+        const stored = localStorage.getItem('providerModels')
+        if (stored) {
+          const map = JSON.parse(stored)
+          if (map && map[provider]) return map[provider]
+        }
+      } catch {}
+      // Fallbacks: use current settings model if it matches the provider, else a default
+      if (settingsModel) {
+        if (provider === 'gemini' && settingsModel.startsWith('gemini-')) return settingsModel
+        if (provider === 'openai' && settingsModel.startsWith('gpt-')) return settingsModel
+        if (provider === 'deepseek' && settingsModel.startsWith('deepseek-')) return settingsModel
+        if (provider === 'anthropic' && settingsModel.startsWith('claude-')) return settingsModel
+      }
+      switch (provider) {
+        case 'gemini': return 'gemini-1.5-flash'
+        case 'openai': return 'gpt-4o'
+        case 'deepseek': return 'deepseek-chat'
+        case 'anthropic': return undefined // use API default Sonnet
+        default: return undefined
+      }
+    }
+
+    const selectedModel = chooseModelForProvider ? chooseModelForProvider(selectedProvider, settings.llmModel) : resolveModelFor(selectedProvider, settings.llmModel)
     const response = await fetch('/api/chat', {
       method: 'POST',
       headers: {
@@ -480,6 +568,7 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ selectedText, contextInfo
       body: JSON.stringify({
         messages: messages.map(m => ({ role: m.role, content: m.content })),
         provider: selectedProvider,
+        model: selectedModel,
         responseLength: currentResponseLength,
       }),
     })
@@ -942,13 +1031,15 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ selectedText, contextInfo
       }
 
       const response = await callLLM([llmMessage])
+      const usedModel = resolveModelFor(selectedProvider, settings.llmModel)
       const assistantMessage: Message = {
         id: (Date.now() + 1).toString(),
         content: response,
         role: 'assistant',
         timestamp: new Date(),
         provider: selectedProvider,
-        style: currentStyle
+        style: currentStyle,
+        model: usedModel
       }
       setMessages(prev => [...prev, assistantMessage])
       
@@ -968,7 +1059,8 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ selectedText, contextInfo
         role: 'assistant',
         timestamp: new Date(),
         provider: selectedProvider,
-        style: currentStyle
+        style: currentStyle,
+        model: resolveModelFor(selectedProvider, settings.llmModel)
       }
       setMessages(prev => [...prev, errorMessage])
     } finally {
@@ -1047,13 +1139,15 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ selectedText, contextInfo
       
       // Then get the AI explanation
       const response = await callLLM([llmMessage])
+      const usedModel = resolveModelFor(selectedProvider, settings.llmModel)
       const assistantMessage: Message = {
         id: (Date.now() + 2).toString(),
         content: response,
         role: 'assistant',
         timestamp: new Date(),
         provider: selectedProvider,
-        style: currentStyle
+        style: currentStyle,
+        model: usedModel
       }
       setMessages(prev => [...prev, assistantMessage])
     } catch (error) {
@@ -1064,11 +1158,13 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ selectedText, contextInfo
         role: 'assistant',
         timestamp: new Date(),
         provider: selectedProvider,
-        style: currentStyle
+        style: currentStyle,
+        model: resolveModelFor(selectedProvider, settings.llmModel)
       }
       setMessages(prev => [...prev, errorMessage])
     } finally {
       setIsLoading(false)
+      if (hasChanges) setHasChanges(false)
     }
   }
 
@@ -1089,13 +1185,15 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ selectedText, contextInfo
 
     try {
       const response = await callLLM(newMessages)
+      const usedModel = resolveModelFor(selectedProvider, settings.llmModel)
       const assistantMessage: Message = {
         id: (Date.now() + 1).toString(),
         content: response,
         role: 'assistant',
         timestamp: new Date(),
         provider: selectedProvider,
-        style: currentStyle
+        style: currentStyle,
+        model: usedModel
       }
       setMessages(prev => [...prev, assistantMessage])
     } catch (error) {
@@ -1106,11 +1204,13 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ selectedText, contextInfo
         role: 'assistant',
         timestamp: new Date(),
         provider: selectedProvider,
-        style: currentStyle
+        style: currentStyle,
+        model: resolveModelFor(selectedProvider, settings.llmModel)
       }
       setMessages(prev => [...prev, errorMessage])
     } finally {
       setIsLoading(false)
+      if (hasChanges) setHasChanges(false)
     }
   }
 
@@ -1124,7 +1224,7 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ selectedText, contextInfo
   const getHelpPopupTitle = () => {
     switch (showHelpPopup) {
       case 'ai-model':
-        return 'AI Model Selection'
+        return 'AI Provider'
       case 'style':
         return 'Explanation Style'
       case 'length':
@@ -1142,7 +1242,7 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ selectedText, contextInfo
             <p><strong>Claude 3.5 Sonnet:</strong> Excellent for literature, poetry, and nuanced text analysis. Often provides the most thoughtful and context-aware explanations.</p>
             <p><strong>GPT-4 (OpenAI):</strong> Great for technical texts, academic writing, and comprehensive analysis. Very strong at breaking down complex concepts.</p>
             <p><strong>DeepSeek Chat:</strong> Creative and engaging explanations, good for making difficult texts accessible and interesting.</p>
-            <p><strong>Gemini 2.5 Flash:</strong> Fast responses, good for quick explanations and straightforward text interpretation.</p>
+            <p><strong>{getProviderLabel('gemini', settings.llmModel)}:</strong> Fast responses, good for quick explanations and straightforward text interpretation.</p>
           </div>
         )
       case 'style':
@@ -1407,7 +1507,7 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ selectedText, contextInfo
             <div className={styles.dropdownsRow}>
               <div className={styles.providerSelector}>
                 <div className={styles.dropdownLabel}>
-                  <span>AI Model</span>
+                  <span>AI Provider</span>
                   <span 
                     className={styles.helpIcon} 
                     onClick={() => setShowHelpPopup('ai-model')}
@@ -1421,19 +1521,20 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ selectedText, contextInfo
                     e.stopPropagation()
                     const newProvider = e.target.value as LLMProvider
                     setSelectedProvider(newProvider)
-                    // Update global settings immediately
+                    // Persist as new default and mark as changed
                     onSettingsChange({
                       ...settings,
                       llmProvider: newProvider
                     })
+                    setHasChanges(true)
                   }}
                   className={styles.providerSelect}
                   disabled={isLoading}
                 >
-                  <option value="anthropic">Claude 3.5 Sonnet</option>
-                  <option value="openai">GPT-4 (OpenAI)</option>
-                  <option value="deepseek">DeepSeek Chat</option>
-                  <option value="gemini">Gemini 2.5 Flash</option>
+                  <option value="gemini">{getProviderLabel('gemini', settings.llmModel)}</option>
+                  <option value="anthropic">{getProviderLabel('anthropic', settings.llmModel)}</option>
+                  <option value="openai">{getProviderLabel('openai', settings.llmModel)}</option>
+                  <option value="deepseek">{getProviderLabel('deepseek', settings.llmModel)}</option>
                 </select>
               </div>
               <div className={styles.styleSelector}>
@@ -1470,11 +1571,12 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ selectedText, contextInfo
                             const newStyle = style.value as ExplanationStyle
                             setCurrentStyle(newStyle); 
                             setShowStyleMenu(false)
-                            // Update global settings immediately
+                            // Persist as new default and mark as changed
                             onSettingsChange({
                               ...settings,
                               explanationStyle: newStyle
                             })
+                            setHasChanges(true)
                           }}
                         >
                           {style.name}
@@ -1500,10 +1602,12 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ selectedText, contextInfo
                       e.stopPropagation()
                       const newLength = e.target.value as ResponseLength
                       setCurrentResponseLength(newLength)
+                      // Persist as new default and mark as changed
                       onSettingsChange({
                         ...settings,
                         responseLength: newLength
                       })
+                      setHasChanges(true)
                     }}
                     disabled={isLoading}
                   />
@@ -1524,6 +1628,7 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ selectedText, contextInfo
                         ...settings,
                         responseLength: newLength
                       })
+                      setHasChanges(true)
                     }}
                     disabled={isLoading}
                   />
@@ -1544,6 +1649,7 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ selectedText, contextInfo
                         ...settings,
                         responseLength: newLength
                       })
+                      setHasChanges(true)
                     }}
                     disabled={isLoading}
                   />
@@ -1684,12 +1790,16 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ selectedText, contextInfo
               {message.role === 'assistant' && message.provider && (
                 <div className={styles.messageInfo}>
                   <span className={styles.providerBadge}>
-                    {message.provider === 'openai' ? 'GPT-4 (OpenAI)' : 
-                     message.provider === 'anthropic' ? 'Claude 3.5 Sonnet' :
-                     message.provider === 'deepseek' ? 'DeepSeek Chat' :
-                     message.provider === 'gemini' ? 'Gemini 2.5 Flash' :
-                     message.provider === 'youtube' ? '🎬 YouTube' :
-                     message.provider}
+                    {message.provider === 'youtube' 
+                      ? '🎬 YouTube' 
+                      : (() => {
+                          const p = message.provider as LLMProvider
+                          const modelId = message.model || resolveModelFor(p, settings.llmModel)
+                          const providerText = getProviderLabel(p)
+                          const modelText = getModelLabel(modelId)
+                          return modelText || providerText
+                        })()
+                    }
                   </span>
                   {message.style && message.style !== 'neutral' && (
                     <span className={styles.styleBadge}>
