@@ -33,7 +33,7 @@ const deepseekOpenai = new OpenAI({
 const gemini = new GoogleGenerativeAI(process.env.GEMINI_API_KEY || '')
 
 async function callOpenAI(messages: ChatMessage[], responseLength: string, style?: string): Promise<string> {
-  const maxTokens = responseLength === 'brief' ? 200 : responseLength === 'medium' ? 500 : 1000
+  const maxTokens = responseLength === 'brief' ? 200 : responseLength === 'medium' ? 500 : 1200
   
   try {
     log('Testing OpenAI with model: gpt-4o')
@@ -55,7 +55,7 @@ async function callOpenAI(messages: ChatMessage[], responseLength: string, style
 }
 
 async function callAnthropic(messages: ChatMessage[], responseLength: string, style?: string): Promise<string> {
-  const maxTokens = responseLength === 'brief' ? 200 : responseLength === 'medium' ? 500 : 1000
+  const maxTokens = responseLength === 'brief' ? 200 : responseLength === 'medium' ? 500 : 1200
   
   const systemMessage = messages.find(m => m.role === 'user')?.content.includes('Please explain this text:') 
     ? 'You are a helpful literary and text analysis assistant. Provide clear, insightful explanations of text passages.'
@@ -76,7 +76,7 @@ async function callAnthropic(messages: ChatMessage[], responseLength: string, st
 }
 
 async function callDeepSeek(messages: ChatMessage[], responseLength: string, style?: string): Promise<string> {
-  const maxTokens = responseLength === 'brief' ? 200 : responseLength === 'medium' ? 500 : 1000
+  const maxTokens = responseLength === 'brief' ? 200 : responseLength === 'medium' ? 500 : 1200
   
   const completion = await deepseekOpenai.chat.completions.create({
     model: 'deepseek-chat',
@@ -92,7 +92,7 @@ async function callDeepSeek(messages: ChatMessage[], responseLength: string, sty
 }
 
 async function callGemini(messages: ChatMessage[], responseLength: string, style?: string): Promise<string> {
-  const maxTokens = responseLength === 'brief' ? 200 : responseLength === 'medium' ? 500 : 1000
+  const maxTokens = responseLength === 'brief' ? 200 : responseLength === 'medium' ? 500 : 1200
   
   const model = gemini.getGenerativeModel({ 
     model: 'gemini-1.5-flash',
