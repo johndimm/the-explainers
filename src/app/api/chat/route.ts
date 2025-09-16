@@ -12,6 +12,7 @@ export interface ChatMessage {
 export interface ChatRequest {
   messages: ChatMessage[]
   provider: 'openai' | 'anthropic' | 'deepseek' | 'gemini'
+  model?: string
   responseLength: 'brief' | 'medium' | 'long'
   style?: string
   selectedText?: string
@@ -32,13 +33,13 @@ const deepseekOpenai = new OpenAI({
 
 const gemini = new GoogleGenerativeAI(process.env.GEMINI_API_KEY || '')
 
-async function callOpenAI(messages: ChatMessage[], responseLength: string, style?: string): Promise<string> {
+async function callOpenAI(messages: ChatMessage[], responseLength: string, model: string = 'gpt-4o', style?: string): Promise<string> {
   const maxTokens = responseLength === 'brief' ? 200 : responseLength === 'medium' ? 500 : 1200
   
   try {
-    log('Testing OpenAI with model: gpt-4o')
+    log(`Testing OpenAI with model: ${model}`)
     const completion = await openai.chat.completions.create({
-      model: 'gpt-4o',
+      model: model,
       messages: messages.map(msg => ({
         role: msg.role,
         content: msg.content
@@ -54,7 +55,7 @@ async function callOpenAI(messages: ChatMessage[], responseLength: string, style
   }
 }
 
-async function callAnthropic(messages: ChatMessage[], responseLength: string, style?: string): Promise<string> {
+async function callAnthropic(messages: ChatMessage[], responseLength: string, model: string = 'claude-3-5-sonnet-20241022', style?: string): Promise<string> {
   const maxTokens = responseLength === 'brief' ? 200 : responseLength === 'medium' ? 500 : 1200
   
   const systemMessage = messages.find(m => m.role === 'user')?.content.includes('Please explain this text:') 
@@ -62,7 +63,7 @@ async function callAnthropic(messages: ChatMessage[], responseLength: string, st
     : 'You are a helpful assistant.'
 
   const response = await anthropic.messages.create({
-    model: 'claude-3-5-sonnet-20241022',
+    model: model,
     max_tokens: maxTokens,
     temperature: 0.7,
     system: systemMessage,
@@ -75,11 +76,11 @@ async function callAnthropic(messages: ChatMessage[], responseLength: string, st
   return response.content[0]?.type === 'text' ? response.content[0].text : 'No response'
 }
 
-async function callDeepSeek(messages: ChatMessage[], responseLength: string, style?: string): Promise<string> {
+async function callDeepSeek(messages: ChatMessage[], responseLength: string, model: string = 'deepseek-chat', style?: string): Promise<string> {
   const maxTokens = responseLength === 'brief' ? 200 : responseLength === 'medium' ? 500 : 1200
   
   const completion = await deepseekOpenai.chat.completions.create({
-    model: 'deepseek-chat',
+    model: model,
     messages: messages.map(msg => ({
       role: msg.role,
       content: msg.content
@@ -91,11 +92,11 @@ async function callDeepSeek(messages: ChatMessage[], responseLength: string, sty
   return completion.choices[0]?.message?.content || 'No response'
 }
 
-async function callGemini(messages: ChatMessage[], responseLength: string, style?: string): Promise<string> {
+async function callGemini(messages: ChatMessage[], responseLength: string, modelName: string = 'gemini-1.5-flash', style?: string): Promise<string> {
   const maxTokens = responseLength === 'brief' ? 200 : responseLength === 'medium' ? 500 : 1200
   
   const model = gemini.getGenerativeModel({ 
-    model: 'gemini-1.5-flash',
+    model: modelName,
     generationConfig: {
       maxOutputTokens: maxTokens,
     }
@@ -120,7 +121,7 @@ export async function POST(request: NextRequest) {
   
   try {
     const body: ChatRequest = await request.json()
-    const { messages, responseLength, style, selectedText } = body
+    const { messages, responseLength, style, selectedText, model } = body
     provider = body.provider
 
     if (!messages || messages.length === 0) {
@@ -131,16 +132,16 @@ export async function POST(request: NextRequest) {
 
     switch (provider) {
       case 'openai':
-        response = await callOpenAI(messages, responseLength, style)
+        response = await callOpenAI(messages, responseLength, model, style)
         break
       case 'anthropic':
-        response = await callAnthropic(messages, responseLength, style)
+        response = await callAnthropic(messages, responseLength, model, style)
         break
       case 'deepseek':
-        response = await callDeepSeek(messages, responseLength, style)
+        response = await callDeepSeek(messages, responseLength, model, style)
         break
       case 'gemini':
-        response = await callGemini(messages, responseLength, style)
+        response = await callGemini(messages, responseLength, model, style)
         break
       default:
         return NextResponse.json({ error: 'Invalid provider' }, { status: 400 })

@@ -1375,7 +1375,6 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ selectedText, contextInfo
       <div className={isPageMode ? '' : styles.chatContainer} style={isPageMode ? { height: '100%', display: 'flex', flexDirection: 'column' } : {}}>
         <div className={styles.chatHeader}>
           <div className={styles.headerTitle}>
-            <h3>Text Explanation</h3>
             <div style={{ fontSize: '13px', color: '#8b5cf6', marginTop: '4px', fontWeight: '500' }}>
               {(() => {
                 const useCustomLLM = selectedProvider === 'custom'
@@ -1418,6 +1417,8 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ selectedText, contextInfo
                 <select 
                   value={selectedProvider} 
                   onChange={(e) => {
+                    e.preventDefault()
+                    e.stopPropagation()
                     const newProvider = e.target.value as LLMProvider
                     setSelectedProvider(newProvider)
                     // Update global settings immediately
@@ -1483,33 +1484,71 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ selectedText, contextInfo
                   )}
                 </div>
               </div>
-              <div className={styles.lengthSelector}>
-                <div className={styles.dropdownLabel}>
-                  <span>Response Length</span>
-                  <span 
-                    className={styles.helpIcon} 
-                    onClick={() => setShowHelpPopup('length')}
-                    title="Click for more info"
-                  >?</span>
-                </div>
-                <select 
-                  value={currentResponseLength} 
-                  onChange={(e) => {
-                    const newLength = e.target.value as ResponseLength
-                    setCurrentResponseLength(newLength)
-                    // Update global settings immediately
-                    onSettingsChange({
-                      ...settings,
-                      responseLength: newLength
-                    })
-                  }}
-                  className={styles.lengthSelect}
-                  disabled={isLoading}
-                >
-                  <option value="brief">Brief</option>
-                  <option value="medium">Medium</option>
-                  <option value="long">Long</option>
-                </select>
+            </div>
+            
+            {/* Response Length Radio Buttons Row */}
+            <div className={styles.lengthRow}>
+              <div className={styles.radioButtons}>
+                <label className={styles.radioLabel}>
+                  <input
+                    type="radio"
+                    name="responseLength"
+                    value="brief"
+                    checked={currentResponseLength === 'brief'}
+                    onChange={(e) => {
+                      e.preventDefault()
+                      e.stopPropagation()
+                      const newLength = e.target.value as ResponseLength
+                      setCurrentResponseLength(newLength)
+                      onSettingsChange({
+                        ...settings,
+                        responseLength: newLength
+                      })
+                    }}
+                    disabled={isLoading}
+                  />
+                  <span>Brief</span>
+                </label>
+                <label className={styles.radioLabel}>
+                  <input
+                    type="radio"
+                    name="responseLength"
+                    value="medium"
+                    checked={currentResponseLength === 'medium'}
+                    onChange={(e) => {
+                      e.preventDefault()
+                      e.stopPropagation()
+                      const newLength = e.target.value as ResponseLength
+                      setCurrentResponseLength(newLength)
+                      onSettingsChange({
+                        ...settings,
+                        responseLength: newLength
+                      })
+                    }}
+                    disabled={isLoading}
+                  />
+                  <span>Medium</span>
+                </label>
+                <label className={styles.radioLabel}>
+                  <input
+                    type="radio"
+                    name="responseLength"
+                    value="long"
+                    checked={currentResponseLength === 'long'}
+                    onChange={(e) => {
+                      e.preventDefault()
+                      e.stopPropagation()
+                      const newLength = e.target.value as ResponseLength
+                      setCurrentResponseLength(newLength)
+                      onSettingsChange({
+                        ...settings,
+                        responseLength: newLength
+                      })
+                    }}
+                    disabled={isLoading}
+                  />
+                  <span>Long</span>
+                </label>
               </div>
             </div>
             

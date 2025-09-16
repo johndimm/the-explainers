@@ -254,8 +254,8 @@
   }
   
   .chatHeader {
-    padding: 8px 12px;
-    gap: 8px;
+    padding: 4px 6px;
+    gap: 4px;
     position: relative;
   }
   
@@ -273,14 +273,17 @@
   
   .headerControls {
     width: 100%;
-    gap: 8px;
+    gap: 4px;
+    padding: 0;
+    margin: 0;
   }
   
   .dropdownsRow {
-    gap: 6px;
+    gap: 2px;
     justify-content: center;
     flex-wrap: wrap;
-    padding: 0 4px;
+    padding: 0 2px;
+    margin: 0;
   }
   
   .buttonsRow {
@@ -290,20 +293,30 @@
     padding: 0 2px;
   }
   
+  .lengthRow {
+    justify-content: center !important;
+    align-items: center !important;
+  }
+  
+  .radioButtons {
+    gap: 5px !important;
+  }
+  
+  .radioLabel {
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+  
+  /* Let selectors break to their own line and fill width on tablets/phones */
   .providerSelector, .styleSelector, .lengthSelector {
     min-width: 0;
-    flex: 1;
-    max-width: 100px;
+    flex: 1 1 100%;
+    max-width: 100%;
   }
   
-  .styleSelector {
-    max-width: 90px; /* Shorter for "Style" */
-  }
+  .styleSelector { max-width: 100%; }
   
-  .lengthSelector {
-    max-width: 110px; /* "Length" instead of "Response Length" */
-    min-width: 100px;
-  }
+  .lengthSelector { max-width: 100%; }
   
   .dropdownLabel {
     font-size: 8px;
@@ -344,6 +357,7 @@
   
   .providerSelect, .styleSelect, .lengthSelect {
     width: 100%;
+    max-width: 100%;
     font-size: 11px;
     padding: 6px 8px;
     min-width: 0;
@@ -356,6 +370,47 @@
   .lengthSelect {
     padding: 6px 4px; /* Reduce padding for more text space */
     font-size: 10px;   /* Slightly smaller font for longer text */
+  }
+  
+  .lengthRow {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 4px;
+    width: 100%;
+    padding: 4px 0;
+    text-align: center;
+  }
+  
+  .radioButtons {
+    display: flex;
+    gap: 60px;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    margin: 0 auto;
+  }
+  
+  .radioLabel {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+    font-size: 13px;
+    color: #333;
+    padding: 8px 12px;
+    border-radius: 4px;
+    transition: background-color 0.2s;
+    white-space: nowrap;
+    margin: 0 20px !important;
+  }
+  
+  .radioLabel:hover {
+    background-color: #f8f9fa;
+  }
+  
+  .radioLabel input[type="radio"] {
+    margin: 0;
   }
   
   .customSelect {
@@ -479,13 +534,14 @@
   
   .providerSelect, .styleSelect, .lengthSelect {
     min-width: 0;
-    max-width: 90px;
+    max-width: 75px;
     font-size: 8px;
     padding: 2px 3px;
   }
   
   .customSelect {
-    min-width: 50px;
+    width: 100%;
+    min-width: 0;
     padding: 3px 4px;
   }
   
@@ -542,6 +598,37 @@
   gap: 3px;
   flex-wrap: wrap;
   justify-content: center;
+}
+
+.lengthRow {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.radioButtons {
+  display: flex;
+  gap: 5px !important;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.radioLabel {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  cursor: pointer;
+  font-size: 13px;
+  color: #333;
+  padding: 0 !important;
+  border-radius: 4px;
+  transition: background-color 0.2s;
+  white-space: nowrap;
+  margin: 0 !important;
 }
 
 .buttonsRow {
@@ -1297,7 +1384,8 @@
   box-shadow: 0 8px 24px rgba(0,0,0,0.12);
   max-height: 280px;
   overflow: auto;
-  z-index: 10000;
+  /* Must be above fixed header (z-index 99999) in page mode */
+  z-index: 100001;
 }
 
 .customOption {
@@ -1475,7 +1563,8 @@
   border: 1px solid #ddd;
   border-radius: 6px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  z-index: 9999;
+  /* Above header */
+  z-index: 100001;
   min-width: 140px;
   margin-top: 4px;
 }

@@ -5,6 +5,7 @@ import { useRouter } from 'next/navigation'
 import styles from './Settings.module.css'
 
 export type LLMProvider = 'openai' | 'anthropic' | 'deepseek' | 'gemini' | 'custom'
+export type LLMModel = 'gpt-4o' | 'gpt-4-turbo' | 'gpt-4' | 'claude-3-5-sonnet' | 'claude-3-opus' | 'claude-3-sonnet' | 'deepseek-chat' | 'deepseek-coder' | 'gemini-1.5-flash' | 'gemini-1.5-pro' | 'gemini-2.0-flash' | 'custom'
 export type ResponseLength = 'brief' | 'medium' | 'long'
 export type FontFamily = 'serif' | 'sans-serif' | 'monospace'
 export type ReadingMode = 'scroll' | 'page'
@@ -31,6 +32,7 @@ export type ExplanationStyle =
 
 export interface SettingsData {
   llmProvider: LLMProvider
+  llmModel?: LLMModel
   responseLength: ResponseLength
   textFont: FontFamily
   chatFont: FontFamily
@@ -52,6 +54,7 @@ interface SettingsProps {
 
 const DEFAULT_SETTINGS: SettingsData = {
   llmProvider: 'gemini',
+  llmModel: 'gemini-1.5-flash',
   responseLength: 'brief',
   textFont: 'serif',
   chatFont: 'sans-serif',
@@ -59,6 +62,31 @@ const DEFAULT_SETTINGS: SettingsData = {
   chatFontSize: 16,
   readingMode: 'scroll',
   explanationStyle: 'neutral'
+}
+
+const MODEL_OPTIONS: Record<LLMProvider, { model: LLMModel, label: string, description?: string }[]> = {
+  openai: [
+    { model: 'gpt-4o', label: 'GPT-4o', description: 'Latest flagship model' },
+    { model: 'gpt-4-turbo', label: 'GPT-4 Turbo', description: 'Fast and capable' },
+    { model: 'gpt-4', label: 'GPT-4', description: 'Classic model' }
+  ],
+  anthropic: [
+    { model: 'claude-3-5-sonnet', label: 'Claude 3.5 Sonnet', description: 'Latest and most capable' },
+    { model: 'claude-3-opus', label: 'Claude 3 Opus', description: 'Most powerful' },
+    { model: 'claude-3-sonnet', label: 'Claude 3 Sonnet', description: 'Balanced performance' }
+  ],
+  deepseek: [
+    { model: 'deepseek-chat', label: 'DeepSeek Chat', description: 'General purpose' },
+    { model: 'deepseek-coder', label: 'DeepSeek Coder', description: 'Code-focused' }
+  ],
+  gemini: [
+    { model: 'gemini-1.5-flash', label: 'Gemini 1.5 Flash', description: 'Fast and efficient (Default)' },
+    { model: 'gemini-1.5-pro', label: 'Gemini 1.5 Pro', description: 'Most capable' },
+    { model: 'gemini-2.0-flash', label: 'Gemini 2.0 Flash', description: 'Latest generation' }
+  ],
+  custom: [
+    { model: 'custom', label: 'Custom Model', description: 'Bring Your Own LLM' }
+  ]
 }
 
 const Settings: React.FC<SettingsProps> = ({ isOpen, onClose, settings, onSettingsChange }) => {
@@ -105,16 +133,14 @@ const Settings: React.FC<SettingsProps> = ({ isOpen, onClose, settings, onSettin
     }
   }, [localSettings, settings, onSettingsChange])
 
-  const handleProviderChange = (provider: LLMProvider) => {
-    console.log('Settings: handleProviderChange called with:', provider)
-    console.log('Settings: Current localSettings:', localSettings)
-    setLocalSettings(prev => {
-      const newSettings = { ...prev, llmProvider: provider }
-      console.log('Settings: New localSettings will be:', newSettings)
-      return newSettings
-    })
-    setShowCustomFields(provider === 'custom')
-  }
+
+  // Ensure llmModel is set when component mounts
+  useEffect(() => {
+    if (!localSettings.llmModel) {
+      const defaultModel = MODEL_OPTIONS[localSettings.llmProvider][0].model
+      setLocalSettings(prev => ({ ...prev, llmModel: defaultModel }))
+    }
+  }, [localSettings.llmProvider, localSettings.llmModel])
 
 
   const handleReset = () => {
@@ -368,68 +394,53 @@ const Settings: React.FC<SettingsProps> = ({ isOpen, onClose, settings, onSettin
           <div className={styles.settingGroup}>
             <h3>Language Model</h3>
             <div className={styles.radioGroup}>
-              <label className={styles.radioLabel}>
-                <input
-                  type="radio"
-                  name="llmProvider"
-                  value="openai"
-                  checked={localSettings.llmProvider === 'openai'}
-                  onChange={() => {
-                    console.log('Settings: OpenAI radio clicked')
-                    handleProviderChange('openai')
-                  }}
-                />
-                <span>GPT-4 (OpenAI)</span>
-              </label>
-              <label className={styles.radioLabel}>
-                <input
-                  type="radio"
-                  name="llmProvider"
-                  value="anthropic"
-                  checked={localSettings.llmProvider === 'anthropic'}
-                  onChange={() => {
-                    console.log('Settings: Anthropic radio clicked')
-                    handleProviderChange('anthropic')
-                  }}
-                />
-                <span>Claude (Anthropic)</span>
-              </label>
-              <label className={styles.radioLabel}>
-                <input
-                  type="radio"
-                  name="llmProvider"
-                  value="deepseek"
-                  checked={localSettings.llmProvider === 'deepseek'}
-                  onChange={() => {
-                    console.log('Settings: DeepSeek radio clicked')
-                    handleProviderChange('deepseek')
-                  }}
-                />
-                <span>DeepSeek</span>
-              </label>
-              <label className={styles.radioLabel}>
-                <input
-                  type="radio"
-                  name="llmProvider"
-                  value="gemini"
-                  checked={localSettings.llmProvider === 'gemini'}
-                  onChange={() => {
-                    console.log('Settings: Gemini radio clicked')
-                    handleProviderChange('gemini')
-                  }}
-                />
-                <span>Gemini (Google) - Default</span>
-              </label>
-              <label className={styles.radioLabel}>
-                <input
-                  type="radio"
-                  name="llmProvider"
-                  value="custom"
-                  checked={localSettings.llmProvider === 'custom'}
-                  onChange={() => handleProviderChange('custom')}
-                />
-                <span>Bring Your Own LLM (BYOLLM)</span>
-              </label>
+              {Object.entries(MODEL_OPTIONS).map(([provider, models]) => (
+                <div key={provider}>
+                  {/* Provider Header */}
+                  <div style={{ 
+                    marginBottom: '8px',
+                    fontWeight: '600',
+                    color: '#333',
+                    fontSize: '16px'
+                  }}>
+                    {provider === 'openai' ? 'OpenAI' :
+                     provider === 'anthropic' ? 'Anthropic' :
+                     provider === 'deepseek' ? 'DeepSeek' :
+                     provider === 'gemini' ? 'Google Gemini - Default' :
+                     'Bring Your Own LLM (BYOLLM)'}
+                  </div>
+                  
+                  {/* Models under this provider */}
+                  <div style={{ marginLeft: '20px', marginBottom: '16px' }}>
+                    {models.map((option) => (
+                      <label key={option.model} className={styles.radioLabel}>
+                        <input
+                          type="radio"
+                          name="llmSelection"
+                          value={`${provider}-${option.model}`}
+                          checked={localSettings.llmProvider === provider && localSettings.llmModel === option.model}
+                          onChange={() => {
+                            setLocalSettings(prev => ({ 
+                              ...prev, 
+                              llmProvider: provider as LLMProvider,
+                              llmModel: option.model
+                            }))
+                            setShowCustomFields(provider === 'custom')
+                          }}
+                        />
+                        <span>
+                          {option.label}
+                          {option.description && (
+                            <span style={{ color: '#666', fontSize: '14px', marginLeft: '8px' }}>
+                              - {option.description}
+                            </span>
+                          )}
+                        </span>
+                      </label>
+                    ))}
+                  </div>
+                </div>
+              ))}
             </div>
 
             {showCustomFields && (

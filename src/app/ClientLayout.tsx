@@ -4,6 +4,7 @@ import { SettingsProvider } from '@/contexts/SettingsContext'
 import { ProfileProvider } from '@/contexts/ProfileContext'
 import { AuthProvider } from '@/contexts/AuthContext'
 import Header from '@/components/Header'
+import styles from './ClientLayout.module.css'
 import React from 'react'
 
 export default function ClientLayout({ children }: { children: React.ReactNode }) {
@@ -13,11 +14,7 @@ export default function ClientLayout({ children }: { children: React.ReactNode }
         <SettingsProvider>
           <div>
             <Header />
-            <main style={{ 
-              maxWidth: '1024px',
-              margin: '0 auto',
-              padding: '20px 20px 60px 20px'
-            }}>
+            <main className={styles.main}>
               {children}
             </main>
           </div>

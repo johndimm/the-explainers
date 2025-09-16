@@ -11,6 +11,7 @@ export default function Header() {
   const { user, isAuthenticated, isLoading, signIn, signOut: handleSignOut } = useAuth()
   const [showMobileMenu, setShowMobileMenu] = useState(false)
   const menuRef = useRef<HTMLDivElement>(null)
+  const headerRef = useRef<HTMLElement>(null)
   const [subtitle, setSubtitle] = useState<string>('understand difficult texts')
   const [searchQuery, setSearchQuery] = useState('')
   const [showSearch, setShowSearch] = useState(false)
@@ -67,6 +68,24 @@ export default function Header() {
     if (showMobileMenu) document.addEventListener('mousedown', handleClickOutside)
     return () => document.removeEventListener('mousedown', handleClickOutside)
   }, [showMobileMenu])
+
+  // Keep a CSS variable with the current header height for layout spacing
+  useEffect(() => {
+    const updateHeaderHeightVar = () => {
+      if (headerRef.current) {
+        const h = headerRef.current.offsetHeight
+        document.documentElement.style.setProperty('--app-header-height', `${h}px`)
+      }
+    }
+    updateHeaderHeightVar()
+    window.addEventListener('resize', updateHeaderHeightVar)
+    const interval = setInterval(updateHeaderHeightVar, 300) // catch font/async changes briefly
+    setTimeout(() => clearInterval(interval), 2000)
+    return () => {
+      window.removeEventListener('resize', updateHeaderHeightVar)
+      clearInterval(interval)
+    }
+  }, [subtitle, pathname, showMobileMenu])
 
   useEffect(() => {
     // Update subtitle based on current book from database
@@ -131,23 +150,19 @@ export default function Header() {
 
   return (
     <header 
+      ref={headerRef}
       className="app-header"
       style={{
       background: 'white', 
       borderBottom: '1px solid #e0e0e0',
-      maxWidth: '1024px',
-      margin: '0 auto',
       width: '100%',
       position: 'fixed',
-      top: '0',
-      left: '50%',
-      transform: 'translateX(-50%)',
+      top: 0,
+      left: 0,
       zIndex: 99999,
-      boxShadow: '0 2px 4px rgba(0,0,0,0.1)',
-      isolation: 'isolate',
-      willChange: 'transform'
+      boxShadow: '0 2px 4px rgba(0,0,0,0.1)'
     }}>
-      <div style={{
+      <div className="container" style={{
         width: '100%',
         display: 'flex',
         justifyContent: 'space-between',

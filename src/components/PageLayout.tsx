@@ -18,7 +18,7 @@ const PageLayout: React.FC<PageLayoutProps> = ({
   return (
     <div className={`bg-white ${className}`}>
       {/* Header Section */}
-      <div className="page-header" style={{ marginTop: '60px' }}>
+      <div className="page-header" style={{ marginTop: 0 }}>
         <div className="container">
           <div className="card">
             <div className="card-body">
