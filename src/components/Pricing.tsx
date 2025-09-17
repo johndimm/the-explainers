@@ -132,7 +132,7 @@ const Pricing: React.FC<PricingProps> = ({ isOpen, onClose, bookTitle, author, i
           overflowY: 'auto',
           padding: '20px'
         }}>
-          {/* Free Demo Banner */}
+          {/* Free Tutorial Banner */}
           <div style={{
             background: 'linear-gradient(135deg, #10b981, #059669)',
             color: 'white',

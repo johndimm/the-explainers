@@ -638,7 +638,7 @@
   flex-wrap: wrap;
   justify-content: center;
   max-width: 100%;
-  overflow: hidden;
+  overflow: visible;
 }
 
 .providerSelector {
@@ -840,7 +840,7 @@
 
 .saveButton {
   padding: 6px 10px;
-  background: #17a2b8;
+  background: #28a745; /* green to match prior style */
   color: white;
   border: none;
   border-radius: 6px;
@@ -850,12 +850,12 @@
   transition: background-color 0.2s;
   white-space: nowrap;
   min-width: 70px;
-  max-width: 100px;
+  max-width: 120px;
   flex-shrink: 1;
 }
 
 .saveButton:hover:not(:disabled) {
-  background: #138496;
+  background: #218838;
 }
 
 .saveButton:disabled {
@@ -1553,6 +1553,7 @@
 .saveDropdown {
   position: relative;
   display: inline-block;
+  z-index: 1000;
 }
 
 .saveDropdownContent {

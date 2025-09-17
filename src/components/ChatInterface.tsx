@@ -79,7 +79,6 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ selectedText, contextInfo
   const [shareFormData, setShareFormData] = useState<{ title: string; content: string } | null>(null)
   const [shareDropdownOpen, setShareDropdownOpen] = useState<string | null>(null)
   const [saveFormatDropdownOpen, setSaveFormatDropdownOpen] = useState(false)
-  const [saveDropdownPosition, setSaveDropdownPosition] = useState({ top: 0, left: 0 })
   const [showClearConfirm, setShowClearConfirm] = useState(false)
   const latestResponseRef = useRef<HTMLDivElement>(null)
   const messagesContainerRef = useRef<HTMLDivElement>(null)
@@ -353,20 +352,34 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ selectedText, contextInfo
     }
   }, [messages, isPageMode])
 
-  // Close save dropdown when clicking outside
+  // Close save dropdown on outside click or Escape
   useEffect(() => {
+    if (!saveFormatDropdownOpen) return
+
     const handleClickOutside = (event: MouseEvent) => {
-      if (saveFormatDropdownOpen && saveDropdownRef.current) {
-        const target = event.target as Node
-        if (!saveDropdownRef.current.contains(target)) {
-          setSaveFormatDropdownOpen(false)
-        }
+      if (!saveDropdownRef.current) return
+      const target = event.target as Node
+      if (!saveDropdownRef.current.contains(target)) {
+        setSaveFormatDropdownOpen(false)
       }
     }
 
-    if (saveFormatDropdownOpen) {
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') {
+        setSaveFormatDropdownOpen(false)
+      }
+    }
+
+    // Delay binding to avoid closing from the same click that opened it
+    const timeoutId = setTimeout(() => {
       document.addEventListener('mousedown', handleClickOutside)
-      return () => document.removeEventListener('mousedown', handleClickOutside)
+      document.addEventListener('keydown', handleKeyDown)
+    }, 0)
+
+    return () => {
+      clearTimeout(timeoutId)
+      document.removeEventListener('mousedown', handleClickOutside)
+      document.removeEventListener('keydown', handleKeyDown)
     }
   }, [saveFormatDropdownOpen])
 
@@ -401,22 +414,6 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ selectedText, contextInfo
     }
   }, [selectedText, isPageMode])
 
-  // Click outside handler for save dropdown
-  useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
-      if (saveDropdownRef.current && !saveDropdownRef.current.contains(event.target as Node)) {
-        setSaveFormatDropdownOpen(false)
-      }
-    }
-
-    if (saveFormatDropdownOpen) {
-      document.addEventListener('mousedown', handleClickOutside)
-    }
-
-    return () => {
-      document.removeEventListener('mousedown', handleClickOutside)
-    }
-  }, [saveFormatDropdownOpen])
 
   // Set original selected text when it becomes available
   useEffect(() => {
@@ -1669,69 +1666,53 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ selectedText, contextInfo
                 Re-explain{hasChanges ? ' *' : ''}
               </button>
               <div className={styles.saveDropdown} ref={saveDropdownRef}>
-                <button 
-                  onClick={(e) => {
-                    console.log('🔍 SAVE BUTTON CLICKED:', { messagesLength: messages.length, disabled: messages.length === 0, currentDropdownOpen: saveFormatDropdownOpen })
-                    
-                    if (!saveFormatDropdownOpen) {
-                      // Calculate position when opening
-                      const rect = e.currentTarget.getBoundingClientRect()
-                      setSaveDropdownPosition({
-                        top: rect.bottom + 4,
-                        left: rect.left
-                      })
-                    }
-                    
-                    setSaveFormatDropdownOpen(!saveFormatDropdownOpen)
-                    console.log('🔍 DROPDOWN SHOULD NOW BE:', !saveFormatDropdownOpen)
-                  }}
-                  disabled={messages.length === 0}
-                  className={styles.saveButton}
-                  title="Save chat history to file (includes book context, AI responses, and settings)"
-                >
-                  💾 Save Chat ▼
-                </button>
+              <button 
+                onClick={() => setSaveFormatDropdownOpen(prev => !prev)}
+                disabled={messages.length === 0}
+                className={styles.saveButton}
+                title="Save chat history to file"
+              >
+                💾 Save Chat ▾
+              </button>
               {saveFormatDropdownOpen && (
-                <div 
-                  className={styles.saveDropdownContent}
-                  style={{
-                    top: `${saveDropdownPosition.top}px`,
-                    left: `${saveDropdownPosition.left}px`
-                  }}
-                >
+                <div className={styles.saveDropdownContent}>
                   <button 
-                    className={styles.saveOption}
                     onClick={() => {
                       console.log('🔍 JSON SAVE CLICKED')
                       saveChatHistory('json')
+                      setSaveFormatDropdownOpen(false)
                     }}
+                    className={styles.saveOption}
                   >
                     📄 JSON
                   </button>
                   <button 
-                    className={styles.saveOption}
                     onClick={() => {
                       console.log('🔍 HTML SAVE CLICKED')
                       saveChatHistory('html')
+                      setSaveFormatDropdownOpen(false)
                     }}
+                    className={styles.saveOption}
                   >
                     🌐 HTML
                   </button>
                   <button 
-                    className={styles.saveOption}
                     onClick={() => {
                       console.log('🔍 MARKDOWN SAVE CLICKED')
                       saveChatHistory('markdown')
+                      setSaveFormatDropdownOpen(false)
                     }}
+                    className={styles.saveOption}
                   >
                     📝 Markdown
                   </button>
                   <button 
-                    className={styles.saveOption}
                     onClick={() => {
                       console.log('🔍 TEXT SAVE CLICKED')
                       saveChatHistory('text')
+                      setSaveFormatDropdownOpen(false)
                     }}
+                    className={styles.saveOption}
                   >
                     📋 Plain Text
                   </button>

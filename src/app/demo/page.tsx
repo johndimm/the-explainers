@@ -29,7 +29,7 @@ const demoSteps = [
 export default function DemoPage() {
   return (
     <PageLayout 
-      title="Demo" 
+      title="Tutorial" 
       subtitle="A quick walkthrough: select a passage and get an AI explanation"
     >
       <div className="demo-grid">

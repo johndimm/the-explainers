@@ -43,6 +43,19 @@ export default function Header() {
     }
   }
 
+  const handleClearSearch = () => {
+    setSearchQuery('')
+    setCurrentSearchIndex(0)
+    setTotalSearchResults(0)
+    
+    // Dispatch clear search event for the current page to handle
+    if (typeof window !== 'undefined') {
+      window.dispatchEvent(new CustomEvent('headerClearSearch', { 
+        detail: { type: searchContext.type } 
+      }))
+    }
+  }
+
   const handleNextSearch = () => {
     if (typeof window !== 'undefined') {
       window.dispatchEvent(new CustomEvent('headerSearchNext', { 
@@ -172,7 +185,19 @@ export default function Header() {
       }}>
         <div style={{ flex: 1 }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: '12px', height: '40px' }}>
-            <h1 style={{ margin: 0, fontSize: '18px', fontWeight: 'bold', color: '#333', lineHeight: '1.2' }}>The Explainers</h1>
+            <h1 
+              onClick={() => router.push('/')}
+              style={{ 
+                margin: 0, 
+                fontSize: '18px', 
+                fontWeight: 'bold', 
+                color: '#333', 
+                lineHeight: '1.2',
+                cursor: 'pointer'
+              }}
+            >
+              The Explainers
+            </h1>
             
             {searchContext.show && (
               <div style={{ position: 'relative', display: 'flex', alignItems: 'center', flex: 1, maxWidth: '400px' }}>
@@ -201,7 +226,7 @@ export default function Header() {
                     width: '100%',
                     backgroundColor: 'white',
                     color: 'black',
-                    paddingRight: '40px' // Make room for arrows
+                    paddingRight: searchQuery ? '70px' : '40px' // Make room for clear button and arrows
                   }}
                   onClick={(e) => {
                     e.stopPropagation()
@@ -268,11 +293,21 @@ export default function Header() {
         </div>
         <div ref={menuRef} style={{ position: 'relative', display: 'flex', alignItems: 'center', height: '40px', marginTop: '0' }}>
           <button 
-            onClick={() => {
+            onClick={(e) => {
+              e.preventDefault()
+              e.stopPropagation()
               console.log('Hamburger clicked, current state:', showMobileMenu)
               setShowMobileMenu(!showMobileMenu)
             }}
-            style={{ padding: '8px', background: 'none', border: 'none', cursor: 'pointer', fontSize: '18px', color: '#333' }}
+            style={{ 
+              padding: '8px', 
+              background: 'none', 
+              border: 'none', 
+              cursor: 'pointer', 
+              fontSize: '18px', 
+              color: '#333',
+              zIndex: 100001
+            }}
           >
             ☰
           </button>
@@ -303,7 +338,7 @@ export default function Header() {
               <button onClick={() => { router.push('/settings'); setShowMobileMenu(false) }} style={{ display: 'block', width: '100%', padding: '12px 16px', background: 'none', border: 'none', textAlign: 'left', cursor: 'pointer', borderBottom: '1px solid #f0f0f0' }}>⚙️ Settings</button>
               <button onClick={() => { router.push('/guide'); setShowMobileMenu(false) }} style={{ display: 'block', width: '100%', padding: '12px 16px', background: 'none', border: 'none', textAlign: 'left', cursor: 'pointer', borderBottom: '1px solid #f0f0f0' }}>📖 User Guide</button>
               <button onClick={() => { router.push('/about'); setShowMobileMenu(false) }} style={{ display: 'block', width: '100%', padding: '12px 16px', background: 'none', border: 'none', textAlign: 'left', cursor: 'pointer', borderBottom: '1px solid #f0f0f0' }}>ℹ️ About</button>
-              <button onClick={() => { router.push('/demo'); setShowMobileMenu(false) }} style={{ display: 'block', width: '100%', padding: '12px 16px', background: 'none', border: 'none', textAlign: 'left', cursor: 'pointer', borderBottom: '1px solid #f0f0f0' }}>🗯️ Demo</button>
+              <button onClick={() => { router.push('/demo'); setShowMobileMenu(false) }} style={{ display: 'block', width: '100%', padding: '12px 16px', background: 'none', border: 'none', textAlign: 'left', cursor: 'pointer', borderBottom: '1px solid #f0f0f0' }}>🗯️ Tutorial</button>
               
               {/* Auth buttons */}
               <div style={{ borderTop: '1px solid #e0e0e0', marginTop: '8px', paddingTop: '8px' }}>

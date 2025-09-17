@@ -260,7 +260,7 @@ function CreditsContent() {
                   borderBottom: '1px solid #f0f0f0'
                 }}
               >
-                🗯️ Demo
+                🗯️ Tutorial
               </button>
               <button 
                 onClick={() => setShowMobileMenu(false)}
@@ -338,7 +338,7 @@ function CreditsContent() {
 
       {/* Main Content */}
       <main className="container">
-        {/* Free Demo Banner */}
+        {/* Free Tutorial Banner */}
         <div className="card mb-8" style={{ background: 'linear-gradient(135deg, var(--color-success), var(--color-success-hover))' }}>
           <div className="card-body text-center text-white">
             <div className="text-3xl mb-3">🎉 Currently FREE!</div>

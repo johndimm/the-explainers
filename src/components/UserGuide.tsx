@@ -33,6 +33,71 @@ const UserGuide: React.FC = () => {
           <li style={{ marginBottom: '5px' }}><strong>Search navigation</strong>: Use the up/down arrows next to the search to jump between hits.</li>
         </ul>
 
+        <h3 style={{ color: '#007bff', marginTop: '25px', marginBottom: '10px' }}>Hamburger Menu Guide</h3>
+        <p>Click the hamburger menu (☰) in the top right to access all features. Here's what each option does:</p>
+        
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '15px', margin: '20px 0' }}>
+          <div style={{ background: '#f8f9fa', padding: '15px', borderRadius: '8px', border: '1px solid #e9ecef' }}>
+            <h4 style={{ color: '#666', marginTop: '0', marginBottom: '8px' }}>📖 Reader</h4>
+            <p style={{ fontSize: '14px', marginBottom: '5px' }}><strong>What it does:</strong> Opens the main text reading interface where you can read books and select passages for explanation.</p>
+            <p style={{ fontSize: '14px', margin: '0' }}><strong>When to use:</strong> When you want to read a book and get AI explanations of difficult passages.</p>
+          </div>
+          
+          <div style={{ background: '#f8f9fa', padding: '15px', borderRadius: '8px', border: '1px solid #e9ecef' }}>
+            <h4 style={{ color: '#666', marginTop: '0', marginBottom: '8px' }}>💬 Chat</h4>
+            <p style={{ fontSize: '14px', marginBottom: '5px' }}><strong>What it does:</strong> Opens a standalone chat interface where you can ask questions about any text or topic.</p>
+            <p style={{ fontSize: '14px', margin: '0' }}><strong>When to use:</strong> When you want to ask general questions or discuss topics without being in a specific book.</p>
+          </div>
+          
+          <div style={{ background: '#f8f9fa', padding: '15px', borderRadius: '8px', border: '1px solid #e9ecef' }}>
+            <h4 style={{ color: '#666', marginTop: '0', marginBottom: '8px' }}>📚 Library</h4>
+            <p style={{ fontSize: '14px', marginBottom: '5px' }}><strong>What it does:</strong> Browse and select from hundreds of classic books, or upload your own texts.</p>
+            <p style={{ fontSize: '14px', margin: '0' }}><strong>When to use:</strong> When you want to start reading a new book or add your own text files.</p>
+          </div>
+          
+          <div style={{ background: '#f8f9fa', padding: '15px', borderRadius: '8px', border: '1px solid #e9ecef' }}>
+            <h4 style={{ color: '#666', marginTop: '0', marginBottom: '8px' }}>🎭 Explainers</h4>
+            <p style={{ fontSize: '14px', marginBottom: '5px' }}><strong>What it does:</strong> Choose from 50+ AI personalities to explain texts in different styles (comedians, professors, authors, etc.).</p>
+            <p style={{ fontSize: '14px', margin: '0' }}><strong>When to use:</strong> When you want to change how explanations are delivered or try a new explainer personality.</p>
+          </div>
+          
+          <div style={{ background: '#f8f9fa', padding: '15px', borderRadius: '8px', border: '1px solid #e9ecef' }}>
+            <h4 style={{ color: '#666', marginTop: '0', marginBottom: '8px' }}>💳 Credits</h4>
+            <p style={{ fontSize: '14px', marginBottom: '5px' }}><strong>What it does:</strong> View your usage statistics, remaining credits, and account information.</p>
+            <p style={{ fontSize: '14px', margin: '0' }}><strong>When to use:</strong> When you want to check how many explanations you've used or manage your account.</p>
+          </div>
+          
+          <div style={{ background: '#f8f9fa', padding: '15px', borderRadius: '8px', border: '1px solid #e9ecef' }}>
+            <h4 style={{ color: '#666', marginTop: '0', marginBottom: '8px' }}>👤 Profile</h4>
+            <p style={{ fontSize: '14px', marginBottom: '5px' }}><strong>What it does:</strong> Set your age, education level, and preferred language for personalized explanations.</p>
+            <p style={{ fontSize: '14px', margin: '0' }}><strong>When to use:</strong> When you first start using the app or want to change how explanations are tailored to you.</p>
+          </div>
+          
+          <div style={{ background: '#f8f9fa', padding: '15px', borderRadius: '8px', border: '1px solid #e9ecef' }}>
+            <h4 style={{ color: '#666', marginTop: '0', marginBottom: '8px' }}>⚙️ Settings</h4>
+            <p style={{ fontSize: '14px', marginBottom: '5px' }}><strong>What it does:</strong> Configure AI model provider, response length, fonts, and other preferences.</p>
+            <p style={{ fontSize: '14px', margin: '0' }}><strong>When to use:</strong> When you want to customize the AI behavior, change fonts, or adjust technical settings.</p>
+          </div>
+          
+          <div style={{ background: '#f8f9fa', padding: '15px', borderRadius: '8px', border: '1px solid #e9ecef' }}>
+            <h4 style={{ color: '#666', marginTop: '0', marginBottom: '8px' }}>📖 User Guide</h4>
+            <p style={{ fontSize: '14px', marginBottom: '5px' }}><strong>What it does:</strong> Opens this comprehensive guide with tips and instructions.</p>
+            <p style={{ fontSize: '14px', margin: '0' }}><strong>When to use:</strong> When you need help learning how to use the app or want to explore advanced features.</p>
+          </div>
+          
+          <div style={{ background: '#f8f9fa', padding: '15px', borderRadius: '8px', border: '1px solid #e9ecef' }}>
+            <h4 style={{ color: '#666', marginTop: '0', marginBottom: '8px' }}>ℹ️ About</h4>
+            <p style={{ fontSize: '14px', marginBottom: '5px' }}><strong>What it does:</strong> Learn about The Explainers app, its mission, and the team behind it.</p>
+            <p style={{ fontSize: '14px', margin: '0' }}><strong>When to use:</strong> When you want to learn more about the app's purpose and background.</p>
+          </div>
+          
+          <div style={{ background: '#f8f9fa', padding: '15px', borderRadius: '8px', border: '1px solid #e9ecef' }}>
+            <h4 style={{ color: '#666', marginTop: '0', marginBottom: '8px' }}>🗯️ Tutorial</h4>
+            <p style={{ fontSize: '14px', marginBottom: '5px' }}><strong>What it does:</strong> Interactive walkthrough showing how to select text and get explanations.</p>
+            <p style={{ fontSize: '14px', margin: '0' }}><strong>When to use:</strong> When you're new to the app and want a hands-on demonstration of the core features.</p>
+          </div>
+        </div>
+
         <h3 style={{ color: '#007bff', marginTop: '25px', marginBottom: '10px' }}>First-Time Setup</h3>
         <p>For the best experience, configure your profile and preferences:</p>
 
