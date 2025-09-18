@@ -26,8 +26,8 @@ export const FilteredStyleList: React.FC<FilteredStyleListProps> = ({
   getPhotoSrc,
   stylesCss
 }) => {
-  // Filter styles that have Wikipedia links (embedded in the data)
-  const filteredStyles = styles.filter(style => style.wikipediaUrl)
+  // Show all styles (Wikipedia links are optional)
+  const filteredStyles = styles
 
   return (
     <div className={stylesCss.styleGrid}>

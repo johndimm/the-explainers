@@ -19,6 +19,103 @@ export const formatTimeOnly = (timestamp: string) => {
   });
 }
 
+const formatStyleName = (style: string): string => {
+  const styleMap: { [key: string]: string } = {
+    'harold-bloom': 'Harold Bloom',
+    'jerry-seinfeld': 'Jerry Seinfeld',
+    'david-foster-wallace': 'David Foster Wallace',
+    'oscar-wilde': 'Oscar Wilde',
+    'maya-angelou': 'Maya Angelou',
+    'douglas-adams': 'Douglas Adams',
+    'terry-pratchett': 'Terry Pratchett',
+    'joan-didion': 'Joan Didion',
+    'david-sedaris': 'David Sedaris',
+    'mark-twain': 'Mark Twain',
+    'james-joyce': 'James Joyce',
+    'samuel-beckett': 'Samuel Beckett',
+    'marilyn-monroe': 'Marilyn Monroe',
+    'louis-theroux': 'Louis Theroux',
+    'robin-williams': 'Robin Williams',
+    'kurt-vonnegut': 'Kurt Vonnegut',
+    'carl-sagan': 'Carl Sagan',
+    'louis-ck': 'Louis C.K.',
+    'neil-degrasse-tyson': 'Neil deGrasse Tyson',
+    'stephen-fry': 'Stephen Fry',
+    'bill-bryson': 'Bill Bryson',
+    'anthony-bourdain': 'Anthony Bourdain',
+    'andrew-dice-clay': 'Andrew Dice Clay',
+    'howard-stern': 'Howard Stern',
+    'tina-fey': 'Tina Fey',
+    'dave-chappelle': 'Dave Chappelle',
+    'amy-poehler': 'Amy Poehler',
+    'ricky-gervais': 'Ricky Gervais',
+    'sarah-silverman': 'Sarah Silverman',
+    'john-mulaney': 'John Mulaney',
+    'ali-wong': 'Ali Wong',
+    'bo-burnham': 'Bo Burnham',
+    'oprah-winfrey': 'Oprah Winfrey',
+    'david-letterman': 'David Letterman',
+    'conan-obrien': 'Conan O\'Brien',
+    'stephen-colbert': 'Stephen Colbert',
+    'jimmy-fallon': 'Jimmy Fallon',
+    'ellen-degeneres': 'Ellen DeGeneres',
+    'trevor-noah': 'Trevor Noah',
+    'john-oliver': 'John Oliver',
+    'jon-stewart': 'Jon Stewart',
+    'ts-eliot': 'T.S. Eliot',
+    'rudyard-kipling': 'Rudyard Kipling',
+    'tom-wolfe': 'Tom Wolfe',
+    'stephen-king': 'Stephen King',
+    'william-shakespeare': 'William Shakespeare',
+    'bernie-sanders': 'Bernie Sanders',
+    'martin-luther-king': 'Martin Luther King',
+    'john-f-kennedy': 'John F. Kennedy',
+    'james-carville': 'James Carville',
+    'donald-trump': 'Donald Trump',
+    'george-w-bush': 'George W. Bush',
+    'barack-obama': 'Barack Obama',
+    'dorothy-parker': 'Dorothy Parker',
+    'ernest-hemingway': 'Ernest Hemingway',
+    'flannery-oconnor': 'Flannery O\'Connor',
+    'humphrey-bogart': 'Humphrey Bogart',
+    'anthony-jeselnik': 'Anthony Jeselnik',
+    'doug-stanhope': 'Doug Stanhope',
+    'jim-norton': 'Jim Norton',
+    'aaron-sorkin': 'Aaron Sorkin',
+    'woody-allen': 'Woody Allen',
+    'jim-jefferies': 'Jim Jefferies',
+    'daniel-tosh': 'Daniel Tosh',
+    'andy-andrist': 'Andy Andrist',
+    'bill-burr': 'Bill Burr',
+    'lewis-black': 'Lewis Black',
+    'george-carlin': 'George Carlin',
+    'sam-kinison': 'Sam Kinison',
+    'paul-mooney': 'Paul Mooney',
+    'bill-hicks': 'Bill Hicks',
+    'bob-saget': 'Bob Saget',
+    'norm-macdonald': 'Norm Macdonald',
+    'bernard-henri-levy': 'Bernard-Henri Lévy',
+    'michel-houellebecq': 'Michel Houellebecq',
+    'bill-maher': 'Bill Maher',
+    'john-ruskin': 'John Ruskin',
+    'samuel-johnson': 'Samuel Johnson',
+    'christopher-hitchens': 'Christopher Hitchens',
+    'christopher-marlowe': 'Christopher Marlowe',
+    'ben-jonson': 'Ben Jonson',
+    'francis-bacon': 'Francis Bacon',
+    'charles-dickens': 'Charles Dickens',
+    'cormac-mccarthy': 'Cormac McCarthy',
+    'quine': 'W.V.O. Quine',
+    'putnam': 'Hilary Putnam',
+    'kripke': 'Saul Kripke',
+    'michael-dummett': 'Michael Dummett',
+    'thomas-nagel': 'Thomas Nagel',
+    'david-lewis': 'David Lewis'
+  };
+  
+  return styleMap[style] || style.replace(/-/g, ' ').replace(/\b\w/g, l => l.toUpperCase());
+}
+
 export const convertToHTML = (data: any) => {
   // Filter out video messages from chat history
   const filteredMessages = data.messages.filter((message: any) => !message.videoId);
@@ -45,12 +142,19 @@ export const convertToHTML = (data: any) => {
     } else {
       const providerClass = message.provider ? message.provider.toLowerCase() : '';
       const providerName = message.provider ? message.provider.toUpperCase() : 'Assistant';
+      const modelName = message.model || '';
+      const styleName = message.style || '';
+      
+      // Build explainer info
+      let explainerInfo = providerName;
+      if (modelName) explainerInfo += ` (${modelName})`;
+      if (styleName && styleName !== 'neutral') explainerInfo += ` - in the style of ${formatStyleName(styleName)}`;
       
       return `
       <div class="message assistant">
           <div class="message-bubble">${message.content}</div>
           <div class="message-meta">
-              <span class="provider-badge ${providerClass}">${providerName}</span>
+              <span class="provider-badge ${providerClass}">${explainerInfo}</span>
               <span class="timestamp">${time}</span>
           </div>
       </div>`;
@@ -341,8 +445,16 @@ export const convertToMarkdown = (data: any) => {
       markdown += `### 👤 User (${time})\n\n`;
       markdown += `${message.content}\n\n`;
     } else {
-      const provider = message.provider ? ` - ${message.provider.toUpperCase()}` : '';
-      markdown += `### 🤖 Assistant${provider} (${time})\n\n`;
+      const provider = message.provider ? message.provider.toUpperCase() : 'Assistant';
+      const model = message.model || '';
+      const style = message.style || '';
+      
+      // Build explainer info
+      let explainerInfo = `🤖 ${provider}`;
+      if (model) explainerInfo += ` (${model})`;
+      if (style && style !== 'neutral') explainerInfo += ` - in the style of ${formatStyleName(style)}`;
+      
+      markdown += `### ${explainerInfo} (${time})\n\n`;
       markdown += `${message.content}\n\n`;
     }
   });
@@ -431,8 +543,16 @@ export const convertToPlainText = (data: any) => {
       text += `[${time}] USER:\n`;
       text += `${message.content}\n\n`;
     } else {
-      const provider = message.provider ? ` (${message.provider.toUpperCase()})` : '';
-      text += `[${time}] ASSISTANT${provider}:\n`;
+      const provider = message.provider ? message.provider.toUpperCase() : 'Assistant';
+      const model = message.model || '';
+      const style = message.style || '';
+      
+      // Build explainer info
+      let explainerInfo = `ASSISTANT (${provider})`;
+      if (model) explainerInfo += ` - ${model}`;
+      if (style && style !== 'neutral') explainerInfo += ` - in the style of ${formatStyleName(style)}`;
+      
+      text += `[${time}] ${explainerInfo}:\n`;
       text += `${message.content}\n\n`;
     }
   });

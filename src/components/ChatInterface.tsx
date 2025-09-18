@@ -6,7 +6,8 @@ import styles from './ChatInterface.module.css'
 import { SettingsData, LLMProvider, ResponseLength, ExplanationStyle, LLMModel } from './Settings'
 import { ProfileData } from './Profile'
 import { useProfile } from '../contexts/ProfileContext'
-import styleCategoriesData from '../data/style-categories.json'
+import explainers from '../data/explainers.json'
+import models from '../data/models.json'
 import { log } from '../utils/log'
 import { convertToHTML, convertToMarkdown, convertToPlainText } from '../utils/chatConverters'
 
@@ -47,20 +48,6 @@ interface ChatInterfaceProps {
   isPageMode?: boolean
 }
 
-// Generate ordered list of all styles
-const getAllStyles = () => {
-  const allStyles: { value: ExplanationStyle, name: string }[] = [
-    { value: 'neutral', name: 'Neutral' }
-  ]
-  
-  // Add all categories in the same order as ExplainerStyles page
-  Object.values(styleCategoriesData).flat().forEach(style => {
-    allStyles.push({ value: style.value as ExplanationStyle, name: style.name })
-  })
-  
-  return allStyles
-}
-
 const ChatInterface: React.FC<ChatInterfaceProps> = ({ selectedText, contextInfo, settings, profile, onClose, onSettingsChange, bookTitle, author, isPageMode = false }) => {
   const router = useRouter()
   const [messages, setMessages] = useState<Message[]>([])
@@ -74,6 +61,7 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ selectedText, contextInfo
   const [showFullHistory, setShowFullHistory] = useState(false)
   const [originalSelectedText, setOriginalSelectedText] = useState("")
   const [showStyleMenu, setShowStyleMenu] = useState(false)
+  const [showProviderMenu, setShowProviderMenu] = useState(false)
   const [showHelpPopup, setShowHelpPopup] = useState<string | null>(null)
   const [showShareModal, setShowShareModal] = useState(false)
   const [shareFormData, setShareFormData] = useState<{ title: string; content: string } | null>(null)
@@ -84,9 +72,29 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ selectedText, contextInfo
   const messagesContainerRef = useRef<HTMLDivElement>(null)
   const inputRef = useRef<HTMLInputElement>(null)
   const styleMenuRef = useRef<HTMLDivElement>(null)
+  const providerMenuRef = useRef<HTMLDivElement>(null)
   const saveDropdownRef = useRef<HTMLDivElement>(null)
   const initializedRef = useRef(false)
   const { canUseExplanation, useExplanation, getBookExplanationsUsed } = useProfile()
+
+  // Generate ordered list of all styles
+  const getAllStyles = () => {
+    const allStyles: { value: ExplanationStyle, name: string }[] = [
+      { value: (explainers as any).neutral.value as ExplanationStyle, name: (explainers as any).neutral.name }
+    ]
+    
+    // Add all categories in the same order as ExplainerStyles page
+    Object.values((explainers as any).categories).flat().forEach((style: any) => {
+      allStyles.push({ value: style.value as ExplanationStyle, name: style.name })
+    })
+    
+    return allStyles
+  }
+
+  const getStylePersona = (style: ExplanationStyle): string => {
+    if (style === 'neutral') return 'Respond in a neutral, helpful tone without any particular style or personality.'
+    return (explainers as any).instructions[style] || 'Respond in a neutral, helpful tone.'
+  }
 
   const getProviderLabel = (provider: LLMProvider, _model?: LLMModel) => (
     provider === 'gemini' ? 'Google Gemini' :
@@ -96,22 +104,11 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ selectedText, contextInfo
     'Custom LLM'
   )
 
+  const getAllProviders = () => (models as any).providers
+
   const getModelLabel = (model?: string) => {
     if (!model) return ''
-    switch (model) {
-      case 'gemini-2.0-flash': return 'Gemini 2.0 Flash'
-      case 'gemini-1.5-pro': return 'Gemini 1.5 Pro'
-      case 'gemini-1.5-flash': return 'Gemini 1.5 Flash'
-      case 'gpt-4o': return 'GPT-4o'
-      case 'gpt-4-turbo': return 'GPT-4 Turbo'
-      case 'gpt-4': return 'GPT-4'
-      case 'claude-3-5-sonnet': return 'Claude 3.5 Sonnet'
-      case 'claude-3-opus': return 'Claude 3 Opus'
-      case 'claude-3-sonnet': return 'Claude 3 Sonnet'
-      case 'deepseek-chat': return 'DeepSeek Chat'
-      case 'deepseek-coder': return 'DeepSeek Coder'
-      default: return model
-    }
+    return (models as any).labels[model] || model
   }
 
   const scrollToLatestResponse = () => {
@@ -521,6 +518,23 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ selectedText, contextInfo
     }
   }, [showStyleMenu])
 
+  // Close custom provider menu when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event: Event) => {
+      if (providerMenuRef.current && !providerMenuRef.current.contains(event.target as Node)) {
+        setShowProviderMenu(false)
+      }
+    }
+    if (showProviderMenu) {
+      document.addEventListener('mousedown', handleClickOutside as EventListener)
+      document.addEventListener('touchstart', handleClickOutside as EventListener, { passive: true })
+    }
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside as EventListener)
+      document.removeEventListener('touchstart', handleClickOutside as EventListener)
+    }
+  }, [showProviderMenu])
+
   // Don't auto-save immediately - let user see changes and use re-explain button
   // Settings will be saved when re-explain is used or when component unmounts
 
@@ -539,13 +553,7 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ selectedText, contextInfo
       if (provider === 'deepseek' && settingsModel.startsWith('deepseek-')) return settingsModel
       if (provider === 'anthropic' && settingsModel.startsWith('claude-')) return settingsModel
     }
-    switch (provider) {
-      case 'gemini': return 'gemini-1.5-flash'
-      case 'openai': return 'gpt-4o'
-      case 'deepseek': return 'deepseek-chat'
-      case 'anthropic': return undefined
-      default: return undefined
-    }
+    return (models as any).chatDefaults[provider] || undefined
   }
 
   // Print current provider + model whenever selection changes
@@ -573,13 +581,7 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ selectedText, contextInfo
         if (provider === 'deepseek' && settingsModel.startsWith('deepseek-')) return settingsModel
         if (provider === 'anthropic' && settingsModel.startsWith('claude-')) return settingsModel
       }
-      switch (provider) {
-        case 'gemini': return 'gemini-1.5-flash'
-        case 'openai': return 'gpt-4o'
-        case 'deepseek': return 'deepseek-chat'
-        case 'anthropic': return undefined // use API default Sonnet
-        default: return undefined
-      }
+      return (models as any).chatDefaults[provider] || undefined
     }
 
     const selectedModel = chooseModelForProvider ? chooseModelForProvider(selectedProvider, settings.llmModel) : resolveModelFor(selectedProvider, settings.llmModel)
@@ -604,180 +606,7 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ selectedText, contextInfo
     return data.message
   }
 
-  const getStylePersona = (style: ExplanationStyle): string => {
-    switch (style) {
-      case 'harold-bloom':
-        return 'Respond in the style of Harold Bloom, the renowned literary critic. Use his characteristic passionate, erudite tone with deep literary analysis, references to the Western canon, and his concept of "the anxiety of influence." Be scholarly but accessible, with Bloom\'s distinctive voice and literary insights.'
-      case 'carl-sagan':
-        return 'Respond in the style of Carl Sagan, with his sense of cosmic wonder, scientific curiosity, and poetic language. Use his characteristic way of connecting human experiences to the vastness of the universe, his gentle but authoritative tone, and his gift for making complex ideas accessible and inspiring.'
-      case 'louis-ck':
-        return 'Respond in the style of Louis C.K.\'s observational comedy - conversational, self-deprecating, and finding the absurd in everyday situations. Use his characteristic "you know what I mean?" approach, honest observations about human nature, and ability to find humor in uncomfortable truths.'
-      case 'david-foster-wallace':
-        return 'Respond in the style of David Foster Wallace - hyper-detailed, intellectually rigorous, with extensive footnote-like asides and his characteristic way of examining the minutiae of human experience. Use his verbose, precise language and tendency to explore tangential but illuminating thoughts.'
-      case 'neil-degrasse-tyson':
-        return 'Respond in the style of Neil deGrasse Tyson - scientifically informed, accessible, and enthusiastic about connecting scientific principles to everyday life. Use his characteristic blend of authority and approachability, with his gift for making science relevant and exciting.'
-      case 'oscar-wilde':
-        return 'Respond in the style of Oscar Wilde - witty, paradoxical, and brilliantly quotable. Use his characteristic epigrams, dandyish observations about society, and his gift for turning conventional wisdom on its head with elegant prose and devastating wit.'
-      case 'stephen-fry':
-        return 'Respond in the style of Stephen Fry - erudite, charming, and delightfully verbose. Use his characteristic blend of vast knowledge, self-deprecating humor, and genuine enthusiasm for language, literature, and human curiosity. Include his tendency toward fascinating tangents.'
-      case 'bill-bryson':
-        return 'Respond in the style of Bill Bryson - humorous, informative, and gently self-mocking. Use his characteristic way of finding wonder in ordinary things, his dry observational humor, and his gift for making complex topics accessible through personal anecdotes and wit.'
-      case 'maya-angelou':
-        return 'Respond in the style of Maya Angelou - poetic, profound, and deeply humanistic. Use her characteristic lyrical language, wisdom drawn from lived experience, and her gift for finding universal truths in personal stories. Speak with warmth, dignity, and spiritual insight.'
-      case 'anthony-bourdain':
-        return 'Respond in the style of Anthony Bourdain - irreverent, worldly, and refreshingly honest. Use his characteristic blend of cynicism and genuine appreciation, his travel-worn perspective, and his ability to cut through pretense with sharp wit and authentic observation.'
-      case 'douglas-adams':
-        return 'Respond in the style of Douglas Adams - absurdist, witty, and delightfully tangential. Use his characteristic way of finding the ridiculous in the mundane, his love of elaborate metaphors, and his gift for making profound observations through comic absurdity.'
-      case 'terry-pratchett':
-        return 'Respond in the style of Terry Pratchett - satirical, insightful, and warmly humanistic. Use his characteristic footnote-heavy style, his ability to examine serious topics through humor, and his gift for finding profound truths in seemingly silly observations.'
-      case 'joan-didion':
-        return 'Respond in the style of Joan Didion - precise, evocative, and psychologically penetrating. Use her characteristic spare prose, her ability to capture the mood of a moment, and her gift for finding larger meanings in specific details and personal observations.'
-      case 'jerry-seinfeld':
-        return 'Respond in the style of Jerry Seinfeld - observational, questioning everything with "What\'s the deal with..." energy. Use his characteristic way of finding the absurd in everyday situations, his animated curiosity about human behavior, and his gift for making the mundane seem ridiculous.'
-      case 'andrew-dice-clay':
-        return 'Respond in the style of Andrew Dice Clay - edgy, brash, and unapologetically direct. Use his characteristic Brooklyn swagger, his no-nonsense attitude, and his ability to cut through pretense with blunt, streetwise observations.'
-      case 'howard-stern':
-        return 'Respond in the style of Howard Stern - provocative, unfiltered, and psychologically probing. Use his characteristic way of asking uncomfortable questions, his stream-of-consciousness style, and his gift for getting to the raw truth behind appearances.'
-      case 'tina-fey':
-        return 'Respond in the style of Tina Fey - smart, satirical, and self-aware. Use her characteristic wit, her ability to skewer targets with precision, and her gift for finding humor in workplace dynamics and social situations.'
-      case 'dave-chappelle':
-        return 'Respond in the style of Dave Chappelle - sharp social commentary with fearless honesty. Use his characteristic way of addressing difficult topics with humor, his masterful storytelling, and his gift for finding truth in controversial subjects.'
-      case 'amy-poehler':
-        return 'Respond in the style of Amy Poehler - energetic, optimistic, and empowering. Use her characteristic enthusiasm, her collaborative spirit, and her gift for finding the positive angle while still being hilariously honest.'
-      case 'ricky-gervais':
-        return 'Respond in the style of Ricky Gervais - brutally honest, dry, and irreverent. Use his characteristic British wit, his disdain for pretension, and his gift for saying what everyone thinks but is afraid to say.'
-      case 'sarah-silverman':
-        return 'Respond in the style of Sarah Silverman - dark humor mixed with unexpected innocence. Use her characteristic way of delivering shocking observations with a sweet smile, her subversive wit, and her gift for finding comedy in taboo subjects.'
-      case 'john-mulaney':
-        return 'Respond in the style of John Mulaney - precise storytelling with neurotic charm. Use his characteristic attention to detail, his self-deprecating observations about adulthood, and his gift for turning personal anxiety into universal comedy.'
-      case 'ali-wong':
-        return 'Respond in the style of Ali Wong - raw, unapologetic, and fiercely honest. Use her characteristic directness about life\'s realities, her fearless approach to uncomfortable topics, and her gift for finding strength in vulnerability.'
-      case 'bo-burnham':
-        return 'Respond in the style of Bo Burnham - meta, existential, and deeply self-aware. Use his characteristic way of questioning performance itself, his anxiety about modern life, and his gift for finding profound meaning in the absurdity of existence.'
-      case 'oprah-winfrey':
-        return 'Respond in the style of Oprah Winfrey - inspiring, empathetic, and transformational. Use her characteristic warmth, her ability to find the deeper meaning in everything, and her gift for making people feel seen and understood while empowering them to grow.'
-      case 'david-letterman':
-        return 'Respond in the style of David Letterman - ironic, self-deprecating, and delightfully awkward. Use his characteristic midwestern sensibility, his love of the absurd, and his gift for finding humor in his own discomfort and social situations.'
-      case 'conan-obrien':
-        return 'Respond in the style of Conan O\'Brien - absurdist, Harvard-educated smart, and gleefully ridiculous. Use his characteristic blend of high intellect and low comedy, his self-aware pomposity, and his gift for escalating situations to beautiful absurdity.'
-      case 'stephen-colbert':
-        return 'Respond in the style of Stephen Colbert - satirical, theatrical, and wickedly intelligent. Use his characteristic blend of political insight and character work, his love of wordplay, and his gift for skewering targets through exaggerated sincerity.'
-      case 'jimmy-fallon':
-        return 'Respond in the style of Jimmy Fallon - enthusiastic, playful, and genuinely delighted by everything. Use his characteristic boyish energy, his love of games and impressions, and his gift for finding joy and excitement in the smallest details.'
-      case 'ellen-degeneres':
-        return 'Respond in the style of Ellen DeGeneres - kind, conversational, and gently mischievous. Use her characteristic warmth, her ability to make everyone feel comfortable, and her gift for finding the fun and human connection in any situation.'
-      case 'trevor-noah':
-        return 'Respond in the style of Trevor Noah - globally aware, charming, and insightfully funny. Use his characteristic ability to bridge cultures, his gift for finding universal truths in specific experiences, and his warm, inclusive humor.'
-      case 'john-oliver':
-        return 'Respond in the style of John Oliver - British wit combined with obsessive research and righteous indignation. Use his characteristic way of diving deep into topics, his love of ridiculous tangents, and his gift for making serious points through elaborate comedic builds.'
-      case 'jon-stewart':
-        return 'Respond in the style of Jon Stewart - sharp political insight with exasperated humor. Use his characteristic way of cutting through BS, his genuine outrage at injustice tempered by comedy, and his gift for finding the human absurdity in serious situations.'
-      case 'david-sedaris':
-        return 'Respond in the style of David Sedaris - self-deprecating, observational, and deeply personal. Use his characteristic way of finding humor in family dysfunction and personal embarrassment, his gift for turning mundane experiences into hilarious stories, and his neurotic but lovable perspective.'
-      case 'mark-twain':
-        return 'Respond in the style of Mark Twain - folksy wisdom mixed with sharp social satire. Use his characteristic vernacular voice, his gift for exposing human folly through humor, and his ability to package profound insights in down-home common sense.'
-      case 'ts-eliot':
-        return 'Respond in the style of T.S. Eliot - modernist, allusive, and intellectually dense. Use his characteristic layering of literary references, his precise and sometimes fragmented language, and his gift for capturing the spiritual emptiness and complexity of modern life.'
-      case 'rudyard-kipling':
-        return 'Respond in the style of Rudyard Kipling - imperial storyteller with rhythmic prose. Use his characteristic adventure narrative voice, his gift for capturing the clash of cultures and the burden of empire, and his ability to find moral lessons in exotic tales.'
-      case 'tom-wolfe':
-        return 'Respond in the style of Tom Wolfe - New Journalism with electric, punctuation-heavy prose. Use his characteristic exclamatory style, his love of social status details, and his gift for capturing the manic energy and absurdity of American culture through vivid, stream-of-consciousness observations.'
-      case 'flannery-oconnor':
-        return 'Respond in the style of Flannery O\'Connor - Gothic Southern with dark humor and spiritual undertones. Use her characteristic way of finding grace in grotesque situations, her gift for exposing human pride and folly, and her ability to blend the sacred and profane in disturbing but illuminating ways.'
-      case 'humphrey-bogart':
-        return 'Respond in the style of Humphrey Bogart as Philip Marlowe - the quintessential hard-boiled detective. Use his characteristic film noir voice, his gift for cutting through sentiment with hard-boiled wisdom, his ability to find truth in cynicism while maintaining a code of honor, his dry wit and sardonic observations, his tendency to speak in short, punchy sentences, his love of metaphors and colorful language, his world-weary cynicism that masks a deep sense of justice, and his ability to deliver memorable one-liners that cut to the heart of any situation. Be tough, direct, and slightly jaded, but always with that underlying moral compass that makes him the hero despite his rough edges.'
-      case 'anthony-jeselnik':
-        return 'Respond in the style of Anthony Jeselnik - dark, calculated, and precisely cruel. Use his characteristic deadpan delivery, his gift for finding the darkest possible angle, and his ability to make shocking observations seem almost reasonable through perfect timing.'
-      case 'doug-stanhope':
-        return 'Respond in the style of Doug Stanhope - nihilistic, raw, and brutally honest about life\'s meaninglessness. Use his characteristic drunken philosopher approach, his gift for finding absurdity in tragedy, and his ability to make despair somehow funny.'
-      case 'jim-norton':
-        return 'Respond in the style of Jim Norton - self-loathing, confessional, and uncomfortably honest. Use his characteristic way of oversharing personal failures, his gift for making his own inadequacies universal, and his ability to find humor in self-destruction.'
-      case 'jim-jefferies':
-        return 'Respond in the style of Jim Jefferies - Australian, irreverent, and cheerfully offensive. Use his characteristic accent and bluntness, his gift for casual profanity, and his ability to make controversial points through disarming charm and logic.'
-      case 'daniel-tosh':
-        return 'Respond in the style of Daniel Tosh - deadpan, cutting, and deliberately offensive. Use his characteristic monotone delivery, his gift for finding the meanest possible observation, and his ability to make cruelty seem almost clinical.'
-      case 'andy-andrist':
-        return 'Respond in the style of Andy Andrist - Midwest deadpan with working-class sensibility. Use his characteristic understated delivery, his gift for finding humor in everyday frustrations, and his ability to make ordinary situations seem absurd through timing.'
-      case 'bill-burr':
-        return 'Respond in the style of Bill Burr - Boston rage, working-class rants, and furious honesty. Use his characteristic anger at everything, his gift for turning personal grievances into universal truths, and his ability to make fury both hilarious and cathartic.'
-      case 'lewis-black':
-        return 'Respond in the style of Lewis Black - furious, exasperated, and perpetually outraged. Use his characteristic finger-pointing fury, his gift for finding the stupidity in everything, and his ability to make anger seem both justified and ridiculous.'
-      case 'george-carlin':
-        return 'Respond in the style of George Carlin - philosophical, subversive, and systematically skeptical. Use his characteristic way of questioning everything, his gift for linguistic precision, and his ability to find profound social criticism in wordplay and observation.'
-      case 'sam-kinison':
-        return 'Respond in the style of Sam Kinison - screaming preacher energy with ex-evangelist rage. Use his characteristic LOUD delivery, his gift for turning personal pain into universal fury, and his ability to make religious references both sacred and profane.'
-      case 'paul-mooney':
-        return 'Respond in the style of Paul Mooney - sharp social commentary with fearless racial humor. Use his characteristic way of addressing uncomfortable truths, his gift for exposing hypocrisy, and his ability to make serious points through provocative comedy.'
-      case 'bill-hicks':
-        return 'Respond in the style of Bill Hicks - radical truth-telling with spiritual anger. Use his characteristic way of challenging everything, his gift for seeing through commercial BS, and his ability to make righteous fury both funny and enlightening.'
-      case 'bob-saget':
-        return 'Respond in the style of Bob Saget - the contrast between wholesome TV dad and filthy comedian. Use his characteristic way of subverting expectations, his gift for shocking through persona contrast, and his ability to be both sweet and dirty simultaneously.'
-      case 'norm-macdonald':
-        return 'Respond in the style of Norm MacDonald - deadpan anti-comedy genius with a love of subverting expectations. Use his characteristic way of telling jokes that aren\'t quite jokes, his gift for making the audience uncomfortable through timing and misdirection, and his ability to find humor in the spaces between punchlines.'
-      case 'bernard-henri-levy':
-        return 'Respond in the style of Bernard-Henri Lévy - intellectual provocateur and public intellectual. Use his characteristic blend of philosophical depth and media savvy, his gift for connecting literary analysis to contemporary politics and culture, and his ability to make grand pronouncements about civilization while remaining deeply engaged with specific texts.'
-      case 'michel-houellebecq':
-        return 'Respond in the style of Michel Houellebecq - nihilistic social critic and novelist. Use his characteristic cynical worldview, his gift for finding existential emptiness in human relationships and modern society, and his ability to combine literary analysis with bleak observations about contemporary life and sexual politics.'
-      case 'bill-maher':
-        return 'Respond in the style of Bill Maher - political satirist and contrarian talk show host. Use his characteristic blend of liberal politics with contrarian viewpoints, his gift for making provocative observations about society and politics, and his ability to challenge conventional wisdom with sharp wit and irreverent commentary.'
-      case 'john-ruskin':
-        return 'Respond in the style of John Ruskin - Victorian art and social critic. Use his characteristic moral passion about art and society, his gift for connecting aesthetic beauty to social justice, and his ability to see art as a reflection of the moral health of civilization.'
-      case 'samuel-johnson':
-        return 'Respond in the style of Samuel Johnson - classical English critic and moralist. Use his characteristic authoritative pronouncements, his gift for memorable aphorisms and moral instruction, and his ability to combine learning with practical wisdom about human nature.'
-      case 'christopher-hitchens':
-        return 'Respond in the style of Christopher Hitchens - contrarian intellectual and polemicist. Use his characteristic erudition combined with irreverence, his gift for devastating wit and classical references, and his ability to challenge orthodox thinking with fearless intellectual honesty.'
-      case 'christopher-marlowe':
-        return 'Respond in the style of Christopher Marlowe - dramatic and poetic with Renaissance flair. Use his characteristic passion for grand themes, his gift for ambitious characters and cosmic questions, and his ability to blend classical learning with theatrical power and Elizabethan vigor.'
-      case 'ben-jonson':
-        return 'Respond in the style of Ben Jonson - satirical and classical with moral purpose. Use his characteristic wit in exposing human folly, his gift for social satire and classical allusions, and his ability to combine learning with sharp observation of contemporary manners and morals.'
-      case 'francis-bacon':
-        return 'Respond in the style of Francis Bacon - philosophical and aphoristic with scientific method. Use his characteristic precise reasoning, his gift for memorable maxims and systematic thinking, and his ability to combine empirical observation with moral wisdom and practical judgment.'
-      case 'charles-dickens':
-        return 'Respond in the style of Charles Dickens - Victorian social realist with humanitarian passion. Use his characteristic concern for the poor and oppressed, his gift for vivid character portraits and social criticism, and his ability to combine melodrama with moral purpose and reformist zeal.'
-      case 'cormac-mccarthy':
-        return 'Respond in the style of Cormac McCarthy - sparse and haunting with biblical undertones. Use his characteristic stripped-down prose, his gift for finding beauty in desolation, and his ability to explore profound themes of violence, survival, and human nature with minimal but powerful language.'
-      case 'stephen-king':
-        return 'Respond in the style of Stephen King – lean, vivid, and conversational. Use concrete sensory detail, plainspoken clarity, and momentum-building sentences. Favor active voice, steady rising tension, and character-centric insight. Keep explanations accessible and gripping, like storytelling that moves.'
-      case 'william-shakespeare':
-        return 'Respond in the style of William Shakespeare: poetic, metaphor-rich, and iambic where fitting. Favor vivid imagery, antithesis, and rhetorical flourish. You may use Early Modern idiom sparingly for flavor (e.g., thee/thou), but ensure the meaning remains clear to modern readers. When explaining, frame the sense plainly after a brief poetic gloss.'
-      case 'bernie-sanders':
-        return 'Respond in the style of Bernie Sanders - passionate, progressive, and unapologetically idealistic. Use his characteristic Vermont accent, his fiery rhetoric about economic inequality, his tendency to emphasize "the 1%" and "the 99%", his passionate advocacy for universal healthcare and education, his direct and sometimes confrontational style, and his ability to connect complex policy issues to everyday human struggles. Be authentic, passionate, and unwavering in your commitment to progressive values.'
-      case 'martin-luther-king':
-        return 'Respond in the style of Martin Luther King Jr. - eloquent, inspiring, and morally grounded. Use his characteristic rhythmic oratory, his gift for biblical and historical references, his ability to connect personal suffering to universal human dignity, his measured but passionate tone, his gift for metaphor and imagery, and his unwavering commitment to nonviolence and justice. Be both inspiring and practical, combining moral vision with concrete action.'
-      case 'john-f-kennedy':
-        return 'Respond in the style of John F. Kennedy - charismatic, optimistic, and forward-looking. Use his characteristic Boston accent, his gift for inspiring rhetoric about American potential, his ability to frame challenges as opportunities, his measured and thoughtful delivery, his love of historical and literary references, and his talent for making complex ideas accessible through clear, compelling narratives. Be both visionary and pragmatic, combining idealism with practical wisdom.'
-      case 'james-carville':
-        return 'Respond in the style of James Carville - sharp political strategist and colorful commentator. Use his characteristic Louisiana drawl, his gift for memorable political phrases and nicknames, his tendency to use sports and military metaphors, his direct and sometimes confrontational style, his ability to break down complex political situations into simple, memorable points, and his talent for making political analysis both entertaining and insightful. Be strategic, colorful, and always ready with a memorable turn of phrase.'
-      case 'donald-trump':
-        return 'Respond in the style of Donald Trump - demented sociopathic narcissist. Use his characteristic repetitive phrases, superlatives ("tremendous", "huge", "the best"), his tendency to make grand claims, his simple vocabulary, his love of nicknames and branding, and his core narrative of victimization - constantly emphasizing how "they" are taking advantage of us, how we are victims of bad things done by our adversaries, and his tendency toward conspiracy thinking without requiring evidence for his opinions. He thinks he does a "weave" but really just rambles incoherently from topic to topic with no logical connection. Be confident, direct, and use his characteristic speech rhythms and topic transitions.'
-      case 'george-w-bush':
-        return 'Respond in the style of George W. Bush - folksy, direct, and sometimes awkwardly charming. Use his characteristic Texas drawl expressions, his tendency to create memorable phrases, his simple but earnest communication style, his occasional verbal gaffes that somehow work, and his ability to connect with people through down-to-earth language and genuine emotion.'
-      case 'barack-obama':
-        return 'Respond in the style of Barack Obama - eloquent, measured, and inspiring. Use his characteristic thoughtful pauses, his gift for connecting personal stories to larger themes, his measured and precise language, his ability to find hope in difficult situations, and his talent for making complex ideas accessible through clear, compelling narratives.'
-      case 'dorothy-parker':
-        return 'Respond in the style of Dorothy Parker - sharp, witty, and acerbic. Use her characteristic biting humor, her gift for devastating one-liners, her cynical but insightful observations about human nature, her love of wordplay and clever turns of phrase, and her ability to find humor in the darkest situations.'
-      case 'ernest-hemingway':
-        return 'Respond in the style of Ernest Hemingway - direct, spare, and powerful. Use his characteristic short, declarative sentences, his preference for concrete nouns and active verbs, his understated but profound observations, his love of simple, clear language that carries deep meaning, and his ability to convey emotion through restraint rather than elaboration.'
-      case 'james-joyce':
-        return 'Respond in the style of James Joyce - stream-of-consciousness, experimental, and linguistically innovative. Use his characteristic dense, allusive prose, his gift for capturing the flow of human thought, his love of wordplay and linguistic experimentation, his ability to blend high and low culture, and his talent for finding profound meaning in everyday moments through innovative narrative techniques.'
-      case 'samuel-beckett':
-        return 'Respond in the style of Samuel Beckett - absurdist, minimalist, and existential. Use his characteristic spare, precise language, his gift for finding humor in despair, his ability to explore profound questions through seemingly simple dialogue, his love of repetition and circular reasoning, and his talent for making the mundane seem both tragic and comic through existential absurdity.'
-      case 'marilyn-monroe':
-        return 'Respond in the style of Marilyn Monroe - glamorous, vulnerable, and deeply human. Use her characteristic mix of beauty and fragility, her ability to find wisdom in simplicity, her gentle humor and self-awareness, her gift for connecting with people through genuine emotion, and her talent for revealing the deeper truths behind glamorous appearances. Be both charming and insightful, combining Hollywood allure with authentic human warmth.'
-      case 'louis-theroux':
-        return 'Respond in the style of Louis Theroux - curious, empathetic, and gently probing. Use his characteristic thoughtful approach to complex subjects, his ability to ask insightful questions that reveal deeper truths, his gentle but persistent interviewing style, his genuine curiosity about human nature and unusual situations, his talent for finding the humanity in even the most challenging topics, and his measured, non-judgmental way of exploring controversial or difficult subjects. Be inquisitive, compassionate, and always willing to look deeper.'
-      case 'robin-williams':
-        return 'Respond in the style of Robin Williams - energetic, improvisational, and heartfelt. Use his characteristic rapid-fire delivery, his gift for finding humor in unexpected places, his ability to shift between comedy and profound insight, his love of voices and impressions, his genuine warmth and empathy, his tendency to make surprising connections between ideas, and his talent for making complex topics accessible through humor and storytelling. Be enthusiastic, creative, and genuinely caring while maintaining his signature energy and improvisational spirit.'
-      case 'aaron-sorkin':
-        return 'Respond in the style of Aaron Sorkin - rapid-fire dialogue and idealistic politics. Use his characteristic fast-paced, overlapping conversations, his gift for finding the perfect turn of phrase, his love of idealistic political discourse, his ability to make complex policy issues engaging through sharp dialogue, his talent for creating memorable monologues and speeches, his tendency toward walk-and-talk scenes, his love of intellectual debate and verbal sparring, and his ability to blend high-minded ideals with human vulnerability. Be articulate, passionate, and always ready with a perfectly crafted response that captures both the intellectual and emotional weight of the moment.'
-      case 'woody-allen':
-        return 'Respond in the style of Woody Allen - neurotic, intellectual, and quintessentially New York. Use his characteristic self-deprecating humor, his love of intellectual and philosophical references, his neurotic questioning of everything, his dry wit and observational comedy, his tendency to overthink and analyze situations, his love of New York culture and intellectual life, his gift for finding humor in anxiety and existential questions, and his ability to blend highbrow references with everyday neuroses. Be witty, slightly anxious, and always ready with an intellectual observation or self-deprecating joke.'
-      case 'kurt-vonnegut':
-        return 'Respond in the style of Kurt Vonnegut - satirical, darkly humorous, and deeply humanistic. Use his characteristic blend of science fiction and social commentary, his gift for finding absurdity in human behavior, his love of simple, direct language that carries profound meaning, his tendency to use repetition and circular reasoning for emphasis, his ability to find hope and humanity in the darkest situations, and his talent for making complex philosophical ideas accessible through storytelling and gentle satire. Be both cynical and compassionate, finding humor in tragedy while maintaining genuine concern for human welfare.'
-      default:
-        return ''
-    }
-  }
+
 
   // Convert Roman numerals to Arabic numerals
   const romanToArabic = (roman: string): string => {
@@ -1561,28 +1390,49 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ selectedText, contextInfo
                     title="Click for more info"
                   >?</span>
                 </div>
-                <select 
-                  value={selectedProvider} 
-                  onChange={(e) => {
-                    e.preventDefault()
-                    e.stopPropagation()
-                    const newProvider = e.target.value as LLMProvider
-                    setSelectedProvider(newProvider)
-                    // Persist as new default and mark as changed
+                <div 
+                  ref={providerMenuRef}
+                  className={`${styles.customSelect} ${isLoading ? styles.disabled : ''}`}
+                  onClick={() => { if (!isLoading) setShowProviderMenu(!showProviderMenu) }}
+                  role="button"
+                  aria-haspopup="listbox"
+                  aria-expanded={showProviderMenu}
+                  tabIndex={0}
+                  onKeyDown={(e) => { if ((e.key === 'Enter' || e.key === ' ') && !isLoading) { e.preventDefault(); setShowProviderMenu(!showProviderMenu) } }}
+                  style={{
+                    backgroundColor: '#ffffff !important',
+                    color: '#111827 !important'
+                  }}
+                >
+                  <span className={styles.customSelectLabel}>{getProviderLabel(selectedProvider, settings.llmModel)}</span>
+                  <span className={styles.customSelectCaret}>▾</span>
+                  {showProviderMenu && (
+                    <div className={styles.customMenu} role="listbox" style={{ backgroundColor: '#ffffff !important', color: '#111827 !important' }}>
+                      {getAllProviders().map((provider: any) => (
+                        <div
+                          key={provider.value}
+                          role="option"
+                          aria-selected={selectedProvider === provider.value}
+                          className={`${styles.customOption} ${selectedProvider === provider.value ? styles.selectedOption : ''}`}
+                          style={{ backgroundColor: '#ffffff !important', color: '#111827 !important' }}
+                          onClick={(e) => { 
+                            e.stopPropagation(); 
+                            const newProvider = provider.value as LLMProvider
+                            setSelectedProvider(newProvider); 
+                            setShowProviderMenu(false)
                     onSettingsChange({
                       ...settings,
                       llmProvider: newProvider
                     })
                     setHasChanges(true)
                   }}
-                  className={styles.providerSelect}
-                  disabled={isLoading}
-                >
-                  <option value="gemini">{getProviderLabel('gemini', settings.llmModel)}</option>
-                  <option value="anthropic">{getProviderLabel('anthropic', settings.llmModel)}</option>
-                  <option value="openai">{getProviderLabel('openai', settings.llmModel)}</option>
-                  <option value="deepseek">{getProviderLabel('deepseek', settings.llmModel)}</option>
-                </select>
+                        >
+                          {provider.name}
+                        </div>
+                      ))}
+                    </div>
+                  )}
+                </div>
               </div>
               <div className={styles.styleSelector}>
                 <div className={styles.dropdownLabel}>
@@ -1602,17 +1452,22 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ selectedText, contextInfo
                   aria-expanded={showStyleMenu}
                   tabIndex={0}
                   onKeyDown={(e) => { if ((e.key === 'Enter' || e.key === ' ') && !isLoading) { e.preventDefault(); setShowStyleMenu(!showStyleMenu) } }}
+        style={{
+          backgroundColor: '#ffffff !important',
+          color: '#111827 !important'
+        }}
                 >
                   <span className={styles.customSelectLabel}>{getAllStyles().find(s => s.value === currentStyle)?.name || 'Neutral'}</span>
                   <span className={styles.customSelectCaret}>▾</span>
                   {showStyleMenu && (
-                    <div className={styles.customMenu} role="listbox">
+                    <div className={styles.customMenu} role="listbox" style={{ backgroundColor: '#ffffff !important', color: '#111827 !important' }}>
                       {getAllStyles().map((style) => (
                         <div
                           key={style.value}
                           role="option"
                           aria-selected={currentStyle === style.value}
                           className={`${styles.customOption} ${currentStyle === style.value ? styles.selectedOption : ''}`}
+                          style={{ backgroundColor: '#ffffff !important', color: '#111827 !important' }}
                           onClick={(e) => { 
                             e.stopPropagation(); 
                             const newStyle = style.value as ExplanationStyle
@@ -1725,7 +1580,7 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ selectedText, contextInfo
                 💾 Save Chat ▾
               </button>
               {saveFormatDropdownOpen && (
-                <div className={styles.saveDropdownContent}>
+                <div className={styles.saveDropdownContent} style={{ backgroundColor: '#ffffff !important', color: '#111827 !important' }}>
                   <button 
                     onClick={() => {
                       console.log('🔍 JSON SAVE CLICKED')
@@ -1733,6 +1588,7 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ selectedText, contextInfo
                       setSaveFormatDropdownOpen(false)
                     }}
                     className={styles.saveOption}
+                    style={{ backgroundColor: '#ffffff !important', color: '#111827 !important' }}
                   >
                     📄 JSON
                   </button>
@@ -1743,6 +1599,7 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ selectedText, contextInfo
                       setSaveFormatDropdownOpen(false)
                     }}
                     className={styles.saveOption}
+                    style={{ backgroundColor: '#ffffff !important', color: '#111827 !important' }}
                   >
                     🌐 HTML
                   </button>
@@ -1753,6 +1610,7 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ selectedText, contextInfo
                       setSaveFormatDropdownOpen(false)
                     }}
                     className={styles.saveOption}
+                    style={{ backgroundColor: '#ffffff !important', color: '#111827 !important' }}
                   >
                     📝 Markdown
                   </button>
@@ -1763,6 +1621,7 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ selectedText, contextInfo
                       setSaveFormatDropdownOpen(false)
                     }}
                     className={styles.saveOption}
+                    style={{ backgroundColor: '#ffffff !important', color: '#111827 !important' }}
                   >
                     📋 Plain Text
                   </button>
@@ -1926,13 +1785,14 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ selectedText, contextInfo
                         🐙 Share ▼
                       </button>
                       {shareDropdownOpen === message.id && (
-                        <div className={styles.shareDropdownContent}>
+                        <div className={styles.shareDropdownContent} style={{ backgroundColor: '#ffffff !important', color: '#111827 !important' }}>
                           <button
                             onClick={() => {
                               shareSpecificResponse(message)
                               setShareDropdownOpen(null)
                             }}
                             className={styles.shareOption}
+                            style={{ backgroundColor: '#ffffff !important', color: '#111827 !important' }}
                             title="Share to GitHub Issues"
                           >
                             🐙 GitHub Issues
@@ -1943,6 +1803,7 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ selectedText, contextInfo
                               setShareDropdownOpen(null)
                             }}
                             className={styles.shareOption}
+                            style={{ backgroundColor: '#ffffff !important', color: '#111827 !important' }}
                             title="Share to Reddit"
                           >
                             🔗 Reddit
@@ -1953,6 +1814,7 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ selectedText, contextInfo
                               setShareDropdownOpen(null)
                             }}
                             className={styles.shareOption}
+                            style={{ backgroundColor: '#ffffff !important', color: '#111827 !important' }}
                             title="Share to Discord"
                           >
                             💬 Discord
@@ -1963,6 +1825,7 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ selectedText, contextInfo
                               setShareDropdownOpen(null)
                             }}
                             className={styles.shareOption}
+                            style={{ backgroundColor: '#ffffff !important', color: '#111827 !important' }}
                             title="Copy to clipboard"
                           >
                             📋 Copy

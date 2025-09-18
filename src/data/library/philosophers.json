@@ -593,5 +593,47 @@
     "directUrl": "https://www.gutenberg.org/cache/epub/10615.txt",
     "wikipediaUrl": "https://en.wikipedia.org/wiki/An_Essay_Concerning_Human_Understanding",
     "wikipediaTitle": "An Essay Concerning Human Understanding"
+  },
+  {
+    "id": "bertrand-russell-principles",
+    "title": "The Principles of Mathematics",
+    "author": "Bertrand Russell",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/The_Principles_of_Mathematics",
+    "wikipediaTitle": "The Principles of Mathematics"
+  },
+  {
+    "id": "bertrand-russell-problems",
+    "title": "The Problems of Philosophy",
+    "author": "Bertrand Russell",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/The_Problems_of_Philosophy",
+    "wikipediaTitle": "The Problems of Philosophy"
+  },
+  {
+    "id": "peter-singer-animal-liberation",
+    "title": "Animal Liberation",
+    "author": "Peter Singer",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Animal_Liberation_(book)",
+    "wikipediaTitle": "Animal Liberation (book)"
+  },
+  {
+    "id": "peter-singer-practical-ethics",
+    "title": "Practical Ethics",
+    "author": "Peter Singer",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Practical_Ethics",
+    "wikipediaTitle": "Practical Ethics"
+  },
+  {
+    "id": "stuart-hampshire-thought-action",
+    "title": "Thought and Action",
+    "author": "Stuart Hampshire",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Stuart_Hampshire",
+    "wikipediaTitle": "Stuart Hampshire"
+  },
+  {
+    "id": "stuart-hampshire-justice",
+    "title": "Justice is Conflict",
+    "author": "Stuart Hampshire",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Stuart_Hampshire",
+    "wikipediaTitle": "Stuart Hampshire"
   }
 ]

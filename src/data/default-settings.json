@@ -1,0 +1,11 @@
+{
+  "llmProvider": "gemini",
+  "llmModel": "gemini-1.5-flash",
+  "responseLength": "brief",
+  "textFont": "serif",
+  "chatFont": "sans-serif",
+  "textFontSize": 18,
+  "chatFontSize": 16,
+  "readingMode": "scroll",
+  "explanationStyle": "neutral"
+}

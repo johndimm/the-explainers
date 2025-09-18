@@ -1,0 +1,117 @@
+{
+  "providers": [
+    {
+      "id": "gemini",
+      "name": "Google Gemini",
+      "order": 1
+    },
+    {
+      "id": "anthropic", 
+      "name": "Anthropic Claude",
+      "order": 2
+    },
+    {
+      "id": "openai",
+      "name": "OpenAI",
+      "order": 3
+    },
+    {
+      "id": "deepseek",
+      "name": "DeepSeek", 
+      "order": 4
+    },
+    {
+      "id": "custom",
+      "name": "Custom (BYO LLM)",
+      "order": 5
+    }
+  ],
+  "models": {
+    "openai": [
+      {
+        "id": "gpt-4o",
+        "name": "GPT-4o",
+        "description": "Latest flagship model"
+      },
+      {
+        "id": "gpt-4-turbo", 
+        "name": "GPT-4 Turbo",
+        "description": "Fast and capable"
+      },
+      {
+        "id": "gpt-4",
+        "name": "GPT-4", 
+        "description": "Classic model"
+      }
+    ],
+    "anthropic": [
+      {
+        "id": "claude-3-5-sonnet",
+        "name": "Claude 3.5 Sonnet",
+        "description": "Latest and most capable"
+      }
+    ],
+    "deepseek": [
+      {
+        "id": "deepseek-chat",
+        "name": "DeepSeek Chat",
+        "description": "General purpose model"
+      },
+      {
+        "id": "deepseek-coder",
+        "name": "DeepSeek Coder", 
+        "description": "Code-focused model"
+      }
+    ],
+    "gemini": [
+      {
+        "id": "gemini-1.5-flash",
+        "name": "Gemini 1.5 Flash",
+        "description": "Fast and efficient"
+      },
+      {
+        "id": "gemini-1.5-pro",
+        "name": "Gemini 1.5 Pro",
+        "description": "Most capable model"
+      },
+      {
+        "id": "gemini-2.0-flash",
+        "name": "Gemini 2.0 Flash",
+        "description": "Latest generation"
+      }
+    ],
+    "custom": [
+      {
+        "id": "custom",
+        "name": "Custom Model",
+        "description": "Your own LLM endpoint"
+      }
+    ]
+  },
+  "labels": {
+    "gemini-2.0-flash": "Gemini 2.0 Flash",
+    "gemini-1.5-pro": "Gemini 1.5 Pro",
+    "gemini-1.5-flash": "Gemini 1.5 Flash",
+    "gpt-4o": "GPT-4o",
+    "gpt-4-turbo": "GPT-4 Turbo",
+    "gpt-4": "GPT-4",
+    "claude-3-5-sonnet": "Claude 3.5 Sonnet",
+    "claude-3-opus": "Claude 3 Opus",
+    "claude-3-sonnet": "Claude 3 Sonnet",
+    "deepseek-chat": "DeepSeek Chat",
+    "deepseek-coder": "DeepSeek Coder"
+  },
+  "defaults": {
+    "gemini": "gemini-1.5-flash",
+    "anthropic": "claude-3-5-sonnet",
+    "openai": "gpt-4o",
+    "deepseek": "deepseek-chat",
+    "custom": "custom"
+  },
+  "chatDefaults": {
+    "gemini": "gemini-1.5-flash",
+    "openai": "gpt-4o",
+    "deepseek": "deepseek-chat",
+    "anthropic": null
+  }
+}

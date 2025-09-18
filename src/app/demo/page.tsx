@@ -2,29 +2,9 @@
 
 import React from 'react'
 import PageLayout from '@/components/PageLayout'
+import demoSteps from '../../data/demo-steps.json'
 
-const demoSteps = [
-  {
-    title: "I'm reading Macbeth",
-    description: "Start by selecting a passage from classic literature",
-    image: "/explainer-demo-screenshots/1.jpg"
-  },
-  {
-    title: "What does this mean?",
-    description: "Highlight text that you want explained",
-    image: "/explainer-demo-screenshots/2.jpg"
-  },
-  {
-    title: "Start a chat with AI about it", 
-    description: "Get instant AI explanations in different styles",
-    image: "/explainer-demo-screenshots/3.jpg"
-  },
-  {
-    title: "Ah, that's what it means",
-    description: "Understand complex literature with clear explanations",
-    image: "/explainer-demo-screenshots/4.jpg"
-  }
-]
+// Demo steps are now imported from JSON
 
 export default function DemoPage() {
   return (
