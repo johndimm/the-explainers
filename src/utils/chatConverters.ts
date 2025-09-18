@@ -20,13 +20,24 @@ export const formatTimeOnly = (timestamp: string) => {
 }
 
 export const convertToHTML = (data: any) => {
-  const messagesHTML = data.messages.map((message: any) => {
+  // Filter out video messages from chat history
+  const filteredMessages = data.messages.filter((message: any) => !message.videoId);
+  const messagesHTML = filteredMessages.map((message: any) => {
     const time = formatTimeOnly(message.timestamp);
     
     if (message.role === 'user') {
+      // Extract the selected text from the user message
+      let selectedText = '';
+      const quoteMatch = message.content.match(/"([^"]+)"/);
+      if (quoteMatch) {
+        selectedText = quoteMatch[1];
+      }
+      
       return `
       <div class="message user">
-          <div class="message-bubble">${message.content}</div>
+          <div class="message-bubble">
+              <div class="selected-quote">"${selectedText}"</div>
+          </div>
           <div class="message-meta">
               <span class="timestamp">${time}</span>
           </div>
@@ -35,27 +46,14 @@ export const convertToHTML = (data: any) => {
       const providerClass = message.provider ? message.provider.toLowerCase() : '';
       const providerName = message.provider ? message.provider.toUpperCase() : 'Assistant';
       
-      if (message.videoId) {
-        return `
-        <div class="message assistant">
-            <div class="message-bubble">
-                🎬 <a href="https://www.youtube.com/watch?v=${message.videoId}" target="_blank" style="color: #1976d2; text-decoration: underline;">${message.videoTitle}</a>
-            </div>
-            <div class="message-meta">
-                <span class="provider-badge ${providerClass}">${providerName}</span>
-                <span class="timestamp">${time}</span>
-            </div>
-        </div>`;
-      } else {
-        return `
-        <div class="message assistant">
-            <div class="message-bubble">${message.content}</div>
-            <div class="message-meta">
-                <span class="provider-badge ${providerClass}">${providerName}</span>
-                <span class="timestamp">${time}</span>
-            </div>
-        </div>`;
-      }
+      return `
+      <div class="message assistant">
+          <div class="message-bubble">${message.content}</div>
+          <div class="message-meta">
+              <span class="provider-badge ${providerClass}">${providerName}</span>
+              <span class="timestamp">${time}</span>
+          </div>
+      </div>`;
     }
   }).join('');
 
@@ -139,6 +137,13 @@ export const convertToHTML = (data: any) => {
             color: #202124;
             border-bottom-left-radius: 4px;
         }
+        .selected-quote {
+            font-style: italic;
+            background: rgba(255, 255, 255, 0.2);
+            padding: 8px 12px;
+            border-radius: 8px;
+            margin-bottom: 8px;
+        }
         .message-meta {
             font-size: 11px;
             color: #6c757d;
@@ -192,19 +197,60 @@ export const convertToHTML = (data: any) => {
             <div class="chat-subtitle">${formatTimestamp(data.timestamp)} • ${data.author}</div>
         </div>
 
-        ${data.selectedText ? `
+        ${data.contextInfo ? `
         <div class="context-section">
-            <div class="context-title">📖 Selected Text</div>
-            <div class="selected-text">"${data.selectedText}"</div>
-            
-            ${data.contextInfo ? `
+            <div class="context-title">📖 Context</div>
             <div class="context-info">
-                ${data.contextInfo.act ? `<div class="context-item"><span class="context-label">Act:</span>${data.contextInfo.act}</div>` : ''}
-                ${data.contextInfo.scene ? `<div class="context-item"><span class="context-label">Scene:</span>${data.contextInfo.scene}</div>` : ''}
-                ${data.contextInfo.speaker ? `<div class="context-item"><span class="context-label">Speaker:</span>${data.contextInfo.speaker}</div>` : ''}
-                ${data.contextInfo.chapter ? `<div class="context-item"><span class="context-label">Chapter:</span>${data.contextInfo.chapter}</div>` : ''}
+                ${(() => {
+                  // Debug: Log the context info to see what we're working with
+                  console.log('🔍 HTML CONVERTER - Full Context Info:', JSON.stringify(data.contextInfo, null, 2));
+                  console.log('🔍 HTML CONVERTER - Act:', data.contextInfo.act);
+                  console.log('🔍 HTML CONVERTER - Scene:', data.contextInfo.scene);
+                  console.log('🔍 HTML CONVERTER - Speaker:', data.contextInfo.speaker);
+                  console.log('🔍 HTML CONVERTER - Characters on Stage:', data.contextInfo.charactersOnStage);
+                  console.log('🔍 HTML CONVERTER - Chapter:', data.contextInfo.chapter);
+                  console.log('🔍 HTML CONVERTER - Book Title:', data.bookTitle);
+                  console.log('🔍 HTML CONVERTER - Author:', data.author);
+                  
+                  // Check if this is Shakespeare content by author or book title
+                  const isShakespeare = data.author?.toLowerCase().includes('shakespeare') || 
+                                      data.bookTitle?.toLowerCase().includes('shakespeare') ||
+                                      (data.contextInfo.act && data.contextInfo.scene);
+                  
+                  // Check if this is Bible content
+                  const isBible = data.author?.toLowerCase().includes('bible') || 
+                                 data.bookTitle?.toLowerCase().includes('bible') ||
+                                 data.bookTitle?.toLowerCase().includes('king james');
+                  
+                  console.log('🔍 HTML CONVERTER - Is Shakespeare:', isShakespeare);
+                  console.log('🔍 HTML CONVERTER - Is Bible:', isBible);
+                  
+                  if (isShakespeare) {
+                    // For Shakespeare: Act, Scene, Speaker, Characters on Stage
+                    return `
+                        ${data.contextInfo.act ? `<div class="context-item"><span class="context-label">Act:</span>${data.contextInfo.act}</div>` : ''}
+                        ${data.contextInfo.scene ? `<div class="context-item"><span class="context-label">Scene:</span>${data.contextInfo.scene}</div>` : ''}
+                        ${data.contextInfo.speaker ? `<div class="context-item"><span class="context-label">Speaker:</span>${data.contextInfo.speaker}</div>` : ''}
+                        ${data.contextInfo.charactersOnStage && data.contextInfo.charactersOnStage.length > 0 ? `<div class="context-item"><span class="context-label">Characters on Stage:</span>${data.contextInfo.charactersOnStage.join(', ')}</div>` : ''}
+                    `;
+                  } else if (isBible) {
+                    // For Bible: Book, Verse
+                    return `
+                        ${data.contextInfo.bibleBook ? `<div class="context-item"><span class="context-label">Book:</span>${data.contextInfo.bibleBook}</div>` : ''}
+                        ${data.contextInfo.bibleVerse ? `<div class="context-item"><span class="context-label">Verse:</span>${data.contextInfo.bibleVerse}</div>` : ''}
+                    `;
+                  } else {
+                    // For other content: Chapter, Speaker (or other relevant fields)
+                    return `
+                        ${data.contextInfo.chapter ? `<div class="context-item"><span class="context-label">Chapter:</span>${data.contextInfo.chapter}</div>` : ''}
+                        ${data.contextInfo.section ? `<div class="context-item"><span class="context-label">Section:</span>${data.contextInfo.section}</div>` : ''}
+                        ${data.contextInfo.part ? `<div class="context-item"><span class="context-label">Part:</span>${data.contextInfo.part}</div>` : ''}
+                        ${data.contextInfo.book ? `<div class="context-item"><span class="context-label">Book:</span>${data.contextInfo.book}</div>` : ''}
+                        ${data.contextInfo.speaker ? `<div class="context-item"><span class="context-label">Speaker:</span>${data.contextInfo.speaker}</div>` : ''}
+                    `;
+                  }
+                })()}
             </div>
-            ` : ''}
         </div>
         ` : ''}
 
@@ -238,17 +284,57 @@ export const convertToMarkdown = (data: any) => {
 
   if (data.contextInfo) {
     markdown += `**Context:**\n`;
-    if (data.contextInfo.act) markdown += `- Act: ${data.contextInfo.act}\n`;
-    if (data.contextInfo.scene) markdown += `- Scene: ${data.contextInfo.scene}\n`;
-    if (data.contextInfo.speaker) markdown += `- Speaker: ${data.contextInfo.speaker}\n`;
-    if (data.contextInfo.chapter) markdown += `- Chapter: ${data.contextInfo.chapter}\n`;
+    
+    // Debug: Log the context info to see what we're working with
+    console.log('🔍 MARKDOWN CONVERTER - Context Info:', data.contextInfo);
+    console.log('🔍 MARKDOWN CONVERTER - Act:', data.contextInfo.act);
+    console.log('🔍 MARKDOWN CONVERTER - Scene:', data.contextInfo.scene);
+    console.log('🔍 MARKDOWN CONVERTER - Chapter:', data.contextInfo.chapter);
+    console.log('🔍 MARKDOWN CONVERTER - Book Title:', data.bookTitle);
+    console.log('🔍 MARKDOWN CONVERTER - Author:', data.author);
+    
+    // Check if this is Shakespeare content by author or book title
+    const isShakespeare = data.author?.toLowerCase().includes('shakespeare') || 
+                        data.bookTitle?.toLowerCase().includes('shakespeare') ||
+                        (data.contextInfo.act && data.contextInfo.scene);
+    
+    // Check if this is Bible content
+    const isBible = data.author?.toLowerCase().includes('bible') || 
+                   data.bookTitle?.toLowerCase().includes('bible') ||
+                   data.bookTitle?.toLowerCase().includes('king james');
+    
+    console.log('🔍 MARKDOWN CONVERTER - Is Shakespeare:', isShakespeare);
+    console.log('🔍 MARKDOWN CONVERTER - Is Bible:', isBible);
+    
+    if (isShakespeare) {
+      // For Shakespeare: Act, Scene, Speaker, Characters on Stage
+      if (data.contextInfo.act) markdown += `- Act: ${data.contextInfo.act}\n`;
+      if (data.contextInfo.scene) markdown += `- Scene: ${data.contextInfo.scene}\n`;
+      if (data.contextInfo.speaker) markdown += `- Speaker: ${data.contextInfo.speaker}\n`;
+      if (data.contextInfo.charactersOnStage && data.contextInfo.charactersOnStage.length > 0) {
+        markdown += `- Characters on Stage: ${data.contextInfo.charactersOnStage.join(', ')}\n`;
+      }
+    } else if (isBible) {
+      // For Bible: Book, Verse
+      if (data.contextInfo.bibleBook) markdown += `- Book: ${data.contextInfo.bibleBook}\n`;
+      if (data.contextInfo.bibleVerse) markdown += `- Verse: ${data.contextInfo.bibleVerse}\n`;
+    } else {
+      // For other content: Chapter, Speaker (or other relevant fields)
+      if (data.contextInfo.chapter) markdown += `- Chapter: ${data.contextInfo.chapter}\n`;
+      if (data.contextInfo.section) markdown += `- Section: ${data.contextInfo.section}\n`;
+      if (data.contextInfo.part) markdown += `- Part: ${data.contextInfo.part}\n`;
+      if (data.contextInfo.book) markdown += `- Book: ${data.contextInfo.book}\n`;
+      if (data.contextInfo.speaker) markdown += `- Speaker: ${data.contextInfo.speaker}\n`;
+    }
     markdown += `\n`;
   }
 
   // Messages
   markdown += `## Conversation\n\n`;
   
-  data.messages.forEach((message: any) => {
+  // Filter out video messages from chat history
+  const filteredMessages = data.messages.filter((message: any) => !message.videoId);
+  filteredMessages.forEach((message: any) => {
     const time = formatTimeOnly(message.timestamp);
     
     if (message.role === 'user') {
@@ -257,13 +343,7 @@ export const convertToMarkdown = (data: any) => {
     } else {
       const provider = message.provider ? ` - ${message.provider.toUpperCase()}` : '';
       markdown += `### 🤖 Assistant${provider} (${time})\n\n`;
-      
-      if (message.videoId) {
-        markdown += `🎬 **Found related video**\n\n`;
-        markdown += `[${message.videoTitle}](https://www.youtube.com/watch?v=${message.videoId})\n\n`;
-      } else {
-        markdown += `${message.content}\n\n`;
-      }
+      markdown += `${message.content}\n\n`;
     }
   });
 
@@ -293,10 +373,48 @@ export const convertToPlainText = (data: any) => {
 
   if (data.contextInfo) {
     text += `CONTEXT:\n`;
-    if (data.contextInfo.act) text += `Act: ${data.contextInfo.act}\n`;
-    if (data.contextInfo.scene) text += `Scene: ${data.contextInfo.scene}\n`;
-    if (data.contextInfo.speaker) text += `Speaker: ${data.contextInfo.speaker}\n`;
-    if (data.contextInfo.chapter) text += `Chapter: ${data.contextInfo.chapter}\n`;
+    
+    // Debug: Log the context info to see what we're working with
+    console.log('🔍 TEXT CONVERTER - Context Info:', data.contextInfo);
+    console.log('🔍 TEXT CONVERTER - Act:', data.contextInfo.act);
+    console.log('🔍 TEXT CONVERTER - Scene:', data.contextInfo.scene);
+    console.log('🔍 TEXT CONVERTER - Chapter:', data.contextInfo.chapter);
+    console.log('🔍 TEXT CONVERTER - Book Title:', data.bookTitle);
+    console.log('🔍 TEXT CONVERTER - Author:', data.author);
+    
+    // Check if this is Shakespeare content by author or book title
+    const isShakespeare = data.author?.toLowerCase().includes('shakespeare') || 
+                        data.bookTitle?.toLowerCase().includes('shakespeare') ||
+                        (data.contextInfo.act && data.contextInfo.scene);
+    
+    // Check if this is Bible content
+    const isBible = data.author?.toLowerCase().includes('bible') || 
+                   data.bookTitle?.toLowerCase().includes('bible') ||
+                   data.bookTitle?.toLowerCase().includes('king james');
+    
+    console.log('🔍 TEXT CONVERTER - Is Shakespeare:', isShakespeare);
+    console.log('🔍 TEXT CONVERTER - Is Bible:', isBible);
+    
+    if (isShakespeare) {
+      // For Shakespeare: Act, Scene, Speaker, Characters on Stage
+      if (data.contextInfo.act) text += `Act: ${data.contextInfo.act}\n`;
+      if (data.contextInfo.scene) text += `Scene: ${data.contextInfo.scene}\n`;
+      if (data.contextInfo.speaker) text += `Speaker: ${data.contextInfo.speaker}\n`;
+      if (data.contextInfo.charactersOnStage && data.contextInfo.charactersOnStage.length > 0) {
+        text += `Characters on Stage: ${data.contextInfo.charactersOnStage.join(', ')}\n`;
+      }
+    } else if (isBible) {
+      // For Bible: Book, Verse
+      if (data.contextInfo.bibleBook) text += `Book: ${data.contextInfo.bibleBook}\n`;
+      if (data.contextInfo.bibleVerse) text += `Verse: ${data.contextInfo.bibleVerse}\n`;
+    } else {
+      // For other content: Chapter, Speaker (or other relevant fields)
+      if (data.contextInfo.chapter) text += `Chapter: ${data.contextInfo.chapter}\n`;
+      if (data.contextInfo.section) text += `Section: ${data.contextInfo.section}\n`;
+      if (data.contextInfo.part) text += `Part: ${data.contextInfo.part}\n`;
+      if (data.contextInfo.book) text += `Book: ${data.contextInfo.book}\n`;
+      if (data.contextInfo.speaker) text += `Speaker: ${data.contextInfo.speaker}\n`;
+    }
     text += `\n`;
   }
 
@@ -304,7 +422,9 @@ export const convertToPlainText = (data: any) => {
   text += `CONVERSATION:\n`;
   text += `${'-'.repeat(30)}\n\n`;
   
-  data.messages.forEach((message: any) => {
+  // Filter out video messages from chat history
+  const filteredMessages = data.messages.filter((message: any) => !message.videoId);
+  filteredMessages.forEach((message: any) => {
     const time = formatTimeOnly(message.timestamp);
     
     if (message.role === 'user') {
@@ -313,13 +433,7 @@ export const convertToPlainText = (data: any) => {
     } else {
       const provider = message.provider ? ` (${message.provider.toUpperCase()})` : '';
       text += `[${time}] ASSISTANT${provider}:\n`;
-      
-      if (message.videoId) {
-        text += `🎬 Found related video: ${message.videoTitle}\n`;
-        text += `URL: https://www.youtube.com/watch?v=${message.videoId}\n\n`;
-      } else {
-        text += `${message.content}\n\n`;
-      }
+      text += `${message.content}\n\n`;
     }
   });
 

@@ -210,7 +210,7 @@ const MobileTextReader: React.FC<ReaderCommonProps> = ({ text, bookTitle = 'Rome
     }
   }, [])
 
-  useBookmarkRestoreAndSave(textReaderRef, text, bookTitle, author)
+  useBookmarkRestoreAndSave(textReaderRef, text, bookTitle, author, showChatModal)
   
   // Calculate pages for scroll navigation and build character map
   useEffect(() => {

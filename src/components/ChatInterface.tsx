@@ -309,6 +309,29 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ selectedText, contextInfo
     return messages
   }
 
+  const getHiddenMessageCount = () => {
+    if (showFullHistory || messages.length <= 2) {
+      return 0
+    }
+    
+    // Find the index of the last user message (most recent quote)
+    let lastUserMessageIndex = -1
+    for (let i = messages.length - 1; i >= 0; i--) {
+      if (messages[i].role === 'user') {
+        lastUserMessageIndex = i
+        break
+      }
+    }
+    
+    // If we found a user message, calculate how many messages are hidden before it
+    if (lastUserMessageIndex >= 0) {
+      return lastUserMessageIndex
+    }
+    
+    // Fallback: no messages are hidden
+    return 0
+  }
+
   // Track the previous message count to only scroll when new messages are added
   const prevMessageCountRef = useRef(0)
   
@@ -473,9 +496,12 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ selectedText, contextInfo
     }
   }, [])
 
+  // Only update from settings on initial load, not on every settings change
   useEffect(() => {
-    log('ChatInterface: settings.responseLength changed to:', settings.responseLength)
-    setCurrentResponseLength(settings.responseLength)
+    if (!initializedRef.current) {
+      log('ChatInterface: Initializing responseLength from settings:', settings.responseLength)
+      setCurrentResponseLength(settings.responseLength)
+    }
   }, [settings.responseLength])
 
   // Close custom style menu when clicking outside
@@ -767,9 +793,14 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ selectedText, contextInfo
   const createContextualPrompt = (text: string, context: ContextInfo | null): string => {
     log('ChatInterface: Profile data:', profile)
     
-    // Use complete speech if available, otherwise use the selected text
+    // Check if this is Shakespeare content (has act/scene or author/book title indicates Shakespeare)
+    const isShakespeare = context?.act && context?.scene || 
+                         author?.toLowerCase().includes('shakespeare') || 
+                         bookTitle?.toLowerCase().includes('shakespeare')
+    
+    // Use complete speech only for Shakespeare plays, otherwise use the selected text
     const completeSpeech = (context as any)?.completeSpeech
-    const hasCompleteSpeech = completeSpeech && completeSpeech !== text
+    const hasCompleteSpeech = isShakespeare && completeSpeech && completeSpeech !== text
     
     let prompt
     if (hasCompleteSpeech) {
@@ -829,7 +860,8 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ selectedText, contextInfo
       prompt += `\n- Provide a detailed explanation with full context and analysis.`
     }
     
-    prompt += `\n- Explain unfamiliar terms and words used in unfamiliar ways`
+    prompt += `\n- Focus primarily on explaining unfamiliar terms, phrases, and words used in unfamiliar ways within the selected text`
+    prompt += `\n- Pay special attention to archaic language, idioms, metaphors, and expressions that need explanation`
     prompt += `\n- Explain why the character is saying this and what is happening at this moment`
     prompt += `\n- Explain references that contemporary audiences would understand`
     if (profile.language !== 'english') {
@@ -841,6 +873,21 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ selectedText, contextInfo
     prompt += `\n- Use vocabulary appropriate for ${profile.educationLevel} level`
     prompt += `\n- Use clear, accessible language in your explanation`
     prompt += `\n- Format your response as a flowing narrative, not as answers to specific questions`
+    
+    // Check prompt size and truncate if too large to prevent expensive API calls
+    const MAX_PROMPT_LENGTH = 8000 // Reasonable limit for most LLMs
+    if (prompt.length > MAX_PROMPT_LENGTH) {
+      console.log('🔍 PROMPT TOO LARGE:', prompt.length, 'characters, truncating to', MAX_PROMPT_LENGTH)
+      
+      // Try to truncate at a reasonable point (end of context info)
+      const contextEndIndex = prompt.indexOf('\n- Focus primarily on explaining')
+      if (contextEndIndex > 0 && contextEndIndex < MAX_PROMPT_LENGTH) {
+        prompt = prompt.substring(0, contextEndIndex) + '\n\n[Note: Prompt truncated due to length]'
+      } else {
+        // Fallback: truncate at max length
+        prompt = prompt.substring(0, MAX_PROMPT_LENGTH) + '\n\n[Note: Prompt truncated due to length]'
+      }
+    }
     
     return prompt
   }
@@ -1017,6 +1064,9 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ selectedText, contextInfo
     }
 
     setIsLoading(true)
+    
+    // Scroll to show the "AI is thinking..." message
+    setTimeout(() => scrollToLatestResponse(), 100)
 
     try {
       // Use the explanation (deduct credits if needed)
@@ -1595,9 +1645,9 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ selectedText, contextInfo
                     value="brief"
                     checked={currentResponseLength === 'brief'}
                     onChange={(e) => {
-                      e.preventDefault()
                       e.stopPropagation()
                       const newLength = e.target.value as ResponseLength
+                      console.log('🔍 Brief radio clicked:', { newLength, currentResponseLength, settingsResponseLength: settings.responseLength })
                       setCurrentResponseLength(newLength)
                       // Persist as new default and mark as changed
                       onSettingsChange({
@@ -1617,9 +1667,9 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ selectedText, contextInfo
                     value="medium"
                     checked={currentResponseLength === 'medium'}
                     onChange={(e) => {
-                      e.preventDefault()
                       e.stopPropagation()
                       const newLength = e.target.value as ResponseLength
+                      console.log('🔍 Medium radio clicked:', { newLength, currentResponseLength, settingsResponseLength: settings.responseLength })
                       setCurrentResponseLength(newLength)
                       onSettingsChange({
                         ...settings,
@@ -1638,9 +1688,9 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ selectedText, contextInfo
                     value="long"
                     checked={currentResponseLength === 'long'}
                     onChange={(e) => {
-                      e.preventDefault()
                       e.stopPropagation()
                       const newLength = e.target.value as ResponseLength
+                      console.log('🔍 Long radio clicked:', { newLength, currentResponseLength, settingsResponseLength: settings.responseLength })
                       setCurrentResponseLength(newLength)
                       onSettingsChange({
                         ...settings,
@@ -1738,18 +1788,18 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ selectedText, contextInfo
           ref={messagesContainerRef}
           style={messages.length === 0 ? { flex: '0 0 auto', minHeight: '100px' } : {}}
         >
-          {!showFullHistory && messages.length > 2 && (
+          {!showFullHistory && getHiddenMessageCount() > 0 && (
             <div style={{ textAlign: 'center', marginBottom: '16px' }}>
               <button 
                 onClick={() => setShowFullHistory(true)}
                 className={styles.historyToggle}
                 title="Show full conversation history"
               >
-                Show Chat History ({messages.length - 2} earlier messages)
+                Show Chat History ({getHiddenMessageCount()} earlier message{getHiddenMessageCount() !== 1 ? 's' : ''})
               </button>
             </div>
           )}
-          {showFullHistory && messages.length > 2 && (
+          {showFullHistory && getHiddenMessageCount() > 0 && (
             <div style={{ textAlign: 'center', marginBottom: '16px' }}>
               <button 
                 onClick={() => setShowFullHistory(false)}
@@ -1838,20 +1888,6 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ selectedText, contextInfo
                     {message.videoTitle && (
                       <div style={{ marginTop: '8px', fontSize: '14px', color: '#666', fontStyle: 'italic' }}>
                         {message.videoTitle}
-                      </div>
-                    )}
-                    {playphraseUrl && (
-                      <div style={{ marginTop: '10px' }}>
-                        <a
-                          href={playphraseUrl}
-                          target="playphrase"
-                          rel="noopener noreferrer"
-                          className={styles.reexplainButton}
-                          style={{ textDecoration: 'none', display: 'inline-flex', alignItems: 'center', justifyContent: 'center' }}
-                          title="Open this quote on Playphrase"
-                        >
-                          In movies?
-                        </a>
                       </div>
                     )}
                   </div>
