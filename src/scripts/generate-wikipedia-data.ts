@@ -16,7 +16,7 @@ const STYLE_CATEGORIES = {
     { name: 'Michel Foucault', value: 'michel-foucault' },
     { name: 'Edward Said', value: 'edward-said' }
   ],
-  'Philosophers': [
+  'Philosophy': [
     { name: 'Plato', value: 'plato' },
     { name: 'Aristotle', value: 'aristotle' },
     { name: 'Immanuel Kant', value: 'immanuel-kant' },

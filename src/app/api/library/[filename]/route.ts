@@ -25,7 +25,23 @@ export async function GET(
       const fileContent = readFileSync(filePath, 'utf8')
       const jsonData = JSON.parse(fileContent)
       
-      return NextResponse.json(jsonData)
+      // Define category name mapping as single source of truth
+      const categoryNames: { [key: string]: string } = {
+        'philosophers': 'Philosophy'
+      }
+      
+      // Add category name to response
+      const categoryName = categoryNames[filename.replace('.json', '')] || 
+        filename
+          .replace('.json', '')
+          .split('-')
+          .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+          .join(' ')
+      
+      return NextResponse.json({
+        categoryName,
+        books: jsonData
+      })
     } catch (fileError) {
       console.error('File read error:', fileError)
       return NextResponse.json({ error: 'File not found' }, { status: 404 })

@@ -93,13 +93,9 @@ const Library: React.FC<LibraryProps> = ({ onBookSelect, onBackToCurrentBook }) 
     try {
       const categoryPromises = CATEGORY_FILES.map(async (filename) => {
         const response = await fetch(`/api/library/${filename}`)
-        const books: Book[] = await response.json()
-        
-        const categoryName = filename
-          .replace('.json', '')
-          .split('-')
-          .map(word => word.charAt(0).toUpperCase() + word.slice(1))
-          .join(' ')
+        const data = await response.json()
+        const books: Book[] = data.books
+        const categoryName = data.categoryName
 
         // Limit English Literature to 100 top entries
         const limitedBooks = filename === 'english-literature.json' ? books.slice(0, 100) : books
