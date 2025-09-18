@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat History: The Merchant of Venice</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        .chat-container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            overflow: hidden;
+        }
+        .chat-header {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+        .chat-title { font-size: 24px; font-weight: 600; margin-bottom: 8px; }
+        .chat-subtitle { font-size: 14px; opacity: 0.9; }
+        .context-section {
+            background: #f8f9fa;
+            padding: 20px;
+            border-bottom: 1px solid #e9ecef;
+        }
+        .context-title { font-size: 16px; font-weight: 600; margin-bottom: 12px; color: #495057; }
+        .selected-text {
+            background: #e3f2fd;
+            border-left: 4px solid #2196f3;
+            padding: 12px 16px;
+            margin-bottom: 16px;
+            border-radius: 4px;
+            font-style: italic;
+            color: #1976d2;
+            white-space: pre-wrap;
+        }
+        .context-info {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 12px;
+            font-size: 14px;
+        }
+        .context-item {
+            background: white;
+            padding: 8px 12px;
+            border-radius: 6px;
+            border: 1px solid #dee2e6;
+        }
+        .context-label { font-weight: 600; color: #6c757d; margin-right: 8px; }
+        .chat-messages { padding: 20px; max-height: 600px; overflow-y: auto; }
+        .message { margin-bottom: 20px; display: flex; flex-direction: column; }
+        .message.user { align-items: flex-end; }
+        .message.assistant { align-items: flex-start; }
+        .message-bubble {
+            max-width: 70%;
+            padding: 12px 16px;
+            border-radius: 18px;
+            word-wrap: break-word;
+            white-space: pre-wrap;
+        }
+        .message.user .message-bubble {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-bottom-right-radius: 4px;
+        }
+        .message.assistant .message-bubble {
+            background: #f1f3f4;
+            color: #202124;
+            border-bottom-left-radius: 4px;
+        }
+        .selected-quote {
+            font-style: italic;
+            background: rgba(255, 255, 255, 0.2);
+            padding: 8px 12px;
+            border-radius: 8px;
+            margin-bottom: 8px;
+        }
+        .message-meta {
+            font-size: 11px;
+            color: #6c757d;
+            margin-top: 4px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .message.user .message-meta { justify-content: flex-end; }
+        .provider-badge {
+            background: #e9ecef;
+            color: #495057;
+            padding: 2px 6px;
+            border-radius: 10px;
+            font-size: 10px;
+            font-weight: 500;
+        }
+        .provider-badge.openai { background: #10a37f; color: white; }
+        .provider-badge.gemini { background: #4285f4; color: white; }
+        .provider-badge.youtube { background: #ff0000; color: white; }
+        .video-message { background: #fff3e0 !important; border: 1px solid #ffb74d; }
+        .video-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            color: #f57c00;
+            text-decoration: none;
+            font-weight: 500;
+        }
+        .video-link:hover { text-decoration: underline; }
+        .settings-footer {
+            background: #f8f9fa;
+            padding: 16px 20px;
+            border-top: 1px solid #e9ecef;
+            font-size: 12px;
+            color: #6c757d;
+            text-align: center;
+        }
+        .settings-item { display: inline-block; margin: 0 12px; }
+        .settings-label { font-weight: 600; margin-right: 4px; }
+        @media (max-width: 600px) {
+            .message-bubble { max-width: 85%; }
+            .context-info { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <div class="chat-container">
+        <div class="chat-header">
+            <div class="chat-title">The Merchant of Venice Discussion</div>
+            <div class="chat-subtitle">Sep 18, 2025, 3:33 PM • William Shakespeare</div>
+        </div>
+
+        
+        <div class="context-section">
+            <div class="context-title">📖 Context</div>
+            <div class="context-info">
+                
+                        <div class="context-item"><span class="context-label">Act:</span>I</div>
+                        <div class="context-item"><span class="context-label">Scene:</span>I</div>
+                        <div class="context-item"><span class="context-label">Speaker:</span>SALARINO</div>
+                        <div class="context-item"><span class="context-label">Characters on Stage:</span>ANTONIO, SALARINO, SOLANIO</div>
+                    
+            </div>
+        </div>
+        
+
+        <div class="chat-messages">
+            
+      <div class="message user">
+          <div class="message-bubble">
+              <div class="selected-quote">"Your mind is tossing on the ocean,
+There where your argosies, with portly sail
+Like signiors and rich burghers on the flood,
+Or as it were the pageants of the sea,
+Do overpeer the petty traffickers
+That curtsy to them, do them reverence,
+As they fly by them with their woven wings."</div>
+          </div>
+          <div class="message-meta">
+              <span class="timestamp">3:32 PM</span>
+          </div>
+      </div>
+      <div class="message assistant">
+          <div class="message-bubble">Salarino is describing Antonio's ships, using vivid imagery of majestic vessels ("argosies," "portly sail") sailing the ocean, surpassing smaller merchant ships ("petty traffickers").  He uses the metaphor of a grand sea pageant to emphasize Antonio's wealth and the impressive scale of his trading ventures, expressing awe at Antonio's success. This scene establishes Antonio's prosperity at the play's start.
+</div>
+          <div class="message-meta">
+              <span class="provider-badge gemini">GEMINI (gemini-1.5-flash)</span>
+              <span class="timestamp">3:32 PM</span>
+          </div>
+      </div>
+      <div class="message assistant">
+          <div class="message-bubble">Of course. Here is a detailed explanation of the text.
+
+This passage is from the very beginning of William Shakespeare's *The Merchant of Venice*. The character Salarino is speaking to his friend Antonio, who has just confessed that he feels unusually sad and cannot figure out the cause.
+
+Salarino is trying to cheer Antonio up by guessing why he might be sad. He suggests that Antonio must be worried about his merchant ships, which are currently at sea carrying his wealth. The entire speech is an elaborate and poetic metaphor comparing Antonio's business ventures to a grand and powerful spectacle on the ocean.
+
+Here is the text broken down line by line:
+
+*   **"Your mind is tossing on the ocean,"**
+    *   **Explanation:** Salarino is saying that Antonio's thoughts ("your mind") are not at rest but are out at sea, being thrown about by the waves ("tossing on the ocean") with worry for his ships.
+
+*   **"There where your argosies, with portly sail"**
+    *   **Unfamiliar Terms:**
+        *   **Argosies:** This is an archaic word for large merchant ships, especially those carrying valuable cargo. It comes from "Ragusa," a famous merchant city (modern-day Dubrovnik).
+        *   **Portly:** Here, it doesn't mean overweight. In Shakespeare's time, it meant "stately," "imposing," or "dignified," like a portly gentleman. He is applying this human quality to the sails of the ship, which are full of wind and impressive.
+    *   **Meaning:** Your large, valuable ships, with their grand and billowing sails...
+
+*   **"Like signiors and rich burghers on the flood,"**
+    *   **Unfamiliar Terms:**
+        *   **Signiors:** A term of respect for gentlemen or lords (from the Italian "signore").
+        *   **Burghers:** Important and wealthy citizens of a town.
+        *   **The flood:** This refers to the sea or the tide.
+    *   **Meaning:** ...are like important lords and rich citizens walking on the water. This continues the metaphor of giving the ships human, upper-class qualities.
+
+*   **"Or as it were the pageants of the sea,"**
+    *   **Unfamiliar Terms:**
+        *   **Pageants:** In Elizabethan times, pageants were elaborate parades or floats, often for celebrations. They were the most spectacular and eye-catching events of the day.
+    *   **Meaning:** ...or, to put it another way, they are like the most magnificent and showy spectacles the sea has to offer.
+
+*   **"Do overpeer the petty traffickers"**
+    *   **Unfamiliar Terms:**
+        *   **Overpeer:** To look down on from above, to tower over. ("Peer" means to look, and "over" means above.)
+        *   **Petty traffickers:** Small-time traders; the much smaller boats of other merchants. ("Petty" means insignificant, and "traffickers" means traders.)
+    *   **Meaning:** These great ships tower over the small trading boats.
+
+*   **"That curtsy to them, do them reverence,"**
+    *   **Explanation:** The smaller boats, being tossed by the wake of the large ships, bob up and down on the waves. Salarino imagines this motion as if the small boats are bowing or curtsying in respect to Antonio's grand ships, showing them reverence (deep respect) as they pass.
+
+*   **"As they fly by them with their woven wings."**
+    *   **Unfamiliar Terms:**
+        *   **Woven wings:** This is a metaphor for the ships' sails, which are made of woven canvas.
+    *   **Meaning:** As Antonio's great ships sail quickly past the smaller ones, powered by their sails.
+
+### Summary and Context
+
+In this moment, Antonio is melancholic, and Salarino is being a supportive friend. He is painting a vivid, flattering, and reassuring picture for Antonio. He wants to say, "If I had such amazing wealth at risk on the ocean, *that* would make me anxious too!" His underlying message is that Antonio's sadness is simply noble worry for his magnificent business empire.
+
+The metaphors Shakespeare uses would have been very powerful to a contemporary audience in London, a city whose wealth was built on sea trade. The image of mighty "argosies" being bowed to by smaller vessels was a clear symbol of power, success, and prestige. Salarino's speech is designed to make Antonio see his own fortune in the most glorious light possible, hoping it will ease his mind.</div>
+          <div class="message-meta">
+              <span class="provider-badge deepseek">DEEPSEEK (deepseek-chat)</span>
+              <span class="timestamp">3:33 PM</span>
+          </div>
+      </div>
+        </div>
+
+        
+        <div class="settings-footer">
+            <span class="settings-item"><span class="settings-label">Provider:</span>deepseek</span>
+            <span class="settings-item"><span class="settings-label">Style:</span>neutral</span>
+            <span class="settings-item"><span class="settings-label">Length:</span>long</span>
+            <span class="settings-item"><span class="settings-label">Saved:</span>Sep 18, 2025, 3:33 PM</span>
+        </div>
+        
+    </div>
+</body>
+</html>

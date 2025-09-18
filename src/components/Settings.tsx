@@ -3,23 +3,21 @@
 import React, { useState, useEffect, useRef } from 'react'
 import { useRouter } from 'next/navigation'
 import styles from './Settings.module.css'
-import explainerInstructions from '../data/explainer-instructions.json'
-import llmProviders from '../data/llm-providers.json'
-import llmModels from '../data/llm-models.json'
+import explainers from '../data/explainers.json'
+import models from '../data/models.json'
 import responseLengths from '../data/response-lengths.json'
 import fontFamilies from '../data/font-families.json'
 import readingModes from '../data/reading-modes.json'
 import defaultSettings from '../data/default-settings.json'
-import defaultProviderModels from '../data/default-provider-models.json'
 
 // Derive all types from JSON data
-export type LLMProvider = typeof llmProviders.providers[number]['id']
-export type LLMModel = typeof llmModels[keyof typeof llmModels][number]['id']
+export type LLMProvider = typeof models.providers[number]['id']
+export type LLMModel = typeof models.models[keyof typeof models.models][number]['id']
 export type ResponseLength = typeof responseLengths.lengths[number]['id']
 export type FontFamily = typeof fontFamilies.fonts[number]['id']
 export type ReadingMode = typeof readingModes.modes[number]['id']
 // Derive ExplanationStyle type from the JSON data + 'neutral'
-export type ExplanationStyle = 'neutral' | keyof typeof explainerInstructions
+export type ExplanationStyle = 'neutral' | keyof typeof explainers.instructions
 
 export interface SettingsData {
   llmProvider: LLMProvider
@@ -48,17 +46,17 @@ const DEFAULT_SETTINGS: SettingsData = defaultSettings as SettingsData
 
 // Get model options from JSON data
 const getModelOptions = (provider: LLMProvider) => {
-  return (llmModels as any)[provider] || []
+  return (models as any).models[provider] || []
 }
 
 const Settings: React.FC<SettingsProps> = ({ isOpen, onClose, settings, onSettingsChange }) => {
   const [localSettings, setLocalSettings] = useState<SettingsData>(settings)
-  const [providerModels, setProviderModels] = useState<Record<LLMProvider, LLMModel>>(defaultProviderModels as Record<LLMProvider, LLMModel>)
+  const [providerModels, setProviderModels] = useState<Record<LLMProvider, LLMModel>>((models as any).defaults as Record<LLMProvider, LLMModel>)
 
   // Get provider order from JSON data
-  const allProviders: LLMProvider[] = llmProviders.providers
-    .sort((a, b) => a.order - b.order)
-    .map(p => p.id as LLMProvider)
+  const allProviders: LLMProvider[] = (models as any).providers
+    .sort((a: any, b: any) => a.order - b.order)
+    .map((p: any) => p.id as LLMProvider)
   const [showCustomFields, setShowCustomFields] = useState(settings.llmProvider === 'custom')
   const [showMobileMenu, setShowMobileMenu] = useState(false)
   const menuRef = useRef<HTMLDivElement>(null)
@@ -66,20 +64,21 @@ const Settings: React.FC<SettingsProps> = ({ isOpen, onClose, settings, onSettin
 
   useEffect(() => {
     console.log('Settings: settings prop changed to:', settings)
-    setLocalSettings(settings)
-    setShowCustomFields(settings.llmProvider === 'custom')
-    // Load per-provider model mapping from localStorage on first sync
-    try {
-      const stored = localStorage.getItem('providerModels')
-      if (stored) {
-        const parsed = JSON.parse(stored)
-        setProviderModels(prev => ({ ...prev, ...parsed }))
-      } else {
-        // Initialize mapping based on current settings
-        setProviderModels(prev => ({ ...prev, [settings.llmProvider]: (settings.llmModel as LLMModel) || prev[settings.llmProvider] }))
-      }
-    } catch {}
-  }, [settings])
+    
+    // Always migrate old Claude 3.5 Sonnet to working model
+    let migratedSettings = { ...settings }
+    if (settings.llmProvider === 'anthropic' && settings.llmModel === 'claude-3-5-sonnet') {
+      migratedSettings.llmModel = 'claude-3-sonnet-20240229' as LLMModel
+      console.log('Settings: Migrated Claude 3.5 Sonnet to Claude 3 Sonnet')
+      onSettingsChange(migratedSettings)
+      return // Don't set local settings yet, wait for the updated settings to come back
+    }
+    
+    setLocalSettings(migratedSettings)
+    setShowCustomFields(migratedSettings.llmProvider === 'custom')
+    // Initialize mapping based on current settings
+    setProviderModels(prev => ({ ...prev, [migratedSettings.llmProvider]: (migratedSettings.llmModel as LLMModel) || prev[migratedSettings.llmProvider] }))
+  }, [settings, onSettingsChange])
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -113,16 +112,24 @@ const Settings: React.FC<SettingsProps> = ({ isOpen, onClose, settings, onSettin
   }, [localSettings, settings, onSettingsChange])
 
 
-  // Ensure llmModel is set when component mounts
+  // Ensure llmModel is set when component mounts and migrate old models
   useEffect(() => {
     if (!localSettings.llmModel) {
       const defaultModel = getModelOptions(localSettings.llmProvider)[0].id as LLMModel
       setLocalSettings(prev => ({ ...prev, llmModel: defaultModel }))
     }
+    
+    // Force migration of old Claude 3.5 Sonnet
+    if (localSettings.llmProvider === 'anthropic' && localSettings.llmModel === 'claude-3-5-sonnet') {
+      const migratedModel = 'claude-3-sonnet-20240229' as LLMModel
+      console.log('Settings: Force migrating Claude 3.5 Sonnet to Claude 3 Sonnet')
+      setLocalSettings(prev => ({ ...prev, llmModel: migratedModel }))
+      onSettingsChange({ ...localSettings, llmModel: migratedModel })
+    }
+    
     // Keep mapping in sync for current provider
     setProviderModels(prev => ({ ...prev, [localSettings.llmProvider]: (localSettings.llmModel || getModelOptions(localSettings.llmProvider)[0].id as LLMModel) }))
-    try { localStorage.setItem('providerModels', JSON.stringify({ ...providerModels, [localSettings.llmProvider]: (localSettings.llmModel || getModelOptions(localSettings.llmProvider)[0].id as LLMModel) })) } catch {}
-  }, [localSettings.llmProvider, localSettings.llmModel])
+  }, [localSettings.llmProvider, localSettings.llmModel, onSettingsChange])
 
   // Log current provider/model selection for debugging
   useEffect(() => {
@@ -143,7 +150,6 @@ const Settings: React.FC<SettingsProps> = ({ isOpen, onClose, settings, onSettin
     }
     if (changed) {
       setProviderModels(fixed)
-      try { localStorage.setItem('providerModels', JSON.stringify(fixed)) } catch {}
     }
   }, [providerModels])
 
@@ -469,20 +475,19 @@ const Settings: React.FC<SettingsProps> = ({ isOpen, onClose, settings, onSettin
                           name={`llmSelection-${provider}`}
                           value={`${provider}-${option.id}`}
                           checked={(providerModels[provider as LLMProvider] || getModelOptions(provider as LLMProvider)[0].id as LLMModel) === option.id}
-                          onChange={() => {
-                            // Update provider-specific default without switching default provider
-                            const p = provider as LLMProvider
-                            setProviderModels(prev => {
-                              const updated = { ...prev, [p]: option.id as LLMModel }
-                              try { localStorage.setItem('providerModels', JSON.stringify(updated)) } catch {}
-                              return updated
-                            })
-                            // If this provider is currently selected as default, sync llmModel
-                            if (localSettings.llmProvider === provider) {
-                              setLocalSettings(prev => ({ ...prev, llmModel: option.id as LLMModel }))
-                            }
-                            setShowCustomFields(provider === 'custom')
-                          }}
+                            onChange={() => {
+                              // Update provider-specific default without switching default provider
+                              const p = provider as LLMProvider
+                              setProviderModels(prev => {
+                                const updated = { ...prev, [p]: option.id as LLMModel }
+                                return updated
+                              })
+                              // If this provider is currently selected as default, sync llmModel
+                              if (localSettings.llmProvider === provider) {
+                                setLocalSettings(prev => ({ ...prev, llmModel: option.id as LLMModel }))
+                              }
+                              setShowCustomFields(provider === 'custom')
+                            }}
                         />
                         <span>
                           {option.name}

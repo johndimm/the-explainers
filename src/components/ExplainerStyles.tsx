@@ -36,27 +36,9 @@ const ExplainerStyles: React.FC<ExplainerStylesProps> = ({
   selectedStyle, 
   onStyleChange 
 }) => {
-  const [showMobileMenu, setShowMobileMenu] = useState(false)
   const [showConfirmModal, setShowConfirmModal] = useState(false)
   const [selectedStyleName, setSelectedStyleName] = useState('')
-  const menuRef = useRef<HTMLDivElement>(null)
   const router = useRouter()
-  
-  useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
-      if (menuRef.current && !menuRef.current.contains(event.target as Node)) {
-        setShowMobileMenu(false)
-      }
-    }
-
-    if (showMobileMenu) {
-      document.addEventListener('mousedown', handleClickOutside)
-    }
-
-    return () => {
-      document.removeEventListener('mousedown', handleClickOutside)
-    }
-  }, [showMobileMenu])
   
   if (!isOpen) return null
 
@@ -126,178 +108,6 @@ const ExplainerStyles: React.FC<ExplainerStylesProps> = ({
             understand difficult texts
           </p>
         </div>
-        {/* Hamburger menu for all devices */}
-        <div ref={menuRef} style={{ position: 'relative' }}>
-          <button 
-            onClick={() => setShowMobileMenu(!showMobileMenu)}
-            style={{
-              padding: '8px',
-              background: 'none',
-              border: 'none',
-              cursor: 'pointer',
-              fontSize: '18px',
-              color: '#333'
-            }}
-          >
-            ☰
-          </button>
-          
-          {showMobileMenu && (
-            <div style={{
-              position: 'absolute',
-              top: '100%',
-              right: 0,
-              background: 'white',
-              border: '1px solid #e0e0e0',
-              borderRadius: '8px',
-              boxShadow: '0 4px 12px rgba(0,0,0,0.15)',
-              minWidth: '160px',
-              zIndex: 1000
-            }}>
-              <button 
-                onClick={() => {
-                  router.push('/reader')
-                  setShowMobileMenu(false)
-                }}
-                style={{
-                  display: 'block',
-                  width: '100%',
-                  padding: '12px 16px',
-                  background: 'none',
-                  border: 'none',
-                  textAlign: 'left',
-                  cursor: 'pointer',
-                  borderBottom: '1px solid #f0f0f0'
-                }}
-              >
-                📖 Reader
-              </button>
-              <button 
-                onClick={() => {
-                  router.push('/chat')
-                  setShowMobileMenu(false)
-                }}
-                style={{
-                  display: 'block',
-                  width: '100%',
-                  padding: '12px 16px',
-                  background: 'none',
-                  border: 'none',
-                  textAlign: 'left',
-                  cursor: 'pointer',
-                  borderBottom: '1px solid #f0f0f0'
-                }}
-              >
-                💬 Chat
-              </button>
-              <button 
-                onClick={() => {
-                  router.push('/library')
-                  setShowMobileMenu(false)
-                }}
-                style={{
-                  display: 'block',
-                  width: '100%',
-                  padding: '12px 16px',
-                  background: 'none',
-                  border: 'none',
-                  textAlign: 'left',
-                  cursor: 'pointer',
-                  borderBottom: '1px solid #f0f0f0'
-                }}
-              >
-                📚 Library
-              </button>
-              <button 
-                onClick={() => setShowMobileMenu(false)}
-                style={{
-                  display: 'block',
-                  width: '100%',
-                  padding: '12px 16px',
-                  background: 'none',
-                  border: 'none',
-                  textAlign: 'left',
-                  cursor: 'pointer',
-                  borderBottom: '1px solid #f0f0f0',
-                  color: '#666'
-                }}
-              >
-                🎭 Styles (current)
-              </button>
-              <button 
-                onClick={() => {
-                  router.push('/credits')
-                  setShowMobileMenu(false)
-                }}
-                style={{
-                  display: 'block',
-                  width: '100%',
-                  padding: '12px 16px',
-                  background: 'none',
-                  border: 'none',
-                  textAlign: 'left',
-                  cursor: 'pointer',
-                  borderBottom: '1px solid #f0f0f0'
-                }}
-              >
-                💳 Credits
-              </button>
-              <button 
-                onClick={() => {
-                  router.push('/profile')
-                  setShowMobileMenu(false)
-                }}
-                style={{
-                  display: 'block',
-                  width: '100%',
-                  padding: '12px 16px',
-                  background: 'none',
-                  border: 'none',
-                  textAlign: 'left',
-                  cursor: 'pointer',
-                  borderBottom: '1px solid #f0f0f0'
-                }}
-              >
-                👤 Profile
-              </button>
-              <button 
-                onClick={() => {
-                  router.push('/settings')
-                  setShowMobileMenu(false)
-                }}
-                style={{
-                  display: 'block',
-                  width: '100%',
-                  padding: '12px 16px',
-                  background: 'none',
-                  border: 'none',
-                  textAlign: 'left',
-                  cursor: 'pointer',
-                  borderBottom: '1px solid #f0f0f0'
-                }}
-              >
-                ⚙️ Settings
-              </button>
-              <button 
-                onClick={() => {
-                  router.push('/guide')
-                  setShowMobileMenu(false)
-                }}
-                style={{
-                  display: 'block',
-                  width: '100%',
-                  padding: '12px 16px',
-                  background: 'none',
-                  border: 'none',
-                  textAlign: 'left',
-                  cursor: 'pointer'
-                }}
-              >
-                📖 User Guide
-              </button>
-            </div>
-          )}
-        </div>
       </header>
     
     <div className={stylesCss.overlay}>
@@ -345,7 +155,20 @@ const ExplainerStyles: React.FC<ExplainerStylesProps> = ({
             onClick={() => handleStyleSelect('neutral')}
           >
             <div className={stylesCss.neutralIcon}>
-              ⚖️
+              <div style={{
+                width: '24px',
+                height: '24px',
+                background: 'linear-gradient(45deg, #6b7280, #9ca3af)',
+                borderRadius: '50%',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                color: 'white',
+                fontSize: '12px',
+                fontWeight: 'bold'
+              }}>
+                N
+              </div>
             </div>
             <div className={stylesCss.styleInfo}>
               <div className={stylesCss.styleName}>Neutral</div>

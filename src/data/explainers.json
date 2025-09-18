@@ -208,6 +208,11 @@
   },
   "photoSources": {
     "william-shakespeare": "/icon-512x512.png",
+    "bernard-henri-levy": "/explainer-photos/bernard-henri-levy0.png",
+    "jimmy-fallon": "/explainer-photos/jimmy-fallon0.png",
+    "trevor-noah": "/explainer-photos/trevor-noah.png",
+    "andrew-sorkin": "/explainer-photos/andrew-sorkin.jpg",
+    "neutral": "/explainer-photos/neutral.svg",
     "default": "/explainer-photos/{value}.jpg"
   },
   "neutral": {

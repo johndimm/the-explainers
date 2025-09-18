@@ -93,7 +93,8 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ selectedText, contextInfo
 
   const getStylePersona = (style: ExplanationStyle): string => {
     if (style === 'neutral') return 'Respond in a neutral, helpful tone without any particular style or personality.'
-    return (explainers as any).instructions[style] || 'Respond in a neutral, helpful tone.'
+    const baseInstruction = (explainers as any).instructions[style] || 'Respond in a neutral, helpful tone.'
+    return `${baseInstruction}\n\nIMPORTANT: Don't just mimic their writing style - adopt their actual opinions, attitudes, and perspectives on the subject matter. Think like they would think, not just write like they would write.`
   }
 
   const getProviderLabel = (provider: LLMProvider, _model?: LLMModel) => (
@@ -104,7 +105,10 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ selectedText, contextInfo
     'Custom LLM'
   )
 
-  const getAllProviders = () => (models as any).providers
+  const getAllProviders = () => (models as any).providers.map((provider: any) => ({
+    value: provider.id,
+    name: provider.name
+  }))
 
   const getModelLabel = (model?: string) => {
     if (!model) return ''
@@ -571,7 +575,15 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ selectedText, contextInfo
         const stored = localStorage.getItem('providerModels')
         if (stored) {
           const map = JSON.parse(stored)
-          if (map && map[provider]) return map[provider]
+          if (map && map[provider]) {
+            // Migrate old Claude 3.5 Sonnet to working model
+            if (provider === 'anthropic' && map[provider] === 'claude-3-5-sonnet') {
+              map[provider] = 'claude-3-sonnet-20240229'
+              localStorage.setItem('providerModels', JSON.stringify(map))
+              console.log('ChatInterface: Migrated Claude 3.5 Sonnet to Claude 3 Sonnet')
+            }
+            return map[provider]
+          }
         }
       } catch {}
       // Fallbacks: use current settings model if it matches the provider, else a default
@@ -585,6 +597,7 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ selectedText, contextInfo
     }
 
     const selectedModel = chooseModelForProvider ? chooseModelForProvider(selectedProvider, settings.llmModel) : resolveModelFor(selectedProvider, settings.llmModel)
+    console.log('ChatInterface: Selected model for API call:', { provider: selectedProvider, model: selectedModel, settingsModel: settings.llmModel })
     const response = await fetch('/api/chat', {
       method: 'POST',
       headers: {
@@ -1420,11 +1433,15 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ selectedText, contextInfo
                             const newProvider = provider.value as LLMProvider
                             setSelectedProvider(newProvider); 
                             setShowProviderMenu(false)
-                    onSettingsChange({
-                      ...settings,
-                      llmProvider: newProvider
-                    })
-                    setHasChanges(true)
+                            
+                            // Update the model to match the provider's default
+                            const defaultModel = (models as any).defaults[newProvider]
+                            onSettingsChange({
+                              ...settings,
+                              llmProvider: newProvider,
+                              llmModel: defaultModel
+                            })
+                            setHasChanges(true)
                   }}
                         >
                           {provider.name}

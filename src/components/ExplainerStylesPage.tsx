@@ -31,6 +31,13 @@ function getStyleCategories() {
 
   const result: { [key: string]: StyleOption[] } = {}
   
+  // Add neutral option first
+  result['neutral'] = [{
+    value: 'neutral' as ExplanationStyle,
+    name: 'Neutral',
+    description: 'Clear, straightforward explanations without any particular style or personality'
+  }]
+  
   for (const [categoryName, people] of Object.entries((explainers as any).categories)) {
     result[categoryName] = (people as any[]).map((person: any) => ({
       value: person.value as ExplanationStyle,

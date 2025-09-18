@@ -56,6 +56,12 @@ const UserGuide: React.FC = () => {
           </div>
           
           <div style={{ background: '#f8f9fa', padding: '15px', borderRadius: '8px', border: '1px solid #e9ecef' }}>
+            <h4 style={{ color: '#666', marginTop: '0', marginBottom: '8px' }}>📚 Examples</h4>
+            <p style={{ fontSize: '14px', marginBottom: '5px' }}><strong>What it does:</strong> View sample quotes and explanations from various literary works to see how the app works.</p>
+            <p style={{ fontSize: '14px', margin: '0' }}><strong>When to use:</strong> When you want to see examples of explanations or get inspired by sample texts.</p>
+          </div>
+          
+          <div style={{ background: '#f8f9fa', padding: '15px', borderRadius: '8px', border: '1px solid #e9ecef' }}>
             <h4 style={{ color: '#666', marginTop: '0', marginBottom: '8px' }}>🎭 Explainers</h4>
             <p style={{ fontSize: '14px', marginBottom: '5px' }}><strong>What it does:</strong> Choose from 50+ AI personalities to explain texts in different styles (comedians, professors, authors, etc.).</p>
             <p style={{ fontSize: '14px', margin: '0' }}><strong>When to use:</strong> When you want to change how explanations are delivered or try a new explainer personality.</p>

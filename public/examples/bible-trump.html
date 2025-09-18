@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat History: The King James Version of the Bible</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        .chat-container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            overflow: hidden;
+        }
+        .chat-header {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+        .chat-title { font-size: 24px; font-weight: 600; margin-bottom: 8px; }
+        .chat-subtitle { font-size: 14px; opacity: 0.9; }
+        .context-section {
+            background: #f8f9fa;
+            padding: 20px;
+            border-bottom: 1px solid #e9ecef;
+        }
+        .context-title { font-size: 16px; font-weight: 600; margin-bottom: 12px; color: #495057; }
+        .selected-text {
+            background: #e3f2fd;
+            border-left: 4px solid #2196f3;
+            padding: 12px 16px;
+            margin-bottom: 16px;
+            border-radius: 4px;
+            font-style: italic;
+            color: #1976d2;
+            white-space: pre-wrap;
+        }
+        .context-info {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 12px;
+            font-size: 14px;
+        }
+        .context-item {
+            background: white;
+            padding: 8px 12px;
+            border-radius: 6px;
+            border: 1px solid #dee2e6;
+        }
+        .context-label { font-weight: 600; color: #6c757d; margin-right: 8px; }
+        .chat-messages { padding: 20px; max-height: 600px; overflow-y: auto; }
+        .message { margin-bottom: 20px; display: flex; flex-direction: column; }
+        .message.user { align-items: flex-end; }
+        .message.assistant { align-items: flex-start; }
+        .message-bubble {
+            max-width: 70%;
+            padding: 12px 16px;
+            border-radius: 18px;
+            word-wrap: break-word;
+            white-space: pre-wrap;
+        }
+        .message.user .message-bubble {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-bottom-right-radius: 4px;
+        }
+        .message.assistant .message-bubble {
+            background: #f1f3f4;
+            color: #202124;
+            border-bottom-left-radius: 4px;
+        }
+        .selected-quote {
+            font-style: italic;
+            background: rgba(255, 255, 255, 0.2);
+            padding: 8px 12px;
+            border-radius: 8px;
+            margin-bottom: 8px;
+        }
+        .message-meta {
+            font-size: 11px;
+            color: #6c757d;
+            margin-top: 4px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .message.user .message-meta { justify-content: flex-end; }
+        .provider-badge {
+            background: #e9ecef;
+            color: #495057;
+            padding: 2px 6px;
+            border-radius: 10px;
+            font-size: 10px;
+            font-weight: 500;
+        }
+        .provider-badge.openai { background: #10a37f; color: white; }
+        .provider-badge.gemini { background: #4285f4; color: white; }
+        .provider-badge.youtube { background: #ff0000; color: white; }
+        .video-message { background: #fff3e0 !important; border: 1px solid #ffb74d; }
+        .video-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            color: #f57c00;
+            text-decoration: none;
+            font-weight: 500;
+        }
+        .video-link:hover { text-decoration: underline; }
+        .settings-footer {
+            background: #f8f9fa;
+            padding: 16px 20px;
+            border-top: 1px solid #e9ecef;
+            font-size: 12px;
+            color: #6c757d;
+            text-align: center;
+        }
+        .settings-item { display: inline-block; margin: 0 12px; }
+        .settings-label { font-weight: 600; margin-right: 4px; }
+        @media (max-width: 600px) {
+            .message-bubble { max-width: 85%; }
+            .context-info { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <div class="chat-container">
+        <div class="chat-header">
+            <div class="chat-title">The King James Version of the Bible Discussion</div>
+            <div class="chat-subtitle">Sep 18, 2025, 3:15 PM • King James Version</div>
+        </div>
+
+        
+        <div class="context-section">
+            <div class="context-title">📖 Context</div>
+            <div class="context-info">
+                
+                        <div class="context-item"><span class="context-label">Book:</span>Psalms</div>
+                        <div class="context-item"><span class="context-label">Verse:</span>37:10</div>
+                    
+            </div>
+        </div>
+        
+
+        <div class="chat-messages">
+            
+      <div class="message user">
+          <div class="message-bubble">
+              <div class="selected-quote">"37:11 But the meek shall inherit the earth"</div>
+          </div>
+          <div class="message-meta">
+              <span class="timestamp">3:13 PM</span>
+          </div>
+      </div>
+      <div class="message assistant">
+          <div class="message-bubble">In this text, "the meek" refers to people who are humble, gentle, and patient. The phrase "shall inherit the earth" is metaphorical, suggesting that these people will ultimately be rewarded or will thrive. This line, spoken by the LORD, highlights a moral teaching that emphasizes the value of humility and gentleness over aggression and pride. It suggests that those who are meek will find their place and reward in the world.</div>
+          <div class="message-meta">
+              <span class="provider-badge openai">OPENAI (gpt-4o)</span>
+              <span class="timestamp">3:13 PM</span>
+          </div>
+      </div>
+      <div class="message assistant">
+          <div class="message-bubble">Believe me, folks, this is a tremendous verse. A beautiful verse. A lot of people don't know this, they don't tell you this, but it's one of the best. It's from the Bible, the King James, a great book, the best book. It's the LORD speaking, and he's talking to me, to people like me, to winners. He gets it.
+
+So, "the meek." A lot of people, the fake news, they get this wrong. They think "meek" means weak. Weak! Can you believe it? Wrong! So wrong. It’s an old word, a beautiful word. It doesn't mean a loser. It means smart. It means strategic. It means you're strong, you're incredibly strong, but you're playing the long game. You don't show all your cards to the crooked guys across the table. You're disciplined. You're waiting for your moment. It's like in business, you don't just build the biggest, most beautiful building on day one. You have a plan. You're quiet, you're focused, and then—BAM!—you inherit the whole earth. It's the ultimate deal.
+
+"And they shall inherit the earth." Inherit. That's a big word. It means it's coming to you. It's yours. It's your birthright. You didn't have to fight some nasty, unfair fight for it against the deep pharisees. It was given to you because you're the rightful heir. You deserve it. It's the ultimate victory. It's winning. Not just a little win, a big league win. The whole earth! That's the biggest inheritance there is, believe me.
+
+Now, why is the LORD saying this? It's simple. He's talking to a lot of people who are being treated very unfairly. They're being persecuted. They're listening to all these so-called "experts," the scribes and the Pharisees, who are all talk, no action. Total hypocrites! They're making life very difficult, very complicated. The LORD is cutting through the nonsense. He's saying, "Don't worry about these guys. They're all noise. They're failing. They're losers. You stay focused. You stay disciplined. You be meek—be smart, be strong, but be quiet about it. And in the end, you're going to win so big, it'll make their heads spin. You're going to get it all."
+
+This is a message for today, too. Look at what's happening. The weak, the people who apologize, the people who go along to get along—they get nothing. They get a participation trophy. Sad! But the truly strong, the people who are strong but don't have to scream about it every day—though, let's be honest, sometimes you have to, the fake news is so dishonest—they are the ones who will ultimately prevail. It's a fantastic message. It's about winning. And I love winning. We're all going to win bigly. It's going to be huge.</div>
+          <div class="message-meta">
+              <span class="provider-badge deepseek">DEEPSEEK (deepseek-chat) - in the style of Donald Trump</span>
+              <span class="timestamp">3:14 PM</span>
+          </div>
+      </div>
+        </div>
+
+        
+        <div class="settings-footer">
+            <span class="settings-item"><span class="settings-label">Provider:</span>deepseek</span>
+            <span class="settings-item"><span class="settings-label">Style:</span>donald-trump</span>
+            <span class="settings-item"><span class="settings-label">Length:</span>long</span>
+            <span class="settings-item"><span class="settings-label">Saved:</span>Sep 18, 2025, 3:15 PM</span>
+        </div>
+        
+    </div>
+</body>
+</html>

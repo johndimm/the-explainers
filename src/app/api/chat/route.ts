@@ -62,18 +62,38 @@ async function callAnthropic(messages: ChatMessage[], responseLength: string, mo
     ? 'You are a helpful literary and text analysis assistant. Provide clear, insightful explanations of text passages.'
     : 'You are a helpful assistant.'
 
-  const response = await anthropic.messages.create({
-    model: model,
-    max_tokens: maxTokens,
-    temperature: 0.7,
-    system: systemMessage,
-    messages: messages.map(msg => ({
-      role: msg.role,
-      content: msg.content
-    }))
-  })
+  try {
+    const response = await anthropic.messages.create({
+      model: model,
+      max_tokens: maxTokens,
+      temperature: 0.7,
+      system: systemMessage,
+      messages: messages.map(msg => ({
+        role: msg.role,
+        content: msg.content
+      }))
+    })
 
-  return response.content[0]?.type === 'text' ? response.content[0].text : 'No response'
+    return response.content[0]?.type === 'text' ? response.content[0].text : 'No response'
+  } catch (error: any) {
+    console.error('Anthropic API error:', error)
+    
+    // Handle specific error cases
+    if (error.message?.includes('model') && error.message?.includes('not found')) {
+      throw new Error(`Model "${model}" is not available. Please try a different Claude model.`)
+    }
+    
+    if (error.message?.includes('API key')) {
+      throw new Error('Invalid Anthropic API key. Please check your API key configuration.')
+    }
+    
+    if (error.message?.includes('inference profile')) {
+      throw new Error(`Model "${model}" requires special setup. Please try a different Claude model like "claude-3-5-sonnet-20241022".`)
+    }
+    
+    // Generic error
+    throw new Error(`Claude API error: ${error.message || 'Unknown error'}`)
+  }
 }
 
 async function callDeepSeek(messages: ChatMessage[], responseLength: string, model: string = 'deepseek-chat', style?: string): Promise<string> {

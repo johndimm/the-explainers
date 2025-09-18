@@ -1,6 +1,6 @@
 {
   "gemini": "gemini-1.5-flash",
-  "anthropic": "claude-3-5-sonnet",
+  "anthropic": "claude-3-5-sonnet-20241022",
   "openai": "gpt-4o",
   "deepseek": "deepseek-chat",
   "custom": "custom"
