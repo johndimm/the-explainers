@@ -58,8 +58,18 @@ const Library: React.FC<LibraryProps> = ({ onBookSelect, onBackToCurrentBook }) 
       }
     }
 
+    const handleHeaderClearSearch = (event: CustomEvent) => {
+      if (event.detail.type === 'books') {
+        setSearchQuery('')
+      }
+    }
+
     window.addEventListener('headerSearch', handleHeaderSearch as EventListener)
-    return () => window.removeEventListener('headerSearch', handleHeaderSearch as EventListener)
+    window.addEventListener('headerClearSearch', handleHeaderClearSearch as EventListener)
+    return () => {
+      window.removeEventListener('headerSearch', handleHeaderSearch as EventListener)
+      window.removeEventListener('headerClearSearch', handleHeaderClearSearch as EventListener)
+    }
   }, [])
   const router = useRouter()
 
