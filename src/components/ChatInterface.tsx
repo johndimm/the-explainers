@@ -715,6 +715,8 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ selectedText, contextInfo
     prompt += `\n- Use vocabulary appropriate for ${profile.educationLevel} level`
     prompt += `\n- Use clear, accessible language in your explanation`
     prompt += `\n- Format your response as a flowing narrative, not as answers to specific questions`
+    prompt += `\n- Don't be cute, peppy, enthusiastic, or excited unless the user is a child. Witty dry sarcasm is fine though`
+    prompt += `\n- Avoid throat-clearing phrases like "listen up!" or "be glad to help you"`
     
     // Check prompt size and truncate if too large to prevent expensive API calls
     const MAX_PROMPT_LENGTH = 8000 // Reasonable limit for most LLMs

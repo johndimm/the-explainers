@@ -97,17 +97,12 @@ const Library: React.FC<LibraryProps> = ({ onBookSelect, onBackToCurrentBook }) 
         const books: Book[] = data.books
         const categoryName = data.categoryName
 
-        // Limit English Literature to 100 top entries
-        const limitedBooks = filename === 'english-literature.json' ? books.slice(0, 100) : books
-        
-        // Filter books that have Wikipedia URLs and overwrite the original array
-        const booksWithWikipedia = limitedBooks.filter(book => 
-          book.wikipediaUrl && book.wikipediaUrl.trim() !== ''
-        )
+        // No longer limiting English Literature - show all books
+        const limitedBooks = books
         
         return {
           name: categoryName,
-          books: booksWithWikipedia,
+          books: limitedBooks,
           visibleCount: 10
         }
       })

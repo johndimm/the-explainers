@@ -97,7 +97,7 @@ async function callAnthropic(messages: ChatMessage[], responseLength: string, mo
 }
 
 async function callDeepSeek(messages: ChatMessage[], responseLength: string, model: string = 'deepseek-chat', style?: string): Promise<string> {
-  const maxTokens = responseLength === 'brief' ? 200 : responseLength === 'medium' ? 500 : 1500
+  const maxTokens = responseLength === 'brief' ? 200 : responseLength === 'medium' ? 500 : 2000
   
   const completion = await deepseekOpenai.chat.completions.create({
     model: model,

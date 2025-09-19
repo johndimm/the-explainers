@@ -240,49 +240,74 @@ export default function Header() {
                   position: 'absolute',
                   right: '8px',
                   display: 'flex',
-                  flexDirection: 'column',
-                  gap: '2px'
+                  alignItems: 'center',
+                  gap: '4px'
                 }}>
-                  <button
-                    type="button"
-                    onClick={handlePrevSearch}
-                    disabled={currentSearchIndex === 0}
-                    style={{
-                      width: '16px',
-                      height: '12px',
-                      border: 'none',
-                      background: 'none',
-                      cursor: currentSearchIndex === 0 ? 'not-allowed' : 'pointer',
-                      fontSize: '10px',
-                      color: currentSearchIndex === 0 ? '#ccc' : '#666',
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'center'
-                    }}
-                    title={`Previous result (${currentSearchIndex}/${totalSearchResults})`}
-                  >
-                    ▲
-                  </button>
-                  <button
-                    type="button"
-                    onClick={handleNextSearch}
-                    disabled={currentSearchIndex >= totalSearchResults - 1}
-                    style={{
-                      width: '16px',
-                      height: '12px',
-                      border: 'none',
-                      background: 'none',
-                      cursor: currentSearchIndex >= totalSearchResults - 1 ? 'not-allowed' : 'pointer',
-                      fontSize: '10px',
-                      color: currentSearchIndex >= totalSearchResults - 1 ? '#ccc' : '#666',
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'center'
-                    }}
-                    title={`Next result (${currentSearchIndex + 1}/${totalSearchResults})`}
-                  >
-                    ▼
-                  </button>
+                  {searchQuery && (
+                    <button
+                      type="button"
+                      onClick={handleClearSearch}
+                      style={{
+                        width: '16px',
+                        height: '16px',
+                        border: 'none',
+                        background: 'none',
+                        cursor: 'pointer',
+                        fontSize: '12px',
+                        color: '#666',
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        borderRadius: '50%',
+                        backgroundColor: '#f0f0f0'
+                      }}
+                      title="Clear search"
+                    >
+                      ✕
+                    </button>
+                  )}
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: '2px' }}>
+                    <button
+                      type="button"
+                      onClick={handlePrevSearch}
+                      disabled={currentSearchIndex === 0}
+                      style={{
+                        width: '16px',
+                        height: '12px',
+                        border: 'none',
+                        background: 'none',
+                        cursor: currentSearchIndex === 0 ? 'not-allowed' : 'pointer',
+                        fontSize: '10px',
+                        color: currentSearchIndex === 0 ? '#ccc' : '#666',
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center'
+                      }}
+                      title={`Previous result (${currentSearchIndex}/${totalSearchResults})`}
+                    >
+                      ▲
+                    </button>
+                    <button
+                      type="button"
+                      onClick={handleNextSearch}
+                      disabled={currentSearchIndex >= totalSearchResults - 1}
+                      style={{
+                        width: '16px',
+                        height: '12px',
+                        border: 'none',
+                        background: 'none',
+                        cursor: currentSearchIndex >= totalSearchResults - 1 ? 'not-allowed' : 'pointer',
+                        fontSize: '10px',
+                        color: currentSearchIndex >= totalSearchResults - 1 ? '#ccc' : '#666',
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center'
+                      }}
+                      title={`Next result (${currentSearchIndex + 1}/${totalSearchResults})`}
+                    >
+                      ▼
+                    </button>
+                  </div>
                 </div>
               </div>
             )}
@@ -338,7 +363,6 @@ export default function Header() {
               <button onClick={() => { router.push('/settings'); setShowMobileMenu(false) }} style={{ display: 'block', width: '100%', padding: '12px 16px', background: 'none', border: 'none', textAlign: 'left', cursor: 'pointer', borderBottom: '1px solid #f0f0f0' }}>⚙️ Settings</button>
               <button onClick={() => { router.push('/guide'); setShowMobileMenu(false) }} style={{ display: 'block', width: '100%', padding: '12px 16px', background: 'none', border: 'none', textAlign: 'left', cursor: 'pointer', borderBottom: '1px solid #f0f0f0' }}>📖 User Guide</button>
               <button onClick={() => { router.push('/about'); setShowMobileMenu(false) }} style={{ display: 'block', width: '100%', padding: '12px 16px', background: 'none', border: 'none', textAlign: 'left', cursor: 'pointer', borderBottom: '1px solid #f0f0f0' }}>ℹ️ About</button>
-              <button onClick={() => { router.push('/demo'); setShowMobileMenu(false) }} style={{ display: 'block', width: '100%', padding: '12px 16px', background: 'none', border: 'none', textAlign: 'left', cursor: 'pointer', borderBottom: '1px solid #f0f0f0' }}>🗯️ Tutorial</button>
               <button onClick={() => { router.push('/examples'); setShowMobileMenu(false) }} style={{ display: 'block', width: '100%', padding: '12px 16px', background: 'none', border: 'none', textAlign: 'left', cursor: 'pointer', borderBottom: '1px solid #f0f0f0' }}>📚 Examples</button>
               
               {/* Auth buttons */}

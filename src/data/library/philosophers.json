@@ -1,12 +1,5 @@
 [
   {
-    "id": "871",
-    "title": "The Golden Sayings of Epictetus, with the Hymn of Cleanthes",
-    "author": "Epictetus",
-    "wikipediaUrl": "https://en.wikipedia.org/wiki/Harvard%20Classics",
-    "wikipediaTitle": "Harvard Classics"
-  },
-  {
     "id": "2680",
     "title": "Meditations",
     "author": "Marcus Aurelius",
@@ -28,241 +21,11 @@
     "wikipediaTitle": "Marcus Aurelius"
   },
   {
-    "id": "226",
-    "title": "Cicero's Orations",
-    "author": "Cicero",
-    "directUrl": "https://www.gutenberg.org/cache/epub/226.txt",
-    "wikipediaUrl": "https://en.wikipedia.org/wiki/Cicero",
-    "wikipediaTitle": "Cicero"
-  },
-  {
-    "id": "59",
-    "title": "Discourse on the Method of Rightly Conducting One's Reason and of Seeking Truth in the Sciences",
-    "author": "Descartes",
-    "wikipediaUrl": "https://en.wikipedia.org/wiki/Discourse%20on%20the%20Method",
-    "wikipediaTitle": "Discourse on the Method"
-  },
-  {
-    "id": "919",
-    "title": "Ethics \u2014 Part 1",
-    "author": "Spinoza",
-    "wikipediaUrl": "https://en.wikipedia.org/wiki/Spinoza's%20Ethics",
-    "wikipediaTitle": "Spinoza's Ethics"
-  },
-  {
-    "id": "920",
-    "title": "Ethics \u2014 Part 2",
-    "author": "Spinoza",
-    "wikipediaUrl": "https://en.wikipedia.org/wiki/Spinoza's%20Ethics",
-    "wikipediaTitle": "Spinoza's Ethics"
-  },
-  {
-    "id": "948",
-    "title": "Ethics \u2014 Part 3",
-    "author": "Spinoza",
-    "wikipediaUrl": "https://en.wikipedia.org/wiki/Spinoza's%20Ethics",
-    "wikipediaTitle": "Spinoza's Ethics"
-  },
-  {
-    "id": "971",
-    "title": "Ethics \u2014 Part 4",
-    "author": "Spinoza",
-    "wikipediaUrl": "https://en.wikipedia.org/wiki/Spinoza's%20Ethics",
-    "wikipediaTitle": "Spinoza's Ethics"
-  },
-  {
-    "id": "975",
-    "title": "Ethics \u2014 Part 5",
-    "author": "Spinoza",
-    "wikipediaUrl": "https://en.wikipedia.org/wiki/Spinoza's%20Ethics",
-    "wikipediaTitle": "Spinoza's Ethics"
-  },
-  {
-    "id": "989",
-    "title": "Theologico-Political Treatise \u2014 Part 1",
-    "author": "Spinoza",
-    "wikipediaUrl": "https://en.wikipedia.org/wiki/Tractatus%20Theologico-Politicus",
-    "wikipediaTitle": "Tractatus Theologico-Politicus"
-  },
-  {
-    "id": "990",
-    "title": "Theologico-Political Treatise \u2014 Part 2",
-    "author": "Spinoza",
-    "wikipediaUrl": "https://en.wikipedia.org/wiki/Tractatus%20Theologico-Politicus",
-    "wikipediaTitle": "Tractatus Theologico-Politicus"
-  },
-  {
-    "id": "991",
-    "title": "A Theological-Political Treatise [Part III]",
-    "author": "Spinoza",
-    "wikipediaUrl": "https://en.wikipedia.org/wiki/Baruch%20Spinoza",
-    "wikipediaTitle": "Baruch Spinoza"
-  },
-  {
-    "id": "992",
-    "title": "A Theological-Political Treatise [Part IV]",
-    "author": "Spinoza",
-    "wikipediaUrl": "https://en.wikipedia.org/wiki/Spinoza's%20Ethics",
-    "wikipediaTitle": "Spinoza's Ethics"
-  },
-  {
-    "id": "1016",
-    "title": "On the Improvement of the Understanding",
-    "author": "Spinoza",
-    "wikipediaUrl": "https://en.wikipedia.org/wiki/Baruch%20Spinoza",
-    "wikipediaTitle": "Baruch Spinoza"
-  },
-  {
-    "id": "2463",
-    "title": "Florentine History",
-    "author": "Niccol\u00f2 Machiavelli"
-  },
-  {
-    "id": "3581",
-    "title": "Essays of Michel de Montaigne \u2014 Volume 01",
-    "author": "Montaigne",
-    "wikipediaUrl": "https://en.wikipedia.org/wiki/Essays%20(Montaigne)%20-%20Bordeaux%20copy",
-    "wikipediaTitle": "Essays (Montaigne) - Bordeaux copy"
-  },
-  {
-    "id": "3582",
-    "title": "Essays of Michel de Montaigne \u2014 Volume 02",
-    "author": "Montaigne",
-    "wikipediaUrl": "https://en.wikipedia.org/wiki/Essays%20(Montaigne)",
-    "wikipediaTitle": "Essays (Montaigne)"
-  },
-  {
-    "id": "3583",
-    "title": "Essays of Michel de Montaigne \u2014 Volume 03",
-    "author": "Montaigne",
-    "wikipediaUrl": "https://en.wikipedia.org/wiki/Essays%20(Montaigne)%20-%20Bordeaux%20copy",
-    "wikipediaTitle": "Essays (Montaigne) - Bordeaux copy"
-  },
-  {
-    "id": "3584",
-    "title": "Essays of Michel de Montaigne \u2014 Volume 04",
-    "author": "Montaigne",
-    "wikipediaUrl": "https://en.wikipedia.org/wiki/Essays%20(Montaigne)%20-%20Bordeaux%20copy",
-    "wikipediaTitle": "Essays (Montaigne) - Bordeaux copy"
-  },
-  {
-    "id": "3585",
-    "title": "Essays of Michel de Montaigne \u2014 Volume 05",
-    "author": "Montaigne",
-    "wikipediaUrl": "https://en.wikipedia.org/wiki/Essays%20(Montaigne)",
-    "wikipediaTitle": "Essays (Montaigne)"
-  },
-  {
-    "id": "3586",
-    "title": "Essays of Michel de Montaigne \u2014 Volume 06",
-    "author": "Montaigne",
-    "wikipediaUrl": "https://en.wikipedia.org/wiki/Michel%20Foucault",
-    "wikipediaTitle": "Michel Foucault"
-  },
-  {
-    "id": "3587",
-    "title": "Essays of Michel de Montaigne \u2014 Volume 07",
-    "author": "Montaigne",
-    "wikipediaUrl": "https://en.wikipedia.org/wiki/Essays%20(Montaigne)%20-%20Bordeaux%20copy",
-    "wikipediaTitle": "Essays (Montaigne) - Bordeaux copy"
-  },
-  {
-    "id": "3588",
-    "title": "Essays of Michel de Montaigne \u2014 Volume 08",
-    "author": "Montaigne",
-    "wikipediaUrl": "https://en.wikipedia.org/wiki/Essay",
-    "wikipediaTitle": "Essay"
-  },
-  {
-    "id": "3589",
-    "title": "Essays of Michel de Montaigne \u2014 Volume 09",
-    "author": "Montaigne",
-    "wikipediaUrl": "https://en.wikipedia.org/wiki/Michel%20de%20Montaigne",
-    "wikipediaTitle": "Michel de Montaigne"
-  },
-  {
-    "id": "3590",
-    "title": "Essays of Michel de Montaigne \u2014 Volume 10",
-    "author": "Montaigne",
-    "wikipediaUrl": "https://en.wikipedia.org/wiki/Essays%20(Montaigne)",
-    "wikipediaTitle": "Essays (Montaigne)"
-  },
-  {
-    "id": "3591",
-    "title": "Essays of Michel de Montaigne \u2014 Volume 11",
-    "author": "Montaigne",
-    "wikipediaUrl": "https://en.wikipedia.org/wiki/Essays%20(Montaigne)",
-    "wikipediaTitle": "Essays (Montaigne)"
-  },
-  {
-    "id": "3592",
-    "title": "Essays of Michel de Montaigne \u2014 Volume 12",
-    "author": "Montaigne",
-    "wikipediaUrl": "https://en.wikipedia.org/wiki/Essays%20(Montaigne)",
-    "wikipediaTitle": "Essays (Montaigne)"
-  },
-  {
-    "id": "3593",
-    "title": "Essays of Michel de Montaigne \u2014 Volume 13",
-    "author": "Montaigne",
-    "wikipediaUrl": "https://en.wikipedia.org/wiki/Michel%20de%20Montaigne",
-    "wikipediaTitle": "Michel de Montaigne"
-  },
-  {
-    "id": "3594",
-    "title": "Essays of Michel de Montaigne \u2014 Volume 14",
-    "author": "Montaigne",
-    "wikipediaUrl": "https://en.wikipedia.org/wiki/Essays%20(Montaigne)%20-%20Bordeaux%20copy",
-    "wikipediaTitle": "Essays (Montaigne) - Bordeaux copy"
-  },
-  {
-    "id": "3595",
-    "title": "Essays of Michel de Montaigne \u2014 Volume 15",
-    "author": "Montaigne",
-    "wikipediaUrl": "https://en.wikipedia.org/wiki/Essays%20(Montaigne)",
-    "wikipediaTitle": "Essays (Montaigne)"
-  },
-  {
-    "id": "3596",
-    "title": "Essays of Michel de Montaigne \u2014 Volume 16",
-    "author": "Montaigne",
-    "wikipediaUrl": "https://en.wikipedia.org/wiki/Essays%20(Montaigne)",
-    "wikipediaTitle": "Essays (Montaigne)"
-  },
-  {
-    "id": "3597",
-    "title": "Essays of Michel de Montaigne \u2014 Volume 17",
-    "author": "Montaigne",
-    "wikipediaUrl": "https://en.wikipedia.org/wiki/Essays%20(Montaigne)",
-    "wikipediaTitle": "Essays (Montaigne)"
-  },
-  {
-    "id": "3598",
-    "title": "Essays of Michel de Montaigne \u2014 Volume 18",
-    "author": "Montaigne",
-    "wikipediaUrl": "https://en.wikipedia.org/wiki/Michel%20de%20Montaigne",
-    "wikipediaTitle": "Michel de Montaigne"
-  },
-  {
-    "id": "3599",
-    "title": "Essays of Michel de Montaigne \u2014 Volume 19",
-    "author": "Montaigne",
-    "wikipediaUrl": "https://en.wikipedia.org/wiki/Michel%20de%20Montaigne",
-    "wikipediaTitle": "Michel de Montaigne"
-  },
-  {
-    "id": "3600",
-    "title": "Essays of Michel de Montaigne \u2014 Complete",
-    "author": "Montaigne",
-    "wikipediaUrl": "https://en.wikipedia.org/wiki/Essays%20(Montaigne)",
-    "wikipediaTitle": "Essays (Montaigne)"
-  },
-  {
-    "id": "4671",
-    "title": "The Querist",
+    "id": "4723",
+    "title": "A Treatise Concerning the Principles of Human Knowledge",
     "author": "Berkeley",
-    "wikipediaUrl": "https://en.wikipedia.org/wiki/George%20Berkeley",
-    "wikipediaTitle": "George Berkeley"
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/A%20Treatise%20Concerning%20the%20Principles%20of%20Human%20Knowledge",
+    "wikipediaTitle": "A Treatise Concerning the Principles of Human Knowledge"
   },
   {
     "id": "4722",
@@ -272,88 +35,11 @@
     "wikipediaTitle": "George Berkeley"
   },
   {
-    "id": "4723",
-    "title": "A Treatise Concerning the Principles of Human Knowledge",
-    "author": "Berkeley",
-    "wikipediaUrl": "https://en.wikipedia.org/wiki/A%20Treatise%20Concerning%20the%20Principles%20of%20Human%20Knowledge",
-    "wikipediaTitle": "A Treatise Concerning the Principles of Human Knowledge"
-  },
-  {
     "id": "4724",
     "title": "Three Dialogues Between Hylas and Philonous in Opposition to Sceptics and Atheists",
     "author": "Berkeley",
     "wikipediaUrl": "https://en.wikipedia.org/wiki/Harvard%20Classics",
     "wikipediaTitle": "Harvard Classics"
-  },
-  {
-    "id": "71",
-    "title": "On the Duty of Civil Disobedience",
-    "author": "Henry David Thoreau"
-  },
-  {
-    "id": "205",
-    "title": "Walden, and On The Duty Of Civil Disobedience",
-    "author": "Henry David Thoreau"
-  },
-  {
-    "id": "1022",
-    "title": "Walking",
-    "author": "Henry David Thoreau"
-  },
-  {
-    "id": "4232",
-    "title": "A Week on the Concord and Merrimack Rivers",
-    "author": "Henry David Thoreau"
-  },
-  {
-    "id": "4066",
-    "title": "Wild Apples",
-    "author": "Henry David Thoreau"
-  },
-  {
-    "id": "2944",
-    "title": "Essays \u2014 First Series",
-    "author": "Ralph Waldo Emerson"
-  },
-  {
-    "id": "2945",
-    "title": "Essays \u2014 Second Series",
-    "author": "Ralph Waldo Emerson"
-  },
-  {
-    "id": "61",
-    "title": "The Communist Manifesto",
-    "author": "Marx",
-    "wikipediaUrl": "https://en.wikipedia.org/wiki/The%20Communist%20Manifesto",
-    "wikipediaTitle": "The Communist Manifesto"
-  },
-  {
-    "id": "1346",
-    "title": "The Eighteenth Brumaire of Louis Bonaparte",
-    "author": "Marx",
-    "wikipediaUrl": "https://en.wikipedia.org/wiki/The%20Eighteenth%20Brumaire%20of%20Louis%20Bonaparte",
-    "wikipediaTitle": "The Eighteenth Brumaire of Louis Bonaparte"
-  },
-  {
-    "id": "690",
-    "title": "Proposed Roads to Freedom",
-    "author": "Russell",
-    "wikipediaUrl": "https://en.wikipedia.org/wiki/Bertrand%20Russell",
-    "wikipediaTitle": "Bertrand Russell"
-  },
-  {
-    "id": "2529",
-    "title": "The Analysis of Mind",
-    "author": "Russell",
-    "wikipediaUrl": "https://en.wikipedia.org/wiki/Pragmatism",
-    "wikipediaTitle": "Pragmatism"
-  },
-  {
-    "id": "4776",
-    "title": "Political Ideals",
-    "author": "Russell",
-    "wikipediaUrl": "https://en.wikipedia.org/wiki/Bertrand%20Russell",
-    "wikipediaTitle": "Bertrand Russell"
   },
   {
     "id": "3330",
@@ -377,39 +63,28 @@
     "wikipediaTitle": "Confucius"
   },
   {
-    "id": "216",
-    "title": "The Tao Teh King, or the Tao and its Characteristics",
-    "author": "Laozi",
-    "wikipediaUrl": "https://en.wikipedia.org/wiki/Tao%20Te%20Ching",
-    "wikipediaTitle": "Tao Te Ching"
+    "id": "59",
+    "title": "Discourse on the Method of Rightly Conducting One's Reason and of Seeking Truth in the Sciences",
+    "author": "Descartes",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Discourse%20on%20the%20Method",
+    "wikipediaTitle": "Discourse on the Method"
   },
   {
-    "id": "1171",
-    "title": "The Apology",
-    "author": "Xenophon",
-    "wikipediaUrl": "https://en.wikipedia.org/wiki/Apology%20(Xenophon)",
-    "wikipediaTitle": "Apology (Xenophon)"
+    "id": "2944",
+    "title": "Essays — First Series",
+    "author": "Ralph Waldo Emerson"
   },
   {
-    "id": "1177",
-    "title": "The Memorabilia",
-    "author": "Xenophon",
-    "wikipediaUrl": "https://en.wikipedia.org/wiki/Memorabilia%20(Xenophon)",
-    "wikipediaTitle": "Memorabilia (Xenophon)"
+    "id": "2945",
+    "title": "Essays — Second Series",
+    "author": "Ralph Waldo Emerson"
   },
   {
-    "id": "1181",
-    "title": "The Symposium",
-    "author": "Xenophon",
-    "wikipediaUrl": "https://en.wikipedia.org/wiki/Symposium%20(Xenophon)",
-    "wikipediaTitle": "Symposium (Xenophon)"
-  },
-  {
-    "id": "7514",
-    "title": "A Guide to Stoicism",
-    "author": "Stock",
-    "wikipediaUrl": "https://en.wikipedia.org/wiki/Hellenistic%20philosophy",
-    "wikipediaTitle": "Hellenistic philosophy"
+    "id": "871",
+    "title": "The Golden Sayings of Epictetus, with the Hymn of Cleanthes",
+    "author": "Epictetus",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Harvard%20Classics",
+    "wikipediaTitle": "Harvard Classics"
   },
   {
     "id": "10846",
@@ -419,180 +94,123 @@
     "wikipediaTitle": "Robert Farrar Capon"
   },
   {
-    "id": "tractatus",
-    "title": "Tractatus Logico-Philosophicus",
-    "author": "Ludwig Wittgenstein",
-    "localPath": "/public-domain-texts/tractatus-english.txt",
-    "wikipediaUrl": "https://en.wikipedia.org/wiki/Tractatus%20Logico-Philosophicus",
-    "wikipediaTitle": "Tractatus Logico-Philosophicus"
+    "id": "stuart-hampshire-justice",
+    "title": "Justice is Conflict",
+    "author": "Stuart Hampshire",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Stuart_Hampshire",
+    "wikipediaTitle": "Stuart Hampshire"
   },
   {
-    "id": "5827",
-    "title": "How We Think",
-    "author": "John Dewey",
-    "directUrl": "https://www.gutenberg.org/cache/epub/5827.txt",
-    "wikipediaUrl": "https://en.wikipedia.org/wiki/How_We_Think",
-    "wikipediaTitle": "How We Think"
+    "id": "stuart-hampshire-thought-action",
+    "title": "Thought and Action",
+    "author": "Stuart Hampshire",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Stuart_Hampshire",
+    "wikipediaTitle": "Stuart Hampshire"
   },
   {
-    "id": "852",
-    "title": "Democracy and Education",
-    "author": "John Dewey",
-    "directUrl": "https://www.gutenberg.org/cache/epub/852.txt",
-    "wikipediaUrl": "https://en.wikipedia.org/wiki/Democracy_and_Education",
-    "wikipediaTitle": "Democracy and Education"
+    "id": "216",
+    "title": "The Tao Teh King, or the Tao and its Characteristics",
+    "author": "Laozi",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Tao%20Te%20Ching",
+    "wikipediaTitle": "Tao Te Ching"
   },
   {
-    "id": "41386",
-    "title": "Human Nature and Conduct",
-    "author": "John Dewey",
-    "directUrl": "https://www.gutenberg.org/cache/epub/41386.txt",
-    "wikipediaUrl": "https://en.wikipedia.org/wiki/Human_Nature_and_Conduct",
-    "wikipediaTitle": "Human Nature and Conduct"
+    "id": "61",
+    "title": "The Communist Manifesto",
+    "author": "Marx",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/The%20Communist%20Manifesto",
+    "wikipediaTitle": "The Communist Manifesto"
   },
   {
-    "id": "71000",
-    "title": "The Public and Its Problems",
-    "author": "John Dewey",
-    "directUrl": "https://www.gutenberg.org/cache/epub/71000.txt",
-    "wikipediaUrl": "https://en.wikipedia.org/wiki/The_Public_and_Its_Problems",
-    "wikipediaTitle": "The Public and Its Problems"
+    "id": "1346",
+    "title": "The Eighteenth Brumaire of Louis Bonaparte",
+    "author": "Marx",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/The%20Eighteenth%20Brumaire%20of%20Louis%20Bonaparte",
+    "wikipediaTitle": "The Eighteenth Brumaire of Louis Bonaparte"
   },
   {
-    "id": "40089",
-    "title": "Reconstruction in Philosophy",
-    "author": "John Dewey",
-    "directUrl": "https://www.gutenberg.org/cache/epub/40089.txt",
-    "wikipediaUrl": "https://en.wikipedia.org/wiki/Reconstruction_in_Philosophy",
-    "wikipediaTitle": "Reconstruction in Philosophy"
+    "id": "3581",
+    "title": "Essays of Michel de Montaigne — Volume 01",
+    "author": "Montaigne",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Essays%20(Montaigne)%20-%20Bordeaux%20copy",
+    "wikipediaTitle": "Essays (Montaigne) - Bordeaux copy"
   },
   {
-    "id": "cantor-transfinite",
-    "title": "Contributions to the Founding of the Theory of Transfinite Numbers",
-    "author": "Georg Cantor",
-    "directUrl": "https://en.wikisource.org/wiki/Contributions_to_the_Founding_of_the_Theory_of_Transfinite_Numbers",
-    "wikipediaUrl": "https://en.wikipedia.org/wiki/Georg_Cantor",
-    "wikipediaTitle": "Georg Cantor"
+    "id": "3582",
+    "title": "Essays of Michel de Montaigne — Volume 02",
+    "author": "Montaigne",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Essays%20(Montaigne)",
+    "wikipediaTitle": "Essays (Montaigne)"
   },
   {
-    "id": "15776",
-    "title": "The Economic Consequences of the Peace",
-    "author": "John Maynard Keynes",
-    "directUrl": "https://www.gutenberg.org/cache/epub/15776.txt",
-    "wikipediaUrl": "https://en.wikipedia.org/wiki/The_Economic_Consequences_of_the_Peace",
-    "wikipediaTitle": "The Economic Consequences of the Peace"
+    "id": "3583",
+    "title": "Essays of Michel de Montaigne — Volume 03",
+    "author": "Montaigne",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Essays%20(Montaigne)%20-%20Bordeaux%20copy",
+    "wikipediaTitle": "Essays (Montaigne) - Bordeaux copy"
   },
   {
-    "id": "32625",
-    "title": "A Treatise on Probability",
-    "author": "John Maynard Keynes",
-    "directUrl": "https://www.gutenberg.org/cache/epub/32625.txt",
-    "wikipediaUrl": "https://en.wikipedia.org/wiki/A_Treatise_on_Probability",
-    "wikipediaTitle": "A Treatise on Probability"
+    "id": "3584",
+    "title": "Essays of Michel de Montaigne — Volume 04",
+    "author": "Montaigne",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Essays%20(Montaigne)%20-%20Bordeaux%20copy",
+    "wikipediaTitle": "Essays (Montaigne) - Bordeaux copy"
   },
   {
-    "id": "keynes-monetary",
-    "title": "A Tract on Monetary Reform",
-    "author": "John Maynard Keynes",
-    "directUrl": "https://www.gutenberg.org/cache/epub/author/6280",
-    "wikipediaUrl": "https://en.wikipedia.org/wiki/A_Tract_on_Monetary_Reform",
-    "wikipediaTitle": "A Tract on Monetary Reform"
+    "id": "3585",
+    "title": "Essays of Michel de Montaigne — Volume 05",
+    "author": "Montaigne",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Essays%20(Montaigne)",
+    "wikipediaTitle": "Essays (Montaigne)"
   },
   {
-    "id": "moore-principia",
-    "title": "Principia Ethica",
-    "author": "G.E. Moore",
-    "directUrl": "https://www.gutenberg.org/cache/epub/author/45722",
-    "wikipediaUrl": "https://en.wikipedia.org/wiki/Principia_Ethica",
-    "wikipediaTitle": "Principia Ethica"
+    "id": "3586",
+    "title": "Essays of Michel de Montaigne — Volume 06",
+    "author": "Montaigne",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Michel%20Foucault",
+    "wikipediaTitle": "Michel Foucault"
   },
   {
-    "id": "moore-ethics",
-    "title": "Ethics",
-    "author": "G.E. Moore",
-    "directUrl": "https://en.wikisource.org/wiki/Ethics_(Moore)",
-    "wikipediaUrl": "https://en.wikipedia.org/wiki/G._E._Moore",
-    "wikipediaTitle": "G. E. Moore"
+    "id": "3588",
+    "title": "Essays of Michel de Montaigne — Volume 08",
+    "author": "Montaigne",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Essay",
+    "wikipediaTitle": "Essay"
   },
   {
-    "id": "moore-studies",
-    "title": "Philosophical Studies",
-    "author": "G.E. Moore",
-    "directUrl": "https://www.gutenberg.org/cache/epub/author/45722",
-    "wikipediaUrl": "https://en.wikipedia.org/wiki/G._E._Moore",
-    "wikipediaTitle": "G. E. Moore"
+    "id": "3589",
+    "title": "Essays of Michel de Montaigne — Volume 09",
+    "author": "Montaigne",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Michel%20de%20Montaigne",
+    "wikipediaTitle": "Michel de Montaigne"
   },
   {
-    "id": "1228",
-    "title": "On the Origin of Species",
-    "author": "Charles Darwin",
-    "directUrl": "https://www.gutenberg.org/cache/epub/1228.txt",
-    "wikipediaUrl": "https://en.wikipedia.org/wiki/On_the_Origin_of_Species",
-    "wikipediaTitle": "On the Origin of Species"
+    "id": "3590",
+    "title": "Essays of Michel de Montaigne — Volume 10",
+    "author": "Montaigne",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Essays%20(Montaigne)",
+    "wikipediaTitle": "Essays (Montaigne)"
   },
   {
-    "id": "2300",
-    "title": "The Descent of Man",
-    "author": "Charles Darwin",
-    "directUrl": "https://www.gutenberg.org/cache/epub/2300.txt",
-    "wikipediaUrl": "https://en.wikipedia.org/wiki/The_Descent_of_Man",
-    "wikipediaTitle": "The Descent of Man"
+    "id": "3591",
+    "title": "Essays of Michel de Montaigne — Volume 11",
+    "author": "Montaigne",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Essays%20(Montaigne)",
+    "wikipediaTitle": "Essays (Montaigne)"
   },
   {
-    "id": "944",
-    "title": "The Voyage of the Beagle",
-    "author": "Charles Darwin",
-    "directUrl": "https://www.gutenberg.org/cache/epub/944.txt",
-    "wikipediaUrl": "https://en.wikipedia.org/wiki/The_Voyage_of_the_Beagle",
-    "wikipediaTitle": "The Voyage of the Beagle"
+    "id": "4776",
+    "title": "Political Ideals",
+    "author": "Russell",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Bertrand%20Russell",
+    "wikipediaTitle": "Bertrand Russell"
   },
   {
-    "id": "2087",
-    "title": "The Expression of the Emotions in Man and Animals",
-    "author": "Charles Darwin",
-    "directUrl": "https://www.gutenberg.org/cache/epub/2087.txt",
-    "wikipediaUrl": "https://en.wikipedia.org/wiki/The_Expression_of_the_Emotions_in_Man_and_Animals",
-    "wikipediaTitle": "The Expression of the Emotions in Man and Animals"
-  },
-  {
-    "id": "28233",
-    "title": "Philosophiae Naturalis Principia Mathematica",
-    "author": "Isaac Newton",
-    "directUrl": "https://www.gutenberg.org/cache/epub/28233.txt",
-    "wikipediaUrl": "https://en.wikipedia.org/wiki/Philosophi%C3%A6_Naturalis_Principia_Mathematica",
-    "wikipediaTitle": "Philosophi\u00e6 Naturalis Principia Mathematica"
-  },
-  {
-    "id": "18269",
-    "title": "Pascal's Pens\u00e9es",
-    "author": "Blaise Pascal",
-    "directUrl": "https://www.gutenberg.org/cache/epub/18269.txt",
-    "wikipediaUrl": "https://en.wikipedia.org/wiki/Pens%C3%A9es",
-    "wikipediaTitle": "Pens\u00e9es"
-  },
-  {
-    "id": "21076",
-    "title": "The First Six Books of the Elements of Euclid",
-    "author": "Euclid",
-    "directUrl": "https://www.gutenberg.org/cache/epub/21076.txt",
-    "wikipediaUrl": "https://en.wikipedia.org/wiki/Euclid%27s_Elements",
-    "wikipediaTitle": "Euclid's Elements"
-  },
-  {
-    "id": "59",
-    "title": "Discourse on the Method",
-    "author": "Ren\u00e9 Descartes",
-    "directUrl": "https://www.gutenberg.org/cache/epub/59.txt",
-    "wikipediaUrl": "https://en.wikipedia.org/wiki/Discourse_on_the_Method",
-    "wikipediaTitle": "Discourse on the Method"
-  },
-  {
-    "id": "10615",
-    "title": "An Essay Concerning Human Understanding",
-    "author": "John Locke",
-    "directUrl": "https://www.gutenberg.org/cache/epub/10615.txt",
-    "wikipediaUrl": "https://en.wikipedia.org/wiki/An_Essay_Concerning_Human_Understanding",
-    "wikipediaTitle": "An Essay Concerning Human Understanding"
+    "id": "690",
+    "title": "Proposed Roads to Freedom",
+    "author": "Russell",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Bertrand%20Russell",
+    "wikipediaTitle": "Bertrand Russell"
   },
   {
     "id": "bertrand-russell-principles",
@@ -623,17 +241,120 @@
     "wikipediaTitle": "Practical Ethics"
   },
   {
-    "id": "stuart-hampshire-thought-action",
-    "title": "Thought and Action",
-    "author": "Stuart Hampshire",
-    "wikipediaUrl": "https://en.wikipedia.org/wiki/Stuart_Hampshire",
-    "wikipediaTitle": "Stuart Hampshire"
+    "id": "991",
+    "title": "A Theological-Political Treatise [Part III]",
+    "author": "Spinoza",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Baruch%20Spinoza",
+    "wikipediaTitle": "Baruch Spinoza"
   },
   {
-    "id": "stuart-hampshire-justice",
-    "title": "Justice is Conflict",
-    "author": "Stuart Hampshire",
-    "wikipediaUrl": "https://en.wikipedia.org/wiki/Stuart_Hampshire",
-    "wikipediaTitle": "Stuart Hampshire"
+    "id": "992",
+    "title": "A Theological-Political Treatise [Part IV]",
+    "author": "Spinoza",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Spinoza's%20Ethics",
+    "wikipediaTitle": "Spinoza's Ethics"
+  },
+  {
+    "id": "919",
+    "title": "Ethics — Part 1",
+    "author": "Spinoza",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Spinoza's%20Ethics",
+    "wikipediaTitle": "Spinoza's Ethics"
+  },
+  {
+    "id": "920",
+    "title": "Ethics — Part 2",
+    "author": "Spinoza",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Spinoza's%20Ethics",
+    "wikipediaTitle": "Spinoza's Ethics"
+  },
+  {
+    "id": "948",
+    "title": "Ethics — Part 3",
+    "author": "Spinoza",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Spinoza's%20Ethics",
+    "wikipediaTitle": "Spinoza's Ethics"
+  },
+  {
+    "id": "971",
+    "title": "Ethics — Part 4",
+    "author": "Spinoza",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Spinoza's%20Ethics",
+    "wikipediaTitle": "Spinoza's Ethics"
+  },
+  {
+    "id": "975",
+    "title": "Ethics — Part 5",
+    "author": "Spinoza",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Spinoza's%20Ethics",
+    "wikipediaTitle": "Spinoza's Ethics"
+  },
+  {
+    "id": "1016",
+    "title": "On the Improvement of the Understanding",
+    "author": "Spinoza",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Baruch%20Spinoza",
+    "wikipediaTitle": "Baruch Spinoza"
+  },
+  {
+    "id": "989",
+    "title": "Theologico-Political Treatise — Part 1",
+    "author": "Spinoza",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Tractatus%20Theologico-Politicus",
+    "wikipediaTitle": "Tractatus Theologico-Politicus"
+  },
+  {
+    "id": "990",
+    "title": "Theologico-Political Treatise — Part 2",
+    "author": "Spinoza",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Tractatus%20Theologico-Politicus",
+    "wikipediaTitle": "Tractatus Theologico-Politicus"
+  },
+  {
+    "id": "7514",
+    "title": "A Guide to Stoicism",
+    "author": "Stock",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Hellenistic%20philosophy",
+    "wikipediaTitle": "Hellenistic philosophy"
+  },
+  {
+    "id": "4232",
+    "title": "A Week on the Concord and Merrimack Rivers",
+    "author": "Henry David Thoreau"
+  },
+  {
+    "id": "71",
+    "title": "On the Duty of Civil Disobedience",
+    "author": "Henry David Thoreau"
+  },
+  {
+    "id": "205",
+    "title": "Walden, and On The Duty Of Civil Disobedience",
+    "author": "Henry David Thoreau"
+  },
+  {
+    "id": "1022",
+    "title": "Walking",
+    "author": "Henry David Thoreau"
+  },
+  {
+    "id": "4066",
+    "title": "Wild Apples",
+    "author": "Henry David Thoreau"
+  },
+  {
+    "id": "tractatus",
+    "title": "Tractatus Logico-Philosophicus",
+    "author": "Ludwig Wittgenstein",
+    "localPath": "/public-domain-texts/tractatus-english.txt",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Tractatus%20Logico-Philosophicus",
+    "wikipediaTitle": "Tractatus Logico-Philosophicus"
+  },
+  {
+    "id": "1181",
+    "title": "The Symposium",
+    "author": "Xenophon",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Symposium%20(Xenophon)",
+    "wikipediaTitle": "Symposium (Xenophon)"
   }
 ]
