@@ -9,6 +9,10 @@ import explainers from '@/data/explainers.json'
 import PageLayout from './PageLayout'
 
 const getPhotoSrc = (value: ExplanationStyle) => {
+  // Special handling for neutral - return a placeholder that won't cause errors
+  if (value === 'neutral') {
+    return 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPGNpcmNsZSBjeD0iMzAiIGN5PSIzMCIgcj0iMzAiIGZpbGw9IiNmOGY5ZmEiIHN0cm9rZT0iI2RlZTJlNiIgc3Ryb2tlLXdpZHRoPSIyIi8+Cjx0ZXh0IHg9IjUwJSIgeT0iNTAlIiBkb21pbmFudC1iYXNlbGluZT0iY2VudHJhbCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZmlsbD0iIzZjNzU3ZCIgZm9udC1zaXplPSIyNCIgZm9udC13ZWlnaHQ9ImJvbGQiPk48L3RleHQ+Cjwvc3ZnPgo='
+  }
   return (explainers as any).photoSources[value] || (explainers as any).photoSources.default.replace('{value}', value)
 }
 
@@ -133,11 +137,30 @@ const ExplainerStylesPage: React.FC<ExplainerStylesPageProps> = ({
 
       {currentStyleData && (
         <div className={stylesCss.selectedStyle}>
-          <img 
-            src={getPhotoSrc(currentStyleData.value)} 
-            alt={currentStyleData.name}
-            className={stylesCss.selectedPhoto}
-          />
+          {currentStyleData.value === 'neutral' ? (
+            <div 
+              className={stylesCss.selectedPhoto}
+              style={{
+                backgroundColor: '#f8f9fa',
+                border: '2px solid #dee2e6',
+                borderRadius: '50%',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                fontSize: '24px',
+                fontWeight: 'bold',
+                color: '#6c757d'
+              }}
+            >
+              N
+            </div>
+          ) : (
+            <img 
+              src={getPhotoSrc(currentStyleData.value)} 
+              alt={currentStyleData.name}
+              className={stylesCss.selectedPhoto}
+            />
+          )}
           <div className={stylesCss.selectedText}>
             <h2>{currentStyleData.name}</h2>
             <p>{currentStyleData.description}</p>
