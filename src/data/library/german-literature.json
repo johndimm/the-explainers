@@ -1,10 +1,5 @@
 [
   {
-    "id": "35435",
-    "title": "Gehirne: Novellen",
-    "author": "Benn"
-  },
-  {
     "id": "5072",
     "title": "Dantons Tod",
     "author": "Büchner",
@@ -12,9 +7,25 @@
     "wikipediaTitle": "Dantons Tod (opera)"
   },
   {
-    "id": "20757",
-    "title": "Darwinismus und Sozialismus: Der Kampf um das Dasein und die Moderne Gesellschaft",
-    "author": "Büchner"
+    "id": "21145",
+    "title": "Leonce und Lena",
+    "author": "Büchner",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Leonce%20and%20Lena",
+    "wikipediaTitle": "Leonce and Lena"
+  },
+  {
+    "id": "5322",
+    "title": "Woyzeck",
+    "author": "Büchner",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Woyzeck",
+    "wikipediaTitle": "Woyzeck"
+  },
+  {
+    "id": "21185",
+    "title": "Woyzeck",
+    "author": "Büchner",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Woyzeck",
+    "wikipediaTitle": "Woyzeck"
   },
   {
     "id": "53628",
@@ -29,11 +40,6 @@
     "author": "Fontane",
     "wikipediaUrl": "https://en.wikipedia.org/wiki/Effi%20Briest",
     "wikipediaTitle": "Effi Briest"
-  },
-  {
-    "id": "46184",
-    "title": "Frau Jenny Treibel: Roman aus der Berliner Gesellschaft",
-    "author": "Fontane"
   },
   {
     "id": "75277",
@@ -57,6 +63,13 @@
     "wikipediaTitle": "Unterm Birnbaum"
   },
   {
+    "id": "29806",
+    "title": "Elemente der Absoluten Geometrie",
+    "author": "Frischauf",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Johannes%20Frischauf",
+    "wikipediaTitle": "Johannes Frischauf"
+  },
+  {
     "id": "17657",
     "title": "Belagerung von Mainz",
     "author": "Goethe",
@@ -71,11 +84,6 @@
     "wikipediaTitle": "Clemens Brentano"
   },
   {
-    "id": "49593",
-    "title": "Briefe von Goethe an Lavater aus den Jahren 1774 bis 1783",
-    "author": "Goethe"
-  },
-  {
     "id": "10428",
     "title": "Die Aufgeregten",
     "author": "Goethe",
@@ -83,9 +91,11 @@
     "wikipediaTitle": "Adolf Muschg"
   },
   {
-    "id": "2406",
-    "title": "Die Geschwister: Ein Schauspiel in einem Akt",
-    "author": "Goethe"
+    "id": "19794",
+    "title": "Die Leiden des jungen Werther",
+    "author": "Goethe",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/The%20Sorrows%20of%20Young%20Werther",
+    "wikipediaTitle": "The Sorrows of Young Werther"
   },
   {
     "id": "2407",
@@ -116,28 +126,11 @@
     "wikipediaTitle": "Johann Wolfgang von Goethe bibliography"
   },
   {
-    "id": "2403",
-    "title": "Die Wahlverwandtschaften",
-    "author": "Goethe",
-    "wikipediaUrl": "https://en.wikipedia.org/wiki/Elective%20Affinities",
-    "wikipediaTitle": "Elective Affinities"
-  },
-  {
-    "id": "45600",
-    "title": "Almansor: Eine Tragödie",
-    "author": "Heine"
-  },
-  {
     "id": "3498",
     "title": "Buch der Lieder",
     "author": "Heine",
     "wikipediaUrl": "https://en.wikipedia.org/wiki/Heinrich%20Heine",
     "wikipediaTitle": "Heinrich Heine"
-  },
-  {
-    "id": "39792",
-    "title": "Das Lied vom blöden Ritter",
-    "author": "Heine"
   },
   {
     "id": "6079",
@@ -196,11 +189,6 @@
     "wikipediaTitle": "Steppenwolf (novel)"
   },
   {
-    "id": "47818",
-    "title": "Diesseits: Erzählungen",
-    "author": "Hesse"
-  },
-  {
     "id": "42311",
     "title": "Eine Stunde hinter Mitternacht",
     "author": "Hesse",
@@ -250,6 +238,20 @@
     "wikipediaTitle": "The Nutcracker and the Mouse King"
   },
   {
+    "id": "19791",
+    "title": "Der Struwwelpeter",
+    "author": "Hoffmann",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Struwwelpeter",
+    "wikipediaTitle": "Struwwelpeter"
+  },
+  {
+    "id": "19792",
+    "title": "Der Struwwelpeter",
+    "author": "Hoffmann",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Struwwelpeter",
+    "wikipediaTitle": "Struwwelpeter"
+  },
+  {
     "id": "76360",
     "title": "Die Elixiere des Teufels",
     "author": "Hoffmann",
@@ -269,16 +271,6 @@
     "author": "Hoffmann",
     "wikipediaUrl": "https://en.wikipedia.org/wiki/E.%20T.%20A.%20Hoffmann",
     "wikipediaTitle": "E. T. A. Hoffmann"
-  },
-  {
-    "id": "46912",
-    "title": "Der Schwierige: Lustspiel in drei Akten",
-    "author": "Hofmannsthal"
-  },
-  {
-    "id": "60603",
-    "title": "Der Tod des Tizian. Idylle. Zwei Dichtungen",
-    "author": "Hofmannsthal"
   },
   {
     "id": "31850",
@@ -302,61 +294,6 @@
     "wikipediaTitle": "Jedermann (play)"
   },
   {
-    "id": "23532",
-    "title": "Betrachtung",
-    "author": "Franz Kafka"
-  },
-  {
-    "id": "21593",
-    "title": "Das Urteil: Eine Geschichte",
-    "author": "Franz Kafka"
-  },
-  {
-    "id": "16304",
-    "title": "Der Heizer: Ein Fragment",
-    "author": "Franz Kafka"
-  },
-  {
-    "id": "30753",
-    "title": "Der Mord",
-    "author": "Franz Kafka"
-  },
-  {
-    "id": "69327",
-    "title": "Der Prozess: Roman",
-    "author": "Franz Kafka"
-  },
-  {
-    "id": "22367",
-    "title": "Die Verwandlung",
-    "author": "Franz Kafka"
-  },
-  {
-    "id": "30655",
-    "title": "Ein Hungerkünstler",
-    "author": "Franz Kafka"
-  },
-  {
-    "id": "21989",
-    "title": "Ein Landarzt: Kleine Erzählungen",
-    "author": "Franz Kafka"
-  },
-  {
-    "id": "30570",
-    "title": "Grosser Lärm",
-    "author": "Franz Kafka"
-  },
-  {
-    "id": "25791",
-    "title": "In der Strafkolonie",
-    "author": "Franz Kafka"
-  },
-  {
-    "id": "75839",
-    "title": "Das Königl. Seminartheater — Altenroda — Grünlein",
-    "author": "Keller"
-  },
-  {
     "id": "51722",
     "title": "Die alte Krone: Ein Roman aus dem Spreewald",
     "author": "Keller",
@@ -369,11 +306,6 @@
     "author": "Keller",
     "wikipediaUrl": "https://en.wikipedia.org/wiki/Ulrich%20M%C3%BChe",
     "wikipediaTitle": "Ulrich Mühe"
-  },
-  {
-    "id": "64370",
-    "title": "Die Heimat: Roman aus den schlesischen Bergen",
-    "author": "Keller"
   },
   {
     "id": "6696",
@@ -395,6 +327,13 @@
     "author": "Keller",
     "wikipediaUrl": "https://en.wikipedia.org/wiki/Holiday%20From%20Myself%20(1952%20film)",
     "wikipediaTitle": "Holiday From Myself (1952 film)"
+  },
+  {
+    "id": "21141",
+    "title": "Kleider machen Leute",
+    "author": "Keller",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Kleider%20machen%20Leute",
+    "wikipediaTitle": "Kleider machen Leute"
   },
   {
     "id": "42339",
@@ -446,11 +385,6 @@
     "wikipediaTitle": "Bernhard Kellermann"
   },
   {
-    "id": "66548",
-    "title": "Die Wiedertäufer von Münster: Drama in 5 Akten",
-    "author": "Kellermann"
-  },
-  {
     "id": "40771",
     "title": "Ingeborg",
     "author": "Kellermann",
@@ -479,11 +413,6 @@
     "wikipediaTitle": "The Broken Jug"
   },
   {
-    "id": "50979",
-    "title": "Heinrich von Kleist's politische Schriften und andere Nachträge zu seinen Werken",
-    "author": "Kleist"
-  },
-  {
     "id": "6648",
     "title": "Penthesilea",
     "author": "Kleist",
@@ -498,16 +427,6 @@
     "wikipediaTitle": "Heinrich von Kleist"
   },
   {
-    "id": "9950",
-    "title": "Abhandlungen über die Fabel",
-    "author": "Lessing"
-  },
-  {
-    "id": "9375",
-    "title": "Ausgewählte Fabeln",
-    "author": "Lessing"
-  },
-  {
     "id": "6820",
     "title": "Ausgewählte Gedichte",
     "author": "Lessing",
@@ -520,11 +439,6 @@
     "author": "Lessing",
     "wikipediaUrl": "https://en.wikipedia.org/wiki/Gotthold%20Ephraim%20Lessing",
     "wikipediaTitle": "Gotthold Ephraim Lessing"
-  },
-  {
-    "id": "9369",
-    "title": "Der junge Gelehrte: Ein Lustspiel in drei Aufzügen",
-    "author": "Lessing"
   },
   {
     "id": "9160",
@@ -548,11 +462,6 @@
     "wikipediaTitle": "Christian Fürchtegott Gellert"
   },
   {
-    "id": "9326",
-    "title": "Gespräche für Freimaurer",
-    "author": "Lessing"
-  },
-  {
     "id": "67407",
     "title": "Haarmann. Die Geschichte eines Werwolfs",
     "author": "Lessing",
@@ -565,11 +474,6 @@
     "author": "Mann",
     "wikipediaUrl": "https://en.wikipedia.org/wiki/Buddenbrooks",
     "wikipediaTitle": "Buddenbrooks"
-  },
-  {
-    "id": "36766",
-    "title": "Der kleine Herr Friedemann: Novellen",
-    "author": "Mann"
   },
   {
     "id": "31803",
@@ -607,11 +511,6 @@
     "wikipediaTitle": "Thomas Mann"
   },
   {
-    "id": "65662",
-    "title": "Der Zauberberg. Zweiter Band",
-    "author": "Mann"
-  },
-  {
     "id": "46987",
     "title": "Die Armen: Ein Roman",
     "author": "Mann",
@@ -619,9 +518,11 @@
     "wikipediaTitle": "Ireen Sheer"
   },
   {
-    "id": "43335",
-    "title": "Die Ehrgeizige: Novelle",
-    "author": "Mann"
+    "id": "46896",
+    "title": "Beitrag zur Beurteilung der Lehren Machs",
+    "author": "Musil",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Ingeborg%20Bachmann",
+    "wikipediaTitle": "Ingeborg Bachmann"
   },
   {
     "id": "34717",
@@ -638,16 +539,6 @@
     "wikipediaTitle": "Novalis"
   },
   {
-    "id": "47268",
-    "title": "Alte Nester: Zwei Bücher Lebensgeschichten",
-    "author": "Raabe"
-  },
-  {
-    "id": "44639",
-    "title": "Der Junker von Denow; Ein Geheimnis; Ein Besuch; Auf dem Altenteil: Erzählungen",
-    "author": "Raabe"
-  },
-  {
     "id": "32008",
     "title": "Deutscher Mondschein",
     "author": "Raabe",
@@ -662,19 +553,11 @@
     "wikipediaTitle": "Wilhelm Raabe"
   },
   {
-    "id": "50445",
-    "title": "Die Innerste: Erzählung",
-    "author": "Raabe"
-  },
-  {
-    "id": "50444",
-    "title": "Höxter und Corvey: Erzählung",
-    "author": "Raabe"
-  },
-  {
-    "id": "46561",
-    "title": "Keltische Knochen/Gedelöcke: Erzählungen",
-    "author": "Raabe"
+    "id": "19795",
+    "title": "Die schwarze Galeere",
+    "author": "Raabe",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Wilhelm%20Raabe",
+    "wikipediaTitle": "Wilhelm Raabe"
   },
   {
     "id": "22123",
@@ -726,6 +609,13 @@
     "wikipediaTitle": "J. P. Stern"
   },
   {
+    "id": "24043",
+    "title": "Die Weise von Liebe und Tod des Cornets Christoph Rilke",
+    "author": "Rilke",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Rainer%20Maria%20Rilke",
+    "wikipediaTitle": "Rainer Maria Rilke"
+  },
+  {
     "id": "33821",
     "title": "Erste Gedichte",
     "author": "Rilke",
@@ -745,13 +635,6 @@
     "author": "Rilke",
     "wikipediaUrl": "https://en.wikipedia.org/wiki/Rainer%20Maria%20Rilke",
     "wikipediaTitle": "Rainer Maria Rilke"
-  },
-  {
-    "id": "27822",
-    "title": "Zwei Prager Geschichten",
-    "author": "Rilke",
-    "wikipediaUrl": "https://en.wikipedia.org/wiki/Jakub%20Schikaneder",
-    "wikipediaTitle": "Jakub Schikaneder"
   },
   {
     "id": "6496",
@@ -789,21 +672,11 @@
     "wikipediaTitle": "Sturm und Drang"
   },
   {
-    "id": "6499",
-    "title": "Die Verschwörung des Fiesco zu Genua: Ein republikanisches Trauerspiel",
-    "author": "Schiller"
-  },
-  {
     "id": "6649",
     "title": "Einige Gedichte",
     "author": "Schiller",
     "wikipediaUrl": "https://en.wikipedia.org/wiki/Sturm%20und%20Drang",
     "wikipediaTitle": "Sturm und Drang"
-  },
-  {
-    "id": "6498",
-    "title": "Kabale und Liebe: Ein bürgerliches Trauerspiel",
-    "author": "Schiller"
   },
   {
     "id": "6518",
@@ -827,31 +700,11 @@
     "wikipediaTitle": "Arthur Schnitzler"
   },
   {
-    "id": "25204",
-    "title": "Der Mörder: Eine Novelle",
-    "author": "Schnitzler"
-  },
-  {
-    "id": "31842",
-    "title": "Der Schleier der Pierrette: Pantomime in drei Bildern",
-    "author": "Schnitzler"
-  },
-  {
-    "id": "37266",
-    "title": "Reigen: Zehn Dialoge",
-    "author": "Schnitzler"
-  },
-  {
     "id": "8889",
     "title": "Aquis Submersus",
     "author": "Storm",
     "wikipediaUrl": "https://en.wikipedia.org/wiki/Aquis%20Submersus%20(novella)",
     "wikipediaTitle": "Aquis Submersus (novella)"
-  },
-  {
-    "id": "8927",
-    "title": "Auf dem Staatshof",
-    "author": "Storm"
   },
   {
     "id": "8895",
@@ -861,14 +714,25 @@
     "wikipediaTitle": "Mermaid"
   },
   {
-    "id": "8916",
-    "title": "Bulemanns Haus",
-    "author": "Storm"
+    "id": "19789",
+    "title": "Der kleine Häwelmann",
+    "author": "Storm",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Der%20kleine%20H%C3%A4welmann",
+    "wikipediaTitle": "Der kleine Häwelmann"
   },
   {
-    "id": "8925",
-    "title": "Der Spiegel des Cyprianus",
-    "author": "Storm"
+    "id": "19790",
+    "title": "Der Schimmelreiter",
+    "author": "Storm",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/The%20Rider%20on%20the%20White%20Horse",
+    "wikipediaTitle": "The Rider on the White Horse"
+  },
+  {
+    "id": "74008",
+    "title": "Der Schimmelreiter",
+    "author": "Storm",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/The%20Rider%20on%20the%20White%20Horse",
+    "wikipediaTitle": "The Rider on the White Horse"
   },
   {
     "id": "8923",
@@ -878,26 +742,6 @@
     "wikipediaTitle": "Ekke Nekkepenn"
   },
   {
-    "id": "8915",
-    "title": "Hinzelmeier: eine nachdenkliche Geschichte",
-    "author": "Storm"
-  },
-  {
-    "id": "24214",
-    "title": "Im Brauerhause: Novelle",
-    "author": "Storm"
-  },
-  {
-    "id": "24212",
-    "title": "Im Saal: Novelle",
-    "author": "Storm"
-  },
-  {
-    "id": "20977",
-    "title": "Im Sonnenschein: Novelle",
-    "author": "Storm"
-  },
-  {
     "id": "40221",
     "title": "Gedichte",
     "author": "Trakl",
@@ -905,51 +749,11 @@
     "wikipediaTitle": "Georg Trakl"
   },
   {
-    "id": "48205",
-    "title": "Im Land des Lichts: Ein Streifzug durch Kabylie und Wüste",
-    "author": "Wolf"
-  },
-  {
-    "id": "46840",
-    "title": "Die Nackten: Eine Dichtung",
-    "author": "Wolfenstein"
-  },
-  {
-    "id": "56152",
-    "title": "Das Recht der Hagestolze: Eine Heiratsgeschichte aus dem Neckartal",
-    "author": "Wolff"
-  },
-  {
-    "id": "53553",
-    "title": "Der Sachsenspiegel: Eine Geschichte aus der Hohenstaufenzeit",
-    "author": "Wolff"
-  },
-  {
-    "id": "59185",
-    "title": "Die Hohkönigsburg: Eine Fehdegeschichte aus dem Wasgau",
-    "author": "Wolff"
-  },
-  {
-    "id": "19823",
-    "title": "Gebete für Israeliten",
-    "author": "Wolff"
-  },
-  {
-    "id": "50456",
-    "title": "Karte und Kroki",
-    "author": "Wolff"
-  },
-  {
     "id": "57850",
     "title": "Amok: Novellen einer Leidenschaft",
     "author": "Zweig",
     "wikipediaUrl": "https://en.wikipedia.org/wiki/Stefan%20Zweig",
     "wikipediaTitle": "Stefan Zweig"
-  },
-  {
-    "id": "24173",
-    "title": "Brennendes Geheimnis: Erzählung",
-    "author": "Zweig"
   },
   {
     "id": "38686",
@@ -964,15 +768,5 @@
     "author": "Zweig",
     "wikipediaUrl": "https://en.wikipedia.org/wiki/Arnold%20Zweig",
     "wikipediaTitle": "Arnold Zweig"
-  },
-  {
-    "id": "40564",
-    "title": "Jeremias: Eine dramatische Dichtung in neun Bildern",
-    "author": "Zweig"
-  },
-  {
-    "id": "57114",
-    "title": "Vögelchen",
-    "author": "Zweig"
   }
 ]

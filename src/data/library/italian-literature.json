@@ -1,10 +1,5 @@
 [
   {
-    "id": "49626",
-    "title": "Il passaggio: Romanzo",
-    "author": "Aleramo"
-  },
-  {
     "id": "53208",
     "title": "Momenti: Liriche",
     "author": "Aleramo",
@@ -12,16 +7,102 @@
     "wikipediaTitle": "Viareggio Prize"
   },
   {
-    "id": "51587",
-    "title": "Trasfigurazione: Novella",
-    "author": "Aleramo"
-  },
-  {
     "id": "47786",
     "title": "Una Donna",
     "author": "Aleramo",
     "wikipediaUrl": "https://en.wikipedia.org/wiki/Sibilla%20Aleramo",
     "wikipediaTitle": "Sibilla Aleramo"
+  },
+  {
+    "id": "3747",
+    "title": "Orlando Furioso",
+    "author": "Ariosto",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Ludovico%20Ariosto",
+    "wikipediaTitle": "Ludovico Ariosto"
+  },
+  {
+    "id": "7267",
+    "title": "Cardello",
+    "author": "Capuana",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Luigi%20Capuana",
+    "wikipediaTitle": "Luigi Capuana"
+  },
+  {
+    "id": "42608",
+    "title": "Nuove \"Paesane\"",
+    "author": "Capuana",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Luigi%20Capuana",
+    "wikipediaTitle": "Luigi Capuana"
+  },
+  {
+    "id": "19517",
+    "title": "Le avventure di Pinocchio",
+    "author": "Collodi",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/The%20Adventures%20of%20Pinocchio",
+    "wikipediaTitle": "The Adventures of Pinocchio"
+  },
+  {
+    "id": "52484",
+    "title": "Le avventure di Pinocchio: Storia di un burattino",
+    "author": "Collodi",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/The%20Adventures%20of%20Pinocchio",
+    "wikipediaTitle": "The Adventures of Pinocchio"
+  },
+  {
+    "id": "27590",
+    "title": "Cabiria: Visione storica del terzo secolo A. C.",
+    "author": "D'Annunzio",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Cabiria",
+    "wikipediaTitle": "Cabiria"
+  },
+  {
+    "id": "58648",
+    "title": "Elegìe Romane",
+    "author": "D'Annunzio",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Gabriele%20D'Annunzio",
+    "wikipediaTitle": "Gabriele D'Annunzio"
+  },
+  {
+    "id": "42673",
+    "title": "Forse che sì forse che no",
+    "author": "D'Annunzio",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Forse%20che%20s%C3%AC%20forse%20che%20no",
+    "wikipediaTitle": "Forse che sì forse che no"
+  },
+  {
+    "id": "37849",
+    "title": "Il ferro",
+    "author": "D'Annunzio",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Julius%20Evola",
+    "wikipediaTitle": "Julius Evola"
+  },
+  {
+    "id": "27825",
+    "title": "Isaotta Guttadàuro ed altre poesie",
+    "author": "D'Annunzio",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Enrico%20Coleman",
+    "wikipediaTitle": "Enrico Coleman"
+  },
+  {
+    "id": "22642",
+    "title": "L'Innocente",
+    "author": "D'Annunzio",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Gabriele%20D'Annunzio",
+    "wikipediaTitle": "Gabriele D'Annunzio"
+  },
+  {
+    "id": "64051",
+    "title": "La fiaccola sotto il moggio",
+    "author": "D'Annunzio",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Gabriele%20D'Annunzio",
+    "wikipediaTitle": "Gabriele D'Annunzio"
+  },
+  {
+    "id": "23297",
+    "title": "La Gioconda",
+    "author": "D'Annunzio",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/La%20Gioconda",
+    "wikipediaTitle": "La Gioconda"
   },
   {
     "id": "997",
@@ -108,11 +189,6 @@
     "wikipediaTitle": "Syracuse, Sicily"
   },
   {
-    "id": "75129",
-    "title": "Lotte civili",
-    "author": "De Amicis"
-  },
-  {
     "id": "30725",
     "title": "Marocco",
     "author": "De Amicis",
@@ -153,278 +229,6 @@
     "author": "De Amicis",
     "wikipediaUrl": "https://en.wikipedia.org/wiki/Edmondo%20De%20Amicis",
     "wikipediaTitle": "Edmondo De Amicis"
-  },
-  {
-    "id": "3747",
-    "title": "Orlando Furioso",
-    "author": "Ariosto",
-    "wikipediaUrl": "https://en.wikipedia.org/wiki/Ludovico%20Ariosto",
-    "wikipediaTitle": "Ludovico Ariosto"
-  },
-  {
-    "id": "50306",
-    "title": "Rinaldo ardito: Frammenti inediti pubblicati sul manoscritto originale",
-    "author": "Ariosto"
-  },
-  {
-    "id": "(Verismo",
-    "title": " Cosmopolitanismo) ed altri saggi di critica letteraria ed artistica",
-    "author": "Capuana"
-  },
-  {
-    "id": "7267",
-    "title": "Cardello",
-    "author": "Capuana",
-    "wikipediaUrl": "https://en.wikipedia.org/wiki/Luigi%20Capuana",
-    "wikipediaTitle": "Luigi Capuana"
-  },
-  {
-    "id": "42610",
-    "title": "Come l'onda... Novelle",
-    "author": "Capuana"
-  },
-  {
-    "id": "36109",
-    "title": "Cronache Letterarie",
-    "author": "Capuana"
-  },
-  {
-    "id": "29874",
-    "title": "Delitto ideale",
-    "author": "Capuana"
-  },
-  {
-    "id": "42698",
-    "title": "Eh! la vita....: Novelle",
-    "author": "Capuana"
-  },
-  {
-    "id": "49963",
-    "title": "I Paralipomeni del Lucifero di Mario Rapisardi",
-    "author": "Capuana"
-  },
-  {
-    "id": "7459",
-    "title": "Il Benefattore",
-    "author": "Capuana"
-  },
-  {
-    "id": "42643",
-    "title": "Il nemico è in noi",
-    "author": "Capuana"
-  },
-  {
-    "id": "42608",
-    "title": "Nuove \"Paesane\"",
-    "author": "Capuana",
-    "wikipediaUrl": "https://en.wikipedia.org/wiki/Luigi%20Capuana",
-    "wikipediaTitle": "Luigi Capuana"
-  },
-  {
-    "id": "46843",
-    "title": "Conversazioni critiche",
-    "author": "Carducci"
-  },
-  {
-    "id": "52484",
-    "title": "Le avventure di Pinocchio: Storia di un burattino",
-    "author": "Collodi",
-    "wikipediaUrl": "https://en.wikipedia.org/wiki/The%20Adventures%20of%20Pinocchio",
-    "wikipediaTitle": "The Adventures of Pinocchio"
-  },
-  {
-    "id": "27590",
-    "title": "Cabiria: Visione storica del terzo secolo A. C.",
-    "author": "D'Annunzio",
-    "wikipediaUrl": "https://en.wikipedia.org/wiki/Cabiria",
-    "wikipediaTitle": "Cabiria"
-  },
-  {
-    "id": "62417",
-    "title": "Contemplazione della morte",
-    "author": "D'Annunzio"
-  },
-  {
-    "id": "58648",
-    "title": "Elegìe Romane",
-    "author": "D'Annunzio",
-    "wikipediaUrl": "https://en.wikipedia.org/wiki/Gabriele%20D'Annunzio",
-    "wikipediaTitle": "Gabriele D'Annunzio"
-  },
-  {
-    "id": "42673",
-    "title": "Forse che sì forse che no",
-    "author": "D'Annunzio",
-    "wikipediaUrl": "https://en.wikipedia.org/wiki/Forse%20che%20s%C3%AC%20forse%20che%20no",
-    "wikipediaTitle": "Forse che sì forse che no"
-  },
-  {
-    "id": "37849",
-    "title": "Il ferro",
-    "author": "D'Annunzio",
-    "wikipediaUrl": "https://en.wikipedia.org/wiki/Julius%20Evola",
-    "wikipediaTitle": "Julius Evola"
-  },
-  {
-    "id": "27825",
-    "title": "Isaotta Guttadàuro ed altre poesie",
-    "author": "D'Annunzio",
-    "wikipediaUrl": "https://en.wikipedia.org/wiki/Enrico%20Coleman",
-    "wikipediaTitle": "Enrico Coleman"
-  },
-  {
-    "id": "52259",
-    "title": "L'allegoria dell'autunno: Omaggio offerto a Venezia da Gabriele D'Annunzio",
-    "author": "D'Annunzio"
-  },
-  {
-    "id": "22642",
-    "title": "L'Innocente",
-    "author": "D'Annunzio",
-    "wikipediaUrl": "https://en.wikipedia.org/wiki/Gabriele%20D'Annunzio",
-    "wikipediaTitle": "Gabriele D'Annunzio"
-  },
-  {
-    "id": "64051",
-    "title": "La fiaccola sotto il moggio",
-    "author": "D'Annunzio",
-    "wikipediaUrl": "https://en.wikipedia.org/wiki/Gabriele%20D'Annunzio",
-    "wikipediaTitle": "Gabriele D'Annunzio"
-  },
-  {
-    "id": "23297",
-    "title": "La Gioconda",
-    "author": "D'Annunzio",
-    "wikipediaUrl": "https://en.wikipedia.org/wiki/La%20Gioconda",
-    "wikipediaTitle": "La Gioconda"
-  },
-  {
-    "id": "43226",
-    "title": "Dopo il divorzio",
-    "author": "Deledda",
-    "wikipediaUrl": "https://en.wikipedia.org/wiki/Grazia%20Deledda",
-    "wikipediaTitle": "Grazia Deledda"
-  },
-  {
-    "id": "22507",
-    "title": "Romanzo d'una signorina per bene",
-    "author": "Vertua Gentile"
-  },
-  {
-    "id": "55236",
-    "title": "I Canti",
-    "author": "Leopardi",
-    "wikipediaUrl": "https://en.wikipedia.org/wiki/Tre%20Canti%20di%20Leopardi",
-    "wikipediaTitle": "Tre Canti di Leopardi"
-  },
-  {
-    "id": "56498",
-    "title": "La mandragola - La Clizia - Belfagor",
-    "author": "Niccolò Machiavelli"
-  },
-  {
-    "id": "18008",
-    "title": "L'Amuleto",
-    "author": "Neera"
-  },
-  {
-    "id": "22020",
-    "title": "L'indomani",
-    "author": "Neera",
-    "wikipediaUrl": "https://en.wikipedia.org/wiki/Anna%20Radius%20Zuccari",
-    "wikipediaTitle": "Anna Radius Zuccari"
-  },
-  {
-    "id": "58353",
-    "title": "La vecchia casa",
-    "author": "Neera"
-  },
-  {
-    "id": "70663",
-    "title": "Le idee di una donna",
-    "author": "Neera",
-    "wikipediaUrl": "https://en.wikipedia.org/wiki/Anna%20Radius%20Zuccari",
-    "wikipediaTitle": "Anna Radius Zuccari"
-  },
-  {
-    "id": "17908",
-    "title": "Nel sogno",
-    "author": "Neera"
-  },
-  {
-    "id": "70994",
-    "title": "Rogo d'amore",
-    "author": "Neera"
-  },
-  {
-    "id": "60292",
-    "title": "Una giovinezza del secolo XIX",
-    "author": "Neera",
-    "wikipediaUrl": "https://en.wikipedia.org/wiki/Anna%20Radius%20Zuccari",
-    "wikipediaTitle": "Anna Radius Zuccari"
-  },
-  {
-    "id": "58579",
-    "title": "Miei Pensieri di varia Umanità",
-    "author": "Pascoli"
-  },
-  {
-    "id": "64291",
-    "title": "Come prima meglio di prima: Commedia in tre atti",
-    "author": "Pirandello"
-  },
-  {
-    "id": "18456",
-    "title": "Enrico IV",
-    "author": "Pirandello",
-    "wikipediaUrl": "https://en.wikipedia.org/wiki/Henry%20IV%20(Pirandello%20play)",
-    "wikipediaTitle": "Henry IV (Pirandello play)"
-  },
-  {
-    "id": "65297",
-    "title": "L'innesto: Commedia in tre atti",
-    "author": "Pirandello"
-  },
-  {
-    "id": "56958",
-    "title": "L'umorismo",
-    "author": "Pirandello",
-    "wikipediaUrl": "https://en.wikipedia.org/wiki/Luigi%20Pirandello",
-    "wikipediaTitle": "Luigi Pirandello"
-  },
-  {
-    "id": "65627",
-    "title": "La ragione degli altri: Commedia in tre atti",
-    "author": "Pirandello"
-  },
-  {
-    "id": "65798",
-    "title": "La signora Morli una e due: Commedia in tre atti",
-    "author": "Pirandello"
-  },
-  {
-    "id": "69997",
-    "title": "La vita che ti diedi",
-    "author": "Pirandello",
-    "wikipediaUrl": "https://en.wikipedia.org/wiki/Luigi%20Pirandello",
-    "wikipediaTitle": "Luigi Pirandello"
-  },
-  {
-    "id": "64845",
-    "title": "Lumìe di Sicilia: Commedia in un atto",
-    "author": "Pirandello"
-  },
-  {
-    "id": "18457",
-    "title": "Sei personaggi in cerca d'autore",
-    "author": "Pirandello",
-    "wikipediaUrl": "https://en.wikipedia.org/wiki/Six%20Characters%20in%20Search%20of%20an%20Author",
-    "wikipediaTitle": "Six Characters in Search of an Author"
-  },
-  {
-    "id": "65713",
-    "title": "Tutto per bene: Commedia in 3 atti",
-    "author": "Pirandello"
   },
   {
     "id": "48206",
@@ -497,6 +301,69 @@
     "wikipediaTitle": "Vencer la culpa"
   },
   {
+    "id": "43226",
+    "title": "Dopo il divorzio",
+    "author": "Deledda",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Grazia%20Deledda",
+    "wikipediaTitle": "Grazia Deledda"
+  },
+  {
+    "id": "55236",
+    "title": "I Canti",
+    "author": "Leopardi",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Tre%20Canti%20di%20Leopardi",
+    "wikipediaTitle": "Tre Canti di Leopardi"
+  },
+  {
+    "id": "22020",
+    "title": "L'indomani",
+    "author": "Neera",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Anna%20Radius%20Zuccari",
+    "wikipediaTitle": "Anna Radius Zuccari"
+  },
+  {
+    "id": "70663",
+    "title": "Le idee di una donna",
+    "author": "Neera",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Anna%20Radius%20Zuccari",
+    "wikipediaTitle": "Anna Radius Zuccari"
+  },
+  {
+    "id": "60292",
+    "title": "Una giovinezza del secolo XIX",
+    "author": "Neera",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Anna%20Radius%20Zuccari",
+    "wikipediaTitle": "Anna Radius Zuccari"
+  },
+  {
+    "id": "18456",
+    "title": "Enrico IV",
+    "author": "Pirandello",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Henry%20IV%20(Pirandello%20play)",
+    "wikipediaTitle": "Henry IV (Pirandello play)"
+  },
+  {
+    "id": "56958",
+    "title": "L'umorismo",
+    "author": "Pirandello",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Luigi%20Pirandello",
+    "wikipediaTitle": "Luigi Pirandello"
+  },
+  {
+    "id": "69997",
+    "title": "La vita che ti diedi",
+    "author": "Pirandello",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Luigi%20Pirandello",
+    "wikipediaTitle": "Luigi Pirandello"
+  },
+  {
+    "id": "18457",
+    "title": "Sei personaggi in cerca d'autore",
+    "author": "Pirandello",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Six%20Characters%20in%20Search%20of%20an%20Author",
+    "wikipediaTitle": "Six Characters in Search of an Author"
+  },
+  {
     "id": "74341",
     "title": "Al polo australe in velocipede",
     "author": "Salgari",
@@ -544,11 +411,6 @@
     "author": "Salgari",
     "wikipediaUrl": "https://en.wikipedia.org/wiki/Emilio%20Salgari",
     "wikipediaTitle": "Emilio Salgari"
-  },
-  {
-    "id": "64062",
-    "title": "Le Aquile della Steppa: Romanzo",
-    "author": "Salgari"
   },
   {
     "id": "75712",
@@ -642,36 +504,11 @@
     "wikipediaTitle": "Iginio Ugo Tarchetti"
   },
   {
-    "id": "28403",
-    "title": "Racconti umoristici: In cerca di morte; Re per ventiquattrore",
-    "author": "Tarchetti"
-  },
-  {
-    "id": "43115",
-    "title": "...Sorella di Messalina: Romanzo",
-    "author": "Vivanti"
-  },
-  {
     "id": "39793",
     "title": "Gioia!",
     "author": "Vivanti",
     "wikipediaUrl": "https://en.wikipedia.org/wiki/Cesare%20Garboli",
     "wikipediaTitle": "Cesare Garboli"
-  },
-  {
-    "id": "34983",
-    "title": "I divoratori: romanzo",
-    "author": "Vivanti"
-  },
-  {
-    "id": "60336",
-    "title": "L'invasore: dramma in tre atti",
-    "author": "Vivanti"
-  },
-  {
-    "id": "49133",
-    "title": "Le bocche inutili: dramma in tre atti",
-    "author": "Vivanti"
   },
   {
     "id": "58615",
@@ -686,10 +523,5 @@
     "author": "Vivanti",
     "wikipediaUrl": "https://en.wikipedia.org/wiki/Annie%20Vivanti",
     "wikipediaTitle": "Annie Vivanti"
-  },
-  {
-    "id": "38259",
-    "title": "Vae victis! Romanzo",
-    "author": "Vivanti"
   }
 ]

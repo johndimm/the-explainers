@@ -1,114 +1,184 @@
 [
   {
+    "id": "1676",
+    "title": "Alcibiades I",
+    "author": "Plato (spurious and doubtful works), 428? BCE-348? BCE",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Alcibiades_I",
+    "wikipediaTitle": "Alcibiades I"
+  },
+  {
+    "id": "1677",
+    "title": "Alcibiades II",
+    "author": "Plato (spurious and doubtful works), 428? BCE-348? BCE",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Alcibiades_II",
+    "wikipediaTitle": "Alcibiades II"
+  },
+  {
     "id": "1656",
     "title": "Apology",
-    "author": "Plato",
-    "wikipediaUrl": "https://en.wikipedia.org/wiki/Apology_(Plato)",
-    "wikipediaTitle": "Apology (Plato)"
+    "author": "Plato, 428? BCE-348? BCE; Jowett, Benjamin, 1817-1893 [Translator]",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Apology",
+    "wikipediaTitle": "Apology"
   },
   {
     "id": "1580",
     "title": "Charmides",
-    "author": "Plato",
-    "wikipediaUrl": "https://en.wikipedia.org/wiki/Charmides%20(dialogue)",
-    "wikipediaTitle": "Charmides (dialogue)"
+    "author": "Plato, 428? BCE-348? BCE; Jowett, Benjamin, 1817-1893 [Translator]",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Charmides",
+    "wikipediaTitle": "Charmides"
   },
   {
     "id": "1616",
     "title": "Cratylus",
-    "author": "Plato",
-    "wikipediaUrl": "https://en.wikipedia.org/wiki/Cratylus_(dialogue)",
-    "wikipediaTitle": "Cratylus (dialogue)"
+    "author": "Plato, 428? BCE-348? BCE; Jowett, Benjamin, 1817-1893 [Translator]",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Cratylus",
+    "wikipediaTitle": "Cratylus"
   },
   {
     "id": "1571",
     "title": "Critias",
-    "author": "Plato",
-    "wikipediaUrl": "https://en.wikipedia.org/wiki/Critias_(dialogue)",
-    "wikipediaTitle": "Critias (dialogue)"
+    "author": "Plato, 428? BCE-348? BCE; Jowett, Benjamin, 1817-1893 [Translator]",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Critias",
+    "wikipediaTitle": "Critias"
   },
   {
     "id": "1657",
     "title": "Crito",
-    "author": "Plato",
+    "author": "Plato, 428? BCE-348? BCE; Jowett, Benjamin, 1817-1893 [Translator]",
     "wikipediaUrl": "https://en.wikipedia.org/wiki/Crito",
     "wikipediaTitle": "Crito"
   },
   {
+    "id": "1681",
+    "title": "Eryxias",
+    "author": "Plato (spurious and doubtful works), 428? BCE-348? BCE; Jowett, Benjamin, 1817-1893 [Translator]",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Eryxias",
+    "wikipediaTitle": "Eryxias"
+  },
+  {
+    "id": "1598",
+    "title": "Euthydemus",
+    "author": "Plato, 428? BCE-348? BCE; Jowett, Benjamin, 1817-1893 [Translator]",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Euthydemus",
+    "wikipediaTitle": "Euthydemus"
+  },
+  {
     "id": "1642",
     "title": "Euthyphro",
-    "author": "Plato",
+    "author": "Plato, 428? BCE-348? BCE; Jowett, Benjamin, 1817-1893 [Translator]",
     "wikipediaUrl": "https://en.wikipedia.org/wiki/Euthyphro",
     "wikipediaTitle": "Euthyphro"
   },
   {
-    "id": "1635",
-    "title": "Ion",
-    "author": "Plato",
-    "wikipediaUrl": "https://en.wikipedia.org/wiki/Ion_(dialogue)",
-    "wikipediaTitle": "Ion (dialogue)"
+    "id": "1672",
+    "title": "Gorgias",
+    "author": "Plato, 428? BCE-348? BCE; Jowett, Benjamin, 1817-1893 [Translator]",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Gorgias",
+    "wikipediaTitle": "Gorgias"
   },
   {
     "id": "1584",
     "title": "Laches",
-    "author": "Plato",
-    "wikipediaUrl": "https://en.wikipedia.org/wiki/Laches%20(dialogue)",
-    "wikipediaTitle": "Laches (dialogue)"
+    "author": "Plato, 428? BCE-348? BCE; Jowett, Benjamin, 1817-1893 [Translator]",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Laches",
+    "wikipediaTitle": "Laches"
+  },
+  {
+    "id": "1673",
+    "title": "Lesser Hippias",
+    "author": "Plato (spurious and doubtful works), 428? BCE-348? BCE; Jowett, Benjamin, 1817-1893 [Translator]",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Lesser_Hippias",
+    "wikipediaTitle": "Lesser Hippias"
   },
   {
     "id": "1579",
     "title": "Lysis",
-    "author": "Plato",
-    "wikipediaUrl": "https://en.wikipedia.org/wiki/Lysis_(dialogue)",
-    "wikipediaTitle": "Lysis (dialogue)"
+    "author": "Plato, 428? BCE-348? BCE; Jowett, Benjamin, 1817-1893 [Translator]",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Lysis",
+    "wikipediaTitle": "Lysis"
   },
   {
-    "id": "1643",
-    "title": "Meno",
-    "author": "Plato",
-    "wikipediaUrl": "https://en.wikipedia.org/wiki/Meno",
-    "wikipediaTitle": "Meno"
+    "id": "1682",
+    "title": "Menexenus",
+    "author": "Plato, 428? BCE-348? BCE; Jowett, Benjamin, 1817-1893 [Translator]",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Menexenus",
+    "wikipediaTitle": "Menexenus"
+  },
+  {
+    "id": "1687",
+    "title": "Parmenides",
+    "author": "Plato, 428? BCE-348? BCE; Jowett, Benjamin, 1817-1893 [Translator]",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Parmenides",
+    "wikipediaTitle": "Parmenides"
   },
   {
     "id": "1658",
     "title": "Phaedo",
-    "author": "Plato",
+    "author": "Plato, 428? BCE-348? BCE; Jowett, Benjamin, 1817-1893 [Translator]",
     "wikipediaUrl": "https://en.wikipedia.org/wiki/Phaedo",
     "wikipediaTitle": "Phaedo"
   },
   {
     "id": "1636",
     "title": "Phaedrus",
-    "author": "Plato",
-    "wikipediaUrl": "https://en.wikipedia.org/wiki/Phaedrus_(dialogue)",
-    "wikipediaTitle": "Phaedrus (dialogue)"
+    "author": "Plato, 428? BCE-348? BCE; Jowett, Benjamin, 1817-1893 [Translator]",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Phaedrus",
+    "wikipediaTitle": "Phaedrus"
+  },
+  {
+    "id": "1744",
+    "title": "Philebus",
+    "author": "Plato, 428? BCE-348? BCE; Jowett, Benjamin, 1817-1893 [Translator]",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Philebus",
+    "wikipediaTitle": "Philebus"
   },
   {
     "id": "1591",
     "title": "Protagoras",
-    "author": "Plato",
-    "wikipediaUrl": "https://en.wikipedia.org/wiki/Protagoras_(dialogue)",
-    "wikipediaTitle": "Protagoras (dialogue)"
+    "author": "Plato, 428? BCE-348? BCE; Jowett, Benjamin, 1817-1893 [Translator]",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Protagoras",
+    "wikipediaTitle": "Protagoras"
+  },
+  {
+    "id": "1735",
+    "title": "Sophist",
+    "author": "Plato, 428? BCE-348? BCE; Jowett, Benjamin, 1817-1893 [Translator]",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Sophist",
+    "wikipediaTitle": "Sophist"
+  },
+  {
+    "id": "1738",
+    "title": "Statesman",
+    "author": "Plato, 428? BCE-348? BCE; Jowett, Benjamin, 1817-1893 [Translator]",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Statesman",
+    "wikipediaTitle": "Statesman"
   },
   {
     "id": "1600",
     "title": "Symposium",
-    "author": "Plato",
-    "wikipediaUrl": "https://en.wikipedia.org/wiki/Symposium_(Plato)",
-    "wikipediaTitle": "Symposium (Plato)"
+    "author": "Plato, 428? BCE-348? BCE; Jowett, Benjamin, 1817-1893 [Translator]",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Symposium",
+    "wikipediaTitle": "Symposium"
   },
   {
-    "id": "1497",
+    "id": "150",
     "title": "The Republic",
-    "author": "Plato",
-    "wikipediaUrl": "https://en.wikipedia.org/wiki/Republic_(Plato)",
-    "wikipediaTitle": "Republic (Plato)"
+    "author": "Plato, 428? BCE-348? BCE; Jowett, Benjamin, 1817-1893 [Translator]",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/The_Republic",
+    "wikipediaTitle": "The Republic"
+  },
+  {
+    "id": "1726",
+    "title": "Theaetetus",
+    "author": "Plato, 428? BCE-348? BCE; Jowett, Benjamin, 1817-1893 [Translator]",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Theaetetus",
+    "wikipediaTitle": "Theaetetus"
   },
   {
     "id": "1572",
     "title": "Timaeus",
-    "author": "Plato",
-    "wikipediaUrl": "https://en.wikipedia.org/wiki/Timaeus_(dialogue)",
-    "wikipediaTitle": "Timaeus (dialogue)"
+    "author": "Plato, 428? BCE-348? BCE; Jowett, Benjamin, 1817-1893 [Translator]",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Timaeus",
+    "wikipediaTitle": "Timaeus"
   }
 ]

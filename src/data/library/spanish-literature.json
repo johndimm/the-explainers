@@ -1,5 +1,26 @@
 [
   {
+    "id": "47631",
+    "title": "El libro de las mil noches y una noche; t. 2",
+    "author": "Anonymous; Blasco Ibáñez",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Spanish%20literature",
+    "wikipediaTitle": "Spanish literature"
+  },
+  {
+    "id": "48903",
+    "title": "El libro de las mil noches y una noche; t. 3",
+    "author": "Anonymous; Blasco Ibáñez",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Spanish%20literature",
+    "wikipediaTitle": "Spanish literature"
+  },
+  {
+    "id": "74041",
+    "title": "El libro de las mil noches y una noche; t. 6",
+    "author": "Anonymous; Blasco Ibáñez",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Spanish%20literature",
+    "wikipediaTitle": "Spanish literature"
+  },
+  {
     "id": "67481",
     "title": "Los valores literarios",
     "author": "Azorín",
@@ -7,31 +28,11 @@
     "wikipediaTitle": "List of works by José Martínez Ruiz"
   },
   {
-    "id": "49470",
-    "title": "Con la Pluma y con el Sable: Crónica de 1820 a 1823",
-    "author": "Baroja"
-  },
-  {
-    "id": "47103",
-    "title": "El aprendiz de conspirador",
-    "author": "Baroja"
-  },
-  {
     "id": "60464",
     "title": "El árbol de la ciencia: novela",
     "author": "Baroja",
     "wikipediaUrl": "https://en.wikipedia.org/wiki/P%C3%ADo%20Baroja",
     "wikipediaTitle": "Pío Baroja"
-  },
-  {
-    "id": "48783",
-    "title": "El Escuadrón del Brigante",
-    "author": "Baroja"
-  },
-  {
-    "id": "54285",
-    "title": "El Sabor de la Venganza",
-    "author": "Baroja"
   },
   {
     "id": "54120",
@@ -55,11 +56,6 @@
     "wikipediaTitle": "Carlism in literature"
   },
   {
-    "id": "43033",
-    "title": "La lucha por la vida: Mala hierba",
-    "author": "Baroja"
-  },
-  {
     "id": "74566",
     "title": "La nave de los locos",
     "author": "Baroja",
@@ -67,158 +63,11 @@
     "wikipediaTitle": "Carlism in literature"
   },
   {
-    "id": "55514",
-    "title": "Cuentos de amor",
-    "author": "Pardo Bazán",
-    "wikipediaUrl": "https://en.wikipedia.org/wiki/Mar%C3%ADa%20de%20la%20O%20Lej%C3%A1rraga",
-    "wikipediaTitle": "María de la O Lejárraga"
-  },
-  {
-    "id": "55812",
-    "title": "Cuentos de navidad y reyes; cuentos de la patria; cuentos antiguos",
-    "author": "Pardo Bazán"
-  },
-  {
-    "id": "56044",
-    "title": "Dulce Dueño",
-    "author": "Pardo Bazán",
-    "wikipediaUrl": "https://en.wikipedia.org/wiki/Emilia%20Pardo%20Baz%C3%A1n",
-    "wikipediaTitle": "Emilia Pardo Bazán"
-  },
-  {
-    "id": "71469",
-    "title": "El cisne de Vilamorta",
-    "author": "Pardo Bazán",
-    "wikipediaUrl": "https://en.wikipedia.org/wiki/Emilia%20Pardo%20Baz%C3%A1n",
-    "wikipediaTitle": "Emilia Pardo Bazán"
-  },
-  {
-    "id": "54791",
-    "title": "El Tesoro de Gastón: Novela",
-    "author": "Pardo Bazán",
-    "wikipediaUrl": "https://en.wikipedia.org/wiki/List%20of%20Peruvian%20films",
-    "wikipediaTitle": "List of Peruvian films"
-  },
-  {
-    "id": "75814",
-    "title": "En tranvía",
-    "author": "Pardo Bazán",
-    "wikipediaUrl": "https://en.wikipedia.org/wiki/A%20Coru%C3%B1a",
-    "wikipediaTitle": "A Coruña"
-  },
-  {
-    "id": "52597",
-    "title": "Insolación y Morriña (Dos historias amorosas)",
-    "author": "Pardo Bazán"
-  },
-  {
-    "id": "55882",
-    "title": "La dama joven",
-    "author": "Pardo Bazán",
-    "wikipediaUrl": "https://en.wikipedia.org/wiki/Carlism%20in%20literature",
-    "wikipediaTitle": "Carlism in literature"
-  },
-  {
-    "id": "58059",
-    "title": "La madre naturaleza (2ª parte de Los pazos de Ulloa)",
-    "author": "Pardo Bazán"
-  },
-  {
-    "id": "68452",
-    "title": "La piedra angular: novela",
-    "author": "Pardo Bazán",
-    "wikipediaUrl": "https://en.wikipedia.org/wiki/LGBTQ%20literature%20in%20Spain",
-    "wikipediaTitle": "LGBTQ literature in Spain"
-  },
-  {
     "id": "76410",
     "title": "La Malquerida",
     "author": "Benavente",
     "wikipediaUrl": "https://en.wikipedia.org/wiki/La%20malquerida",
     "wikipediaTitle": "La malquerida"
-  },
-  {
-    "id": "67726",
-    "title": "Señora ama: Comedia en tres actos",
-    "author": "Benavente"
-  },
-  {
-    "id": "25074",
-    "title": "Novelas y cuentos",
-    "author": "Estébanez Calderón",
-    "wikipediaUrl": "https://en.wikipedia.org/wiki/Costumbrismo",
-    "wikipediaTitle": "Costumbrismo"
-  },
-  {
-    "id": "71413",
-    "title": "7 de julio",
-    "author": "Pérez Galdós",
-    "wikipediaUrl": "https://en.wikipedia.org/wiki/Tristana%20(film)",
-    "wikipediaTitle": "Tristana (film)"
-  },
-  {
-    "id": "14311",
-    "title": "Bailén",
-    "author": "Pérez Galdós",
-    "wikipediaUrl": "https://en.wikipedia.org/wiki/Battle%20of%20Bail%C3%A9n",
-    "wikipediaTitle": "Battle of Bailén"
-  },
-  {
-    "id": "21906",
-    "title": "Cádiz",
-    "author": "Pérez Galdós",
-    "wikipediaUrl": "https://en.wikipedia.org/wiki/Sherry",
-    "wikipediaTitle": "Sherry"
-  },
-  {
-    "id": "76264",
-    "title": "De Oñate a La Granja",
-    "author": "Pérez Galdós",
-    "wikipediaUrl": "https://en.wikipedia.org/wiki/Episodios%20Nacionales",
-    "wikipediaTitle": "Episodios Nacionales"
-  },
-  {
-    "id": "67189",
-    "title": "El 19 de marzo y el 2 de mayo",
-    "author": "Pérez Galdós",
-    "wikipediaUrl": "https://en.wikipedia.org/wiki/Blood%20in%20May",
-    "wikipediaTitle": "Blood in May"
-  },
-  {
-    "id": "66488",
-    "title": "El abuelo (Novela en cinco jornadas)",
-    "author": "Pérez Galdós"
-  },
-  {
-    "id": "55563",
-    "title": "El amigo Manso",
-    "author": "Pérez Galdós",
-    "wikipediaUrl": "https://en.wikipedia.org/wiki/Benito%20P%C3%A9rez%20Gald%C3%B3s",
-    "wikipediaTitle": "Benito Pérez Galdós"
-  },
-  {
-    "id": "67126",
-    "title": "El caballero encantado (cuento real... inverosí­mil)",
-    "author": "Pérez Galdós"
-  },
-  {
-    "id": "57261",
-    "title": "El Doctor Centeno (novela completa)",
-    "author": "Pérez Galdós",
-    "wikipediaUrl": "https://en.wikipedia.org/wiki/Benito%20P%C3%A9rez%20Gald%C3%B3s",
-    "wikipediaTitle": "Benito Pérez Galdós"
-  },
-  {
-    "id": "57263",
-    "title": "El Doctor Centeno (Tomo I)",
-    "author": "Pérez Galdós"
-  },
-  {
-    "id": "14765",
-    "title": "El Gaucho Martín Fierro",
-    "author": "Hernández",
-    "wikipediaUrl": "https://en.wikipedia.org/wiki/Mart%C3%ADn%20Fierro",
-    "wikipediaTitle": "Martín Fierro"
   },
   {
     "id": "16413",
@@ -244,6 +93,13 @@
   {
     "id": "24466",
     "title": "El intruso",
+    "author": "Blasco Ibáñez",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Vicente%20Blasco%20Ib%C3%A1%C3%B1ez",
+    "wikipediaTitle": "Vicente Blasco Ibáñez"
+  },
+  {
+    "id": "67843",
+    "title": "El papa del mar",
     "author": "Blasco Ibáñez",
     "wikipediaUrl": "https://en.wikipedia.org/wiki/Vicente%20Blasco%20Ib%C3%A1%C3%B1ez",
     "wikipediaTitle": "Vicente Blasco Ibáñez"
@@ -284,72 +140,6 @@
     "wikipediaTitle": "Vicente Blasco Ibáñez"
   },
   {
-    "id": "16670",
-    "title": "La Catedral",
-    "author": "Blasco Ibáñez",
-    "wikipediaUrl": "https://en.wikipedia.org/wiki/Vicente%20Blasco%20Ib%C3%A1%C3%B1ez",
-    "wikipediaTitle": "Vicente Blasco Ibáñez"
-  },
-  {
-    "id": "47631",
-    "title": "El libro de las mil noches y una noche; t. 2",
-    "author": "Anonymous; Blasco Ibáñez",
-    "wikipediaUrl": "https://en.wikipedia.org/wiki/Spanish%20literature",
-    "wikipediaTitle": "Spanish literature"
-  },
-  {
-    "id": "48903",
-    "title": "El libro de las mil noches y una noche; t. 3",
-    "author": "Anonymous; Blasco Ibáñez",
-    "wikipediaUrl": "https://en.wikipedia.org/wiki/Spanish%20literature",
-    "wikipediaTitle": "Spanish literature"
-  },
-  {
-    "id": "74065",
-    "title": "El libro de las mil noches y una noche; t. 7",
-    "author": "Anonymous; Blasco Ibáñez"
-  },
-  {
-    "id": "9980",
-    "title": "Platero y yo",
-    "author": "Jiménez",
-    "wikipediaUrl": "https://en.wikipedia.org/wiki/Platero%20and%20I",
-    "wikipediaTitle": "Platero and I"
-  },
-  {
-    "id": "75703",
-    "title": "Libro de poemas",
-    "author": "García Lorca",
-    "wikipediaUrl": "https://en.wikipedia.org/wiki/Federico%20Garc%C3%ADa%20Lorca",
-    "wikipediaTitle": "Federico García Lorca"
-  },
-  {
-    "id": "72665",
-    "title": "Romancero gitano",
-    "author": "García Lorca",
-    "wikipediaUrl": "https://en.wikipedia.org/wiki/Romancero%20gitano",
-    "wikipediaTitle": "Romancero gitano"
-  },
-  {
-    "id": "49437",
-    "title": "Páginas escogidas",
-    "author": "Machado"
-  },
-  {
-    "id": "68525",
-    "title": "Poesías completas",
-    "author": "Machado",
-    "wikipediaUrl": "https://en.wikipedia.org/wiki/Antonio%20Machado",
-    "wikipediaTitle": "Antonio Machado"
-  },
-  {
-    "id": "49333",
-    "title": "Coplas por la muerte de su padre",
-    "author": "Manrique",
-    "wikipediaUrl": "https://en.wikipedia.org/wiki/Jorge%20Manrique",
-    "wikipediaTitle": "Jorge Manrique"
-  },
-  {
     "id": "2000",
     "title": "Don Quijote",
     "author": "Cervantes Saavedra",
@@ -376,6 +166,174 @@
     "author": "Cervantes Saavedra",
     "wikipediaUrl": "https://en.wikipedia.org/wiki/Miguel%20de%20Cervantes",
     "wikipediaTitle": "Miguel de Cervantes"
+  },
+  {
+    "id": "25074",
+    "title": "Novelas y cuentos",
+    "author": "Estébanez Calderón",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Costumbrismo",
+    "wikipediaTitle": "Costumbrismo"
+  },
+  {
+    "id": "75703",
+    "title": "Libro de poemas",
+    "author": "García Lorca",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Federico%20Garc%C3%ADa%20Lorca",
+    "wikipediaTitle": "Federico García Lorca"
+  },
+  {
+    "id": "72665",
+    "title": "Romancero gitano",
+    "author": "García Lorca",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Romancero%20gitano",
+    "wikipediaTitle": "Romancero gitano"
+  },
+  {
+    "id": "14765",
+    "title": "El Gaucho Martín Fierro",
+    "author": "Hernández",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Mart%C3%ADn%20Fierro",
+    "wikipediaTitle": "Martín Fierro"
+  },
+  {
+    "id": "15066",
+    "title": "La Vuelta de Martín Fierro",
+    "author": "Hernández",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Mart%C3%ADn%20Fierro",
+    "wikipediaTitle": "Martín Fierro"
+  },
+  {
+    "id": "9980",
+    "title": "Platero y yo",
+    "author": "Jiménez",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Platero%20and%20I",
+    "wikipediaTitle": "Platero and I"
+  },
+  {
+    "id": "39209",
+    "title": "Platero y yo",
+    "author": "Jiménez",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Platero%20and%20I",
+    "wikipediaTitle": "Platero and I"
+  },
+  {
+    "id": "68525",
+    "title": "Poesías completas",
+    "author": "Machado",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Antonio%20Machado",
+    "wikipediaTitle": "Antonio Machado"
+  },
+  {
+    "id": "49333",
+    "title": "Coplas por la muerte de su padre",
+    "author": "Manrique",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Jorge%20Manrique",
+    "wikipediaTitle": "Jorge Manrique"
+  },
+  {
+    "id": "55514",
+    "title": "Cuentos de amor",
+    "author": "Pardo Bazán",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Mar%C3%ADa%20de%20la%20O%20Lej%C3%A1rraga",
+    "wikipediaTitle": "María de la O Lejárraga"
+  },
+  {
+    "id": "56044",
+    "title": "Dulce Dueño",
+    "author": "Pardo Bazán",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Emilia%20Pardo%20Baz%C3%A1n",
+    "wikipediaTitle": "Emilia Pardo Bazán"
+  },
+  {
+    "id": "71469",
+    "title": "El cisne de Vilamorta",
+    "author": "Pardo Bazán",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Emilia%20Pardo%20Baz%C3%A1n",
+    "wikipediaTitle": "Emilia Pardo Bazán"
+  },
+  {
+    "id": "54791",
+    "title": "El Tesoro de Gastón: Novela",
+    "author": "Pardo Bazán",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/List%20of%20Peruvian%20films",
+    "wikipediaTitle": "List of Peruvian films"
+  },
+  {
+    "id": "75814",
+    "title": "En tranvía",
+    "author": "Pardo Bazán",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/A%20Coru%C3%B1a",
+    "wikipediaTitle": "A Coruña"
+  },
+  {
+    "id": "55882",
+    "title": "La dama joven",
+    "author": "Pardo Bazán",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Carlism%20in%20literature",
+    "wikipediaTitle": "Carlism in literature"
+  },
+  {
+    "id": "68452",
+    "title": "La piedra angular: novela",
+    "author": "Pardo Bazán",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/LGBTQ%20literature%20in%20Spain",
+    "wikipediaTitle": "LGBTQ literature in Spain"
+  },
+  {
+    "id": "71413",
+    "title": "7 de julio",
+    "author": "Pérez Galdós",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Tristana%20(film)",
+    "wikipediaTitle": "Tristana (film)"
+  },
+  {
+    "id": "14311",
+    "title": "Bailén",
+    "author": "Pérez Galdós",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Battle%20of%20Bail%C3%A9n",
+    "wikipediaTitle": "Battle of Bailén"
+  },
+  {
+    "id": "21906",
+    "title": "Cádiz",
+    "author": "Pérez Galdós",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Sherry",
+    "wikipediaTitle": "Sherry"
+  },
+  {
+    "id": "76264",
+    "title": "De Oñate a La Granja",
+    "author": "Pérez Galdós",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Episodios%20Nacionales",
+    "wikipediaTitle": "Episodios Nacionales"
+  },
+  {
+    "id": "67189",
+    "title": "El 19 de marzo y el 2 de mayo",
+    "author": "Pérez Galdós",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Blood%20in%20May",
+    "wikipediaTitle": "Blood in May"
+  },
+  {
+    "id": "55563",
+    "title": "El amigo Manso",
+    "author": "Pérez Galdós",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Benito%20P%C3%A9rez%20Gald%C3%B3s",
+    "wikipediaTitle": "Benito Pérez Galdós"
+  },
+  {
+    "id": "57261",
+    "title": "El Doctor Centeno (novela completa)",
+    "author": "Pérez Galdós",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Benito%20P%C3%A9rez%20Gald%C3%B3s",
+    "wikipediaTitle": "Benito Pérez Galdós"
+  },
+  {
+    "id": "1619",
+    "title": "La Celestina",
+    "author": "Rojas",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/La%20Celestina",
+    "wikipediaTitle": "La Celestina"
   },
   {
     "id": "44512",
@@ -439,11 +397,6 @@
     "author": "Valle-Inclán",
     "wikipediaUrl": "https://en.wikipedia.org/wiki/Ram%C3%B3n%20del%20Valle-Incl%C3%A1n",
     "wikipediaTitle": "Ramón del Valle-Inclán"
-  },
-  {
-    "id": "55448",
-    "title": "La media noche: visión estelar de un momento de guerra",
-    "author": "Valle-Inclán"
   },
   {
     "id": "68745",

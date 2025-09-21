@@ -49,34 +49,6 @@
     "wikipediaTitle": "Orphism (art)"
   },
   {
-    "id": "54456",
-    "title": "De l'amour",
-    "author": "Baudelaire",
-    "wikipediaUrl": "https://en.wikipedia.org/wiki/Christine%20Jordis",
-    "wikipediaTitle": "Christine Jordis"
-  },
-  {
-    "id": "13792",
-    "title": "Journaux intimes",
-    "author": "Baudelaire",
-    "wikipediaUrl": "https://en.wikipedia.org/wiki/Journaux",
-    "wikipediaTitle": "Journaux"
-  },
-  {
-    "id": "26710",
-    "title": "Les épaves",
-    "author": "Baudelaire",
-    "wikipediaUrl": "https://en.wikipedia.org/wiki/Les%20Fleurs%20du%20mal",
-    "wikipediaTitle": "Les Fleurs du mal"
-  },
-  {
-    "id": "6099",
-    "title": "Les Fleurs du Mal",
-    "author": "Baudelaire",
-    "wikipediaUrl": "https://en.wikipedia.org/wiki/Les%20Fleurs%20du%20mal",
-    "wikipediaTitle": "Les Fleurs du mal"
-  },
-  {
     "id": "63634",
     "title": "L'Amour impossible; La bague d'Annibal",
     "author": "Barbey d'Aurevilly",
@@ -105,9 +77,39 @@
     "wikipediaTitle": "Jules Barbey d'Aurevilly"
   },
   {
-    "id": "40694",
-    "title": "Philosophes et Écrivains Religieux",
-    "author": "Barbey d'Aurevilly"
+    "id": "54456",
+    "title": "De l'amour",
+    "author": "Baudelaire",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Christine%20Jordis",
+    "wikipediaTitle": "Christine Jordis"
+  },
+  {
+    "id": "13792",
+    "title": "Journaux intimes",
+    "author": "Baudelaire",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Journaux",
+    "wikipediaTitle": "Journaux"
+  },
+  {
+    "id": "61565",
+    "title": "L'Oeuvre Poètique: Les Fleurs du Mal",
+    "author": "Baudelaire",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Charvet",
+    "wikipediaTitle": "Charvet"
+  },
+  {
+    "id": "26710",
+    "title": "Les épaves",
+    "author": "Baudelaire",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Les%20Fleurs%20du%20mal",
+    "wikipediaTitle": "Les Fleurs du mal"
+  },
+  {
+    "id": "6099",
+    "title": "Les Fleurs du Mal",
+    "author": "Baudelaire",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Les%20Fleurs%20du%20mal",
+    "wikipediaTitle": "Les Fleurs du mal"
   },
   {
     "id": "28602",
@@ -129,11 +131,6 @@
     "author": "Diderot",
     "wikipediaUrl": "https://en.wikipedia.org/wiki/Jacques%20the%20Fatalist",
     "wikipediaTitle": "Jacques the Fatalist"
-  },
-  {
-    "id": "28605",
-    "title": "L'oiseau blanc: conte bleu",
-    "author": "Diderot"
   },
   {
     "id": "28827",
@@ -290,11 +287,6 @@
     "wikipediaTitle": "Rachilde"
   },
   {
-    "id": "76249",
-    "title": "La souris japonaise",
-    "author": "Rachilde"
-  },
-  {
     "id": "74164",
     "title": "La tour d'amour",
     "author": "Rachilde",
@@ -323,21 +315,11 @@
     "wikipediaTitle": "Rachilde"
   },
   {
-    "id": "74459",
-    "title": "Refaire l'amour",
-    "author": "Rachilde"
-  },
-  {
     "id": "56668",
     "title": "Une saison en enfer",
     "author": "Rimbaud",
     "wikipediaUrl": "https://en.wikipedia.org/wiki/A%20Season%20in%20Hell",
     "wikipediaTitle": "A Season in Hell"
-  },
-  {
-    "id": "73889",
-    "title": "Voyage en Abyssinie et au Harrar",
-    "author": "Rimbaud"
   },
   {
     "id": "20568",
@@ -347,9 +329,11 @@
     "wikipediaTitle": "Martin van Maële"
   },
   {
-    "id": "18543",
-    "title": "Abrégé de l'Histoire universelle depuis Charlemagne jusques à Charlequint (Tome 1)",
-    "author": "Voltaire"
+    "id": "25734",
+    "title": "Correspondance avec le roi de Prusse",
+    "author": "Voltaire",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Sexuality%20of%20Frederick%20the%20Great",
+    "wikipediaTitle": "Sexuality of Frederick the Great"
   },
   {
     "id": "50340",
@@ -359,16 +343,18 @@
     "wikipediaTitle": "La Voltairomanie"
   },
   {
-    "id": "4718",
-    "title": "Histoire des voyages de Scarmentado",
-    "author": "Voltaire"
-  },
-  {
     "id": "4772",
     "title": "Jeannot et Colin",
     "author": "Voltaire",
     "wikipediaUrl": "https://en.wikipedia.org/wiki/Voltaire",
     "wikipediaTitle": "Voltaire"
+  },
+  {
+    "id": "4651",
+    "title": "L'Ingénu",
+    "author": "Voltaire",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/L'Ing%C3%A9nu",
+    "wikipediaTitle": "L'Ingénu"
   },
   {
     "id": "15804",
@@ -397,19 +383,5 @@
     "author": "Voltaire",
     "wikipediaUrl": "https://en.wikipedia.org/wiki/Microm%C3%A9gas",
     "wikipediaTitle": "Micromégas"
-  },
-  {
-    "id": "42131",
-    "title": "Traité sur la tolérance",
-    "author": "Voltaire",
-    "wikipediaUrl": "https://en.wikipedia.org/wiki/Voltaire",
-    "wikipediaTitle": "Voltaire"
-  },
-  {
-    "id": "3644",
-    "title": "Vie de Molière",
-    "author": "Voltaire",
-    "wikipediaUrl": "https://en.wikipedia.org/wiki/Voltaire",
-    "wikipediaTitle": "Voltaire"
   }
 ]

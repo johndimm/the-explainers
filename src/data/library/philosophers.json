@@ -1,26 +1,5 @@
 [
   {
-    "id": "2680",
-    "title": "Meditations",
-    "author": "Marcus Aurelius",
-    "wikipediaUrl": "https://en.wikipedia.org/wiki/Meditations",
-    "wikipediaTitle": "Meditations"
-  },
-  {
-    "id": "6920",
-    "title": "Thoughts of Marcus Aurelius",
-    "author": "Marcus Aurelius",
-    "wikipediaUrl": "https://en.wikipedia.org/wiki/Marcus%20Aurelius",
-    "wikipediaTitle": "Marcus Aurelius"
-  },
-  {
-    "id": "15877",
-    "title": "Thoughts of Marcus Aurelius Antoninus",
-    "author": "Marcus Aurelius",
-    "wikipediaUrl": "https://en.wikipedia.org/wiki/Marcus%20Aurelius",
-    "wikipediaTitle": "Marcus Aurelius"
-  },
-  {
     "id": "4723",
     "title": "A Treatise Concerning the Principles of Human Knowledge",
     "author": "Berkeley",
@@ -30,6 +9,13 @@
   {
     "id": "4722",
     "title": "An Essay Towards a New Theory of Vision",
+    "author": "Berkeley",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/George%20Berkeley",
+    "wikipediaTitle": "George Berkeley"
+  },
+  {
+    "id": "4671",
+    "title": "The Querist",
     "author": "Berkeley",
     "wikipediaUrl": "https://en.wikipedia.org/wiki/George%20Berkeley",
     "wikipediaTitle": "George Berkeley"
@@ -70,16 +56,6 @@
     "wikipediaTitle": "Discourse on the Method"
   },
   {
-    "id": "2944",
-    "title": "Essays — First Series",
-    "author": "Ralph Waldo Emerson"
-  },
-  {
-    "id": "2945",
-    "title": "Essays — Second Series",
-    "author": "Ralph Waldo Emerson"
-  },
-  {
     "id": "871",
     "title": "The Golden Sayings of Epictetus, with the Hymn of Cleanthes",
     "author": "Epictetus",
@@ -94,18 +70,29 @@
     "wikipediaTitle": "Robert Farrar Capon"
   },
   {
-    "id": "stuart-hampshire-justice",
-    "title": "Justice is Conflict",
-    "author": "Stuart Hampshire",
-    "wikipediaUrl": "https://en.wikipedia.org/wiki/Stuart_Hampshire",
-    "wikipediaTitle": "Stuart Hampshire"
+    "id": "4232",
+    "title": "A Week on the Concord and Merrimack Rivers",
+    "author": "Henry David Thoreau"
   },
   {
-    "id": "stuart-hampshire-thought-action",
-    "title": "Thought and Action",
-    "author": "Stuart Hampshire",
-    "wikipediaUrl": "https://en.wikipedia.org/wiki/Stuart_Hampshire",
-    "wikipediaTitle": "Stuart Hampshire"
+    "id": "71",
+    "title": "On the Duty of Civil Disobedience",
+    "author": "Henry David Thoreau"
+  },
+  {
+    "id": "205",
+    "title": "Walden, and On The Duty Of Civil Disobedience",
+    "author": "Henry David Thoreau"
+  },
+  {
+    "id": "1022",
+    "title": "Walking",
+    "author": "Henry David Thoreau"
+  },
+  {
+    "id": "4066",
+    "title": "Wild Apples",
+    "author": "Henry David Thoreau"
   },
   {
     "id": "216",
@@ -113,6 +100,27 @@
     "author": "Laozi",
     "wikipediaUrl": "https://en.wikipedia.org/wiki/Tao%20Te%20Ching",
     "wikipediaTitle": "Tao Te Ching"
+  },
+  {
+    "id": "2680",
+    "title": "Meditations",
+    "author": "Marcus Aurelius",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Meditations",
+    "wikipediaTitle": "Meditations"
+  },
+  {
+    "id": "6920",
+    "title": "Thoughts of Marcus Aurelius",
+    "author": "Marcus Aurelius",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Marcus%20Aurelius",
+    "wikipediaTitle": "Marcus Aurelius"
+  },
+  {
+    "id": "15877",
+    "title": "Thoughts of Marcus Aurelius Antoninus",
+    "author": "Marcus Aurelius",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Marcus%20Aurelius",
+    "wikipediaTitle": "Marcus Aurelius"
   },
   {
     "id": "61",
@@ -127,6 +135,13 @@
     "author": "Marx",
     "wikipediaUrl": "https://en.wikipedia.org/wiki/The%20Eighteenth%20Brumaire%20of%20Louis%20Bonaparte",
     "wikipediaTitle": "The Eighteenth Brumaire of Louis Bonaparte"
+  },
+  {
+    "id": "3600",
+    "title": "Essays of Michel de Montaigne — Complete",
+    "author": "Montaigne",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Essays%20(Montaigne)",
+    "wikipediaTitle": "Essays (Montaigne)"
   },
   {
     "id": "3581",
@@ -171,6 +186,13 @@
     "wikipediaTitle": "Michel Foucault"
   },
   {
+    "id": "3587",
+    "title": "Essays of Michel de Montaigne — Volume 07",
+    "author": "Montaigne",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Essays%20(Montaigne)%20-%20Bordeaux%20copy",
+    "wikipediaTitle": "Essays (Montaigne) - Bordeaux copy"
+  },
+  {
     "id": "3588",
     "title": "Essays of Michel de Montaigne — Volume 08",
     "author": "Montaigne",
@@ -185,18 +207,19 @@
     "wikipediaTitle": "Michel de Montaigne"
   },
   {
-    "id": "3590",
-    "title": "Essays of Michel de Montaigne — Volume 10",
-    "author": "Montaigne",
-    "wikipediaUrl": "https://en.wikipedia.org/wiki/Essays%20(Montaigne)",
-    "wikipediaTitle": "Essays (Montaigne)"
+    "id": "2463",
+    "title": "Florentine History",
+    "author": "Niccolò Machiavelli"
   },
   {
-    "id": "3591",
-    "title": "Essays of Michel de Montaigne — Volume 11",
-    "author": "Montaigne",
-    "wikipediaUrl": "https://en.wikipedia.org/wiki/Essays%20(Montaigne)",
-    "wikipediaTitle": "Essays (Montaigne)"
+    "id": "2944",
+    "title": "Essays — First Series",
+    "author": "Ralph Waldo Emerson"
+  },
+  {
+    "id": "2945",
+    "title": "Essays — Second Series",
+    "author": "Ralph Waldo Emerson"
   },
   {
     "id": "4776",
@@ -213,18 +236,11 @@
     "wikipediaTitle": "Bertrand Russell"
   },
   {
-    "id": "bertrand-russell-principles",
-    "title": "The Principles of Mathematics",
-    "author": "Bertrand Russell",
-    "wikipediaUrl": "https://en.wikipedia.org/wiki/The_Principles_of_Mathematics",
-    "wikipediaTitle": "The Principles of Mathematics"
-  },
-  {
-    "id": "bertrand-russell-problems",
-    "title": "The Problems of Philosophy",
-    "author": "Bertrand Russell",
-    "wikipediaUrl": "https://en.wikipedia.org/wiki/The_Problems_of_Philosophy",
-    "wikipediaTitle": "The Problems of Philosophy"
+    "id": "2529",
+    "title": "The Analysis of Mind",
+    "author": "Russell",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Pragmatism",
+    "wikipediaTitle": "Pragmatism"
   },
   {
     "id": "991",
@@ -304,37 +320,18 @@
     "wikipediaTitle": "Hellenistic philosophy"
   },
   {
-    "id": "4232",
-    "title": "A Week on the Concord and Merrimack Rivers",
-    "author": "Henry David Thoreau"
+    "id": "1171",
+    "title": "The Apology",
+    "author": "Xenophon",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Apology%20(Xenophon)",
+    "wikipediaTitle": "Apology (Xenophon)"
   },
   {
-    "id": "71",
-    "title": "On the Duty of Civil Disobedience",
-    "author": "Henry David Thoreau"
-  },
-  {
-    "id": "205",
-    "title": "Walden, and On The Duty Of Civil Disobedience",
-    "author": "Henry David Thoreau"
-  },
-  {
-    "id": "1022",
-    "title": "Walking",
-    "author": "Henry David Thoreau"
-  },
-  {
-    "id": "4066",
-    "title": "Wild Apples",
-    "author": "Henry David Thoreau"
-  },
-  {
-    "id": "tractatus",
-    "title": "Tractatus Logico-Philosophicus",
-    "author": "Ludwig Wittgenstein",
-    "localPath": "/public-domain-texts/tractatus-english.txt",
-    "wikipediaUrl": "https://en.wikipedia.org/wiki/Tractatus%20Logico-Philosophicus",
-    "wikipediaTitle": "Tractatus Logico-Philosophicus"
+    "id": "1177",
+    "title": "The Memorabilia",
+    "author": "Xenophon",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Memorabilia%20(Xenophon)",
+    "wikipediaTitle": "Memorabilia (Xenophon)"
   },
   {
     "id": "1181",

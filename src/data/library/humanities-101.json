@@ -1,11 +1,27 @@
 [
   {
-    "id": "7142",
-    "title": "History of the Peloponnesian War",
-    "author": "Thucydides",
-    "directUrl": "https://www.gutenberg.org/cache/epub/7142/pg7142.txt",
-    "wikipediaUrl": "https://en.wikipedia.org/wiki/History_of_the_Peloponnesian_War",
-    "wikipediaTitle": "History of the Peloponnesian War"
+    "id": "27458",
+    "title": "Prometheus Bound",
+    "author": "Aeschylus",
+    "directUrl": "https://www.gutenberg.org/cache/epub/27458/pg27458.txt",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Prometheus_Bound",
+    "wikipediaTitle": "Prometheus Bound"
+  },
+  {
+    "id": "14484",
+    "title": "The Oresteia",
+    "author": "Aeschylus",
+    "directUrl": "https://www.gutenberg.org/cache/epub/14484/pg14484.txt",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Oresteia",
+    "wikipediaTitle": "Oresteia"
+  },
+  {
+    "id": "2563",
+    "title": "The Frogs",
+    "author": "Aristophanes",
+    "directUrl": "https://www.gutenberg.org/cache/epub/2563/pg2563.txt",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/The_Frogs",
+    "wikipediaTitle": "The Frogs"
   },
   {
     "id": "8438",
@@ -16,12 +32,12 @@
     "wikipediaTitle": "Nicomachean Ethics"
   },
   {
-    "id": "27458",
-    "title": "Prometheus Bound",
-    "author": "Aeschylus",
-    "directUrl": "https://www.gutenberg.org/cache/epub/27458/pg27458.txt",
-    "wikipediaUrl": "https://en.wikipedia.org/wiki/Prometheus_Bound",
-    "wikipediaTitle": "Prometheus Bound"
+    "id": "2707",
+    "title": "The History of Herodotus",
+    "author": "Herodotus",
+    "directUrl": "https://www.gutenberg.org/cache/epub/2707/pg2707.txt",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Herodotus",
+    "wikipediaTitle": "Herodotus"
   },
   {
     "id": "6130",
@@ -38,5 +54,29 @@
     "directUrl": "https://www.gutenberg.org/cache/epub/1727/pg1727.txt",
     "wikipediaUrl": "https://en.wikipedia.org/wiki/Odyssey",
     "wikipediaTitle": "Odyssey"
+  },
+  {
+    "id": "1112",
+    "title": "Antigone",
+    "author": "Sophocles",
+    "directUrl": "https://www.gutenberg.org/cache/epub/1112/pg1112.txt",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Antigone",
+    "wikipediaTitle": "Antigone"
+  },
+  {
+    "id": "31",
+    "title": "Oedipus Rex",
+    "author": "Sophocles",
+    "directUrl": "https://www.gutenberg.org/cache/epub/31/pg31.txt",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Oedipus_Rex",
+    "wikipediaTitle": "Oedipus Rex"
+  },
+  {
+    "id": "7142",
+    "title": "History of the Peloponnesian War",
+    "author": "Thucydides",
+    "directUrl": "https://www.gutenberg.org/cache/epub/7142/pg7142.txt",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/History_of_the_Peloponnesian_War",
+    "wikipediaTitle": "History of the Peloponnesian War"
   }
 ]

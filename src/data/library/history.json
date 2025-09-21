@@ -1,42 +1,191 @@
 [
   {
-    "id": "674",
-    "title": "Lives of the Noble Grecians and Romans",
-    "author": "Plutarch",
-    "directUrl": "https://www.gutenberg.org/cache/epub/674/pg674.txt",
-    "wikipediaUrl": "https://en.wikipedia.org/wiki/Parallel_Lives",
-    "wikipediaTitle": "Parallel Lives"
+    "id": "35835",
+    "title": "History of Prince Edward Island",
+    "author": "Campbell, Duncan, 1819?-1886",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/History%20of%20Prince%20Edward%20Island",
+    "wikipediaTitle": "History of Prince Edward Island"
   },
   {
-    "id": "magna-carta",
-    "title": "Magna Carta",
-    "author": "King John of England",
-    "localPath": "/public-domain-texts/magna-carta.txt",
-    "wikipediaUrl": "https://en.wikipedia.org/wiki/Magna%20Carta",
-    "wikipediaTitle": "Magna Carta"
+    "id": "1091",
+    "title": "On Heroes, Hero-Worship, and the Heroic in History",
+    "author": "Carlyle, Thomas, 1795-1881",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/On%20Heroes%2C%20Hero-Worship%2C%20%26%20the%20Heroic%20in%20History",
+    "wikipediaTitle": "On Heroes, Hero-Worship, & the Heroic in History"
   },
   {
-    "id": "book-of-mormon",
-    "title": "The Book of Mormon",
-    "author": "Various",
-    "directUrl": "https://www.gutenberg.org/cache/epub/17/pg17.txt",
-    "wikipediaUrl": "https://en.wikipedia.org/wiki/Book%20of%20Mormon",
-    "wikipediaTitle": "Book of Mormon"
+    "id": "1301",
+    "title": "The French Revolution: A History",
+    "author": "Carlyle, Thomas, 1795-1881",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/The%20French%20Revolution%3A%20A%20History",
+    "wikipediaTitle": "The French Revolution: A History"
   },
   {
-    "id": "kjv-bible",
-    "title": "The King James Version of the Bible",
-    "author": "Various",
-    "localPath": "/public-domain-texts/king-james-bible.txt",
-    "wikipediaUrl": "https://en.wikipedia.org/wiki/King%20James%20Version",
-    "wikipediaTitle": "King James Version"
+    "id": "7116",
+    "title": "Vestiges of the Natural History of Creation",
+    "author": "Chambers, Robert, 1802-1871",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Vestiges%20of%20the%20Natural%20History%20of%20Creation",
+    "wikipediaTitle": "Vestiges of the Natural History of Creation"
   },
   {
-    "id": "1232",
-    "title": "The Prince",
-    "author": "Niccolò Machiavelli",
-    "directUrl": "https://www.gutenberg.org/cache/epub/1232/pg1232.txt",
-    "wikipediaUrl": "https://en.wikipedia.org/wiki/The_Prince",
-    "wikipediaTitle": "The Prince"
+    "id": "During the Years 1858",
+    "title": "Henri",
+    "author": "Charles [Editor],Cambodia -- Description and travel; Thailand -- Description and travel; Natural history -- Indochina; Khmer language,DS,Category: Travel Writing; Category: History - Early Modern (c. 1450-1750); Category: Archaeology & Anthropology",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Henri-Fr%C3%A9d%C3%A9ric%20Amiel",
+    "wikipediaTitle": "Henri-Frédéric Amiel"
+  },
+  {
+    "id": "76649",
+    "title": "The autobiography of Calvin Coolidge",
+    "author": "Coolidge, Calvin, 1872-1933",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/The%20Autobiography%20of%20Calvin%20Coolidge",
+    "wikipediaTitle": "The Autobiography of Calvin Coolidge"
+  },
+  {
+    "id": "2010",
+    "title": "The Autobiography of Charles Darwin",
+    "author": "Darwin, Charles, 1809-1882; Darwin, Francis, Sir, 1848-1925 [Editor]",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/The%20Autobiography%20of%20Charles%20Darwin",
+    "wikipediaTitle": "The Autobiography of Charles Darwin"
+  },
+  {
+    "id": "39122",
+    "title": "Memoirs of a Midget",
+    "author": "De la Mare, Walter, 1873-1956 [Adapter]",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Memoirs%20of%20a%20Midget",
+    "wikipediaTitle": "Memoirs of a Midget"
+  },
+  {
+    "id": "699",
+    "title": "A Child's History of England",
+    "author": "Dickens, Charles, 1812-1870; Townsend, F. H. (Frederick Henry), 1868-1920 [Illustrator]",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/A%20Child's%20History%20of%20England",
+    "wikipediaTitle": "A Child's History of England"
+  },
+  {
+    "id": "834",
+    "title": "The Memoirs of Sherlock Holmes",
+    "author": "Doyle, Arthur Conan, 1859-1930",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/The%20Memoirs%20of%20Sherlock%20Holmes",
+    "wikipediaTitle": "The Memoirs of Sherlock Holmes"
+  },
+  {
+    "id": "4282",
+    "title": "Don Rodriguez; Chronicles of Shadow Valley",
+    "author": "Dunsany, Lord, 1878-1957",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Don%20Rodriguez%3A%20Chronicles%20of%20Shadow%20Valley",
+    "wikipediaTitle": "Don Rodriguez: Chronicles of Shadow Valley"
+  },
+  {
+    "id": "1780-1784,en,Boswell",
+    "title": "Samuel",
+    "author": "English -- 18th century -- Biography; Lexicographers -- Great Britain -- Biography; Critics -- Great Britain -- Biography,PR,Category: Biographies; Category: British Literature",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Samuel-Auguste%20Tissot",
+    "wikipediaTitle": "Samuel-Auguste Tissot"
+  },
+  {
+    "id": "27111",
+    "title": "History of New Brunswick",
+    "author": "Fisher, Peter, 1782-1848; Fisher, William Shives [Contributor]; Raymond, W. O. (William Odber), 1853-1923 [Contributor]",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/History%20of%20New%20Brunswick",
+    "wikipediaTitle": "History of New Brunswick"
+  },
+  {
+    "id": "49369",
+    "title": "A History of Lancashire",
+    "author": "Fishwick, Henry, 1835-1914",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/History%20of%20Lancashire",
+    "wikipediaTitle": "History of Lancashire"
+  },
+  {
+    "id": "148",
+    "title": "The Autobiography of Benjamin Franklin",
+    "author": "Franklin, Benjamin, 1706-1790; Eliot, Charles William, 1834-1926 [Editor]",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/The%20Autobiography%20of%20Benjamin%20Franklin",
+    "wikipediaTitle": "The Autobiography of Benjamin Franklin"
+  },
+  {
+    "id": "Mémoires d'un Père pour servir à  l'Instruction de ses enfans,fr,Marmontel",
+    "title": "Maurice",
+    "author": "French -- 18th century -- Biography; Marmontel",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Maurice%20(novel)",
+    "wikipediaTitle": "Maurice (novel)"
+  },
+  {
+    "id": "48762",
+    "title": "History of the Decline and Fall of the Roman Empire",
+    "author": "Gibbon, Edward, 1737-1794",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/The%20History%20of%20the%20Decline%20and%20Fall%20of%20the%20Roman%20Empire",
+    "wikipediaTitle": "The History of the Decline and Fall of the Roman Empire"
+  },
+  {
+    "id": "14562",
+    "title": "The Land-War in Ireland: A History for the Times",
+    "author": "Godkin, James, 1806-1879",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/The%20Land%20(poem)",
+    "wikipediaTitle": "The Land (poem)"
+  },
+  {
+    "id": "46709",
+    "title": "Memoirs of Joseph Grimaldi",
+    "author": "Grimaldi, Joseph, 1779-1837; Dickens, Charles, 1812-1870 [Editor]; Cruikshank, George, 1792-1878 [Illustrator]",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Memoirs%20of%20Joseph%20Grimaldi",
+    "wikipediaTitle": "Memoirs of Joseph Grimaldi"
+  },
+  {
+    "id": "657",
+    "title": "The Anglo-Saxon Chronicle",
+    "author": "Ingram, J. (James), 1774-1850 [Translator]; Giles, J. A. (John Allen), 1808-1884 [Translator]",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Anglo-Saxon%20Petroleum",
+    "wikipediaTitle": "Anglo-Saxon Petroleum"
+  },
+  {
+    "id": "40580",
+    "title": "A general history of the pyrates",
+    "author": "Johnson, Charles, active 1724-1731; Defoe, Daniel, 1661?-1731 [Dubious author]",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/A%20General%20History%20of%20the%20Pyrates",
+    "wikipediaTitle": "A General History of the Pyrates"
+  },
+  {
+    "id": "3034",
+    "title": "The Anti-Slavery Crusade: A Chronicle of the Gathering Storm",
+    "author": "Macy, Jesse, 1842-1919",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Anti-Justine",
+    "wikipediaTitle": "Anti-Justine"
+  },
+  {
+    "id": "1354",
+    "title": "Chronicles of Avonlea",
+    "author": "Montgomery, L. M. (Lucy Maud), 1874-1942",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Chronicles%20of%20Avonlea",
+    "wikipediaTitle": "Chronicles of Avonlea"
+  },
+  {
+    "id": "5340",
+    "title": "Further Chronicles of Avonlea",
+    "author": "Montgomery, L. M. (Lucy Maud), 1874-1942",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Further%20Chronicles%20of%20Avonlea",
+    "wikipediaTitle": "Further Chronicles of Avonlea"
+  },
+  {
+    "id": "3045",
+    "title": "The Last Chronicle of Barset",
+    "author": "Trollope, Anthony, 1815-1882",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/The%20Last%20Chronicle%20of%20Barset",
+    "wikipediaTitle": "The Last Chronicle of Barset"
+  },
+  {
+    "id": "2nd. Ed.,en,Kitton",
+    "title": "Charles",
+    "author": "Victorian -- Great Britain; English fiction -- Illustrations; Illustrators -- Great Britain,PR,Category: British Literature; Category: History - Modern (1750+); Category: Art",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Charles-Gaspard%20Delestre-Poirson",
+    "wikipediaTitle": "Charles-Gaspard Delestre-Poirson"
+  },
+  {
+    "id": "7308",
+    "title": "The History of Mr. Polly",
+    "author": "Wells, H. G. (Herbert George), 1866-1946",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/The%20History%20of%20Mr%20Polly",
+    "wikipediaTitle": "The History of Mr Polly"
   }
 ]

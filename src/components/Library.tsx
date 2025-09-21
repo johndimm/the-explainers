@@ -33,7 +33,6 @@ const CATEGORY_FILES = [
   'english-literature.json', 
   'philosophers.json',
   'plato.json',
-  'poetry.json',
   'french-literature.json',
   'german-literature.json',
   'italian-literature.json',
@@ -110,10 +109,20 @@ const Library: React.FC<LibraryProps> = ({ onBookSelect, onBackToCurrentBook }) 
         // No longer limiting English Literature - show all books
         const limitedBooks = books
         
+        // Set initial visible count based on category size
+        let initialVisibleCount: number
+        if (books.length <= 10) {
+          initialVisibleCount = books.length // Show all books
+        } else if (books.length <= 20) {
+          initialVisibleCount = 10 // Show first 10, More will show all
+        } else {
+          initialVisibleCount = 10 // Show first 10, More will show popup
+        }
+        
         return {
           name: categoryName,
           books: limitedBooks,
-          visibleCount: 10
+          visibleCount: initialVisibleCount
         }
       })
 
@@ -130,14 +139,17 @@ const Library: React.FC<LibraryProps> = ({ onBookSelect, onBackToCurrentBook }) 
     const category = categories[categoryIndex]
     const totalBooks = category.books.length
     
-    // If category has more than 50 books, show popup instead of expanding
-    if (totalBooks > 50) {
+    // New logic based on category size:
+    // - ≤10 books: No More button (handled in render)
+    // - 11-20 books: Show all books in the same view
+    // - >20 books: Show popup with all books
+    if (totalBooks > 20) {
       setPopupCategory(category)
     } else {
-      // For smaller categories, use the old behavior
+      // For 11-20 books, show all books in the same view
       setCategories(prev => prev.map((cat, index) => 
         index === categoryIndex 
-          ? { ...cat, visibleCount: Math.min(cat.visibleCount + 10, totalBooks) }
+          ? { ...cat, visibleCount: totalBooks }
           : cat
       ))
     }
@@ -252,15 +264,15 @@ const Library: React.FC<LibraryProps> = ({ onBookSelect, onBackToCurrentBook }) 
                   styles={styles}
                 />
                 
-                {category.visibleCount < category.books.length && (
+                {category.books.length > 10 && category.visibleCount < category.books.length && (
                   <div className="text-center mt-6">
                     <button 
                       onClick={() => showMoreBooks(categoryIndex)}
                       className="btn btn-secondary"
                     >
-                      {category.books.length > 50 
+                      {category.books.length > 20 
                         ? `View All ${category.books.length} Books`
-                        : `Show More (${category.books.length - category.visibleCount} remaining)`
+                        : `Show All ${category.books.length} Books`
                       }
                     </button>
                   </div>
