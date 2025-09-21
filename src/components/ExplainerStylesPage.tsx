@@ -5,12 +5,15 @@ import { useRouter } from 'next/navigation'
 import { ExplanationStyle } from './Settings'
 import stylesCss from './ExplainerStyles.module.css'
 import FilteredStyleList from './FilteredStyleList'
-import styleCategoriesData from '@/data/style-categories.json'
+import explainers from '@/data/explainers.json'
 import PageLayout from './PageLayout'
 
 const getPhotoSrc = (value: ExplanationStyle) => {
-  if (value === 'william-shakespeare') return '/icon-512x512.png'
-  return `/explainer-photos/${value}.jpg`
+  // Special handling for neutral - return a placeholder that won't cause errors
+  if (value === 'neutral') {
+    return 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPGNpcmNsZSBjeD0iMzAiIGN5PSIzMCIgcj0iMzAiIGZpbGw9IiNmOGY5ZmEiIHN0cm9rZT0iI2RlZTJlNiIgc3Ryb2tlLXdpZHRoPSIyIi8+Cjx0ZXh0IHg9IjUwJSIgeT0iNTAlIiBkb21pbmFudC1iYXNlbGluZT0iY2VudHJhbCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZmlsbD0iIzZjNzU3ZCIgZm9udC1zaXplPSIyNCIgZm9udC13ZWlnaHQ9ImJvbGQiPk48L3RleHQ+Cjwvc3ZnPgo='
+  }
+  return (explainers as any).photoSources[value] || (explainers as any).photoSources.default.replace('{value}', value)
 }
 
 interface ExplainerStylesPageProps {
@@ -28,101 +31,22 @@ interface StyleOption {
 
 // Function to get style categories from JSON data with descriptions
 function getStyleCategories() {
-  // Add descriptions to the JSON data (since the JSON only has name and value)
-  const descriptions: { [key: string]: string } = {
-    'harold-bloom': 'Literary critic style',
-    'ts-eliot': 'Modernist and allusive',
-    'john-ruskin': 'Victorian art and social critic',
-    'samuel-johnson': 'Classical English criticism',
-    'christopher-marlowe': 'Dramatic and poetic',
-    'ben-jonson': 'Satirical and classical',
-    'francis-bacon': 'Philosophical and aphoristic',
-    'david-foster-wallace': 'Hyper-detailed and verbose',
-    'oscar-wilde': 'Witty and paradoxical',
-    'maya-angelou': 'Poetic and profound',
-    'douglas-adams': 'Absurdist and witty',
-    'terry-pratchett': 'Satirical and insightful',
-    'joan-didion': 'Precise and evocative',
-    'david-sedaris': 'Self-deprecating and observational',
-    'mark-twain': 'Folksy wisdom and satire',
-    'rudyard-kipling': 'Imperial and storytelling',
-    'tom-wolfe': 'New Journalism and electric prose',
-    'flannery-oconnor': 'Gothic and darkly funny',
-    'anthony-bourdain': 'Irreverent and worldly',
-    'bill-bryson': 'Humorous and informative',
-    'stephen-fry': 'Erudite and charming',
-    'bernard-henri-levy': 'Intellectual provocateur',
-    'michel-houellebecq': 'Nihilistic social critic',
-    'christopher-hitchens': 'Contrarian and erudite',
-    'charles-dickens': 'Victorian and social realist',
-    'cormac-mccarthy': 'Sparse and haunting',
-    'stephen-king': 'Lean, vivid, and suspenseful',
-    'william-shakespeare': 'Elizabethan drama, metaphor-rich, poetic',
-    'dorothy-parker': 'Witty, sharp, and acerbic',
-    'ernest-hemingway': 'Sparse, direct, and masculine',
-    'james-joyce': 'Stream-of-consciousness, experimental, and linguistically innovative',
-    'samuel-beckett': 'Absurdist, minimalist, and existential',
-    'kurt-vonnegut': 'Satirical, darkly humorous, and humanistic',
-    'bernie-sanders': 'Progressive populist and passionate advocate',
-    'martin-luther-king': 'Eloquent, inspiring, and morally grounded',
-    'john-f-kennedy': 'Charismatic, optimistic, and forward-looking',
-    'james-carville': 'Sharp political strategist and colorful commentator',
-    'donald-trump': 'Demented sociopathic narcissist',
-    'george-w-bush': 'Down-to-earth and folksy',
-    'barack-obama': 'Eloquent, thoughtful, and inspiring',
-    'jerry-seinfeld': 'What\'s the deal with...',
-    'louis-ck': 'Observational and conversational',
-    'dave-chappelle': 'Sharp social commentary',
-    'tina-fey': 'Smart and satirical',
-    'amy-poehler': 'Energetic and optimistic',
-    'ricky-gervais': 'Brutally honest and dry',
-    'sarah-silverman': 'Dark humor and irony',
-    'john-mulaney': 'Storytelling and precision',
-    'ali-wong': 'Raw and unapologetic',
-    'bo-burnham': 'Meta and existential',
-    'andrew-dice-clay': 'Edgy and brash',
-    'anthony-jeselnik': 'Dark and calculated',
-    'doug-stanhope': 'Nihilistic and raw',
-    'jim-norton': 'Self-loathing and confessional',
-    'jim-jefferies': 'Australian and irreverent',
-    'daniel-tosh': 'Deadpan and cutting',
-    'andy-andrist': 'Midwest deadpan',
-    'bill-burr': 'Boston rage and rants',
-    'lewis-black': 'Furious and exasperated',
-    'george-carlin': 'Philosophical and subversive',
-    'sam-kinison': 'Screaming preacher energy',
-    'paul-mooney': 'Sharp social commentary',
-    'bill-hicks': 'Radical truth-telling',
-    'bob-saget': 'Clean vs dirty contrast',
-    'norm-macdonald': 'Deadpan anti-comedy genius',
-    'oprah-winfrey': 'Empathetic, inspiring, and deeply personal',
-    'david-letterman': 'Dry wit and Midwestern charm',
-    'conan-obrien': 'Self-deprecating and absurdist',
-    'stephen-colbert': 'Satirical and politically sharp',
-    'jimmy-fallon': 'Energetic and playful',
-    'ellen-degeneres': 'Warm, funny, and uplifting',
-    'trevor-noah': 'Global perspective and sharp wit',
-    'john-oliver': 'British wit and thorough research',
-    'jon-stewart': 'Sharp political commentary and humor',
-    'howard-stern': 'Provocative and unfiltered',
-    'bill-maher': 'Contrarian and politically incorrect',
-    'carl-sagan': 'Scientific wonder and cosmic perspective',
-    'neil-degrasse-tyson': 'Scientific enthusiasm and accessibility',
-    'humphrey-bogart': 'Cool, understated, and world-weary',
-    'marilyn-monroe': 'Vulnerable, charming, and iconic',
-    'louis-theroux': 'Curious, empathetic, and gently probing',
-    'robin-williams': 'Energetic, improvisational, and heartfelt',
-    'aaron-sorkin': 'Rapid-fire dialogue and idealistic politics',
-    'woody-allen': 'Neurotic, intellectual, and New York witty'
-  }
+  // Descriptions are now included in the JSON data
 
   const result: { [key: string]: StyleOption[] } = {}
   
-  for (const [categoryName, people] of Object.entries(styleCategoriesData)) {
-    result[categoryName] = people.map((person: any) => ({
+  // Add neutral option first
+  result['neutral'] = [{
+    value: 'neutral' as ExplanationStyle,
+    name: 'Neutral',
+    description: 'Clear, straightforward explanations without any particular style or personality'
+  }]
+  
+  for (const [categoryName, people] of Object.entries((explainers as any).categories)) {
+    result[categoryName] = (people as any[]).map((person: any) => ({
       value: person.value as ExplanationStyle,
       name: person.name,
-      description: descriptions[person.value] || 'No description available',
+      description: person.description || 'No description available',
       wikipediaUrl: person.wikipediaUrl,
       wikipediaTitle: person.wikipediaTitle
     }))
@@ -213,11 +137,30 @@ const ExplainerStylesPage: React.FC<ExplainerStylesPageProps> = ({
 
       {currentStyleData && (
         <div className={stylesCss.selectedStyle}>
-          <img 
-            src={getPhotoSrc(currentStyleData.value)} 
-            alt={currentStyleData.name}
-            className={stylesCss.selectedPhoto}
-          />
+          {currentStyleData.value === 'neutral' ? (
+            <div 
+              className={stylesCss.selectedPhoto}
+              style={{
+                backgroundColor: '#f8f9fa',
+                border: '2px solid #dee2e6',
+                borderRadius: '50%',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                fontSize: '24px',
+                fontWeight: 'bold',
+                color: '#6c757d'
+              }}
+            >
+              N
+            </div>
+          ) : (
+            <img 
+              src={getPhotoSrc(currentStyleData.value)} 
+              alt={currentStyleData.name}
+              className={stylesCss.selectedPhoto}
+            />
+          )}
           <div className={stylesCss.selectedText}>
             <h2>{currentStyleData.name}</h2>
             <p>{currentStyleData.description}</p>

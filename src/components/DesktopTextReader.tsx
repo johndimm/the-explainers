@@ -22,7 +22,7 @@ const DesktopTextReader: React.FC<ReaderCommonProps> = ({ text, bookTitle = 'Rom
   const [currentPage, setCurrentPage] = useState(0)
   const pageHeight = 600 // Default page height in pixels
 
-  useBookmarkRestoreAndSave(textReaderRef, text, bookTitle, author)
+  useBookmarkRestoreAndSave(textReaderRef, text, bookTitle, author, showChatModal)
   
   // Global mouse up listener to catch selections that extend outside the text content
   React.useEffect(() => {

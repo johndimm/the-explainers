@@ -26,8 +26,8 @@ export const FilteredStyleList: React.FC<FilteredStyleListProps> = ({
   getPhotoSrc,
   stylesCss
 }) => {
-  // Filter styles that have Wikipedia links (embedded in the data)
-  const filteredStyles = styles.filter(style => style.wikipediaUrl)
+  // Show all styles (Wikipedia links are optional)
+  const filteredStyles = styles
 
   return (
     <div className={stylesCss.styleGrid}>
@@ -38,32 +38,54 @@ export const FilteredStyleList: React.FC<FilteredStyleListProps> = ({
           onClick={() => onStyleSelect(style.value)}
           style={{ position: 'relative' }}
         >
-          <img 
-            src={getPhotoSrc(style.value)}
-            alt={style.name}
-            className={stylesCss.stylePhoto}
-            onError={(e) => { 
-              e.currentTarget.style.display = 'none'
-              // Show a placeholder icon when image fails to load
-              const placeholder = document.createElement('div')
-              placeholder.style.width = '60px'
-              placeholder.style.height = '60px' 
-              placeholder.style.backgroundColor = '#f3f4f6'
-              placeholder.style.borderRadius = '50%'
-              placeholder.style.display = 'flex'
-              placeholder.style.alignItems = 'center'
-              placeholder.style.justifyContent = 'center'
-              placeholder.style.fontSize = '24px'
-              placeholder.style.flexShrink = '0'
-              placeholder.innerHTML = style.value === 'neutral' ? '⚖️' : '👤'
-              e.currentTarget.parentNode?.insertBefore(placeholder, e.currentTarget)
-            }}
-          />
-          <img 
-            src={getPhotoSrc(style.value)}
-            alt={`${style.name} - Large View`}
-            className={stylesCss.hoverImage}
-          />
+          {style.value === 'neutral' ? (
+            <div className={stylesCss.neutralIcon}>
+              <div style={{
+                width: '24px',
+                height: '24px',
+                background: 'linear-gradient(45deg, #6b7280, #9ca3af)',
+                borderRadius: '50%',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                color: 'white',
+                fontSize: '12px',
+                fontWeight: 'bold'
+              }}>
+                N
+              </div>
+            </div>
+          ) : (
+            <>
+              <img 
+                src={getPhotoSrc(style.value)}
+                alt={style.name}
+                className={stylesCss.stylePhoto}
+                onError={(e) => { 
+                  console.warn(`Failed to load image for ${style.value}:`, getPhotoSrc(style.value))
+                  e.currentTarget.style.display = 'none'
+                  // Show a placeholder icon when image fails to load
+                  const placeholder = document.createElement('div')
+                  placeholder.style.width = '60px'
+                  placeholder.style.height = '60px' 
+                  placeholder.style.backgroundColor = '#f3f4f6'
+                  placeholder.style.borderRadius = '50%'
+                  placeholder.style.display = 'flex'
+                  placeholder.style.alignItems = 'center'
+                  placeholder.style.justifyContent = 'center'
+                  placeholder.style.fontSize = '24px'
+                  placeholder.style.flexShrink = '0'
+                  placeholder.innerHTML = '👤'
+                  e.currentTarget.parentNode?.insertBefore(placeholder, e.currentTarget)
+                }}
+              />
+              <img 
+                src={getPhotoSrc(style.value)}
+                alt={`${style.name} - Large View`}
+                className={stylesCss.hoverImage}
+              />
+            </>
+          )}
           <div className={stylesCss.styleInfo}>
             <div className={stylesCss.styleName} style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
               {style.name}

@@ -1,531 +1,38 @@
 [
   {
-    "id": "1619",
-    "title": "La Celestina",
-    "author": "Rojas",
-    "wikipediaUrl": "https://en.wikipedia.org/wiki/La%20Celestina",
-    "wikipediaTitle": "La Celestina"
-  },
-  {
-    "id": "2000",
-    "title": "Don Quijote",
-    "author": "Cervantes Saavedra",
-    "wikipediaUrl": "https://en.wikipedia.org/wiki/Miguel%20de%20Cervantes",
-    "wikipediaTitle": "Miguel de Cervantes"
-  },
-  {
-    "id": "9980",
-    "title": "Platero y yo",
-    "author": "Jim\u00e9nez",
-    "wikipediaUrl": "https://en.wikipedia.org/wiki/Platero%20and%20I",
-    "wikipediaTitle": "Platero and I"
-  },
-  {
-    "id": "11070",
-    "title": "La Fontana de Oro",
-    "author": "P\u00e9rez Gald\u00f3s",
-    "wikipediaUrl": "https://en.wikipedia.org/wiki/Benito%20P%C3%A9rez%20Gald%C3%B3s",
-    "wikipediaTitle": "Benito P\u00e9rez Gald\u00f3s"
-  },
-  {
-    "id": "12848",
-    "title": "Las inquietudes de Shanti Andia",
-    "author": "Baroja",
-    "wikipediaUrl": "https://en.wikipedia.org/wiki/P%C3%ADo%20Baroja",
-    "wikipediaTitle": "P\u00edo Baroja"
-  },
-  {
-    "id": "13519",
-    "title": "La Tierra de Todos",
-    "author": "Blasco Ib\u00e1\u00f1ez",
-    "wikipediaUrl": "https://en.wikipedia.org/wiki/Vicente%20Blasco%20Ib%C3%A1%C3%B1ez",
-    "wikipediaTitle": "Vicente Blasco Ib\u00e1\u00f1ez"
-  },
-  {
-    "id": "14308",
-    "title": "El pr\u00e9stamo de la difunta",
-    "author": "Blasco Ib\u00e1\u00f1ez",
-    "wikipediaUrl": "https://en.wikipedia.org/wiki/Vicente%20Blasco%20Ib%C3%A1%C3%B1ez",
-    "wikipediaTitle": "Vicente Blasco Ib\u00e1\u00f1ez"
-  },
-  {
-    "id": "14311",
-    "title": "Bail\u00e9n",
-    "author": "P\u00e9rez Gald\u00f3s",
-    "wikipediaUrl": "https://en.wikipedia.org/wiki/Battle%20of%20Bail%C3%A9n",
-    "wikipediaTitle": "Battle of Bail\u00e9n"
-  },
-  {
-    "id": "14765",
-    "title": "El Gaucho Mart\u00edn Fierro",
-    "author": "Hern\u00e1ndez",
-    "wikipediaUrl": "https://en.wikipedia.org/wiki/Mart%C3%ADn%20Fierro",
-    "wikipediaTitle": "Mart\u00edn Fierro"
-  },
-  {
-    "id": "14944",
-    "title": "La Barraca",
-    "author": "Blasco Ib\u00e1\u00f1ez",
-    "wikipediaUrl": "https://en.wikipedia.org/wiki/Vicente%20Blasco%20Ib%C3%A1%C3%B1ez",
-    "wikipediaTitle": "Vicente Blasco Ib\u00e1\u00f1ez"
-  },
-  {
-    "id": "15066",
-    "title": "La Vuelta de Mart\u00edn Fierro",
-    "author": "Hern\u00e1ndez",
-    "wikipediaUrl": "https://en.wikipedia.org/wiki/Mart%C3%ADn%20Fierro",
-    "wikipediaTitle": "Mart\u00edn Fierro"
-  },
-  {
-    "id": "15115",
-    "title": "Novelas y teatro",
-    "author": "Cervantes Saavedra",
-    "wikipediaUrl": "https://en.wikipedia.org/wiki/Miguel%20de%20Cervantes",
-    "wikipediaTitle": "Miguel de Cervantes"
-  },
-  {
-    "id": "15206",
-    "title": "Torquemada en la hoguera",
-    "author": "P\u00e9rez Gald\u00f3s",
-    "wikipediaUrl": "https://en.wikipedia.org/wiki/Benito%20P%C3%A9rez%20Gald%C3%B3s",
-    "wikipediaTitle": "Benito P\u00e9rez Gald\u00f3s"
-  },
-  {
-    "id": "16413",
-    "title": "Arroz y tartana",
-    "author": "Blasco Ib\u00e1\u00f1ez",
-    "wikipediaUrl": "https://en.wikipedia.org/wiki/Vicente%20Blasco%20Ib%C3%A1%C3%B1ez",
-    "wikipediaTitle": "Vicente Blasco Ib\u00e1\u00f1ez"
-  },
-  {
-    "id": "16670",
-    "title": "La Catedral",
-    "author": "Blasco Ib\u00e1\u00f1ez",
-    "wikipediaUrl": "https://en.wikipedia.org/wiki/Vicente%20Blasco%20Ib%C3%A1%C3%B1ez",
-    "wikipediaTitle": "Vicente Blasco Ib\u00e1\u00f1ez"
-  },
-  {
-    "id": "16961",
-    "title": "Trafalgar",
-    "author": "P\u00e9rez Gald\u00f3s",
-    "wikipediaUrl": "https://en.wikipedia.org/wiki/Benito%20P%C3%A9rez%20Gald%C3%B3s",
-    "wikipediaTitle": "Benito P\u00e9rez Gald\u00f3s"
-  },
-  {
-    "id": "17013",
-    "title": "Fortunata y Jacinta: dos historias de casadas",
-    "author": "P\u00e9rez Gald\u00f3s",
-    "wikipediaUrl": "https://en.wikipedia.org/wiki/Juan%20Mar%C3%ADa%20Guelbenzu%20Fern%C3%A1ndez",
-    "wikipediaTitle": "Juan Mar\u00eda Guelbenzu Fern\u00e1ndez"
-  },
-  {
-    "id": "17340",
-    "title": "Marianela",
-    "author": "P\u00e9rez Gald\u00f3s",
-    "wikipediaUrl": "https://en.wikipedia.org/wiki/Benito%20P%C3%A9rez%20Gald%C3%B3s",
-    "wikipediaTitle": "Benito P\u00e9rez Gald\u00f3s"
-  },
-  {
-    "id": "17406",
-    "title": "Un viaje de novios",
-    "author": "Pardo Baz\u00e1n",
-    "wikipediaUrl": "https://en.wikipedia.org/wiki/Emilia%20Pardo%20Baz%C3%A1n",
-    "wikipediaTitle": "Emilia Pardo Baz\u00e1n"
-  },
-  {
-    "id": "17443",
-    "title": "Un faccioso m\u00e1s y algunos frailes menos",
-    "author": "P\u00e9rez Gald\u00f3s",
-    "wikipediaUrl": "https://en.wikipedia.org/wiki/Episodios%20Nacionales",
-    "wikipediaTitle": "Episodios Nacionales"
-  },
-  {
-    "id": "17491",
-    "title": "La Tribuna",
-    "author": "Pardo Baz\u00e1n",
-    "wikipediaUrl": "https://en.wikipedia.org/wiki/Emilia%20Pardo%20Baz%C3%A1n",
-    "wikipediaTitle": "Emilia Pardo Baz\u00e1n"
-  },
-  {
-    "id": "18005",
-    "title": "Los pazos de Ulloa",
-    "author": "Pardo Baz\u00e1n",
-    "wikipediaUrl": "https://en.wikipedia.org/wiki/Emilia%20Pardo%20Baz%C3%A1n",
-    "wikipediaTitle": "Emilia Pardo Baz\u00e1n"
-  },
-  {
-    "id": "21651",
-    "title": "Los muertos mandan",
-    "author": "Blasco Ib\u00e1\u00f1ez",
-    "wikipediaUrl": "https://en.wikipedia.org/wiki/Vicente%20Blasco%20Ib%C3%A1%C3%B1ez",
-    "wikipediaTitle": "Vicente Blasco Ib\u00e1\u00f1ez"
-  },
-  {
-    "id": "21831",
-    "title": "Misericordia",
-    "author": "P\u00e9rez Gald\u00f3s",
-    "wikipediaUrl": "https://en.wikipedia.org/wiki/Benito%20P%C3%A9rez%20Gald%C3%B3s",
-    "wikipediaTitle": "Benito P\u00e9rez Gald\u00f3s"
-  },
-  {
-    "id": "21906",
-    "title": "C\u00e1diz",
-    "author": "P\u00e9rez Gald\u00f3s",
-    "wikipediaUrl": "https://en.wikipedia.org/wiki/Sherry",
-    "wikipediaTitle": "Sherry"
-  },
-  {
-    "id": "23236",
-    "title": "Mare nostrum",
-    "author": "Blasco Ib\u00e1\u00f1ez",
-    "wikipediaUrl": "https://en.wikipedia.org/wiki/Mare%20Nostrum%20(1926%20film)",
-    "wikipediaTitle": "Mare Nostrum (1926 film)"
-  },
-  {
-    "id": "24466",
-    "title": "El intruso",
-    "author": "Blasco Ib\u00e1\u00f1ez",
-    "wikipediaUrl": "https://en.wikipedia.org/wiki/Vicente%20Blasco%20Ib%C3%A1%C3%B1ez",
-    "wikipediaTitle": "Vicente Blasco Ib\u00e1\u00f1ez"
-  },
-  {
-    "id": "24536",
-    "title": "Los cuatro jinetes del apocalipsis",
-    "author": "Blasco Ib\u00e1\u00f1ez",
-    "wikipediaUrl": "https://en.wikipedia.org/wiki/Vicente%20Blasco%20Ib%C3%A1%C3%B1ez",
-    "wikipediaTitle": "Vicente Blasco Ib\u00e1\u00f1ez"
-  },
-  {
-    "id": "25074",
-    "title": "Novelas y cuentos",
-    "author": "Est\u00e9banez Calder\u00f3n",
-    "wikipediaUrl": "https://en.wikipedia.org/wiki/Costumbrismo",
-    "wikipediaTitle": "Costumbrismo"
-  },
-  {
-    "id": "25640",
-    "title": "Los argonautas",
-    "author": "Blasco Ib\u00e1\u00f1ez",
-    "wikipediaUrl": "https://en.wikipedia.org/wiki/Vicente%20Blasco%20Ib%C3%A1%C3%B1ez",
-    "wikipediaTitle": "Vicente Blasco Ib\u00e1\u00f1ez"
-  },
-  {
-    "id": "25956",
-    "title": "La desheredada",
-    "author": "P\u00e9rez Gald\u00f3s",
-    "wikipediaUrl": "https://en.wikipedia.org/wiki/Benito%20P%C3%A9rez%20Gald%C3%B3s",
-    "wikipediaTitle": "Benito P\u00e9rez Gald\u00f3s"
-  },
-  {
-    "id": "26983",
-    "title": "Sangre y arena",
-    "author": "Blasco Ib\u00e1\u00f1ez",
-    "wikipediaUrl": "https://en.wikipedia.org/wiki/Vicente%20Blasco%20Ib%C3%A1%C3%B1ez",
-    "wikipediaTitle": "Vicente Blasco Ib\u00e1\u00f1ez"
-  },
-  {
-    "id": "27736",
-    "title": "La condenada (cuentos)",
-    "author": "Blasco Ib\u00e1\u00f1ez",
-    "wikipediaUrl": "https://en.wikipedia.org/wiki/List%20of%20Spanish%20television%20series",
-    "wikipediaTitle": "List of Spanish television series"
-  },
-  {
-    "id": "28002",
-    "title": "Electra",
-    "author": "P\u00e9rez Gald\u00f3s",
-    "wikipediaUrl": "https://en.wikipedia.org/wiki/Benito%20P%C3%A9rez%20Gald%C3%B3s",
-    "wikipediaTitle": "Benito P\u00e9rez Gald\u00f3s"
-  },
-  {
-    "id": "28927",
-    "title": "La bodega",
-    "author": "Blasco Ib\u00e1\u00f1ez",
-    "wikipediaUrl": "https://en.wikipedia.org/wiki/Vicente%20Blasco%20Ib%C3%A1%C3%B1ez",
-    "wikipediaTitle": "Vicente Blasco Ib\u00e1\u00f1ez"
-  },
-  {
-    "id": "30122",
-    "title": "Entre naranjos",
-    "author": "Blasco Ib\u00e1\u00f1ez",
-    "wikipediaUrl": "https://en.wikipedia.org/wiki/Vicente%20Blasco%20Ib%C3%A1%C3%B1ez",
-    "wikipediaTitle": "Vicente Blasco Ib\u00e1\u00f1ez"
-  },
-  {
-    "id": "31464",
-    "title": "La de Bringas",
-    "author": "P\u00e9rez Gald\u00f3s",
-    "wikipediaUrl": "https://en.wikipedia.org/wiki/Benito%20P%C3%A9rez%20Gald%C3%B3s",
-    "wikipediaTitle": "Benito P\u00e9rez Gald\u00f3s"
-  },
-  {
-    "id": "31465",
-    "title": "Tormento",
-    "author": "P\u00e9rez Gald\u00f3s",
-    "wikipediaUrl": "https://en.wikipedia.org/wiki/Benito%20P%C3%A9rez%20Gald%C3%B3s",
-    "wikipediaTitle": "Benito P\u00e9rez Gald\u00f3s"
-  },
-  {
-    "id": "33474",
-    "title": "La horda",
-    "author": "Blasco Ib\u00e1\u00f1ez",
-    "wikipediaUrl": "https://en.wikipedia.org/wiki/Vicente%20Blasco%20Ib%C3%A1%C3%B1ez",
-    "wikipediaTitle": "Vicente Blasco Ib\u00e1\u00f1ez"
-  },
-  {
-    "id": "37139",
-    "title": "Los enemigos de la mujer",
-    "author": "Blasco Ib\u00e1\u00f1ez",
-    "wikipediaUrl": "https://en.wikipedia.org/wiki/Vicente%20Blasco%20Ib%C3%A1%C3%B1ez",
-    "wikipediaTitle": "Vicente Blasco Ib\u00e1\u00f1ez"
-  },
-  {
-    "id": "39209",
-    "title": "Platero y yo",
-    "author": "Jim\u00e9nez",
-    "wikipediaUrl": "https://en.wikipedia.org/wiki/Platero%20and%20I",
-    "wikipediaTitle": "Platero and I"
-  },
-  {
-    "id": "40182",
-    "title": "Oriente",
-    "author": "Blasco Ib\u00e1\u00f1ez",
-    "wikipediaUrl": "https://en.wikipedia.org/wiki/Vicente%20Blasco%20Ib%C3%A1%C3%B1ez",
-    "wikipediaTitle": "Vicente Blasco Ib\u00e1\u00f1ez"
-  },
-  {
-    "id": "40544",
-    "title": "La lucha por la vida: Aurora roja",
-    "author": "Baroja",
-    "wikipediaUrl": "https://en.wikipedia.org/wiki/Ignacio%20Baleztena%20Asc%C3%A1rate",
-    "wikipediaTitle": "Ignacio Baleztena Asc\u00e1rate"
-  },
-  {
-    "id": "41746",
-    "title": "Flor de mayo",
-    "author": "Blasco Ib\u00e1\u00f1ez",
-    "wikipediaUrl": "https://en.wikipedia.org/wiki/Vicente%20Blasco%20Ib%C3%A1%C3%B1ez",
-    "wikipediaTitle": "Vicente Blasco Ib\u00e1\u00f1ez"
-  },
-  {
-    "id": "42424",
-    "title": "Sonata de est\u00edo: memorias del marqu\u00e9s de Bradom\u00edn",
-    "author": "Valle-Incl\u00e1n",
-    "wikipediaUrl": "https://en.wikipedia.org/wiki/Ram%C3%B3n%20del%20Valle-Incl%C3%A1n",
-    "wikipediaTitle": "Ram\u00f3n del Valle-Incl\u00e1n"
-  },
-  {
-    "id": "42440",
-    "title": "Sonata de primavera: memorias del marqu\u00e9s de Bradom\u00edn",
-    "author": "Valle-Incl\u00e1n",
-    "wikipediaUrl": "https://en.wikipedia.org/wiki/Ram%C3%B3n%20del%20Valle-Incl%C3%A1n",
-    "wikipediaTitle": "Ram\u00f3n del Valle-Incl\u00e1n"
-  },
-  {
-    "id": "43017",
-    "title": "Mala Hierba",
-    "author": "Baroja"
-  },
-  {
-    "id": "43030",
-    "title": "La maja desnuda",
-    "author": "Blasco Ib\u00e1\u00f1ez",
-    "wikipediaUrl": "https://en.wikipedia.org/wiki/Vicente%20Blasco%20Ib%C3%A1%C3%B1ez",
-    "wikipediaTitle": "Vicente Blasco Ib\u00e1\u00f1ez"
-  },
-  {
-    "id": "43033",
-    "title": "La lucha por la vida: Mala hierba",
-    "author": "Baroja"
-  },
-  {
-    "id": "43432",
-    "title": "La lucha por la vida: La busca",
-    "author": "Baroja",
-    "wikipediaUrl": "https://en.wikipedia.org/wiki/Carlism%20in%20literature",
-    "wikipediaTitle": "Carlism in literature"
-  },
-  {
-    "id": "44358",
-    "title": "La T\u00eda Tula (Novela)",
-    "author": "Unamuno",
-    "wikipediaUrl": "https://en.wikipedia.org/wiki/Miguel%20de%20Unamuno",
-    "wikipediaTitle": "Miguel de Unamuno"
-  },
-  {
-    "id": "44512",
-    "title": "Abel S\u00e1nchez: Una Historia de Pasi\u00f3n",
-    "author": "Unamuno",
-    "wikipediaUrl": "https://en.wikipedia.org/wiki/Abel%20S%C3%A1nchez%3A%20The%20History%20of%20a%20Passion",
-    "wikipediaTitle": "Abel S\u00e1nchez: The History of a Passion"
-  },
-  {
-    "id": "46182",
-    "title": "Sonata de oto\u00f1o; Sonata de invierno: memorias del Marqu\u00e9s de Bradom\u00edn",
-    "author": "Valle-Incl\u00e1n",
-    "wikipediaUrl": "https://en.wikipedia.org/wiki/Ram%C3%B3n%20del%20Valle-Incl%C3%A1n",
-    "wikipediaTitle": "Ram\u00f3n del Valle-Incl\u00e1n"
-  },
-  {
-    "id": "47057",
-    "title": "Las inquietudes de Shanti And\u00eda",
-    "author": "Baroja",
-    "wikipediaUrl": "https://en.wikipedia.org/wiki/P%C3%ADo%20Baroja",
-    "wikipediaTitle": "P\u00edo Baroja"
-  },
-  {
-    "id": "47103",
-    "title": "El aprendiz de conspirador",
-    "author": "Baroja"
-  },
-  {
     "id": "47631",
     "title": "El libro de las mil noches y una noche; t. 2",
-    "author": "Anonymous; Blasco Ib\u00e1\u00f1ez",
+    "author": "Anonymous; Blasco Ibáñez",
     "wikipediaUrl": "https://en.wikipedia.org/wiki/Spanish%20literature",
     "wikipediaTitle": "Spanish literature"
-  },
-  {
-    "id": "48783",
-    "title": "El Escuadr\u00f3n del Brigante",
-    "author": "Baroja"
   },
   {
     "id": "48903",
     "title": "El libro de las mil noches y una noche; t. 3",
-    "author": "Anonymous; Blasco Ib\u00e1\u00f1ez",
+    "author": "Anonymous; Blasco Ibáñez",
     "wikipediaUrl": "https://en.wikipedia.org/wiki/Spanish%20literature",
     "wikipediaTitle": "Spanish literature"
   },
   {
-    "id": "48944",
-    "title": "Gloria (primera parte)",
-    "author": "P\u00e9rez Gald\u00f3s",
+    "id": "74041",
+    "title": "El libro de las mil noches y una noche; t. 6",
+    "author": "Anonymous; Blasco Ibáñez",
     "wikipediaUrl": "https://en.wikipedia.org/wiki/Spanish%20literature",
     "wikipediaTitle": "Spanish literature"
   },
   {
-    "id": "48945",
-    "title": "Gloria (segunda parte)",
-    "author": "P\u00e9rez Gald\u00f3s",
-    "wikipediaUrl": "https://en.wikipedia.org/wiki/Carlism%20in%20literature",
-    "wikipediaTitle": "Carlism in literature"
+    "id": "67481",
+    "title": "Los valores literarios",
+    "author": "Azorín",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/List%20of%20works%20by%20Jos%C3%A9%20Mart%C3%ADnez%20Ruiz",
+    "wikipediaTitle": "List of works by José Martínez Ruiz"
   },
   {
-    "id": "48946",
-    "title": "Gloria (novela completa)",
-    "author": "P\u00e9rez Gald\u00f3s",
-    "wikipediaUrl": "https://en.wikipedia.org/wiki/Benito%20P%C3%A9rez%20Gald%C3%B3s",
-    "wikipediaTitle": "Benito P\u00e9rez Gald\u00f3s"
-  },
-  {
-    "id": "49149",
-    "title": "Amor y Pedagog\u00eda",
-    "author": "Unamuno",
-    "wikipediaUrl": "https://en.wikipedia.org/wiki/Miguel%20de%20Unamuno",
-    "wikipediaTitle": "Miguel de Unamuno"
-  },
-  {
-    "id": "49280",
-    "title": "Los Caminos del Mundo",
+    "id": "60464",
+    "title": "El árbol de la ciencia: novela",
     "author": "Baroja",
     "wikipediaUrl": "https://en.wikipedia.org/wiki/P%C3%ADo%20Baroja",
-    "wikipediaTitle": "P\u00edo Baroja"
-  },
-  {
-    "id": "49333",
-    "title": "Coplas por la muerte de su padre",
-    "author": "Manrique",
-    "wikipediaUrl": "https://en.wikipedia.org/wiki/Jorge%20Manrique",
-    "wikipediaTitle": "Jorge Manrique"
-  },
-  {
-    "id": "49433",
-    "title": "Zaragoza",
-    "author": "P\u00e9rez Gald\u00f3s",
-    "wikipediaUrl": "https://en.wikipedia.org/wiki/Benito%20P%C3%A9rez%20Gald%C3%B3s",
-    "wikipediaTitle": "Benito P\u00e9rez Gald\u00f3s"
-  },
-  {
-    "id": "49437",
-    "title": "P\u00e1ginas escogidas",
-    "author": "Machado"
-  },
-  {
-    "id": "49470",
-    "title": "Con la Pluma y con el Sable: Cr\u00f3nica de 1820 a 1823",
-    "author": "Baroja"
-  },
-  {
-    "id": "49756",
-    "title": "La Quimera",
-    "author": "Pardo Baz\u00e1n",
-    "wikipediaUrl": "https://en.wikipedia.org/wiki/2019%20in%20Mexico",
-    "wikipediaTitle": "2019 in Mexico"
-  },
-  {
-    "id": "49836",
-    "title": "Niebla (Nivola)",
-    "author": "Unamuno",
-    "wikipediaUrl": "https://en.wikipedia.org/wiki/Mist%20(novel)",
-    "wikipediaTitle": "Mist (novel)"
-  },
-  {
-    "id": "50126",
-    "title": "Los Recursos de la Astucia",
-    "author": "Baroja"
-  },
-  {
-    "id": "50726",
-    "title": "La Ruta del Aventurero",
-    "author": "Baroja",
-    "wikipediaUrl": "https://en.wikipedia.org/wiki/Telmo%20Aldaz",
-    "wikipediaTitle": "Telmo Aldaz"
-  },
-  {
-    "id": "51450",
-    "title": "La Sirena Negra",
-    "author": "Pardo Baz\u00e1n",
-    "wikipediaUrl": "https://en.wikipedia.org/wiki/The%20Black%20Siren",
-    "wikipediaTitle": "The Black Siren"
-  },
-  {
-    "id": "51858",
-    "title": "Los Contrastes de la Vida",
-    "author": "Baroja",
-    "wikipediaUrl": "https://en.wikipedia.org/wiki/Jos%C3%A9%20Baroja",
-    "wikipediaTitle": "Jos\u00e9 Baroja"
-  },
-  {
-    "id": "52392",
-    "title": "Miau",
-    "author": "P\u00e9rez Gald\u00f3s",
-    "wikipediaUrl": "https://en.wikipedia.org/wiki/Miau",
-    "wikipediaTitle": "Miau"
-  },
-  {
-    "id": "52597",
-    "title": "Insolaci\u00f3n y Morri\u00f1a (Dos historias amorosas)",
-    "author": "Pardo Baz\u00e1n"
-  },
-  {
-    "id": "53003",
-    "title": "La Veleta de Gastizar",
-    "author": "Baroja"
-  },
-  {
-    "id": "53355",
-    "title": "La novela en el tranv\u00eda",
-    "author": "P\u00e9rez Gald\u00f3s",
-    "wikipediaUrl": "https://en.wikipedia.org/wiki/Benito%20P%C3%A9rez%20Gald%C3%B3s",
-    "wikipediaTitle": "Benito P\u00e9rez Gald\u00f3s"
-  },
-  {
-    "id": "53517",
-    "title": "Los Caudillos de 1830",
-    "author": "Baroja",
-    "wikipediaUrl": "https://en.wikipedia.org/wiki/Carlism%20in%20literature",
-    "wikipediaTitle": "Carlism in literature"
+    "wikipediaTitle": "Pío Baroja"
   },
   {
     "id": "54120",
@@ -535,475 +42,18 @@
     "wikipediaTitle": "1834 massacre of friars in Madrid"
   },
   {
-    "id": "54285",
-    "title": "El Sabor de la Venganza",
-    "author": "Baroja"
-  },
-  {
-    "id": "54423",
-    "title": "Realidad: Novela en cinco Jornadas",
-    "author": "P\u00e9rez Gald\u00f3s"
-  },
-  {
-    "id": "54521",
-    "title": "La Inc\u00f3gnita",
-    "author": "P\u00e9rez Gald\u00f3s",
-    "wikipediaUrl": "https://en.wikipedia.org/wiki/Benito%20P%C3%A9rez%20Gald%C3%B3s",
-    "wikipediaTitle": "Benito P\u00e9rez Gald\u00f3s"
-  },
-  {
-    "id": "54791",
-    "title": "El Tesoro de Gast\u00f3n: Novela",
-    "author": "Pardo Baz\u00e1n",
-    "wikipediaUrl": "https://en.wikipedia.org/wiki/List%20of%20Peruvian%20films",
-    "wikipediaTitle": "List of Peruvian films"
-  },
-  {
-    "id": "54861",
-    "title": "Torquemada en la cruz",
-    "author": "P\u00e9rez Gald\u00f3s",
-    "wikipediaUrl": "https://en.wikipedia.org/wiki/Benito%20P%C3%A9rez%20Gald%C3%B3s",
-    "wikipediaTitle": "Benito P\u00e9rez Gald\u00f3s"
-  },
-  {
-    "id": "55139",
-    "title": "Torquemada en el purgatorio",
-    "author": "P\u00e9rez Gald\u00f3s",
-    "wikipediaUrl": "https://en.wikipedia.org/wiki/Benito%20P%C3%A9rez%20Gald%C3%B3s",
-    "wikipediaTitle": "Benito P\u00e9rez Gald\u00f3s"
-  },
-  {
-    "id": "55157",
-    "title": "Las Furias",
+    "id": "40544",
+    "title": "La lucha por la vida: Aurora roja",
     "author": "Baroja",
-    "wikipediaUrl": "https://en.wikipedia.org/wiki/Jes%C3%BAs%20Franco%20filmography",
-    "wikipediaTitle": "Jes\u00fas Franco filmography"
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Ignacio%20Baleztena%20Asc%C3%A1rate",
+    "wikipediaTitle": "Ignacio Baleztena Ascárate"
   },
   {
-    "id": "55448",
-    "title": "La media noche: visi\u00f3n estelar de un momento de guerra",
-    "author": "Valle-Incl\u00e1n"
-  },
-  {
-    "id": "55514",
-    "title": "Cuentos de amor",
-    "author": "Pardo Baz\u00e1n",
-    "wikipediaUrl": "https://en.wikipedia.org/wiki/Mar%C3%ADa%20de%20la%20O%20Lej%C3%A1rraga",
-    "wikipediaTitle": "Mar\u00eda de la O Lej\u00e1rraga"
-  },
-  {
-    "id": "55563",
-    "title": "El amigo Manso",
-    "author": "P\u00e9rez Gald\u00f3s",
-    "wikipediaUrl": "https://en.wikipedia.org/wiki/Benito%20P%C3%A9rez%20Gald%C3%B3s",
-    "wikipediaTitle": "Benito P\u00e9rez Gald\u00f3s"
-  },
-  {
-    "id": "55812",
-    "title": "Cuentos de navidad y reyes; cuentos de la patria; cuentos antiguos",
-    "author": "Pardo Baz\u00e1n"
-  },
-  {
-    "id": "55882",
-    "title": "La dama joven",
-    "author": "Pardo Baz\u00e1n",
-    "wikipediaUrl": "https://en.wikipedia.org/wiki/Carlism%20in%20literature",
-    "wikipediaTitle": "Carlism in literature"
-  },
-  {
-    "id": "55915",
-    "title": "Torquemada y San Pedro",
-    "author": "P\u00e9rez Gald\u00f3s",
-    "wikipediaUrl": "https://en.wikipedia.org/wiki/Benito%20P%C3%A9rez%20Gald%C3%B3s",
-    "wikipediaTitle": "Benito P\u00e9rez Gald\u00f3s"
-  },
-  {
-    "id": "55916",
-    "title": "Tres novelas ejemplares y un pr\u00f3logo",
-    "author": "Unamuno",
-    "wikipediaUrl": "https://en.wikipedia.org/wiki/Miguel%20de%20Unamuno",
-    "wikipediaTitle": "Miguel de Unamuno"
-  },
-  {
-    "id": "56044",
-    "title": "Dulce Due\u00f1o",
-    "author": "Pardo Baz\u00e1n",
-    "wikipediaUrl": "https://en.wikipedia.org/wiki/Emilia%20Pardo%20Baz%C3%A1n",
-    "wikipediaTitle": "Emilia Pardo Baz\u00e1n"
-  },
-  {
-    "id": "57261",
-    "title": "El Doctor Centeno (novela completa)",
-    "author": "P\u00e9rez Gald\u00f3s",
-    "wikipediaUrl": "https://en.wikipedia.org/wiki/Benito%20P%C3%A9rez%20Gald%C3%B3s",
-    "wikipediaTitle": "Benito P\u00e9rez Gald\u00f3s"
-  },
-  {
-    "id": "57263",
-    "title": "El Doctor Centeno (Tomo I)",
-    "author": "P\u00e9rez Gald\u00f3s"
-  },
-  {
-    "id": "57264",
-    "title": "El Doctor Centeno (Tomo II)",
-    "author": "P\u00e9rez Gald\u00f3s"
-  },
-  {
-    "id": "57781",
-    "title": "Ca\u00f1as y barro: Novela",
-    "author": "Blasco Ib\u00e1\u00f1ez",
-    "wikipediaUrl": "https://en.wikipedia.org/wiki/Vicente%20Blasco%20Ib%C3%A1%C3%B1ez",
-    "wikipediaTitle": "Vicente Blasco Ib\u00e1\u00f1ez"
-  },
-  {
-    "id": "57955",
-    "title": "Los entremeses",
-    "author": "Cervantes Saavedra",
-    "wikipediaUrl": "https://en.wikipedia.org/wiki/Miguel%20de%20Cervantes",
-    "wikipediaTitle": "Miguel de Cervantes"
-  },
-  {
-    "id": "58049",
-    "title": "El Marqu\u00e9s de Bradom\u00edn: Coloquios Rom\u00e1nticos",
-    "author": "Valle-Incl\u00e1n",
-    "wikipediaUrl": "https://en.wikipedia.org/wiki/Ram%C3%B3n%20del%20Valle-Incl%C3%A1n",
-    "wikipediaTitle": "Ram\u00f3n del Valle-Incl\u00e1n"
-  },
-  {
-    "id": "58059",
-    "title": "La madre naturaleza (2\u00aa parte de Los pazos de Ulloa)",
-    "author": "Pardo Baz\u00e1n"
-  },
-  {
-    "id": "59852",
-    "title": "Del sentimiento tr\u00e1gico de la vida",
-    "author": "Unamuno",
-    "wikipediaUrl": "https://en.wikipedia.org/wiki/Miguel%20de%20Unamuno",
-    "wikipediaTitle": "Miguel de Unamuno"
-  },
-  {
-    "id": "60137",
-    "title": "Una Cristiana",
-    "author": "Pardo Baz\u00e1n",
-    "wikipediaUrl": "https://en.wikipedia.org/wiki/Spanish%20cuisine",
-    "wikipediaTitle": "Spanish cuisine"
-  },
-  {
-    "id": "60464",
-    "title": "El \u00e1rbol de la ciencia: novela",
+    "id": "43432",
+    "title": "La lucha por la vida: La busca",
     "author": "Baroja",
-    "wikipediaUrl": "https://en.wikipedia.org/wiki/P%C3%ADo%20Baroja",
-    "wikipediaTitle": "P\u00edo Baroja"
-  },
-  {
-    "id": "61202",
-    "title": "Novelas ejemplares",
-    "author": "Cervantes Saavedra",
-    "wikipediaUrl": "https://en.wikipedia.org/wiki/Novelas%20ejemplares",
-    "wikipediaTitle": "Novelas ejemplares"
-  },
-  {
-    "id": "61438",
-    "title": "S\u00f3nnica la cortesana: Novela",
-    "author": "Blasco Ib\u00e1\u00f1ez"
-  },
-  {
-    "id": "62850",
-    "title": "La reina Calafia (novela)",
-    "author": "Blasco Ib\u00e1\u00f1ez",
-    "wikipediaUrl": "https://en.wikipedia.org/wiki/Vicente%20Blasco%20Ib%C3%A1%C3%B1ez",
-    "wikipediaTitle": "Vicente Blasco Ib\u00e1\u00f1ez"
-  },
-  {
-    "id": "63412",
-    "title": "Lo prohibido (novela completa)",
-    "author": "P\u00e9rez Gald\u00f3s",
-    "wikipediaUrl": "https://en.wikipedia.org/wiki/Benito%20P%C3%A9rez%20Gald%C3%B3s",
-    "wikipediaTitle": "Benito P\u00e9rez Gald\u00f3s"
-  },
-  {
-    "id": "63413",
-    "title": "Lo prohibido (tomo 1 de 2)",
-    "author": "P\u00e9rez Gald\u00f3s",
-    "wikipediaUrl": "https://en.wikipedia.org/wiki/Isabella%20II",
-    "wikipediaTitle": "Isabella II"
-  },
-  {
-    "id": "63414",
-    "title": "Lo prohibido (tomo 2 de 2)",
-    "author": "P\u00e9rez Gald\u00f3s",
-    "wikipediaUrl": "https://en.wikipedia.org/wiki/Isabella%20II",
-    "wikipediaTitle": "Isabella II"
-  },
-  {
-    "id": "63680",
-    "title": "Las figuras de cera: novela",
-    "author": "Baroja"
-  },
-  {
-    "id": "63810",
-    "title": "La vuelta al mundo de un novelista; vol. 1/3",
-    "author": "Blasco Ib\u00e1\u00f1ez",
     "wikipediaUrl": "https://en.wikipedia.org/wiki/Carlism%20in%20literature",
     "wikipediaTitle": "Carlism in literature"
-  },
-  {
-    "id": "63816",
-    "title": "La vuelta al mundo de un novelista; vol. 2/3",
-    "author": "Blasco Ib\u00e1\u00f1ez",
-    "wikipediaUrl": "https://en.wikipedia.org/wiki/Carlism%20in%20literature",
-    "wikipediaTitle": "Carlism in literature"
-  },
-  {
-    "id": "65333",
-    "title": "Halma",
-    "author": "P\u00e9rez Gald\u00f3s",
-    "wikipediaUrl": "https://en.wikipedia.org/wiki/Benito%20P%C3%A9rez%20Gald%C3%B3s",
-    "wikipediaTitle": "Benito P\u00e9rez Gald\u00f3s"
-  },
-  {
-    "id": "65632",
-    "title": "La prueba",
-    "author": "Pardo Baz\u00e1n",
-    "wikipediaUrl": "https://en.wikipedia.org/wiki/Mar%C3%ADa%20de%20Zayas",
-    "wikipediaTitle": "Mar\u00eda de Zayas"
-  },
-  {
-    "id": "65719",
-    "title": "La familia de Doctor Pedraza",
-    "author": "Blasco Ib\u00e1\u00f1ez",
-    "wikipediaUrl": "https://en.wikipedia.org/wiki/Vicente%20Blasco%20Ib%C3%A1%C3%B1ez",
-    "wikipediaTitle": "Vicente Blasco Ib\u00e1\u00f1ez"
-  },
-  {
-    "id": "66488",
-    "title": "El abuelo (Novela en cinco jornadas)",
-    "author": "P\u00e9rez Gald\u00f3s"
-  },
-  {
-    "id": "66514",
-    "title": "Cuentos valencianos",
-    "author": "Blasco Ib\u00e1\u00f1ez",
-    "wikipediaUrl": "https://en.wikipedia.org/wiki/Vicente%20Blasco%20Ib%C3%A1%C3%B1ez",
-    "wikipediaTitle": "Vicente Blasco Ib\u00e1\u00f1ez"
-  },
-  {
-    "id": "66979",
-    "title": "Tristana",
-    "author": "P\u00e9rez Gald\u00f3s",
-    "wikipediaUrl": "https://en.wikipedia.org/wiki/Tristana%20(film)",
-    "wikipediaTitle": "Tristana (film)"
-  },
-  {
-    "id": "67126",
-    "title": "El caballero encantado (cuento real... inveros\u00ed\u00admil)",
-    "author": "P\u00e9rez Gald\u00f3s"
-  },
-  {
-    "id": "67137",
-    "title": "Novelas de la Costa Azul",
-    "author": "Blasco Ib\u00e1\u00f1ez",
-    "wikipediaUrl": "https://en.wikipedia.org/wiki/Vicente%20Blasco%20Ib%C3%A1%C3%B1ez",
-    "wikipediaTitle": "Vicente Blasco Ib\u00e1\u00f1ez"
-  },
-  {
-    "id": "67155",
-    "title": "La corte de Carlos IV",
-    "author": "P\u00e9rez Gald\u00f3s",
-    "wikipediaUrl": "https://en.wikipedia.org/wiki/Benito%20P%C3%A9rez%20Gald%C3%B3s",
-    "wikipediaTitle": "Benito P\u00e9rez Gald\u00f3s"
-  },
-  {
-    "id": "67189",
-    "title": "El 19 de marzo y el 2 de mayo",
-    "author": "P\u00e9rez Gald\u00f3s",
-    "wikipediaUrl": "https://en.wikipedia.org/wiki/Blood%20in%20May",
-    "wikipediaTitle": "Blood in May"
-  },
-  {
-    "id": "67360",
-    "title": "Napole\u00f3n en Chamart\u00edn",
-    "author": "P\u00e9rez Gald\u00f3s",
-    "wikipediaUrl": "https://en.wikipedia.org/wiki/Episodios%20Nacionales",
-    "wikipediaTitle": "Episodios Nacionales"
-  },
-  {
-    "id": "67415",
-    "title": "Gerona",
-    "author": "P\u00e9rez Gald\u00f3s",
-    "wikipediaUrl": "https://en.wikipedia.org/wiki/Benito%20P%C3%A9rez%20Gald%C3%B3s",
-    "wikipediaTitle": "Benito P\u00e9rez Gald\u00f3s"
-  },
-  {
-    "id": "67481",
-    "title": "Los valores literarios",
-    "author": "Azor\u00edn",
-    "wikipediaUrl": "https://en.wikipedia.org/wiki/List%20of%20works%20by%20Jos%C3%A9%20Mart%C3%ADnez%20Ruiz",
-    "wikipediaTitle": "List of works by Jos\u00e9 Mart\u00ednez Ruiz"
-  },
-  {
-    "id": "67705",
-    "title": "Juan Mart\u00edn el Empecinado",
-    "author": "P\u00e9rez Gald\u00f3s",
-    "wikipediaUrl": "https://en.wikipedia.org/wiki/Juan%20Mart%C3%ADn%20D%C3%ADez",
-    "wikipediaTitle": "Juan Mart\u00edn D\u00edez"
-  },
-  {
-    "id": "67726",
-    "title": "Se\u00f1ora ama: Comedia en tres actos",
-    "author": "Benavente"
-  },
-  {
-    "id": "67817",
-    "title": "La batalla de los Arapiles",
-    "author": "P\u00e9rez Gald\u00f3s",
-    "wikipediaUrl": "https://en.wikipedia.org/wiki/Benito%20P%C3%A9rez%20Gald%C3%B3s",
-    "wikipediaTitle": "Benito P\u00e9rez Gald\u00f3s"
-  },
-  {
-    "id": "67843",
-    "title": "El papa del mar",
-    "author": "Blasco Ib\u00e1\u00f1ez",
-    "wikipediaUrl": "https://en.wikipedia.org/wiki/Vicente%20Blasco%20Ib%C3%A1%C3%B1ez",
-    "wikipediaTitle": "Vicente Blasco Ib\u00e1\u00f1ez"
-  },
-  {
-    "id": "67917",
-    "title": "La vuelta al mundo de un novelista; vol. 3/3",
-    "author": "Blasco Ib\u00e1\u00f1ez",
-    "wikipediaUrl": "https://en.wikipedia.org/wiki/Carlism%20in%20literature",
-    "wikipediaTitle": "Carlism in literature"
-  },
-  {
-    "id": "68154",
-    "title": "Tirano Banderas: Novela de tierra caliente",
-    "author": "Valle-Incl\u00e1n",
-    "wikipediaUrl": "https://en.wikipedia.org/wiki/1926%20in%20literature",
-    "wikipediaTitle": "1926 in literature"
-  },
-  {
-    "id": "68452",
-    "title": "La piedra angular: novela",
-    "author": "Pardo Baz\u00e1n",
-    "wikipediaUrl": "https://en.wikipedia.org/wiki/LGBTQ%20literature%20in%20Spain",
-    "wikipediaTitle": "LGBTQ literature in Spain"
-  },
-  {
-    "id": "68525",
-    "title": "Poes\u00edas completas",
-    "author": "Machado",
-    "wikipediaUrl": "https://en.wikipedia.org/wiki/Antonio%20Machado",
-    "wikipediaTitle": "Antonio Machado"
-  },
-  {
-    "id": "68745",
-    "title": "Luces de Bohemia: Esperpento",
-    "author": "Valle-Incl\u00e1n",
-    "wikipediaUrl": "https://en.wikipedia.org/wiki/Ram%C3%B3n%20del%20Valle-Incl%C3%A1n",
-    "wikipediaTitle": "Ram\u00f3n del Valle-Incl\u00e1n"
-  },
-  {
-    "id": "69578",
-    "title": "El equipaje del rey Jos\u00e9",
-    "author": "P\u00e9rez Gald\u00f3s",
-    "wikipediaUrl": "https://en.wikipedia.org/wiki/Spanish%20Realist%20literature",
-    "wikipediaTitle": "Spanish Realist literature"
-  },
-  {
-    "id": "69951",
-    "title": "Divinas palabras",
-    "author": "Valle-Incl\u00e1n",
-    "wikipediaUrl": "https://en.wikipedia.org/wiki/Ram%C3%B3n%20del%20Valle-Incl%C3%A1n",
-    "wikipediaTitle": "Ram\u00f3n del Valle-Incl\u00e1n"
-  },
-  {
-    "id": "70868",
-    "title": "Memorias de un cortesano de 1815",
-    "author": "P\u00e9rez Gald\u00f3s",
-    "wikipediaUrl": "https://en.wikipedia.org/wiki/Episodios%20Nacionales",
-    "wikipediaTitle": "Episodios Nacionales"
-  },
-  {
-    "id": "71055",
-    "title": "La segunda casaca",
-    "author": "P\u00e9rez Gald\u00f3s",
-    "wikipediaUrl": "https://en.wikipedia.org/wiki/Episodios%20Nacionales",
-    "wikipediaTitle": "Episodios Nacionales"
-  },
-  {
-    "id": "71250",
-    "title": "El Grande Oriente",
-    "author": "P\u00e9rez Gald\u00f3s",
-    "wikipediaUrl": "https://en.wikipedia.org/wiki/Benito%20P%C3%A9rez%20Gald%C3%B3s",
-    "wikipediaTitle": "Benito P\u00e9rez Gald\u00f3s"
-  },
-  {
-    "id": "71413",
-    "title": "7 de julio",
-    "author": "P\u00e9rez Gald\u00f3s",
-    "wikipediaUrl": "https://en.wikipedia.org/wiki/Tristana%20(film)",
-    "wikipediaTitle": "Tristana (film)"
-  },
-  {
-    "id": "71469",
-    "title": "El cisne de Vilamorta",
-    "author": "Pardo Baz\u00e1n",
-    "wikipediaUrl": "https://en.wikipedia.org/wiki/Emilia%20Pardo%20Baz%C3%A1n",
-    "wikipediaTitle": "Emilia Pardo Baz\u00e1n"
-  },
-  {
-    "id": "71614",
-    "title": "Los cien mil hijos de San Luis",
-    "author": "P\u00e9rez Gald\u00f3s",
-    "wikipediaUrl": "https://en.wikipedia.org/wiki/Spanish%20Realist%20literature",
-    "wikipediaTitle": "Spanish Realist literature"
-  },
-  {
-    "id": "71861",
-    "title": "El terror de 1824",
-    "author": "P\u00e9rez Gald\u00f3s",
-    "wikipediaUrl": "https://en.wikipedia.org/wiki/Episodios%20Nacionales",
-    "wikipediaTitle": "Episodios Nacionales"
-  },
-  {
-    "id": "72090",
-    "title": "Un voluntario realista",
-    "author": "P\u00e9rez Gald\u00f3s",
-    "wikipediaUrl": "https://en.wikipedia.org/wiki/Benito%20P%C3%A9rez%20Gald%C3%B3s",
-    "wikipediaTitle": "Benito P\u00e9rez Gald\u00f3s"
-  },
-  {
-    "id": "72373",
-    "title": "Los apost\u00f3licos",
-    "author": "P\u00e9rez Gald\u00f3s",
-    "wikipediaUrl": "https://en.wikipedia.org/wiki/Episodios%20Nacionales",
-    "wikipediaTitle": "Episodios Nacionales"
-  },
-  {
-    "id": "72665",
-    "title": "Romancero gitano",
-    "author": "Garc\u00eda Lorca",
-    "wikipediaUrl": "https://en.wikipedia.org/wiki/Romancero%20gitano",
-    "wikipediaTitle": "Romancero gitano"
-  },
-  {
-    "id": "73322",
-    "title": "Nazar\u00edn",
-    "author": "P\u00e9rez Gald\u00f3s",
-    "wikipediaUrl": "https://en.wikipedia.org/wiki/Benito%20P%C3%A9rez%20Gald%C3%B3s",
-    "wikipediaTitle": "Benito P\u00e9rez Gald\u00f3s"
-  },
-  {
-    "id": "74041",
-    "title": "El libro de las mil noches y una noche; t. 6",
-    "author": "Anonymous; Blasco Ib\u00e1\u00f1ez",
-    "wikipediaUrl": "https://en.wikipedia.org/wiki/Spanish%20literature",
-    "wikipediaTitle": "Spanish literature"
-  },
-  {
-    "id": "74065",
-    "title": "El libro de las mil noches y una noche; t. 7",
-    "author": "Anonymous; Blasco Ib\u00e1\u00f1ez"
   },
   {
     "id": "74566",
@@ -1013,11 +63,319 @@
     "wikipediaTitle": "Carlism in literature"
   },
   {
-    "id": "74881",
-    "title": "Zumalac\u00e1rregui",
-    "author": "P\u00e9rez Gald\u00f3s",
-    "wikipediaUrl": "https://en.wikipedia.org/wiki/Tom%C3%A1s%20de%20Zumalac%C3%A1rregui",
-    "wikipediaTitle": "Tom\u00e1s de Zumalac\u00e1rregui"
+    "id": "76410",
+    "title": "La Malquerida",
+    "author": "Benavente",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/La%20malquerida",
+    "wikipediaTitle": "La malquerida"
+  },
+  {
+    "id": "16413",
+    "title": "Arroz y tartana",
+    "author": "Blasco Ibáñez",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Vicente%20Blasco%20Ib%C3%A1%C3%B1ez",
+    "wikipediaTitle": "Vicente Blasco Ibáñez"
+  },
+  {
+    "id": "57781",
+    "title": "Cañas y barro: Novela",
+    "author": "Blasco Ibáñez",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Vicente%20Blasco%20Ib%C3%A1%C3%B1ez",
+    "wikipediaTitle": "Vicente Blasco Ibáñez"
+  },
+  {
+    "id": "66514",
+    "title": "Cuentos valencianos",
+    "author": "Blasco Ibáñez",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Vicente%20Blasco%20Ib%C3%A1%C3%B1ez",
+    "wikipediaTitle": "Vicente Blasco Ibáñez"
+  },
+  {
+    "id": "24466",
+    "title": "El intruso",
+    "author": "Blasco Ibáñez",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Vicente%20Blasco%20Ib%C3%A1%C3%B1ez",
+    "wikipediaTitle": "Vicente Blasco Ibáñez"
+  },
+  {
+    "id": "67843",
+    "title": "El papa del mar",
+    "author": "Blasco Ibáñez",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Vicente%20Blasco%20Ib%C3%A1%C3%B1ez",
+    "wikipediaTitle": "Vicente Blasco Ibáñez"
+  },
+  {
+    "id": "14308",
+    "title": "El préstamo de la difunta",
+    "author": "Blasco Ibáñez",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Vicente%20Blasco%20Ib%C3%A1%C3%B1ez",
+    "wikipediaTitle": "Vicente Blasco Ibáñez"
+  },
+  {
+    "id": "30122",
+    "title": "Entre naranjos",
+    "author": "Blasco Ibáñez",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Vicente%20Blasco%20Ib%C3%A1%C3%B1ez",
+    "wikipediaTitle": "Vicente Blasco Ibáñez"
+  },
+  {
+    "id": "41746",
+    "title": "Flor de mayo",
+    "author": "Blasco Ibáñez",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Vicente%20Blasco%20Ib%C3%A1%C3%B1ez",
+    "wikipediaTitle": "Vicente Blasco Ibáñez"
+  },
+  {
+    "id": "14944",
+    "title": "La Barraca",
+    "author": "Blasco Ibáñez",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Vicente%20Blasco%20Ib%C3%A1%C3%B1ez",
+    "wikipediaTitle": "Vicente Blasco Ibáñez"
+  },
+  {
+    "id": "28927",
+    "title": "La bodega",
+    "author": "Blasco Ibáñez",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Vicente%20Blasco%20Ib%C3%A1%C3%B1ez",
+    "wikipediaTitle": "Vicente Blasco Ibáñez"
+  },
+  {
+    "id": "2000",
+    "title": "Don Quijote",
+    "author": "Cervantes Saavedra",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Miguel%20de%20Cervantes",
+    "wikipediaTitle": "Miguel de Cervantes"
+  },
+  {
+    "id": "57955",
+    "title": "Los entremeses",
+    "author": "Cervantes Saavedra",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Miguel%20de%20Cervantes",
+    "wikipediaTitle": "Miguel de Cervantes"
+  },
+  {
+    "id": "61202",
+    "title": "Novelas ejemplares",
+    "author": "Cervantes Saavedra",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Novelas%20ejemplares",
+    "wikipediaTitle": "Novelas ejemplares"
+  },
+  {
+    "id": "15115",
+    "title": "Novelas y teatro",
+    "author": "Cervantes Saavedra",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Miguel%20de%20Cervantes",
+    "wikipediaTitle": "Miguel de Cervantes"
+  },
+  {
+    "id": "25074",
+    "title": "Novelas y cuentos",
+    "author": "Estébanez Calderón",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Costumbrismo",
+    "wikipediaTitle": "Costumbrismo"
+  },
+  {
+    "id": "75703",
+    "title": "Libro de poemas",
+    "author": "García Lorca",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Federico%20Garc%C3%ADa%20Lorca",
+    "wikipediaTitle": "Federico García Lorca"
+  },
+  {
+    "id": "72665",
+    "title": "Romancero gitano",
+    "author": "García Lorca",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Romancero%20gitano",
+    "wikipediaTitle": "Romancero gitano"
+  },
+  {
+    "id": "14765",
+    "title": "El Gaucho Martín Fierro",
+    "author": "Hernández",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Mart%C3%ADn%20Fierro",
+    "wikipediaTitle": "Martín Fierro"
+  },
+  {
+    "id": "15066",
+    "title": "La Vuelta de Martín Fierro",
+    "author": "Hernández",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Mart%C3%ADn%20Fierro",
+    "wikipediaTitle": "Martín Fierro"
+  },
+  {
+    "id": "9980",
+    "title": "Platero y yo",
+    "author": "Jiménez",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Platero%20and%20I",
+    "wikipediaTitle": "Platero and I"
+  },
+  {
+    "id": "39209",
+    "title": "Platero y yo",
+    "author": "Jiménez",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Platero%20and%20I",
+    "wikipediaTitle": "Platero and I"
+  },
+  {
+    "id": "68525",
+    "title": "Poesías completas",
+    "author": "Machado",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Antonio%20Machado",
+    "wikipediaTitle": "Antonio Machado"
+  },
+  {
+    "id": "49333",
+    "title": "Coplas por la muerte de su padre",
+    "author": "Manrique",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Jorge%20Manrique",
+    "wikipediaTitle": "Jorge Manrique"
+  },
+  {
+    "id": "55514",
+    "title": "Cuentos de amor",
+    "author": "Pardo Bazán",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Mar%C3%ADa%20de%20la%20O%20Lej%C3%A1rraga",
+    "wikipediaTitle": "María de la O Lejárraga"
+  },
+  {
+    "id": "56044",
+    "title": "Dulce Dueño",
+    "author": "Pardo Bazán",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Emilia%20Pardo%20Baz%C3%A1n",
+    "wikipediaTitle": "Emilia Pardo Bazán"
+  },
+  {
+    "id": "71469",
+    "title": "El cisne de Vilamorta",
+    "author": "Pardo Bazán",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Emilia%20Pardo%20Baz%C3%A1n",
+    "wikipediaTitle": "Emilia Pardo Bazán"
+  },
+  {
+    "id": "54791",
+    "title": "El Tesoro de Gastón: Novela",
+    "author": "Pardo Bazán",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/List%20of%20Peruvian%20films",
+    "wikipediaTitle": "List of Peruvian films"
+  },
+  {
+    "id": "75814",
+    "title": "En tranvía",
+    "author": "Pardo Bazán",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/A%20Coru%C3%B1a",
+    "wikipediaTitle": "A Coruña"
+  },
+  {
+    "id": "55882",
+    "title": "La dama joven",
+    "author": "Pardo Bazán",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Carlism%20in%20literature",
+    "wikipediaTitle": "Carlism in literature"
+  },
+  {
+    "id": "68452",
+    "title": "La piedra angular: novela",
+    "author": "Pardo Bazán",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/LGBTQ%20literature%20in%20Spain",
+    "wikipediaTitle": "LGBTQ literature in Spain"
+  },
+  {
+    "id": "71413",
+    "title": "7 de julio",
+    "author": "Pérez Galdós",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Tristana%20(film)",
+    "wikipediaTitle": "Tristana (film)"
+  },
+  {
+    "id": "14311",
+    "title": "Bailén",
+    "author": "Pérez Galdós",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Battle%20of%20Bail%C3%A9n",
+    "wikipediaTitle": "Battle of Bailén"
+  },
+  {
+    "id": "21906",
+    "title": "Cádiz",
+    "author": "Pérez Galdós",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Sherry",
+    "wikipediaTitle": "Sherry"
+  },
+  {
+    "id": "76264",
+    "title": "De Oñate a La Granja",
+    "author": "Pérez Galdós",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Episodios%20Nacionales",
+    "wikipediaTitle": "Episodios Nacionales"
+  },
+  {
+    "id": "67189",
+    "title": "El 19 de marzo y el 2 de mayo",
+    "author": "Pérez Galdós",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Blood%20in%20May",
+    "wikipediaTitle": "Blood in May"
+  },
+  {
+    "id": "55563",
+    "title": "El amigo Manso",
+    "author": "Pérez Galdós",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Benito%20P%C3%A9rez%20Gald%C3%B3s",
+    "wikipediaTitle": "Benito Pérez Galdós"
+  },
+  {
+    "id": "57261",
+    "title": "El Doctor Centeno (novela completa)",
+    "author": "Pérez Galdós",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Benito%20P%C3%A9rez%20Gald%C3%B3s",
+    "wikipediaTitle": "Benito Pérez Galdós"
+  },
+  {
+    "id": "1619",
+    "title": "La Celestina",
+    "author": "Rojas",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/La%20Celestina",
+    "wikipediaTitle": "La Celestina"
+  },
+  {
+    "id": "44512",
+    "title": "Abel Sánchez: Una Historia de Pasión",
+    "author": "Unamuno",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Abel%20S%C3%A1nchez%3A%20The%20History%20of%20a%20Passion",
+    "wikipediaTitle": "Abel Sánchez: The History of a Passion"
+  },
+  {
+    "id": "49149",
+    "title": "Amor y Pedagogía",
+    "author": "Unamuno",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Miguel%20de%20Unamuno",
+    "wikipediaTitle": "Miguel de Unamuno"
+  },
+  {
+    "id": "59852",
+    "title": "Del sentimiento trágico de la vida",
+    "author": "Unamuno",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Miguel%20de%20Unamuno",
+    "wikipediaTitle": "Miguel de Unamuno"
+  },
+  {
+    "id": "44358",
+    "title": "La Tía Tula (Novela)",
+    "author": "Unamuno",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Miguel%20de%20Unamuno",
+    "wikipediaTitle": "Miguel de Unamuno"
+  },
+  {
+    "id": "49836",
+    "title": "Niebla (Nivola)",
+    "author": "Unamuno",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Mist%20(novel)",
+    "wikipediaTitle": "Mist (novel)"
+  },
+  {
+    "id": "55916",
+    "title": "Tres novelas ejemplares y un prólogo",
+    "author": "Unamuno",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Miguel%20de%20Unamuno",
+    "wikipediaTitle": "Miguel de Unamuno"
   },
   {
     "id": "75472",
@@ -1027,38 +385,52 @@
     "wikipediaTitle": "Miguel de Unamuno"
   },
   {
-    "id": "75614",
-    "title": "Mendiz\u00e1bal",
-    "author": "P\u00e9rez Gald\u00f3s",
-    "wikipediaUrl": "https://en.wikipedia.org/wiki/Viridiana",
-    "wikipediaTitle": "Viridiana"
+    "id": "69951",
+    "title": "Divinas palabras",
+    "author": "Valle-Inclán",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Ram%C3%B3n%20del%20Valle-Incl%C3%A1n",
+    "wikipediaTitle": "Ramón del Valle-Inclán"
   },
   {
-    "id": "75703",
-    "title": "Libro de poemas",
-    "author": "Garc\u00eda Lorca",
-    "wikipediaUrl": "https://en.wikipedia.org/wiki/Federico%20Garc%C3%ADa%20Lorca",
-    "wikipediaTitle": "Federico Garc\u00eda Lorca"
+    "id": "58049",
+    "title": "El Marqués de Bradomín: Coloquios Románticos",
+    "author": "Valle-Inclán",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Ram%C3%B3n%20del%20Valle-Incl%C3%A1n",
+    "wikipediaTitle": "Ramón del Valle-Inclán"
   },
   {
-    "id": "75814",
-    "title": "En tranv\u00eda",
-    "author": "Pardo Baz\u00e1n",
-    "wikipediaUrl": "https://en.wikipedia.org/wiki/A%20Coru%C3%B1a",
-    "wikipediaTitle": "A Coru\u00f1a"
+    "id": "68745",
+    "title": "Luces de Bohemia: Esperpento",
+    "author": "Valle-Inclán",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Ram%C3%B3n%20del%20Valle-Incl%C3%A1n",
+    "wikipediaTitle": "Ramón del Valle-Inclán"
   },
   {
-    "id": "76264",
-    "title": "De O\u00f1ate a La Granja",
-    "author": "P\u00e9rez Gald\u00f3s",
-    "wikipediaUrl": "https://en.wikipedia.org/wiki/Episodios%20Nacionales",
-    "wikipediaTitle": "Episodios Nacionales"
+    "id": "42424",
+    "title": "Sonata de estío: memorias del marqués de Bradomín",
+    "author": "Valle-Inclán",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Ram%C3%B3n%20del%20Valle-Incl%C3%A1n",
+    "wikipediaTitle": "Ramón del Valle-Inclán"
   },
   {
-    "id": "76410",
-    "title": "La Malquerida",
-    "author": "Benavente",
-    "wikipediaUrl": "https://en.wikipedia.org/wiki/La%20malquerida",
-    "wikipediaTitle": "La malquerida"
+    "id": "46182",
+    "title": "Sonata de otoño; Sonata de invierno: memorias del Marqués de Bradomín",
+    "author": "Valle-Inclán",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Ram%C3%B3n%20del%20Valle-Incl%C3%A1n",
+    "wikipediaTitle": "Ramón del Valle-Inclán"
+  },
+  {
+    "id": "42440",
+    "title": "Sonata de primavera: memorias del marqués de Bradomín",
+    "author": "Valle-Inclán",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Ram%C3%B3n%20del%20Valle-Incl%C3%A1n",
+    "wikipediaTitle": "Ramón del Valle-Inclán"
+  },
+  {
+    "id": "68154",
+    "title": "Tirano Banderas: Novela de tierra caliente",
+    "author": "Valle-Inclán",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/1926%20in%20literature",
+    "wikipediaTitle": "1926 in literature"
   }
 ]

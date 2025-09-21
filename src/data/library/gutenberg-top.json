@@ -1,22 +1,5 @@
 [
   {
-    "id": 84,
-    "title": "Frankenstein; Or, The Modern Prometheus",
-    "author": "Mary Wollstonecraft Shelley"
-  },
-  {
-    "id": 2701,
-    "title": "Moby Dick; Or, The Whale",
-    "author": "Herman Melville",
-    "wikipediaUrl": "https://en.wikipedia.org/wiki/Moby-Dick",
-    "wikipediaTitle": "Moby-Dick"
-  },
-  {
-    "id": 74,
-    "title": "The Adventures of Tom Sawyer",
-    "author": "Mark Twain"
-  },
-  {
     "id": 345,
     "title": "Dracula",
     "author": "Bram Stoker",
@@ -31,16 +14,32 @@
     "wikipediaTitle": "The Yellow Wallpaper"
   },
   {
-    "id": 2542,
-    "title": "A Doll's House",
-    "author": "Henrik Ibsen"
-  },
-  {
     "id": 5200,
     "title": "Metamorphosis",
     "author": "Franz Kafka",
     "wikipediaUrl": "https://en.wikipedia.org/wiki/The%20Metamorphosis",
     "wikipediaTitle": "The Metamorphosis"
+  },
+  {
+    "id": 2542,
+    "title": "A Doll's House",
+    "author": "Henrik Ibsen",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/A_Doll%27s_House",
+    "wikipediaTitle": "A Doll's House"
+  },
+  {
+    "id": 2701,
+    "title": "Moby Dick; Or, The Whale",
+    "author": "Herman Melville",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Moby-Dick",
+    "wikipediaTitle": "Moby-Dick"
+  },
+  {
+    "id": 4306,
+    "title": "The Call of the Wild",
+    "author": "Jack London",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/The_Call_of_the_Wild",
+    "wikipediaTitle": "The Call of the Wild"
   },
   {
     "id": 4300,
@@ -50,6 +49,13 @@
     "wikipediaTitle": "Ulysses (novel)"
   },
   {
+    "id": 140,
+    "title": "The Wonderful Wizard of Oz",
+    "author": "L. Frank Baum",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/The_Wonderful_Wizard_of_Oz",
+    "wikipediaTitle": "The Wonderful Wizard of Oz"
+  },
+  {
     "id": 2600,
     "title": "War and Peace",
     "author": "Leo Tolstoy",
@@ -57,18 +63,24 @@
     "wikipediaTitle": "War and Peace"
   },
   {
-    "id": 140,
-    "title": "The Wonderful Wizard of Oz",
-    "author": "L. Frank Baum"
+    "id": 74,
+    "title": "The Adventures of Tom Sawyer",
+    "author": "Mark Twain",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/The_Adventures_of_Tom_Sawyer",
+    "wikipediaTitle": "The Adventures of Tom Sawyer"
   },
   {
-    "id": 4306,
-    "title": "The Call of the Wild",
-    "author": "Jack London"
+    "id": 84,
+    "title": "Frankenstein; Or, The Modern Prometheus",
+    "author": "Mary Wollstonecraft Shelley",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Frankenstein",
+    "wikipediaTitle": "Frankenstein"
   },
   {
     "id": 25305,
     "title": "The Scarlet Letter",
-    "author": "Nathaniel Hawthorne"
+    "author": "Nathaniel Hawthorne",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/The_Scarlet_Letter",
+    "wikipediaTitle": "The Scarlet Letter"
   }
 ]

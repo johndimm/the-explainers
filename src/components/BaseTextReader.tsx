@@ -554,11 +554,28 @@ const buildCharacterMap = (fullText: string, playKey: string) => {
   
   // Regex patterns from README.txt
   const SPEAKERS = /^[A-Z]{3,}\.\s*$/
-  const ACTS = /ACT [IV]+\./
-  const SCENES = /SCENE [IV]+\./
-  const ENTERS = /^\s*Enter/
-  const EXITS = /_Exit /
-  const EXEUNTS = /_Exeunt_/
+  const ACTS = /ACT [IV]+\.?/
+  const SCENES = /SCENE [IV]+\.?/
+  const ENTERS = /^\s*Enter|\[_Enter[^\]]*_\]/
+  const EXITS = /_Exit |\[_Exit[^\]]*_\]/
+  const EXEUNTS = /_Exeunt_|\[_Exeunt[^\]]*_\]/
+  
+  // Debug: Test the specific exeunt text
+  const testExeunt = '[_Exeunt Othello, Lodovico and Attendants._]'
+  console.log('🔍 TESTING EXEUNT REGEX:', {
+    pattern: EXEUNTS.toString(),
+    testText: testExeunt,
+    matches: EXEUNTS.test(testExeunt)
+  })
+  
+  // Debug: Test all patterns
+  const testEnter = 'Enter Othello, Iago, and Attendants'
+  const testExit = '[_Exit Othello._]'
+  console.log('🔍 TESTING ALL PATTERNS:', {
+    ENTERS: { pattern: ENTERS.toString(), test: testEnter, matches: ENTERS.test(testEnter) },
+    EXITS: { pattern: EXITS.toString(), test: testExit, matches: EXITS.test(testExit) },
+    EXEUNTS: { pattern: EXEUNTS.toString(), test: testExeunt, matches: EXEUNTS.test(testExeunt) }
+  })
   
   for (let i = 0; i < lines.length; i++) {
     const line = lines[i]
@@ -566,20 +583,24 @@ const buildCharacterMap = (fullText: string, playKey: string) => {
     
     // Check for ACT
     if (ACTS.test(line)) {
-      const actMatch = line.match(/ACT ([IV]+)\./)
+      console.log('🔍 ACT LINE DETECTED:', line.trim())
+      const actMatch = line.match(/ACT ([IV]+)\.?/)
       if (actMatch) {
         currentAct = actMatch[1]
+        console.log('🔍 Found ACT event:', currentAct, 'at line:', i, 'offset:', lineOffset)
         structuralEvents.push({
           offset: lineOffset,
           type: 'ACT',
           content: line.trim(),
           act: currentAct
         })
+      } else {
+        console.log('🔍 ACT line but no match:', line.trim())
       }
     }
     // Check for SCENE
     else if (SCENES.test(line)) {
-      const sceneMatch = line.match(/SCENE ([IV]+)\./)
+      const sceneMatch = line.match(/SCENE ([IV]+)\.?/)
       if (sceneMatch) {
         currentScene = sceneMatch[1]
         structuralEvents.push({
@@ -623,14 +644,37 @@ const buildCharacterMap = (fullText: string, playKey: string) => {
     }
     // Check for Exeunt (all exit)
     else if (EXEUNTS.test(line)) {
+      console.log('🔍 EXEUNT DETECTED:', line.trim(), 'at offset:', lineOffset)
+      
+      // Parse characters from Exeunt stage direction
+      let exeuntCharacters: string[] = []
+      
+      // Check if specific characters are mentioned in the Exeunt
+      if (line.includes('[') && line.includes(']')) {
+        // Extract characters from square bracket format: [_Exeunt Othello, Lodovico and Attendants._]
+        const match = line.match(/\[_Exeunt\s+([^\]]+)_\]/i)
+        if (match) {
+          exeuntCharacters = parseCharacterList(match[1])
+          console.log('🔍 EXEUNT CHARACTERS PARSED:', exeuntCharacters)
+        }
+      } else {
+        // Check for other formats like "Exeunt Othello, Lodovico"
+        const match = line.match(/Exeunt\s+(.+)/i)
+        if (match) {
+          exeuntCharacters = parseCharacterList(match[1])
+          console.log('🔍 EXEUNT CHARACTERS PARSED:', exeuntCharacters)
+        }
+      }
+      
       structuralEvents.push({
         offset: lineOffset,
         type: 'EXEUNT',
         content: line.trim(),
         act: currentAct,
         scene: currentScene,
-        characters: [] // Empty means all characters exit
+        characters: exeuntCharacters // Specific characters to exit, or empty if all exit
       })
+      console.log('🔍 EXEUNT ADDED TO STRUCTURAL EVENTS, total count:', structuralEvents.length, 'characters:', exeuntCharacters)
     }
     
     position += line.length + 1 // +1 for newline
@@ -706,15 +750,25 @@ const buildCharacterMap = (fullText: string, playKey: string) => {
     const sortedCharacters = [...characters].sort()
     
     if (JSON.stringify(sortedCharacters) !== JSON.stringify(lastCharacterState)) {
-      characterMap.push({position, characters: sortedCharacters, act: mapCurrentAct, scene: mapCurrentScene})
+      const entry = {position, characters: sortedCharacters, act: mapCurrentAct, scene: mapCurrentScene}
+      characterMap.push(entry)
+      console.log('🔍 Character map: Adding entry:', entry, 'currentAct:', mapCurrentAct, 'currentScene:', mapCurrentScene)
       lastCharacterState = sortedCharacters
+    } else {
+      console.log('🔍 Character map: Skipping entry (no change):', {position, characters: sortedCharacters, act: mapCurrentAct, scene: mapCurrentScene})
     }
   }
   
+  console.log('🔍 PROCESSING ALL EVENTS:', allEvents.length, 'events')
+  
   for (const event of allEvents) {
+    console.log('🔍 PROCESSING EVENT:', event.type, 'at offset:', event.offset, 'content:', event.content)
+    
     switch (event.type) {
       case 'ACT':
         mapCurrentAct = event.act || ''
+        console.log('🔍 Character map: Processing ACT event:', event.act, 'at offset:', event.offset)
+        // Just update the current act state - no need for special handling
         break
         
       case 'SCENE':
@@ -739,14 +793,32 @@ const buildCharacterMap = (fullText: string, playKey: string) => {
         break
         
       case 'EXEUNT':
-        // All characters exit
-        currentCharacters.clear()
-        addEntryIfChanged(event.offset, [])
+        // Handle Exeunt - remove specific characters or all if none specified
+        console.log('🔍 EXEUNT EVENT: Characters to exit:', event.characters, 'current count:', currentCharacters.size, 'before exit:', Array.from(currentCharacters))
+        
+        if (event.characters && event.characters.length > 0) {
+          // Remove only the specified characters
+          event.characters.forEach(char => currentCharacters.delete(char))
+          console.log('🔍 EXEUNT EVENT: Removed specific characters, remaining:', Array.from(currentCharacters))
+        } else {
+          // No specific characters mentioned - all characters exit
+          currentCharacters.clear()
+          console.log('🔍 EXEUNT EVENT: No specific characters, cleared all, remaining:', Array.from(currentCharacters))
+        }
+        
+        addEntryIfChanged(event.offset, Array.from(currentCharacters))
+        console.log('🔍 EXEUNT EVENT: After addEntryIfChanged, character map length:', characterMap.length)
         break
     }
   }
   
   log('character-map', `🎭 Built character map with ${characterMap.length} entries using 2-scan approach`)
+  
+  // Debug: Log the final character map
+  console.log('🔍 FINAL CHARACTER MAP:', characterMap)
+  console.log('🔍 STRUCTURAL EVENTS COUNT:', structuralEvents.length)
+  console.log('🔍 SAMPLE STRUCTURAL EVENTS:', structuralEvents.slice(0, 10))
+  
   return characterMap
 }
 
@@ -864,16 +936,22 @@ const extractContextFromIndex = (selectedIndex: number, selectedLength: number, 
   // Shakespeare-specific context (Act & Scene) - support both Roman and Arabic numerals
   // Look for ACT markers in a much larger context window
   const contextForActScene = fullText.substring(Math.max(0, selectedIndex - 5000), selectedIndex)
-  const actMatches = contextForActScene.match(/\bACT\s+([IVXLCDM]+|\d+)\b/gi)
+  const actMatches = contextForActScene.match(/\bACT\s+([IVXLCDM]+|\d+)\.?\b/gi)
   if (actMatches) {
     const lastActMatch = actMatches[actMatches.length - 1]
-    act = lastActMatch.replace(/\bACT\s+/i, '').trim()
+    act = lastActMatch.replace(/\bACT\s+/i, '').replace(/\.$/, '').trim()
+    console.log('🔍 Regex-based Act detection found:', act)
+  } else {
+    console.log('🔍 No Act found by regex detection')
   }
 
-  const sceneMatches = contextForActScene.match(/\bSCENE\s+([IVXLCDM]+|\d+)\b/gi)
+  const sceneMatches = contextForActScene.match(/\bSCENE\s+([IVXLCDM]+|\d+)\.?\b/gi)
   if (sceneMatches) {
     const lastSceneMatch = sceneMatches[sceneMatches.length - 1]
-    scene = lastSceneMatch.replace(/\bSCENE\s+/i, '').trim()
+    scene = lastSceneMatch.replace(/\bSCENE\s+/i, '').replace(/\.$/, '').trim()
+    console.log('🔍 Regex-based Scene detection found:', scene)
+  } else {
+    console.log('🔍 No Scene found by regex detection')
   }
   
 
@@ -914,6 +992,47 @@ const extractContextFromIndex = (selectedIndex: number, selectedLength: number, 
   if (romanChapterMatches && !chapter) {
     const lastRomanMatch = romanChapterMatches[romanChapterMatches.length - 1]
     chapter = lastRomanMatch.replace(/\.\s*\n$/, '').trim()
+  }
+
+  // Bible book and verse detection
+  let bibleBook: string | null = null
+  let bibleVerse: string | null = null
+  
+  // Check if this is Bible content by author or book title
+  const isBible = author?.toLowerCase().includes('bible') || 
+                 bookTitle?.toLowerCase().includes('bible') ||
+                 bookTitle?.toLowerCase().includes('king james')
+  
+  if (isBible) {
+    console.log('🔍 Detected Bible content, looking for book and verse')
+    
+    // Look for Bible book titles (e.g., "The Book of Joshua", "Genesis", "Matthew")
+    const bookTitleMatches = searchText.match(/(?:The\s+)?(?:Book\s+of\s+)?([A-Z][a-z]+(?:\s+[A-Z][a-z]+)*)\s*$/gm)
+    if (bookTitleMatches) {
+      // Get the most recent book title before the selection
+      const beforeLines = textBeforeSelection.split('\n')
+      for (let i = beforeLines.length - 1; i >= 0; i--) {
+        const line = beforeLines[i].trim()
+        if (line.match(/^(?:The\s+)?(?:Book\s+of\s+)?([A-Z][a-z]+(?:\s+[A-Z][a-z]+)*)\s*$/)) {
+          bibleBook = line.replace(/^(?:The\s+)?(?:Book\s+of\s+)?/, '').trim()
+          console.log('🔍 Bible book found:', bibleBook)
+          break
+        }
+      }
+    }
+    
+    // Look for verse numbers (e.g., "1:1", "2:15", "10:25")
+    const verseMatches = searchText.match(/\b(\d+):(\d+)\b/g)
+    if (verseMatches) {
+      // Get the most recent verse before the selection
+      const beforeText = textBeforeSelection
+      const beforeVerseMatches = beforeText.match(/\b(\d+):(\d+)\b/g)
+      if (beforeVerseMatches) {
+        const lastVerse = beforeVerseMatches[beforeVerseMatches.length - 1]
+        bibleVerse = lastVerse
+        console.log('🔍 Bible verse found:', bibleVerse)
+      }
+    }
   }
 
   // Simple speaker detection: find the most recent speaker name before the selection
@@ -972,9 +1091,11 @@ const extractContextFromIndex = (selectedIndex: number, selectedLength: number, 
     // Also get act/scene from character map lookup
     const characterMapEntry = getCharacterMapEntryAtPosition(selectedIndex, fullText)
     if (characterMapEntry) {
-      act = characterMapEntry.act || null
-      scene = characterMapEntry.scene || null
-      console.log('🔍 Act/Scene from character map:', act, scene)
+      // Only override if character map has act/scene info, otherwise keep regex-based detection
+      if (characterMapEntry.act) act = characterMapEntry.act
+      if (characterMapEntry.scene) scene = characterMapEntry.scene
+      console.log('🔍 Act/Scene from character map:', characterMapEntry.act, characterMapEntry.scene)
+      console.log('🔍 Final Act/Scene after character map:', act, scene)
     }
   }
 
@@ -989,6 +1110,8 @@ const extractContextFromIndex = (selectedIndex: number, selectedLength: number, 
     section,
     part,
     book,
+    bibleBook,
+    bibleVerse,
     selectedText: fullText.substring(selectedIndex, selectedIndex + selectedLength),
     completeSpeech: completeSpeech || fullText.substring(selectedIndex, selectedIndex + selectedLength),
     beforeContext: beforeText.slice(-200),
@@ -1000,16 +1123,22 @@ export const useBookmarkRestoreAndSave = (
   textReaderRef: React.RefObject<HTMLDivElement | null>,
   text: string,
   bookTitle?: string,
-  author?: string
+  author?: string,
+  disableBookmarkSaving: boolean = false
 ) => {
   const scrollTimeoutRef = useRef<NodeJS.Timeout | null>(null)
   const { data: session } = useSession()
 
   useEffect(() => {
+    console.log('🔍 BOOKMARK RESTORE EFFECT TRIGGERED:', { textLength: text?.length, bookTitle, author, disableBookmarkSaving })
     const loadBookmark = async () => {
-      if (!text || text.length < 100) return
+      if (!text || text.length < 100) {
+        console.log('🔍 Skipping bookmark load - text too short:', text?.length)
+        return
+      }
       const title = bookTitle || 'Untitled'
       const auth = author || 'Unknown'
+      console.log('🔍 Loading bookmark for:', title, 'by', auth)
 
 
       // Wait for content to be fully rendered before attempting restoration
@@ -1107,6 +1236,12 @@ export const useBookmarkRestoreAndSave = (
     
     const handleScroll = () => {
       log('bookmark', 'Scroll event fired!')
+      
+      // Skip bookmark saving if disabled (e.g., during chat operations)
+      if (disableBookmarkSaving) {
+        log('bookmark', 'Bookmark saving disabled, skipping')
+        return
+      }
       
       // Get scroll position from the scrollable element
       let scrollPosition = 0

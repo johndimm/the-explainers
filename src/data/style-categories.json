@@ -201,6 +201,62 @@
       "wikipediaTitle": "Kurt Vonnegut"
     }
   ],
+  "philosophers": [
+    {
+      "name": "W.V.O. Quine",
+      "value": "quine",
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/Willard_Van_Orman_Quine",
+      "wikipediaTitle": "Willard Van Orman Quine"
+    },
+    {
+      "name": "Hilary Putnam",
+      "value": "putnam",
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/Hilary_Putnam",
+      "wikipediaTitle": "Hilary Putnam"
+    },
+    {
+      "name": "Saul Kripke",
+      "value": "kripke",
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/Saul_Kripke",
+      "wikipediaTitle": "Saul Kripke"
+    },
+    {
+      "name": "Michael Dummett",
+      "value": "michael-dummett",
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/Michael_Dummett",
+      "wikipediaTitle": "Michael Dummett"
+    },
+    {
+      "name": "Thomas Nagel",
+      "value": "thomas-nagel",
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/Thomas_Nagel",
+      "wikipediaTitle": "Thomas Nagel"
+    },
+    {
+      "name": "David Lewis",
+      "value": "david-lewis",
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/David_Lewis_(philosopher)",
+      "wikipediaTitle": "David Lewis (philosopher)"
+    },
+    {
+      "name": "Bertrand Russell",
+      "value": "bertrand-russell",
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/Bertrand_Russell",
+      "wikipediaTitle": "Bertrand Russell"
+    },
+    {
+      "name": "Peter Singer",
+      "value": "peter-singer",
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/Peter_Singer",
+      "wikipediaTitle": "Peter Singer"
+    },
+    {
+      "name": "Stuart Hampshire",
+      "value": "stuart-hampshire",
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/Stuart_Hampshire",
+      "wikipediaTitle": "Stuart Hampshire"
+    }
+  ],
   "politics": [
     {
       "name": "Bernie Sanders",
@@ -243,6 +299,74 @@
       "value": "barack-obama",
       "wikipediaUrl": "https://en.wikipedia.org/wiki/Barack_Obama",
       "wikipediaTitle": "Barack Obama"
+    }
+  ],
+  "talkShowHosts": [
+    {
+      "name": "Oprah Winfrey",
+      "value": "oprah-winfrey",
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/Oprah_Winfrey",
+      "wikipediaTitle": "Oprah Winfrey"
+    },
+    {
+      "name": "David Letterman",
+      "value": "david-letterman",
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/David_Letterman",
+      "wikipediaTitle": "David Letterman"
+    },
+    {
+      "name": "Conan O'Brien",
+      "value": "conan-obrien",
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/Conan_O'Brien",
+      "wikipediaTitle": "Conan O'Brien"
+    },
+    {
+      "name": "Stephen Colbert",
+      "value": "stephen-colbert",
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/Stephen_Colbert",
+      "wikipediaTitle": "Stephen Colbert"
+    },
+    {
+      "name": "Jimmy Fallon",
+      "value": "jimmy-fallon",
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/Jimmy_Fallon",
+      "wikipediaTitle": "Jimmy Fallon"
+    },
+    {
+      "name": "Ellen DeGeneres",
+      "value": "ellen-degeneres",
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/Ellen_DeGeneres",
+      "wikipediaTitle": "Ellen DeGeneres"
+    },
+    {
+      "name": "Trevor Noah",
+      "value": "trevor-noah",
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/Trevor_Noah",
+      "wikipediaTitle": "Trevor Noah"
+    },
+    {
+      "name": "John Oliver",
+      "value": "john-oliver",
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/John_Oliver",
+      "wikipediaTitle": "John Oliver"
+    },
+    {
+      "name": "Jon Stewart",
+      "value": "jon-stewart",
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/Jon_Stewart",
+      "wikipediaTitle": "Jon Stewart"
+    },
+    {
+      "name": "Howard Stern",
+      "value": "howard-stern",
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/Howard_Stern",
+      "wikipediaTitle": "Howard Stern"
+    },
+    {
+      "name": "Bill Maher",
+      "value": "bill-maher",
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/Bill_Maher",
+      "wikipediaTitle": "Bill Maher"
     }
   ],
   "comedians": [
@@ -395,74 +519,6 @@
       "value": "norm-macdonald",
       "wikipediaUrl": "https://en.wikipedia.org/wiki/Norm_Macdonald",
       "wikipediaTitle": "Norm Macdonald"
-    }
-  ],
-  "talkShowHosts": [
-    {
-      "name": "Oprah Winfrey",
-      "value": "oprah-winfrey",
-      "wikipediaUrl": "https://en.wikipedia.org/wiki/Oprah_Winfrey",
-      "wikipediaTitle": "Oprah Winfrey"
-    },
-    {
-      "name": "David Letterman",
-      "value": "david-letterman",
-      "wikipediaUrl": "https://en.wikipedia.org/wiki/David_Letterman",
-      "wikipediaTitle": "David Letterman"
-    },
-    {
-      "name": "Conan O'Brien",
-      "value": "conan-obrien",
-      "wikipediaUrl": "https://en.wikipedia.org/wiki/Conan_O'Brien",
-      "wikipediaTitle": "Conan O'Brien"
-    },
-    {
-      "name": "Stephen Colbert",
-      "value": "stephen-colbert",
-      "wikipediaUrl": "https://en.wikipedia.org/wiki/Stephen_Colbert",
-      "wikipediaTitle": "Stephen Colbert"
-    },
-    {
-      "name": "Jimmy Fallon",
-      "value": "jimmy-fallon",
-      "wikipediaUrl": "https://en.wikipedia.org/wiki/Jimmy_Fallon",
-      "wikipediaTitle": "Jimmy Fallon"
-    },
-    {
-      "name": "Ellen DeGeneres",
-      "value": "ellen-degeneres",
-      "wikipediaUrl": "https://en.wikipedia.org/wiki/Ellen_DeGeneres",
-      "wikipediaTitle": "Ellen DeGeneres"
-    },
-    {
-      "name": "Trevor Noah",
-      "value": "trevor-noah",
-      "wikipediaUrl": "https://en.wikipedia.org/wiki/Trevor_Noah",
-      "wikipediaTitle": "Trevor Noah"
-    },
-    {
-      "name": "John Oliver",
-      "value": "john-oliver",
-      "wikipediaUrl": "https://en.wikipedia.org/wiki/John_Oliver",
-      "wikipediaTitle": "John Oliver"
-    },
-    {
-      "name": "Jon Stewart",
-      "value": "jon-stewart",
-      "wikipediaUrl": "https://en.wikipedia.org/wiki/Jon_Stewart",
-      "wikipediaTitle": "Jon Stewart"
-    },
-    {
-      "name": "Howard Stern",
-      "value": "howard-stern",
-      "wikipediaUrl": "https://en.wikipedia.org/wiki/Howard_Stern",
-      "wikipediaTitle": "Howard Stern"
-    },
-    {
-      "name": "Bill Maher",
-      "value": "bill-maher",
-      "wikipediaUrl": "https://en.wikipedia.org/wiki/Bill_Maher",
-      "wikipediaTitle": "Bill Maher"
     }
   ],
   "other": [

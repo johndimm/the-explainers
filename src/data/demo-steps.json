@@ -1,0 +1,57 @@
+[
+  {
+    "title": "I'm reading Macbeth",
+    "description": "Start by selecting a passage from classic literature",
+    "image": "/explainer-demo-screenshots/1.jpg"
+  },
+  {
+    "title": "What does this mean?",
+    "description": "Highlight text that you want explained",
+    "image": "/explainer-demo-screenshots/2.jpg"
+  },
+  {
+    "title": "Start a chat with AI about it", 
+    "description": "Get instant AI explanations in different styles",
+    "image": "/explainer-demo-screenshots/3.jpg"
+  },
+  {
+    "title": "Ah, that's what it means",
+    "description": "Understand complex literature with clear explanations",
+    "image": "/explainer-demo-screenshots/4.jpg"
+  },
+  {
+    "title": "Ask follow-up questions",
+    "description": "Dig deeper with natural conversation",
+    "image": "/explainer-demo-screenshots/5.jpg"
+  },
+  {
+    "title": "Try different explainer styles",
+    "description": "Get explanations from different perspectives",
+    "image": "/explainer-demo-screenshots/6.jpg"
+  },
+  {
+    "title": "Save your conversations",
+    "description": "Keep track of your learning journey",
+    "image": "/explainer-demo-screenshots/7.jpg"
+  },
+  {
+    "title": "Share with others",
+    "description": "Export and share your insights",
+    "image": "/explainer-demo-screenshots/8.jpg"
+  },
+  {
+    "title": "Read in different modes",
+    "description": "Switch between page and scroll views",
+    "image": "/explainer-demo-screenshots/9.jpg"
+  },
+  {
+    "title": "Customize your experience",
+    "description": "Adjust fonts, sizes, and AI settings",
+    "image": "/explainer-demo-screenshots/10.jpg"
+  },
+  {
+    "title": "Explore the library",
+    "description": "Discover more classic literature",
+    "image": "/explainer-demo-screenshots/11.jpg"
+  }
+]

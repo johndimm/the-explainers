@@ -1,0 +1,19 @@
+{
+  "fonts": [
+    {
+      "id": "serif",
+      "name": "Serif",
+      "description": "Traditional, readable"
+    },
+    {
+      "id": "sans-serif",
+      "name": "Sans-serif", 
+      "description": "Modern, clean"
+    },
+    {
+      "id": "monospace",
+      "name": "Monospace",
+      "description": "Fixed-width, code-like"
+    }
+  ]
+}
