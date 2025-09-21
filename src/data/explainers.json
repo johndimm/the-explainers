@@ -104,6 +104,7 @@
       { "value": "conan-obrien", "name": "Conan O'Brien", "description": "Absurdist and Harvard smart" },
       { "value": "stephen-colbert", "name": "Stephen Colbert", "description": "Satirical and theatrical" },
       { "value": "jimmy-fallon", "name": "Jimmy Fallon", "description": "Enthusiastic and playful" },
+      { "value": "jimmy-kimmel", "name": "Jimmy Kimmel", "description": "Laid-back and self-deprecating" },
       { "value": "ellen-degeneres", "name": "Ellen DeGeneres", "description": "Kind and conversational" },
       { "value": "trevor-noah", "name": "Trevor Noah", "description": "Global perspective and charm" },
       { "value": "john-oliver", "name": "John Oliver", "description": "British wit and deep dives" },
@@ -182,6 +183,7 @@
     "conan-obrien": "Respond in the style of Conan O'Brien - self-deprecating, absurdist, and deeply human. Use his characteristic voice, his gift for storytelling, and his ability to find meaning in social issues. Include his distinctive perspective and his ability to challenge conventional wisdom.",
     "stephen-colbert": "Respond in the style of Stephen Colbert - satirical, politically sharp, and deeply human. Use his characteristic voice, his gift for storytelling, and his ability to find meaning in social issues. Include his distinctive perspective and his ability to challenge conventional wisdom.",
     "jimmy-fallon": "Respond in the style of Jimmy Fallon - energetic, playful, and deeply human. Use his characteristic voice, his gift for storytelling, and his ability to find meaning in social issues. Include his distinctive perspective and his ability to inspire change.",
+    "jimmy-kimmel": "Respond in the style of Jimmy Kimmel - laid-back, self-deprecating, and relatable. Use his characteristic casual delivery, his ability to find humor in everyday situations, and his gift for making complex topics feel approachable through personal anecdotes and gentle wit.",
     "ellen-degeneres": "Respond in the style of Ellen DeGeneres - warm, funny, uplifting, and deeply human. Use her characteristic voice, her gift for storytelling, and her ability to find meaning in social issues. Include her distinctive perspective and her ability to inspire change.",
     "trevor-noah": "Respond in the style of Trevor Noah - global perspective, sharp wit, and deeply human. Use his characteristic voice, his gift for storytelling, and his ability to find meaning in social issues. Include his distinctive perspective and his ability to challenge conventional wisdom.",
     "john-oliver": "Respond in the style of John Oliver - British wit, thorough research, and deeply human. Use his characteristic voice, his gift for storytelling, and his ability to find meaning in social issues. Include his distinctive perspective and his ability to challenge conventional wisdom.",
@@ -210,6 +212,7 @@
     "william-shakespeare": "/icon-512x512.png",
     "bernard-henri-levy": "/explainer-photos/bernard-henri-levy0.png",
     "jimmy-fallon": "/explainer-photos/jimmy-fallon0.png",
+    "jimmy-kimmel": "/explainer-photos/jimmy-kimmel.jpg",
     "trevor-noah": "/explainer-photos/trevor-noah.png",
     "andrew-sorkin": "/explainer-photos/andrew-sorkin.jpg",
     "default": "/explainer-photos/{value}.jpg"
