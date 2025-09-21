@@ -1,0 +1,408 @@
+{
+  "categories": {
+    "shakespeare": {
+      "name": "Shakespeare",
+      "books": [
+        {
+          "id": "hamlet",
+          "title": "Hamlet",
+          "author": "William Shakespeare",
+          "localPath": "public-domain-texts/hamlet.txt",
+          "wikipediaUrl": "https://en.wikipedia.org/wiki/Hamlet",
+          "wikipediaTitle": "Hamlet"
+        },
+        {
+          "id": "macbeth",
+          "title": "Macbeth",
+          "author": "William Shakespeare",
+          "localPath": "public-domain-texts/macbeth.txt",
+          "wikipediaUrl": "https://en.wikipedia.org/wiki/Macbeth",
+          "wikipediaTitle": "Macbeth"
+        },
+        {
+          "id": "romeo-and-juliet",
+          "title": "Romeo and Juliet",
+          "author": "William Shakespeare",
+          "localPath": "public-domain-texts/romeo-and-juliet.txt",
+          "wikipediaUrl": "https://en.wikipedia.org/wiki/Romeo_and_Juliet",
+          "wikipediaTitle": "Romeo and Juliet"
+        },
+        {
+          "id": "a-midsummer-nights-dream",
+          "title": "A Midsummer Night's Dream",
+          "author": "William Shakespeare",
+          "localPath": "public-domain-texts/a-midsummer-nights-dream.txt",
+          "wikipediaUrl": "https://en.wikipedia.org/wiki/A_Midsummer_Night%27s_Dream",
+          "wikipediaTitle": "A Midsummer Night's Dream"
+        },
+        {
+          "id": "othello",
+          "title": "Othello",
+          "author": "William Shakespeare",
+          "localPath": "public-domain-texts/othello.txt",
+          "wikipediaUrl": "https://en.wikipedia.org/wiki/Othello",
+          "wikipediaTitle": "Othello"
+        },
+        {
+          "id": "king-lear",
+          "title": "King Lear",
+          "author": "William Shakespeare",
+          "localPath": "public-domain-texts/king-lear.txt",
+          "wikipediaUrl": "https://en.wikipedia.org/wiki/King_Lear",
+          "wikipediaTitle": "King Lear"
+        },
+        {
+          "id": "the-tempest",
+          "title": "The Tempest",
+          "author": "William Shakespeare",
+          "localPath": "public-domain-texts/the-tempest.txt",
+          "wikipediaUrl": "https://en.wikipedia.org/wiki/The_Tempest",
+          "wikipediaTitle": "The Tempest"
+        },
+        {
+          "id": "as-you-like-it",
+          "title": "As You Like It",
+          "author": "William Shakespeare",
+          "localPath": "public-domain-texts/as-you-like-it.txt",
+          "wikipediaUrl": "https://en.wikipedia.org/wiki/As_You_Like_It",
+          "wikipediaTitle": "As You Like It"
+        },
+        {
+          "id": "twelfth-night",
+          "title": "Twelfth Night",
+          "author": "William Shakespeare",
+          "localPath": "public-domain-texts/twelfth-night.txt",
+          "wikipediaUrl": "https://en.wikipedia.org/wiki/Twelfth_Night",
+          "wikipediaTitle": "Twelfth Night"
+        },
+        {
+          "id": "much-ado-about-nothing",
+          "title": "Much Ado About Nothing",
+          "author": "William Shakespeare",
+          "localPath": "public-domain-texts/much-ado-about-nothing.txt",
+          "wikipediaUrl": "https://en.wikipedia.org/wiki/Much_Ado_About_Nothing",
+          "wikipediaTitle": "Much Ado About Nothing"
+        }
+      ]
+    },
+    "english-literature": {
+      "name": "English Literature",
+      "books": [
+        {
+          "id": "finnegans-wake",
+          "title": "Finnegans Wake",
+          "author": "James Joyce",
+          "localPath": "public-domain-texts/finnegans-wake.txt",
+          "wikipediaUrl": "https://en.wikipedia.org/wiki/Finnegans_Wake",
+          "wikipediaTitle": "Finnegans Wake"
+        },
+        {
+          "id": "alices-adventures-in-wonderland",
+          "title": "Alice's Adventures in Wonderland",
+          "author": "Lewis Carroll",
+          "wikipediaUrl": "https://en.wikipedia.org/wiki/Alice%27s_Adventures_in_Wonderland",
+          "wikipediaTitle": "Alice's Adventures in Wonderland"
+        },
+        {
+          "id": "pride-and-prejudice",
+          "title": "Pride and Prejudice",
+          "author": "Jane Austen",
+          "wikipediaUrl": "https://en.wikipedia.org/wiki/Pride%20and%20Prejudice",
+          "wikipediaTitle": "Pride and Prejudice"
+        },
+        {
+          "id": "through-the-looking-glass",
+          "title": "Through the Looking-Glass",
+          "author": "Lewis Carroll"
+        },
+        {
+          "id": "the-hunting-of-the-snark",
+          "title": "The Hunting of the Snark: An Agony in Eight Fits",
+          "author": "Lewis Carroll"
+        },
+        {
+          "id": "peter-pan",
+          "title": "Peter Pan",
+          "author": "J.M. Barrie"
+        },
+        {
+          "id": "far-from-the-madding-crowd",
+          "title": "Far from the Madding Crowd",
+          "author": "Thomas Hardy"
+        },
+        {
+          "id": "the-time-machine",
+          "title": "The Time Machine",
+          "author": "H.G. Wells"
+        },
+        {
+          "id": "the-war-of-the-worlds",
+          "title": "The War of the Worlds",
+          "author": "H.G. Wells"
+        },
+        {
+          "id": "dr-jekyll-and-mr-hyde",
+          "title": "The Strange Case of Dr. Jekyll and Mr. Hyde",
+          "author": "Robert Louis Stevenson"
+        },
+        {
+          "id": "a-christmas-carol",
+          "title": "A Christmas Carol in Prose; Being a Ghost Story of Christmas",
+          "author": "Charles Dickens",
+          "wikipediaUrl": "https://en.wikipedia.org/wiki/A_Christmas_Carol",
+          "wikipediaTitle": "A Christmas Carol"
+        },
+        {
+          "id": "a-tale-of-two-cities",
+          "title": "A Tale of Two Cities",
+          "author": "Charles Dickens"
+        },
+        {
+          "id": "persuasion",
+          "title": "Persuasion",
+          "author": "Jane Austen"
+        }
+      ]
+    },
+    "philosophers": {
+      "name": "Philosophy",
+      "books": [
+        {
+          "id": "republic",
+          "title": "The Republic",
+          "author": "Plato",
+          "wikipediaUrl": "https://en.wikipedia.org/wiki/Republic_(Plato)",
+          "wikipediaTitle": "Republic (Plato)"
+        },
+        {
+          "id": "nicomachean-ethics",
+          "title": "Nicomachean Ethics",
+          "author": "Aristotle",
+          "wikipediaUrl": "https://en.wikipedia.org/wiki/Nicomachean_Ethics",
+          "wikipediaTitle": "Nicomachean Ethics"
+        },
+        {
+          "id": "critique-of-pure-reason",
+          "title": "Critique of Pure Reason",
+          "author": "Immanuel Kant",
+          "wikipediaUrl": "https://en.wikipedia.org/wiki/Critique_of_Pure_Reason",
+          "wikipediaTitle": "Critique of Pure Reason"
+        },
+        {
+          "id": "beyond-good-and-evil",
+          "title": "Beyond Good and Evil",
+          "author": "Friedrich Nietzsche",
+          "wikipediaUrl": "https://en.wikipedia.org/wiki/Beyond_Good_and_Evil",
+          "wikipediaTitle": "Beyond Good and Evil"
+        },
+        {
+          "id": "being-and-nothingness",
+          "title": "Being and Nothingness",
+          "author": "Jean-Paul Sartre",
+          "wikipediaUrl": "https://en.wikipedia.org/wiki/Being_and_Nothingness",
+          "wikipediaTitle": "Being and Nothingness"
+        }
+      ]
+    },
+    "poetry": {
+      "name": "Poetry",
+      "books": [
+        {
+          "id": "the-waste-land",
+          "title": "The Waste Land",
+          "author": "T.S. Eliot",
+          "wikipediaUrl": "https://en.wikipedia.org/wiki/The_Waste_Land",
+          "wikipediaTitle": "The Waste Land"
+        },
+        {
+          "id": "leaves-of-grass",
+          "title": "Leaves of Grass",
+          "author": "Walt Whitman",
+          "wikipediaUrl": "https://en.wikipedia.org/wiki/Leaves_of_Grass",
+          "wikipediaTitle": "Leaves of Grass"
+        },
+        {
+          "id": "songs-of-innocence-and-experience",
+          "title": "Songs of Innocence and of Experience",
+          "author": "William Blake",
+          "wikipediaUrl": "https://en.wikipedia.org/wiki/Songs_of_Innocence_and_of_Experience",
+          "wikipediaTitle": "Songs of Innocence and of Experience"
+        }
+      ]
+    },
+    "french-literature": {
+      "name": "French Literature",
+      "books": [
+        {
+          "id": "les-miserables",
+          "title": "Les Misérables",
+          "author": "Victor Hugo",
+          "wikipediaUrl": "https://en.wikipedia.org/wiki/Les_Mis%C3%A9rables",
+          "wikipediaTitle": "Les Misérables"
+        },
+        {
+          "id": "the-count-of-monte-cristo",
+          "title": "The Count of Monte Cristo",
+          "author": "Alexandre Dumas",
+          "wikipediaUrl": "https://en.wikipedia.org/wiki/The_Count_of_Monte_Cristo",
+          "wikipediaTitle": "The Count of Monte Cristo"
+        }
+      ]
+    },
+    "german-literature": {
+      "name": "German Literature",
+      "books": [
+        {
+          "id": "faust",
+          "title": "Faust",
+          "author": "Johann Wolfgang von Goethe",
+          "wikipediaUrl": "https://en.wikipedia.org/wiki/Faust",
+          "wikipediaTitle": "Faust"
+        }
+      ]
+    },
+    "italian-literature": {
+      "name": "Italian Literature",
+      "books": [
+        {
+          "id": "the-divine-comedy",
+          "title": "The Divine Comedy",
+          "author": "Dante Alighieri",
+          "wikipediaUrl": "https://en.wikipedia.org/wiki/Divine_Comedy",
+          "wikipediaTitle": "Divine Comedy"
+        }
+      ]
+    },
+    "spanish-literature": {
+      "name": "Spanish Literature",
+      "books": [
+        {
+          "id": "don-quixote",
+          "title": "Don Quixote",
+          "author": "Miguel de Cervantes",
+          "wikipediaUrl": "https://en.wikipedia.org/wiki/Don_Quixote",
+          "wikipediaTitle": "Don Quixote"
+        }
+      ]
+    },
+    "history": {
+      "name": "History",
+      "books": [
+        {
+          "id": "the-decline-and-fall-of-the-roman-empire",
+          "title": "The History of the Decline and Fall of the Roman Empire",
+          "author": "Edward Gibbon",
+          "wikipediaUrl": "https://en.wikipedia.org/wiki/The_History_of_the_Decline_and_Fall_of_the_Roman_Empire",
+          "wikipediaTitle": "The History of the Decline and Fall of the Roman Empire"
+        }
+      ]
+    }
+  },
+  "wikipediaData": {
+    "people": {
+      "Harold Bloom": {
+        "exists": true,
+        "url": "https://en.wikipedia.org/wiki/Harold_Bloom",
+        "title": "Harold Bloom"
+      },
+      "T.S. Eliot": {
+        "exists": true,
+        "url": "https://en.wikipedia.org/wiki/T._S._Eliot",
+        "title": "T. S. Eliot"
+      },
+      "John Ruskin": {
+        "exists": true,
+        "url": "https://en.wikipedia.org/wiki/John_Ruskin",
+        "title": "John Ruskin"
+      },
+      "Samuel Johnson": {
+        "exists": true,
+        "url": "https://en.wikipedia.org/wiki/Samuel_Johnson",
+        "title": "Samuel Johnson"
+      },
+      "Virginia Woolf": {
+        "exists": true,
+        "url": "https://en.wikipedia.org/wiki/Virginia_Woolf",
+        "title": "Virginia Woolf"
+      },
+      "Northrop Frye": {
+        "exists": true,
+        "url": "https://en.wikipedia.org/wiki/Northrop_Frye",
+        "title": "Northrop Frye"
+      },
+      "Roland Barthes": {
+        "exists": true,
+        "url": "https://en.wikipedia.org/wiki/Roland_Barthes",
+        "title": "Roland Barthes"
+      },
+      "Jacques Derrida": {
+        "exists": true,
+        "url": "https://en.wikipedia.org/wiki/Jacques_Derrida",
+        "title": "Jacques Derrida"
+      },
+      "Michel Foucault": {
+        "exists": true,
+        "url": "https://en.wikipedia.org/wiki/Michel_Foucault",
+        "title": "Michel Foucault"
+      },
+      "Edward Said": {
+        "exists": true,
+        "url": "https://en.wikipedia.org/wiki/Edward_Said",
+        "title": "Edward Said"
+      },
+      "Plato": {
+        "exists": true,
+        "url": "https://en.wikipedia.org/wiki/Plato",
+        "title": "Plato"
+      },
+      "Aristotle": {
+        "exists": true,
+        "url": "https://en.wikipedia.org/wiki/Aristotle",
+        "title": "Aristotle"
+      },
+      "Immanuel Kant": {
+        "exists": true,
+        "url": "https://en.wikipedia.org/wiki/Immanuel_Kant",
+        "title": "Immanuel Kant"
+      },
+      "Friedrich Nietzsche": {
+        "exists": true,
+        "url": "https://en.wikipedia.org/wiki/Friedrich_Nietzsche",
+        "title": "Friedrich Nietzsche"
+      },
+      "Jean-Paul Sartre": {
+        "exists": true,
+        "url": "https://en.wikipedia.org/wiki/Jean-Paul_Sartre",
+        "title": "Jean-Paul Sartre"
+      }
+    },
+    "books": {
+      "Hamlet by William Shakespeare": {
+        "exists": true,
+        "url": "https://en.wikipedia.org/wiki/Ur-Hamlet",
+        "title": "Ur-Hamlet"
+      },
+      "Ulysses by James Joyce": {
+        "exists": true,
+        "url": "https://en.wikipedia.org/wiki/Ulysses_(novel)",
+        "title": "Ulysses (novel)"
+      },
+      "Pride and Prejudice by Jane Austen": {
+        "exists": true,
+        "url": "https://en.wikipedia.org/wiki/Pride%20and%20Prejudice",
+        "title": "Pride and Prejudice"
+      },
+      "1984 by George Orwell": {
+        "exists": true,
+        "url": "https://en.wikipedia.org/wiki/Nineteen_Eighty-Four",
+        "title": "Nineteen Eighty-Four"
+      },
+      "A Midsummer Night's Dream by William Shakespeare": {
+        "exists": true,
+        "url": "https://en.wikipedia.org/wiki/Puck%20(A%20Midsummer%20Night's%20Dream)",
+        "title": "Puck (A Midsummer Night's Dream)"
+      }
+    },
+    "generatedAt": "2025-09-08T14:25:43.520Z"
+  }
+}

@@ -1,45 +1,5 @@
 [
   {
-    "id": "6130",
-    "title": "The Iliad",
-    "author": "Homer",
-    "directUrl": "https://www.gutenberg.org/cache/epub/6130/pg6130.txt",
-    "wikipediaUrl": "https://en.wikipedia.org/wiki/Iliad",
-    "wikipediaTitle": "Iliad"
-  },
-  {
-    "id": "1727",
-    "title": "The Odyssey",
-    "author": "Homer",
-    "directUrl": "https://www.gutenberg.org/cache/epub/1727/pg1727.txt",
-    "wikipediaUrl": "https://en.wikipedia.org/wiki/Odyssey",
-    "wikipediaTitle": "Odyssey"
-  },
-  {
-    "id": "2707",
-    "title": "The History of Herodotus",
-    "author": "Herodotus",
-    "directUrl": "https://www.gutenberg.org/cache/epub/2707/pg2707.txt",
-    "wikipediaUrl": "https://en.wikipedia.org/wiki/Herodotus",
-    "wikipediaTitle": "Herodotus"
-  },
-  {
-    "id": "7142",
-    "title": "History of the Peloponnesian War",
-    "author": "Thucydides",
-    "directUrl": "https://www.gutenberg.org/cache/epub/7142/pg7142.txt",
-    "wikipediaUrl": "https://en.wikipedia.org/wiki/History_of_the_Peloponnesian_War",
-    "wikipediaTitle": "History of the Peloponnesian War"
-  },
-  {
-    "id": "14484",
-    "title": "The Oresteia",
-    "author": "Aeschylus",
-    "directUrl": "https://www.gutenberg.org/cache/epub/14484/pg14484.txt",
-    "wikipediaUrl": "https://en.wikipedia.org/wiki/Oresteia",
-    "wikipediaTitle": "Oresteia"
-  },
-  {
     "id": "27458",
     "title": "Prometheus Bound",
     "author": "Aeschylus",
@@ -48,20 +8,12 @@
     "wikipediaTitle": "Prometheus Bound"
   },
   {
-    "id": "31",
-    "title": "Oedipus Rex",
-    "author": "Sophocles",
-    "directUrl": "https://www.gutenberg.org/cache/epub/31/pg31.txt",
-    "wikipediaUrl": "https://en.wikipedia.org/wiki/Oedipus_Rex",
-    "wikipediaTitle": "Oedipus Rex"
-  },
-  {
-    "id": "1112",
-    "title": "Antigone",
-    "author": "Sophocles",
-    "directUrl": "https://www.gutenberg.org/cache/epub/1112/pg1112.txt",
-    "wikipediaUrl": "https://en.wikipedia.org/wiki/Antigone",
-    "wikipediaTitle": "Antigone"
+    "id": "14484",
+    "title": "The Oresteia",
+    "author": "Aeschylus",
+    "directUrl": "https://www.gutenberg.org/cache/epub/14484/pg14484.txt",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Oresteia",
+    "wikipediaTitle": "Oresteia"
   },
   {
     "id": "2563",
@@ -78,5 +30,53 @@
     "directUrl": "https://www.gutenberg.org/cache/epub/8438/pg8438.txt",
     "wikipediaUrl": "https://en.wikipedia.org/wiki/Nicomachean_Ethics",
     "wikipediaTitle": "Nicomachean Ethics"
+  },
+  {
+    "id": "2707",
+    "title": "The History of Herodotus",
+    "author": "Herodotus",
+    "directUrl": "https://www.gutenberg.org/cache/epub/2707/pg2707.txt",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Herodotus",
+    "wikipediaTitle": "Herodotus"
+  },
+  {
+    "id": "6130",
+    "title": "The Iliad",
+    "author": "Homer",
+    "directUrl": "https://www.gutenberg.org/cache/epub/6130/pg6130.txt",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Iliad",
+    "wikipediaTitle": "Iliad"
+  },
+  {
+    "id": "1727",
+    "title": "The Odyssey",
+    "author": "Homer",
+    "directUrl": "https://www.gutenberg.org/cache/epub/1727/pg1727.txt",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Odyssey",
+    "wikipediaTitle": "Odyssey"
+  },
+  {
+    "id": "1112",
+    "title": "Antigone",
+    "author": "Sophocles",
+    "directUrl": "https://www.gutenberg.org/cache/epub/1112/pg1112.txt",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Antigone",
+    "wikipediaTitle": "Antigone"
+  },
+  {
+    "id": "31",
+    "title": "Oedipus Rex",
+    "author": "Sophocles",
+    "directUrl": "https://www.gutenberg.org/cache/epub/31/pg31.txt",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Oedipus_Rex",
+    "wikipediaTitle": "Oedipus Rex"
+  },
+  {
+    "id": "7142",
+    "title": "History of the Peloponnesian War",
+    "author": "Thucydides",
+    "directUrl": "https://www.gutenberg.org/cache/epub/7142/pg7142.txt",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/History_of_the_Peloponnesian_War",
+    "wikipediaTitle": "History of the Peloponnesian War"
   }
 ]

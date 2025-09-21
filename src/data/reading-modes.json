@@ -1,0 +1,14 @@
+{
+  "modes": [
+    {
+      "id": "scroll",
+      "name": "Scroll",
+      "description": "Continuous scrolling"
+    },
+    {
+      "id": "page",
+      "name": "Page",
+      "description": "Page-by-page reading"
+    }
+  ]
+}

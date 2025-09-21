@@ -2,6 +2,7 @@
 
 import React from 'react'
 import PageLayout from './PageLayout'
+import demoSteps from '../data/demo-steps.json'
 
 const UserGuide: React.FC = () => {
   return (
@@ -56,6 +57,12 @@ const UserGuide: React.FC = () => {
           </div>
           
           <div style={{ background: '#f8f9fa', padding: '15px', borderRadius: '8px', border: '1px solid #e9ecef' }}>
+            <h4 style={{ color: '#666', marginTop: '0', marginBottom: '8px' }}>📚 Examples</h4>
+            <p style={{ fontSize: '14px', marginBottom: '5px' }}><strong>What it does:</strong> View sample quotes and explanations from various literary works to see how the app works.</p>
+            <p style={{ fontSize: '14px', margin: '0' }}><strong>When to use:</strong> When you want to see examples of explanations or get inspired by sample texts.</p>
+          </div>
+          
+          <div style={{ background: '#f8f9fa', padding: '15px', borderRadius: '8px', border: '1px solid #e9ecef' }}>
             <h4 style={{ color: '#666', marginTop: '0', marginBottom: '8px' }}>🎭 Explainers</h4>
             <p style={{ fontSize: '14px', marginBottom: '5px' }}><strong>What it does:</strong> Choose from 50+ AI personalities to explain texts in different styles (comedians, professors, authors, etc.).</p>
             <p style={{ fontSize: '14px', margin: '0' }}><strong>When to use:</strong> When you want to change how explanations are delivered or try a new explainer personality.</p>
@@ -91,11 +98,47 @@ const UserGuide: React.FC = () => {
             <p style={{ fontSize: '14px', margin: '0' }}><strong>When to use:</strong> When you want to learn more about the app's purpose and background.</p>
           </div>
           
-          <div style={{ background: '#f8f9fa', padding: '15px', borderRadius: '8px', border: '1px solid #e9ecef' }}>
-            <h4 style={{ color: '#666', marginTop: '0', marginBottom: '8px' }}>🗯️ Tutorial</h4>
-            <p style={{ fontSize: '14px', marginBottom: '5px' }}><strong>What it does:</strong> Interactive walkthrough showing how to select text and get explanations.</p>
-            <p style={{ fontSize: '14px', margin: '0' }}><strong>When to use:</strong> When you're new to the app and want a hands-on demonstration of the core features.</p>
-          </div>
+        </div>
+
+        <h3 style={{ color: '#007bff', marginTop: '25px', marginBottom: '10px' }}>Interactive Tutorial</h3>
+        <p>Here's a step-by-step walkthrough of how The Explainers works:</p>
+        
+        <div className="demo-grid" style={{ 
+          margin: '20px 0',
+          display: 'grid',
+          gridTemplateColumns: '1fr 1fr',
+          gap: '2rem'
+        }}>
+          {demoSteps.slice(0, 4).map((step, idx) => (
+            <div key={idx} className="demo-step">
+              <div style={{ padding: '20px' }}>
+                <div style={{
+                  background: '#007bff',
+                  color: 'white',
+                  borderRadius: '50%',
+                  width: '30px',
+                  height: '30px',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  fontSize: '14px',
+                  fontWeight: 'bold',
+                  marginBottom: '15px'
+                }}>
+                  {idx + 1}
+                </div>
+                <h4 style={{ marginTop: '0', marginBottom: '8px', color: '#333' }}>{step.title}</h4>
+                <p style={{ marginBottom: '15px', color: '#666' }}>{step.description}</p>
+              </div>
+              <div className="demo-screenshot">
+                <img 
+                  src={step.image} 
+                  alt={step.title}
+                  className="demo-screenshot-image"
+                />
+              </div>
+            </div>
+          ))}
         </div>
 
         <h3 style={{ color: '#007bff', marginTop: '25px', marginBottom: '10px' }}>First-Time Setup</h3>

@@ -1,0 +1,19 @@
+{
+  "lengths": [
+    {
+      "id": "brief",
+      "name": "Brief",
+      "description": "2-3 sentences, one screen"
+    },
+    {
+      "id": "medium", 
+      "name": "Medium",
+      "description": "1-2 paragraphs, detailed"
+    },
+    {
+      "id": "long",
+      "name": "Long", 
+      "description": "Comprehensive explanation"
+    }
+  ]
+}

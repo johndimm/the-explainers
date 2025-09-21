@@ -34,17 +34,8 @@ export const FilteredBookList: React.FC<FilteredBookListProps> = ({
     const filterBooks = () => {
       setIsLoading(true)
       
-      // Filter books that have Wikipedia links directly from JSON data
-      const validBooks = books.filter(book => {
-        if (book.wikipediaUrl && book.wikipediaUrl.trim() !== '') {
-          return true
-        } else {
-          log(`Removing book "${book.title}" by ${book.author || 'Unknown'} - no Wikipedia URL in JSON data`)
-          return false
-        }
-      })
-
-      setFilteredBooks(validBooks)
+      // Use all books without filtering
+      setFilteredBooks(books)
       setIsLoading(false)
     }
 

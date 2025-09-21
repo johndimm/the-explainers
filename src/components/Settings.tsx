@@ -3,32 +3,21 @@
 import React, { useState, useEffect, useRef } from 'react'
 import { useRouter } from 'next/navigation'
 import styles from './Settings.module.css'
+import explainers from '../data/explainers.json'
+import models from '../data/models.json'
+import responseLengths from '../data/response-lengths.json'
+import fontFamilies from '../data/font-families.json'
+import readingModes from '../data/reading-modes.json'
+import defaultSettings from '../data/default-settings.json'
 
-export type LLMProvider = 'openai' | 'anthropic' | 'deepseek' | 'gemini' | 'custom'
-export type LLMModel = 'gpt-4o' | 'gpt-4-turbo' | 'gpt-4' | 'claude-3-5-sonnet' | 'claude-3-opus' | 'claude-3-sonnet' | 'deepseek-chat' | 'deepseek-coder' | 'gemini-1.5-flash' | 'gemini-1.5-pro' | 'gemini-2.0-flash' | 'custom'
-export type ResponseLength = 'brief' | 'medium' | 'long'
-export type FontFamily = 'serif' | 'sans-serif' | 'monospace'
-export type ReadingMode = 'scroll' | 'page'
-export type ExplanationStyle = 
-  | 'neutral'
-  | 'harold-bloom' | 'carl-sagan' | 'louis-ck' | 'david-foster-wallace' | 'neil-degrasse-tyson'
-  | 'oscar-wilde' | 'stephen-fry' | 'bill-bryson' | 'maya-angelou' | 'anthony-bourdain'
-  | 'douglas-adams' | 'terry-pratchett' | 'joan-didion' | 'jerry-seinfeld' | 'andrew-dice-clay'
-  | 'howard-stern' | 'tina-fey' | 'dave-chappelle' | 'amy-poehler' | 'ricky-gervais'
-  | 'sarah-silverman' | 'john-mulaney' | 'ali-wong' | 'bo-burnham' | 'oprah-winfrey'
-  | 'david-letterman' | 'conan-obrien' | 'stephen-colbert' | 'jimmy-fallon' | 'ellen-degeneres'
-  | 'trevor-noah' | 'john-oliver' | 'jon-stewart' | 'david-sedaris'
-  | 'mark-twain' | 'ts-eliot' | 'rudyard-kipling' | 'tom-wolfe' | 'stephen-king'
-  | 'william-shakespeare' | 'bernie-sanders' | 'martin-luther-king' | 'john-f-kennedy' | 'james-carville' | 'donald-trump' | 'george-w-bush' | 'barack-obama' | 'dorothy-parker'
-  | 'ernest-hemingway' | 'james-joyce' | 'samuel-beckett' | 'marilyn-monroe' | 'louis-theroux'
-  | 'robin-williams' | 'kurt-vonnegut'
-  | 'flannery-oconnor' | 'humphrey-bogart' | 'anthony-jeselnik' | 'doug-stanhope' | 'jim-norton'
-  | 'aaron-sorkin' | 'woody-allen'
-  | 'jim-jefferies' | 'daniel-tosh' | 'andy-andrist' | 'bill-burr' | 'lewis-black'
-  | 'george-carlin' | 'sam-kinison' | 'paul-mooney' | 'bill-hicks' | 'bob-saget'
-  | 'norm-macdonald' | 'bernard-henri-levy' | 'michel-houellebecq' | 'bill-maher' | 'john-ruskin'
-  | 'samuel-johnson' | 'christopher-hitchens' | 'christopher-marlowe' | 'ben-jonson' | 'francis-bacon'
-  | 'charles-dickens' | 'cormac-mccarthy'
+// Derive all types from JSON data
+export type LLMProvider = typeof models.providers[number]['id']
+export type LLMModel = typeof models.models[keyof typeof models.models][number]['id']
+export type ResponseLength = typeof responseLengths.lengths[number]['id']
+export type FontFamily = typeof fontFamilies.fonts[number]['id']
+export type ReadingMode = typeof readingModes.modes[number]['id']
+// Derive ExplanationStyle type from the JSON data + 'neutral'
+export type ExplanationStyle = 'neutral' | keyof typeof explainers.instructions
 
 export interface SettingsData {
   llmProvider: LLMProvider
@@ -52,55 +41,22 @@ interface SettingsProps {
   onSettingsChange: (settings: SettingsData) => void
 }
 
-const DEFAULT_SETTINGS: SettingsData = {
-  llmProvider: 'gemini',
-  llmModel: 'gemini-1.5-flash',
-  responseLength: 'brief',
-  textFont: 'serif',
-  chatFont: 'sans-serif',
-  textFontSize: 18,
-  chatFontSize: 16,
-  readingMode: 'scroll',
-  explanationStyle: 'neutral'
-}
+// Use default settings from JSON data
+const DEFAULT_SETTINGS: SettingsData = defaultSettings as SettingsData
 
-const MODEL_OPTIONS: Record<LLMProvider, { model: LLMModel, label: string, description?: string }[]> = {
-  openai: [
-    { model: 'gpt-4o', label: 'GPT-4o', description: 'Latest flagship model' },
-    { model: 'gpt-4-turbo', label: 'GPT-4 Turbo', description: 'Fast and capable' },
-    { model: 'gpt-4', label: 'GPT-4', description: 'Classic model' }
-  ],
-  anthropic: [
-    { model: 'claude-3-5-sonnet', label: 'Claude 3.5 Sonnet', description: 'Latest and most capable' },
-    // Filtered to only models supported by your key
-  ],
-  deepseek: [
-    { model: 'deepseek-chat', label: 'DeepSeek Chat', description: 'General purpose' },
-    { model: 'deepseek-coder', label: 'DeepSeek Coder', description: 'Code-focused' }
-  ],
-  gemini: [
-    { model: 'gemini-1.5-flash', label: 'Gemini 1.5 Flash', description: 'Fast and efficient (Default)' },
-    { model: 'gemini-1.5-pro', label: 'Gemini 1.5 Pro', description: 'Most capable' },
-    { model: 'gemini-2.0-flash', label: 'Gemini 2.0 Flash', description: 'Latest generation' }
-  ],
-  custom: [
-    { model: 'custom', label: 'Custom Model', description: 'Bring Your Own LLM' }
-  ]
+// Get model options from JSON data
+const getModelOptions = (provider: LLMProvider) => {
+  return (models as any).models[provider] || []
 }
 
 const Settings: React.FC<SettingsProps> = ({ isOpen, onClose, settings, onSettingsChange }) => {
   const [localSettings, setLocalSettings] = useState<SettingsData>(settings)
-  const [providerModels, setProviderModels] = useState<Record<LLMProvider, LLMModel>>({
-    gemini: 'gemini-1.5-flash',
-    anthropic: 'claude-3-5-sonnet',
-    openai: 'gpt-4o',
-    deepseek: 'deepseek-chat',
-    custom: 'custom'
-  })
+  const [providerModels, setProviderModels] = useState<Record<LLMProvider, LLMModel>>((models as any).defaults as Record<LLMProvider, LLMModel>)
 
-  // Single source of truth for provider display order across Settings and Chat
-  const PROVIDER_ORDER: LLMProvider[] = ['gemini','anthropic','openai','deepseek','custom']
-  const allProviders: LLMProvider[] = PROVIDER_ORDER
+  // Get provider order from JSON data
+  const allProviders: LLMProvider[] = (models as any).providers
+    .sort((a: any, b: any) => a.order - b.order)
+    .map((p: any) => p.id as LLMProvider)
   const [showCustomFields, setShowCustomFields] = useState(settings.llmProvider === 'custom')
   const [showMobileMenu, setShowMobileMenu] = useState(false)
   const menuRef = useRef<HTMLDivElement>(null)
@@ -108,20 +64,21 @@ const Settings: React.FC<SettingsProps> = ({ isOpen, onClose, settings, onSettin
 
   useEffect(() => {
     console.log('Settings: settings prop changed to:', settings)
-    setLocalSettings(settings)
-    setShowCustomFields(settings.llmProvider === 'custom')
-    // Load per-provider model mapping from localStorage on first sync
-    try {
-      const stored = localStorage.getItem('providerModels')
-      if (stored) {
-        const parsed = JSON.parse(stored)
-        setProviderModels(prev => ({ ...prev, ...parsed }))
-      } else {
-        // Initialize mapping based on current settings
-        setProviderModels(prev => ({ ...prev, [settings.llmProvider]: (settings.llmModel as LLMModel) || prev[settings.llmProvider] }))
-      }
-    } catch {}
-  }, [settings])
+    
+    // Always migrate old Claude 3.5 Sonnet to working model
+    let migratedSettings = { ...settings }
+    if (settings.llmProvider === 'anthropic' && settings.llmModel === 'claude-3-5-sonnet') {
+      migratedSettings.llmModel = 'claude-3-sonnet-20240229' as LLMModel
+      console.log('Settings: Migrated Claude 3.5 Sonnet to Claude 3 Sonnet')
+      onSettingsChange(migratedSettings)
+      return // Don't set local settings yet, wait for the updated settings to come back
+    }
+    
+    setLocalSettings(migratedSettings)
+    setShowCustomFields(migratedSettings.llmProvider === 'custom')
+    // Initialize mapping based on current settings
+    setProviderModels(prev => ({ ...prev, [migratedSettings.llmProvider]: (migratedSettings.llmModel as LLMModel) || prev[migratedSettings.llmProvider] }))
+  }, [settings, onSettingsChange])
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -155,20 +112,28 @@ const Settings: React.FC<SettingsProps> = ({ isOpen, onClose, settings, onSettin
   }, [localSettings, settings, onSettingsChange])
 
 
-  // Ensure llmModel is set when component mounts
+  // Ensure llmModel is set when component mounts and migrate old models
   useEffect(() => {
     if (!localSettings.llmModel) {
-      const defaultModel = MODEL_OPTIONS[localSettings.llmProvider][0].model
+      const defaultModel = getModelOptions(localSettings.llmProvider)[0].id as LLMModel
       setLocalSettings(prev => ({ ...prev, llmModel: defaultModel }))
     }
+    
+    // Force migration of old Claude 3.5 Sonnet
+    if (localSettings.llmProvider === 'anthropic' && localSettings.llmModel === 'claude-3-5-sonnet') {
+      const migratedModel = 'claude-3-sonnet-20240229' as LLMModel
+      console.log('Settings: Force migrating Claude 3.5 Sonnet to Claude 3 Sonnet')
+      setLocalSettings(prev => ({ ...prev, llmModel: migratedModel }))
+      onSettingsChange({ ...localSettings, llmModel: migratedModel })
+    }
+    
     // Keep mapping in sync for current provider
-    setProviderModels(prev => ({ ...prev, [localSettings.llmProvider]: (localSettings.llmModel || MODEL_OPTIONS[localSettings.llmProvider][0].model) as LLMModel }))
-    try { localStorage.setItem('providerModels', JSON.stringify({ ...providerModels, [localSettings.llmProvider]: (localSettings.llmModel || MODEL_OPTIONS[localSettings.llmProvider][0].model) })) } catch {}
-  }, [localSettings.llmProvider, localSettings.llmModel])
+    setProviderModels(prev => ({ ...prev, [localSettings.llmProvider]: (localSettings.llmModel || getModelOptions(localSettings.llmProvider)[0].id as LLMModel) }))
+  }, [localSettings.llmProvider, localSettings.llmModel, onSettingsChange])
 
   // Log current provider/model selection for debugging
   useEffect(() => {
-    const currentModel = providerModels[localSettings.llmProvider] || localSettings.llmModel || MODEL_OPTIONS[localSettings.llmProvider][0].model
+    const currentModel = providerModels[localSettings.llmProvider] || localSettings.llmModel || getModelOptions(localSettings.llmProvider)[0].id as LLMModel
     console.log('Settings selection:', { provider: localSettings.llmProvider, model: currentModel })
   }, [localSettings.llmProvider, localSettings.llmModel, providerModels])
 
@@ -177,15 +142,14 @@ const Settings: React.FC<SettingsProps> = ({ isOpen, onClose, settings, onSettin
     let changed = false
     const fixed: Record<LLMProvider, LLMModel> = { ...providerModels }
     for (const p of allProviders) {
-      const options = MODEL_OPTIONS[p].map(o => o.model)
+      const options = getModelOptions(p).map((o: any) => o.id as LLMModel)
       if (!fixed[p] || !options.includes(fixed[p])) {
-        fixed[p] = MODEL_OPTIONS[p][0].model as LLMModel
+        fixed[p] = getModelOptions(p)[0].id as LLMModel
         changed = true
       }
     }
     if (changed) {
       setProviderModels(fixed)
-      try { localStorage.setItem('providerModels', JSON.stringify(fixed)) } catch {}
     }
   }, [providerModels])
 
@@ -442,7 +406,7 @@ const Settings: React.FC<SettingsProps> = ({ isOpen, onClose, settings, onSettin
           <div className={styles.settingGroup}>
             <h3>Default Provider</h3>
             <div className={styles.radioGroup}>
-              {PROVIDER_ORDER.map((provider) => (
+              {allProviders.map((provider) => (
                 <label key={`provider-${provider}`} className={styles.radioLabel}>
                   <input
                     type="radio"
@@ -450,7 +414,7 @@ const Settings: React.FC<SettingsProps> = ({ isOpen, onClose, settings, onSettin
                     value={provider}
                     checked={localSettings.llmProvider === provider}
                     onChange={() => {
-                      const nextModel = providerModels[provider] || MODEL_OPTIONS[provider][0].model
+                      const nextModel = providerModels[provider] || getModelOptions(provider)[0].id as LLMModel
                       setLocalSettings(prev => ({ ...prev, llmProvider: provider, llmModel: nextModel }))
                       setShowCustomFields(provider === 'custom')
                     }}
@@ -463,7 +427,7 @@ const Settings: React.FC<SettingsProps> = ({ isOpen, onClose, settings, onSettin
                      'Custom (BYO LLM)'}
                     {provider !== 'custom' && (
                       <span style={{ color: '#666', marginLeft: 8 }}>
-                        – {MODEL_OPTIONS[provider].find(m => m.model === providerModels[provider])?.label || MODEL_OPTIONS[provider][0].label}
+                        – {getModelOptions(provider).find((m: any) => m.id === providerModels[provider])?.name || getModelOptions(provider)[0].name}
                       </span>
                     )}
                   </span>
@@ -475,8 +439,8 @@ const Settings: React.FC<SettingsProps> = ({ isOpen, onClose, settings, onSettin
           <div className={styles.settingGroup}>
             <h3>Language Model</h3>
             <div className={styles.radioGroup}>
-              {PROVIDER_ORDER.map((provider) => {
-                const models = MODEL_OPTIONS[provider]
+              {allProviders.map((provider) => {
+                const models = getModelOptions(provider)
                 return (
                 <div key={provider}>
                   {/* Provider Header */}
@@ -495,8 +459,8 @@ const Settings: React.FC<SettingsProps> = ({ isOpen, onClose, settings, onSettin
                       <span style={{ color: '#666', marginLeft: 8 }}>
                         – {(() => {
                           const p = provider as LLMProvider
-                          const selected = providerModels[p] || MODEL_OPTIONS[p][0].model
-                          return MODEL_OPTIONS[p].find(m => m.model === selected)?.label || MODEL_OPTIONS[p][0].label
+                          const selected = providerModels[p] || getModelOptions(p)[0].id as LLMModel
+                          return getModelOptions(p).find((m: any) => m.id === selected)?.name || getModelOptions(p)[0].name
                         })()}
                       </span>
                     )}
@@ -504,30 +468,29 @@ const Settings: React.FC<SettingsProps> = ({ isOpen, onClose, settings, onSettin
                   
                   {/* Models under this provider */}
                   <div style={{ marginLeft: '20px', marginBottom: '16px' }}>
-                    {models.map((option) => (
-                      <label key={option.model} className={styles.radioLabel}>
+                    {models.map((option: any) => (
+                      <label key={option.id} className={styles.radioLabel}>
                         <input
                           type="radio"
                           name={`llmSelection-${provider}`}
-                          value={`${provider}-${option.model}`}
-                          checked={(providerModels[provider as LLMProvider] || MODEL_OPTIONS[provider as LLMProvider][0].model) === option.model}
-                          onChange={() => {
-                            // Update provider-specific default without switching default provider
-                            const p = provider as LLMProvider
-                            setProviderModels(prev => {
-                              const updated = { ...prev, [p]: option.model }
-                              try { localStorage.setItem('providerModels', JSON.stringify(updated)) } catch {}
-                              return updated
-                            })
-                            // If this provider is currently selected as default, sync llmModel
-                            if (localSettings.llmProvider === provider) {
-                              setLocalSettings(prev => ({ ...prev, llmModel: option.model }))
-                            }
-                            setShowCustomFields(provider === 'custom')
-                          }}
+                          value={`${provider}-${option.id}`}
+                          checked={(providerModels[provider as LLMProvider] || getModelOptions(provider as LLMProvider)[0].id as LLMModel) === option.id}
+                            onChange={() => {
+                              // Update provider-specific default without switching default provider
+                              const p = provider as LLMProvider
+                              setProviderModels(prev => {
+                                const updated = { ...prev, [p]: option.id as LLMModel }
+                                return updated
+                              })
+                              // If this provider is currently selected as default, sync llmModel
+                              if (localSettings.llmProvider === provider) {
+                                setLocalSettings(prev => ({ ...prev, llmModel: option.id as LLMModel }))
+                              }
+                              setShowCustomFields(provider === 'custom')
+                            }}
                         />
                         <span>
-                          {option.label}
+                          {option.name}
                           {option.description && (
                             <span style={{ color: '#666', fontSize: '14px', marginLeft: '8px' }}>
                               - {option.description}

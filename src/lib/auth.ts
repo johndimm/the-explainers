@@ -14,7 +14,8 @@ export const authOptions: AuthOptions = {
           response_type: "code",
           scope: "openid email profile"
         }
-      }
+      },
+      checks: ["state"]
     })
   ],
   callbacks: {
@@ -70,6 +71,9 @@ export const authOptions: AuthOptions = {
     },
     session: async (message) => {
       console.log('NextAuth session event:', message)
+    },
+    signIn: async (message) => {
+      console.log('NextAuth signIn event:', message)
     }
   },
   // Mobile-specific configuration

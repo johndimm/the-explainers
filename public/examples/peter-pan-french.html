@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat History: Peter and Wendy</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        .chat-container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            overflow: hidden;
+        }
+        .chat-header {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+        .chat-title { font-size: 24px; font-weight: 600; margin-bottom: 8px; }
+        .chat-subtitle { font-size: 14px; opacity: 0.9; }
+        .context-section {
+            background: #f8f9fa;
+            padding: 20px;
+            border-bottom: 1px solid #e9ecef;
+        }
+        .context-title { font-size: 16px; font-weight: 600; margin-bottom: 12px; color: #495057; }
+        .selected-text {
+            background: #e3f2fd;
+            border-left: 4px solid #2196f3;
+            padding: 12px 16px;
+            margin-bottom: 16px;
+            border-radius: 4px;
+            font-style: italic;
+            color: #1976d2;
+            white-space: pre-wrap;
+        }
+        .context-info {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 12px;
+            font-size: 14px;
+        }
+        .context-item {
+            background: white;
+            padding: 8px 12px;
+            border-radius: 6px;
+            border: 1px solid #dee2e6;
+        }
+        .context-label { font-weight: 600; color: #6c757d; margin-right: 8px; }
+        .chat-messages { padding: 20px; max-height: 600px; overflow-y: auto; }
+        .message { margin-bottom: 20px; display: flex; flex-direction: column; }
+        .message.user { align-items: flex-end; }
+        .message.assistant { align-items: flex-start; }
+        .message-bubble {
+            max-width: 70%;
+            padding: 12px 16px;
+            border-radius: 18px;
+            word-wrap: break-word;
+            white-space: pre-wrap;
+        }
+        .message.user .message-bubble {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-bottom-right-radius: 4px;
+        }
+        .message.assistant .message-bubble {
+            background: #f1f3f4;
+            color: #202124;
+            border-bottom-left-radius: 4px;
+        }
+        .selected-quote {
+            font-style: italic;
+            background: rgba(255, 255, 255, 0.2);
+            padding: 8px 12px;
+            border-radius: 8px;
+            margin-bottom: 8px;
+        }
+        .message-meta {
+            font-size: 11px;
+            color: #6c757d;
+            margin-top: 4px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .message.user .message-meta { justify-content: flex-end; }
+        .provider-badge {
+            background: #e9ecef;
+            color: #495057;
+            padding: 2px 6px;
+            border-radius: 10px;
+            font-size: 10px;
+            font-weight: 500;
+        }
+        .provider-badge.openai { background: #10a37f; color: white; }
+        .provider-badge.gemini { background: #4285f4; color: white; }
+        .provider-badge.youtube { background: #ff0000; color: white; }
+        .video-message { background: #fff3e0 !important; border: 1px solid #ffb74d; }
+        .video-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            color: #f57c00;
+            text-decoration: none;
+            font-weight: 500;
+        }
+        .video-link:hover { text-decoration: underline; }
+        .settings-footer {
+            background: #f8f9fa;
+            padding: 16px 20px;
+            border-top: 1px solid #e9ecef;
+            font-size: 12px;
+            color: #6c757d;
+            text-align: center;
+        }
+        .settings-item { display: inline-block; margin: 0 12px; }
+        .settings-label { font-weight: 600; margin-right: 4px; }
+        @media (max-width: 600px) {
+            .message-bubble { max-width: 85%; }
+            .context-info { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <div class="chat-container">
+        <div class="chat-header">
+            <div class="chat-title">Peter and Wendy Discussion</div>
+            <div class="chat-subtitle">Sep 19, 2025, 3:14 PM • J.M. Barrie</div>
+        </div>
+
+        
+        <div class="context-section">
+            <div class="context-title">📖 Context</div>
+            <div class="context-info">
+                
+                        <div class="context-item"><span class="context-label">Chapter:</span>I</div>
+                        
+                        
+                        
+                        
+                    
+            </div>
+        </div>
+        
+
+        <div class="chat-messages">
+            
+      <div class="message user">
+          <div class="message-bubble">
+              <div class="selected-quote">"All children, except one, grow up. They soon know that they will grow
+up, and the way Wendy knew was this. One day when she was two years old
+she was playing in a garden, and she plucked another flower and ran
+with it to her mother. I suppose she must have looked rather
+delightful, for Mrs. Darling put her hand to her heart and cried, “Oh,
+why can’t you remain like this for ever!” This was all that passed
+between them on the subject, but henceforth Wendy knew that she must
+grow up. You always know after you are two. Two is the beginning of the
+end."</div>
+          </div>
+          <div class="message-meta">
+              <span class="timestamp">3:13 PM</span>
+          </div>
+      </div>
+      <div class="message assistant">
+          <div class="message-bubble">Ce passage de "Peter Pan" explique comment Wendy réalise qu'elle va grandir.  Quand Wendy avait deux ans, elle jouait dans un jardin et a donné une fleur à sa maman.  Sa maman, très émue par ce geste mignon, a exprimé son souhait que Wendy reste toujours aussi petite et adorable.  Même si elles n'ont pas beaucoup parlé de ça, Wendy a compris à ce moment-là, grâce aux paroles de sa maman, qu'elle allait forcément grandir un jour.  L'auteur dit que dès l'âge de deux ans, les enfants commencent à comprendre qu'ils ne resteront pas toujours des bébés.  "Deux ans, c'est le début de la fin" signifie simplement que l'enfance est une période limitée dans le temps.
+
+En gros, c'est un moment important dans la vie de Wendy, où elle prend conscience de la réalité du temps qui passe et de la croissance inévitable.  C'est une triste mais belle étape de la vie de tout enfant.
+</div>
+          <div class="message-meta">
+              <span class="provider-badge gemini">GEMINI (gemini-1.5-flash)</span>
+              <span class="timestamp">3:13 PM</span>
+          </div>
+      </div>
+        </div>
+
+        
+        <div class="settings-footer">
+            <span class="settings-item"><span class="settings-label">Provider:</span>gemini</span>
+            <span class="settings-item"><span class="settings-label">Style:</span>neutral</span>
+            <span class="settings-item"><span class="settings-label">Length:</span>medium</span>
+            <span class="settings-item"><span class="settings-label">Saved:</span>Sep 19, 2025, 3:14 PM</span>
+        </div>
+        
+    </div>
+</body>
+</html>

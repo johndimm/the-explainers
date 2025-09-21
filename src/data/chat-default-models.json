@@ -1,0 +1,6 @@
+{
+  "gemini": "gemini-1.5-flash",
+  "openai": "gpt-4o",
+  "deepseek": "deepseek-chat",
+  "anthropic": null
+}

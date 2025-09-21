@@ -15,7 +15,7 @@
   background: white;
   border-radius: 12px;
   width: 98%;
-  max-width: 1000px;
+  max-width: 1024px;
   height: 95%;
   max-height: 800px;
   display: flex;
@@ -143,6 +143,8 @@
 
 .messageInput {
   flex: 1;
+  min-width: 0; /* Allow flex item to shrink below content size */
+  max-width: calc(100% - 80px); /* Ensure space for send button */
   padding: 12px 16px;
   border: 1px solid #d0d7de;
   border-radius: 20px;
@@ -171,6 +173,7 @@
   font-weight: 500;
   transition: background-color 0.2s;
   min-width: 60px;
+  flex-shrink: 0; /* Prevent send button from shrinking */
 }
 
 .sendButton:hover:not(:disabled) {
@@ -469,6 +472,7 @@
   
   .inputContainer {
     padding: 8px 12px;
+    gap: 8px; /* Reduce gap on mobile */
   }
   
   .message {
@@ -483,12 +487,15 @@
   .messageInput {
     font-size: 16px; /* Prevents zoom on iOS */
     padding: 10px 14px;
+    min-width: 0; /* Allow shrinking */
+    max-width: calc(100% - 70px); /* Account for smaller send button */
   }
   
   .sendButton {
     padding: 10px 16px;
     font-size: 14px;
     min-width: 50px;
+    flex-shrink: 0; /* Prevent send button from shrinking */
   }
   
   /* Hide less important elements on very small screens */
@@ -577,6 +584,17 @@
   
   .inputContainer {
     padding: 6px 8px;
+    gap: 6px; /* Even smaller gap on very small screens */
+  }
+  
+  .messageInput {
+    max-width: calc(100% - 60px); /* Even more space for send button */
+    font-size: 16px; /* Keep 16px to prevent zoom */
+  }
+  
+  .sendButton {
+    min-width: 45px; /* Smaller minimum width */
+    padding: 8px 12px; /* Smaller padding */
   }
   
   .messageContent {
@@ -1477,8 +1495,84 @@
 
 /* Ensure dropdown menus render in light theme with readable text */
 .providerSelect option, .styleSelect option, .lengthSelect option {
-  background: #ffffff;
-  color: #111827;
+  background: #ffffff !important;
+  color: #111827 !important;
+}
+
+/* Force light theme on mobile devices for select elements */
+@media (max-width: 768px) {
+  .providerSelect, .styleSelect, .lengthSelect {
+    background: #ffffff !important;
+    color: #111827 !important;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+  }
+  
+  .providerSelect option, .styleSelect option, .lengthSelect option {
+    background: #ffffff !important;
+    color: #111827 !important;
+  }
+  
+  /* Override any dark theme system styles */
+  .providerSelect:focus, .styleSelect:focus, .lengthSelect:focus {
+    background: #ffffff !important;
+    color: #111827 !important;
+  }
+  
+  /* Add custom dropdown arrow for better mobile experience */
+  .providerSelect::after, .styleSelect::after, .lengthSelect::after {
+    content: '▼';
+    position: absolute;
+    right: 8px;
+    top: 50%;
+    transform: translateY(-50%);
+    pointer-events: none;
+    color: #6b7280;
+    font-size: 10px;
+  }
+  
+  /* Ensure proper border and shadow on mobile */
+  .providerSelect, .styleSelect, .lengthSelect {
+    border: 1px solid #d0d7de !important;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05) !important;
+  }
+}
+
+/* Extra specific mobile styles for provider select */
+@media (max-width: 768px) {
+  .chatContainer .providerSelect,
+  .chatContainer .providerSelect option,
+  .chatContainer .providerSelect:focus,
+  .chatContainer .providerSelect:active,
+  .chatContainer .providerSelect:hover {
+    background: #ffffff !important;
+    color: #111827 !important;
+    background-color: #ffffff !important;
+    color: #111827 !important;
+  }
+  
+  /* Force override for all possible states */
+  .providerSelect[disabled],
+  .providerSelect:disabled {
+    background: #f6f8fa !important;
+    color: #6b7280 !important;
+  }
+  
+  /* Webkit-specific overrides for mobile browsers */
+  .providerSelect::-webkit-appearance,
+  .providerSelect::-moz-appearance {
+    background: #ffffff !important;
+    color: #111827 !important;
+  }
+  
+  /* Additional specificity for provider select */
+  select.providerSelect,
+  select.providerSelect option {
+    background: #ffffff !important;
+    background-color: #ffffff !important;
+    color: #111827 !important;
+  }
 }
 
 .shareResponseButton {
