@@ -152,7 +152,7 @@ export default function Header() {
   const handleAuthAction = async () => {
     if (isAuthenticated) {
       setShowSignOutConfirm(true)
-      setShowMobileMenu(false)
+      // Keep menu open to show confirmation
     } else {
       await signIn()
       setShowMobileMenu(false)
@@ -161,11 +161,13 @@ export default function Header() {
 
   const handleConfirmSignOut = async () => {
     setShowSignOutConfirm(false)
+    setShowMobileMenu(false)
     await handleSignOut()
   }
 
   const handleCancelSignOut = () => {
     setShowSignOutConfirm(false)
+    setShowMobileMenu(false)
   }
 
   return (
