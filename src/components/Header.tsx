@@ -4,7 +4,6 @@ import React, { useEffect, useRef, useState } from 'react'
 import { useRouter, usePathname } from 'next/navigation'
 import { useAuth } from '@/contexts/AuthContext'
 import { getCurrentBook } from '@/utils/currentBookStorage'
-import ConfirmationPopup from './ConfirmationPopup'
 
 export default function Header() {
   const router = useRouter()
@@ -393,23 +392,66 @@ export default function Header() {
                       )}
                       {user?.email}
                     </div>
-                    <button 
-                      onClick={handleAuthAction}
-                      disabled={isLoading}
-                      style={{ 
-                        display: 'block', 
-                        width: '100%', 
-                        padding: '12px 16px', 
-                        background: 'none', 
-                        border: 'none', 
-                        textAlign: 'left', 
-                        cursor: isLoading ? 'not-allowed' : 'pointer',
-                        color: '#dc3545',
-                        opacity: isLoading ? 0.6 : 1
-                      }}
-                    >
-                      {isLoading ? 'Signing out...' : '🚪 Sign Out'}
-                    </button>
+{!showSignOutConfirm ? (
+                      <button 
+                        onClick={handleAuthAction}
+                        disabled={isLoading}
+                        style={{ 
+                          display: 'block', 
+                          width: '100%', 
+                          padding: '12px 16px', 
+                          background: 'none', 
+                          border: 'none', 
+                          textAlign: 'left', 
+                          cursor: isLoading ? 'not-allowed' : 'pointer',
+                          color: '#dc3545',
+                          opacity: isLoading ? 0.6 : 1
+                        }}
+                      >
+                        {isLoading ? 'Signing out...' : '🚪 Sign Out'}
+                      </button>
+                    ) : (
+                      <div style={{ padding: '12px 16px', borderTop: '1px solid #f0f0f0' }}>
+                        <div style={{ marginBottom: '8px', fontSize: '14px', fontWeight: 'bold', color: '#333' }}>
+                          Sign Out
+                        </div>
+                        <div style={{ marginBottom: '12px', fontSize: '12px', color: '#666' }}>
+                          Are you sure you want to sign out?
+                        </div>
+                        <div style={{ display: 'flex', gap: '8px' }}>
+                          <button
+                            onClick={handleCancelSignOut}
+                            style={{
+                              flex: 1,
+                              padding: '6px 12px',
+                              fontSize: '12px',
+                              border: '1px solid #ddd',
+                              background: '#fff',
+                              borderRadius: '4px',
+                              cursor: 'pointer',
+                              color: '#333'
+                            }}
+                          >
+                            Cancel
+                          </button>
+                          <button
+                            onClick={handleConfirmSignOut}
+                            style={{
+                              flex: 1,
+                              padding: '6px 12px',
+                              fontSize: '12px',
+                              border: 'none',
+                              background: '#dc3545',
+                              borderRadius: '4px',
+                              cursor: 'pointer',
+                              color: '#fff'
+                            }}
+                          >
+                            Sign Out
+                          </button>
+                        </div>
+                      </div>
+                    )}
                   </>
                 ) : (
                   <button 
@@ -436,22 +478,6 @@ export default function Header() {
         </div>
       </div>
       
-      {/* Sign Out Confirmation Popup */}
-      <ConfirmationPopup
-        isOpen={showSignOutConfirm}
-        title="Sign Out"
-        message="Are you sure you want to sign out?"
-        confirmText="Sign Out"
-        cancelText="Cancel"
-        onConfirm={handleConfirmSignOut}
-        onCancel={handleCancelSignOut}
-        type="warning"
-        variant="popup"
-        position={{
-          top: '60px',
-          right: '20px'
-        }}
-      />
     </header>
   )
 }
