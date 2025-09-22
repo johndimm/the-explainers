@@ -1169,7 +1169,7 @@ export const useBookmarkRestoreAndSave = (
       // Wait a bit for session to be fully loaded
       await new Promise(resolve => setTimeout(resolve, 100))
       
-      const userEmail = session?.user?.email || (process.env.NODE_ENV === 'development' ? 'john.r.dimm@gmail.com' : null)
+      const userEmail = session?.user?.email || (process.env.NODE_ENV === 'development' ? 'dev-user@example.com' : null)
       
       if (userEmail) {
         try {
@@ -1260,7 +1260,7 @@ export const useBookmarkRestoreAndSave = (
 
         // Save to database if user is authenticated or in development mode
         const isLocalDev = process.env.NODE_ENV === 'development' && typeof window !== 'undefined' && window.location.hostname === 'localhost'
-        const userEmail = session?.user?.email || (isLocalDev ? 'john.r.dimm@gmail.com' : null)
+        const userEmail = session?.user?.email || (isLocalDev ? 'dev-user@example.com' : null)
         
         log('bookmark', `Session email: ${session?.user?.email}, isLocalDev: ${isLocalDev}, userEmail: ${userEmail}`)
         

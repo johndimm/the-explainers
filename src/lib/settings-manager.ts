@@ -17,13 +17,15 @@ export class SettingsManager {
   }
 
   private setupMigrations() {
-    // Migration 1: Claude 3.5 Sonnet -> Claude 3 Sonnet
+    // Migration 1: Old Claude models -> Default Claude model from JSON
     this.migrations.push((settings) => {
-      if (settings.llmProvider === 'anthropic' && settings.llmModel === 'claude-3-5-sonnet') {
-        console.log('SettingsManager: Migrating Claude 3.5 Sonnet to Claude 3 Sonnet')
+      if (settings.llmProvider === 'anthropic' && 
+          (settings.llmModel === 'claude-3-sonnet-20240229' || settings.llmModel === 'claude-3-5-sonnet')) {
+        const defaultModel = (models as any).defaults.anthropic
+        console.log(`SettingsManager: Migrating old Claude model to ${defaultModel}`)
         return {
           ...settings,
-          llmModel: 'claude-3-sonnet-20240229'
+          llmModel: defaultModel
         }
       }
       return settings
@@ -47,7 +49,7 @@ export class SettingsManager {
 
   // Get default model for a provider
   getDefaultModelForProvider(provider: string): string {
-    return (models as any).defaults[provider] || (models as any).chatDefaults[provider]
+    return (models as any).defaults[provider]
   }
 
   // Migrate settings through all migrations
