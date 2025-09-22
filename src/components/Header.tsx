@@ -4,6 +4,7 @@ import React, { useEffect, useRef, useState } from 'react'
 import { useRouter, usePathname } from 'next/navigation'
 import { useAuth } from '@/contexts/AuthContext'
 import { getCurrentBook } from '@/utils/currentBookStorage'
+import ConfirmationPopup from './ConfirmationPopup'
 
 export default function Header() {
   const router = useRouter()
@@ -17,6 +18,7 @@ export default function Header() {
   const [showSearch, setShowSearch] = useState(false)
   const [currentSearchIndex, setCurrentSearchIndex] = useState(0)
   const [totalSearchResults, setTotalSearchResults] = useState(0)
+  const [showSignOutConfirm, setShowSignOutConfirm] = useState(false)
 
   // Determine search context based on current page
   const getSearchContext = () => {
@@ -150,15 +152,21 @@ export default function Header() {
 
   const handleAuthAction = async () => {
     if (isAuthenticated) {
-      const confirmed = window.confirm('Are you sure you want to sign out?')
-      if (confirmed) {
-        setShowMobileMenu(false)
-        await handleSignOut()
-      }
+      setShowSignOutConfirm(true)
+      setShowMobileMenu(false)
     } else {
       await signIn()
       setShowMobileMenu(false)
     }
+  }
+
+  const handleConfirmSignOut = async () => {
+    setShowSignOutConfirm(false)
+    await handleSignOut()
+  }
+
+  const handleCancelSignOut = () => {
+    setShowSignOutConfirm(false)
   }
 
   return (
@@ -427,6 +435,18 @@ export default function Header() {
           )}
         </div>
       </div>
+      
+      {/* Sign Out Confirmation Popup */}
+      <ConfirmationPopup
+        isOpen={showSignOutConfirm}
+        title="Sign Out"
+        message="Are you sure you want to sign out?"
+        confirmText="Sign Out"
+        cancelText="Cancel"
+        onConfirm={handleConfirmSignOut}
+        onCancel={handleCancelSignOut}
+        type="warning"
+      />
     </header>
   )
 }
