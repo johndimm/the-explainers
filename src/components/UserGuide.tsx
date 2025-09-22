@@ -16,6 +16,22 @@ const UserGuide: React.FC = () => {
           <strong>Welcome to The Explainers!</strong> This app helps you understand difficult texts by providing AI-powered explanations of selected passages. Whether you're tackling Shakespeare, philosophy, or classic literature, we make challenging texts accessible.
         </div>
 
+        <div style={{ margin: '30px 0', textAlign: 'center' }}>
+          <h3 style={{ color: '#8b5cf6', marginBottom: '20px' }}>📺 Watch the Demo</h3>
+          <div style={{ position: 'relative', width: '100%', height: '0', paddingBottom: '56.25%', margin: '0 auto', maxWidth: '640px' }}>
+            <iframe 
+              src="https://www.youtube.com/embed/UefibaSk1Dc" 
+              title="The Explainers Demo"
+              style={{ position: 'absolute', top: '0', left: '0', width: '100%', height: '100%', border: 'none', borderRadius: '8px' }}
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+              allowFullScreen>
+            </iframe>
+          </div>
+          <p style={{ marginTop: '15px', color: '#666', fontSize: '14px' }}>
+            See how easy it is to get AI-powered explanations of difficult texts!
+          </p>
+        </div>
+
         <h2 style={{ color: '#10b981', marginTop: '30px', marginBottom: '15px' }}>Getting Started</h2>
 
         <h3 style={{ color: '#007bff', marginTop: '25px', marginBottom: '10px' }}>Quick Start</h3>
