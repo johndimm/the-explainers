@@ -11,6 +11,13 @@ interface ConfirmationPopupProps {
   onConfirm: () => void
   onCancel: () => void
   type?: 'danger' | 'warning' | 'info'
+  variant?: 'modal' | 'popup'
+  position?: {
+    top?: number | string
+    left?: number | string
+    right?: number | string
+    bottom?: number | string
+  }
 }
 
 const ConfirmationPopup: React.FC<ConfirmationPopupProps> = ({
@@ -21,7 +28,9 @@ const ConfirmationPopup: React.FC<ConfirmationPopupProps> = ({
   cancelText = 'Cancel',
   onConfirm,
   onCancel,
-  type = 'info'
+  type = 'info',
+  variant = 'modal',
+  position
 }) => {
   if (!isOpen) return null
 
@@ -46,6 +55,56 @@ const ConfirmationPopup: React.FC<ConfirmationPopupProps> = ({
   }
 
   const buttonStyles = getButtonStyles()
+
+  if (variant === 'popup') {
+    const popupStyle = {
+      position: 'fixed' as const,
+      zIndex: 50,
+      ...position
+    }
+
+    return (
+      <>
+        {/* Backdrop for popup */}
+        <div 
+          className="fixed inset-0 z-40"
+          onClick={onCancel}
+        />
+        
+        {/* Popup */}
+        <div 
+          style={popupStyle}
+          className="bg-white rounded-lg shadow-xl border border-gray-200 min-w-64 p-4"
+        >
+          {/* Title */}
+          <h3 className="text-sm font-semibold text-gray-900 mb-2">
+            {title}
+          </h3>
+          
+          {/* Message */}
+          <p className="text-xs text-gray-600 mb-4">
+            {message}
+          </p>
+          
+          {/* Buttons */}
+          <div className="flex justify-end space-x-2">
+            <button
+              onClick={onCancel}
+              className={`px-3 py-1.5 text-xs rounded font-medium transition-colors ${buttonStyles.cancel}`}
+            >
+              {cancelText}
+            </button>
+            <button
+              onClick={onConfirm}
+              className={`px-3 py-1.5 text-xs rounded font-medium transition-colors ${buttonStyles.confirm}`}
+            >
+              {confirmText}
+            </button>
+          </div>
+        </div>
+      </>
+    )
+  }
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center">

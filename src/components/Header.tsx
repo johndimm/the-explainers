@@ -446,6 +446,11 @@ export default function Header() {
         onConfirm={handleConfirmSignOut}
         onCancel={handleCancelSignOut}
         type="warning"
+        variant="popup"
+        position={{
+          top: '60px',
+          right: '20px'
+        }}
       />
     </header>
   )
