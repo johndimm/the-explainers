@@ -17,6 +17,7 @@ export default function Header() {
   const [showSearch, setShowSearch] = useState(false)
   const [currentSearchIndex, setCurrentSearchIndex] = useState(0)
   const [totalSearchResults, setTotalSearchResults] = useState(0)
+  const [showSignOutConfirm, setShowSignOutConfirm] = useState(false)
 
   // Determine search context based on current page
   const getSearchContext = () => {
@@ -150,15 +151,23 @@ export default function Header() {
 
   const handleAuthAction = async () => {
     if (isAuthenticated) {
-      const confirmed = window.confirm('Are you sure you want to sign out?')
-      if (confirmed) {
-        setShowMobileMenu(false)
-        await handleSignOut()
-      }
+      setShowSignOutConfirm(true)
+      // Keep menu open to show confirmation
     } else {
       await signIn()
       setShowMobileMenu(false)
     }
+  }
+
+  const handleConfirmSignOut = async () => {
+    setShowSignOutConfirm(false)
+    setShowMobileMenu(false)
+    await handleSignOut()
+  }
+
+  const handleCancelSignOut = () => {
+    setShowSignOutConfirm(false)
+    setShowMobileMenu(false)
   }
 
   return (
@@ -385,23 +394,66 @@ export default function Header() {
                       )}
                       {user?.email}
                     </div>
-                    <button 
-                      onClick={handleAuthAction}
-                      disabled={isLoading}
-                      style={{ 
-                        display: 'block', 
-                        width: '100%', 
-                        padding: '12px 16px', 
-                        background: 'none', 
-                        border: 'none', 
-                        textAlign: 'left', 
-                        cursor: isLoading ? 'not-allowed' : 'pointer',
-                        color: '#dc3545',
-                        opacity: isLoading ? 0.6 : 1
-                      }}
-                    >
-                      {isLoading ? 'Signing out...' : '🚪 Sign Out'}
-                    </button>
+{!showSignOutConfirm ? (
+                      <button 
+                        onClick={handleAuthAction}
+                        disabled={isLoading}
+                        style={{ 
+                          display: 'block', 
+                          width: '100%', 
+                          padding: '12px 16px', 
+                          background: 'none', 
+                          border: 'none', 
+                          textAlign: 'left', 
+                          cursor: isLoading ? 'not-allowed' : 'pointer',
+                          color: '#dc3545',
+                          opacity: isLoading ? 0.6 : 1
+                        }}
+                      >
+                        {isLoading ? 'Signing out...' : '🚪 Sign Out'}
+                      </button>
+                    ) : (
+                      <div style={{ padding: '12px 16px', borderTop: '1px solid #f0f0f0' }}>
+                        <div style={{ marginBottom: '8px', fontSize: '14px', fontWeight: 'bold', color: '#333' }}>
+                          Sign Out
+                        </div>
+                        <div style={{ marginBottom: '12px', fontSize: '12px', color: '#666' }}>
+                          Are you sure you want to sign out?
+                        </div>
+                        <div style={{ display: 'flex', gap: '8px' }}>
+                          <button
+                            onClick={handleCancelSignOut}
+                            style={{
+                              flex: 1,
+                              padding: '6px 12px',
+                              fontSize: '12px',
+                              border: '1px solid #ddd',
+                              background: '#fff',
+                              borderRadius: '4px',
+                              cursor: 'pointer',
+                              color: '#333'
+                            }}
+                          >
+                            Cancel
+                          </button>
+                          <button
+                            onClick={handleConfirmSignOut}
+                            style={{
+                              flex: 1,
+                              padding: '6px 12px',
+                              fontSize: '12px',
+                              border: 'none',
+                              background: '#dc3545',
+                              borderRadius: '4px',
+                              cursor: 'pointer',
+                              color: '#fff'
+                            }}
+                          >
+                            Sign Out
+                          </button>
+                        </div>
+                      </div>
+                    )}
                   </>
                 ) : (
                   <button 
@@ -427,6 +479,7 @@ export default function Header() {
           )}
         </div>
       </div>
+      
     </header>
   )
 }

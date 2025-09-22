@@ -3,6 +3,7 @@ import OpenAI from 'openai'
 import Anthropic from '@anthropic-ai/sdk'
 import { GoogleGenerativeAI } from '@google/generative-ai'
 import { log } from '@/utils/log'
+import models from '@/data/models.json'
 
 export interface ChatMessage {
   role: 'user' | 'assistant'
@@ -33,7 +34,7 @@ const deepseekOpenai = new OpenAI({
 
 const gemini = new GoogleGenerativeAI(process.env.GEMINI_API_KEY || '')
 
-async function callOpenAI(messages: ChatMessage[], responseLength: string, model: string = 'gpt-4o', style?: string): Promise<string> {
+async function callOpenAI(messages: ChatMessage[], responseLength: string, model: string = (models as any).defaults.openai, style?: string): Promise<string> {
   const maxTokens = responseLength === 'brief' ? 200 : responseLength === 'medium' ? 500 : 1200
   
   try {
@@ -55,7 +56,7 @@ async function callOpenAI(messages: ChatMessage[], responseLength: string, model
   }
 }
 
-async function callAnthropic(messages: ChatMessage[], responseLength: string, model: string = 'claude-3-5-sonnet-20241022', style?: string): Promise<string> {
+async function callAnthropic(messages: ChatMessage[], responseLength: string, model: string = (models as any).defaults.anthropic, style?: string): Promise<string> {
   const maxTokens = responseLength === 'brief' ? 200 : responseLength === 'medium' ? 500 : 1200
   
   const systemMessage = messages.find(m => m.role === 'user')?.content.includes('Please explain this text:') 
@@ -88,7 +89,7 @@ async function callAnthropic(messages: ChatMessage[], responseLength: string, mo
     }
     
     if (error.message?.includes('inference profile')) {
-      throw new Error(`Model "${model}" requires special setup. Please try a different Claude model like "claude-3-5-sonnet-20241022".`)
+      throw new Error(`Model "${model}" requires special setup. Please try a different Claude model like "${(models as any).defaults.anthropic}".`)
     }
     
     // Generic error
@@ -96,7 +97,7 @@ async function callAnthropic(messages: ChatMessage[], responseLength: string, mo
   }
 }
 
-async function callDeepSeek(messages: ChatMessage[], responseLength: string, model: string = 'deepseek-chat', style?: string): Promise<string> {
+async function callDeepSeek(messages: ChatMessage[], responseLength: string, model: string = (models as any).defaults.deepseek, style?: string): Promise<string> {
   const maxTokens = responseLength === 'brief' ? 200 : responseLength === 'medium' ? 500 : 2000
   
   const completion = await deepseekOpenai.chat.completions.create({
@@ -112,7 +113,7 @@ async function callDeepSeek(messages: ChatMessage[], responseLength: string, mod
   return completion.choices[0]?.message?.content || 'No response'
 }
 
-async function callGemini(messages: ChatMessage[], responseLength: string, modelName: string = 'gemini-1.5-flash', style?: string): Promise<string> {
+async function callGemini(messages: ChatMessage[], responseLength: string, modelName: string = (models as any).defaults.gemini, style?: string): Promise<string> {
   const maxTokens = responseLength === 'brief' ? 200 : responseLength === 'medium' ? 500 : 1200
   
   const model = gemini.getGenerativeModel({ 
