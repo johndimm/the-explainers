@@ -2,6 +2,7 @@
 
 import React, { useState, useRef, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
+import { useSession } from 'next-auth/react'
 import styles from './ChatInterface.module.css'
 import { SettingsData, LLMProvider, ResponseLength, ExplanationStyle, LLMModel } from './Settings'
 import { ProfileData } from './Profile'
@@ -112,7 +113,17 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ selectedText, contextInfo
 
   const getModelLabel = (model?: string) => {
     if (!model) return ''
-    return (models as any).labels[model] || model
+    
+    // Find the model in the models array to get its name
+    for (const provider of (models as any).providers) {
+      const providerModels = (models as any).models[provider.id] || []
+      const foundModel = providerModels.find((m: any) => m.id === model)
+      if (foundModel) {
+        return foundModel.name
+      }
+    }
+    
+    return model
   }
 
   const scrollToLatestResponse = () => {
@@ -542,15 +553,8 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ selectedText, contextInfo
   // Don't auto-save immediately - let user see changes and use re-explain button
   // Settings will be saved when re-explain is used or when component unmounts
 
-  // Resolve model for a given provider using per-provider mapping
+  // Resolve model for a given provider using settings
   const resolveModelFor = (provider: LLMProvider, settingsModel?: LLMModel): string | undefined => {
-    try {
-      const stored = localStorage.getItem('providerModels')
-      if (stored) {
-        const map = JSON.parse(stored)
-        if (map && map[provider]) return map[provider]
-      }
-    } catch {}
     if (settingsModel) {
       if (provider === 'gemini' && settingsModel.startsWith('gemini-')) return settingsModel
       if (provider === 'openai' && settingsModel.startsWith('gpt-')) return settingsModel
@@ -570,23 +574,7 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ selectedText, contextInfo
   const callLLM = async (messages: Message[]): Promise<string> => {
     // Choose an appropriate model based on provider and current settings
     const chooseModelForProvider = (provider: LLMProvider, settingsModel?: LLMModel): string | undefined => {
-      // Prefer provider-specific mapping from localStorage if available
-      try {
-        const stored = localStorage.getItem('providerModels')
-        if (stored) {
-          const map = JSON.parse(stored)
-          if (map && map[provider]) {
-            // Migrate old Claude 3.5 Sonnet to working model
-            if (provider === 'anthropic' && map[provider] === 'claude-3-5-sonnet') {
-              map[provider] = 'claude-3-sonnet-20240229'
-              localStorage.setItem('providerModels', JSON.stringify(map))
-              console.log('ChatInterface: Migrated Claude 3.5 Sonnet to Claude 3 Sonnet')
-            }
-            return map[provider]
-          }
-        }
-      } catch {}
-      // Fallbacks: use current settings model if it matches the provider, else a default
+      // Use current settings model if it matches the provider, else use default
       if (settingsModel) {
         if (provider === 'gemini' && settingsModel.startsWith('gemini-')) return settingsModel
         if (provider === 'openai' && settingsModel.startsWith('gpt-')) return settingsModel
@@ -878,8 +866,17 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ selectedText, contextInfo
     
     // Check if user can use explanation
     if (!canUseExplanation(bookTitle, author, useCustomLLM)) {
-      log('ChatInterface: canUseExplanation returned false, redirecting to credits')
-      router.push('/credits')
+      // Check if user is authenticated to determine redirect destination
+      const isLocalDev = process.env.NODE_ENV === 'development' && typeof window !== 'undefined' && window.location.hostname === 'localhost'
+      const { data: session } = useSession()
+      
+      if (!session?.user?.email && !isLocalDev) {
+        log('ChatInterface: canUseExplanation returned false - not authenticated, redirecting to sign-in')
+        router.push('/auth/signin')
+      } else {
+        log('ChatInterface: canUseExplanation returned false - authenticated but no credits, redirecting to credits')
+        router.push('/credits')
+      }
       return
     }
     
@@ -981,8 +978,17 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ selectedText, contextInfo
     
     // Check if user can use explanation
     if (!canUseExplanation(bookTitle, author, useCustomLLM)) {
-      log('ChatInterface: canUseExplanation returned false, redirecting to credits')
-      router.push('/credits')
+      // Check if user is authenticated to determine redirect destination
+      const isLocalDev = process.env.NODE_ENV === 'development' && typeof window !== 'undefined' && window.location.hostname === 'localhost'
+      const { data: session } = useSession()
+      
+      if (!session?.user?.email && !isLocalDev) {
+        log('ChatInterface: canUseExplanation returned false - not authenticated, redirecting to sign-in')
+        router.push('/auth/signin')
+      } else {
+        log('ChatInterface: canUseExplanation returned false - authenticated but no credits, redirecting to credits')
+        router.push('/credits')
+      }
       return
     }
     
@@ -1436,12 +1442,20 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ selectedText, contextInfo
                             setSelectedProvider(newProvider); 
                             setShowProviderMenu(false)
                             
-                            // Update the model to match the provider's default
-                            const defaultModel = (models as any).defaults[newProvider]
+                            // Keep current model if it's valid for the new provider, otherwise use default
+                            let newModel = settings.llmModel
+                            if (!settings.llmModel || 
+                                (newProvider === 'gemini' && !settings.llmModel.startsWith('gemini-')) ||
+                                (newProvider === 'openai' && !settings.llmModel.startsWith('gpt-')) ||
+                                (newProvider === 'deepseek' && !settings.llmModel.startsWith('deepseek-')) ||
+                                (newProvider === 'anthropic' && !settings.llmModel.startsWith('claude-')) ||
+                                (newProvider === 'custom' && settings.llmModel !== 'custom')) {
+                              newModel = (models as any).defaults[newProvider]
+                            }
                             onSettingsChange({
                               ...settings,
                               llmProvider: newProvider,
-                              llmModel: defaultModel
+                              llmModel: newModel
                             })
                             setHasChanges(true)
                   }}

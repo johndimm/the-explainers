@@ -215,6 +215,13 @@ export const ProfileProvider: React.FC<ProfileProviderProps> = ({ children }) =>
       return true
     }
     
+    // Require authentication for first explanation (except in development)
+    const isLocalDev = process.env.NODE_ENV === 'development' && typeof window !== 'undefined' && window.location.hostname === 'localhost'
+    if (!session?.user?.email && !isLocalDev) {
+      log('ProfileContext: Not authenticated - access denied for first explanation')
+      return false
+    }
+    
     // Free if has unlimited access
     if (profile.hasUnlimitedAccess && profile.unlimitedAccessExpiry) {
       const now = new Date()

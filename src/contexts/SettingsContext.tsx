@@ -4,6 +4,7 @@ import React, { createContext, useContext, useState, useEffect, ReactNode } from
 import { useSession } from 'next-auth/react'
 import { SettingsData, LLMProvider, LLMModel, ResponseLength, FontFamily, ReadingMode, ExplanationStyle } from '../components/Settings'
 import { log } from '../utils/log'
+import models from '../data/models.json'
 
 interface SettingsContextType {
   settings: SettingsData
@@ -15,7 +16,7 @@ interface SettingsContextType {
 
 const DEFAULT_SETTINGS: SettingsData = {
   llmProvider: 'gemini',
-  llmModel: 'gemini-1.5-flash',
+  llmModel: (models as any).defaults.gemini,
   responseLength: 'brief',
   textFont: 'serif',
   chatFont: 'sans-serif',
@@ -57,7 +58,7 @@ export const SettingsProvider: React.FC<SettingsProviderProps> = ({ children }) 
           // Convert database settings to SettingsData format
           const convertedSettings: SettingsData = {
             llmProvider: dbSettings.llm_provider as LLMProvider,
-            llmModel: dbSettings.llm_model as LLMModel || 'gemini-1.5-flash', // Default if not set
+            llmModel: dbSettings.llm_model as LLMModel || (models as any).defaults.gemini, // Default if not set
             responseLength: dbSettings.response_length as ResponseLength,
             textFont: dbSettings.text_font as FontFamily,
             chatFont: dbSettings.chat_font as FontFamily,

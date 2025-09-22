@@ -51,6 +51,7 @@ const getModelOptions = (provider: LLMProvider) => {
 
 const Settings: React.FC<SettingsProps> = ({ isOpen, onClose, settings, onSettingsChange }) => {
   const [localSettings, setLocalSettings] = useState<SettingsData>(settings)
+  // Initialize providerModels from settings or defaults
   const [providerModels, setProviderModels] = useState<Record<LLMProvider, LLMModel>>((models as any).defaults as Record<LLMProvider, LLMModel>)
 
   // Get provider order from JSON data
@@ -65,11 +66,13 @@ const Settings: React.FC<SettingsProps> = ({ isOpen, onClose, settings, onSettin
   useEffect(() => {
     console.log('Settings: settings prop changed to:', settings)
     
-    // Always migrate old Claude 3.5 Sonnet to working model
+    // Always migrate old Claude models to default model from JSON
     let migratedSettings = { ...settings }
-    if (settings.llmProvider === 'anthropic' && settings.llmModel === 'claude-3-5-sonnet') {
-      migratedSettings.llmModel = 'claude-3-sonnet-20240229' as LLMModel
-      console.log('Settings: Migrated Claude 3.5 Sonnet to Claude 3 Sonnet')
+    if (settings.llmProvider === 'anthropic' && 
+        (settings.llmModel === 'claude-3-sonnet-20240229' || settings.llmModel === 'claude-3-5-sonnet')) {
+      const defaultModel = (models as any).defaults.anthropic
+      migratedSettings.llmModel = defaultModel as LLMModel
+      console.log(`Settings: Migrated old Claude model to ${defaultModel}`)
       onSettingsChange(migratedSettings)
       return // Don't set local settings yet, wait for the updated settings to come back
     }
@@ -119,10 +122,11 @@ const Settings: React.FC<SettingsProps> = ({ isOpen, onClose, settings, onSettin
       setLocalSettings(prev => ({ ...prev, llmModel: defaultModel }))
     }
     
-    // Force migration of old Claude 3.5 Sonnet
-    if (localSettings.llmProvider === 'anthropic' && localSettings.llmModel === 'claude-3-5-sonnet') {
-      const migratedModel = 'claude-3-sonnet-20240229' as LLMModel
-      console.log('Settings: Force migrating Claude 3.5 Sonnet to Claude 3 Sonnet')
+    // Only migrate truly deprecated Claude models, not valid ones like Haiku
+    if (localSettings.llmProvider === 'anthropic' && 
+        (localSettings.llmModel === 'claude-3-sonnet-20240229' || localSettings.llmModel === 'claude-3-5-sonnet')) {
+      const migratedModel = (models as any).defaults.anthropic as LLMModel
+      console.log(`Settings: Force migrating deprecated Claude model ${localSettings.llmModel} to ${migratedModel}`)
       setLocalSettings(prev => ({ ...prev, llmModel: migratedModel }))
       onSettingsChange({ ...localSettings, llmModel: migratedModel })
     }
@@ -152,6 +156,7 @@ const Settings: React.FC<SettingsProps> = ({ isOpen, onClose, settings, onSettin
       setProviderModels(fixed)
     }
   }, [providerModels])
+
 
 
   const handleReset = () => {
@@ -476,13 +481,13 @@ const Settings: React.FC<SettingsProps> = ({ isOpen, onClose, settings, onSettin
                           value={`${provider}-${option.id}`}
                           checked={(providerModels[provider as LLMProvider] || getModelOptions(provider as LLMProvider)[0].id as LLMModel) === option.id}
                             onChange={() => {
-                              // Update provider-specific default without switching default provider
+                              // Update provider-specific default
                               const p = provider as LLMProvider
                               setProviderModels(prev => {
                                 const updated = { ...prev, [p]: option.id as LLMModel }
                                 return updated
                               })
-                              // If this provider is currently selected as default, sync llmModel
+                              // If this provider is currently selected as default, update llmModel
                               if (localSettings.llmProvider === provider) {
                                 setLocalSettings(prev => ({ ...prev, llmModel: option.id as LLMModel }))
                               }
