@@ -75,9 +75,15 @@ function ChatContent() {
               🔒
             </div>
             <h2 className="text-xl font-semibold mb-4">Authentication Required</h2>
-            <p className="text-gray-600 mb-6">
+            <p className="text-gray-600 mb-4">
               Please sign in to access the AI chat feature.
             </p>
+            <div className="bg-blue-50 border border-blue-200 rounded-lg p-4 mb-6 text-sm">
+              <div className="font-medium text-blue-900 mb-2">📧 Use any email address</div>
+              <div className="text-blue-800">
+                Don't have a Gmail account? You can use any email address (Yahoo, Outlook, company email, etc.) by creating a Google account linked to your existing email.
+              </div>
+            </div>
             <button
               onClick={() => router.push('/auth/signin')}
               className="btn btn-primary"

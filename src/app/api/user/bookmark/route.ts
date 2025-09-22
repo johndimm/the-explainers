@@ -8,7 +8,7 @@ export async function GET(request: NextRequest) {
     const session = await getServerSession(authOptions)
     
     // In development, if no session, try to get the bookmark for the default user
-    const userEmail = session?.user?.email || (process.env.NODE_ENV === 'development' ? 'john.r.dimm@gmail.com' : null)
+    const userEmail = session?.user?.email || (process.env.NODE_ENV === 'development' ? 'dev-user@example.com' : null)
     
     if (!userEmail) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
@@ -43,7 +43,7 @@ export async function POST(request: NextRequest) {
     const session = await getServerSession(authOptions)
     
     // In development, if no session, use the default user
-    const userEmail = session?.user?.email || (process.env.NODE_ENV === 'development' ? 'john.r.dimm@gmail.com' : null)
+    const userEmail = session?.user?.email || (process.env.NODE_ENV === 'development' ? 'dev-user@example.com' : null)
     
     if (!userEmail) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
