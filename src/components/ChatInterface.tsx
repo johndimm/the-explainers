@@ -51,6 +51,7 @@ interface ChatInterfaceProps {
 
 const ChatInterface: React.FC<ChatInterfaceProps> = ({ selectedText, contextInfo, settings, profile, onClose, onSettingsChange, bookTitle, author, isPageMode = false }) => {
   const router = useRouter()
+  const { data: session } = useSession()
   const [messages, setMessages] = useState<Message[]>([])
   const [inputValue, setInputValue] = useState('')
   const [isLoading, setIsLoading] = useState(false)
@@ -868,7 +869,6 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ selectedText, contextInfo
     if (!canUseExplanation(bookTitle, author, useCustomLLM)) {
       // Check if user is authenticated to determine redirect destination
       const isLocalDev = process.env.NODE_ENV === 'development' && typeof window !== 'undefined' && window.location.hostname === 'localhost'
-      const { data: session } = useSession()
       
       if (!session?.user?.email && !isLocalDev) {
         log('ChatInterface: canUseExplanation returned false - not authenticated, redirecting to sign-in')
@@ -980,7 +980,6 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ selectedText, contextInfo
     if (!canUseExplanation(bookTitle, author, useCustomLLM)) {
       // Check if user is authenticated to determine redirect destination
       const isLocalDev = process.env.NODE_ENV === 'development' && typeof window !== 'undefined' && window.location.hostname === 'localhost'
-      const { data: session } = useSession()
       
       if (!session?.user?.email && !isLocalDev) {
         log('ChatInterface: canUseExplanation returned false - not authenticated, redirecting to sign-in')
