@@ -49,7 +49,7 @@ export class SettingsManager {
 
   // Get default model for a provider
   getDefaultModelForProvider(provider: string): string {
-    return (models as any).defaults[provider] || (models as any).chatDefaults[provider]
+    return (models as any).defaults[provider]
   }
 
   // Migrate settings through all migrations

@@ -562,7 +562,7 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ selectedText, contextInfo
       if (provider === 'deepseek' && settingsModel.startsWith('deepseek-')) return settingsModel
       if (provider === 'anthropic' && settingsModel.startsWith('claude-')) return settingsModel
     }
-    return (models as any).chatDefaults[provider] || undefined
+    return (models as any).defaults[provider] || undefined
   }
 
   // Print current provider + model whenever selection changes
@@ -582,7 +582,7 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ selectedText, contextInfo
         if (provider === 'deepseek' && settingsModel.startsWith('deepseek-')) return settingsModel
         if (provider === 'anthropic' && settingsModel.startsWith('claude-')) return settingsModel
       }
-      return (models as any).chatDefaults[provider] || undefined
+      return (models as any).defaults[provider] || undefined
     }
 
     const selectedModel = chooseModelForProvider ? chooseModelForProvider(selectedProvider, settings.llmModel) : resolveModelFor(selectedProvider, settings.llmModel)

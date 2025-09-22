@@ -139,11 +139,5 @@
     "openai": "gpt-4o",
     "deepseek": "deepseek-v3",
     "custom": "custom"
-  },
-  "chatDefaults": {
-    "gemini": "gemini-1.5-flash",
-    "openai": "gpt-4o",
-    "deepseek": "deepseek-v3",
-    "anthropic": "claude-sonnet-4-20250514"
   }
 }
