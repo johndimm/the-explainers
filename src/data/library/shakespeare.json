@@ -65,37 +65,51 @@
   {
     "id": 1516,
     "title": "King Henry IV, Part 1",
-    "author": "William Shakespeare"
+    "author": "William Shakespeare",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Henry_IV,_Part_1",
+    "wikipediaTitle": "Henry IV, Part 1"
   },
   {
     "id": 1518,
     "title": "King Henry IV, Part 2",
-    "author": "William Shakespeare"
+    "author": "William Shakespeare",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Henry_IV,_Part_2",
+    "wikipediaTitle": "Henry IV, Part 2"
   },
   {
     "id": 1521,
     "title": "King Henry V",
-    "author": "William Shakespeare"
+    "author": "William Shakespeare",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Henry_V_(play)",
+    "wikipediaTitle": "Henry V"
   },
   {
     "id": 1500,
     "title": "King Henry VI, Part 1",
-    "author": "William Shakespeare"
+    "author": "William Shakespeare",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Henry_VI,_Part_1",
+    "wikipediaTitle": "Henry VI, Part 1"
   },
   {
     "id": 1501,
     "title": "King Henry VI, Part 2",
-    "author": "William Shakespeare"
+    "author": "William Shakespeare",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Henry_VI,_Part_2",
+    "wikipediaTitle": "Henry VI, Part 2"
   },
   {
     "id": 1502,
     "title": "King Henry VI, Part 3",
-    "author": "William Shakespeare"
+    "author": "William Shakespeare",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Henry_VI,_Part_3",
+    "wikipediaTitle": "Henry VI, Part 3"
   },
   {
     "id": 1541,
     "title": "King Henry VIII",
-    "author": "William Shakespeare"
+    "author": "William Shakespeare",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Henry_VIII_(play)",
+    "wikipediaTitle": "Henry VIII"
   },
   {
     "id": 1511,
@@ -114,17 +128,23 @@
   {
     "id": 1512,
     "title": "King Richard II",
-    "author": "William Shakespeare"
+    "author": "William Shakespeare",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Richard_II_(play)",
+    "wikipediaTitle": "Richard II"
   },
   {
     "id": 1503,
     "title": "King Richard III",
-    "author": "William Shakespeare"
+    "author": "William Shakespeare",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Richard_III_(play)",
+    "wikipediaTitle": "Richard III"
   },
   {
     "id": 1548,
     "title": "Locrine",
-    "author": "William Shakespeare"
+    "author": "William Shakespeare",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Locrine",
+    "wikipediaTitle": "Locrine"
   },
   {
     "id": 1510,
@@ -150,7 +170,9 @@
   {
     "id": 1545,
     "title": "Mucedorus",
-    "author": "William Shakespeare"
+    "author": "William Shakespeare",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Mucedorus",
+    "wikipediaTitle": "Mucedorus"
   },
   {
     "id": 1519,
@@ -169,7 +191,9 @@
   {
     "id": 1537,
     "title": "Pericles",
-    "author": "William Shakespeare"
+    "author": "William Shakespeare",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Pericles,_Prince_of_Tyre",
+    "wikipediaTitle": "Pericles, Prince of Tyre"
   },
   {
     "id": 1513,
@@ -182,17 +206,23 @@
     "id": 1041,
     "title": "Shakespeare's Sonnets",
     "directUrl": "https://www.gutenberg.org/cache/epub/1041/pg1041.txt",
-    "author": "William Shakespeare"
+    "author": "William Shakespeare",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Shakespeare%27s_sonnets",
+    "wikipediaTitle": "Shakespeare's Sonnets"
   },
   {
     "id": 1547,
     "title": "Sir Thomas More",
-    "author": "William Shakespeare"
+    "author": "William Shakespeare",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Sir_Thomas_More_(play)",
+    "wikipediaTitle": "Sir Thomas More"
   },
   {
     "id": 1546,
     "title": "Sonnets To Sundry Notes of Music",
-    "author": "William Shakespeare"
+    "author": "William Shakespeare",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/The_Passionate_Pilgrim",
+    "wikipediaTitle": "The Passionate Pilgrim"
   },
   {
     "id": 1504,
@@ -218,12 +248,16 @@
   {
     "id": 1544,
     "title": "The Passionate Pilgrim",
-    "author": "William Shakespeare"
+    "author": "William Shakespeare",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/The_Passionate_Pilgrim",
+    "wikipediaTitle": "The Passionate Pilgrim"
   },
   {
     "id": 1525,
     "title": "The Phoenix and the Turtle",
-    "author": "William Shakespeare"
+    "author": "William Shakespeare",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/The_Phoenix_and_the_Turtle",
+    "wikipediaTitle": "The Phoenix and the Turtle"
   },
   {
     "id": 1505,
@@ -249,7 +283,9 @@
   {
     "id": 1507,
     "title": "The Tragedy of Titus Andronicus",
-    "author": "William Shakespeare"
+    "author": "William Shakespeare",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Titus_Andronicus",
+    "wikipediaTitle": "Titus Andronicus"
   },
   {
     "id": 1542,
@@ -289,7 +325,9 @@
   {
     "id": 1509,
     "title": "Two Gentlemen of Verona",
-    "author": "William Shakespeare"
+    "author": "William Shakespeare",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/The_Two_Gentlemen_of_Verona",
+    "wikipediaTitle": "The Two Gentlemen of Verona"
   },
   {
     "id": 1045,
