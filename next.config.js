@@ -1,6 +1,14 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
+  // Enable static export for native builds
+  ...(process.env.BUILD_NATIVE === 'true' && {
+    output: 'export',
+    trailingSlash: true,
+    images: {
+      unoptimized: true
+    }
+  }),
   experimental: {
     serverComponentsExternalPackages: []
   },

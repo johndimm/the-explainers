@@ -1,0 +1,587 @@
+{
+  "analysisDate": "2025-09-20T21:32:57.891Z",
+  "statistics": {
+    "wikipediaArticles": 14341,
+    "gutenbergBooks": 86802,
+    "exactMatches": 64,
+    "matchRate": "0.45%"
+  },
+  "matches": [
+    {
+      "wikipediaTitle": "Samuel Adams",
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/Samuel%20Adams",
+      "gutenbergId": "Tourist's Edition,en,Drake",
+      "gutenbergTitle": "Samuel Adams",
+      "gutenbergAuthor": "1833-1905,White Mountains (N.H. and Me.) -- Description and travel,F001,Category: Adventure; Category: Mythology",
+      "gutenbergLanguage": "Legends & Folklore; Category: Travel Writing",
+      "matchType": "exact"
+    },
+    {
+      "wikipediaTitle": "Adolphe",
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/Adolphe",
+      "gutenbergId": "faisant suite à l'Histoire de la Révolution Française,fr,Thiers",
+      "gutenbergTitle": "Adolphe",
+      "gutenbergAuthor": "1797-1877,France -- History -- Consulate and First Empire",
+      "gutenbergLanguage": "1799-1815,DC,FR Histoire; Category: History - European; Category: History - Modern (1750+); Category: History - Warfare",
+      "matchType": "exact"
+    },
+    {
+      "wikipediaTitle": "Adolphe",
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/Adolphe",
+      "gutenbergId": "faisant suite à l'Histoire de la Révolution Française,fr,Thiers",
+      "gutenbergTitle": "Adolphe",
+      "gutenbergAuthor": "1797-1877,France -- History -- Consulate and First Empire",
+      "gutenbergLanguage": "1799-1815,DC,FR Histoire; Category: History - European; Category: History - Modern (1750+); Category: History - Warfare",
+      "matchType": "exact"
+    },
+    {
+      "wikipediaTitle": "Adolphe",
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/Adolphe",
+      "gutenbergId": "The story of Rodolphe and Coco the Chimpanzee,fr,Dreyspring",
+      "gutenbergTitle": "Adolphe",
+      "gutenbergAuthor": "1835-1906,French language -- Readers,PC,FR Jeunesse; Category: Children & Young Adult Reading; Category: Language & Communication",
+      "gutenbergLanguage": "English",
+      "matchType": "exact"
+    },
+    {
+      "wikipediaTitle": "Adolphe",
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/Adolphe",
+      "gutenbergId": "faisant suite à l'Histoire de la Révolution Française,fr,Thiers",
+      "gutenbergTitle": "Adolphe",
+      "gutenbergAuthor": "1797-1877,France -- History -- Consulate and First Empire",
+      "gutenbergLanguage": "1799-1815,DC,FR Histoire; Category: History - European; Category: History - Modern (1750+); Category: History - Warfare",
+      "matchType": "exact"
+    },
+    {
+      "wikipediaTitle": "Adolphe",
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/Adolphe",
+      "gutenbergId": "faisant suite à l'Histoire de la Révolution Française,fr,Thiers",
+      "gutenbergTitle": "Adolphe",
+      "gutenbergAuthor": "1797-1877,France -- History -- Consulate and First Empire",
+      "gutenbergLanguage": "1799-1815,DC,FR Histoire; Category: History - European; Category: History - Modern (1750+); Category: History - Warfare",
+      "matchType": "exact"
+    },
+    {
+      "wikipediaTitle": "Adolphe",
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/Adolphe",
+      "gutenbergId": "faisant suite à l'Histoire de la Révolution Française,fr,Thiers",
+      "gutenbergTitle": "Adolphe",
+      "gutenbergAuthor": "1797-1877,France -- History -- Consulate and First Empire",
+      "gutenbergLanguage": "1799-1815,DC,FR Histoire; Category: History - European; Category: History - Modern (1750+); Category: History - Warfare",
+      "matchType": "exact"
+    },
+    {
+      "wikipediaTitle": "Adolphe",
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/Adolphe",
+      "gutenbergId": "faisant suite à l'Histoire de la Révolution Française,fr,Thiers",
+      "gutenbergTitle": "Adolphe",
+      "gutenbergAuthor": "1797-1877,France -- History -- Consulate and First Empire",
+      "gutenbergLanguage": "1799-1815,DC,FR Histoire; Category: History - European; Category: History - Modern (1750+); Category: History - Royalty; Category: History - Warfare",
+      "matchType": "exact"
+    },
+    {
+      "wikipediaTitle": "Adolphe",
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/Adolphe",
+      "gutenbergId": "faisant suite à l'Histoire de la Révolution Française,fr,Thiers",
+      "gutenbergTitle": "Adolphe",
+      "gutenbergAuthor": "1797-1877,France -- History -- Consulate and First Empire",
+      "gutenbergLanguage": "1799-1815,DC,FR Histoire; Category: History - European; Category: History - Modern (1750+); Category: History - Warfare",
+      "matchType": "exact"
+    },
+    {
+      "wikipediaTitle": "Adolphe",
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/Adolphe",
+      "gutenbergId": "faisant suite à l'Histoire de la Révolution Française,fr,Thiers",
+      "gutenbergTitle": "Adolphe",
+      "gutenbergAuthor": "1797-1877,France -- History -- Consulate and First Empire",
+      "gutenbergLanguage": "1799-1815,DC,FR Histoire; Category: History - European; Category: History - Modern (1750+); Category: History - Warfare",
+      "matchType": "exact"
+    },
+    {
+      "wikipediaTitle": "Adolphe",
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/Adolphe",
+      "gutenbergId": "faisant suite à l'Histoire de la Révolution Française,fr,Thiers",
+      "gutenbergTitle": "Adolphe",
+      "gutenbergAuthor": "1797-1877,France -- History -- Consulate and First Empire",
+      "gutenbergLanguage": "1799-1815,DC,FR Histoire; Category: History - European; Category: History - Modern (1750+); Category: History - Warfare",
+      "matchType": "exact"
+    },
+    {
+      "wikipediaTitle": "Adolphe",
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/Adolphe",
+      "gutenbergId": "faisant suite à l'Histoire de la Révolution Française,fr,Thiers",
+      "gutenbergTitle": "Adolphe",
+      "gutenbergAuthor": "1797-1877,France -- History -- Consulate and First Empire",
+      "gutenbergLanguage": "1799-1815,DC,FR Histoire; Category: History - European; Category: History - Modern (1750+); Category: History - Warfare",
+      "matchType": "exact"
+    },
+    {
+      "wikipediaTitle": "Adolphe",
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/Adolphe",
+      "gutenbergId": "faisant suite à l'Histoire de la Révolution Française,fr,Thiers",
+      "gutenbergTitle": "Adolphe",
+      "gutenbergAuthor": "1797-1877,France -- History -- Consulate and First Empire",
+      "gutenbergLanguage": "1799-1815,DC,FR Histoire; Category: History - European; Category: History - Modern (1750+); Category: History - Warfare",
+      "matchType": "exact"
+    },
+    {
+      "wikipediaTitle": "Adolphe",
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/Adolphe",
+      "gutenbergId": "faisant suite à l'Histoire de la Révolution Française,fr,Thiers",
+      "gutenbergTitle": "Adolphe",
+      "gutenbergAuthor": "1797-1877,France -- History -- Consulate and First Empire",
+      "gutenbergLanguage": "1799-1815,DC,FR Histoire; Category: History - European; Category: History - Modern (1750+); Category: History - Warfare",
+      "matchType": "exact"
+    },
+    {
+      "wikipediaTitle": "Adolphe",
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/Adolphe",
+      "gutenbergId": "précédés de notes biographiques écrites par lui même,fr,Adam",
+      "gutenbergTitle": "Adolphe",
+      "gutenbergAuthor": "1803-1856,Musicians -- France; Music -- France,ML,FR Biographie",
+      "gutenbergLanguage": "Mémoires",
+      "matchType": "exact"
+    },
+    {
+      "wikipediaTitle": "Adolphe",
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/Adolphe",
+      "gutenbergId": "faisant suite à l'Histoire de la Révolution Française,fr,Thiers",
+      "gutenbergTitle": "Adolphe",
+      "gutenbergAuthor": "1797-1877,France -- History -- Consulate and First Empire",
+      "gutenbergLanguage": "1799-1815,DC,FR Histoire; Category: History - European; Category: History - Modern (1750+)",
+      "matchType": "exact"
+    },
+    {
+      "wikipediaTitle": "Adolphe",
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/Adolphe",
+      "gutenbergId": "faisant suite à l'Histoire de la Révolution Française,fr,Thiers",
+      "gutenbergTitle": "Adolphe",
+      "gutenbergAuthor": "1797-1877,France -- History -- Consulate and First Empire",
+      "gutenbergLanguage": "1799-1815,DC,FR Nouveautés; FR Histoire; Category: History - European; Category: History - Modern (1750+); Category: History - Religious; Category: History - Royalty; Category: History - Warfare",
+      "matchType": "exact"
+    },
+    {
+      "wikipediaTitle": "Adolphe",
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/Adolphe",
+      "gutenbergId": "faisant suite à l'Histoire de la Révolution Française,fr,Thiers",
+      "gutenbergTitle": "Adolphe",
+      "gutenbergAuthor": "1797-1877,France -- History -- Consulate and First Empire",
+      "gutenbergLanguage": "1799-1815,DC,Category: History - European; Category: History - Modern (1750+); Category: History - Warfare",
+      "matchType": "exact"
+    },
+    {
+      "wikipediaTitle": "Adolphe",
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/Adolphe",
+      "gutenbergId": "faisant suite à l'Histoire de la Révolution Française,fr,Thiers",
+      "gutenbergTitle": "Adolphe",
+      "gutenbergAuthor": "1797-1877,France -- History -- Consulate and First Empire",
+      "gutenbergLanguage": "1799-1815,DC,Category: History - European; Category: History - Modern (1750+); Category: History - Warfare",
+      "matchType": "exact"
+    },
+    {
+      "wikipediaTitle": "Adolphe",
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/Adolphe",
+      "gutenbergId": "faisant suite à l'Histoire de la Révolution Française,fr,Thiers",
+      "gutenbergTitle": "Adolphe",
+      "gutenbergAuthor": "1797-1877,France -- History -- Consulate and First Empire",
+      "gutenbergLanguage": "1799-1815,DC,Category: History - European; Category: History - Modern (1750+); Category: History - Warfare",
+      "matchType": "exact"
+    },
+    {
+      "wikipediaTitle": "Adolphe",
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/Adolphe",
+      "gutenbergId": "faisant suite à l'Histoire de la Révolution Française,fr,Thiers",
+      "gutenbergTitle": "Adolphe",
+      "gutenbergAuthor": "1797-1877,France -- History -- Consulate and First Empire",
+      "gutenbergLanguage": "1799-1815,DC,Category: History - European; Category: History - Modern (1750+); Category: History - Royalty; Category: History - Warfare",
+      "matchType": "exact"
+    },
+    {
+      "wikipediaTitle": "Adolphe",
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/Adolphe",
+      "gutenbergId": "faisant suite à l'Histoire de la Révolution Française,fr,Thiers",
+      "gutenbergTitle": "Adolphe",
+      "gutenbergAuthor": "1797-1877,France -- History -- Consulate and First Empire",
+      "gutenbergLanguage": "1799-1815,DC,Category: History - European; Category: History - Modern (1750+); Category: History - Royalty",
+      "matchType": "exact"
+    },
+    {
+      "wikipediaTitle": "Adolphe",
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/Adolphe",
+      "gutenbergId": "faisant suite à l'Histoire de la Révolution Française,fr,Thiers",
+      "gutenbergTitle": "Adolphe",
+      "gutenbergAuthor": "1797-1877,France -- History -- Consulate and First Empire",
+      "gutenbergLanguage": "1799-1815,DC,Category: History - European; Category: History - Modern (1750+); Category: History - Warfare",
+      "matchType": "exact"
+    },
+    {
+      "wikipediaTitle": "Ambrose",
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/Ambrose",
+      "gutenbergId": "In the Midst of Life: Tales of Soldiers and Civilians,en,Bierce",
+      "gutenbergTitle": "Ambrose",
+      "gutenbergAuthor": "1842-1914?,United States -- History -- Civil War",
+      "gutenbergLanguage": "1861-1865 -- Fiction; Horror tales",
+      "matchType": "exact"
+    },
+    {
+      "wikipediaTitle": "Ambrose",
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/Ambrose",
+      "gutenbergId": "1909,en,Bierce",
+      "gutenbergTitle": "Ambrose",
+      "gutenbergAuthor": "1842-1914?; Howes",
+      "gutenbergLanguage": "S. O. (Silas Orrin)",
+      "matchType": "exact"
+    },
+    {
+      "wikipediaTitle": "Ambrose",
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/Ambrose",
+      "gutenbergId": "In Motley,en,Bierce",
+      "gutenbergTitle": "Ambrose",
+      "gutenbergAuthor": "1842-1914?,American literature,PS,Category: Short Stories; Category: Humour; Category: American Literature",
+      "gutenbergLanguage": "English",
+      "matchType": "exact"
+    },
+    {
+      "wikipediaTitle": "Ambrose",
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/Ambrose",
+      "gutenbergId": "Tangential Views,en,Bierce",
+      "gutenbergTitle": "Ambrose",
+      "gutenbergAuthor": "1842-1914?,American literature; American essays,PS,Category: Essays",
+      "gutenbergLanguage": "Letters & Speeches; Category: American Literature",
+      "matchType": "exact"
+    },
+    {
+      "wikipediaTitle": "Ambrose",
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/Ambrose",
+      "gutenbergId": "The Opinionator,en,Bierce",
+      "gutenbergTitle": "Ambrose",
+      "gutenbergAuthor": "1842-1914?,American literature; American essays,PS,Category: Essays",
+      "gutenbergLanguage": "Letters & Speeches; Category: American Literature",
+      "matchType": "exact"
+    },
+    {
+      "wikipediaTitle": "Ambrose",
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/Ambrose",
+      "gutenbergId": "Antepenultimata,en,Bierce",
+      "gutenbergTitle": "Ambrose",
+      "gutenbergAuthor": "1842-1914?,American literature; American essays,PS,Category: Essays",
+      "gutenbergLanguage": "Letters & Speeches; Category: American Literature",
+      "matchType": "exact"
+    },
+    {
+      "wikipediaTitle": "William Clark",
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/William%20Clark",
+      "gutenbergId": "An account of the mutiny of the crew and the loss of the ship when trying to make the Bermudas,en,Russell",
+      "gutenbergTitle": "William Clark",
+      "gutenbergAuthor": "1844-1911,Sea stories; Shipwrecks -- Fiction; Mutiny -- Fiction,PR,Category: Adventure; Category: Novels; Category: British Literature",
+      "gutenbergLanguage": "English",
+      "matchType": "exact"
+    },
+    {
+      "wikipediaTitle": "William Clark",
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/William%20Clark",
+      "gutenbergId": "An account of the mutiny of the crew and the loss of the ship when trying to make the Bermudas,en,Russell",
+      "gutenbergTitle": "William Clark",
+      "gutenbergAuthor": "1844-1911,Sea stories; Shipwrecks -- Fiction; Mutiny -- Fiction,PR,Category: Adventure; Category: Novels; Category: British Literature",
+      "gutenbergLanguage": "English",
+      "matchType": "exact"
+    },
+    {
+      "wikipediaTitle": "William Clark",
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/William%20Clark",
+      "gutenbergId": "An account of the mutiny of the crew and the loss of the ship when trying to make the Bermudas,en,Russell",
+      "gutenbergTitle": "William Clark",
+      "gutenbergAuthor": "1844-1911,Sea stories; Shipwrecks -- Fiction; Mutiny -- Fiction,PR,Category: Adventure; Category: Novels; Category: British Literature",
+      "gutenbergLanguage": "English",
+      "matchType": "exact"
+    },
+    {
+      "wikipediaTitle": "Ascanio Condivi",
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/Ascanio%20Condivi",
+      "gutenbergId": "With Translations Of The Life Of The Master By His Scholar",
+      "gutenbergTitle": "Ascanio Condivi",
+      "gutenbergAuthor": "And Three Dialogues From The Portugese By Francisco d'Ollanda,en,Holroyd",
+      "gutenbergLanguage": "Charles",
+      "matchType": "exact"
+    },
+    {
+      "wikipediaTitle": "Erasmus",
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/Erasmus",
+      "gutenbergId": "With Philosophical Notes.,en,Darwin",
+      "gutenbergTitle": "Erasmus",
+      "gutenbergAuthor": "1731-1802,Natural history; Plants -- Poetry,PR,Botany; Horticulture; Category: Poetry",
+      "gutenbergLanguage": "English",
+      "matchType": "exact"
+    },
+    {
+      "wikipediaTitle": "Edward Everett",
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/Edward%20Everett",
+      "gutenbergId": "From His Own Letters and Journals and Other Documents of His Time,en,Hale",
+      "gutenbergTitle": "Edward Everett",
+      "gutenbergAuthor": "1822-1909,Columbus",
+      "gutenbergLanguage": "Christopher",
+      "matchType": "exact"
+    },
+    {
+      "wikipediaTitle": "Edward Everett",
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/Edward%20Everett",
+      "gutenbergId": "Four Possibilities and Six Exaggerations with Some Bits of Fact,en,Hale",
+      "gutenbergTitle": "Edward Everett",
+      "gutenbergAuthor": "1822-1909,Short stories",
+      "gutenbergLanguage": "American; United States -- Social life and customs -- 19th century -- Fiction,PS,Category: Humour; Category: Essays",
+      "matchType": "exact"
+    },
+    {
+      "wikipediaTitle": "Henry Fawcett",
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/Henry%20Fawcett",
+      "gutenbergId": "Twelve Sketches by Herbert Spencer",
+      "gutenbergTitle": "Henry Fawcett",
+      "gutenbergAuthor": "Frederic Harrison",
+      "gutenbergLanguage": "and Other Distinguished Authors,en,Bourne",
+      "matchType": "exact"
+    },
+    {
+      "wikipediaTitle": "Benjamin Franklin",
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/Benjamin%20Franklin",
+      "gutenbergId": "The Terminal Station - West,en,Cresson",
+      "gutenbergTitle": "Benjamin Franklin",
+      "gutenbergAuthor": "1873-1923,Civil engineering -- Periodicals; Railroad stations -- Design and construction,TA,Technology; Category: Engineering & Technology",
+      "gutenbergLanguage": "English",
+      "matchType": "exact"
+    },
+    {
+      "wikipediaTitle": "Benjamin Franklin",
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/Benjamin%20Franklin",
+      "gutenbergId": "Colonies and Dialect,en,Schappelle",
+      "gutenbergTitle": "Benjamin Franklin",
+      "gutenbergAuthor": "1885-,German language -- Dialects -- Brazil; Germans -- Brazil,PF; F2501,Category: History - Other; Category: Archaeology & Anthropology; Category: Language & Communication",
+      "gutenbergLanguage": "English",
+      "matchType": "exact"
+    },
+    {
+      "wikipediaTitle": "Henry George",
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/Henry%20George",
+      "gutenbergId": "with Notices of its Immediate Neighbourhood,en,Davis",
+      "gutenbergTitle": "Henry George",
+      "gutenbergAuthor": "1830-1857; Davis",
+      "gutenbergLanguage": "Charles [Editor],Knightsbridge (London",
+      "matchType": "exact"
+    },
+    {
+      "wikipediaTitle": "Horace",
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/Horace",
+      "gutenbergId": "a series of brief and plain expositions of practical agriculture as an art based upon science,en,Greeley",
+      "gutenbergTitle": "Horace",
+      "gutenbergAuthor": "1811-1872,Agriculture -- United States,S,Category: Science - Earth/Agricultural/Farming; Category: How To ...",
+      "gutenbergLanguage": "English",
+      "matchType": "exact"
+    },
+    {
+      "wikipediaTitle": "Thomas Jefferson",
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/Thomas%20Jefferson",
+      "gutenbergId": "Over One Thousand Tried and Tested Remedies from Mothers of the United States and Canada,en,Ritter",
+      "gutenbergTitle": "Thomas Jefferson",
+      "gutenbergAuthor": "1855-,Etiquette; Medicine",
+      "gutenbergLanguage": "Popular; Formulas",
+      "matchType": "exact"
+    },
+    {
+      "wikipediaTitle": "Thomas Jefferson",
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/Thomas%20Jefferson",
+      "gutenbergId": "Or The Origin and Development of the Social Classes of the Old Dominion,en,Wertenbaker",
+      "gutenbergTitle": "Thomas Jefferson",
+      "gutenbergAuthor": "1879-1966,Virginia -- History -- Colonial period",
+      "gutenbergLanguage": "ca. 1600-1775; Virginia -- Social life and customs -- To 1775,F206,Category: History - American",
+      "matchType": "exact"
+    },
+    {
+      "wikipediaTitle": "Josephus",
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/Josephus",
+      "gutenbergId": "Also Extracts from Diodorus Siculus",
+      "gutenbergTitle": "Josephus",
+      "gutenbergAuthor": "and Tacitus",
+      "gutenbergLanguage": "Relating to the Jews",
+      "matchType": "exact"
+    },
+    {
+      "wikipediaTitle": "Thomas Babington Macaulay",
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/Thomas%20Babington%20Macaulay",
+      "gutenbergId": "Complete Contents of the Five Volumes,en,Macaulay",
+      "gutenbergTitle": "Thomas Babington Macaulay",
+      "gutenbergAuthor": "Baron",
+      "gutenbergLanguage": "1800-1859; Widger",
+      "matchType": "exact"
+    },
+    {
+      "wikipediaTitle": "Thomas Babington Macaulay",
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/Thomas%20Babington%20Macaulay",
+      "gutenbergId": "Complete Table of Contents of the Four Volumes,en,Macaulay",
+      "gutenbergTitle": "Thomas Babington Macaulay",
+      "gutenbergAuthor": "Baron",
+      "gutenbergLanguage": "1800-1859; Widger",
+      "matchType": "exact"
+    },
+    {
+      "wikipediaTitle": "Thomas Babington Macaulay",
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/Thomas%20Babington%20Macaulay",
+      "gutenbergId": "With a Memoir and Index,en,Macaulay",
+      "gutenbergTitle": "Thomas Babington Macaulay",
+      "gutenbergAuthor": "Baron",
+      "gutenbergLanguage": "1800-1859; Whipple",
+      "matchType": "exact"
+    },
+    {
+      "wikipediaTitle": "Thomas Babington Macaulay",
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/Thomas%20Babington%20Macaulay",
+      "gutenbergId": "With a Memoir and Index,en,Macaulay",
+      "gutenbergTitle": "Thomas Babington Macaulay",
+      "gutenbergAuthor": "Baron",
+      "gutenbergLanguage": "1800-1859; Whipple",
+      "matchType": "exact"
+    },
+    {
+      "wikipediaTitle": "Thomas Babington Macaulay",
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/Thomas%20Babington%20Macaulay",
+      "gutenbergId": "With a Memoir and Index,en,Macaulay",
+      "gutenbergTitle": "Thomas Babington Macaulay",
+      "gutenbergAuthor": "Baron",
+      "gutenbergLanguage": "1800-1859; Whipple",
+      "matchType": "exact"
+    },
+    {
+      "wikipediaTitle": "Thomas Babington Macaulay",
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/Thomas%20Babington%20Macaulay",
+      "gutenbergId": "With a Memoir and Index,en,Macaulay",
+      "gutenbergTitle": "Thomas Babington Macaulay",
+      "gutenbergAuthor": "Baron",
+      "gutenbergLanguage": "1800-1859; Whipple",
+      "matchType": "exact"
+    },
+    {
+      "wikipediaTitle": "Thomas Babington Macaulay",
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/Thomas%20Babington%20Macaulay",
+      "gutenbergId": "With a Memoir and Index,en,Macaulay",
+      "gutenbergTitle": "Thomas Babington Macaulay",
+      "gutenbergAuthor": "Baron",
+      "gutenbergLanguage": "1800-1859; Whipple",
+      "matchType": "exact"
+    },
+    {
+      "wikipediaTitle": "Thomas Babington Macaulay",
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/Thomas%20Babington%20Macaulay",
+      "gutenbergId": "With a Memoir and Index,en,Macaulay",
+      "gutenbergTitle": "Thomas Babington Macaulay",
+      "gutenbergAuthor": "Baron",
+      "gutenbergLanguage": "1800-1859; Whipple",
+      "matchType": "exact"
+    },
+    {
+      "wikipediaTitle": "George MacDonald",
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/George%20MacDonald",
+      "gutenbergId": "Artemus Ward",
+      "gutenbergTitle": "George Macdonald",
+      "gutenbergAuthor": "Max Adeler",
+      "gutenbergLanguage": "Samuel Lover",
+      "matchType": "exact"
+    },
+    {
+      "wikipediaTitle": "Ethel Watts Mumford",
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/Ethel%20Watts%20Mumford",
+      "gutenbergId": "Being Bunches of Wisdom Culled from the Calendars of Oliver Herford",
+      "gutenbergTitle": "Ethel Watts Mumford",
+      "gutenbergAuthor": "Addison Mizner,en,Herford",
+      "gutenbergLanguage": "Oliver",
+      "matchType": "exact"
+    },
+    {
+      "wikipediaTitle": "Alice Freeman Palmer",
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/Alice%20Freeman%20Palmer",
+      "gutenbergId": "Mary Lyon",
+      "gutenbergTitle": "Alice Freeman Palmer",
+      "gutenbergAuthor": "Clara Barton",
+      "gutenbergLanguage": "Frances Willard",
+      "matchType": "exact"
+    },
+    {
+      "wikipediaTitle": "James Payn",
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/James%20Payn",
+      "gutenbergId": "the experiences of Walter Besant",
+      "gutenbergTitle": "James Payn",
+      "gutenbergAuthor": "W. Clark Russell",
+      "gutenbergLanguage": "Grant Allen",
+      "matchType": "exact"
+    },
+    {
+      "wikipediaTitle": "Egerton Ryerson",
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/Egerton%20Ryerson",
+      "gutenbergId": "Stories of Missionary Work among Cree and Salteaux Indians,en,Young",
+      "gutenbergTitle": "Egerton Ryerson",
+      "gutenbergAuthor": "1840-1909,Ojibwa Indians -- Missions; Cree Indians -- Missions,E011,Native America; Category: Travel Writing; Category: History - American; Category: Religion/Spirituality",
+      "gutenbergLanguage": "English",
+      "matchType": "exact"
+    },
+    {
+      "wikipediaTitle": "Charles Sumner",
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/Charles%20Sumner",
+      "gutenbergId": "Being an account of a search for sunken treasure in the Caribbean Sea.,en,Seeley",
+      "gutenbergTitle": "Charles Sumner",
+      "gutenbergAuthor": "1844-,Shipwreck survival -- Fiction; Islands -- Fiction; Adventure stories; Treasure troves -- Fiction; Caribbean Area -- Fiction,PS,Category: Adventure; Category: Novels",
+      "gutenbergLanguage": "English",
+      "matchType": "exact"
+    },
+    {
+      "wikipediaTitle": "George Ticknor",
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/George%20Ticknor",
+      "gutenbergId": "With Notices of Its Principle Framers,en,Curtis",
+      "gutenbergTitle": "George Ticknor",
+      "gutenbergAuthor": "1812-1894,Constitutional history -- United States,KF,Category: History - American",
+      "gutenbergLanguage": "English",
+      "matchType": "exact"
+    },
+    {
+      "wikipediaTitle": "George Ticknor",
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/George%20Ticknor",
+      "gutenbergId": "With Notices of Its Principle Framers,en,Curtis",
+      "gutenbergTitle": "George Ticknor",
+      "gutenbergAuthor": "1812-1894,Constitutional history -- United States,KF,Category: History - American; Category: History - Modern (1750+); Category: Politics",
+      "gutenbergLanguage": "English",
+      "matchType": "exact"
+    },
+    {
+      "wikipediaTitle": "Voltaire",
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/Voltaire",
+      "gutenbergId": "Les marquises de Boufflers et du Châtelet",
+      "gutenbergTitle": "Voltaire",
+      "gutenbergAuthor": "Devau",
+      "gutenbergLanguage": "Saint-Lambert",
+      "matchType": "exact"
+    },
+    {
+      "wikipediaTitle": "George Washington",
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/George%20Washington",
+      "gutenbergId": "1840 to 1872,en,Julian",
+      "gutenbergTitle": "George Washington",
+      "gutenbergAuthor": "1817-1899,United States -- Politics and government; Republican Party (U.S. : 1854- ) -- History,JK,Category: Biographies; Category: History - American",
+      "gutenbergLanguage": "English",
+      "matchType": "exact"
+    },
+    {
+      "wikipediaTitle": "John Wesley",
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/John%20Wesley",
+      "gutenbergId": "Bureau of American Ethnology,en,Powell",
+      "gutenbergTitle": "John Wesley",
+      "gutenbergAuthor": "1834-1902,Wyandot Indians,E011,Category: Archaeology & Anthropology",
+      "gutenbergLanguage": "English",
+      "matchType": "exact"
+    },
+    {
+      "wikipediaTitle": "Mary Wollstonecraft",
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/Mary%20Wollstonecraft",
+      "gutenbergId": "Now First Collected,en,Shelley",
+      "gutenbergTitle": "Mary Wollstonecraft",
+      "gutenbergAuthor": "1797-1851; Garnett",
+      "gutenbergLanguage": "Richard",
+      "matchType": "exact"
+    }
+  ]
+}

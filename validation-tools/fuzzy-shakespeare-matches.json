@@ -1,0 +1,624 @@
+{
+  "analysisDate": "2025-09-20T21:43:44.822Z",
+  "targetPlays": [
+    "King John",
+    "King Richard II",
+    "King Henry IV, Part 1",
+    "King Henry IV, Part 2",
+    "King Henry V",
+    "King Henry VI, Part 1",
+    "King Henry VI, Part 2",
+    "King Henry VI, Part 3",
+    "King Richard III",
+    "King Henry VIII",
+    "Coriolanus",
+    "King Lear",
+    "Timon of Athens",
+    "Cymbeline",
+    "Pericles",
+    "The Taming of the Shrew",
+    "Sonnets",
+    "Venus and Adonis"
+  ],
+  "matches": [
+    {
+      "targetPlay": "King John",
+      "variation": "King John",
+      "gutenbergTitle": "King John",
+      "gutenbergId": "1110",
+      "gutenbergAuthors": "Shakespeare, William, 1564-1616",
+      "gutenbergLanguage": "en",
+      "matchType": "exact"
+    },
+    {
+      "targetPlay": "King John",
+      "variation": "King John",
+      "gutenbergTitle": "King John",
+      "gutenbergId": "1511",
+      "gutenbergAuthors": "Shakespeare, William, 1564-1616",
+      "gutenbergLanguage": "en",
+      "matchType": "exact"
+    },
+    {
+      "targetPlay": "King John",
+      "variation": "King John",
+      "gutenbergTitle": "King John",
+      "gutenbergId": "1775",
+      "gutenbergAuthors": "Shakespeare, William, 1564-1616",
+      "gutenbergLanguage": "en",
+      "matchType": "exact"
+    },
+    {
+      "targetPlay": "King John",
+      "variation": "King John",
+      "gutenbergTitle": "King John",
+      "gutenbergId": "2249",
+      "gutenbergAuthors": "Shakespeare, William, 1564-1616",
+      "gutenbergLanguage": "en",
+      "matchType": "exact"
+    },
+    {
+      "targetPlay": "King Richard II",
+      "variation": "Richard II",
+      "gutenbergTitle": "Richard II",
+      "gutenbergId": "1111",
+      "gutenbergAuthors": "Shakespeare, William, 1564-1616",
+      "gutenbergLanguage": "en",
+      "matchType": "exact"
+    },
+    {
+      "targetPlay": "King Richard II",
+      "variation": "Richard II",
+      "gutenbergTitle": "Richard II",
+      "gutenbergId": "1512",
+      "gutenbergAuthors": "Shakespeare, William, 1564-1616",
+      "gutenbergLanguage": "en",
+      "matchType": "exact"
+    },
+    {
+      "targetPlay": "King Richard II",
+      "variation": "Richard II",
+      "gutenbergTitle": "Richard II",
+      "gutenbergId": "1776",
+      "gutenbergAuthors": "Shakespeare, William, 1564-1616",
+      "gutenbergLanguage": "en",
+      "matchType": "exact"
+    },
+    {
+      "targetPlay": "King Richard II",
+      "variation": "Richard II",
+      "gutenbergTitle": "Richard II",
+      "gutenbergId": "2250",
+      "gutenbergAuthors": "Shakespeare, William, 1564-1616",
+      "gutenbergLanguage": "en",
+      "matchType": "exact"
+    },
+    {
+      "targetPlay": "King Henry IV, Part 1",
+      "variation": "Henry IV, Part 1",
+      "gutenbergTitle": "Henry IV, Part 1",
+      "gutenbergId": "1115",
+      "gutenbergAuthors": "Shakespeare, William, 1564-1616",
+      "gutenbergLanguage": "en",
+      "matchType": "exact"
+    },
+    {
+      "targetPlay": "King Henry IV, Part 1",
+      "variation": "Henry IV, Part 1",
+      "gutenbergTitle": "Henry IV, Part 1",
+      "gutenbergId": "1516",
+      "gutenbergAuthors": "Shakespeare, William, 1564-1616",
+      "gutenbergLanguage": "en",
+      "matchType": "exact"
+    },
+    {
+      "targetPlay": "King Henry IV, Part 1",
+      "variation": "Henry IV, Part 1",
+      "gutenbergTitle": "Henry IV, Part 1",
+      "gutenbergId": "1780",
+      "gutenbergAuthors": "Shakespeare, William, 1564-1616",
+      "gutenbergLanguage": "en",
+      "matchType": "exact"
+    },
+    {
+      "targetPlay": "King Henry IV, Part 1",
+      "variation": "Henry IV, Part 1",
+      "gutenbergTitle": "Henry IV, Part 1",
+      "gutenbergId": "2251",
+      "gutenbergAuthors": "Shakespeare, William, 1564-1616",
+      "gutenbergLanguage": "en",
+      "matchType": "exact"
+    },
+    {
+      "targetPlay": "King Henry IV, Part 2",
+      "variation": "Henry IV, Part 2",
+      "gutenbergTitle": "Henry IV, Part 2",
+      "gutenbergId": "1117",
+      "gutenbergAuthors": "Shakespeare, William, 1564-1616",
+      "gutenbergLanguage": "en",
+      "matchType": "exact"
+    },
+    {
+      "targetPlay": "King Henry IV, Part 2",
+      "variation": "Henry IV, Part 2",
+      "gutenbergTitle": "Henry IV, Part 2",
+      "gutenbergId": "1518",
+      "gutenbergAuthors": "Shakespeare, William, 1564-1616",
+      "gutenbergLanguage": "en",
+      "matchType": "exact"
+    },
+    {
+      "targetPlay": "King Henry IV, Part 2",
+      "variation": "Henry IV, Part 2",
+      "gutenbergTitle": "Henry IV, Part 2",
+      "gutenbergId": "1782",
+      "gutenbergAuthors": "Shakespeare, William, 1564-1616",
+      "gutenbergLanguage": "en",
+      "matchType": "exact"
+    },
+    {
+      "targetPlay": "King Henry IV, Part 2",
+      "variation": "Henry IV, Part 2",
+      "gutenbergTitle": "Henry IV, Part 2",
+      "gutenbergId": "2252",
+      "gutenbergAuthors": "Shakespeare, William, 1564-1616",
+      "gutenbergLanguage": "en",
+      "matchType": "exact"
+    },
+    {
+      "targetPlay": "King Henry V",
+      "variation": "Henry V",
+      "gutenbergTitle": "Henry V",
+      "gutenbergId": "1119",
+      "gutenbergAuthors": "Shakespeare, William, 1564-1616",
+      "gutenbergLanguage": "en",
+      "matchType": "exact"
+    },
+    {
+      "targetPlay": "King Henry V",
+      "variation": "Henry V",
+      "gutenbergTitle": "Henry V",
+      "gutenbergId": "1521",
+      "gutenbergAuthors": "Shakespeare, William, 1564-1616",
+      "gutenbergLanguage": "en",
+      "matchType": "exact"
+    },
+    {
+      "targetPlay": "King Henry V",
+      "variation": "Henry V",
+      "gutenbergTitle": "Henry V",
+      "gutenbergId": "1784",
+      "gutenbergAuthors": "Shakespeare, William, 1564-1616",
+      "gutenbergLanguage": "en",
+      "matchType": "exact"
+    },
+    {
+      "targetPlay": "King Henry V",
+      "variation": "Henry V",
+      "gutenbergTitle": "Henry V",
+      "gutenbergId": "2253",
+      "gutenbergAuthors": "Shakespeare, William, 1564-1616",
+      "gutenbergLanguage": "en",
+      "matchType": "exact"
+    },
+    {
+      "targetPlay": "King Henry VI, Part 1",
+      "variation": "Henry VI, Part 1",
+      "gutenbergTitle": "Henry VI, Part 1",
+      "gutenbergId": "1100",
+      "gutenbergAuthors": "Shakespeare, William, 1564-1616",
+      "gutenbergLanguage": "en",
+      "matchType": "exact"
+    },
+    {
+      "targetPlay": "King Henry VI, Part 1",
+      "variation": "Henry VI, Part 1",
+      "gutenbergTitle": "Henry VI, Part 1",
+      "gutenbergId": "1500",
+      "gutenbergAuthors": "Shakespeare, William, 1564-1616",
+      "gutenbergLanguage": "en",
+      "matchType": "exact"
+    },
+    {
+      "targetPlay": "King Henry VI, Part 1",
+      "variation": "Henry VI, Part 1",
+      "gutenbergTitle": "Henry VI, Part 1",
+      "gutenbergId": "1765",
+      "gutenbergAuthors": "Shakespeare, William, 1564-1616",
+      "gutenbergLanguage": "en",
+      "matchType": "exact"
+    },
+    {
+      "targetPlay": "King Henry VI, Part 1",
+      "variation": "Henry VI, Part 1",
+      "gutenbergTitle": "Henry VI, Part 1",
+      "gutenbergId": "2254",
+      "gutenbergAuthors": "Shakespeare, William, 1564-1616",
+      "gutenbergLanguage": "en",
+      "matchType": "exact"
+    },
+    {
+      "targetPlay": "King Henry VI, Part 2",
+      "variation": "Henry VI, Part 2",
+      "gutenbergTitle": "Henry VI, Part 2",
+      "gutenbergId": "1101",
+      "gutenbergAuthors": "Shakespeare, William, 1564-1616",
+      "gutenbergLanguage": "en",
+      "matchType": "exact"
+    },
+    {
+      "targetPlay": "King Henry VI, Part 2",
+      "variation": "Henry VI, Part 2",
+      "gutenbergTitle": "Henry VI, Part 2",
+      "gutenbergId": "1501",
+      "gutenbergAuthors": "Shakespeare, William, 1564-1616",
+      "gutenbergLanguage": "en",
+      "matchType": "exact"
+    },
+    {
+      "targetPlay": "King Henry VI, Part 2",
+      "variation": "Henry VI, Part 2",
+      "gutenbergTitle": "Henry VI, Part 2",
+      "gutenbergId": "2255",
+      "gutenbergAuthors": "Shakespeare, William, 1564-1616",
+      "gutenbergLanguage": "en",
+      "matchType": "exact"
+    },
+    {
+      "targetPlay": "King Henry VI, Part 3",
+      "variation": "Henry VI, Part 3",
+      "gutenbergTitle": "Henry VI, Part 3",
+      "gutenbergId": "1102",
+      "gutenbergAuthors": "Shakespeare, William, 1564-1616",
+      "gutenbergLanguage": "en",
+      "matchType": "exact"
+    },
+    {
+      "targetPlay": "King Henry VI, Part 3",
+      "variation": "Henry VI, Part 3",
+      "gutenbergTitle": "Henry VI, Part 3",
+      "gutenbergId": "1502",
+      "gutenbergAuthors": "Shakespeare, William, 1564-1616",
+      "gutenbergLanguage": "en",
+      "matchType": "exact"
+    },
+    {
+      "targetPlay": "King Henry VI, Part 3",
+      "variation": "Henry VI, Part 3",
+      "gutenbergTitle": "Henry VI, Part 3",
+      "gutenbergId": "2256",
+      "gutenbergAuthors": "Shakespeare, William, 1564-1616",
+      "gutenbergLanguage": "en",
+      "matchType": "exact"
+    },
+    {
+      "targetPlay": "King Richard III",
+      "variation": "Richard III",
+      "gutenbergTitle": "Richard III",
+      "gutenbergId": "1103",
+      "gutenbergAuthors": "Shakespeare, William, 1564-1616",
+      "gutenbergLanguage": "en",
+      "matchType": "exact"
+    },
+    {
+      "targetPlay": "King Richard III",
+      "variation": "Richard III",
+      "gutenbergTitle": "Richard III",
+      "gutenbergId": "1503",
+      "gutenbergAuthors": "Shakespeare, William, 1564-1616",
+      "gutenbergLanguage": "en",
+      "matchType": "exact"
+    },
+    {
+      "targetPlay": "King Richard III",
+      "variation": "Richard III",
+      "gutenbergTitle": "Richard III",
+      "gutenbergId": "1768",
+      "gutenbergAuthors": "Shakespeare, William, 1564-1616",
+      "gutenbergLanguage": "en",
+      "matchType": "exact"
+    },
+    {
+      "targetPlay": "King Richard III",
+      "variation": "Richard III",
+      "gutenbergTitle": "Richard III",
+      "gutenbergId": "2257",
+      "gutenbergAuthors": "Shakespeare, William, 1564-1616",
+      "gutenbergLanguage": "en",
+      "matchType": "exact"
+    },
+    {
+      "targetPlay": "King Richard III",
+      "variation": "Richard III",
+      "gutenbergTitle": "Richard III",
+      "gutenbergId": "6924",
+      "gutenbergAuthors": "Shakespeare, William, 1564-1616; Schlegel, August Wilhelm von, 1767-1845 [Translator]",
+      "gutenbergLanguage": "de",
+      "matchType": "exact"
+    },
+    {
+      "targetPlay": "King Henry VIII",
+      "variation": "Henry VIII",
+      "gutenbergTitle": "Henry VIII",
+      "gutenbergId": "1136",
+      "gutenbergAuthors": "Shakespeare, William, 1564-1616",
+      "gutenbergLanguage": "en",
+      "matchType": "exact"
+    },
+    {
+      "targetPlay": "King Henry VIII",
+      "variation": "Henry VIII",
+      "gutenbergTitle": "Henry VIII",
+      "gutenbergId": "1541",
+      "gutenbergAuthors": "Shakespeare, William, 1564-1616",
+      "gutenbergLanguage": "en",
+      "matchType": "exact"
+    },
+    {
+      "targetPlay": "King Henry VIII",
+      "variation": "Henry VIII",
+      "gutenbergTitle": "Henry VIII",
+      "gutenbergId": "1802",
+      "gutenbergAuthors": "Shakespeare, William, 1564-1616",
+      "gutenbergLanguage": "en",
+      "matchType": "exact"
+    },
+    {
+      "targetPlay": "King Henry VIII",
+      "variation": "Henry VIII",
+      "gutenbergTitle": "Henry VIII",
+      "gutenbergId": "2258",
+      "gutenbergAuthors": "Shakespeare, William, 1564-1616",
+      "gutenbergLanguage": "en",
+      "matchType": "exact"
+    },
+    {
+      "targetPlay": "Coriolanus",
+      "variation": "Coriolanus",
+      "gutenbergTitle": "Coriolanus",
+      "gutenbergId": "1131",
+      "gutenbergAuthors": "Shakespeare, William, 1564-1616",
+      "gutenbergLanguage": "en",
+      "matchType": "exact"
+    },
+    {
+      "targetPlay": "Coriolanus",
+      "variation": "Coriolanus",
+      "gutenbergTitle": "Coriolanus",
+      "gutenbergId": "1535",
+      "gutenbergAuthors": "Shakespeare, William, 1564-1616",
+      "gutenbergLanguage": "en",
+      "matchType": "exact"
+    },
+    {
+      "targetPlay": "Coriolanus",
+      "variation": "Coriolanus",
+      "gutenbergTitle": "Coriolanus",
+      "gutenbergId": "1797",
+      "gutenbergAuthors": "Shakespeare, William, 1564-1616",
+      "gutenbergLanguage": "en",
+      "matchType": "exact"
+    },
+    {
+      "targetPlay": "Coriolanus",
+      "variation": "Coriolanus",
+      "gutenbergTitle": "Coriolanus",
+      "gutenbergId": "2259",
+      "gutenbergAuthors": "Shakespeare, William, 1564-1616",
+      "gutenbergLanguage": "en",
+      "matchType": "exact"
+    },
+    {
+      "targetPlay": "Coriolanus",
+      "variation": "Coriolanus",
+      "gutenbergTitle": "Coriolanus",
+      "gutenbergId": "6990",
+      "gutenbergAuthors": "Shakespeare, William, 1564-1616; Tieck, Dorothea, 1799-1841 [Translator]",
+      "gutenbergLanguage": "de",
+      "matchType": "exact"
+    },
+    {
+      "targetPlay": "Coriolanus",
+      "variation": "Coriolanus",
+      "gutenbergTitle": "Coriolanus",
+      "gutenbergId": "20188",
+      "gutenbergAuthors": "Shakespeare, William, 1564-1616; Cajander, Paavo Emil, 1846-1913 [Translator]",
+      "gutenbergLanguage": "fi",
+      "matchType": "exact"
+    },
+    {
+      "targetPlay": "King Lear",
+      "variation": "King Lear",
+      "gutenbergTitle": "King Lear",
+      "gutenbergId": "1128",
+      "gutenbergAuthors": "Shakespeare, William, 1564-1616",
+      "gutenbergLanguage": "en",
+      "matchType": "exact"
+    },
+    {
+      "targetPlay": "King Lear",
+      "variation": "King Lear",
+      "gutenbergTitle": "King Lear",
+      "gutenbergId": "1532",
+      "gutenbergAuthors": "Shakespeare, William, 1564-1616",
+      "gutenbergLanguage": "en",
+      "matchType": "exact"
+    },
+    {
+      "targetPlay": "King Lear",
+      "variation": "King Lear",
+      "gutenbergTitle": "King Lear",
+      "gutenbergId": "1794",
+      "gutenbergAuthors": "Shakespeare, William, 1564-1616",
+      "gutenbergLanguage": "en",
+      "matchType": "exact"
+    },
+    {
+      "targetPlay": "King Lear",
+      "variation": "King Lear",
+      "gutenbergTitle": "King Lear",
+      "gutenbergId": "2266",
+      "gutenbergAuthors": "Shakespeare, William, 1564-1616",
+      "gutenbergLanguage": "en",
+      "matchType": "exact"
+    },
+    {
+      "targetPlay": "King Lear",
+      "variation": "King Lear",
+      "gutenbergTitle": "King Lear",
+      "gutenbergId": "26224",
+      "gutenbergAuthors": "Shakespeare, William, 1564-1616",
+      "gutenbergLanguage": "en",
+      "matchType": "exact"
+    },
+    {
+      "targetPlay": "Timon of Athens",
+      "variation": "Timon of Athens",
+      "gutenbergTitle": "Timon of Athens",
+      "gutenbergId": "1132",
+      "gutenbergAuthors": "Shakespeare, William, 1564-1616",
+      "gutenbergLanguage": "en",
+      "matchType": "exact"
+    },
+    {
+      "targetPlay": "Timon of Athens",
+      "variation": "Timon of Athens",
+      "gutenbergTitle": "Timon of Athens",
+      "gutenbergId": "1536",
+      "gutenbergAuthors": "Shakespeare, William, 1564-1616",
+      "gutenbergLanguage": "en",
+      "matchType": "exact"
+    },
+    {
+      "targetPlay": "Timon of Athens",
+      "variation": "Timon of Athens",
+      "gutenbergTitle": "Timon of Athens",
+      "gutenbergId": "1798",
+      "gutenbergAuthors": "Shakespeare, William, 1564-1616",
+      "gutenbergLanguage": "en",
+      "matchType": "exact"
+    },
+    {
+      "targetPlay": "Timon of Athens",
+      "variation": "Timon of Athens",
+      "gutenbergTitle": "Timon of Athens",
+      "gutenbergId": "2262",
+      "gutenbergAuthors": "Shakespeare, William, 1564-1616",
+      "gutenbergLanguage": "en",
+      "matchType": "exact"
+    },
+    {
+      "targetPlay": "Cymbeline",
+      "variation": "Cymbeline",
+      "gutenbergTitle": "Cymbeline",
+      "gutenbergId": "1133",
+      "gutenbergAuthors": "Shakespeare, William, 1564-1616",
+      "gutenbergLanguage": "en",
+      "matchType": "exact"
+    },
+    {
+      "targetPlay": "Cymbeline",
+      "variation": "Cymbeline",
+      "gutenbergTitle": "Cymbeline",
+      "gutenbergId": "1538",
+      "gutenbergAuthors": "Shakespeare, William, 1564-1616",
+      "gutenbergLanguage": "en",
+      "matchType": "exact"
+    },
+    {
+      "targetPlay": "Cymbeline",
+      "variation": "Cymbeline",
+      "gutenbergTitle": "Cymbeline",
+      "gutenbergId": "1799",
+      "gutenbergAuthors": "Shakespeare, William, 1564-1616",
+      "gutenbergLanguage": "en",
+      "matchType": "exact"
+    },
+    {
+      "targetPlay": "Cymbeline",
+      "variation": "Cymbeline",
+      "gutenbergTitle": "Cymbeline",
+      "gutenbergId": "2269",
+      "gutenbergAuthors": "Shakespeare, William, 1564-1616",
+      "gutenbergLanguage": "en",
+      "matchType": "exact"
+    },
+    {
+      "targetPlay": "Cymbeline",
+      "variation": "Cymbeline",
+      "gutenbergTitle": "Cymbeline",
+      "gutenbergId": "22556",
+      "gutenbergAuthors": "Shakespeare, William, 1564-1616; Cajander, Paavo Emil, 1846-1913 [Translator]",
+      "gutenbergLanguage": "fi",
+      "matchType": "exact"
+    },
+    {
+      "targetPlay": "The Taming of the Shrew",
+      "variation": "The Taming of the Shrew",
+      "gutenbergTitle": "The Taming of the Shrew",
+      "gutenbergId": "1107",
+      "gutenbergAuthors": "Shakespeare, William, 1564-1616",
+      "gutenbergLanguage": "en",
+      "matchType": "exact"
+    },
+    {
+      "targetPlay": "The Taming of the Shrew",
+      "variation": "The Taming of the Shrew",
+      "gutenbergTitle": "The Taming of the Shrew",
+      "gutenbergId": "1508",
+      "gutenbergAuthors": "Shakespeare, William, 1564-1616",
+      "gutenbergLanguage": "en",
+      "matchType": "exact"
+    },
+    {
+      "targetPlay": "The Taming of the Shrew",
+      "variation": "The Taming of the Shrew",
+      "gutenbergTitle": "The Taming of the Shrew",
+      "gutenbergId": "1772",
+      "gutenbergAuthors": "Shakespeare, William, 1564-1616",
+      "gutenbergLanguage": "en",
+      "matchType": "exact"
+    },
+    {
+      "targetPlay": "The Taming of the Shrew",
+      "variation": "The Taming of the Shrew",
+      "gutenbergTitle": "The Taming of the Shrew",
+      "gutenbergId": "2245",
+      "gutenbergAuthors": "Shakespeare, William, 1564-1616",
+      "gutenbergLanguage": "en",
+      "matchType": "exact"
+    },
+    {
+      "targetPlay": "Sonnets",
+      "variation": "The Sonnets",
+      "gutenbergTitle": "The Sonnets",
+      "gutenbergId": "1105",
+      "gutenbergAuthors": "Shakespeare, William, 1564-1616",
+      "gutenbergLanguage": "en",
+      "matchType": "exact"
+    },
+    {
+      "targetPlay": "Sonnets",
+      "variation": "Sonnets",
+      "gutenbergTitle": "Sonnets",
+      "gutenbergId": "23970",
+      "gutenbergAuthors": "Shakespeare, William, 1564-1616",
+      "gutenbergLanguage": "en",
+      "matchType": "exact"
+    },
+    {
+      "targetPlay": "Venus and Adonis",
+      "variation": "Venus and Adonis",
+      "gutenbergTitle": "Venus and Adonis",
+      "gutenbergId": "1045",
+      "gutenbergAuthors": "Shakespeare, William, 1564-1616",
+      "gutenbergLanguage": "en",
+      "matchType": "exact"
+    }
+  ],
+  "statistics": {
+    "totalTargetPlays": 18,
+    "matchesFound": 66,
+    "successRate": "366.67%"
+  }
+}

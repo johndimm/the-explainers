@@ -1,0 +1,358 @@
+{
+  "analysisDate": "2025-09-20T21:46:15.064Z",
+  "targetWorks": [
+    "The Republic",
+    "Apology",
+    "Phaedo",
+    "Phaedrus",
+    "Symposium",
+    "Timaeus",
+    "Critias",
+    "Laws",
+    "Meno",
+    "Gorgias",
+    "Parmenides",
+    "Theaetetus",
+    "Sophist",
+    "Statesman",
+    "Protagoras",
+    "Euthyphro",
+    "Crito",
+    "Ion",
+    "Laches",
+    "Charmides",
+    "Lysis",
+    "Euthydemus",
+    "Cratylus",
+    "Philebus",
+    "Second Alcibiades",
+    "Menexenus",
+    "Minos",
+    "Seventh Letter",
+    "First Letter",
+    "Second Letter",
+    "Third Letter",
+    "Fourth Letter",
+    "Fifth Letter",
+    "Sixth Letter",
+    "Eighth Letter",
+    "Ninth Letter",
+    "Tenth Letter",
+    "Eleventh Letter",
+    "Twelfth Letter",
+    "Thirteenth Letter",
+    "Alcibiades I",
+    "Alcibiades II",
+    "Hipparchus",
+    "Theages",
+    "Eryxias",
+    "Clitophon",
+    "Hippias Major",
+    "Hippias Minor",
+    "The Rivals"
+  ],
+  "matches": [
+    {
+      "targetWork": "The Republic",
+      "variation": "The Republic",
+      "gutenbergTitle": "The Republic",
+      "gutenbergId": "150",
+      "gutenbergAuthors": "Plato, 428? BCE-348? BCE; Jowett, Benjamin, 1817-1893 [Translator]",
+      "gutenbergLanguage": "en",
+      "matchType": "exact"
+    },
+    {
+      "targetWork": "The Republic",
+      "variation": "The Republic",
+      "gutenbergTitle": "The Republic",
+      "gutenbergId": "1497",
+      "gutenbergAuthors": "Plato, 428? BCE-348? BCE; Jowett, Benjamin, 1817-1893 [Translator]",
+      "gutenbergLanguage": "en",
+      "matchType": "exact"
+    },
+    {
+      "targetWork": "Apology",
+      "variation": "Apology",
+      "gutenbergTitle": "Apology",
+      "gutenbergId": "1656",
+      "gutenbergAuthors": "Plato, 428? BCE-348? BCE; Jowett, Benjamin, 1817-1893 [Translator]",
+      "gutenbergLanguage": "en",
+      "matchType": "exact"
+    },
+    {
+      "targetWork": "Phaedo",
+      "variation": "Phaedo",
+      "gutenbergTitle": "Phaedo",
+      "gutenbergId": "1658",
+      "gutenbergAuthors": "Plato, 428? BCE-348? BCE; Jowett, Benjamin, 1817-1893 [Translator]",
+      "gutenbergLanguage": "en",
+      "matchType": "exact"
+    },
+    {
+      "targetWork": "Phaedrus",
+      "variation": "Phaedrus",
+      "gutenbergTitle": "Phaedrus",
+      "gutenbergId": "1636",
+      "gutenbergAuthors": "Plato, 428? BCE-348? BCE; Jowett, Benjamin, 1817-1893 [Translator]",
+      "gutenbergLanguage": "en",
+      "matchType": "exact"
+    },
+    {
+      "targetWork": "Symposium",
+      "variation": "Symposium",
+      "gutenbergTitle": "Symposium",
+      "gutenbergId": "1600",
+      "gutenbergAuthors": "Plato, 428? BCE-348? BCE; Jowett, Benjamin, 1817-1893 [Translator]",
+      "gutenbergLanguage": "en",
+      "matchType": "exact"
+    },
+    {
+      "targetWork": "Timaeus",
+      "variation": "Timaeus",
+      "gutenbergTitle": "Timaeus",
+      "gutenbergId": "1572",
+      "gutenbergAuthors": "Plato, 428? BCE-348? BCE; Jowett, Benjamin, 1817-1893 [Translator]",
+      "gutenbergLanguage": "en",
+      "matchType": "exact"
+    },
+    {
+      "targetWork": "Critias",
+      "variation": "Critias",
+      "gutenbergTitle": "Critias",
+      "gutenbergId": "1571",
+      "gutenbergAuthors": "Plato, 428? BCE-348? BCE; Jowett, Benjamin, 1817-1893 [Translator]",
+      "gutenbergLanguage": "en",
+      "matchType": "exact"
+    },
+    {
+      "targetWork": "Laws",
+      "variation": "Laws",
+      "gutenbergTitle": "Laws",
+      "gutenbergId": "1750",
+      "gutenbergAuthors": "Plato, 428? BCE-348? BCE; Jowett, Benjamin, 1817-1893 [Translator]",
+      "gutenbergLanguage": "en",
+      "matchType": "exact"
+    },
+    {
+      "targetWork": "Meno",
+      "variation": "Meno",
+      "gutenbergTitle": "Meno",
+      "gutenbergId": "1643",
+      "gutenbergAuthors": "Plato, 428? BCE-348? BCE; Jowett, Benjamin, 1817-1893 [Translator]",
+      "gutenbergLanguage": "en",
+      "matchType": "exact"
+    },
+    {
+      "targetWork": "Gorgias",
+      "variation": "Gorgias",
+      "gutenbergTitle": "Gorgias",
+      "gutenbergId": "1672",
+      "gutenbergAuthors": "Plato, 428? BCE-348? BCE; Jowett, Benjamin, 1817-1893 [Translator]",
+      "gutenbergLanguage": "en",
+      "matchType": "exact"
+    },
+    {
+      "targetWork": "Gorgias",
+      "variation": "Gorgias",
+      "gutenbergTitle": "Gorgias",
+      "gutenbergId": "57145",
+      "gutenbergAuthors": "Plato, 428? BCE-348? BCE; Forsman, Kaarlo, 1851-1918 [Translator]",
+      "gutenbergLanguage": "fi",
+      "matchType": "exact"
+    },
+    {
+      "targetWork": "Parmenides",
+      "variation": "Parmenides",
+      "gutenbergTitle": "Parmenides",
+      "gutenbergId": "1687",
+      "gutenbergAuthors": "Plato, 428? BCE-348? BCE; Jowett, Benjamin, 1817-1893 [Translator]",
+      "gutenbergLanguage": "en",
+      "matchType": "exact"
+    },
+    {
+      "targetWork": "Theaetetus",
+      "variation": "Theaetetus",
+      "gutenbergTitle": "Theaetetus",
+      "gutenbergId": "1726",
+      "gutenbergAuthors": "Plato, 428? BCE-348? BCE; Jowett, Benjamin, 1817-1893 [Translator]",
+      "gutenbergLanguage": "en",
+      "matchType": "exact"
+    },
+    {
+      "targetWork": "Theaetetus",
+      "variation": "Theaetetus",
+      "gutenbergTitle": "Theaetetus",
+      "gutenbergId": "72108",
+      "gutenbergAuthors": "Plato, 428? BCE-348? BCE; Burger, D. (Dionijs), 1820-1891 [Translator]",
+      "gutenbergLanguage": "nl",
+      "matchType": "exact"
+    },
+    {
+      "targetWork": "Sophist",
+      "variation": "Sophist",
+      "gutenbergTitle": "Sophist",
+      "gutenbergId": "1735",
+      "gutenbergAuthors": "Plato, 428? BCE-348? BCE; Jowett, Benjamin, 1817-1893 [Translator]",
+      "gutenbergLanguage": "en",
+      "matchType": "exact"
+    },
+    {
+      "targetWork": "Statesman",
+      "variation": "Statesman",
+      "gutenbergTitle": "Statesman",
+      "gutenbergId": "1738",
+      "gutenbergAuthors": "Plato, 428? BCE-348? BCE; Jowett, Benjamin, 1817-1893 [Translator]",
+      "gutenbergLanguage": "en",
+      "matchType": "exact"
+    },
+    {
+      "targetWork": "Protagoras",
+      "variation": "Protagoras",
+      "gutenbergTitle": "Protagoras",
+      "gutenbergId": "1591",
+      "gutenbergAuthors": "Plato, 428? BCE-348? BCE; Jowett, Benjamin, 1817-1893 [Translator]",
+      "gutenbergLanguage": "en",
+      "matchType": "exact"
+    },
+    {
+      "targetWork": "Euthyphro",
+      "variation": "Euthyphro",
+      "gutenbergTitle": "Euthyphro",
+      "gutenbergId": "1642",
+      "gutenbergAuthors": "Plato, 428? BCE-348? BCE; Jowett, Benjamin, 1817-1893 [Translator]",
+      "gutenbergLanguage": "en",
+      "matchType": "exact"
+    },
+    {
+      "targetWork": "Euthyphro",
+      "variation": "Euthyphro",
+      "gutenbergTitle": "Euthyphro",
+      "gutenbergId": "19840",
+      "gutenbergAuthors": "Plato, 428? BCE-348? BCE; Jowett, Benjamin, 1817-1893 [Translator]",
+      "gutenbergLanguage": "en",
+      "matchType": "exact"
+    },
+    {
+      "targetWork": "Crito",
+      "variation": "Crito",
+      "gutenbergTitle": "Crito",
+      "gutenbergId": "1657",
+      "gutenbergAuthors": "Plato, 428? BCE-348? BCE; Jowett, Benjamin, 1817-1893 [Translator]",
+      "gutenbergLanguage": "en",
+      "matchType": "exact"
+    },
+    {
+      "targetWork": "Crito",
+      "variation": "Crito",
+      "gutenbergTitle": "Crito",
+      "gutenbergId": "51220",
+      "gutenbergAuthors": "Plato, 428? BCE-348? BCE; Ficino, Marsilio, 1433-1499 [Translator]",
+      "gutenbergLanguage": "la",
+      "matchType": "exact"
+    },
+    {
+      "targetWork": "Ion",
+      "variation": "Ion",
+      "gutenbergTitle": "Ion",
+      "gutenbergId": "1635",
+      "gutenbergAuthors": "Plato, 428? BCE-348? BCE; Jowett, Benjamin, 1817-1893 [Translator]",
+      "gutenbergLanguage": "en",
+      "matchType": "exact"
+    },
+    {
+      "targetWork": "Laches",
+      "variation": "Laches",
+      "gutenbergTitle": "Laches",
+      "gutenbergId": "1584",
+      "gutenbergAuthors": "Plato, 428? BCE-348? BCE; Jowett, Benjamin, 1817-1893 [Translator]",
+      "gutenbergLanguage": "en",
+      "matchType": "exact"
+    },
+    {
+      "targetWork": "Charmides",
+      "variation": "Charmides",
+      "gutenbergTitle": "Charmides",
+      "gutenbergId": "1580",
+      "gutenbergAuthors": "Plato, 428? BCE-348? BCE; Jowett, Benjamin, 1817-1893 [Translator]",
+      "gutenbergLanguage": "en",
+      "matchType": "exact"
+    },
+    {
+      "targetWork": "Lysis",
+      "variation": "Lysis",
+      "gutenbergTitle": "Lysis",
+      "gutenbergId": "1579",
+      "gutenbergAuthors": "Plato, 428? BCE-348? BCE; Jowett, Benjamin, 1817-1893 [Translator]",
+      "gutenbergLanguage": "en",
+      "matchType": "exact"
+    },
+    {
+      "targetWork": "Euthydemus",
+      "variation": "Euthydemus",
+      "gutenbergTitle": "Euthydemus",
+      "gutenbergId": "1598",
+      "gutenbergAuthors": "Plato, 428? BCE-348? BCE; Jowett, Benjamin, 1817-1893 [Translator]",
+      "gutenbergLanguage": "en",
+      "matchType": "exact"
+    },
+    {
+      "targetWork": "Cratylus",
+      "variation": "Cratylus",
+      "gutenbergTitle": "Cratylus",
+      "gutenbergId": "1616",
+      "gutenbergAuthors": "Plato, 428? BCE-348? BCE; Jowett, Benjamin, 1817-1893 [Translator]",
+      "gutenbergLanguage": "en",
+      "matchType": "exact"
+    },
+    {
+      "targetWork": "Philebus",
+      "variation": "Philebus",
+      "gutenbergTitle": "Philebus",
+      "gutenbergId": "1744",
+      "gutenbergAuthors": "Plato, 428? BCE-348? BCE; Jowett, Benjamin, 1817-1893 [Translator]",
+      "gutenbergLanguage": "en",
+      "matchType": "exact"
+    },
+    {
+      "targetWork": "Menexenus",
+      "variation": "Menexenus",
+      "gutenbergTitle": "Menexenus",
+      "gutenbergId": "1682",
+      "gutenbergAuthors": "Plato, 428? BCE-348? BCE; Jowett, Benjamin, 1817-1893 [Translator]",
+      "gutenbergLanguage": "en",
+      "matchType": "exact"
+    },
+    {
+      "targetWork": "Alcibiades I",
+      "variation": "Alcibiades I",
+      "gutenbergTitle": "Alcibiades I",
+      "gutenbergId": "1676",
+      "gutenbergAuthors": "Plato (spurious and doubtful works), 428? BCE-348? BCE",
+      "gutenbergLanguage": "en",
+      "matchType": "exact"
+    },
+    {
+      "targetWork": "Alcibiades II",
+      "variation": "Alcibiades II",
+      "gutenbergTitle": "Alcibiades II",
+      "gutenbergId": "1677",
+      "gutenbergAuthors": "Plato (spurious and doubtful works), 428? BCE-348? BCE",
+      "gutenbergLanguage": "en",
+      "matchType": "exact"
+    },
+    {
+      "targetWork": "Eryxias",
+      "variation": "Eryxias",
+      "gutenbergTitle": "Eryxias",
+      "gutenbergId": "1681",
+      "gutenbergAuthors": "Plato (spurious and doubtful works), 428? BCE-348? BCE; Jowett, Benjamin, 1817-1893 [Translator]",
+      "gutenbergLanguage": "en",
+      "matchType": "exact"
+    }
+  ],
+  "statistics": {
+    "totalTargetWorks": 49,
+    "matchesFound": 33,
+    "successRate": "67.35%"
+  }
+}

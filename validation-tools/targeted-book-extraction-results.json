@@ -1,0 +1,835 @@
+{
+  "extractionDate": "2025-09-20T19:40:36.556Z",
+  "statistics": {
+    "totalCategories": 39,
+    "totalBooks": 1150,
+    "booksWithGutenberg": 71,
+    "successRate": "6.17%"
+  },
+  "categoryStats": {
+    "Novels": {
+      "total": 0,
+      "withGutenberg": 0
+    },
+    "Books": {
+      "total": 2,
+      "withGutenberg": 0
+    },
+    "Poems": {
+      "total": 24,
+      "withGutenberg": 1
+    },
+    "Plays": {
+      "total": 1,
+      "withGutenberg": 0
+    },
+    "English-language books": {
+      "total": 123,
+      "withGutenberg": 6
+    },
+    "American novels": {
+      "total": 1,
+      "withGutenberg": 0
+    },
+    "British novels": {
+      "total": 0,
+      "withGutenberg": 0
+    },
+    "French novels": {
+      "total": 0,
+      "withGutenberg": 0
+    },
+    "German novels": {
+      "total": 0,
+      "withGutenberg": 0
+    },
+    "Italian novels": {
+      "total": 3,
+      "withGutenberg": 1
+    },
+    "Spanish novels": {
+      "total": 4,
+      "withGutenberg": 1
+    },
+    "Russian novels": {
+      "total": 5,
+      "withGutenberg": 0
+    },
+    "Classical literature": {
+      "total": 8,
+      "withGutenberg": 0
+    },
+    "19th-century books": {
+      "total": 9,
+      "withGutenberg": 0
+    },
+    "18th-century books": {
+      "total": 17,
+      "withGutenberg": 0
+    },
+    "17th-century books": {
+      "total": 14,
+      "withGutenberg": 0
+    },
+    "16th-century books": {
+      "total": 43,
+      "withGutenberg": 3
+    },
+    "20th-century books": {
+      "total": 21,
+      "withGutenberg": 0
+    },
+    "Science fiction novels": {
+      "total": 3,
+      "withGutenberg": 0
+    },
+    "Fantasy novels": {
+      "total": 0,
+      "withGutenberg": 0
+    },
+    "Historical novels": {
+      "total": 434,
+      "withGutenberg": 37
+    },
+    "Romance novels": {
+      "total": 10,
+      "withGutenberg": 0
+    },
+    "Mystery novels": {
+      "total": 20,
+      "withGutenberg": 0
+    },
+    "Horror novels": {
+      "total": 1,
+      "withGutenberg": 0
+    },
+    "Adventure novels": {
+      "total": 11,
+      "withGutenberg": 1
+    },
+    "Children's books": {
+      "total": 15,
+      "withGutenberg": 0
+    },
+    "Young adult novels": {
+      "total": 35,
+      "withGutenberg": 1
+    },
+    "Poetry collections": {
+      "total": 57,
+      "withGutenberg": 1
+    },
+    "Epic poems": {
+      "total": 53,
+      "withGutenberg": 6
+    },
+    "Shakespeare plays": {
+      "total": 0,
+      "withGutenberg": 0
+    },
+    "Greek plays": {
+      "total": 0,
+      "withGutenberg": 0
+    },
+    "Roman plays": {
+      "total": 0,
+      "withGutenberg": 0
+    },
+    "Medieval literature": {
+      "total": 177,
+      "withGutenberg": 9
+    },
+    "Renaissance literature": {
+      "total": 34,
+      "withGutenberg": 4
+    },
+    "Victorian literature": {
+      "total": 3,
+      "withGutenberg": 0
+    },
+    "Modern literature": {
+      "total": 0,
+      "withGutenberg": 0
+    },
+    "Philosophical works": {
+      "total": 0,
+      "withGutenberg": 0
+    },
+    "Religious texts": {
+      "total": 22,
+      "withGutenberg": 0
+    },
+    "Bible translations": {
+      "total": 0,
+      "withGutenberg": 0
+    }
+  },
+  "books": [
+    {
+      "title": "Outline of poetry",
+      "gutenbergIds": [
+        "1977"
+      ],
+      "category": "Poems",
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/Outline%20of%20poetry",
+      "pageId": 6585439
+    },
+    {
+      "title": "A Boy's Will",
+      "gutenbergIds": [
+        "3021"
+      ],
+      "category": "English-language books",
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/A%20Boy's%20Will",
+      "pageId": 38019881
+    },
+    {
+      "title": "The Game and Playe of the Chesse",
+      "gutenbergIds": [
+        "10672"
+      ],
+      "category": "English-language books",
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/The%20Game%20and%20Playe%20of%20the%20Chesse",
+      "pageId": 29444165
+    },
+    {
+      "title": "New Hampshire (poetry collection)",
+      "gutenbergIds": [
+        "58611"
+      ],
+      "category": "English-language books",
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/New%20Hampshire%20(poetry%20collection)",
+      "pageId": 5827939
+    },
+    {
+      "title": "North of Boston",
+      "gutenbergIds": [
+        "3026"
+      ],
+      "category": "English-language books",
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/North%20of%20Boston",
+      "pageId": 10428177
+    },
+    {
+      "title": "The Sense of Beauty",
+      "gutenbergIds": [
+        "26842"
+      ],
+      "category": "English-language books",
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/The%20Sense%20of%20Beauty",
+      "pageId": 36762455
+    },
+    {
+      "title": "Songs of Kabir",
+      "gutenbergIds": [
+        "6519"
+      ],
+      "category": "English-language books",
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/Songs%20of%20Kabir",
+      "pageId": 42563282
+    },
+    {
+      "title": "Elegia di Madonna Fiammetta",
+      "gutenbergIds": [
+        "10006"
+      ],
+      "category": "Italian novels",
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/Elegia%20di%20Madonna%20Fiammetta",
+      "pageId": 22315131
+    },
+    {
+      "title": "La Celestina",
+      "gutenbergIds": [
+        "1619"
+      ],
+      "category": "Spanish novels",
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/La%20Celestina",
+      "pageId": 869971
+    },
+    {
+      "title": "Ananga Ranga",
+      "gutenbergIds": [
+        "4315"
+      ],
+      "category": "16th-century books",
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/Ananga%20Ranga",
+      "pageId": 414269
+    },
+    {
+      "title": "Annals of the Cakchiquels",
+      "gutenbergIds": [
+        "20775",
+        "20775"
+      ],
+      "category": "16th-century books",
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/Annals%20of%20the%20Cakchiquels",
+      "pageId": 8665308
+    },
+    {
+      "title": "Shakespeare's Jest Book",
+      "gutenbergIds": [
+        "29821"
+      ],
+      "category": "16th-century books",
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/Shakespeare's%20Jest%20Book",
+      "pageId": 33763404
+    },
+    {
+      "title": "List of historical novels",
+      "gutenbergIds": [
+        "1359"
+      ],
+      "category": "Historical novels",
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/List%20of%20historical%20novels",
+      "pageId": 224331
+    },
+    {
+      "title": "Ang Singsing ng Dalagang Marmol",
+      "gutenbergIds": [
+        "15129"
+      ],
+      "category": "Historical novels",
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/Ang%20Singsing%20ng%20Dalagang%20Marmol",
+      "pageId": 32133825
+    },
+    {
+      "title": "The Black Tulip",
+      "gutenbergIds": [
+        "965"
+      ],
+      "category": "Historical novels",
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/The%20Black%20Tulip",
+      "pageId": 236569
+    },
+    {
+      "title": "The Bride of Lammermoor",
+      "gutenbergIds": [
+        "471"
+      ],
+      "category": "Historical novels",
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/The%20Bride%20of%20Lammermoor",
+      "pageId": 1906129
+    },
+    {
+      "title": "A Bride of the Plains",
+      "gutenbergIds": [
+        "29106"
+      ],
+      "category": "Historical novels",
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/A%20Bride%20of%20the%20Plains",
+      "pageId": 12187025
+    },
+    {
+      "title": "The Bronze Eagle",
+      "gutenbergIds": [
+        "25955"
+      ],
+      "category": "Historical novels",
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/The%20Bronze%20Eagle",
+      "pageId": 9795291
+    },
+    {
+      "title": "The Fair Maid of Perth",
+      "gutenbergIds": [
+        "7987"
+      ],
+      "category": "Historical novels",
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/The%20Fair%20Maid%20of%20Perth",
+      "pageId": 5381757
+    },
+    {
+      "title": "The Fortunes of Nigel",
+      "gutenbergIds": [
+        "5950"
+      ],
+      "category": "Historical novels",
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/The%20Fortunes%20of%20Nigel",
+      "pageId": 2899736
+    },
+    {
+      "title": "The Golden Ocean",
+      "gutenbergIds": [
+        "16611"
+      ],
+      "category": "Historical novels",
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/The%20Golden%20Ocean",
+      "pageId": 1252290
+    },
+    {
+      "title": "Guy Fawkes (novel)",
+      "gutenbergIds": [
+        "37750"
+      ],
+      "category": "Historical novels",
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/Guy%20Fawkes%20(novel)",
+      "pageId": 22567549
+    },
+    {
+      "title": "The Heart of Midlothian",
+      "gutenbergIds": [
+        "6944"
+      ],
+      "category": "Historical novels",
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/The%20Heart%20of%20Midlothian",
+      "pageId": 2084907
+    },
+    {
+      "title": "The Helmet of Navarre",
+      "gutenbergIds": [
+        "14219"
+      ],
+      "category": "Historical novels",
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/The%20Helmet%20of%20Navarre",
+      "pageId": 29144709
+    },
+    {
+      "title": "A Journal of the Plague Year",
+      "gutenbergIds": [
+        "376"
+      ],
+      "category": "Historical novels",
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/A%20Journal%20of%20the%20Plague%20Year",
+      "pageId": 352506
+    },
+    {
+      "title": "Kenilworth (novel)",
+      "gutenbergIds": [
+        "1606"
+      ],
+      "category": "Historical novels",
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/Kenilworth%20(novel)",
+      "pageId": 1638910
+    },
+    {
+      "title": "A Lady of Quality (novel)",
+      "gutenbergIds": [
+        "1550"
+      ],
+      "category": "Historical novels",
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/A%20Lady%20of%20Quality%20(novel)",
+      "pageId": 36942988
+    },
+    {
+      "title": "A Legend of Montrose",
+      "gutenbergIds": [
+        "1461",
+        "1461"
+      ],
+      "category": "Historical novels",
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/A%20Legend%20of%20Montrose",
+      "pageId": 2059665
+    },
+    {
+      "title": "The Master of Ballantrae",
+      "gutenbergIds": [
+        "864"
+      ],
+      "category": "Historical novels",
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/The%20Master%20of%20Ballantrae",
+      "pageId": 2933212
+    },
+    {
+      "title": "Memoirs of a Cavalier",
+      "gutenbergIds": [
+        "12259"
+      ],
+      "category": "Historical novels",
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/Memoirs%20of%20a%20Cavalier",
+      "pageId": 10340089
+    },
+    {
+      "title": "Mercedes of Castile",
+      "gutenbergIds": [
+        "36406"
+      ],
+      "category": "Historical novels",
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/Mercedes%20of%20Castile",
+      "pageId": 47511453
+    },
+    {
+      "title": "The Mississippi Bubble",
+      "gutenbergIds": [
+        "14001"
+      ],
+      "category": "Historical novels",
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/The%20Mississippi%20Bubble",
+      "pageId": 40628069
+    },
+    {
+      "title": "The Monastery: A Romance",
+      "gutenbergIds": [
+        "6406"
+      ],
+      "category": "Historical novels",
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/The%20Monastery%3A%20A%20Romance",
+      "pageId": 6062284
+    },
+    {
+      "title": "The Moon and Sixpence",
+      "gutenbergIds": [
+        "222"
+      ],
+      "category": "Historical novels",
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/The%20Moon%20and%20Sixpence",
+      "pageId": 467386
+    },
+    {
+      "title": "Noli Me Tángere (novel)",
+      "gutenbergIds": [
+        "6737",
+        "6737",
+        "6737",
+        "6737",
+        "30278",
+        "30211",
+        "21848",
+        "6737",
+        "6737",
+        "6737",
+        "47584",
+        "6737",
+        "6737",
+        "20228",
+        "18141",
+        "6737"
+      ],
+      "category": "Historical novels",
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/Noli%20Me%20T%C3%A1ngere%20(novel)",
+      "pageId": 317137
+    },
+    {
+      "title": "On the Field of Glory",
+      "gutenbergIds": [
+        "37406"
+      ],
+      "category": "Historical novels",
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/On%20the%20Field%20of%20Glory",
+      "pageId": 36028525
+    },
+    {
+      "title": "The Pathfinder, or The Inland Sea",
+      "gutenbergIds": [
+        "1880"
+      ],
+      "category": "Historical novels",
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/The%20Pathfinder%2C%20or%20The%20Inland%20Sea",
+      "pageId": 9898801
+    },
+    {
+      "title": "Personal Recollections of Joan of Arc",
+      "gutenbergIds": [
+        "2874",
+        "2875"
+      ],
+      "category": "Historical novels",
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/Personal%20Recollections%20of%20Joan%20of%20Arc",
+      "pageId": 1869208
+    },
+    {
+      "title": "Peveril of the Peak",
+      "gutenbergIds": [
+        "5959"
+      ],
+      "category": "Historical novels",
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/Peveril%20of%20the%20Peak",
+      "pageId": 5381738
+    },
+    {
+      "title": "The Pilot: A Tale of the Sea",
+      "gutenbergIds": [
+        "7974"
+      ],
+      "category": "Historical novels",
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/The%20Pilot%3A%20A%20Tale%20of%20the%20Sea",
+      "pageId": 4392699
+    },
+    {
+      "title": "Powder and Patch",
+      "gutenbergIds": [
+        "60776"
+      ],
+      "category": "Historical novels",
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/Powder%20and%20Patch",
+      "pageId": 3403157
+    },
+    {
+      "title": "Rob Roy (novel)",
+      "gutenbergIds": [
+        "7025"
+      ],
+      "category": "Historical novels",
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/Rob%20Roy%20(novel)",
+      "pageId": 750558
+    },
+    {
+      "title": "The Rover (novel)",
+      "gutenbergIds": [
+        "59142"
+      ],
+      "category": "Historical novels",
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/The%20Rover%20(novel)",
+      "pageId": 2864563
+    },
+    {
+      "title": "Saint Ronan's Well",
+      "gutenbergIds": [
+        "20749"
+      ],
+      "category": "Historical novels",
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/Saint%20Ronan's%20Well",
+      "pageId": 6824674
+    },
+    {
+      "title": "Thaddeus of Warsaw",
+      "gutenbergIds": [
+        "6566"
+      ],
+      "category": "Historical novels",
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/Thaddeus%20of%20Warsaw",
+      "pageId": 40634533
+    },
+    {
+      "title": "The Virginians",
+      "gutenbergIds": [
+        "8123"
+      ],
+      "category": "Historical novels",
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/The%20Virginians",
+      "pageId": 24813025
+    },
+    {
+      "title": "Waverley (novel)",
+      "gutenbergIds": [
+        "5998"
+      ],
+      "category": "Historical novels",
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/Waverley%20(novel)",
+      "pageId": 152925
+    },
+    {
+      "title": "The Wept of Wish-ton-Wish",
+      "gutenbergIds": [
+        "8888"
+      ],
+      "category": "Historical novels",
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/The%20Wept%20of%20Wish-ton-Wish",
+      "pageId": 78255270
+    },
+    {
+      "title": "Woodstock (novel)",
+      "gutenbergIds": [
+        "9785"
+      ],
+      "category": "Historical novels",
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/Woodstock%20(novel)",
+      "pageId": 4296593
+    },
+    {
+      "title": "The Swiss Family Robinson",
+      "gutenbergIds": [
+        "11703",
+        "3836"
+      ],
+      "category": "Adventure novels",
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/The%20Swiss%20Family%20Robinson",
+      "pageId": 454577
+    },
+    {
+      "title": "The Song of the Blood-Red Flower",
+      "gutenbergIds": [
+        "12935"
+      ],
+      "category": "Young adult novels",
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/The%20Song%20of%20the%20Blood-Red%20Flower",
+      "pageId": 63387104
+    },
+    {
+      "title": "Kobzar (poetry collection)",
+      "gutenbergIds": [
+        "68486"
+      ],
+      "category": "Poetry collections",
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/Kobzar%20(poetry%20collection)",
+      "pageId": 15406101
+    },
+    {
+      "title": "Epic of the Forgotten",
+      "gutenbergIds": [
+        "2890"
+      ],
+      "category": "Epic poems",
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/Epic%20of%20the%20Forgotten",
+      "pageId": 6297790
+    },
+    {
+      "title": "Florante at Laura",
+      "gutenbergIds": [
+        "15845"
+      ],
+      "category": "Epic poems",
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/Florante%20at%20Laura",
+      "pageId": 1492575
+    },
+    {
+      "title": "Epic of Gilgamesh",
+      "gutenbergIds": [
+        "11000"
+      ],
+      "category": "Epic poems",
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/Epic%20of%20Gilgamesh",
+      "pageId": 80028
+    },
+    {
+      "title": "Sitala Maju",
+      "gutenbergIds": [
+        "30364"
+      ],
+      "category": "Epic poems",
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/Sitala%20Maju",
+      "pageId": 35926592
+    },
+    {
+      "title": "The Wallace (poem)",
+      "gutenbergIds": [
+        "49580"
+      ],
+      "category": "Epic poems",
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/The%20Wallace%20(poem)",
+      "pageId": 22691831
+    },
+    {
+      "title": "Who Can Be Happy and Free in Russia?",
+      "gutenbergIds": [
+        "9619"
+      ],
+      "category": "Epic poems",
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/Who%20Can%20Be%20Happy%20and%20Free%20in%20Russia%3F",
+      "pageId": 44506579
+    },
+    {
+      "title": "List of English translations from medieval sources: A",
+      "gutenbergIds": [
+        "36402"
+      ],
+      "category": "Medieval literature",
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/List%20of%20English%20translations%20from%20medieval%20sources%3A%20A",
+      "pageId": 66703792
+    },
+    {
+      "title": "Early English Text Society",
+      "gutenbergIds": [
+        "17000"
+      ],
+      "category": "Medieval literature",
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/Early%20English%20Text%20Society",
+      "pageId": 3631214
+    },
+    {
+      "title": "Le Morte d'Arthur",
+      "gutenbergIds": [
+        "1251",
+        "1252",
+        "1251",
+        "1252",
+        "12753"
+      ],
+      "category": "Medieval literature",
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/Le%20Morte%20d'Arthur",
+      "pageId": 419489
+    },
+    {
+      "title": "Roman de la Rose",
+      "gutenbergIds": [
+        "16816",
+        "17140"
+      ],
+      "category": "Medieval literature",
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/Roman%20de%20la%20Rose",
+      "pageId": 213563
+    },
+    {
+      "title": "The Romaunt of the Rose",
+      "gutenbergIds": [
+        "43089"
+      ],
+      "category": "Medieval literature",
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/The%20Romaunt%20of%20the%20Rose",
+      "pageId": 213566
+    },
+    {
+      "title": "The Second Shepherds' Play",
+      "gutenbergIds": [
+        "19481"
+      ],
+      "category": "Medieval literature",
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/The%20Second%20Shepherds'%20Play",
+      "pageId": 30857776
+    },
+    {
+      "title": "Secretum (book)",
+      "gutenbergIds": [
+        "49450"
+      ],
+      "category": "Medieval literature",
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/Secretum%20(book)",
+      "pageId": 1296521
+    },
+    {
+      "title": "The Travels of Marco Polo",
+      "gutenbergIds": [
+        "10636",
+        "12410"
+      ],
+      "category": "Medieval literature",
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/The%20Travels%20of%20Marco%20Polo",
+      "pageId": 538167
+    },
+    {
+      "title": "La Vita Nuova",
+      "gutenbergIds": [
+        "41085"
+      ],
+      "category": "Medieval literature",
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/La%20Vita%20Nuova",
+      "pageId": 215928
+    },
+    {
+      "title": "Amadís de Gaula",
+      "gutenbergIds": [
+        "17440"
+      ],
+      "category": "Renaissance literature",
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/Amad%C3%ADs%20de%20Gaula",
+      "pageId": 145431
+    },
+    {
+      "title": "La Celestina",
+      "gutenbergIds": [
+        "1619"
+      ],
+      "category": "Renaissance literature",
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/La%20Celestina",
+      "pageId": 869971
+    },
+    {
+      "title": "Hypnerotomachia Poliphili",
+      "gutenbergIds": [
+        "18459"
+      ],
+      "category": "Renaissance literature",
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/Hypnerotomachia%20Poliphili",
+      "pageId": 219616
+    },
+    {
+      "title": "In Praise of Folly",
+      "gutenbergIds": [
+        "9371",
+        "9371",
+        "30201"
+      ],
+      "category": "Renaissance literature",
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/In%20Praise%20of%20Folly",
+      "pageId": 465619
+    }
+  ]
+}

@@ -1,0 +1,887 @@
+{
+  "timestamp": "2025-09-20T19:51:17.009Z",
+  "stats": {
+    "total": 14341,
+    "processed": 10600,
+    "books": 2400,
+    "authors": 8200,
+    "errors": 2,
+    "withGutenbergLinks": 2880
+  },
+  "books": [
+    {
+      "title": "The Rajah's Diamond",
+      "pageId": 12325147,
+      "url": "https://en.wikipedia.org/wiki/The%20Rajah's%20Diamond",
+      "gutenbergIds": [
+        "839"
+      ],
+      "wikipediaLength": 3146,
+      "extlinksCount": 5,
+      "categories": [
+        "Category:1878 short story collections",
+        "Category:All stub articles",
+        "Category:Articles with Project Gutenberg links",
+        "Category:Articles with short description",
+        "Category:Detective fiction short story collections",
+        "Category:Mystery short story collection stubs",
+        "Category:Scottish short story collections",
+        "Category:Short description is different from Wikidata",
+        "Category:Short story collections by Robert Louis Stevenson",
+        "Category:Use dmy dates from November 2022"
+      ],
+      "classification": {
+        "isBook": true,
+        "confidence": 0.8461538461538461,
+        "bookScore": 12,
+        "authorScore": 1,
+        "reasoning": {
+          "title": "The Rajah's Diamond",
+          "contentLength": 383,
+          "categories": [
+            "Category:1878 short story collections",
+            "Category:All stub articles",
+            "Category:Articles with Project Gutenberg links",
+            "Category:Articles with short description",
+            "Category:Detective fiction short story collections"
+          ],
+          "indicators": {
+            "book": 12,
+            "author": 1
+          }
+        }
+      },
+      "contentPreview": "The Rajah's Diamond is a cycle of four short stories by Robert Louis Stevenson. First published in 1878 in a serial periodical London Magazine, they were republished in the first volume of New Arabian Nights. The stories are:\n\n\"Story of the Bandbox\"\n\"Story of the Young Man in Holy Orders\"\n\"Story of ..."
+    },
+    {
+      "title": "Ralph 124C 41+",
+      "pageId": 1379135,
+      "url": "https://en.wikipedia.org/wiki/Ralph%20124C%2041%2B",
+      "gutenbergIds": [
+        "60944"
+      ],
+      "wikipediaLength": 12985,
+      "extlinksCount": 7,
+      "categories": [
+        "Category:1911 American novels",
+        "Category:1911 science fiction novels",
+        "Category:All articles needing additional references",
+        "Category:All articles with unsourced statements",
+        "Category:American science fiction novels",
+        "Category:Articles needing additional references from June 2022",
+        "Category:Articles with Project Gutenberg links",
+        "Category:Articles with short description",
+        "Category:Articles with unsourced statements from June 2022",
+        "Category:Hugo Gernsback"
+      ],
+      "classification": {
+        "isBook": true,
+        "confidence": 1,
+        "bookScore": 11,
+        "authorScore": 0,
+        "reasoning": {
+          "title": "Ralph 124C 41+",
+          "contentLength": 848,
+          "categories": [
+            "Category:1911 American novels",
+            "Category:1911 science fiction novels",
+            "Category:All articles needing additional references",
+            "Category:All articles with unsourced statements",
+            "Category:American science fiction novels"
+          ],
+          "indicators": {
+            "book": 11,
+            "author": 0
+          }
+        }
+      },
+      "contentPreview": "Ralph 124C 41 +, by Hugo Gernsback, is an early science fiction novel, written as a twelve-part serial in Modern Electrics magazine, which Gernsback edited, beginning in April 1911. It was compiled into novel/book form in 1925. While it pioneered many ideas found in later science fiction, it has bee..."
+    },
+    {
+      "title": "Ramayana",
+      "pageId": 44245,
+      "url": "https://en.wikipedia.org/wiki/Ramayana",
+      "gutenbergIds": [
+        "24869"
+      ],
+      "wikipediaLength": 88769,
+      "extlinksCount": 136,
+      "categories": [
+        "Category:6th-century BC poems",
+        "Category:7th-century BC poems",
+        "Category:All articles lacking in-text citations",
+        "Category:All articles lacking reliable references",
+        "Category:All articles needing additional references",
+        "Category:All articles with dead external links",
+        "Category:All articles with unsourced statements",
+        "Category:Articles containing Sanskrit-language text",
+        "Category:Articles containing Thai-language text",
+        "Category:Articles lacking in-text citations from June 2024"
+      ],
+      "classification": {
+        "isBook": true,
+        "confidence": 0.14285714285714285,
+        "bookScore": 8,
+        "authorScore": 6,
+        "reasoning": {
+          "title": "Ramayana",
+          "contentLength": 2156,
+          "categories": [
+            "Category:6th-century BC poems",
+            "Category:7th-century BC poems",
+            "Category:All articles lacking in-text citations",
+            "Category:All articles lacking reliable references",
+            "Category:All articles needing additional references"
+          ],
+          "indicators": {
+            "book": 8,
+            "author": 6
+          }
+        }
+      },
+      "contentPreview": "The Ramayana (; Sanskrit: रामायणम्, romanized: Rāmāyaṇam), also known as Valmiki Ramayana, as traditionally attributed to Valmiki, is a smriti text (also described as a Sanskrit epic) from ancient India, one of the two important epics of Hinduism known as the Itihasas, the other being the Mahabharat..."
+    },
+    {
+      "title": "Ramona",
+      "pageId": 373170,
+      "url": "https://en.wikipedia.org/wiki/Ramona",
+      "gutenbergIds": [
+        "2802"
+      ],
+      "wikipediaLength": 22808,
+      "extlinksCount": 22,
+      "categories": [
+        "Category:1884 American novels",
+        "Category:American novels adapted into films",
+        "Category:American novels adapted into plays",
+        "Category:Articles with LibriVox links",
+        "Category:Articles with Project Gutenberg links",
+        "Category:Articles with short description",
+        "Category:Children's books about Native Americans",
+        "Category:Children's books set in California",
+        "Category:Children's books set in the 19th century",
+        "Category:Commons category link is on Wikidata"
+      ],
+      "classification": {
+        "isBook": true,
+        "confidence": 0.391304347826087,
+        "bookScore": 16,
+        "authorScore": 7,
+        "reasoning": {
+          "title": "Ramona",
+          "contentLength": 935,
+          "categories": [
+            "Category:1884 American novels",
+            "Category:American novels adapted into films",
+            "Category:American novels adapted into plays",
+            "Category:Articles with LibriVox links",
+            "Category:Articles with Project Gutenberg links"
+          ],
+          "indicators": {
+            "book": 16,
+            "author": 7
+          }
+        }
+      },
+      "contentPreview": "Ramona is an 1884 American novel written by Helen Hunt Jackson. Set in Southern California after the Mexican–American War and annexation of the territory by the United States, Ramona explores the life of a mixed-race Scottish–Native American orphan girl. The story was inspired by the marriage of Hug..."
+    },
+    {
+      "title": "Ranald Bannerman's Boyhood",
+      "pageId": 12487235,
+      "url": "https://en.wikipedia.org/wiki/Ranald%20Bannerman's%20Boyhood",
+      "gutenbergIds": [
+        "9301"
+      ],
+      "wikipediaLength": 2655,
+      "extlinksCount": 3,
+      "categories": [
+        "Category:1870s novel stubs",
+        "Category:1871 British novels",
+        "Category:All stub articles",
+        "Category:Articles with LibriVox links",
+        "Category:Articles with Project Gutenberg links",
+        "Category:Articles with short description",
+        "Category:Autobiographical novel stubs",
+        "Category:British autobiographical novels",
+        "Category:Novels about orphans",
+        "Category:Novels by George MacDonald"
+      ],
+      "classification": {
+        "isBook": true,
+        "confidence": 0.7142857142857143,
+        "bookScore": 6,
+        "authorScore": 1,
+        "reasoning": {
+          "title": "Ranald Bannerman's Boyhood",
+          "contentLength": 182,
+          "categories": [
+            "Category:1870s novel stubs",
+            "Category:1871 British novels",
+            "Category:All stub articles",
+            "Category:Articles with LibriVox links",
+            "Category:Articles with Project Gutenberg links"
+          ],
+          "indicators": {
+            "book": 6,
+            "author": 1
+          }
+        }
+      },
+      "contentPreview": "Ranald Bannerman's Boyhood is a realistic, largely autobiographical, novel by George MacDonald. It was first published in 1871. The original edition was illustrated by Arthur Hughes...."
+    },
+    {
+      "title": "Random Harvest",
+      "pageId": 27714917,
+      "url": "https://en.wikipedia.org/wiki/Random%20Harvest",
+      "gutenbergIds": [],
+      "wikipediaLength": 11902,
+      "extlinksCount": 12,
+      "categories": [
+        "Category:1941 British novels",
+        "Category:All Wikipedia articles written in British English",
+        "Category:All articles needing additional references",
+        "Category:Articles needing additional references from October 2021",
+        "Category:Articles with Project Gutenberg links",
+        "Category:Articles with short description",
+        "Category:British novels adapted into films",
+        "Category:English novels",
+        "Category:Macmillan Publishers books",
+        "Category:Novels by James Hilton"
+      ],
+      "classification": {
+        "isBook": true,
+        "confidence": 0.6923076923076923,
+        "bookScore": 11,
+        "authorScore": 2,
+        "reasoning": {
+          "title": "Random Harvest",
+          "contentLength": 770,
+          "categories": [
+            "Category:1941 British novels",
+            "Category:All Wikipedia articles written in British English",
+            "Category:All articles needing additional references",
+            "Category:Articles needing additional references from October 2021",
+            "Category:Articles with Project Gutenberg links"
+          ],
+          "indicators": {
+            "book": 11,
+            "author": 2
+          }
+        }
+      },
+      "contentPreview": "Random Harvest is a novel written by James Hilton, first published in 1941. Like previous Hilton works, including Lost Horizon and Goodbye, Mr. Chips, the novel was immensely popular, placing second on Publishers Weekly list of best-selling novels for the year, and it was published as an Armed Servi..."
+    },
+    {
+      "title": "The Rape of Lucrece",
+      "pageId": 697747,
+      "url": "https://en.wikipedia.org/wiki/The%20Rape%20of%20Lucrece",
+      "gutenbergIds": [
+        "1505"
+      ],
+      "wikipediaLength": 16281,
+      "extlinksCount": 20,
+      "categories": [
+        "Category:1594 poems",
+        "Category:All Wikipedia articles written in British English",
+        "Category:Articles with LibriVox links",
+        "Category:Articles with Project Gutenberg links",
+        "Category:Articles with short description",
+        "Category:Cultural depictions of Lucius Junius Brutus",
+        "Category:Cultural depictions of Lucretia",
+        "Category:Cultural depictions of Servius Tullius",
+        "Category:Cultural depictions of Sextus Tarquinius",
+        "Category:Cultural depictions of Tullia Minor"
+      ],
+      "classification": {
+        "isBook": true,
+        "confidence": 1,
+        "bookScore": 11,
+        "authorScore": 0,
+        "reasoning": {
+          "title": "The Rape of Lucrece",
+          "contentLength": 1077,
+          "categories": [
+            "Category:1594 poems",
+            "Category:All Wikipedia articles written in British English",
+            "Category:Articles with LibriVox links",
+            "Category:Articles with Project Gutenberg links",
+            "Category:Articles with short description"
+          ],
+          "indicators": {
+            "book": 11,
+            "author": 0
+          }
+        }
+      },
+      "contentPreview": "The Rape of Lucrece (1594) is a narrative poem by William Shakespeare about the legendary Roman noblewoman Lucretia. In his previous narrative poem, Venus and Adonis (1593), Shakespeare had included a dedicatory letter to his patron, the Earl of Southampton, in which he promised to compose a \"graver..."
+    },
+    {
+      "title": "The Rape of the Lock",
+      "pageId": 292437,
+      "url": "https://en.wikipedia.org/wiki/The%20Rape%20of%20the%20Lock",
+      "gutenbergIds": [
+        "9800"
+      ],
+      "wikipediaLength": 35277,
+      "extlinksCount": 81,
+      "categories": [
+        "Category:1712 poems",
+        "Category:All Wikipedia articles written in British English",
+        "Category:Articles containing Italian-language text",
+        "Category:Articles with LibriVox links",
+        "Category:Articles with Project Gutenberg links",
+        "Category:Articles with short description",
+        "Category:British satirical poems",
+        "Category:Commons category link from Wikidata",
+        "Category:Literary parodies",
+        "Category:Mock-heroic English poems"
+      ],
+      "classification": {
+        "isBook": true,
+        "confidence": 0.8666666666666667,
+        "bookScore": 14,
+        "authorScore": 1,
+        "reasoning": {
+          "title": "The Rape of the Lock",
+          "contentLength": 706,
+          "categories": [
+            "Category:1712 poems",
+            "Category:All Wikipedia articles written in British English",
+            "Category:Articles containing Italian-language text",
+            "Category:Articles with LibriVox links",
+            "Category:Articles with Project Gutenberg links"
+          ],
+          "indicators": {
+            "book": 14,
+            "author": 1
+          }
+        }
+      },
+      "contentPreview": "The Rape of the Lock (Italian title: Il ricciolo rapito) is a mock-heroic narrative poem written by Alexander Pope. One of the most commonly cited examples of high burlesque, it was first published anonymously in Lintot's Miscellaneous Poems and Translations (May 1712) in two cantos (334 lines); a r..."
+    },
+    {
+      "title": "Rashōmon (short story)",
+      "pageId": 187607,
+      "url": "https://en.wikipedia.org/wiki/Rash%C5%8Dmon%20(short%20story)",
+      "gutenbergIds": [
+        "1982"
+      ],
+      "wikipediaLength": 4947,
+      "extlinksCount": 14,
+      "categories": [
+        "Category:1915 short stories",
+        "Category:All articles with unsourced statements",
+        "Category:Articles containing Japanese-language text",
+        "Category:Articles with Japanese-language sources (ja)",
+        "Category:Articles with Project Gutenberg links",
+        "Category:Articles with short description",
+        "Category:Articles with unsourced statements from December 2023",
+        "Category:Rashōmon",
+        "Category:Short description is different from Wikidata",
+        "Category:Short stories adapted into films"
+      ],
+      "classification": {
+        "isBook": true,
+        "confidence": 0.75,
+        "bookScore": 7,
+        "authorScore": 1,
+        "reasoning": {
+          "title": "Rashōmon (short story)",
+          "contentLength": 476,
+          "categories": [
+            "Category:1915 short stories",
+            "Category:All articles with unsourced statements",
+            "Category:Articles containing Japanese-language text",
+            "Category:Articles with Japanese-language sources (ja)",
+            "Category:Articles with Project Gutenberg links"
+          ],
+          "indicators": {
+            "book": 7,
+            "author": 1
+          }
+        }
+      },
+      "contentPreview": "\"Rashōmon (羅生門)\" is a short story by Ryūnosuke Akutagawa based on tales from the Konjaku Monogatarishū.\nThe story was first published in 1915 in Teikoku Bungaku. Akira Kurosawa's film Rashomon (1950) is in fact based primarily on another of Akutagawa's short stories, \"In a Grove\"; only the film's ti..."
+    },
+    {
+      "title": "The Rat Race (novel)",
+      "pageId": 17205776,
+      "url": "https://en.wikipedia.org/wiki/The%20Rat%20Race%20(novel)",
+      "gutenbergIds": [],
+      "wikipediaLength": 2889,
+      "extlinksCount": 4,
+      "categories": [
+        "Category:1950 American novels",
+        "Category:1950 science fiction novels",
+        "Category:1950s science fiction novel stubs",
+        "Category:All stub articles",
+        "Category:American science fiction novels",
+        "Category:Articles with LibriVox links",
+        "Category:Articles with Project Gutenberg links",
+        "Category:Articles with short description",
+        "Category:Fantasy Publishing Company, Inc. books",
+        "Category:Fiction about body swapping"
+      ],
+      "classification": {
+        "isBook": true,
+        "confidence": 0.7647058823529411,
+        "bookScore": 15,
+        "authorScore": 2,
+        "reasoning": {
+          "title": "The Rat Race (novel)",
+          "contentLength": 288,
+          "categories": [
+            "Category:1950 American novels",
+            "Category:1950 science fiction novels",
+            "Category:1950s science fiction novel stubs",
+            "Category:All stub articles",
+            "Category:American science fiction novels"
+          ],
+          "indicators": {
+            "book": 15,
+            "author": 2
+          }
+        }
+      },
+      "contentPreview": "The Rat Race is a  science fiction novel by American writer Jay Franklin.  It was first published in book form in 1950 by Fantasy Publishing Company, Inc. in an edition of 1,500 copies of which 1,200 were hardcover.  The novel originally appeared in the magazine Collier's Weekly in 1947...."
+    }
+  ],
+  "authors": [
+    {
+      "title": "Dora Knowlton Ranous",
+      "pageId": 58211437,
+      "url": "https://en.wikipedia.org/wiki/Dora%20Knowlton%20Ranous",
+      "gutenbergIds": [],
+      "wikipediaLength": 14359,
+      "extlinksCount": 17,
+      "categories": [
+        "Category:1859 births",
+        "Category:1916 deaths",
+        "Category:1916 suicides",
+        "Category:19th-century American actresses",
+        "Category:19th-century American translators",
+        "Category:19th-century American women writers",
+        "Category:19th-century American writers",
+        "Category:20th-century American women writers",
+        "Category:20th-century American writers",
+        "Category:Actors from Franklin County, Massachusetts"
+      ],
+      "classification": {
+        "isBook": false,
+        "confidence": 0.4444444444444444,
+        "bookScore": 5,
+        "authorScore": 13,
+        "reasoning": {
+          "title": "Dora Knowlton Ranous",
+          "contentLength": 887,
+          "categories": [
+            "Category:1859 births",
+            "Category:1916 deaths",
+            "Category:1916 suicides",
+            "Category:19th-century American actresses",
+            "Category:19th-century American translators"
+          ],
+          "indicators": {
+            "book": 5,
+            "author": 13
+          }
+        }
+      },
+      "contentPreview": "Dora Knowlton Ranous (August 16, 1859 – January 19, 1916) was an American actress, author, editor, translator, and book reviewer. She began her literary career editing educational books and contributing to Appleton's Annual Cyclopaedia and The Criterion. Ranous attained distinction as a translator o..."
+    },
+    {
+      "title": "Arthur Ransome",
+      "pageId": 176386,
+      "url": "https://en.wikipedia.org/wiki/Arthur%20Ransome",
+      "gutenbergIds": [
+        "40448",
+        "40447",
+        "36017",
+        "1326"
+      ],
+      "wikipediaLength": 32380,
+      "extlinksCount": 79,
+      "categories": [
+        "Category:1884 births",
+        "Category:1967 deaths",
+        "Category:Angling writers",
+        "Category:Arthur Ransome",
+        "Category:Articles with Internet Archive links",
+        "Category:Articles with LibriVox links",
+        "Category:Articles with Open Library links",
+        "Category:Articles with Project Gutenberg links",
+        "Category:Articles with short description",
+        "Category:British people of the Russian Civil War"
+      ],
+      "classification": {
+        "isBook": false,
+        "confidence": 0.3333333333333333,
+        "bookScore": 6,
+        "authorScore": 12,
+        "reasoning": {
+          "title": "Arthur Ransome",
+          "contentLength": 790,
+          "categories": [
+            "Category:1884 births",
+            "Category:1967 deaths",
+            "Category:Angling writers",
+            "Category:Arthur Ransome",
+            "Category:Articles with Internet Archive links"
+          ],
+          "indicators": {
+            "book": 6,
+            "author": 12
+          }
+        }
+      },
+      "contentPreview": "Arthur Michell Ransome  (18 January 1884 – 3 June 1967) was an English author and journalist. He is best known for writing and illustrating the Swallows and Amazons series of children's books about the school-holiday adventures of children, mostly in the Lake District and the Norfolk Broads. The ent..."
+    },
+    {
+      "title": "René Rapin",
+      "pageId": 2170389,
+      "url": "https://en.wikipedia.org/wiki/Ren%C3%A9%20Rapin",
+      "gutenbergIds": [],
+      "wikipediaLength": 2593,
+      "extlinksCount": 31,
+      "categories": [
+        "Category:1621 births",
+        "Category:1687 deaths",
+        "Category:17th-century French Jesuits",
+        "Category:All articles lacking in-text citations",
+        "Category:Articles incorporating a citation from the 1913 Catholic Encyclopedia with Wikisource reference",
+        "Category:Articles incorporating text from the 1913 Catholic Encyclopedia with Wikisource reference",
+        "Category:Articles lacking in-text citations from May 2014",
+        "Category:Articles with Internet Archive links",
+        "Category:Articles with Project Gutenberg links",
+        "Category:Articles with short description"
+      ],
+      "classification": {
+        "isBook": false,
+        "confidence": 0.7,
+        "bookScore": 3,
+        "authorScore": 17,
+        "reasoning": {
+          "title": "René Rapin",
+          "contentLength": 184,
+          "categories": [
+            "Category:1621 births",
+            "Category:1687 deaths",
+            "Category:17th-century French Jesuits",
+            "Category:All articles lacking in-text citations",
+            "Category:Articles incorporating a citation from the 1913 Catholic Encyclopedia with Wikisource reference"
+          ],
+          "indicators": {
+            "book": 3,
+            "author": 17
+          }
+        }
+      },
+      "contentPreview": "René Rapin (1621–1687) was a French Jesuit and writer.\nHe was born at Tours and entered the Society of Jesus in 1639. He taught rhetoric, and wrote extensively both in verse and prose...."
+    },
+    {
+      "title": "Mario Rapisardi",
+      "pageId": 17921742,
+      "url": "https://en.wikipedia.org/wiki/Mario%20Rapisardi",
+      "gutenbergIds": [],
+      "wikipediaLength": 8791,
+      "extlinksCount": 37,
+      "categories": [
+        "Category:1844 births",
+        "Category:1912 deaths",
+        "Category:19th-century Italian poets",
+        "Category:20th-century Italian poets",
+        "Category:All articles with dead external links",
+        "Category:Articles with Internet Archive links",
+        "Category:Articles with Italian-language sources (it)",
+        "Category:Articles with Project Gutenberg links",
+        "Category:Articles with dead external links from June 2017",
+        "Category:Articles with permanently dead external links"
+      ],
+      "classification": {
+        "isBook": false,
+        "confidence": 0.875,
+        "bookScore": 1,
+        "authorScore": 15,
+        "reasoning": {
+          "title": "Mario Rapisardi",
+          "contentLength": 180,
+          "categories": [
+            "Category:1844 births",
+            "Category:1912 deaths",
+            "Category:19th-century Italian poets",
+            "Category:20th-century Italian poets",
+            "Category:All articles with dead external links"
+          ],
+          "indicators": {
+            "book": 1,
+            "author": 15
+          }
+        }
+      },
+      "contentPreview": "Mario Rapisardi (25 February 1844, in Catania – 4 January 1912, in Catania) was an Italian poet, supporter of Risorgimento and member of the Scapigliatura (definition but refused)...."
+    },
+    {
+      "title": "John Solomon Rarey",
+      "pageId": 1909318,
+      "url": "https://en.wikipedia.org/wiki/John%20Solomon%20Rarey",
+      "gutenbergIds": [],
+      "wikipediaLength": 2830,
+      "extlinksCount": 25,
+      "categories": [
+        "Category:1827 births",
+        "Category:1866 deaths",
+        "Category:All articles lacking reliable references",
+        "Category:All articles needing additional references",
+        "Category:All stub articles",
+        "Category:American people stubs",
+        "Category:Articles lacking reliable references from July 2024",
+        "Category:Articles needing additional references from July 2024",
+        "Category:Articles with Internet Archive links",
+        "Category:Articles with Project Gutenberg links"
+      ],
+      "classification": {
+        "isBook": false,
+        "confidence": 0.5,
+        "bookScore": 3,
+        "authorScore": 9,
+        "reasoning": {
+          "title": "John Solomon Rarey",
+          "contentLength": 1632,
+          "categories": [
+            "Category:1827 births",
+            "Category:1866 deaths",
+            "Category:All articles lacking reliable references",
+            "Category:All articles needing additional references",
+            "Category:All stub articles"
+          ],
+          "indicators": {
+            "book": 3,
+            "author": 9
+          }
+        }
+      },
+      "contentPreview": "John Solomon Rarey (1827–1866) was a nineteenth-century horse whisperer, an important figure in the rehabilitation of abused and vicious horses during the 1850s. Originally from Groveport, Ohio, Rarey trained his first horse at the age of twelve. (His method of rehabilitating horses is discussed in ..."
+    },
+    {
+      "title": "Burton Rascoe",
+      "pageId": 7807892,
+      "url": "https://en.wikipedia.org/wiki/Burton%20Rascoe",
+      "gutenbergIds": [],
+      "wikipediaLength": 8435,
+      "extlinksCount": 29,
+      "categories": [
+        "Category:1892 births",
+        "Category:1957 deaths",
+        "Category:American literary critics",
+        "Category:American television critics",
+        "Category:Articles with Internet Archive links",
+        "Category:Articles with LibriVox links",
+        "Category:Articles with Project Gutenberg links",
+        "Category:Articles with short description",
+        "Category:New-York Tribune people",
+        "Category:New York Herald Tribune people"
+      ],
+      "classification": {
+        "isBook": false,
+        "confidence": 0.2727272727272727,
+        "bookScore": 8,
+        "authorScore": 14,
+        "reasoning": {
+          "title": "Burton Rascoe",
+          "contentLength": 3849,
+          "categories": [
+            "Category:1892 births",
+            "Category:1957 deaths",
+            "Category:American literary critics",
+            "Category:American television critics",
+            "Category:Articles with Internet Archive links"
+          ],
+          "indicators": {
+            "book": 8,
+            "author": 14
+          }
+        }
+      },
+      "contentPreview": "Arthur Burton Rascoe (October 22, 1892 – March 19, 1957), was an American journalist, editor and literary critic of the New York Herald Tribune.\nHe was born in Fulton, Kentucky to Matthew L. Rascoe and Elizabeth Burton Rascoe. His father chose to investigate business prospect in Oklahoma Territory, ..."
+    },
+    {
+      "title": "Hastings Rashdall",
+      "pageId": 2305516,
+      "url": "https://en.wikipedia.org/wiki/Hastings%20Rashdall",
+      "gutenbergIds": [],
+      "wikipediaLength": 13029,
+      "extlinksCount": 43,
+      "categories": [
+        "Category:1858 births",
+        "Category:1924 deaths",
+        "Category:19th-century British historians",
+        "Category:19th-century English philosophers",
+        "Category:19th-century English theologians",
+        "Category:20th-century English historians",
+        "Category:20th-century English philosophers",
+        "Category:20th-century English theologians",
+        "Category:Academics of Durham University",
+        "Category:All Wikipedia articles written in British English"
+      ],
+      "classification": {
+        "isBook": false,
+        "confidence": 0.6666666666666666,
+        "bookScore": 2,
+        "authorScore": 10,
+        "reasoning": {
+          "title": "Hastings Rashdall",
+          "contentLength": 300,
+          "categories": [
+            "Category:1858 births",
+            "Category:1924 deaths",
+            "Category:19th-century British historians",
+            "Category:19th-century English philosophers",
+            "Category:19th-century English theologians"
+          ],
+          "indicators": {
+            "book": 2,
+            "author": 10
+          }
+        }
+      },
+      "contentPreview": "Hastings Rashdall  (24 June 1858 – 9 February 1924) was an English philosopher, theologian, historian, and Anglican priest. He expounded a theory known as ideal utilitarianism, and he was a major historian of the universities of the Middle Ages. He argued for personal idealism and theistic finitism...."
+    },
+    {
+      "title": "Knud Rasmussen",
+      "pageId": 17193,
+      "url": "https://en.wikipedia.org/wiki/Knud%20Rasmussen",
+      "gutenbergIds": [],
+      "wikipediaLength": 16851,
+      "extlinksCount": 54,
+      "categories": [
+        "Category:1879 births",
+        "Category:1933 deaths",
+        "Category:20th-century Greenlandic people",
+        "Category:20th-century Inuit people",
+        "Category:20th-century anthropologists",
+        "Category:All Wikipedia articles written in British English",
+        "Category:All articles with unsourced statements",
+        "Category:Articles containing Danish-language text",
+        "Category:Articles containing Greenlandic-language text",
+        "Category:Articles with Biodiversity Heritage Library links"
+      ],
+      "classification": {
+        "isBook": false,
+        "confidence": 0.8181818181818182,
+        "bookScore": 1,
+        "authorScore": 10,
+        "reasoning": {
+          "title": "Knud Rasmussen",
+          "contentLength": 379,
+          "categories": [
+            "Category:1879 births",
+            "Category:1933 deaths",
+            "Category:20th-century Greenlandic people",
+            "Category:20th-century Inuit people",
+            "Category:20th-century anthropologists"
+          ],
+          "indicators": {
+            "book": 1,
+            "author": 10
+          }
+        }
+      },
+      "contentPreview": "Knud Johan Victor Rasmussen (; 7 June 1879 – 21 December 1933) was a Greenlandic-Danish polar explorer and anthropologist. He has been called the \"father of Eskimology\" (now often known as Inuit Studies or Greenlandic and Arctic Studies) and was the first European to cross the Northwest Passage via ..."
+    },
+    {
+      "title": "Rudolf Erich Raspe",
+      "pageId": 164506,
+      "url": "https://en.wikipedia.org/wiki/Rudolf%20Erich%20Raspe",
+      "gutenbergIds": [],
+      "wikipediaLength": 10352,
+      "extlinksCount": 53,
+      "categories": [
+        "Category:1736 births",
+        "Category:1794 deaths",
+        "Category:18th-century German chemists",
+        "Category:18th-century German novelists",
+        "Category:18th-century German translators",
+        "Category:Academic staff of the University of Kassel",
+        "Category:All Wikipedia articles written in British English",
+        "Category:Articles with Internet Archive links",
+        "Category:Articles with LibriVox links",
+        "Category:Articles with Project Gutenberg links"
+      ],
+      "classification": {
+        "isBook": false,
+        "confidence": 0.3333333333333333,
+        "bookScore": 8,
+        "authorScore": 16,
+        "reasoning": {
+          "title": "Rudolf Erich Raspe",
+          "contentLength": 397,
+          "categories": [
+            "Category:1736 births",
+            "Category:1794 deaths",
+            "Category:18th-century German chemists",
+            "Category:18th-century German novelists",
+            "Category:18th-century German translators"
+          ],
+          "indicators": {
+            "book": 8,
+            "author": 16
+          }
+        }
+      },
+      "contentPreview": "Rudolf Erich Raspe (March 1736 – 16 November 1794) was a German librarian, writer, and scientist, called by his biographer John Patrick Carswell a \"rogue\". He is best known for his collection of tall tales The Surprising Adventures of Baron Munchausen, also known as Baron Munchausen's Narrative of h..."
+    },
+    {
+      "title": "Rat-catcher",
+      "pageId": 1247347,
+      "url": "https://en.wikipedia.org/wiki/Rat-catcher",
+      "gutenbergIds": [
+        "17243"
+      ],
+      "wikipediaLength": 7371,
+      "extlinksCount": 9,
+      "categories": [
+        "Category:Articles with Project Gutenberg links",
+        "Category:Articles with short description",
+        "Category:Cleaning and maintenance occupations",
+        "Category:Commons category link is on Wikidata",
+        "Category:Hunters by game",
+        "Category:Pest trapping",
+        "Category:Rat-baiting",
+        "Category:Rats",
+        "Category:Short description is different from Wikidata"
+      ],
+      "classification": {
+        "isBook": false,
+        "confidence": 0,
+        "bookScore": 1,
+        "authorScore": 1,
+        "reasoning": {
+          "title": "Rat-catcher",
+          "contentLength": 386,
+          "categories": [
+            "Category:Articles with Project Gutenberg links",
+            "Category:Articles with short description",
+            "Category:Cleaning and maintenance occupations",
+            "Category:Commons category link is on Wikidata",
+            "Category:Hunters by game"
+          ],
+          "indicators": {
+            "book": 1,
+            "author": 1
+          }
+        }
+      },
+      "contentPreview": "A rat-catcher is a person who kills or captures rats as a professional form of pest control. Keeping the rat population under control was practiced in Europe to prevent the spread of diseases, most notoriously the Black Death, and to prevent damage to food supplies. In modern developed countries, su..."
+    }
+  ],
+  "errors": [
+    {
+      "title": "Church of St Mary, Compton Dando",
+      "error": "No extract available"
+    },
+    {
+      "title": "Frank Morton McMurry",
+      "error": "No extract available"
+    }
+  ]
+}

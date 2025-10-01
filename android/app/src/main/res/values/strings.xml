@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">The Explainers</string>
+    <string name="title_activity_main">The Explainers</string>
+    <string name="package_name">com.explainers.app</string>
+    <string name="custom_url_scheme">com.explainers.app</string>
+</resources>

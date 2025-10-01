@@ -1,0 +1,446 @@
+{
+  "extractionDate": "2025-09-20T20:16:27.799Z",
+  "statistics": {
+    "totalCategories": 56,
+    "totalBooks": 133,
+    "booksWithGutenberg": 25,
+    "successRate": "18.80%"
+  },
+  "categoryStats": {
+    "Plato": {
+      "total": 3,
+      "withGutenberg": 0
+    },
+    "Works by Plato": {
+      "total": 3,
+      "withGutenberg": 0
+    },
+    "Dialogues of Plato": {
+      "total": 44,
+      "withGutenberg": 15
+    },
+    "The Republic (Plato)": {
+      "total": 0,
+      "withGutenberg": 0
+    },
+    "Apology (Plato)": {
+      "total": 0,
+      "withGutenberg": 0
+    },
+    "Phaedo": {
+      "total": 0,
+      "withGutenberg": 0
+    },
+    "Phaedrus (dialogue)": {
+      "total": 0,
+      "withGutenberg": 0
+    },
+    "Symposium (Plato)": {
+      "total": 0,
+      "withGutenberg": 0
+    },
+    "Timaeus (dialogue)": {
+      "total": 0,
+      "withGutenberg": 0
+    },
+    "Critias (dialogue)": {
+      "total": 0,
+      "withGutenberg": 0
+    },
+    "Laws (dialogue)": {
+      "total": 0,
+      "withGutenberg": 0
+    },
+    "Meno": {
+      "total": 0,
+      "withGutenberg": 0
+    },
+    "Gorgias (dialogue)": {
+      "total": 0,
+      "withGutenberg": 0
+    },
+    "Parmenides (dialogue)": {
+      "total": 0,
+      "withGutenberg": 0
+    },
+    "Theaetetus (dialogue)": {
+      "total": 0,
+      "withGutenberg": 0
+    },
+    "Sophist (dialogue)": {
+      "total": 0,
+      "withGutenberg": 0
+    },
+    "Statesman (dialogue)": {
+      "total": 0,
+      "withGutenberg": 0
+    },
+    "Protagoras (dialogue)": {
+      "total": 0,
+      "withGutenberg": 0
+    },
+    "Euthyphro": {
+      "total": 0,
+      "withGutenberg": 0
+    },
+    "Crito": {
+      "total": 0,
+      "withGutenberg": 0
+    },
+    "Ion (dialogue)": {
+      "total": 0,
+      "withGutenberg": 0
+    },
+    "Laches (dialogue)": {
+      "total": 0,
+      "withGutenberg": 0
+    },
+    "Charmides (dialogue)": {
+      "total": 0,
+      "withGutenberg": 0
+    },
+    "Lysis (dialogue)": {
+      "total": 0,
+      "withGutenberg": 0
+    },
+    "Euthydemus (dialogue)": {
+      "total": 0,
+      "withGutenberg": 0
+    },
+    "Cratylus (dialogue)": {
+      "total": 0,
+      "withGutenberg": 0
+    },
+    "Philebus": {
+      "total": 0,
+      "withGutenberg": 0
+    },
+    "Seventh Letter": {
+      "total": 0,
+      "withGutenberg": 0
+    },
+    "Ancient Greek philosophy": {
+      "total": 1,
+      "withGutenberg": 0
+    },
+    "Classical philosophy": {
+      "total": 0,
+      "withGutenberg": 0
+    },
+    "Socratic dialogues": {
+      "total": 7,
+      "withGutenberg": 5
+    },
+    "Platonic philosophy": {
+      "total": 0,
+      "withGutenberg": 0
+    },
+    "Greek philosophy": {
+      "total": 2,
+      "withGutenberg": 1
+    },
+    "Western philosophy": {
+      "total": 0,
+      "withGutenberg": 0
+    },
+    "Philosophy of Plato": {
+      "total": 0,
+      "withGutenberg": 0
+    },
+    "Platonism": {
+      "total": 20,
+      "withGutenberg": 1
+    },
+    "Ancient Greek literature": {
+      "total": 14,
+      "withGutenberg": 1
+    },
+    "Classical literature": {
+      "total": 11,
+      "withGutenberg": 0
+    },
+    "Philosophical literature": {
+      "total": 3,
+      "withGutenberg": 0
+    },
+    "Philosophical works": {
+      "total": 0,
+      "withGutenberg": 0
+    },
+    "Philosophical texts": {
+      "total": 0,
+      "withGutenberg": 0
+    },
+    "Ancient philosophy": {
+      "total": 2,
+      "withGutenberg": 0
+    },
+    "Classical texts": {
+      "total": 0,
+      "withGutenberg": 0
+    },
+    "Greek literature": {
+      "total": 21,
+      "withGutenberg": 2
+    },
+    "Ancient Greek texts": {
+      "total": 0,
+      "withGutenberg": 0
+    },
+    "Classical Greek philosophy": {
+      "total": 2,
+      "withGutenberg": 0
+    },
+    "Socratic philosophy": {
+      "total": 0,
+      "withGutenberg": 0
+    },
+    "Ancient Greek thinkers": {
+      "total": 0,
+      "withGutenberg": 0
+    },
+    "Greek philosophers": {
+      "total": 0,
+      "withGutenberg": 0
+    },
+    "Ancient philosophers": {
+      "total": 0,
+      "withGutenberg": 0
+    },
+    "Classical philosophers": {
+      "total": 0,
+      "withGutenberg": 0
+    }
+  },
+  "books": [
+    {
+      "title": "Apology (Plato)",
+      "gutenbergIds": [
+        "1656",
+        "13726"
+      ],
+      "category": "Dialogues of Plato",
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/Apology%20(Plato)",
+      "pageId": 868157
+    },
+    {
+      "title": "Charmides (dialogue)",
+      "gutenbergIds": [
+        "1580"
+      ],
+      "category": "Dialogues of Plato",
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/Charmides%20(dialogue)",
+      "pageId": 380957
+    },
+    {
+      "title": "Critias (dialogue)",
+      "gutenbergIds": [
+        "1571"
+      ],
+      "category": "Dialogues of Plato",
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/Critias%20(dialogue)",
+      "pageId": 1337863
+    },
+    {
+      "title": "Gorgias (dialogue)",
+      "gutenbergIds": [
+        "1672"
+      ],
+      "category": "Dialogues of Plato",
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/Gorgias%20(dialogue)",
+      "pageId": 1178825
+    },
+    {
+      "title": "Ion (dialogue)",
+      "gutenbergIds": [
+        "1635"
+      ],
+      "category": "Dialogues of Plato",
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/Ion%20(dialogue)",
+      "pageId": 1803918
+    },
+    {
+      "title": "Laws (dialogue)",
+      "gutenbergIds": [
+        "1750"
+      ],
+      "category": "Dialogues of Plato",
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/Laws%20(dialogue)",
+      "pageId": 1356238
+    },
+    {
+      "title": "Menexenus (dialogue)",
+      "gutenbergIds": [
+        "1682"
+      ],
+      "category": "Dialogues of Plato",
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/Menexenus%20(dialogue)",
+      "pageId": 1229426
+    },
+    {
+      "title": "Minos (dialogue)",
+      "gutenbergIds": [
+        "1750"
+      ],
+      "category": "Dialogues of Plato",
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/Minos%20(dialogue)",
+      "pageId": 8508034
+    },
+    {
+      "title": "Parmenides (dialogue)",
+      "gutenbergIds": [
+        "1687"
+      ],
+      "category": "Dialogues of Plato",
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/Parmenides%20(dialogue)",
+      "pageId": 871784
+    },
+    {
+      "title": "Philebus",
+      "gutenbergIds": [
+        "1744"
+      ],
+      "category": "Dialogues of Plato",
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/Philebus",
+      "pageId": 7189210
+    },
+    {
+      "title": "Protagoras (dialogue)",
+      "gutenbergIds": [
+        "1591"
+      ],
+      "category": "Dialogues of Plato",
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/Protagoras%20(dialogue)",
+      "pageId": 531094
+    },
+    {
+      "title": "Republic (Plato)",
+      "gutenbergIds": [
+        "1497",
+        "55201"
+      ],
+      "category": "Dialogues of Plato",
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/Republic%20(Plato)",
+      "pageId": 1607411
+    },
+    {
+      "title": "Second Alcibiades",
+      "gutenbergIds": [
+        "1677"
+      ],
+      "category": "Dialogues of Plato",
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/Second%20Alcibiades",
+      "pageId": 6898170
+    },
+    {
+      "title": "Symposium (Plato)",
+      "gutenbergIds": [
+        "1600"
+      ],
+      "category": "Dialogues of Plato",
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/Symposium%20(Plato)",
+      "pageId": 246725
+    },
+    {
+      "title": "Timaeus (dialogue)",
+      "gutenbergIds": [
+        "1572"
+      ],
+      "category": "Dialogues of Plato",
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/Timaeus%20(dialogue)",
+      "pageId": 540497
+    },
+    {
+      "title": "Apology (Xenophon)",
+      "gutenbergIds": [
+        "1171"
+      ],
+      "category": "Socratic dialogues",
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/Apology%20(Xenophon)",
+      "pageId": 1601908
+    },
+    {
+      "title": "The Art of War (Machiavelli book)",
+      "gutenbergIds": [
+        "15772"
+      ],
+      "category": "Socratic dialogues",
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/The%20Art%20of%20War%20(Machiavelli%20book)",
+      "pageId": 2359444
+    },
+    {
+      "title": "Memorabilia (Xenophon)",
+      "gutenbergIds": [
+        "17490",
+        "1177"
+      ],
+      "category": "Socratic dialogues",
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/Memorabilia%20(Xenophon)",
+      "pageId": 1673863
+    },
+    {
+      "title": "Oeconomicus",
+      "gutenbergIds": [
+        "1173"
+      ],
+      "category": "Socratic dialogues",
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/Oeconomicus",
+      "pageId": 1673827
+    },
+    {
+      "title": "Symposium (Xenophon)",
+      "gutenbergIds": [
+        "1181"
+      ],
+      "category": "Socratic dialogues",
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/Symposium%20(Xenophon)",
+      "pageId": 1602847
+    },
+    {
+      "title": "Eleatics",
+      "gutenbergIds": [
+        "1735"
+      ],
+      "category": "Greek philosophy",
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/Eleatics",
+      "pageId": 591116
+    },
+    {
+      "title": "Mimesis",
+      "gutenbergIds": [
+        "150"
+      ],
+      "category": "Platonism",
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/Mimesis",
+      "pageId": 329625
+    },
+    {
+      "title": "Aesop's Fables",
+      "gutenbergIds": [
+        "11339",
+        "19994"
+      ],
+      "category": "Ancient Greek literature",
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/Aesop's%20Fables",
+      "pageId": 240755
+    },
+    {
+      "title": "Barlaam and Josaphat",
+      "gutenbergIds": [
+        "749"
+      ],
+      "category": "Greek literature",
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/Barlaam%20and%20Josaphat",
+      "pageId": 16360
+    },
+    {
+      "title": "Bibliography of Greece",
+      "gutenbergIds": [
+        "69344"
+      ],
+      "category": "Greek literature",
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/Bibliography%20of%20Greece",
+      "pageId": 29305328
+    }
+  ]
+}

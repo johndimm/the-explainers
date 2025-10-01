@@ -1,0 +1,158 @@
+[
+  {
+    "title": "Complete Works of Shakespeare",
+    "gutenbergId": "100",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Complete%20Works%20of%20Shakespeare",
+    "category": "Works by William Shakespeare"
+  },
+  {
+    "title": "Hamlet",
+    "gutenbergId": "56454",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Hamlet",
+    "category": "Hamlet"
+  },
+  {
+    "title": "Literary influence of Hamlet",
+    "gutenbergId": "1787",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Literary%20influence%20of%20Hamlet",
+    "category": "Hamlet"
+  },
+  {
+    "title": "To be, or not to be",
+    "gutenbergId": "21279",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/To%20be%2C%20or%20not%20to%20be",
+    "category": "Hamlet"
+  },
+  {
+    "title": "Macbeth",
+    "gutenbergId": "1533",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Macbeth",
+    "category": "Macbeth"
+  },
+  {
+    "title": "Romeo and Juliet",
+    "gutenbergId": "1513",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Romeo%20and%20Juliet",
+    "category": "Romeo and Juliet"
+  },
+  {
+    "title": "Othello",
+    "gutenbergId": "1531",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Othello",
+    "category": "Othello"
+  },
+  {
+    "title": "King Lear",
+    "gutenbergId": "1532",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/King%20Lear",
+    "category": "King Lear"
+  },
+  {
+    "title": "The Tempest",
+    "gutenbergId": "1540",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/The%20Tempest",
+    "category": "The Tempest"
+  },
+  {
+    "title": "A Midsummer Night's Dream",
+    "gutenbergId": "1514",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/A%20Midsummer%20Night's%20Dream",
+    "category": "A Midsummer Night's Dream"
+  },
+  {
+    "title": "The Merchant of Venice",
+    "gutenbergId": "1515",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/The%20Merchant%20of%20Venice",
+    "category": "The Merchant of Venice"
+  },
+  {
+    "title": "The Jew of Malta",
+    "gutenbergId": "901",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/The%20Jew%20of%20Malta",
+    "category": "The Merchant of Venice"
+  },
+  {
+    "title": "Twelfth Night",
+    "gutenbergId": "1526",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Twelfth%20Night",
+    "category": "Twelfth Night"
+  },
+  {
+    "title": "As You Like It",
+    "gutenbergId": "1523",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/As%20You%20Like%20It",
+    "category": "As You Like It"
+  },
+  {
+    "title": "Caesarism",
+    "gutenbergId": "470",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Caesarism",
+    "category": "Julius Caesar"
+  },
+  {
+    "title": "Gallic Wars",
+    "gutenbergId": "10657",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Gallic%20Wars",
+    "category": "Julius Caesar"
+  },
+  {
+    "title": "Military campaigns of Julius Caesar",
+    "gutenbergId": "10657",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Military%20campaigns%20of%20Julius%20Caesar",
+    "category": "Julius Caesar"
+  },
+  {
+    "title": "Antony and Cleopatra",
+    "gutenbergId": "1534",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Antony%20and%20Cleopatra",
+    "category": "Antony and Cleopatra"
+  },
+  {
+    "title": "Cockpit-in-Court",
+    "gutenbergId": "22397",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Cockpit-in-Court",
+    "category": "Henry VIII"
+  },
+  {
+    "title": "Hampton Court Palace",
+    "gutenbergId": "27524",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Hampton%20Court%20Palace",
+    "category": "Henry VIII"
+  },
+  {
+    "title": "The Taming of the Shrew",
+    "gutenbergId": "11929",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/The%20Taming%20of%20the%20Shrew",
+    "category": "The Taming of the Shrew"
+  },
+  {
+    "title": "Troilus and Cressida",
+    "gutenbergId": "1528",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Troilus%20and%20Cressida",
+    "category": "Troilus and Cressida"
+  },
+  {
+    "title": "Troilus",
+    "gutenbergId": "1528",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Troilus",
+    "category": "Troilus and Cressida"
+  },
+  {
+    "title": "Troilus and Criseyde",
+    "gutenbergId": "257",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Troilus%20and%20Criseyde",
+    "category": "Troilus and Cressida"
+  },
+  {
+    "title": "Coriolanus",
+    "gutenbergId": "14033",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Coriolanus",
+    "category": "Coriolanus"
+  },
+  {
+    "title": "First Folio",
+    "gutenbergId": "2270",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/First%20Folio",
+    "category": "Timon of Athens"
+  }
+]

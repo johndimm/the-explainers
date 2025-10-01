@@ -1,0 +1,836 @@
+{
+  "searchDate": "2025-09-20T21:19:00.587Z",
+  "statistics": {
+    "booksSearched": 58,
+    "booksFound": 82,
+    "successRate": "141.38%"
+  },
+  "books": [
+    {
+      "title": "Pride and Prejudice",
+      "gutenbergIds": [
+        "1342",
+        "42671"
+      ],
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/Pride%20and%20Prejudice",
+      "wikipediaTitle": "Pride and Prejudice",
+      "searchTerm": "Pride and Prejudice"
+    },
+    {
+      "title": "Jane Austen",
+      "gutenbergIds": [
+        "17797"
+      ],
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/Jane%20Austen",
+      "wikipediaTitle": "Jane Austen",
+      "searchTerm": "Pride and Prejudice"
+    },
+    {
+      "title": "Jane Eyre",
+      "gutenbergIds": [
+        "1260"
+      ],
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/Jane%20Eyre",
+      "wikipediaTitle": "Jane Eyre",
+      "searchTerm": "Jane Eyre"
+    },
+    {
+      "title": "Wuthering Heights",
+      "gutenbergIds": [
+        "768",
+        "40655"
+      ],
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/Wuthering%20Heights",
+      "wikipediaTitle": "Wuthering Heights",
+      "searchTerm": "Wuthering Heights"
+    },
+    {
+      "title": "Emily Brontë",
+      "gutenbergIds": [
+        "25789"
+      ],
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/Emily%20Bront%C3%AB",
+      "wikipediaTitle": "Emily Brontë",
+      "searchTerm": "Wuthering Heights"
+    },
+    {
+      "title": "Great Expectations",
+      "gutenbergIds": [
+        "1400"
+      ],
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/Great%20Expectations",
+      "wikipediaTitle": "Great Expectations",
+      "searchTerm": "Great Expectations"
+    },
+    {
+      "title": "Charles Dickens",
+      "gutenbergIds": [
+        "25851",
+        "25851"
+      ],
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/Charles%20Dickens",
+      "wikipediaTitle": "Charles Dickens",
+      "searchTerm": "Great Expectations"
+    },
+    {
+      "title": "David Copperfield",
+      "gutenbergIds": [
+        "25851",
+        "25851",
+        "766"
+      ],
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/David%20Copperfield",
+      "wikipediaTitle": "David Copperfield",
+      "searchTerm": "David Copperfield"
+    },
+    {
+      "title": "Oliver Twist",
+      "gutenbergIds": [
+        "730",
+        "730",
+        "730"
+      ],
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/Oliver%20Twist",
+      "wikipediaTitle": "Oliver Twist",
+      "searchTerm": "Oliver Twist"
+    },
+    {
+      "title": "A Tale of Two Cities",
+      "gutenbergIds": [
+        "98"
+      ],
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/A%20Tale%20of%20Two%20Cities",
+      "wikipediaTitle": "A Tale of Two Cities",
+      "searchTerm": "A Tale of Two Cities"
+    },
+    {
+      "title": "Moby-Dick",
+      "gutenbergIds": [
+        "15",
+        "2701"
+      ],
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/Moby-Dick",
+      "wikipediaTitle": "Moby-Dick",
+      "searchTerm": "Moby Dick"
+    },
+    {
+      "title": "Cetology of Moby-Dick",
+      "gutenbergIds": [
+        "2701"
+      ],
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/Cetology%20of%20Moby-Dick",
+      "wikipediaTitle": "Cetology of Moby-Dick",
+      "searchTerm": "Moby Dick"
+    },
+    {
+      "title": "The Scarlet Letter",
+      "gutenbergIds": [
+        "33"
+      ],
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/The%20Scarlet%20Letter",
+      "wikipediaTitle": "The Scarlet Letter",
+      "searchTerm": "The Scarlet Letter"
+    },
+    {
+      "title": "The Great Gatsby",
+      "gutenbergIds": [
+        "64317"
+      ],
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/The%20Great%20Gatsby",
+      "wikipediaTitle": "The Great Gatsby",
+      "searchTerm": "The Great Gatsby"
+    },
+    {
+      "title": "The Sun Also Rises",
+      "gutenbergIds": [
+        "67138"
+      ],
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/The%20Sun%20Also%20Rises",
+      "wikipediaTitle": "The Sun Also Rises",
+      "searchTerm": "The Sun Also Rises"
+    },
+    {
+      "title": "The Waste Land",
+      "gutenbergIds": [
+        "1321"
+      ],
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/The%20Waste%20Land",
+      "wikipediaTitle": "The Waste Land",
+      "searchTerm": "The Waste Land"
+    },
+    {
+      "title": "Walt Whitman",
+      "gutenbergIds": [
+        "56536",
+        "56536"
+      ],
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/Walt%20Whitman",
+      "wikipediaTitle": "Walt Whitman",
+      "searchTerm": "Leaves of Grass"
+    },
+    {
+      "title": "A Passage to India",
+      "gutenbergIds": [
+        "61221"
+      ],
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/A%20Passage%20to%20India",
+      "wikipediaTitle": "A Passage to India",
+      "searchTerm": "Leaves of Grass"
+    },
+    {
+      "title": "Paradise Lost",
+      "gutenbergIds": [
+        "20",
+        "26"
+      ],
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/Paradise%20Lost",
+      "wikipediaTitle": "Paradise Lost",
+      "searchTerm": "Paradise Lost"
+    },
+    {
+      "title": "Paradise Regained",
+      "gutenbergIds": [
+        "58"
+      ],
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/Paradise%20Regained",
+      "wikipediaTitle": "Paradise Regained",
+      "searchTerm": "Paradise Lost"
+    },
+    {
+      "title": "Beowulf",
+      "gutenbergIds": [
+        "25942"
+      ],
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/Beowulf",
+      "wikipediaTitle": "Beowulf",
+      "searchTerm": "Beowulf"
+    },
+    {
+      "title": "Beowulf (hero)",
+      "gutenbergIds": [
+        "14878"
+      ],
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/Beowulf%20(hero)",
+      "wikipediaTitle": "Beowulf (hero)",
+      "searchTerm": "Beowulf"
+    },
+    {
+      "title": "Hrólfr Kraki",
+      "gutenbergIds": [
+        "981",
+        "14878",
+        "16328"
+      ],
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/Hr%C3%B3lfr%20Kraki",
+      "wikipediaTitle": "Hrólfr Kraki",
+      "searchTerm": "Beowulf"
+    },
+    {
+      "title": "Iliad",
+      "gutenbergIds": [
+        "16452",
+        "51355",
+        "6130",
+        "22382",
+        "6150",
+        "3059",
+        "2199"
+      ],
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/Iliad",
+      "wikipediaTitle": "Iliad",
+      "searchTerm": "The Iliad"
+    },
+    {
+      "title": "Odyssey",
+      "gutenbergIds": [
+        "48895",
+        "3160",
+        "24269",
+        "1728",
+        "1727",
+        "49324"
+      ],
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/Odyssey",
+      "wikipediaTitle": "Odyssey",
+      "searchTerm": "The Iliad"
+    },
+    {
+      "title": "English translations of Homer",
+      "gutenbergIds": [
+        "6130",
+        "16452",
+        "6150",
+        "2199",
+        "3160",
+        "1728",
+        "1727",
+        "22382"
+      ],
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/English%20translations%20of%20Homer",
+      "wikipediaTitle": "English translations of Homer",
+      "searchTerm": "The Iliad"
+    },
+    {
+      "title": "The Prince",
+      "gutenbergIds": [
+        "1232"
+      ],
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/The%20Prince",
+      "wikipediaTitle": "The Prince",
+      "searchTerm": "The Prince"
+    },
+    {
+      "title": "The Prince and the Pauper",
+      "gutenbergIds": [
+        "1837"
+      ],
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/The%20Prince%20and%20the%20Pauper",
+      "wikipediaTitle": "The Prince and the Pauper",
+      "searchTerm": "The Prince"
+    },
+    {
+      "title": "Leviathan (Hobbes book)",
+      "gutenbergIds": [
+        "3207"
+      ],
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/Leviathan%20(Hobbes%20book)",
+      "wikipediaTitle": "Leviathan (Hobbes book)",
+      "searchTerm": "Leviathan"
+    },
+    {
+      "title": "Thomas Hobbes",
+      "gutenbergIds": [
+        "39232"
+      ],
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/Thomas%20Hobbes",
+      "wikipediaTitle": "Thomas Hobbes",
+      "searchTerm": "Leviathan"
+    },
+    {
+      "title": "The Social Contract",
+      "gutenbergIds": [
+        "1301"
+      ],
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/The%20Social%20Contract",
+      "wikipediaTitle": "The Social Contract",
+      "searchTerm": "The Social Contract"
+    },
+    {
+      "title": "Beyond Good and Evil",
+      "gutenbergIds": [
+        "4363",
+        "7204",
+        "4363"
+      ],
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/Beyond%20Good%20and%20Evil",
+      "wikipediaTitle": "Beyond Good and Evil",
+      "searchTerm": "Beyond Good and Evil"
+    },
+    {
+      "title": "Philosophy of Friedrich Nietzsche",
+      "gutenbergIds": [
+        "52915"
+      ],
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/Philosophy%20of%20Friedrich%20Nietzsche",
+      "wikipediaTitle": "Philosophy of Friedrich Nietzsche",
+      "searchTerm": "Beyond Good and Evil"
+    },
+    {
+      "title": "Friedrich Nietzsche",
+      "gutenbergIds": [
+        "11419",
+        "12491"
+      ],
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/Friedrich%20Nietzsche",
+      "wikipediaTitle": "Friedrich Nietzsche",
+      "searchTerm": "Beyond Good and Evil"
+    },
+    {
+      "title": "Thus Spoke Zarathustra",
+      "gutenbergIds": [
+        "1998",
+        "7205",
+        "52190"
+      ],
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/Thus%20Spoke%20Zarathustra",
+      "wikipediaTitle": "Thus Spoke Zarathustra",
+      "searchTerm": "Thus Spoke Zarathustra"
+    },
+    {
+      "title": "Also sprach Zarathustra",
+      "gutenbergIds": [
+        "1998"
+      ],
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/Also%20sprach%20Zarathustra",
+      "wikipediaTitle": "Also sprach Zarathustra",
+      "searchTerm": "Thus Spoke Zarathustra"
+    },
+    {
+      "title": "Übermensch",
+      "gutenbergIds": [
+        "1998"
+      ],
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/%C3%9Cbermensch",
+      "wikipediaTitle": "Übermensch",
+      "searchTerm": "Thus Spoke Zarathustra"
+    },
+    {
+      "title": "Zarathustra's roundelay",
+      "gutenbergIds": [
+        "1998"
+      ],
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/Zarathustra's%20roundelay",
+      "wikipediaTitle": "Zarathustra's roundelay",
+      "searchTerm": "Thus Spoke Zarathustra"
+    },
+    {
+      "title": "Human, All Too Human",
+      "gutenbergIds": [
+        "38145",
+        "37841",
+        "7207"
+      ],
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/Human%2C%20All%20Too%20Human",
+      "wikipediaTitle": "Human, All Too Human",
+      "searchTerm": "Thus Spoke Zarathustra"
+    },
+    {
+      "title": "Eternal return",
+      "gutenbergIds": [
+        "52915",
+        "52263"
+      ],
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/Eternal%20return",
+      "wikipediaTitle": "Eternal return",
+      "searchTerm": "Thus Spoke Zarathustra"
+    },
+    {
+      "title": "Philosophy of Friedrich Nietzsche",
+      "gutenbergIds": [
+        "52915"
+      ],
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/Philosophy%20of%20Friedrich%20Nietzsche",
+      "wikipediaTitle": "Philosophy of Friedrich Nietzsche",
+      "searchTerm": "Thus Spoke Zarathustra"
+    },
+    {
+      "title": "Beyond Good and Evil",
+      "gutenbergIds": [
+        "4363",
+        "7204",
+        "4363"
+      ],
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/Beyond%20Good%20and%20Evil",
+      "wikipediaTitle": "Beyond Good and Evil",
+      "searchTerm": "Thus Spoke Zarathustra"
+    },
+    {
+      "title": "Critique of Pure Reason",
+      "gutenbergIds": [
+        "4280",
+        "4280"
+      ],
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/Critique%20of%20Pure%20Reason",
+      "wikipediaTitle": "Critique of Pure Reason",
+      "searchTerm": "The Critique of Pure Reason"
+    },
+    {
+      "title": "Critique of Practical Reason",
+      "gutenbergIds": [
+        "5683"
+      ],
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/Critique%20of%20Practical%20Reason",
+      "wikipediaTitle": "Critique of Practical Reason",
+      "searchTerm": "The Critique of Pure Reason"
+    },
+    {
+      "title": "The Wealth of Nations",
+      "gutenbergIds": [
+        "3300"
+      ],
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/The%20Wealth%20of%20Nations",
+      "wikipediaTitle": "The Wealth of Nations",
+      "searchTerm": "The Wealth of Nations"
+    },
+    {
+      "title": "Wealth",
+      "gutenbergIds": [
+        "3300",
+        "3300"
+      ],
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/Wealth",
+      "wikipediaTitle": "Wealth",
+      "searchTerm": "The Wealth of Nations"
+    },
+    {
+      "title": "Class struggle",
+      "gutenbergIds": [
+        "1497",
+        "674",
+        "3300",
+        "3300",
+        "5669",
+        "11224",
+        "25717",
+        "3300",
+        "3300",
+        "3300",
+        "3300"
+      ],
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/Class%20struggle",
+      "wikipediaTitle": "Class struggle",
+      "searchTerm": "The Wealth of Nations"
+    },
+    {
+      "title": "Greed",
+      "gutenbergIds": [
+        "785",
+        "3600",
+        "3800",
+        "39270",
+        "3300",
+        "25717",
+        "11224"
+      ],
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/Greed",
+      "wikipediaTitle": "Greed",
+      "searchTerm": "The Wealth of Nations"
+    },
+    {
+      "title": "The Art of War",
+      "gutenbergIds": [
+        "132",
+        "44024",
+        "66706"
+      ],
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/The%20Art%20of%20War",
+      "wikipediaTitle": "The Art of War",
+      "searchTerm": "The Art of War"
+    },
+    {
+      "title": "The Prince",
+      "gutenbergIds": [
+        "1232"
+      ],
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/The%20Prince",
+      "wikipediaTitle": "The Prince",
+      "searchTerm": "The Prince"
+    },
+    {
+      "title": "Marcus Aurelius",
+      "gutenbergIds": [
+        "6585",
+        "6585"
+      ],
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/Marcus%20Aurelius",
+      "wikipediaTitle": "Marcus Aurelius",
+      "searchTerm": "Meditations"
+    },
+    {
+      "title": "Alice's Adventures in Wonderland",
+      "gutenbergIds": [
+        "19002",
+        "28885",
+        "19033"
+      ],
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/Alice's%20Adventures%20in%20Wonderland",
+      "wikipediaTitle": "Alice's Adventures in Wonderland",
+      "searchTerm": "Alice's Adventures in Wonderland"
+    },
+    {
+      "title": "Alice (Alice's Adventures in Wonderland)",
+      "gutenbergIds": [
+        "11"
+      ],
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/Alice%20(Alice's%20Adventures%20in%20Wonderland)",
+      "wikipediaTitle": "Alice (Alice's Adventures in Wonderland)",
+      "searchTerm": "Alice's Adventures in Wonderland"
+    },
+    {
+      "title": "Duchess (Alice's Adventures in Wonderland)",
+      "gutenbergIds": [
+        "11"
+      ],
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/Duchess%20(Alice's%20Adventures%20in%20Wonderland)",
+      "wikipediaTitle": "Duchess (Alice's Adventures in Wonderland)",
+      "searchTerm": "Alice's Adventures in Wonderland"
+    },
+    {
+      "title": "Through the Looking-Glass",
+      "gutenbergIds": [
+        "12"
+      ],
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/Through%20the%20Looking-Glass",
+      "wikipediaTitle": "Through the Looking-Glass",
+      "searchTerm": "Through the Looking-Glass"
+    },
+    {
+      "title": "Alice (Alice's Adventures in Wonderland)",
+      "gutenbergIds": [
+        "11"
+      ],
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/Alice%20(Alice's%20Adventures%20in%20Wonderland)",
+      "wikipediaTitle": "Alice (Alice's Adventures in Wonderland)",
+      "searchTerm": "Through the Looking-Glass"
+    },
+    {
+      "title": "The Adventures of Tom Sawyer",
+      "gutenbergIds": [
+        "74",
+        "2988"
+      ],
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/The%20Adventures%20of%20Tom%20Sawyer",
+      "wikipediaTitle": "The Adventures of Tom Sawyer",
+      "searchTerm": "The Adventures of Tom Sawyer"
+    },
+    {
+      "title": "Tom Sawyer",
+      "gutenbergIds": [
+        "74"
+      ],
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/Tom%20Sawyer",
+      "wikipediaTitle": "Tom Sawyer",
+      "searchTerm": "The Adventures of Tom Sawyer"
+    },
+    {
+      "title": "Adventures of Huckleberry Finn",
+      "gutenbergIds": [
+        "76"
+      ],
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/Adventures%20of%20Huckleberry%20Finn",
+      "wikipediaTitle": "Adventures of Huckleberry Finn",
+      "searchTerm": "The Adventures of Tom Sawyer"
+    },
+    {
+      "title": "Tom Sawyer Abroad",
+      "gutenbergIds": [
+        "91"
+      ],
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/Tom%20Sawyer%20Abroad",
+      "wikipediaTitle": "Tom Sawyer Abroad",
+      "searchTerm": "The Adventures of Tom Sawyer"
+    },
+    {
+      "title": "Tom Sawyer, Detective",
+      "gutenbergIds": [
+        "93",
+        "93"
+      ],
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/Tom%20Sawyer%2C%20Detective",
+      "wikipediaTitle": "Tom Sawyer, Detective",
+      "searchTerm": "The Adventures of Tom Sawyer"
+    },
+    {
+      "title": "Adventures of Huckleberry Finn",
+      "gutenbergIds": [
+        "76"
+      ],
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/Adventures%20of%20Huckleberry%20Finn",
+      "wikipediaTitle": "Adventures of Huckleberry Finn",
+      "searchTerm": "Adventures of Huckleberry Finn"
+    },
+    {
+      "title": "The Adventures of Tom Sawyer",
+      "gutenbergIds": [
+        "74",
+        "2988"
+      ],
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/The%20Adventures%20of%20Tom%20Sawyer",
+      "wikipediaTitle": "The Adventures of Tom Sawyer",
+      "searchTerm": "Adventures of Huckleberry Finn"
+    },
+    {
+      "title": "Mark Twain",
+      "gutenbergIds": [
+        "2988"
+      ],
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/Mark%20Twain",
+      "wikipediaTitle": "Mark Twain",
+      "searchTerm": "Adventures of Huckleberry Finn"
+    },
+    {
+      "title": "Treasure Island",
+      "gutenbergIds": [
+        "405",
+        "10669",
+        "120"
+      ],
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/Treasure%20Island",
+      "wikipediaTitle": "Treasure Island",
+      "searchTerm": "Treasure Island"
+    },
+    {
+      "title": "Robinson Crusoe",
+      "gutenbergIds": [
+        "12623",
+        "6936"
+      ],
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/Robinson%20Crusoe",
+      "wikipediaTitle": "Robinson Crusoe",
+      "searchTerm": "Robinson Crusoe"
+    },
+    {
+      "title": "The Farther Adventures of Robinson Crusoe",
+      "gutenbergIds": [
+        "561"
+      ],
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/The%20Farther%20Adventures%20of%20Robinson%20Crusoe",
+      "wikipediaTitle": "The Farther Adventures of Robinson Crusoe",
+      "searchTerm": "Robinson Crusoe"
+    },
+    {
+      "title": "The Swiss Family Robinson",
+      "gutenbergIds": [
+        "11703",
+        "3836"
+      ],
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/The%20Swiss%20Family%20Robinson",
+      "wikipediaTitle": "The Swiss Family Robinson",
+      "searchTerm": "Robinson Crusoe"
+    },
+    {
+      "title": "Daniel Defoe",
+      "gutenbergIds": [
+        "73564"
+      ],
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/Daniel%20Defoe",
+      "wikipediaTitle": "Daniel Defoe",
+      "searchTerm": "Robinson Crusoe"
+    },
+    {
+      "title": "Jonathan Swift",
+      "gutenbergIds": [
+        "13169",
+        "12784",
+        "14353",
+        "13621",
+        "9276",
+        "4738",
+        "12252",
+        "12746",
+        "13040",
+        "13169",
+        "12784",
+        "13621",
+        "9276",
+        "12252",
+        "12746",
+        "13040",
+        "14353"
+      ],
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/Jonathan%20Swift",
+      "wikipediaTitle": "Jonathan Swift",
+      "searchTerm": "Gulliver's Travels"
+    },
+    {
+      "title": "Laputa",
+      "gutenbergIds": [
+        "829"
+      ],
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/Laputa",
+      "wikipediaTitle": "Laputa",
+      "searchTerm": "Gulliver's Travels"
+    },
+    {
+      "title": "Hamlet",
+      "gutenbergIds": [
+        "56454",
+        "1524"
+      ],
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/Hamlet",
+      "wikipediaTitle": "Hamlet",
+      "searchTerm": "Hamlet"
+    },
+    {
+      "title": "Ghost (Hamlet)",
+      "gutenbergIds": [
+        "16275"
+      ],
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/Ghost%20(Hamlet)",
+      "wikipediaTitle": "Ghost (Hamlet)",
+      "searchTerm": "Hamlet"
+    },
+    {
+      "title": "Romeo and Juliet",
+      "gutenbergIds": [
+        "1513"
+      ],
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/Romeo%20and%20Juliet",
+      "wikipediaTitle": "Romeo and Juliet",
+      "searchTerm": "Romeo and Juliet"
+    },
+    {
+      "title": "Characters in Romeo and Juliet",
+      "gutenbergIds": [
+        "1112"
+      ],
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/Characters%20in%20Romeo%20and%20Juliet",
+      "wikipediaTitle": "Characters in Romeo and Juliet",
+      "searchTerm": "Romeo and Juliet"
+    },
+    {
+      "title": "Othello",
+      "gutenbergIds": [
+        "1531"
+      ],
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/Othello",
+      "wikipediaTitle": "Othello",
+      "searchTerm": "Othello"
+    },
+    {
+      "title": "King Lear",
+      "gutenbergIds": [
+        "1532"
+      ],
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/King%20Lear",
+      "wikipediaTitle": "King Lear",
+      "searchTerm": "King Lear"
+    },
+    {
+      "title": "Chronology of Shakespeare's plays",
+      "gutenbergIds": [
+        "12198",
+        "11929"
+      ],
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/Chronology%20of%20Shakespeare's%20plays",
+      "wikipediaTitle": "Chronology of Shakespeare's plays",
+      "searchTerm": "King Lear"
+    },
+    {
+      "title": "The Tempest",
+      "gutenbergIds": [
+        "1540"
+      ],
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/The%20Tempest",
+      "wikipediaTitle": "The Tempest",
+      "searchTerm": "The Tempest"
+    },
+    {
+      "title": "A Midsummer Night's Dream",
+      "gutenbergIds": [
+        "1514"
+      ],
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/A%20Midsummer%20Night's%20Dream",
+      "wikipediaTitle": "A Midsummer Night's Dream",
+      "searchTerm": "A Midsummer Night's Dream"
+    },
+    {
+      "title": "The Merchant of Venice",
+      "gutenbergIds": [
+        "1515"
+      ],
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/The%20Merchant%20of%20Venice",
+      "wikipediaTitle": "The Merchant of Venice",
+      "searchTerm": "The Merchant of Venice"
+    },
+    {
+      "title": "As You Like It",
+      "gutenbergIds": [
+        "1523"
+      ],
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/As%20You%20Like%20It",
+      "wikipediaTitle": "As You Like It",
+      "searchTerm": "As You Like It"
+    }
+  ]
+}

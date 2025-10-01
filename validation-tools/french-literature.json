@@ -1,0 +1,732 @@
+[
+  {
+    "id": "5781",
+    "title": "Le Grand Meaulnes",
+    "author": "Alain-Fournier, 1886-1914"
+  },
+  {
+    "id": "22787",
+    "title": "Little Men",
+    "author": "Alcott, Louisa May, 1832-1888"
+  },
+  {
+    "id": "514",
+    "title": "Little Women",
+    "author": "Alcott, Louisa May, 1832-1888"
+  },
+  {
+    "id": "34730",
+    "title": "Charles Darwin",
+    "author": "Allen, Grant, 1848-1899"
+  },
+  {
+    "id": "11049",
+    "title": "Eugénie Grandet",
+    "author": "Balzac, Honoré de, 1799-1850"
+  },
+  {
+    "id": "41211",
+    "title": "La Comédie humaine - Volume 01",
+    "author": "Balzac, Honoré de, 1799-1850"
+  },
+  {
+    "id": "1826",
+    "title": "Sarrasine",
+    "author": "Balzac, Honoré de, 1799-1850; Bell, Clara, 1834-1927 [Translator]"
+  },
+  {
+    "id": "1841",
+    "title": "Z. Marcas",
+    "author": "Balzac, Honoré de, 1799-1850; Bell, Clara, 1834-1927 [Translator]"
+  },
+  {
+    "id": "1350",
+    "title": "The Country Doctor",
+    "author": "Balzac, Honoré de, 1799-1850; Bell, Clara, 1834-1927 [Translator]; Marriage, Ellen, 1865-1946 [Translator]"
+  },
+  {
+    "id": "1884",
+    "title": "The Exiles",
+    "author": "Balzac, Honoré de, 1799-1850; Bell, Clara, 1834-1927 [Translator]; Waring, James [Translator]"
+  },
+  {
+    "id": "12900",
+    "title": "Poor Relations",
+    "author": "Balzac, Honoré de, 1799-1850; Marriage, Ellen, 1865-1946 [Translator]; Waring, James [Translator]"
+  },
+  {
+    "id": "1374",
+    "title": "Vendetta",
+    "author": "Balzac, Honoré de, 1799-1850; Wormeley, Katharine Prescott, 1830-1908 [Translator]"
+  },
+  {
+    "id": "3490",
+    "title": "The Admirable Crichton",
+    "author": "Barrie, J. M. (James Matthew), 1860-1937"
+  },
+  {
+    "id": "6099",
+    "title": "Les Fleurs du Mal",
+    "author": "Baudelaire, Charles, 1821-1867"
+  },
+  {
+    "id": "19467",
+    "title": "Little Wizard Stories of Oz",
+    "author": "Baum, L. Frank (Lyman Frank), 1856-1919"
+  },
+  {
+    "id": "27424",
+    "title": "Cautionary Tales for Children",
+    "author": "Belloc, Hilaire, 1870-1953; B. T. B. (Basil Temple Blackwood), 1870-1917 [Illustrator]"
+  },
+  {
+    "id": "4734",
+    "title": "The Grim Smile of the Five Towns",
+    "author": "Bennett, Arnold, 1867-1931"
+  },
+  {
+    "id": "47587",
+    "title": "Anatole France",
+    "author": "Brandes, Georg, 1842-1927"
+  },
+  {
+    "id": "19514",
+    "title": "A Little Princess",
+    "author": "Burnett, Frances Hodgson, 1849-1924"
+  },
+  {
+    "id": "479",
+    "title": "Little Lord Fauntleroy",
+    "author": "Burnett, Frances Hodgson, 1849-1924"
+  },
+  {
+    "id": "6438",
+    "title": "Fables for the Frivolous",
+    "author": "Carryl, Guy Wetmore, 1873-1904; Newell, Peter, 1862-1924 [Illustrator]"
+  },
+  {
+    "id": "65882",
+    "title": "The Battle of Dorking",
+    "author": "Chesney, George Tomkyns, 1830-1895; Powell, G. H. (George Herbert), 1856-1924 [Author of introduction, etc.]"
+  },
+  {
+    "id": "61760",
+    "title": "Charles Dickens",
+    "author": "Chesterton, G. K. (Gilbert Keith), 1874-1936; Kitton, Frederic George, 1856-1904"
+  },
+  {
+    "id": "2360",
+    "title": "The Riddle of the Sands",
+    "author": "Childers, Erskine, 1870-1922"
+  },
+  {
+    "id": "1202",
+    "title": "Tales of Unrest",
+    "author": "Conrad, Joseph, 1857-1924"
+  },
+  {
+    "id": "9826",
+    "title": "Homeward Bound; Or, the Chase: A Tale of the Sea",
+    "author": "Cooper, James Fenimore, 1789-1851"
+  },
+  {
+    "id": "7974",
+    "title": "The Pilot: A Tale of the Sea",
+    "author": "Cooper, James Fenimore, 1789-1851"
+  },
+  {
+    "id": "11957",
+    "title": "The Wing-and-Wing; Or, Le Feu-Follet",
+    "author": "Cooper, James Fenimore, 1789-1851"
+  },
+  {
+    "id": "70493",
+    "title": "The Prince of Wales and other famous Americans",
+    "author": "Covarrubias, Miguel, 1904-1957 [Artist]; Van Vechten, Carl, 1880-1964 [Author of introduction, etc.]"
+  },
+  {
+    "id": "45975",
+    "title": "The Little Lame Prince and His Travelling Cloak",
+    "author": "Craik, Dinah Maria Mulock, 1826-1887; Dunlap, Hope [Illustrator]"
+  },
+  {
+    "id": "34959",
+    "title": "Khaled, A Tale of Arabia",
+    "author": "Crawford, F. Marion (Francis Marion), 1854-1909"
+  },
+  {
+    "id": "71218",
+    "title": "La vita nuova",
+    "author": "Dante Alighieri, 1265-1321; Agresti, A. (Antonio), 1866-1927 [Editor]; Rossetti, Dante Gabriel, 1828-1882 [Illustrator]"
+  },
+  {
+    "id": "2010",
+    "title": "The Autobiography of Charles Darwin",
+    "author": "Darwin, Charles, 1809-1882; Darwin, Francis, Sir, 1848-1925 [Editor]"
+  },
+  {
+    "id": "43453",
+    "title": "A Pickle for the Knowing Ones",
+    "author": "Dexter, Timothy, 1747-1806"
+  },
+  {
+    "id": "32154",
+    "title": "The Variable Man",
+    "author": "Dick, Philip K., 1928-1982; Ebel, Alex, 1932-2013 [Illustrator]"
+  },
+  {
+    "id": "98",
+    "title": "A Tale of Two Cities",
+    "author": "Dickens, Charles, 1812-1870"
+  },
+  {
+    "id": "917",
+    "title": "Barnaby Rudge: A Tale of the Riots of 'Eighty",
+    "author": "Dickens, Charles, 1812-1870"
+  },
+  {
+    "id": "963",
+    "title": "Little Dorrit",
+    "author": "Dickens, Charles, 1812-1870"
+  },
+  {
+    "id": "676",
+    "title": "The Battle of Life",
+    "author": "Dickens, Charles, 1812-1870"
+  },
+  {
+    "id": "Don Juan Tenorio d'Espagne",
+    "title": "Guillaume",
+    "author": "Don (Legendary character),PQ,FR Séduction et libertinage; Category: Science-Fiction & Fantasy; Category: Novels; Category: French Literature"
+  },
+  {
+    "id": "8394",
+    "title": "The doings of Raffles Haw",
+    "author": "Doyle, Arthur Conan, 1859-1930"
+  },
+  {
+    "id": "26648",
+    "title": "Les lauriers sont coupés",
+    "author": "Dujardin, Edouard, 1861-1949"
+  },
+  {
+    "id": "13856",
+    "title": "La reine Margot - Tome I",
+    "author": "Dumas, Alexandre, 1802-1870; Maquet, Auguste, 1813-1888"
+  },
+  {
+    "id": "18006",
+    "title": "Le chevalier de Maison-Rouge",
+    "author": "Dumas, Alexandre, 1802-1870; Maquet, Auguste, 1813-1888"
+  },
+  {
+    "id": "11440",
+    "title": "Tales of Three Hemispheres",
+    "author": "Dunsany, Lord, 1878-1957"
+  },
+  {
+    "id": "1424",
+    "title": "Castle Rackrent",
+    "author": "Edgeworth, Maria, 1768-1849; Ritchie, Anne Thackeray, 1837-1919 [Author of introduction, etc.]"
+  },
+  {
+    "id": "68292",
+    "title": "Tales from silver lands",
+    "author": "Finger, Charles Joseph, 1869-1941; Honoré, Paul, 1885-1956 [Illustrator]"
+  },
+  {
+    "id": "1930",
+    "title": "Penguin Island",
+    "author": "France, Anatole, 1844-1924"
+  },
+  {
+    "id": "2123",
+    "title": "The Crime of Sylvestre Bonnard",
+    "author": "France, Anatole, 1844-1924"
+  },
+  {
+    "id": "Mémoires d'un Père pour servir à  l'Instruction de ses enfans,fr,Marmontel",
+    "title": "Maurice",
+    "author": "French -- 18th century -- Biography; Marmontel"
+  },
+  {
+    "id": "ou",
+    "title": "Claude-Prosper Jolyot de",
+    "author": "French; French fiction -- 18th century,PQ,FR Littérature; Category: Science-Fiction & Fantasy; Category: Novels; Category: French Literature"
+  },
+  {
+    "id": "15593",
+    "title": "Les aventures de M. Colin-Tampon",
+    "author": "Girardin, Jules, 1832-1888"
+  },
+  {
+    "id": "1300",
+    "title": "Riders of the Purple Sage",
+    "author": "Grey, Zane, 1872-1939"
+  },
+  {
+    "id": "6769",
+    "title": "The People of the Mist",
+    "author": "Haggard, H. Rider (Henry Rider), 1856-1925"
+  },
+  {
+    "id": "3049",
+    "title": "A Group of Noble Dames",
+    "author": "Hardy, Thomas, 1840-1928"
+  },
+  {
+    "id": "2081",
+    "title": "The Blithedale Romance",
+    "author": "Hawthorne, Nathaniel, 1804-1864"
+  },
+  {
+    "id": "49630",
+    "title": "Tales of two people",
+    "author": "Hope, Anthony, 1863-1933; Buckland, Arthur H., 1870-1927 [Illustrator]"
+  },
+  {
+    "id": "135",
+    "title": "Les Misérables",
+    "author": "Hugo, Victor, 1802-1885; Hapgood, Isabel Florence, 1850-1928 [Translator]"
+  },
+  {
+    "id": "7942",
+    "title": "Little Eyolf",
+    "author": "Ibsen, Henrik, 1828-1906; Archer, William, 1856-1924 [Translator]"
+  },
+  {
+    "id": "22002",
+    "title": "A Simple Story",
+    "author": "Inchbald, Mrs., 1753-1821; Strachey, Lytton, 1880-1932 [Editor]"
+  },
+  {
+    "id": "13514",
+    "title": "Tales of a Traveller",
+    "author": "Irving, Washington, 1783-1859"
+  },
+  {
+    "id": "849",
+    "title": "The Idle Thoughts of an Idle Fellow",
+    "author": "Jerome, Jerome K. (Jerome Klapka), 1859-1927"
+  },
+  {
+    "id": "17977",
+    "title": "Charles Lamb",
+    "author": "Jerrold, Walter, 1865-1929"
+  },
+  {
+    "id": "1858",
+    "title": "Plain Tales from the Hills",
+    "author": "Kipling, Rudyard, 1865-1936"
+  },
+  {
+    "id": "236",
+    "title": "The Jungle Book",
+    "author": "Kipling, Rudyard, 1865-1936"
+  },
+  {
+    "id": "1937",
+    "title": "The Second Jungle Book",
+    "author": "Kipling, Rudyard, 1865-1936"
+  },
+  {
+    "id": "18797",
+    "title": "La princesse de Clèves",
+    "author": "La Fayette, Madame de (Marie-Madeleine Pioche de La Vergne), 1634-1693"
+  },
+  {
+    "id": "12005",
+    "title": "Les Chants de Maldoror",
+    "author": "Lautréamont, comte de, 1846-1870"
+  },
+  {
+    "id": "4020",
+    "title": "Arcadian Adventures with the Idle Rich",
+    "author": "Leacock, Stephen, 1869-1944"
+  },
+  {
+    "id": "3533",
+    "title": "Sunshine Sketches of a Little Town",
+    "author": "Leacock, Stephen, 1869-1944"
+  },
+  {
+    "id": "Together with An Essay on the Chinese Written Character,en,Pound",
+    "title": "Ernest",
+    "author": "Letters & Speeches; Category: French Literature"
+  },
+  {
+    "id": "73411",
+    "title": "Doctor Dolittle in the Moon",
+    "author": "Lofting, Hugh, 1886-1947"
+  },
+  {
+    "id": "6455",
+    "title": "The Little Lady of the Big House",
+    "author": "London, Jack, 1876-1916"
+  },
+  {
+    "id": "1688",
+    "title": "The People of the Abyss",
+    "author": "London, Jack, 1876-1916"
+  },
+  {
+    "id": "59216",
+    "title": "The Courtship of Miles Standish",
+    "author": "Longfellow, Henry Wadsworth, 1807-1882; Russell, Walter, 1871-1963 [Illustrator]"
+  },
+  {
+    "id": "56426",
+    "title": "The Mummy! A Tale of the Twenty-Second Century",
+    "author": "Loudon, Mrs. (Jane), 1807-1858"
+  },
+  {
+    "id": "4239",
+    "title": "An Essay on the Principle of Population",
+    "author": "Malthus, T. R. (Thomas Robert), 1766-1834"
+  },
+  {
+    "id": "16042",
+    "title": "The Wonder Book of Bible Stories",
+    "author": "Marshall, Logan, 1884-1937 [Editor]"
+  },
+  {
+    "id": "4745",
+    "title": "At the Villa Rose",
+    "author": "Mason, A. E. W. (Alfred Edward Woodley), 1865-1948"
+  },
+  {
+    "id": "10746",
+    "title": "Boule de Suif",
+    "author": "Maupassant, Guy de, 1850-1893"
+  },
+  {
+    "id": "3796",
+    "title": "Rilla of Ingleside",
+    "author": "Montgomery, L. M. (Lucy Maud), 1874-1942"
+  },
+  {
+    "id": "66057",
+    "title": "The tale of Genji",
+    "author": "Murasaki Shikibu, 978?-; Waley, Arthur, 1889-1966 [Translator]"
+  },
+  {
+    "id": "18137",
+    "title": "Little Fuzzy",
+    "author": "Piper, H. Beam, 1904-1964"
+  },
+  {
+    "id": "14407",
+    "title": "The Tale of Benjamin Bunny",
+    "author": "Potter, Beatrix, 1866-1943"
+  },
+  {
+    "id": "14877",
+    "title": "The Tale of Ginger and Pickles",
+    "author": "Potter, Beatrix, 1866-1943"
+  },
+  {
+    "id": "14814",
+    "title": "The Tale of Jemima Puddle-Duck",
+    "author": "Potter, Beatrix, 1866-1943"
+  },
+  {
+    "id": "15284",
+    "title": "The Tale of Johnny Town-Mouse",
+    "author": "Potter, Beatrix, 1866-1943"
+  },
+  {
+    "id": "15077",
+    "title": "The Tale of Mr. Jeremy Fisher",
+    "author": "Potter, Beatrix, 1866-1943"
+  },
+  {
+    "id": "19805",
+    "title": "The Tale of Mr. Tod",
+    "author": "Potter, Beatrix, 1866-1943"
+  },
+  {
+    "id": "12103",
+    "title": "The Tale of Mrs. Tiggy-Winkle",
+    "author": "Potter, Beatrix, 1866-1943"
+  },
+  {
+    "id": "17089",
+    "title": "The Tale of Mrs. Tittlemouse",
+    "author": "Potter, Beatrix, 1866-1943"
+  },
+  {
+    "id": "12702",
+    "title": "The Tale of Peter Rabbit",
+    "author": "Potter, Beatrix, 1866-1943"
+  },
+  {
+    "id": "15575",
+    "title": "The Tale of Samuel Whiskers; Or, The Roly-Poly Pudding",
+    "author": "Potter, Beatrix, 1866-1943"
+  },
+  {
+    "id": "14872",
+    "title": "The Tale of Squirrel Nutkin",
+    "author": "Potter, Beatrix, 1866-1943"
+  },
+  {
+    "id": "14220",
+    "title": "The Tale of the Flopsy Bunnies",
+    "author": "Potter, Beatrix, 1866-1943"
+  },
+  {
+    "id": "14797",
+    "title": "The Tale of Timmy Tiptoes",
+    "author": "Potter, Beatrix, 1866-1943"
+  },
+  {
+    "id": "14837",
+    "title": "The Tale of Tom Kitten",
+    "author": "Potter, Beatrix, 1866-1943"
+  },
+  {
+    "id": "70572",
+    "title": "Bomba the jungle boy",
+    "author": "Rockwood, Roy; Rogers, Walter S. (Walter Stanton), 1870-1937 [Illustrator]"
+  },
+  {
+    "id": "1619",
+    "title": "La Celestina",
+    "author": "Rojas, Fernando de, -1541"
+  },
+  {
+    "id": "65845",
+    "title": "Les Xipéhuz",
+    "author": "Rosny, J.-H., aîné, 1856-1940; Rosny, J.-H., jeune, 1859-1948"
+  },
+  {
+    "id": "65386",
+    "title": "The Little French Girl",
+    "author": "Sedgwick, Anne Douglas, 1873-1935"
+  },
+  {
+    "id": "4003",
+    "title": "Androcles and the Lion",
+    "author": "Shaw, Bernard, 1856-1950"
+  },
+  {
+    "id": "11229",
+    "title": "The Purple Cloud",
+    "author": "Shiel, M. P. (Matthew Phipps), 1865-1947"
+  },
+  {
+    "id": "848",
+    "title": "The Black Arrow: A Tale of the Two Roses",
+    "author": "Stevenson, Robert Louis, 1850-1894"
+  },
+  {
+    "id": "344",
+    "title": "The Merry Men, and Other Tales and Fables",
+    "author": "Stevenson, Robert Louis, 1850-1894"
+  },
+  {
+    "id": "203",
+    "title": "Uncle Tom's Cabin",
+    "author": "Stowe, Harriet Beecher, 1811-1896"
+  },
+  {
+    "id": "9270",
+    "title": "The Battle of the Books",
+    "author": "Swift, Jonathan, 1667-1745"
+  },
+  {
+    "id": "4737",
+    "title": "A Tale of a Tub",
+    "author": "Swift, Jonathan, 1667-1745; Morley, Henry, 1822-1894 [Editor]"
+  },
+  {
+    "id": "2823",
+    "title": "The Fitz-Boodle Papers",
+    "author": "Thackeray, William Makepeace, 1811-1863"
+  },
+  {
+    "id": "2823",
+    "title": "The Fitz-Boodle Papers",
+    "author": "Thackeray, William Makepeace, 1811-1863"
+  },
+  {
+    "id": "5897",
+    "title": "Castle Richmond",
+    "author": "Trollope, Anthony, 1815-1882"
+  },
+  {
+    "id": "4731",
+    "title": "Seven Little Australians",
+    "author": "Turner, Ethel, 1870-1958"
+  },
+  {
+    "id": "3180",
+    "title": "A Double Barrelled Detective Story",
+    "author": "Twain, Mark, 1835-1910"
+  },
+  {
+    "id": "3178",
+    "title": "The Gilded Age: A Tale of Today",
+    "author": "Twain, Mark, 1835-1910; Warner, Charles Dudley, 1829-1900"
+  },
+  {
+    "id": "2145",
+    "title": "Ben-Hur: A tale of the Christ",
+    "author": "Wallace, Lew, 1827-1905"
+  },
+  {
+    "id": "696",
+    "title": "The Castle of Otranto",
+    "author": "Walpole, Horace, 1717-1797; Morley, Henry, 1822-1894 [Editor]"
+  },
+  {
+    "id": "1046",
+    "title": "God, the Invisible King",
+    "author": "Wells, H. G. (Herbert George), 1866-1946"
+  },
+  {
+    "id": "27365",
+    "title": "Tales of Space and Time",
+    "author": "Wells, H. G. (Herbert George), 1866-1946"
+  },
+  {
+    "id": "Tombouctou",
+    "title": "René",
+    "author": "West -- Description and travel; Morocco -- Description and travel,DT,Category: Adventure; Category: Travel Writing; Category: French Literature; Category: History - Modern (1750+)"
+  },
+  {
+    "id": "Tombouctou",
+    "title": "René",
+    "author": "West -- Description and travel; Morocco -- Description and travel,DT,Category: Adventure; Category: Travel Writing; Category: French Literature; Category: History - Modern (1750+)"
+  },
+  {
+    "id": "24650",
+    "title": "The Gentle Art of Making Enemies",
+    "author": "Whistler, James McNeill, 1834-1903"
+  },
+  {
+    "id": "14522",
+    "title": "The Canterville Ghost",
+    "author": "Wilde, Oscar, 1854-1900; Goldsmith, Wallace, 1873-1945 [Illustrator]"
+  },
+  {
+    "id": "59845",
+    "title": "The Able McLaughlins",
+    "author": "Wilson, Margaret, 1882-1973"
+  },
+  {
+    "id": "6980",
+    "title": "Tales of St. Austin's",
+    "author": "Wodehouse, P. G. (Pelham Grenville), 1881-1975"
+  },
+  {
+    "id": "59254",
+    "title": "The Inimitable Jeeves",
+    "author": "Wodehouse, P. G. (Pelham Grenville), 1881-1975"
+  },
+  {
+    "id": "16852",
+    "title": "Au bonheur des dames",
+    "author": "Zola, Émile, 1840-1902"
+  },
+  {
+    "id": "5711",
+    "title": "Germinal",
+    "author": "Zola, Émile, 1840-1902"
+  },
+  {
+    "id": "17516",
+    "title": "L'Argent",
+    "author": "Zola, Émile, 1840-1902"
+  },
+  {
+    "id": "6497",
+    "title": "L'Assommoir",
+    "author": "Zola, Émile, 1840-1902"
+  },
+  {
+    "id": "17517",
+    "title": "L'Œuvre",
+    "author": "Zola, Émile, 1840-1902"
+  },
+  {
+    "id": "5154",
+    "title": "La Bête humaine",
+    "author": "Zola, Émile, 1840-1902"
+  },
+  {
+    "id": "8712",
+    "title": "La Conquête de Plassans",
+    "author": "Zola, Émile, 1840-1902"
+  },
+  {
+    "id": "17553",
+    "title": "La Curée",
+    "author": "Zola, Émile, 1840-1902"
+  },
+  {
+    "id": "17831",
+    "title": "La Débâcle",
+    "author": "Zola, Émile, 1840-1902"
+  },
+  {
+    "id": "6558",
+    "title": "La faute de l'abbé Mouret",
+    "author": "Zola, Émile, 1840-1902"
+  },
+  {
+    "id": "8563",
+    "title": "La Terre",
+    "author": "Zola, Émile, 1840-1902"
+  },
+  {
+    "id": "8560",
+    "title": "Le Docteur Pascal",
+    "author": "Zola, Émile, 1840-1902"
+  },
+  {
+    "id": "17533",
+    "title": "Le Rêve",
+    "author": "Zola, Émile, 1840-1902"
+  },
+  {
+    "id": "6470",
+    "title": "Le Ventre de Paris",
+    "author": "Zola, Émile, 1840-1902"
+  },
+  {
+    "id": "5250",
+    "title": "Nana",
+    "author": "Zola, Émile, 1840-1902"
+  },
+  {
+    "id": "8907",
+    "title": "Pot-Bouille",
+    "author": "Zola, Émile, 1840-1902"
+  },
+  {
+    "id": "17557",
+    "title": "Son Excellence Eugène Rougon",
+    "author": "Zola, Émile, 1840-1902"
+  },
+  {
+    "id": "7461",
+    "title": "Thérèse Raquin",
+    "author": "Zola, Émile, 1840-1902"
+  },
+  {
+    "id": "8561",
+    "title": "Une page d'amour",
+    "author": "Zola, Émile, 1840-1902"
+  },
+  {
+    "id": "9499",
+    "title": "The Dream",
+    "author": "Zola, Émile, 1840-1902; Chase, Eliza E. (Eliza Earle), 1829-1896 [Translator]"
+  },
+  {
+    "id": "35387",
+    "title": "Émile Verhaeren",
+    "author": "Zweig, Stefan, 1881-1942; Bithell, Jethro, 1878-1962 [Translator]"
+  }
+]

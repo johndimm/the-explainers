@@ -57,3 +57,4 @@ temp/
 .cursor*
 .specstory*
 .pg
+postgres.sh

@@ -1,0 +1,259 @@
+{
+  "shakespeare": [
+    {
+      "title": "A Lover's Complaint",
+      "author": "William Shakespeare",
+      "hasWikipediaPage": true
+    },
+    {
+      "title": "A Midsummer Night's Dream",
+      "author": "William Shakespeare",
+      "hasWikipediaPage": true
+    },
+    {
+      "title": "All's Well That Ends Well",
+      "author": "William Shakespeare",
+      "hasWikipediaPage": true
+    },
+    {
+      "title": "Antony and Cleopatra",
+      "author": "William Shakespeare",
+      "hasWikipediaPage": true
+    },
+    {
+      "title": "As You Like It",
+      "author": "William Shakespeare",
+      "hasWikipediaPage": true
+    },
+    {
+      "title": "Coriolanus",
+      "author": "William Shakespeare",
+      "hasWikipediaPage": true
+    },
+    {
+      "title": "Cymbeline",
+      "author": "William Shakespeare",
+      "hasWikipediaPage": true
+    },
+    {
+      "title": "Hamlet",
+      "author": "William Shakespeare",
+      "hasWikipediaPage": true
+    },
+    {
+      "title": "Julius Caesar",
+      "author": "William Shakespeare",
+      "hasWikipediaPage": true
+    },
+    {
+      "title": "King Henry IV, Part 1",
+      "author": "William Shakespeare",
+      "hasWikipediaPage": false
+    },
+    {
+      "title": "King Henry IV, Part 2",
+      "author": "William Shakespeare",
+      "hasWikipediaPage": false
+    },
+    {
+      "title": "King Henry V",
+      "author": "William Shakespeare",
+      "hasWikipediaPage": false
+    },
+    {
+      "title": "King Henry VI, Part 1",
+      "author": "William Shakespeare",
+      "hasWikipediaPage": false
+    },
+    {
+      "title": "King Henry VI, Part 2",
+      "author": "William Shakespeare",
+      "hasWikipediaPage": false
+    },
+    {
+      "title": "King Henry VI, Part 3",
+      "author": "William Shakespeare",
+      "hasWikipediaPage": false
+    },
+    {
+      "title": "King Henry VIII",
+      "author": "William Shakespeare",
+      "hasWikipediaPage": true
+    },
+    {
+      "title": "King John",
+      "author": "William Shakespeare",
+      "hasWikipediaPage": true
+    },
+    {
+      "title": "King Lear",
+      "author": "William Shakespeare",
+      "hasWikipediaPage": true
+    },
+    {
+      "title": "King Richard II",
+      "author": "William Shakespeare",
+      "hasWikipediaPage": true
+    },
+    {
+      "title": "King Richard III",
+      "author": "William Shakespeare",
+      "hasWikipediaPage": false
+    },
+    {
+      "title": "Locrine",
+      "author": "William Shakespeare",
+      "hasWikipediaPage": false
+    },
+    {
+      "title": "Love's Labour's Lost",
+      "author": "William Shakespeare",
+      "hasWikipediaPage": true
+    },
+    {
+      "title": "Macbeth",
+      "author": "William Shakespeare",
+      "hasWikipediaPage": true
+    },
+    {
+      "title": "Measure for Measure",
+      "author": "William Shakespeare",
+      "hasWikipediaPage": true
+    },
+    {
+      "title": "Mucedorus",
+      "author": "William Shakespeare",
+      "hasWikipediaPage": true
+    },
+    {
+      "title": "Much Ado About Nothing",
+      "author": "William Shakespeare",
+      "hasWikipediaPage": true
+    },
+    {
+      "title": "Othello, the Moor of Venice",
+      "author": "William Shakespeare",
+      "hasWikipediaPage": false
+    },
+    {
+      "title": "Pericles",
+      "author": "William Shakespeare",
+      "hasWikipediaPage": true
+    },
+    {
+      "title": "Romeo and Juliet",
+      "author": "William Shakespeare",
+      "hasWikipediaPage": true
+    },
+    {
+      "title": "Shakespeare's Sonnets",
+      "author": "William Shakespeare",
+      "hasWikipediaPage": true
+    },
+    {
+      "title": "Sir Thomas More",
+      "author": "William Shakespeare",
+      "hasWikipediaPage": true
+    },
+    {
+      "title": "Sonnets To Sundry Notes of Music",
+      "author": "William Shakespeare",
+      "hasWikipediaPage": false
+    },
+    {
+      "title": "The Comedy of Errors",
+      "author": "William Shakespeare",
+      "hasWikipediaPage": true
+    },
+    {
+      "title": "The Merchant of Venice",
+      "author": "William Shakespeare",
+      "hasWikipediaPage": true
+    },
+    {
+      "title": "The Merry Wives of Windsor",
+      "author": "William Shakespeare",
+      "hasWikipediaPage": true
+    },
+    {
+      "title": "The Passionate Pilgrim",
+      "author": "William Shakespeare",
+      "hasWikipediaPage": true
+    },
+    {
+      "title": "The Phoenix and the Turtle",
+      "author": "William Shakespeare",
+      "hasWikipediaPage": true
+    },
+    {
+      "title": "The Rape of Lucrece",
+      "author": "William Shakespeare",
+      "hasWikipediaPage": true
+    },
+    {
+      "title": "The Taming of the Shrew",
+      "author": "William Shakespeare",
+      "hasWikipediaPage": true
+    },
+    {
+      "title": "The Tempest",
+      "author": "William Shakespeare",
+      "hasWikipediaPage": true
+    },
+    {
+      "title": "The Tragedy of Titus Andronicus",
+      "author": "William Shakespeare",
+      "hasWikipediaPage": false
+    },
+    {
+      "title": "The Two Noble Kinsmen",
+      "author": "William Shakespeare",
+      "hasWikipediaPage": true
+    },
+    {
+      "title": "The Winter's Tale",
+      "author": "William Shakespeare",
+      "hasWikipediaPage": true
+    },
+    {
+      "title": "Timon of Athens",
+      "author": "William Shakespeare",
+      "hasWikipediaPage": true
+    },
+    {
+      "title": "Troilus and Cressida",
+      "author": "William Shakespeare",
+      "hasWikipediaPage": true
+    },
+    {
+      "title": "Twelfth Night",
+      "author": "William Shakespeare",
+      "hasWikipediaPage": true
+    },
+    {
+      "title": "Two Gentlemen of Verona",
+      "author": "William Shakespeare",
+      "hasWikipediaPage": true
+    },
+    {
+      "title": "Venus and Adonis",
+      "author": "William Shakespeare",
+      "hasWikipediaPage": true
+    }
+  ],
+  "plato": [],
+  "summary": {
+    "shakespeare": {
+      "withPages": 37,
+      "total": 48
+    },
+    "plato": {
+      "withPages": 0,
+      "total": 0
+    },
+    "overall": {
+      "withPages": 37,
+      "total": 48
+    }
+  }
+}

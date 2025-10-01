@@ -1,0 +1,531 @@
+{
+  "analysisDate": "2025-09-20T21:40:47.116Z",
+  "statistics": {
+    "totalShakespeareWorks": 44,
+    "foundInWikipedia": 26,
+    "foundInGutenberg": 26,
+    "notInWikipedia": 18,
+    "notInGutenberg": 18
+  },
+  "results": {
+    "foundInWiki": [
+      {
+        "title": "Antony and Cleopatra",
+        "wikiTitle": "Antony and Cleopatra",
+        "wikiUrl": "https://en.wikipedia.org/wiki/Antony%20and%20Cleopatra"
+      },
+      {
+        "title": "Hamlet",
+        "wikiTitle": "Hamlet",
+        "wikiUrl": "https://en.wikipedia.org/wiki/Hamlet"
+      },
+      {
+        "title": "Julius Caesar",
+        "wikiTitle": "Julius Caesar",
+        "wikiUrl": "https://en.wikipedia.org/wiki/Julius%20Caesar"
+      },
+      {
+        "title": "Macbeth",
+        "wikiTitle": "Macbeth",
+        "wikiUrl": "https://en.wikipedia.org/wiki/Macbeth"
+      },
+      {
+        "title": "Othello",
+        "wikiTitle": "Othello",
+        "wikiUrl": "https://en.wikipedia.org/wiki/Othello"
+      },
+      {
+        "title": "Romeo and Juliet",
+        "wikiTitle": "Romeo and Juliet",
+        "wikiUrl": "https://en.wikipedia.org/wiki/Romeo%20and%20Juliet"
+      },
+      {
+        "title": "Titus Andronicus",
+        "wikiTitle": "Titus Andronicus",
+        "wikiUrl": "https://en.wikipedia.org/wiki/Titus%20Andronicus"
+      },
+      {
+        "title": "Troilus and Cressida",
+        "wikiTitle": "Troilus and Cressida",
+        "wikiUrl": "https://en.wikipedia.org/wiki/Troilus%20and%20Cressida"
+      },
+      {
+        "title": "All's Well That Ends Well",
+        "wikiTitle": "All's Well That Ends Well",
+        "wikiUrl": "https://en.wikipedia.org/wiki/All's%20Well%20That%20Ends%20Well"
+      },
+      {
+        "title": "As You Like It",
+        "wikiTitle": "As You Like It",
+        "wikiUrl": "https://en.wikipedia.org/wiki/As%20You%20Like%20It"
+      },
+      {
+        "title": "The Comedy of Errors",
+        "wikiTitle": "The Comedy of Errors",
+        "wikiUrl": "https://en.wikipedia.org/wiki/The%20Comedy%20of%20Errors"
+      },
+      {
+        "title": "Love's Labour's Lost",
+        "wikiTitle": "Love's Labour's Lost",
+        "wikiUrl": "https://en.wikipedia.org/wiki/Love's%20Labour's%20Lost"
+      },
+      {
+        "title": "Measure for Measure",
+        "wikiTitle": "Measure for Measure",
+        "wikiUrl": "https://en.wikipedia.org/wiki/Measure%20for%20Measure"
+      },
+      {
+        "title": "The Merchant of Venice",
+        "wikiTitle": "The Merchant of Venice",
+        "wikiUrl": "https://en.wikipedia.org/wiki/The%20Merchant%20of%20Venice"
+      },
+      {
+        "title": "The Merry Wives of Windsor",
+        "wikiTitle": "The Merry Wives of Windsor",
+        "wikiUrl": "https://en.wikipedia.org/wiki/The%20Merry%20Wives%20of%20Windsor"
+      },
+      {
+        "title": "A Midsummer Night's Dream",
+        "wikiTitle": "A Midsummer Night's Dream",
+        "wikiUrl": "https://en.wikipedia.org/wiki/A%20Midsummer%20Night's%20Dream"
+      },
+      {
+        "title": "Much Ado About Nothing",
+        "wikiTitle": "Much Ado About Nothing",
+        "wikiUrl": "https://en.wikipedia.org/wiki/Much%20Ado%20About%20Nothing"
+      },
+      {
+        "title": "The Tempest",
+        "wikiTitle": "The Tempest",
+        "wikiUrl": "https://en.wikipedia.org/wiki/The%20Tempest"
+      },
+      {
+        "title": "Twelfth Night",
+        "wikiTitle": "Twelfth Night",
+        "wikiUrl": "https://en.wikipedia.org/wiki/Twelfth%20Night"
+      },
+      {
+        "title": "The Two Gentlemen of Verona",
+        "wikiTitle": "The Two Gentlemen of Verona",
+        "wikiUrl": "https://en.wikipedia.org/wiki/The%20Two%20Gentlemen%20of%20Verona"
+      },
+      {
+        "title": "The Two Noble Kinsmen",
+        "wikiTitle": "The Two Noble Kinsmen",
+        "wikiUrl": "https://en.wikipedia.org/wiki/The%20Two%20Noble%20Kinsmen"
+      },
+      {
+        "title": "The Winter's Tale",
+        "wikiTitle": "The Winter's Tale",
+        "wikiUrl": "https://en.wikipedia.org/wiki/The%20Winter's%20Tale"
+      },
+      {
+        "title": "The Rape of Lucrece",
+        "wikiTitle": "The Rape of Lucrece",
+        "wikiUrl": "https://en.wikipedia.org/wiki/The%20Rape%20of%20Lucrece"
+      },
+      {
+        "title": "A Lover's Complaint",
+        "wikiTitle": "A Lover's Complaint",
+        "wikiUrl": "https://en.wikipedia.org/wiki/A%20Lover's%20Complaint"
+      },
+      {
+        "title": "The Phoenix and the Turtle",
+        "wikiTitle": "The Phoenix and the Turtle",
+        "wikiUrl": "https://en.wikipedia.org/wiki/The%20Phoenix%20and%20the%20Turtle"
+      },
+      {
+        "title": "The Passionate Pilgrim",
+        "wikiTitle": "The Passionate Pilgrim",
+        "wikiUrl": "https://en.wikipedia.org/wiki/The%20Passionate%20Pilgrim"
+      }
+    ],
+    "foundInGutenberg": [
+      {
+        "title": "Antony and Cleopatra",
+        "wikiTitle": "Antony and Cleopatra",
+        "gutenbergTitle": "Antony and Cleopatra",
+        "gutenbergId": "1130",
+        "versions": 4
+      },
+      {
+        "title": "Hamlet",
+        "wikiTitle": "Hamlet",
+        "gutenbergTitle": "Hamlet",
+        "gutenbergId": "1122",
+        "versions": 7
+      },
+      {
+        "title": "Julius Caesar",
+        "wikiTitle": "Julius Caesar",
+        "gutenbergTitle": "Julius Caesar",
+        "gutenbergId": "1120",
+        "versions": 6
+      },
+      {
+        "title": "Macbeth",
+        "wikiTitle": "Macbeth",
+        "gutenbergTitle": "Macbeth",
+        "gutenbergId": "1533",
+        "versions": 7
+      },
+      {
+        "title": "Othello",
+        "wikiTitle": "Othello",
+        "gutenbergTitle": "Othello",
+        "gutenbergId": "1127",
+        "versions": 8
+      },
+      {
+        "title": "Romeo and Juliet",
+        "wikiTitle": "Romeo and Juliet",
+        "gutenbergTitle": "Romeo and Juliet",
+        "gutenbergId": "1112",
+        "versions": 6
+      },
+      {
+        "title": "Titus Andronicus",
+        "wikiTitle": "Titus Andronicus",
+        "gutenbergTitle": "Titus Andronicus",
+        "gutenbergId": "1106",
+        "versions": 7
+      },
+      {
+        "title": "Troilus and Cressida",
+        "wikiTitle": "Troilus and Cressida",
+        "gutenbergTitle": "Troilus and Cressida",
+        "gutenbergId": "1124",
+        "versions": 3
+      },
+      {
+        "title": "All's Well That Ends Well",
+        "wikiTitle": "All's Well That Ends Well",
+        "gutenbergTitle": "All's Well That Ends Well",
+        "gutenbergId": "1125",
+        "versions": 4
+      },
+      {
+        "title": "As You Like It",
+        "wikiTitle": "As You Like It",
+        "gutenbergTitle": "As You Like It",
+        "gutenbergId": "1121",
+        "versions": 4
+      },
+      {
+        "title": "The Comedy of Errors",
+        "wikiTitle": "The Comedy of Errors",
+        "gutenbergTitle": "The Comedy of Errors",
+        "gutenbergId": "1104",
+        "versions": 4
+      },
+      {
+        "title": "Love's Labour's Lost",
+        "wikiTitle": "Love's Labour's Lost",
+        "gutenbergTitle": "Love's Labour's Lost",
+        "gutenbergId": "1109",
+        "versions": 4
+      },
+      {
+        "title": "Measure for Measure",
+        "wikiTitle": "Measure for Measure",
+        "gutenbergTitle": "Measure for Measure",
+        "gutenbergId": "1126",
+        "versions": 4
+      },
+      {
+        "title": "The Merchant of Venice",
+        "wikiTitle": "The Merchant of Venice",
+        "gutenbergTitle": "The Merchant of Venice",
+        "gutenbergId": "1114",
+        "versions": 4
+      },
+      {
+        "title": "The Merry Wives of Windsor",
+        "wikiTitle": "The Merry Wives of Windsor",
+        "gutenbergTitle": "The Merry Wives of Windsor",
+        "gutenbergId": "1116",
+        "versions": 4
+      },
+      {
+        "title": "A Midsummer Night's Dream",
+        "wikiTitle": "A Midsummer Night's Dream",
+        "gutenbergTitle": "A Midsummer Night's Dream",
+        "gutenbergId": "1113",
+        "versions": 5
+      },
+      {
+        "title": "Much Ado About Nothing",
+        "wikiTitle": "Much Ado About Nothing",
+        "gutenbergTitle": "Much Ado about Nothing",
+        "gutenbergId": "1118",
+        "versions": 5
+      },
+      {
+        "title": "The Tempest",
+        "wikiTitle": "The Tempest",
+        "gutenbergTitle": "The Tempest",
+        "gutenbergId": "1135",
+        "versions": 5
+      },
+      {
+        "title": "Twelfth Night",
+        "wikiTitle": "Twelfth Night",
+        "gutenbergTitle": "Twelfth Night",
+        "gutenbergId": "1123",
+        "versions": 5
+      },
+      {
+        "title": "The Two Gentlemen of Verona",
+        "wikiTitle": "The Two Gentlemen of Verona",
+        "gutenbergTitle": "The Two Gentlemen of Verona",
+        "gutenbergId": "1108",
+        "versions": 4
+      },
+      {
+        "title": "The Two Noble Kinsmen",
+        "wikiTitle": "The Two Noble Kinsmen",
+        "gutenbergTitle": "The Two Noble Kinsmen",
+        "gutenbergId": "1506",
+        "versions": 2
+      },
+      {
+        "title": "The Winter's Tale",
+        "wikiTitle": "The Winter's Tale",
+        "gutenbergTitle": "The Winter's Tale",
+        "gutenbergId": "1134",
+        "versions": 4
+      },
+      {
+        "title": "The Rape of Lucrece",
+        "wikiTitle": "The Rape of Lucrece",
+        "gutenbergTitle": "The Rape of Lucrece",
+        "gutenbergId": "1505",
+        "versions": 1
+      },
+      {
+        "title": "A Lover's Complaint",
+        "wikiTitle": "A Lover's Complaint",
+        "gutenbergTitle": "A Lover's Complaint",
+        "gutenbergId": "1137",
+        "versions": 2
+      },
+      {
+        "title": "The Phoenix and the Turtle",
+        "wikiTitle": "The Phoenix and the Turtle",
+        "gutenbergTitle": "The Phoenix and the Turtle",
+        "gutenbergId": "1525",
+        "versions": 1
+      },
+      {
+        "title": "The Passionate Pilgrim",
+        "wikiTitle": "The Passionate Pilgrim",
+        "gutenbergTitle": "The Passionate Pilgrim",
+        "gutenbergId": "1544",
+        "versions": 1
+      }
+    ],
+    "notFoundInWiki": [
+      "Coriolanus",
+      "King Lear",
+      "Timon of Athens",
+      "Cymbeline",
+      "Pericles",
+      "The Taming of the Shrew",
+      "King John",
+      "King Richard II",
+      "King Henry IV, Part 1",
+      "King Henry IV, Part 2",
+      "King Henry V",
+      "King Henry VI, Part 1",
+      "King Henry VI, Part 2",
+      "King Henry VI, Part 3",
+      "King Richard III",
+      "King Henry VIII",
+      "Sonnets",
+      "Venus and Adonis"
+    ],
+    "notFoundInGutenberg": [
+      "Coriolanus",
+      "King Lear",
+      "Timon of Athens",
+      "Cymbeline",
+      "Pericles",
+      "The Taming of the Shrew",
+      "King John",
+      "King Richard II",
+      "King Henry IV, Part 1",
+      "King Henry IV, Part 2",
+      "King Henry V",
+      "King Henry VI, Part 1",
+      "King Henry VI, Part 2",
+      "King Henry VI, Part 3",
+      "King Richard III",
+      "King Henry VIII",
+      "Sonnets",
+      "Venus and Adonis"
+    ],
+    "multiVersionWorks": [
+      {
+        "title": "Antony and Cleopatra",
+        "wikiTitle": "Antony and Cleopatra",
+        "gutenbergTitle": "Antony and Cleopatra",
+        "gutenbergId": "1130",
+        "versions": 4
+      },
+      {
+        "title": "Hamlet",
+        "wikiTitle": "Hamlet",
+        "gutenbergTitle": "Hamlet",
+        "gutenbergId": "1122",
+        "versions": 7
+      },
+      {
+        "title": "Julius Caesar",
+        "wikiTitle": "Julius Caesar",
+        "gutenbergTitle": "Julius Caesar",
+        "gutenbergId": "1120",
+        "versions": 6
+      },
+      {
+        "title": "Macbeth",
+        "wikiTitle": "Macbeth",
+        "gutenbergTitle": "Macbeth",
+        "gutenbergId": "1533",
+        "versions": 7
+      },
+      {
+        "title": "Othello",
+        "wikiTitle": "Othello",
+        "gutenbergTitle": "Othello",
+        "gutenbergId": "1127",
+        "versions": 8
+      },
+      {
+        "title": "Romeo and Juliet",
+        "wikiTitle": "Romeo and Juliet",
+        "gutenbergTitle": "Romeo and Juliet",
+        "gutenbergId": "1112",
+        "versions": 6
+      },
+      {
+        "title": "Titus Andronicus",
+        "wikiTitle": "Titus Andronicus",
+        "gutenbergTitle": "Titus Andronicus",
+        "gutenbergId": "1106",
+        "versions": 7
+      },
+      {
+        "title": "Troilus and Cressida",
+        "wikiTitle": "Troilus and Cressida",
+        "gutenbergTitle": "Troilus and Cressida",
+        "gutenbergId": "1124",
+        "versions": 3
+      },
+      {
+        "title": "All's Well That Ends Well",
+        "wikiTitle": "All's Well That Ends Well",
+        "gutenbergTitle": "All's Well That Ends Well",
+        "gutenbergId": "1125",
+        "versions": 4
+      },
+      {
+        "title": "As You Like It",
+        "wikiTitle": "As You Like It",
+        "gutenbergTitle": "As You Like It",
+        "gutenbergId": "1121",
+        "versions": 4
+      },
+      {
+        "title": "The Comedy of Errors",
+        "wikiTitle": "The Comedy of Errors",
+        "gutenbergTitle": "The Comedy of Errors",
+        "gutenbergId": "1104",
+        "versions": 4
+      },
+      {
+        "title": "Love's Labour's Lost",
+        "wikiTitle": "Love's Labour's Lost",
+        "gutenbergTitle": "Love's Labour's Lost",
+        "gutenbergId": "1109",
+        "versions": 4
+      },
+      {
+        "title": "Measure for Measure",
+        "wikiTitle": "Measure for Measure",
+        "gutenbergTitle": "Measure for Measure",
+        "gutenbergId": "1126",
+        "versions": 4
+      },
+      {
+        "title": "The Merchant of Venice",
+        "wikiTitle": "The Merchant of Venice",
+        "gutenbergTitle": "The Merchant of Venice",
+        "gutenbergId": "1114",
+        "versions": 4
+      },
+      {
+        "title": "The Merry Wives of Windsor",
+        "wikiTitle": "The Merry Wives of Windsor",
+        "gutenbergTitle": "The Merry Wives of Windsor",
+        "gutenbergId": "1116",
+        "versions": 4
+      },
+      {
+        "title": "A Midsummer Night's Dream",
+        "wikiTitle": "A Midsummer Night's Dream",
+        "gutenbergTitle": "A Midsummer Night's Dream",
+        "gutenbergId": "1113",
+        "versions": 5
+      },
+      {
+        "title": "Much Ado About Nothing",
+        "wikiTitle": "Much Ado About Nothing",
+        "gutenbergTitle": "Much Ado about Nothing",
+        "gutenbergId": "1118",
+        "versions": 5
+      },
+      {
+        "title": "The Tempest",
+        "wikiTitle": "The Tempest",
+        "gutenbergTitle": "The Tempest",
+        "gutenbergId": "1135",
+        "versions": 5
+      },
+      {
+        "title": "Twelfth Night",
+        "wikiTitle": "Twelfth Night",
+        "gutenbergTitle": "Twelfth Night",
+        "gutenbergId": "1123",
+        "versions": 5
+      },
+      {
+        "title": "The Two Gentlemen of Verona",
+        "wikiTitle": "The Two Gentlemen of Verona",
+        "gutenbergTitle": "The Two Gentlemen of Verona",
+        "gutenbergId": "1108",
+        "versions": 4
+      },
+      {
+        "title": "The Two Noble Kinsmen",
+        "wikiTitle": "The Two Noble Kinsmen",
+        "gutenbergTitle": "The Two Noble Kinsmen",
+        "gutenbergId": "1506",
+        "versions": 2
+      },
+      {
+        "title": "The Winter's Tale",
+        "wikiTitle": "The Winter's Tale",
+        "gutenbergTitle": "The Winter's Tale",
+        "gutenbergId": "1134",
+        "versions": 4
+      },
+      {
+        "title": "A Lover's Complaint",
+        "wikiTitle": "A Lover's Complaint",
+        "gutenbergTitle": "A Lover's Complaint",
+        "gutenbergId": "1137",
+        "versions": 2
+      }
+    ]
+  }
+}

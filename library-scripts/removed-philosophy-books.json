@@ -1,0 +1,228 @@
+[
+  {
+    "id": "bertrand-russell-principles",
+    "title": "The Principles of Mathematics",
+    "author": "Bertrand Russell",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/The_Principles_of_Mathematics",
+    "wikipediaTitle": "The Principles of Mathematics"
+  },
+  {
+    "id": "bertrand-russell-problems",
+    "title": "The Problems of Philosophy",
+    "author": "Bertrand Russell",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/The_Problems_of_Philosophy",
+    "wikipediaTitle": "The Problems of Philosophy"
+  },
+  {
+    "id": "18269",
+    "title": "Pascal's Pensées",
+    "author": "Blaise Pascal",
+    "directUrl": "https://www.gutenberg.org/cache/epub/18269.txt",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Pens%C3%A9es",
+    "wikipediaTitle": "Pensées"
+  },
+  {
+    "id": "1228",
+    "title": "On the Origin of Species",
+    "author": "Charles Darwin",
+    "directUrl": "https://www.gutenberg.org/cache/epub/1228.txt",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/On_the_Origin_of_Species",
+    "wikipediaTitle": "On the Origin of Species"
+  },
+  {
+    "id": "2300",
+    "title": "The Descent of Man",
+    "author": "Charles Darwin",
+    "directUrl": "https://www.gutenberg.org/cache/epub/2300.txt",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/The_Descent_of_Man",
+    "wikipediaTitle": "The Descent of Man"
+  },
+  {
+    "id": "2087",
+    "title": "The Expression of the Emotions in Man and Animals",
+    "author": "Charles Darwin",
+    "directUrl": "https://www.gutenberg.org/cache/epub/2087.txt",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/The_Expression_of_the_Emotions_in_Man_and_Animals",
+    "wikipediaTitle": "The Expression of the Emotions in Man and Animals"
+  },
+  {
+    "id": "944",
+    "title": "The Voyage of the Beagle",
+    "author": "Charles Darwin",
+    "directUrl": "https://www.gutenberg.org/cache/epub/944.txt",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/The_Voyage_of_the_Beagle",
+    "wikipediaTitle": "The Voyage of the Beagle"
+  },
+  {
+    "id": "226",
+    "title": "Cicero's Orations",
+    "author": "Cicero",
+    "directUrl": "https://www.gutenberg.org/cache/epub/226.txt",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Cicero",
+    "wikipediaTitle": "Cicero"
+  },
+  {
+    "id": "21076",
+    "title": "The First Six Books of the Elements of Euclid",
+    "author": "Euclid",
+    "directUrl": "https://www.gutenberg.org/cache/epub/21076.txt",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Euclid%27s_Elements",
+    "wikipediaTitle": "Euclid's Elements"
+  },
+  {
+    "id": "moore-ethics",
+    "title": "Ethics",
+    "author": "G.E. Moore",
+    "directUrl": "https://en.wikisource.org/wiki/Ethics_(Moore)",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/G._E._Moore",
+    "wikipediaTitle": "G. E. Moore"
+  },
+  {
+    "id": "moore-studies",
+    "title": "Philosophical Studies",
+    "author": "G.E. Moore",
+    "directUrl": "https://www.gutenberg.org/cache/epub/author/45722",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/G._E._Moore",
+    "wikipediaTitle": "G. E. Moore"
+  },
+  {
+    "id": "moore-principia",
+    "title": "Principia Ethica",
+    "author": "G.E. Moore",
+    "directUrl": "https://www.gutenberg.org/cache/epub/author/45722",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Principia_Ethica",
+    "wikipediaTitle": "Principia Ethica"
+  },
+  {
+    "id": "cantor-transfinite",
+    "title": "Contributions to the Founding of the Theory of Transfinite Numbers",
+    "author": "Georg Cantor",
+    "directUrl": "https://en.wikisource.org/wiki/Contributions_to_the_Founding_of_the_Theory_of_Transfinite_Numbers",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Georg_Cantor",
+    "wikipediaTitle": "Georg Cantor"
+  },
+  {
+    "id": "28233",
+    "title": "Philosophiae Naturalis Principia Mathematica",
+    "author": "Isaac Newton",
+    "directUrl": "https://www.gutenberg.org/cache/epub/28233.txt",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Philosophi%C3%A6_Naturalis_Principia_Mathematica",
+    "wikipediaTitle": "Philosophiæ Naturalis Principia Mathematica"
+  },
+  {
+    "id": "852",
+    "title": "Democracy and Education",
+    "author": "John Dewey",
+    "directUrl": "https://www.gutenberg.org/cache/epub/852.txt",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Democracy_and_Education",
+    "wikipediaTitle": "Democracy and Education"
+  },
+  {
+    "id": "5827",
+    "title": "How We Think",
+    "author": "John Dewey",
+    "directUrl": "https://www.gutenberg.org/cache/epub/5827.txt",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/How_We_Think",
+    "wikipediaTitle": "How We Think"
+  },
+  {
+    "id": "41386",
+    "title": "Human Nature and Conduct",
+    "author": "John Dewey",
+    "directUrl": "https://www.gutenberg.org/cache/epub/41386.txt",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Human_Nature_and_Conduct",
+    "wikipediaTitle": "Human Nature and Conduct"
+  },
+  {
+    "id": "40089",
+    "title": "Reconstruction in Philosophy",
+    "author": "John Dewey",
+    "directUrl": "https://www.gutenberg.org/cache/epub/40089.txt",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Reconstruction_in_Philosophy",
+    "wikipediaTitle": "Reconstruction in Philosophy"
+  },
+  {
+    "id": "71000",
+    "title": "The Public and Its Problems",
+    "author": "John Dewey",
+    "directUrl": "https://www.gutenberg.org/cache/epub/71000.txt",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/The_Public_and_Its_Problems",
+    "wikipediaTitle": "The Public and Its Problems"
+  },
+  {
+    "id": "10615",
+    "title": "An Essay Concerning Human Understanding",
+    "author": "John Locke",
+    "directUrl": "https://www.gutenberg.org/cache/epub/10615.txt",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/An_Essay_Concerning_Human_Understanding",
+    "wikipediaTitle": "An Essay Concerning Human Understanding"
+  },
+  {
+    "id": "keynes-monetary",
+    "title": "A Tract on Monetary Reform",
+    "author": "John Maynard Keynes",
+    "directUrl": "https://www.gutenberg.org/cache/epub/author/6280",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/A_Tract_on_Monetary_Reform",
+    "wikipediaTitle": "A Tract on Monetary Reform"
+  },
+  {
+    "id": "32625",
+    "title": "A Treatise on Probability",
+    "author": "John Maynard Keynes",
+    "directUrl": "https://www.gutenberg.org/cache/epub/32625.txt",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/A_Treatise_on_Probability",
+    "wikipediaTitle": "A Treatise on Probability"
+  },
+  {
+    "id": "15776",
+    "title": "The Economic Consequences of the Peace",
+    "author": "John Maynard Keynes",
+    "directUrl": "https://www.gutenberg.org/cache/epub/15776.txt",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/The_Economic_Consequences_of_the_Peace",
+    "wikipediaTitle": "The Economic Consequences of the Peace"
+  },
+  {
+    "id": "tractatus",
+    "title": "Tractatus Logico-Philosophicus",
+    "author": "Ludwig Wittgenstein",
+    "localPath": "/public-domain-texts/tractatus-english.txt",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Tractatus%20Logico-Philosophicus",
+    "wikipediaTitle": "Tractatus Logico-Philosophicus"
+  },
+  {
+    "id": "peter-singer-animal-liberation",
+    "title": "Animal Liberation",
+    "author": "Peter Singer",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Animal_Liberation_(book)",
+    "wikipediaTitle": "Animal Liberation (book)"
+  },
+  {
+    "id": "peter-singer-practical-ethics",
+    "title": "Practical Ethics",
+    "author": "Peter Singer",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Practical_Ethics",
+    "wikipediaTitle": "Practical Ethics"
+  },
+  {
+    "id": "59",
+    "title": "Discourse on the Method",
+    "author": "René Descartes",
+    "directUrl": "https://www.gutenberg.org/cache/epub/59.txt",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Discourse_on_the_Method",
+    "wikipediaTitle": "Discourse on the Method"
+  },
+  {
+    "id": "stuart-hampshire-justice",
+    "title": "Justice is Conflict",
+    "author": "Stuart Hampshire",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Stuart_Hampshire",
+    "wikipediaTitle": "Stuart Hampshire"
+  },
+  {
+    "id": "stuart-hampshire-thought-action",
+    "title": "Thought and Action",
+    "author": "Stuart Hampshire",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Stuart_Hampshire",
+    "wikipediaTitle": "Stuart Hampshire"
+  }
+]

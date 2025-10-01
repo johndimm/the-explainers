@@ -1,0 +1,576 @@
+[
+  {
+    "id": "1342",
+    "title": "Pride and Prejudice",
+    "author": "Unknown",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Pride%20and%20Prejudice",
+    "wikipediaTitle": "Pride and Prejudice"
+  },
+  {
+    "id": "17797",
+    "title": "Jane Austen",
+    "author": "Unknown",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Jane%20Austen",
+    "wikipediaTitle": "Jane Austen"
+  },
+  {
+    "id": "1260",
+    "title": "Jane Eyre",
+    "author": "Unknown",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Jane%20Eyre",
+    "wikipediaTitle": "Jane Eyre"
+  },
+  {
+    "id": "768",
+    "title": "Wuthering Heights",
+    "author": "Unknown",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Wuthering%20Heights",
+    "wikipediaTitle": "Wuthering Heights"
+  },
+  {
+    "id": "25789",
+    "title": "Emily Brontë",
+    "author": "Unknown",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Emily%20Bront%C3%AB",
+    "wikipediaTitle": "Emily Brontë"
+  },
+  {
+    "id": "1400",
+    "title": "Great Expectations",
+    "author": "Unknown",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Great%20Expectations",
+    "wikipediaTitle": "Great Expectations"
+  },
+  {
+    "id": "25851",
+    "title": "Charles Dickens",
+    "author": "Unknown",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Charles%20Dickens",
+    "wikipediaTitle": "Charles Dickens"
+  },
+  {
+    "id": "25851",
+    "title": "David Copperfield",
+    "author": "Unknown",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/David%20Copperfield",
+    "wikipediaTitle": "David Copperfield"
+  },
+  {
+    "id": "730",
+    "title": "Oliver Twist",
+    "author": "Unknown",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Oliver%20Twist",
+    "wikipediaTitle": "Oliver Twist"
+  },
+  {
+    "id": "98",
+    "title": "A Tale of Two Cities",
+    "author": "Unknown",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/A%20Tale%20of%20Two%20Cities",
+    "wikipediaTitle": "A Tale of Two Cities"
+  },
+  {
+    "id": "15",
+    "title": "Moby-Dick",
+    "author": "Unknown",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Moby-Dick",
+    "wikipediaTitle": "Moby-Dick"
+  },
+  {
+    "id": "2701",
+    "title": "Cetology of Moby-Dick",
+    "author": "Unknown",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Cetology%20of%20Moby-Dick",
+    "wikipediaTitle": "Cetology of Moby-Dick"
+  },
+  {
+    "id": "33",
+    "title": "The Scarlet Letter",
+    "author": "Unknown",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/The%20Scarlet%20Letter",
+    "wikipediaTitle": "The Scarlet Letter"
+  },
+  {
+    "id": "64317",
+    "title": "The Great Gatsby",
+    "author": "Unknown",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/The%20Great%20Gatsby",
+    "wikipediaTitle": "The Great Gatsby"
+  },
+  {
+    "id": "67138",
+    "title": "The Sun Also Rises",
+    "author": "Unknown",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/The%20Sun%20Also%20Rises",
+    "wikipediaTitle": "The Sun Also Rises"
+  },
+  {
+    "id": "1321",
+    "title": "The Waste Land",
+    "author": "Unknown",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/The%20Waste%20Land",
+    "wikipediaTitle": "The Waste Land"
+  },
+  {
+    "id": "56536",
+    "title": "Walt Whitman",
+    "author": "Unknown",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Walt%20Whitman",
+    "wikipediaTitle": "Walt Whitman"
+  },
+  {
+    "id": "61221",
+    "title": "A Passage to India",
+    "author": "Unknown",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/A%20Passage%20to%20India",
+    "wikipediaTitle": "A Passage to India"
+  },
+  {
+    "id": "20",
+    "title": "Paradise Lost",
+    "author": "Unknown",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Paradise%20Lost",
+    "wikipediaTitle": "Paradise Lost"
+  },
+  {
+    "id": "58",
+    "title": "Paradise Regained",
+    "author": "Unknown",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Paradise%20Regained",
+    "wikipediaTitle": "Paradise Regained"
+  },
+  {
+    "id": "25942",
+    "title": "Beowulf",
+    "author": "Unknown",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Beowulf",
+    "wikipediaTitle": "Beowulf"
+  },
+  {
+    "id": "14878",
+    "title": "Beowulf (hero)",
+    "author": "Unknown",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Beowulf%20(hero)",
+    "wikipediaTitle": "Beowulf (hero)"
+  },
+  {
+    "id": "981",
+    "title": "Hrólfr Kraki",
+    "author": "Unknown",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Hr%C3%B3lfr%20Kraki",
+    "wikipediaTitle": "Hrólfr Kraki"
+  },
+  {
+    "id": "16452",
+    "title": "Iliad",
+    "author": "Unknown",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Iliad",
+    "wikipediaTitle": "Iliad"
+  },
+  {
+    "id": "48895",
+    "title": "Odyssey",
+    "author": "Unknown",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Odyssey",
+    "wikipediaTitle": "Odyssey"
+  },
+  {
+    "id": "6130",
+    "title": "English translations of Homer",
+    "author": "Unknown",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/English%20translations%20of%20Homer",
+    "wikipediaTitle": "English translations of Homer"
+  },
+  {
+    "id": "1232",
+    "title": "The Prince",
+    "author": "Unknown",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/The%20Prince",
+    "wikipediaTitle": "The Prince"
+  },
+  {
+    "id": "1837",
+    "title": "The Prince and the Pauper",
+    "author": "Unknown",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/The%20Prince%20and%20the%20Pauper",
+    "wikipediaTitle": "The Prince and the Pauper"
+  },
+  {
+    "id": "3207",
+    "title": "Leviathan (Hobbes book)",
+    "author": "Unknown",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Leviathan%20(Hobbes%20book)",
+    "wikipediaTitle": "Leviathan (Hobbes book)"
+  },
+  {
+    "id": "39232",
+    "title": "Thomas Hobbes",
+    "author": "Unknown",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Thomas%20Hobbes",
+    "wikipediaTitle": "Thomas Hobbes"
+  },
+  {
+    "id": "1301",
+    "title": "The Social Contract",
+    "author": "Unknown",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/The%20Social%20Contract",
+    "wikipediaTitle": "The Social Contract"
+  },
+  {
+    "id": "4363",
+    "title": "Beyond Good and Evil",
+    "author": "Unknown",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Beyond%20Good%20and%20Evil",
+    "wikipediaTitle": "Beyond Good and Evil"
+  },
+  {
+    "id": "52915",
+    "title": "Philosophy of Friedrich Nietzsche",
+    "author": "Unknown",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Philosophy%20of%20Friedrich%20Nietzsche",
+    "wikipediaTitle": "Philosophy of Friedrich Nietzsche"
+  },
+  {
+    "id": "11419",
+    "title": "Friedrich Nietzsche",
+    "author": "Unknown",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Friedrich%20Nietzsche",
+    "wikipediaTitle": "Friedrich Nietzsche"
+  },
+  {
+    "id": "1998",
+    "title": "Thus Spoke Zarathustra",
+    "author": "Unknown",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Thus%20Spoke%20Zarathustra",
+    "wikipediaTitle": "Thus Spoke Zarathustra"
+  },
+  {
+    "id": "1998",
+    "title": "Also sprach Zarathustra",
+    "author": "Unknown",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Also%20sprach%20Zarathustra",
+    "wikipediaTitle": "Also sprach Zarathustra"
+  },
+  {
+    "id": "1998",
+    "title": "Übermensch",
+    "author": "Unknown",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/%C3%9Cbermensch",
+    "wikipediaTitle": "Übermensch"
+  },
+  {
+    "id": "1998",
+    "title": "Zarathustra's roundelay",
+    "author": "Unknown",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Zarathustra's%20roundelay",
+    "wikipediaTitle": "Zarathustra's roundelay"
+  },
+  {
+    "id": "38145",
+    "title": "Human, All Too Human",
+    "author": "Unknown",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Human%2C%20All%20Too%20Human",
+    "wikipediaTitle": "Human, All Too Human"
+  },
+  {
+    "id": "52915",
+    "title": "Eternal return",
+    "author": "Unknown",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Eternal%20return",
+    "wikipediaTitle": "Eternal return"
+  },
+  {
+    "id": "52915",
+    "title": "Philosophy of Friedrich Nietzsche",
+    "author": "Unknown",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Philosophy%20of%20Friedrich%20Nietzsche",
+    "wikipediaTitle": "Philosophy of Friedrich Nietzsche"
+  },
+  {
+    "id": "4363",
+    "title": "Beyond Good and Evil",
+    "author": "Unknown",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Beyond%20Good%20and%20Evil",
+    "wikipediaTitle": "Beyond Good and Evil"
+  },
+  {
+    "id": "4280",
+    "title": "Critique of Pure Reason",
+    "author": "Unknown",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Critique%20of%20Pure%20Reason",
+    "wikipediaTitle": "Critique of Pure Reason"
+  },
+  {
+    "id": "5683",
+    "title": "Critique of Practical Reason",
+    "author": "Unknown",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Critique%20of%20Practical%20Reason",
+    "wikipediaTitle": "Critique of Practical Reason"
+  },
+  {
+    "id": "3300",
+    "title": "The Wealth of Nations",
+    "author": "Unknown",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/The%20Wealth%20of%20Nations",
+    "wikipediaTitle": "The Wealth of Nations"
+  },
+  {
+    "id": "3300",
+    "title": "Wealth",
+    "author": "Unknown",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Wealth",
+    "wikipediaTitle": "Wealth"
+  },
+  {
+    "id": "1497",
+    "title": "Class struggle",
+    "author": "Unknown",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Class%20struggle",
+    "wikipediaTitle": "Class struggle"
+  },
+  {
+    "id": "785",
+    "title": "Greed",
+    "author": "Unknown",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Greed",
+    "wikipediaTitle": "Greed"
+  },
+  {
+    "id": "132",
+    "title": "The Art of War",
+    "author": "Unknown",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/The%20Art%20of%20War",
+    "wikipediaTitle": "The Art of War"
+  },
+  {
+    "id": "1232",
+    "title": "The Prince",
+    "author": "Unknown",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/The%20Prince",
+    "wikipediaTitle": "The Prince"
+  },
+  {
+    "id": "6585",
+    "title": "Marcus Aurelius",
+    "author": "Unknown",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Marcus%20Aurelius",
+    "wikipediaTitle": "Marcus Aurelius"
+  },
+  {
+    "id": "19002",
+    "title": "Alice's Adventures in Wonderland",
+    "author": "Unknown",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Alice's%20Adventures%20in%20Wonderland",
+    "wikipediaTitle": "Alice's Adventures in Wonderland"
+  },
+  {
+    "id": "11",
+    "title": "Alice (Alice's Adventures in Wonderland)",
+    "author": "Unknown",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Alice%20(Alice's%20Adventures%20in%20Wonderland)",
+    "wikipediaTitle": "Alice (Alice's Adventures in Wonderland)"
+  },
+  {
+    "id": "11",
+    "title": "Duchess (Alice's Adventures in Wonderland)",
+    "author": "Unknown",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Duchess%20(Alice's%20Adventures%20in%20Wonderland)",
+    "wikipediaTitle": "Duchess (Alice's Adventures in Wonderland)"
+  },
+  {
+    "id": "12",
+    "title": "Through the Looking-Glass",
+    "author": "Unknown",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Through%20the%20Looking-Glass",
+    "wikipediaTitle": "Through the Looking-Glass"
+  },
+  {
+    "id": "11",
+    "title": "Alice (Alice's Adventures in Wonderland)",
+    "author": "Unknown",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Alice%20(Alice's%20Adventures%20in%20Wonderland)",
+    "wikipediaTitle": "Alice (Alice's Adventures in Wonderland)"
+  },
+  {
+    "id": "74",
+    "title": "The Adventures of Tom Sawyer",
+    "author": "Unknown",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/The%20Adventures%20of%20Tom%20Sawyer",
+    "wikipediaTitle": "The Adventures of Tom Sawyer"
+  },
+  {
+    "id": "74",
+    "title": "Tom Sawyer",
+    "author": "Unknown",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Tom%20Sawyer",
+    "wikipediaTitle": "Tom Sawyer"
+  },
+  {
+    "id": "76",
+    "title": "Adventures of Huckleberry Finn",
+    "author": "Unknown",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Adventures%20of%20Huckleberry%20Finn",
+    "wikipediaTitle": "Adventures of Huckleberry Finn"
+  },
+  {
+    "id": "91",
+    "title": "Tom Sawyer Abroad",
+    "author": "Unknown",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Tom%20Sawyer%20Abroad",
+    "wikipediaTitle": "Tom Sawyer Abroad"
+  },
+  {
+    "id": "93",
+    "title": "Tom Sawyer, Detective",
+    "author": "Unknown",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Tom%20Sawyer%2C%20Detective",
+    "wikipediaTitle": "Tom Sawyer, Detective"
+  },
+  {
+    "id": "76",
+    "title": "Adventures of Huckleberry Finn",
+    "author": "Unknown",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Adventures%20of%20Huckleberry%20Finn",
+    "wikipediaTitle": "Adventures of Huckleberry Finn"
+  },
+  {
+    "id": "74",
+    "title": "The Adventures of Tom Sawyer",
+    "author": "Unknown",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/The%20Adventures%20of%20Tom%20Sawyer",
+    "wikipediaTitle": "The Adventures of Tom Sawyer"
+  },
+  {
+    "id": "2988",
+    "title": "Mark Twain",
+    "author": "Unknown",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Mark%20Twain",
+    "wikipediaTitle": "Mark Twain"
+  },
+  {
+    "id": "405",
+    "title": "Treasure Island",
+    "author": "Unknown",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Treasure%20Island",
+    "wikipediaTitle": "Treasure Island"
+  },
+  {
+    "id": "12623",
+    "title": "Robinson Crusoe",
+    "author": "Unknown",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Robinson%20Crusoe",
+    "wikipediaTitle": "Robinson Crusoe"
+  },
+  {
+    "id": "561",
+    "title": "The Farther Adventures of Robinson Crusoe",
+    "author": "Unknown",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/The%20Farther%20Adventures%20of%20Robinson%20Crusoe",
+    "wikipediaTitle": "The Farther Adventures of Robinson Crusoe"
+  },
+  {
+    "id": "11703",
+    "title": "The Swiss Family Robinson",
+    "author": "Unknown",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/The%20Swiss%20Family%20Robinson",
+    "wikipediaTitle": "The Swiss Family Robinson"
+  },
+  {
+    "id": "73564",
+    "title": "Daniel Defoe",
+    "author": "Unknown",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Daniel%20Defoe",
+    "wikipediaTitle": "Daniel Defoe"
+  },
+  {
+    "id": "13169",
+    "title": "Jonathan Swift",
+    "author": "Unknown",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Jonathan%20Swift",
+    "wikipediaTitle": "Jonathan Swift"
+  },
+  {
+    "id": "829",
+    "title": "Laputa",
+    "author": "Unknown",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Laputa",
+    "wikipediaTitle": "Laputa"
+  },
+  {
+    "id": "56454",
+    "title": "Hamlet",
+    "author": "Unknown",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Hamlet",
+    "wikipediaTitle": "Hamlet"
+  },
+  {
+    "id": "16275",
+    "title": "Ghost (Hamlet)",
+    "author": "Unknown",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Ghost%20(Hamlet)",
+    "wikipediaTitle": "Ghost (Hamlet)"
+  },
+  {
+    "id": "1513",
+    "title": "Romeo and Juliet",
+    "author": "Unknown",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Romeo%20and%20Juliet",
+    "wikipediaTitle": "Romeo and Juliet"
+  },
+  {
+    "id": "1112",
+    "title": "Characters in Romeo and Juliet",
+    "author": "Unknown",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Characters%20in%20Romeo%20and%20Juliet",
+    "wikipediaTitle": "Characters in Romeo and Juliet"
+  },
+  {
+    "id": "1531",
+    "title": "Othello",
+    "author": "Unknown",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Othello",
+    "wikipediaTitle": "Othello"
+  },
+  {
+    "id": "1532",
+    "title": "King Lear",
+    "author": "Unknown",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/King%20Lear",
+    "wikipediaTitle": "King Lear"
+  },
+  {
+    "id": "12198",
+    "title": "Chronology of Shakespeare's plays",
+    "author": "Unknown",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Chronology%20of%20Shakespeare's%20plays",
+    "wikipediaTitle": "Chronology of Shakespeare's plays"
+  },
+  {
+    "id": "1540",
+    "title": "The Tempest",
+    "author": "Unknown",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/The%20Tempest",
+    "wikipediaTitle": "The Tempest"
+  },
+  {
+    "id": "1514",
+    "title": "A Midsummer Night's Dream",
+    "author": "Unknown",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/A%20Midsummer%20Night's%20Dream",
+    "wikipediaTitle": "A Midsummer Night's Dream"
+  },
+  {
+    "id": "1515",
+    "title": "The Merchant of Venice",
+    "author": "Unknown",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/The%20Merchant%20of%20Venice",
+    "wikipediaTitle": "The Merchant of Venice"
+  },
+  {
+    "id": "1523",
+    "title": "As You Like It",
+    "author": "Unknown",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/As%20You%20Like%20It",
+    "wikipediaTitle": "As You Like It"
+  }
+]

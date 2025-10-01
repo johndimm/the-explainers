@@ -1,0 +1,425 @@
+{
+  "extractionDate": "2025-09-20T20:14:43.476Z",
+  "statistics": {
+    "totalCategories": 43,
+    "totalBooks": 305,
+    "booksWithGutenberg": 26,
+    "successRate": "8.52%"
+  },
+  "categoryStats": {
+    "Shakespeare": {
+      "total": 0,
+      "withGutenberg": 0
+    },
+    "Shakespeare plays": {
+      "total": 0,
+      "withGutenberg": 0
+    },
+    "Works by William Shakespeare": {
+      "total": 6,
+      "withGutenberg": 1
+    },
+    "Hamlet": {
+      "total": 24,
+      "withGutenberg": 3
+    },
+    "Macbeth": {
+      "total": 23,
+      "withGutenberg": 1
+    },
+    "Romeo and Juliet": {
+      "total": 19,
+      "withGutenberg": 1
+    },
+    "Othello": {
+      "total": 18,
+      "withGutenberg": 1
+    },
+    "King Lear": {
+      "total": 11,
+      "withGutenberg": 1
+    },
+    "The Tempest": {
+      "total": 21,
+      "withGutenberg": 1
+    },
+    "A Midsummer Night's Dream": {
+      "total": 4,
+      "withGutenberg": 1
+    },
+    "Much Ado About Nothing": {
+      "total": 0,
+      "withGutenberg": 0
+    },
+    "The Merchant of Venice": {
+      "total": 9,
+      "withGutenberg": 2
+    },
+    "Twelfth Night": {
+      "total": 2,
+      "withGutenberg": 1
+    },
+    "As You Like It": {
+      "total": 10,
+      "withGutenberg": 1
+    },
+    "Julius Caesar": {
+      "total": 49,
+      "withGutenberg": 3
+    },
+    "Antony and Cleopatra": {
+      "total": 4,
+      "withGutenberg": 1
+    },
+    "King Henry IV, Part 1": {
+      "total": 0,
+      "withGutenberg": 0
+    },
+    "King Henry IV, Part 2": {
+      "total": 0,
+      "withGutenberg": 0
+    },
+    "King Henry V": {
+      "total": 0,
+      "withGutenberg": 0
+    },
+    "King Richard III": {
+      "total": 0,
+      "withGutenberg": 0
+    },
+    "King Richard II": {
+      "total": 0,
+      "withGutenberg": 0
+    },
+    "Henry VIII": {
+      "total": 74,
+      "withGutenberg": 2
+    },
+    "The Taming of the Shrew": {
+      "total": 8,
+      "withGutenberg": 1
+    },
+    "The Comedy of Errors": {
+      "total": 0,
+      "withGutenberg": 0
+    },
+    "All's Well That Ends Well": {
+      "total": 0,
+      "withGutenberg": 0
+    },
+    "Measure for Measure": {
+      "total": 0,
+      "withGutenberg": 0
+    },
+    "Troilus and Cressida": {
+      "total": 8,
+      "withGutenberg": 3
+    },
+    "Coriolanus": {
+      "total": 3,
+      "withGutenberg": 1
+    },
+    "Timon of Athens": {
+      "total": 12,
+      "withGutenberg": 1
+    },
+    "Cymbeline": {
+      "total": 0,
+      "withGutenberg": 0
+    },
+    "The Winter's Tale": {
+      "total": 0,
+      "withGutenberg": 0
+    },
+    "Pericles, Prince of Tyre": {
+      "total": 0,
+      "withGutenberg": 0
+    },
+    "The Two Noble Kinsmen": {
+      "total": 0,
+      "withGutenberg": 0
+    },
+    "Shakespeare's Sonnets": {
+      "total": 0,
+      "withGutenberg": 0
+    },
+    "Venus and Adonis": {
+      "total": 0,
+      "withGutenberg": 0
+    },
+    "The Rape of Lucrece": {
+      "total": 0,
+      "withGutenberg": 0
+    },
+    "A Lover's Complaint": {
+      "total": 0,
+      "withGutenberg": 0
+    },
+    "The Passionate Pilgrim": {
+      "total": 0,
+      "withGutenberg": 0
+    },
+    "The Phoenix and the Turtle": {
+      "total": 0,
+      "withGutenberg": 0
+    },
+    "Sonnets To Sundry Notes of Music": {
+      "total": 0,
+      "withGutenberg": 0
+    },
+    "Locrine": {
+      "total": 0,
+      "withGutenberg": 0
+    },
+    "Mucedorus": {
+      "total": 0,
+      "withGutenberg": 0
+    },
+    "Sir Thomas More": {
+      "total": 0,
+      "withGutenberg": 0
+    }
+  },
+  "books": [
+    {
+      "title": "Complete Works of Shakespeare",
+      "gutenbergIds": [
+        "100"
+      ],
+      "category": "Works by William Shakespeare",
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/Complete%20Works%20of%20Shakespeare",
+      "pageId": 1540166
+    },
+    {
+      "title": "Hamlet",
+      "gutenbergIds": [
+        "56454",
+        "1524"
+      ],
+      "category": "Hamlet",
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/Hamlet",
+      "pageId": 13554
+    },
+    {
+      "title": "Literary influence of Hamlet",
+      "gutenbergIds": [
+        "1787"
+      ],
+      "category": "Hamlet",
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/Literary%20influence%20of%20Hamlet",
+      "pageId": 14879000
+    },
+    {
+      "title": "To be, or not to be",
+      "gutenbergIds": [
+        "21279"
+      ],
+      "category": "Hamlet",
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/To%20be%2C%20or%20not%20to%20be",
+      "pageId": 729006
+    },
+    {
+      "title": "Macbeth",
+      "gutenbergIds": [
+        "1533"
+      ],
+      "category": "Macbeth",
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/Macbeth",
+      "pageId": 18866
+    },
+    {
+      "title": "Romeo and Juliet",
+      "gutenbergIds": [
+        "1513"
+      ],
+      "category": "Romeo and Juliet",
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/Romeo%20and%20Juliet",
+      "pageId": 25821
+    },
+    {
+      "title": "Othello",
+      "gutenbergIds": [
+        "1531"
+      ],
+      "category": "Othello",
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/Othello",
+      "pageId": 22460
+    },
+    {
+      "title": "King Lear",
+      "gutenbergIds": [
+        "1532"
+      ],
+      "category": "King Lear",
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/King%20Lear",
+      "pageId": 55721
+    },
+    {
+      "title": "The Tempest",
+      "gutenbergIds": [
+        "1540"
+      ],
+      "category": "The Tempest",
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/The%20Tempest",
+      "pageId": 23487767
+    },
+    {
+      "title": "A Midsummer Night's Dream",
+      "gutenbergIds": [
+        "1514"
+      ],
+      "category": "A Midsummer Night's Dream",
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/A%20Midsummer%20Night's%20Dream",
+      "pageId": 43206
+    },
+    {
+      "title": "The Merchant of Venice",
+      "gutenbergIds": [
+        "1515"
+      ],
+      "category": "The Merchant of Venice",
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/The%20Merchant%20of%20Venice",
+      "pageId": 37713
+    },
+    {
+      "title": "The Jew of Malta",
+      "gutenbergIds": [
+        "901"
+      ],
+      "category": "The Merchant of Venice",
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/The%20Jew%20of%20Malta",
+      "pageId": 1858211
+    },
+    {
+      "title": "Twelfth Night",
+      "gutenbergIds": [
+        "1526"
+      ],
+      "category": "Twelfth Night",
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/Twelfth%20Night",
+      "pageId": 652812
+    },
+    {
+      "title": "As You Like It",
+      "gutenbergIds": [
+        "1523"
+      ],
+      "category": "As You Like It",
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/As%20You%20Like%20It",
+      "pageId": 23454544
+    },
+    {
+      "title": "Caesarism",
+      "gutenbergIds": [
+        "470"
+      ],
+      "category": "Julius Caesar",
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/Caesarism",
+      "pageId": 1543355
+    },
+    {
+      "title": "Gallic Wars",
+      "gutenbergIds": [
+        "10657"
+      ],
+      "category": "Julius Caesar",
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/Gallic%20Wars",
+      "pageId": 143229
+    },
+    {
+      "title": "Military campaigns of Julius Caesar",
+      "gutenbergIds": [
+        "10657"
+      ],
+      "category": "Julius Caesar",
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/Military%20campaigns%20of%20Julius%20Caesar",
+      "pageId": 28933941
+    },
+    {
+      "title": "Antony and Cleopatra",
+      "gutenbergIds": [
+        "1534"
+      ],
+      "category": "Antony and Cleopatra",
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/Antony%20and%20Cleopatra",
+      "pageId": 65169
+    },
+    {
+      "title": "Cockpit-in-Court",
+      "gutenbergIds": [
+        "22397"
+      ],
+      "category": "Henry VIII",
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/Cockpit-in-Court",
+      "pageId": 7365615
+    },
+    {
+      "title": "Hampton Court Palace",
+      "gutenbergIds": [
+        "27524"
+      ],
+      "category": "Henry VIII",
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/Hampton%20Court%20Palace",
+      "pageId": 52947
+    },
+    {
+      "title": "The Taming of the Shrew",
+      "gutenbergIds": [
+        "11929",
+        "12198",
+        "1508"
+      ],
+      "category": "The Taming of the Shrew",
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/The%20Taming%20of%20the%20Shrew",
+      "pageId": 62654
+    },
+    {
+      "title": "Troilus and Cressida",
+      "gutenbergIds": [
+        "1528"
+      ],
+      "category": "Troilus and Cressida",
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/Troilus%20and%20Cressida",
+      "pageId": 59083633
+    },
+    {
+      "title": "Troilus",
+      "gutenbergIds": [
+        "1528",
+        "257"
+      ],
+      "category": "Troilus and Cressida",
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/Troilus",
+      "pageId": 1247736
+    },
+    {
+      "title": "Troilus and Criseyde",
+      "gutenbergIds": [
+        "257"
+      ],
+      "category": "Troilus and Cressida",
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/Troilus%20and%20Criseyde",
+      "pageId": 855241
+    },
+    {
+      "title": "Coriolanus",
+      "gutenbergIds": [
+        "14033",
+        "1535"
+      ],
+      "category": "Coriolanus",
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/Coriolanus",
+      "pageId": 1036847
+    },
+    {
+      "title": "First Folio",
+      "gutenbergIds": [
+        "2270",
+        "100"
+      ],
+      "category": "Timon of Athens",
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/First%20Folio",
+      "pageId": 599456
+    }
+  ]
+}

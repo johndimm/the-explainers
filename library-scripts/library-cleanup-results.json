@@ -1,0 +1,1558 @@
+{
+  "timestamp": "2025-09-21T00:38:45.349Z",
+  "config": {
+    "maxBooksPerAuthor": 10
+  },
+  "files": {
+    "shakespeare.json": {
+      "original": 48,
+      "cleaned": 10,
+      "removed": 38,
+      "authors": {
+        "William Shakespeare": {
+          "total": 48,
+          "kept": 10,
+          "removed": 38
+        }
+      }
+    },
+    "plato.json": {
+      "original": 26,
+      "cleaned": 10,
+      "removed": 16,
+      "authors": {
+        "Plato": {
+          "total": 26,
+          "kept": 10,
+          "removed": 16
+        }
+      }
+    },
+    "english-literature.json": {
+      "original": 2666,
+      "cleaned": 749,
+      "removed": 1917,
+      "authors": {
+        "James Joyce": {
+          "total": 11,
+          "kept": 10,
+          "removed": 1
+        },
+        "Lewis Carroll": {
+          "total": 20,
+          "kept": 10,
+          "removed": 10
+        },
+        "Jane Austen": {
+          "total": 17,
+          "kept": 10,
+          "removed": 7
+        },
+        "J.M. Barrie": {
+          "total": 31,
+          "kept": 10,
+          "removed": 21
+        },
+        "Thomas Hardy": {
+          "total": 54,
+          "kept": 10,
+          "removed": 44
+        },
+        "H.G. Wells": {
+          "total": 170,
+          "kept": 10,
+          "removed": 160
+        },
+        "Robert Louis Stevenson": {
+          "total": 72,
+          "kept": 10,
+          "removed": 62
+        },
+        "Charles Dickens": {
+          "total": 123,
+          "kept": 10,
+          "removed": 113
+        },
+        "Doyle": {
+          "total": 99,
+          "kept": 10,
+          "removed": 89
+        },
+        "Virginia Woolf": {
+          "total": 13,
+          "kept": 10,
+          "removed": 3
+        },
+        "Paine": {
+          "total": 30,
+          "kept": 10,
+          "removed": 20
+        },
+        "Collins": {
+          "total": 59,
+          "kept": 10,
+          "removed": 49
+        },
+        "Webster": {
+          "total": 33,
+          "kept": 10,
+          "removed": 23
+        },
+        "Paterson": {
+          "total": 5,
+          "kept": 5,
+          "removed": 0
+        },
+        "Conrad": {
+          "total": 69,
+          "kept": 10,
+          "removed": 59
+        },
+        "Kipling": {
+          "total": 59,
+          "kept": 10,
+          "removed": 49
+        },
+        "Chaucer": {
+          "total": 3,
+          "kept": 3,
+          "removed": 0
+        },
+        "Grahame": {
+          "total": 14,
+          "kept": 10,
+          "removed": 4
+        },
+        "Defoe": {
+          "total": 33,
+          "kept": 10,
+          "removed": 23
+        },
+        "Scott-Moncrieff": {
+          "total": 1,
+          "kept": 1,
+          "removed": 0
+        },
+        "Scott": {
+          "total": 97,
+          "kept": 10,
+          "removed": 87
+        },
+        "Johnson": {
+          "total": 73,
+          "kept": 10,
+          "removed": 63
+        },
+        "Sidney": {
+          "total": 16,
+          "kept": 10,
+          "removed": 6
+        },
+        "Trollope": {
+          "total": 82,
+          "kept": 10,
+          "removed": 72
+        },
+        "Project Gutenberg": {
+          "total": 6,
+          "kept": 6,
+          "removed": 0
+        },
+        "Walton": {
+          "total": 58,
+          "kept": 10,
+          "removed": 48
+        },
+        "Ruskin": {
+          "total": 15,
+          "kept": 10,
+          "removed": 5
+        },
+        "Gibbon": {
+          "total": 23,
+          "kept": 10,
+          "removed": 13
+        },
+        "Charlotte Brontë": {
+          "total": 12,
+          "kept": 10,
+          "removed": 2
+        },
+        "Oscar Wilde": {
+          "total": 29,
+          "kept": 10,
+          "removed": 19
+        },
+        "Sterne": {
+          "total": 4,
+          "kept": 4,
+          "removed": 0
+        },
+        "Jonathan Swift": {
+          "total": 18,
+          "kept": 10,
+          "removed": 8
+        },
+        "Macaulay": {
+          "total": 18,
+          "kept": 10,
+          "removed": 8
+        },
+        "Smith": {
+          "total": 283,
+          "kept": 10,
+          "removed": 273
+        },
+        "Bacon": {
+          "total": 26,
+          "kept": 10,
+          "removed": 16
+        },
+        "Marlowe": {
+          "total": 57,
+          "kept": 10,
+          "removed": 47
+        },
+        "Carlyle": {
+          "total": 30,
+          "kept": 10,
+          "removed": 20
+        },
+        "Fielding": {
+          "total": 17,
+          "kept": 10,
+          "removed": 7
+        },
+        "Congreve": {
+          "total": 8,
+          "kept": 8,
+          "removed": 0
+        },
+        "Millay": {
+          "total": 5,
+          "kept": 5,
+          "removed": 0
+        },
+        "Huxley": {
+          "total": 38,
+          "kept": 10,
+          "removed": 28
+        },
+        "Sheridan": {
+          "total": 9,
+          "kept": 9,
+          "removed": 0
+        },
+        "Smollett": {
+          "total": 8,
+          "kept": 8,
+          "removed": 0
+        },
+        "Burke": {
+          "total": 12,
+          "kept": 10,
+          "removed": 2
+        },
+        "Pater": {
+          "total": 9,
+          "kept": 9,
+          "removed": 0
+        },
+        "Gay": {
+          "total": 5,
+          "kept": 5,
+          "removed": 0
+        },
+        "Forster": {
+          "total": 13,
+          "kept": 10,
+          "removed": 3
+        },
+        "Goldsmith": {
+          "total": 17,
+          "kept": 10,
+          "removed": 7
+        },
+        "Hume": {
+          "total": 75,
+          "kept": 10,
+          "removed": 65
+        },
+        "Hobbes": {
+          "total": 1,
+          "kept": 1,
+          "removed": 0
+        },
+        "Pepys": {
+          "total": 87,
+          "kept": 10,
+          "removed": 77
+        },
+        "Burton": {
+          "total": 53,
+          "kept": 10,
+          "removed": 43
+        },
+        "Jonson": {
+          "total": 8,
+          "kept": 8,
+          "removed": 0
+        },
+        "Richardson": {
+          "total": 33,
+          "kept": 10,
+          "removed": 23
+        },
+        "Locke": {
+          "total": 33,
+          "kept": 10,
+          "removed": 23
+        },
+        "Lawrence": {
+          "total": 40,
+          "kept": 10,
+          "removed": 30
+        },
+        "De Mille": {
+          "total": 12,
+          "kept": 10,
+          "removed": 2
+        },
+        "Mill": {
+          "total": 13,
+          "kept": 10,
+          "removed": 3
+        },
+        "Kyd": {
+          "total": 2,
+          "kept": 2,
+          "removed": 0
+        },
+        "Browne": {
+          "total": 24,
+          "kept": 10,
+          "removed": 14
+        },
+        "Vaughan": {
+          "total": 13,
+          "kept": 10,
+          "removed": 3
+        },
+        "Spenser": {
+          "total": 2,
+          "kept": 2,
+          "removed": 0
+        },
+        "FitzGibbon": {
+          "total": 1,
+          "kept": 1,
+          "removed": 0
+        },
+        "Greene": {
+          "total": 22,
+          "kept": 10,
+          "removed": 12
+        },
+        "Dryden": {
+          "total": 2,
+          "kept": 2,
+          "removed": 0
+        },
+        "Howard": {
+          "total": 53,
+          "kept": 10,
+          "removed": 43
+        },
+        "Miller": {
+          "total": 102,
+          "kept": 10,
+          "removed": 92
+        },
+        "Behn": {
+          "total": 1,
+          "kept": 1,
+          "removed": 0
+        },
+        "Waugh": {
+          "total": 12,
+          "kept": 10,
+          "removed": 2
+        },
+        "Godwin": {
+          "total": 12,
+          "kept": 10,
+          "removed": 2
+        },
+        "Boswell": {
+          "total": 2,
+          "kept": 2,
+          "removed": 0
+        },
+        "Society for Pure English": {
+          "total": 1,
+          "kept": 1,
+          "removed": 0
+        },
+        "Milligan": {
+          "total": 4,
+          "kept": 4,
+          "removed": 0
+        },
+        "Robertson Scott": {
+          "total": 2,
+          "kept": 2,
+          "removed": 0
+        },
+        "Wells-Barnett": {
+          "total": 3,
+          "kept": 3,
+          "removed": 0
+        },
+        "Evelyn": {
+          "total": 5,
+          "kept": 5,
+          "removed": 0
+        },
+        "Kaye-Smith": {
+          "total": 7,
+          "kept": 7,
+          "removed": 0
+        },
+        "Lockett": {
+          "total": 1,
+          "kept": 1,
+          "removed": 0
+        },
+        "Wollstonecraft": {
+          "total": 6,
+          "kept": 6,
+          "removed": 0
+        },
+        "Brownell": {
+          "total": 3,
+          "kept": 3,
+          "removed": 0
+        },
+        "Millard": {
+          "total": 1,
+          "kept": 1,
+          "removed": 0
+        },
+        "Austen-Leigh": {
+          "total": 1,
+          "kept": 1,
+          "removed": 0
+        },
+        "Prime-Stevenson": {
+          "total": 4,
+          "kept": 4,
+          "removed": 0
+        },
+        "Newman": {
+          "total": 13,
+          "kept": 10,
+          "removed": 3
+        },
+        "Wyatt": {
+          "total": 3,
+          "kept": 3,
+          "removed": 0
+        },
+        "Scott-Elliot": {
+          "total": 1,
+          "kept": 1,
+          "removed": 0
+        },
+        "Gibbons": {
+          "total": 8,
+          "kept": 8,
+          "removed": 0
+        },
+        "Scott-James": {
+          "total": 1,
+          "kept": 1,
+          "removed": 0
+        },
+        "Wildenbruch": {
+          "total": 1,
+          "kept": 1,
+          "removed": 0
+        },
+        "Cowper": {
+          "total": 4,
+          "kept": 4,
+          "removed": 0
+        },
+        "Various": {
+          "total": 12,
+          "kept": 10,
+          "removed": 2
+        },
+        "Paternoster": {
+          "total": 2,
+          "kept": 2,
+          "removed": 0
+        },
+        "New Zealand. Committee of Inquiry into various aspects of the Problem of Abortion in New Zealand": {
+          "total": 1,
+          "kept": 1,
+          "removed": 0
+        },
+        "Grahame-White": {
+          "total": 3,
+          "kept": 3,
+          "removed": 0
+        },
+        "Mills": {
+          "total": 17,
+          "kept": 10,
+          "removed": 7
+        },
+        "Van Millingen": {
+          "total": 2,
+          "kept": 2,
+          "removed": 0
+        },
+        "Behnke": {
+          "total": 1,
+          "kept": 1,
+          "removed": 0
+        },
+        "Millington": {
+          "total": 1,
+          "kept": 1,
+          "removed": 0
+        },
+        "Gaylord": {
+          "total": 1,
+          "kept": 1,
+          "removed": 0
+        },
+        "Dawson Scott": {
+          "total": 2,
+          "kept": 2,
+          "removed": 0
+        },
+        "MacMillan": {
+          "total": 1,
+          "kept": 1,
+          "removed": 0
+        },
+        "Woolfenden": {
+          "total": 1,
+          "kept": 1,
+          "removed": 0
+        },
+        "Haskett Smith": {
+          "total": 1,
+          "kept": 1,
+          "removed": 0
+        },
+        "Howard & Bullough American Machine Company": {
+          "total": 1,
+          "kept": 1,
+          "removed": 0
+        },
+        "Locker-Lampson": {
+          "total": 1,
+          "kept": 1,
+          "removed": 0
+        },
+        "Millingen": {
+          "total": 3,
+          "kept": 3,
+          "removed": 0
+        },
+        "Consolation Club": {
+          "total": 1,
+          "kept": 1,
+          "removed": 0
+        },
+        "Hamilton-Browne": {
+          "total": 1,
+          "kept": 1,
+          "removed": 0
+        },
+        "Wilder": {
+          "total": 5,
+          "kept": 5,
+          "removed": 0
+        },
+        "Gilliat-Smith": {
+          "total": 2,
+          "kept": 2,
+          "removed": 0
+        },
+        "Durning-Lawrence": {
+          "total": 1,
+          "kept": 1,
+          "removed": 0
+        },
+        "Gayton": {
+          "total": 1,
+          "kept": 1,
+          "removed": 0
+        },
+        "Gayle": {
+          "total": 1,
+          "kept": 1,
+          "removed": 0
+        },
+        "Bloundelle-Burton": {
+          "total": 3,
+          "kept": 3,
+          "removed": 0
+        },
+        "Gayangos": {
+          "total": 1,
+          "kept": 1,
+          "removed": 0
+        },
+        "Smithson": {
+          "total": 2,
+          "kept": 2,
+          "removed": 0
+        },
+        "Scotts' Shipbuilding & Engineering Co. Ltd.": {
+          "total": 1,
+          "kept": 1,
+          "removed": 0
+        },
+        "Burkett": {
+          "total": 1,
+          "kept": 1,
+          "removed": 0
+        },
+        "MacGibbon": {
+          "total": 4,
+          "kept": 4,
+          "removed": 0
+        },
+        "Vaughan-Smith": {
+          "total": 1,
+          "kept": 1,
+          "removed": 0
+        },
+        "Millet": {
+          "total": 2,
+          "kept": 2,
+          "removed": 0
+        },
+        "American Sunday-School Union": {
+          "total": 1,
+          "kept": 1,
+          "removed": 0
+        },
+        "Dixon-Johnson": {
+          "total": 1,
+          "kept": 1,
+          "removed": 0
+        },
+        "Lily Mills Company": {
+          "total": 1,
+          "kept": 1,
+          "removed": 0
+        },
+        "Collinson": {
+          "total": 1,
+          "kept": 1,
+          "removed": 0
+        },
+        "Smith-Dampier": {
+          "total": 1,
+          "kept": 1,
+          "removed": 0
+        },
+        "Gore Browne": {
+          "total": 1,
+          "kept": 1,
+          "removed": 0
+        },
+        "Hume-Cook": {
+          "total": 1,
+          "kept": 1,
+          "removed": 0
+        },
+        "Berkeley": {
+          "total": 3,
+          "kept": 3,
+          "removed": 0
+        },
+        "Bixby Smith": {
+          "total": 1,
+          "kept": 1,
+          "removed": 0
+        },
+        "Kay-Scott": {
+          "total": 1,
+          "kept": 1,
+          "removed": 0
+        },
+        "Gathorne-Hardy": {
+          "total": 1,
+          "kept": 1,
+          "removed": 0
+        }
+      }
+    },
+    "philosophers.json": {
+      "original": 90,
+      "cleaned": 80,
+      "removed": 10,
+      "authors": {
+        "Epictetus": {
+          "total": 1,
+          "kept": 1,
+          "removed": 0
+        },
+        "Marcus Aurelius": {
+          "total": 3,
+          "kept": 3,
+          "removed": 0
+        },
+        "Cicero": {
+          "total": 1,
+          "kept": 1,
+          "removed": 0
+        },
+        "Descartes": {
+          "total": 1,
+          "kept": 1,
+          "removed": 0
+        },
+        "Spinoza": {
+          "total": 10,
+          "kept": 10,
+          "removed": 0
+        },
+        "Niccolò Machiavelli": {
+          "total": 1,
+          "kept": 1,
+          "removed": 0
+        },
+        "Montaigne": {
+          "total": 20,
+          "kept": 10,
+          "removed": 10
+        },
+        "Berkeley": {
+          "total": 4,
+          "kept": 4,
+          "removed": 0
+        },
+        "Henry David Thoreau": {
+          "total": 5,
+          "kept": 5,
+          "removed": 0
+        },
+        "Ralph Waldo Emerson": {
+          "total": 2,
+          "kept": 2,
+          "removed": 0
+        },
+        "Marx": {
+          "total": 2,
+          "kept": 2,
+          "removed": 0
+        },
+        "Russell": {
+          "total": 3,
+          "kept": 3,
+          "removed": 0
+        },
+        "Confucius": {
+          "total": 3,
+          "kept": 3,
+          "removed": 0
+        },
+        "Laozi": {
+          "total": 1,
+          "kept": 1,
+          "removed": 0
+        },
+        "Xenophon": {
+          "total": 3,
+          "kept": 3,
+          "removed": 0
+        },
+        "Stock": {
+          "total": 1,
+          "kept": 1,
+          "removed": 0
+        },
+        "Farrar": {
+          "total": 1,
+          "kept": 1,
+          "removed": 0
+        },
+        "Ludwig Wittgenstein": {
+          "total": 1,
+          "kept": 1,
+          "removed": 0
+        },
+        "John Dewey": {
+          "total": 5,
+          "kept": 5,
+          "removed": 0
+        },
+        "Georg Cantor": {
+          "total": 1,
+          "kept": 1,
+          "removed": 0
+        },
+        "John Maynard Keynes": {
+          "total": 3,
+          "kept": 3,
+          "removed": 0
+        },
+        "G.E. Moore": {
+          "total": 3,
+          "kept": 3,
+          "removed": 0
+        },
+        "Charles Darwin": {
+          "total": 4,
+          "kept": 4,
+          "removed": 0
+        },
+        "Isaac Newton": {
+          "total": 1,
+          "kept": 1,
+          "removed": 0
+        },
+        "Blaise Pascal": {
+          "total": 1,
+          "kept": 1,
+          "removed": 0
+        },
+        "Euclid": {
+          "total": 1,
+          "kept": 1,
+          "removed": 0
+        },
+        "René Descartes": {
+          "total": 1,
+          "kept": 1,
+          "removed": 0
+        },
+        "John Locke": {
+          "total": 1,
+          "kept": 1,
+          "removed": 0
+        },
+        "Bertrand Russell": {
+          "total": 2,
+          "kept": 2,
+          "removed": 0
+        },
+        "Peter Singer": {
+          "total": 2,
+          "kept": 2,
+          "removed": 0
+        },
+        "Stuart Hampshire": {
+          "total": 2,
+          "kept": 2,
+          "removed": 0
+        }
+      }
+    },
+    "poetry.json": {
+      "original": 8,
+      "cleaned": 8,
+      "removed": 0,
+      "authors": {
+        "Brontë": {
+          "total": 1,
+          "kept": 1,
+          "removed": 0
+        },
+        "Browning": {
+          "total": 1,
+          "kept": 1,
+          "removed": 0
+        },
+        "Flecker": {
+          "total": 1,
+          "kept": 1,
+          "removed": 0
+        },
+        "Hardy": {
+          "total": 1,
+          "kept": 1,
+          "removed": 0
+        },
+        "Housman": {
+          "total": 1,
+          "kept": 1,
+          "removed": 0
+        },
+        "Latin": {
+          "total": 1,
+          "kept": 1,
+          "removed": 0
+        },
+        "Paterson": {
+          "total": 1,
+          "kept": 1,
+          "removed": 0
+        },
+        "Stevenson": {
+          "total": 1,
+          "kept": 1,
+          "removed": 0
+        }
+      }
+    },
+    "french-literature.json": {
+      "original": 98,
+      "cleaned": 63,
+      "removed": 35,
+      "authors": {
+        "Apollinaire": {
+          "total": 7,
+          "kept": 7,
+          "removed": 0
+        },
+        "Barbey d'Aurevilly": {
+          "total": 5,
+          "kept": 5,
+          "removed": 0
+        },
+        "Baudelaire": {
+          "total": 5,
+          "kept": 5,
+          "removed": 0
+        },
+        "Diderot": {
+          "total": 10,
+          "kept": 10,
+          "removed": 0
+        },
+        "Huysmans": {
+          "total": 5,
+          "kept": 5,
+          "removed": 0
+        },
+        "Maupassant": {
+          "total": 41,
+          "kept": 10,
+          "removed": 31
+        },
+        "Montesquieu": {
+          "total": 1,
+          "kept": 1,
+          "removed": 0
+        },
+        "Rachilde": {
+          "total": 7,
+          "kept": 7,
+          "removed": 0
+        },
+        "Rimbaud": {
+          "total": 2,
+          "kept": 2,
+          "removed": 0
+        },
+        "Verlaine": {
+          "total": 1,
+          "kept": 1,
+          "removed": 0
+        },
+        "Voltaire": {
+          "total": 14,
+          "kept": 10,
+          "removed": 4
+        }
+      }
+    },
+    "german-literature.json": {
+      "original": 236,
+      "cleaned": 166,
+      "removed": 70,
+      "authors": {
+        "Goethe": {
+          "total": 43,
+          "kept": 10,
+          "removed": 33
+        },
+        "Rilke": {
+          "total": 11,
+          "kept": 10,
+          "removed": 1
+        },
+        "Hesse": {
+          "total": 20,
+          "kept": 10,
+          "removed": 10
+        },
+        "Heine": {
+          "total": 7,
+          "kept": 7,
+          "removed": 0
+        },
+        "Hoffmann": {
+          "total": 8,
+          "kept": 8,
+          "removed": 0
+        },
+        "Büchner": {
+          "total": 5,
+          "kept": 5,
+          "removed": 0
+        },
+        "Fontane": {
+          "total": 6,
+          "kept": 6,
+          "removed": 0
+        },
+        "Schiller": {
+          "total": 10,
+          "kept": 10,
+          "removed": 0
+        },
+        "Kleist": {
+          "total": 5,
+          "kept": 5,
+          "removed": 0
+        },
+        "Storm": {
+          "total": 17,
+          "kept": 10,
+          "removed": 7
+        },
+        "Keller": {
+          "total": 8,
+          "kept": 8,
+          "removed": 0
+        },
+        "Lessing": {
+          "total": 16,
+          "kept": 10,
+          "removed": 6
+        },
+        "Mann": {
+          "total": 20,
+          "kept": 10,
+          "removed": 10
+        },
+        "Franz Kafka": {
+          "total": 12,
+          "kept": 10,
+          "removed": 2
+        },
+        "Schnitzler": {
+          "total": 4,
+          "kept": 4,
+          "removed": 0
+        },
+        "Raabe": {
+          "total": 9,
+          "kept": 9,
+          "removed": 0
+        },
+        "Wolff": {
+          "total": 5,
+          "kept": 5,
+          "removed": 0
+        },
+        "Zweig": {
+          "total": 6,
+          "kept": 6,
+          "removed": 0
+        },
+        "Hofmannsthal": {
+          "total": 5,
+          "kept": 5,
+          "removed": 0
+        },
+        "Frischauf": {
+          "total": 1,
+          "kept": 1,
+          "removed": 0
+        },
+        "Musil": {
+          "total": 2,
+          "kept": 2,
+          "removed": 0
+        },
+        "Benn": {
+          "total": 1,
+          "kept": 1,
+          "removed": 0
+        },
+        "Trakl": {
+          "total": 1,
+          "kept": 1,
+          "removed": 0
+        },
+        "Kellermann": {
+          "total": 11,
+          "kept": 10,
+          "removed": 1
+        },
+        "Novalis": {
+          "total": 1,
+          "kept": 1,
+          "removed": 0
+        },
+        "Wolfenstein": {
+          "total": 1,
+          "kept": 1,
+          "removed": 0
+        },
+        "Wolf": {
+          "total": 1,
+          "kept": 1,
+          "removed": 0
+        }
+      }
+    },
+    "italian-literature.json": {
+      "original": 133,
+      "cleaned": 113,
+      "removed": 20,
+      "authors": {
+        "Dante Alighieri": {
+          "total": 9,
+          "kept": 9,
+          "removed": 0
+        },
+        "Ariosto": {
+          "total": 2,
+          "kept": 2,
+          "removed": 0
+        },
+        "Capuana": {
+          "total": 14,
+          "kept": 10,
+          "removed": 4
+        },
+        "De Amicis": {
+          "total": 13,
+          "kept": 10,
+          "removed": 3
+        },
+        "Neera": {
+          "total": 7,
+          "kept": 7,
+          "removed": 0
+        },
+        "Serao": {
+          "total": 14,
+          "kept": 10,
+          "removed": 4
+        },
+        "Pirandello": {
+          "total": 12,
+          "kept": 10,
+          "removed": 2
+        },
+        "Collodi": {
+          "total": 2,
+          "kept": 2,
+          "removed": 0
+        },
+        "Vertua Gentile": {
+          "total": 1,
+          "kept": 1,
+          "removed": 0
+        },
+        "D'Annunzio": {
+          "total": 15,
+          "kept": 10,
+          "removed": 5
+        },
+        "Salgari": {
+          "total": 10,
+          "kept": 10,
+          "removed": 0
+        },
+        "De Roberto": {
+          "total": 12,
+          "kept": 10,
+          "removed": 2
+        },
+        "Tarchetti": {
+          "total": 2,
+          "kept": 2,
+          "removed": 0
+        },
+        "Vivanti": {
+          "total": 8,
+          "kept": 8,
+          "removed": 0
+        },
+        "Deledda": {
+          "total": 1,
+          "kept": 1,
+          "removed": 0
+        },
+        "Pascoli": {
+          "total": 3,
+          "kept": 3,
+          "removed": 0
+        },
+        "Carducci": {
+          "total": 2,
+          "kept": 2,
+          "removed": 0
+        },
+        "Aleramo": {
+          "total": 4,
+          "kept": 4,
+          "removed": 0
+        },
+        "Leopardi": {
+          "total": 1,
+          "kept": 1,
+          "removed": 0
+        },
+        "Niccolò Machiavelli": {
+          "total": 1,
+          "kept": 1,
+          "removed": 0
+        }
+      }
+    },
+    "spanish-literature.json": {
+      "original": 158,
+      "cleaned": 77,
+      "removed": 81,
+      "authors": {
+        "Rojas": {
+          "total": 1,
+          "kept": 1,
+          "removed": 0
+        },
+        "Cervantes Saavedra": {
+          "total": 4,
+          "kept": 4,
+          "removed": 0
+        },
+        "Jiménez": {
+          "total": 2,
+          "kept": 2,
+          "removed": 0
+        },
+        "Pérez Galdós": {
+          "total": 54,
+          "kept": 10,
+          "removed": 44
+        },
+        "Baroja": {
+          "total": 21,
+          "kept": 10,
+          "removed": 11
+        },
+        "Blasco Ibáñez": {
+          "total": 29,
+          "kept": 10,
+          "removed": 19
+        },
+        "Hernández": {
+          "total": 2,
+          "kept": 2,
+          "removed": 0
+        },
+        "Pardo Bazán": {
+          "total": 17,
+          "kept": 10,
+          "removed": 7
+        },
+        "Estébanez Calderón": {
+          "total": 1,
+          "kept": 1,
+          "removed": 0
+        },
+        "Valle-Inclán": {
+          "total": 8,
+          "kept": 8,
+          "removed": 0
+        },
+        "Unamuno": {
+          "total": 7,
+          "kept": 7,
+          "removed": 0
+        },
+        "Anonymous": {
+          "total": 4,
+          "kept": 4,
+          "removed": 0
+        },
+        "Manrique": {
+          "total": 1,
+          "kept": 1,
+          "removed": 0
+        },
+        "Machado": {
+          "total": 2,
+          "kept": 2,
+          "removed": 0
+        },
+        "Azorín": {
+          "total": 1,
+          "kept": 1,
+          "removed": 0
+        },
+        "Benavente": {
+          "total": 2,
+          "kept": 2,
+          "removed": 0
+        },
+        "García Lorca": {
+          "total": 2,
+          "kept": 2,
+          "removed": 0
+        }
+      }
+    },
+    "gutenberg-top.json": {
+      "original": 12,
+      "cleaned": 12,
+      "removed": 0,
+      "authors": {
+        "Mary Wollstonecraft Shelley": {
+          "total": 1,
+          "kept": 1,
+          "removed": 0
+        },
+        "Herman Melville": {
+          "total": 1,
+          "kept": 1,
+          "removed": 0
+        },
+        "Mark Twain": {
+          "total": 1,
+          "kept": 1,
+          "removed": 0
+        },
+        "Bram Stoker": {
+          "total": 1,
+          "kept": 1,
+          "removed": 0
+        },
+        "Charlotte Perkins Gilman": {
+          "total": 1,
+          "kept": 1,
+          "removed": 0
+        },
+        "Henrik Ibsen": {
+          "total": 1,
+          "kept": 1,
+          "removed": 0
+        },
+        "Franz Kafka": {
+          "total": 1,
+          "kept": 1,
+          "removed": 0
+        },
+        "James Joyce": {
+          "total": 1,
+          "kept": 1,
+          "removed": 0
+        },
+        "Leo Tolstoy": {
+          "total": 1,
+          "kept": 1,
+          "removed": 0
+        },
+        "L. Frank Baum": {
+          "total": 1,
+          "kept": 1,
+          "removed": 0
+        },
+        "Jack London": {
+          "total": 1,
+          "kept": 1,
+          "removed": 0
+        },
+        "Nathaniel Hawthorne": {
+          "total": 1,
+          "kept": 1,
+          "removed": 0
+        }
+      }
+    },
+    "history.json": {
+      "original": 27,
+      "cleaned": 27,
+      "removed": 0,
+      "authors": {
+        "Campbell": {
+          "total": 1,
+          "kept": 1,
+          "removed": 0
+        },
+        "Carlyle": {
+          "total": 2,
+          "kept": 2,
+          "removed": 0
+        },
+        "Chambers": {
+          "total": 1,
+          "kept": 1,
+          "removed": 0
+        },
+        "Charles": {
+          "total": 1,
+          "kept": 1,
+          "removed": 0
+        },
+        "Coolidge": {
+          "total": 1,
+          "kept": 1,
+          "removed": 0
+        },
+        "Darwin": {
+          "total": 1,
+          "kept": 1,
+          "removed": 0
+        },
+        "De la Mare": {
+          "total": 1,
+          "kept": 1,
+          "removed": 0
+        },
+        "Dickens": {
+          "total": 1,
+          "kept": 1,
+          "removed": 0
+        },
+        "Doyle": {
+          "total": 1,
+          "kept": 1,
+          "removed": 0
+        },
+        "Dunsany": {
+          "total": 1,
+          "kept": 1,
+          "removed": 0
+        },
+        "English": {
+          "total": 1,
+          "kept": 1,
+          "removed": 0
+        },
+        "Fisher": {
+          "total": 1,
+          "kept": 1,
+          "removed": 0
+        },
+        "Fishwick": {
+          "total": 1,
+          "kept": 1,
+          "removed": 0
+        },
+        "Franklin": {
+          "total": 1,
+          "kept": 1,
+          "removed": 0
+        },
+        "French": {
+          "total": 1,
+          "kept": 1,
+          "removed": 0
+        },
+        "Gibbon": {
+          "total": 1,
+          "kept": 1,
+          "removed": 0
+        },
+        "Godkin": {
+          "total": 1,
+          "kept": 1,
+          "removed": 0
+        },
+        "Grimaldi": {
+          "total": 1,
+          "kept": 1,
+          "removed": 0
+        },
+        "Ingram": {
+          "total": 1,
+          "kept": 1,
+          "removed": 0
+        },
+        "Johnson": {
+          "total": 1,
+          "kept": 1,
+          "removed": 0
+        },
+        "Macy": {
+          "total": 1,
+          "kept": 1,
+          "removed": 0
+        },
+        "Montgomery": {
+          "total": 2,
+          "kept": 2,
+          "removed": 0
+        },
+        "Trollope": {
+          "total": 1,
+          "kept": 1,
+          "removed": 0
+        },
+        "Victorian": {
+          "total": 1,
+          "kept": 1,
+          "removed": 0
+        },
+        "Wells": {
+          "total": 1,
+          "kept": 1,
+          "removed": 0
+        }
+      }
+    },
+    "humanities-101.json": {
+      "original": 10,
+      "cleaned": 10,
+      "removed": 0,
+      "authors": {
+        "Homer": {
+          "total": 2,
+          "kept": 2,
+          "removed": 0
+        },
+        "Herodotus": {
+          "total": 1,
+          "kept": 1,
+          "removed": 0
+        },
+        "Thucydides": {
+          "total": 1,
+          "kept": 1,
+          "removed": 0
+        },
+        "Aeschylus": {
+          "total": 2,
+          "kept": 2,
+          "removed": 0
+        },
+        "Sophocles": {
+          "total": 2,
+          "kept": 2,
+          "removed": 0
+        },
+        "Aristophanes": {
+          "total": 1,
+          "kept": 1,
+          "removed": 0
+        },
+        "Aristotle": {
+          "total": 1,
+          "kept": 1,
+          "removed": 0
+        }
+      }
+    }
+  },
+  "summary": {
+    "totalOriginal": 3512,
+    "totalCleaned": 1325,
+    "totalRemoved": 2187,
+    "totalAuthors": 292
+  }
+}

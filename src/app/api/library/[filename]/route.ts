@@ -2,6 +2,26 @@ import { NextRequest, NextResponse } from 'next/server'
 import { readFileSync } from 'fs'
 import { join } from 'path'
 
+export async function generateStaticParams() {
+  const libraryFiles = [
+    'english-literature.json',
+    'french-literature.json', 
+    'german-literature.json',
+    'gutenberg-top.json',
+    'history.json',
+    'humanities-101.json',
+    'italian-literature.json',
+    'philosophers.json',
+    'plato.json',
+    'shakespeare.json',
+    'spanish-literature.json'
+  ]
+  
+  return libraryFiles.map((filename) => ({
+    filename: filename.replace('.json', '')
+  }))
+}
+
 export async function GET(
   request: NextRequest,
   { params }: { params: Promise<{ filename: string }> }

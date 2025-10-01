@@ -1,0 +1,120 @@
+[
+  {
+    "id": 1543,
+    "title": "A Lover's Complaint",
+    "author": "William Shakespeare",
+    "isValid": true,
+    "reason": "Valid",
+    "actualTitle": "A Lover's Complaint",
+    "actualAuthor": "William Shakespeare",
+    "workingUrl": "https://www.gutenberg.org/files/1543/1543-0.txt",
+    "titleMatch": true,
+    "authorMatch": true
+  },
+  {
+    "id": "1497",
+    "title": "The Republic",
+    "author": "Plato",
+    "isValid": true,
+    "reason": "Valid",
+    "actualTitle": "The Republic",
+    "actualAuthor": "Plato",
+    "workingUrl": "https://www.gutenberg.org/files/1497/1497-0.txt",
+    "titleMatch": true,
+    "authorMatch": true
+  },
+  {
+    "id": "finnegans-wake",
+    "title": "Finnegans Wake",
+    "author": "James Joyce",
+    "isValid": true,
+    "reason": "Special case (local file or non-PG source)",
+    "actualTitle": "Finnegans Wake",
+    "actualAuthor": "James Joyce",
+    "workingUrl": "public-domain-texts/finnegans-wake.txt"
+  },
+  {
+    "id": "871",
+    "title": "The Golden Sayings of Epictetus, with the Hymn of Cleanthes",
+    "author": "Epictetus",
+    "isValid": true,
+    "reason": "Valid",
+    "actualTitle": "The Golden Sayings of Epictetus",
+    "actualAuthor": "Epictetus",
+    "workingUrl": "https://www.gutenberg.org/files/871/871-0.txt",
+    "titleMatch": true,
+    "authorMatch": true
+  },
+  {
+    "id": "20",
+    "title": "Paradise Lost",
+    "author": "John Milton",
+    "isValid": true,
+    "reason": "Valid",
+    "actualTitle": "Paradise Lost",
+    "actualAuthor": "John Milton",
+    "workingUrl": "https://www.gutenberg.org/files/20/20-0.txt",
+    "titleMatch": true,
+    "authorMatch": true
+  },
+  {
+    "id": "15462",
+    "title": "Alcools",
+    "author": "Apollinaire",
+    "isValid": true,
+    "reason": "Valid",
+    "actualTitle": "Alcools",
+    "actualAuthor": "Apollinaire",
+    "workingUrl": "https://www.gutenberg.org/cache/epub/15462/pg15462.txt",
+    "titleMatch": true,
+    "authorMatch": true
+  },
+  {
+    "id": "2054",
+    "title": "Iphigenie auf Tauris",
+    "author": "Goethe",
+    "isValid": true,
+    "reason": "Valid",
+    "actualTitle": "Iphigenie auf Tauris",
+    "actualAuthor": "Goethe",
+    "workingUrl": "https://www.gutenberg.org/cache/epub/2054/pg2054.txt",
+    "titleMatch": true,
+    "authorMatch": true
+  },
+  {
+    "id": "997",
+    "title": "Divina Commedia di Dante: Inferno",
+    "author": "Dante Alighieri",
+    "isValid": true,
+    "reason": "Valid",
+    "actualTitle": "Divina Commedia di Dante: Inferno",
+    "actualAuthor": "Dante Alighieri",
+    "workingUrl": "https://www.gutenberg.org/files/997/997-0.txt",
+    "titleMatch": true,
+    "authorMatch": true
+  },
+  {
+    "id": "1619",
+    "title": "La Celestina",
+    "author": "Rojas",
+    "isValid": true,
+    "reason": "Valid",
+    "actualTitle": "La Celestina",
+    "actualAuthor": "Rojas",
+    "workingUrl": "https://www.gutenberg.org/cache/epub/1619/pg1619.txt",
+    "titleMatch": true,
+    "authorMatch": true
+  },
+  {
+    "id": 84,
+    "title": "Frankenstein; Or, The Modern Prometheus",
+    "author": "Mary Wollstonecraft Shelley",
+    "isValid": true,
+    "reason": "Valid",
+    "actualTitle": "Frankenstein; Or, The Modern Prometheus",
+    "actualAuthor": "Mary Wollstonecraft Shelley",
+    "workingUrl": "https://www.gutenberg.org/cache/epub/84/pg84.txt",
+    "titleMatch": true,
+    "authorMatch": true
+  }
+]

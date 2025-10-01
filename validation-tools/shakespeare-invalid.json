@@ -1,0 +1,79 @@
+[
+  {
+    "id": 1516,
+    "title": "King Henry IV, Part 1",
+    "author": "William Shakespeare",
+    "isValid": false,
+    "reason": "Extraction failure: Title match: false, Author match: true",
+    "actualTitle": "THE FIRST PART OF",
+    "actualAuthor": "William Shakespeare",
+    "hasWikipediaPage": false,
+    "workingUrl": "https://www.gutenberg.org/files/1516/1516-0.txt"
+  },
+  {
+    "id": 1518,
+    "title": "King Henry IV, Part 2",
+    "author": "William Shakespeare",
+    "isValid": false,
+    "reason": "Extraction failure: Title match: false, Author match: true",
+    "actualTitle": "THE SECOND PART OF",
+    "actualAuthor": "William Shakespeare",
+    "hasWikipediaPage": false,
+    "workingUrl": "https://www.gutenberg.org/files/1518/1518-0.txt"
+  },
+  {
+    "id": 1500,
+    "title": "King Henry VI, Part 1",
+    "author": "William Shakespeare",
+    "isValid": false,
+    "reason": "Extraction failure: Title match: false, Author match: true",
+    "actualTitle": "THE FIRST PART OF",
+    "actualAuthor": "William Shakespeare",
+    "hasWikipediaPage": false,
+    "workingUrl": "https://www.gutenberg.org/files/1500/1500-0.txt"
+  },
+  {
+    "id": 1501,
+    "title": "King Henry VI, Part 2",
+    "author": "William Shakespeare",
+    "isValid": false,
+    "reason": "Extraction failure: Title match: false, Author match: true",
+    "actualTitle": "THE SECOND PART OF",
+    "actualAuthor": "William Shakespeare",
+    "hasWikipediaPage": false,
+    "workingUrl": "https://www.gutenberg.org/files/1501/1501-0.txt"
+  },
+  {
+    "id": 1502,
+    "title": "King Henry VI, Part 3",
+    "author": "William Shakespeare",
+    "isValid": false,
+    "reason": "Extraction failure: Title match: false, Author match: true",
+    "actualTitle": "THE THIRD PART OF",
+    "actualAuthor": "William Shakespeare",
+    "hasWikipediaPage": false,
+    "workingUrl": "https://www.gutenberg.org/files/1502/1502-0.txt"
+  },
+  {
+    "id": 1541,
+    "title": "King Henry VIII",
+    "author": "William Shakespeare",
+    "isValid": false,
+    "reason": "Extraction failure: Title match: false, Author match: true",
+    "actualTitle": "THE FAMOUS HISTORY OF THE LIFE OF KING HENRY THE EIGHTH",
+    "actualAuthor": "William Shakespeare",
+    "hasWikipediaPage": false,
+    "workingUrl": "https://www.gutenberg.org/files/1541/1541-0.txt"
+  },
+  {
+    "id": 1512,
+    "title": "King Richard II",
+    "author": "William Shakespeare",
+    "isValid": false,
+    "reason": "Extraction failure: Title match: false, Author match: true",
+    "actualTitle": "THE LIFE AND DEATH OF KING RICHARD THE SECOND",
+    "actualAuthor": "William Shakespeare",
+    "hasWikipediaPage": false,
+    "workingUrl": "https://www.gutenberg.org/files/1512/1512-0.txt"
+  }
+]

@@ -1,0 +1,255 @@
+[
+  {
+    "id": "9690",
+    "title": "A Child's History of England",
+    "author": "Charles Dickens"
+  },
+  {
+    "id": "9696",
+    "title": "A Christmas Carol",
+    "author": "Charles Dickens"
+  },
+  {
+    "id": "19505",
+    "title": "A Christmas Carol",
+    "author": "Charles Dickens"
+  },
+  {
+    "id": "20673",
+    "title": "A Christmas Carol",
+    "author": "Charles Dickens"
+  },
+  {
+    "id": "23077",
+    "title": "Jane Eyre",
+    "author": "Charlotte Brontë"
+  },
+  {
+    "id": "23722",
+    "title": "The Canterbury Tales",
+    "author": "Chaucer"
+  },
+  {
+    "id": "9356",
+    "title": "'Twixt Land and Sea",
+    "author": "Conrad"
+  },
+  {
+    "id": "9339",
+    "title": "A Personal Record",
+    "author": "Conrad"
+  },
+  {
+    "id": "9349",
+    "title": "A Set of Six",
+    "author": "Conrad"
+  },
+  {
+    "id": "9344",
+    "title": "Almayer's Folly",
+    "author": "Conrad"
+  },
+  {
+    "id": "9683",
+    "title": "A Journal of the Plague Year",
+    "author": "Defoe"
+  },
+  {
+    "id": "9682",
+    "title": "An Essay Upon Projects",
+    "author": "Defoe"
+  },
+  {
+    "id": "9680",
+    "title": "Dickory Cronke",
+    "author": "Defoe"
+  },
+  {
+    "id": "9681",
+    "title": "Everybody's Business is Nobody's Business",
+    "author": "Defoe"
+  },
+  {
+    "id": "9684",
+    "title": "From London to Land's End",
+    "author": "Defoe"
+  },
+  {
+    "id": "8615",
+    "title": "A Study in Scarlet",
+    "author": "Doyle",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/A%20Study%20in%20Scarlet",
+    "wikipediaTitle": "A Study in Scarlet"
+  },
+  {
+    "id": "9556",
+    "title": "A Study in Scarlet",
+    "author": "Doyle",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/A%20Study%20in%20Scarlet",
+    "wikipediaTitle": "A Study in Scarlet"
+  },
+  {
+    "id": "8634",
+    "title": "His Last Bow",
+    "author": "Doyle"
+  },
+  {
+    "id": "9554",
+    "title": "His Last Bow",
+    "author": "Doyle"
+  },
+  {
+    "id": "22452",
+    "title": "Howards End",
+    "author": "Forster"
+  },
+  {
+    "id": "900",
+    "title": "History of the Decline and Fall of the Roman Empire — Volume 3 — Folio format",
+    "author": "Gibbon"
+  },
+  {
+    "id": "21588",
+    "title": "The Reluctant Dragon",
+    "author": "Grahame"
+  },
+  {
+    "id": "6551",
+    "title": "Crome Yellow",
+    "author": "Huxley"
+  },
+  {
+    "id": "19686",
+    "title": "Crome Yellow",
+    "author": "Huxley"
+  },
+  {
+    "id": "20601",
+    "title": "Chamber Music",
+    "author": "James Joyce"
+  },
+  {
+    "id": "7872",
+    "title": "Dubliners",
+    "author": "James Joyce",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Dubliners",
+    "wikipediaTitle": "Dubliners"
+  },
+  {
+    "id": "19839",
+    "title": "Emma",
+    "author": "Jane Austen"
+  },
+  {
+    "id": "22953",
+    "title": "Lady Susan",
+    "author": "Jane Austen"
+  },
+  {
+    "id": "22954",
+    "title": "Love and Freindship [sic]",
+    "author": "Jane Austen"
+  },
+  {
+    "id": "22962",
+    "title": "Mansfield Park",
+    "author": "Jane Austen"
+  },
+  {
+    "id": "20682",
+    "title": "Northanger Abbey",
+    "author": "Jane Austen"
+  },
+  {
+    "id": "9275",
+    "title": "A Tale of a Tub",
+    "author": "Jonathan Swift"
+  },
+  {
+    "id": "9272",
+    "title": "Gulliver's Travels",
+    "author": "Jonathan Swift"
+  },
+  {
+    "id": "28946",
+    "title": "Gulliver's Travels",
+    "author": "Jonathan Swift"
+  },
+  {
+    "id": "12715",
+    "title": "Danny Deever",
+    "author": "Kipling"
+  },
+  {
+    "id": "12716",
+    "title": "Dedication",
+    "author": "Kipling"
+  },
+  {
+    "id": "6544",
+    "title": "Aaron's Rod",
+    "author": "Lawrence"
+  },
+  {
+    "id": "19838",
+    "title": "Embankment at Night",
+    "author": "Lawrence"
+  },
+  {
+    "id": "23717",
+    "title": "Jabberwocky",
+    "author": "Lewis Carroll"
+  },
+  {
+    "id": "6555",
+    "title": "De Profundis",
+    "author": "Oscar Wilde"
+  },
+  {
+    "id": "20037",
+    "title": "Five Little Peppers and How They Grew",
+    "author": "Sidney"
+  },
+  {
+    "id": "9416",
+    "title": "A Changed Man and Other Tales",
+    "author": "Thomas Hardy"
+  },
+  {
+    "id": "9428",
+    "title": "A Group of Noble Dames",
+    "author": "Thomas Hardy"
+  },
+  {
+    "id": "9422",
+    "title": "A Laodicean",
+    "author": "Thomas Hardy"
+  },
+  {
+    "id": "9429",
+    "title": "A pair of blue eyes",
+    "author": "Thomas Hardy"
+  },
+  {
+    "id": "9418",
+    "title": "Desperate Remedies",
+    "author": "Thomas Hardy"
+  },
+  {
+    "id": "26584",
+    "title": "Night and Day",
+    "author": "Virginia Woolf"
+  },
+  {
+    "id": "19782",
+    "title": "Daddy-Long-Legs",
+    "author": "Webster",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Daddy-Long-Legs%20(novel)",
+    "wikipediaTitle": "Daddy-Long-Legs (novel)"
+  },
+  {
+    "id": "26590",
+    "title": "A Vindication of the Rights of Woman",
+    "author": "Wollstonecraft"
+  }
+]

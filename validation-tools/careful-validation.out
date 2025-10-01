@@ -1,0 +1,2329 @@
+🔍 Careful Library Validation (Persistent Mode)
+This will process 1000 books per run and maintain persistent valid/invalid files
+Valid books will be written to valid-books.json
+Invalid books will be written to invalid-books.json
+Stop on first error: NO
+Books per run: 1000
+
+📚 Previously processed:
+  ✅ Valid books: 1987
+  ❌ Invalid books: 308
+
+🔄 Re-checking invalid books with improved extraction...
+  📡 Skipping 214 books with network failures
+  🔍 Re-checking 94 books with extraction failures
+
+🔄 Re-checking: "Discourse on the Method of Rightly Conducting One's Reason and of Seeking Truth in the Sciences" by Descartes
+
+🔍 Checking: "Discourse on the Method of Rightly Conducting One's Reason and of Seeking Truth in the Sciences" by Descartes (ID: 59)
+  Trying URL 1: https://www.gutenberg.org/files/59/59-0.txt
+    Response status: 200
+    ✅ Got text content (150099 characters)
+    Found expected author: "Descartes"
+    Found title pattern: "A Discourse on Method"
+    📖 Extracted title: "A Discourse on Method"
+    👤 Extracted author: "Descartes"
+    Title comparison:
+      Expected: "Discourse on the Method of Rightly Conducting One's Reason and of Seeking Truth in the Sciences" -> "discourse on the method of rightly conducting one s reason and of seeking truth in the sciences"
+      Actual:   "A Discourse on Method" -> "a discourse on method"
+      Match: ❌
+    Author comparison:
+      Expected: "Descartes" -> "descartes"
+      Actual:   "Descartes" -> "descartes"
+      Match: ✅
+    Title match: ❌
+    Author match: ✅
+  ❌ Still invalid: Title/author mismatch
+
+🔄 Re-checking: "Middlemarch" by T.S. Eliot
+
+🔍 Checking: "Middlemarch" by T.S. Eliot (ID: 145)
+  Trying URL 1: https://www.gutenberg.org/files/145/145-0.txt
+    Response status: 200
+    ✅ Got text content (1813565 characters)
+    Found expected title: "Middlemarch"
+    ❌ Could not extract title/author from text
+  Trying URL 2: https://www.gutenberg.org/cache/epub/145/pg145.txt
+    Response status: 200
+    ✅ Got text content (1833032 characters)
+    Found expected title: "Middlemarch"
+    Found author pattern: "George Eliot"
+    📖 Extracted title: "Middlemarch"
+    👤 Extracted author: "George Eliot"
+    Title comparison:
+      Expected: "Middlemarch" -> "middlemarch"
+      Actual:   "Middlemarch" -> "middlemarch"
+      Match: ✅
+    Author comparison:
+      Expected: "T.S. Eliot" -> "t s eliot"
+      Actual:   "George Eliot" -> "george eliot"
+      Match: ❌
+    Title match: ✅
+    Author match: ❌
+  ❌ Still invalid: Title/author mismatch
+
+🔄 Re-checking: "The Wonderful Wizard of Oz" by L. Frank Baum
+
+🔍 Checking: "The Wonderful Wizard of Oz" by L. Frank Baum (ID: 140)
+  Trying URL 1: https://www.gutenberg.org/files/140/140-0.txt
+    Response status: 200
+    ✅ Got text content (822326 characters)
+    Found by pattern: "Upton Sinclair"
+    ❌ Could not extract title/author from text
+  Trying URL 2: https://www.gutenberg.org/cache/epub/140/pg140.txt
+    Response status: 200
+    ✅ Got text content (841879 characters)
+    Found title pattern: "The Jungle"
+    Found author pattern: "Upton Sinclair"
+    📖 Extracted title: "The Jungle"
+    👤 Extracted author: "Upton Sinclair"
+    Title comparison:
+      Expected: "The Wonderful Wizard of Oz" -> "the wonderful wizard of oz"
+      Actual:   "The Jungle" -> "the jungle"
+      Match: ❌
+    Author comparison:
+      Expected: "L. Frank Baum" -> "l frank baum"
+      Actual:   "Upton Sinclair" -> "upton sinclair"
+      Match: ❌
+    Title match: ❌
+    Author match: ❌
+  ❌ Still invalid: Title/author mismatch
+
+🔄 Re-checking: "Mucedorus" by William Shakespeare
+
+🔍 Checking: "Mucedorus" by William Shakespeare (ID: 1545)
+  Trying URL 1: https://www.gutenberg.org/files/1545/1545-0.txt
+    Response status: 200
+    ✅ Got text content (78393 characters)
+    Found expected title: "Mucedorus"
+    Found by pattern: "each other’s side."
+    📖 Extracted title: "Mucedorus"
+    👤 Extracted author: "each other’s side."
+    Title comparison:
+      Expected: "Mucedorus" -> "mucedorus"
+      Actual:   "Mucedorus" -> "mucedorus"
+      Match: ✅
+    Author comparison:
+      Expected: "William Shakespeare" -> "william shakespeare"
+      Actual:   "each other’s side." -> "each other s side"
+      Match: ❌
+    Title match: ✅
+    Author match: ❌
+  ❌ Still invalid: Title/author mismatch
+
+🔄 Re-checking: "The Haunted Man and the Ghost's Bargain" by Charles Dickens
+
+🔍 Checking: "The Haunted Man and the Ghost's Bargain" by Charles Dickens (ID: 644)
+  Trying URL 1: https://www.gutenberg.org/files/644/644-0.txt
+    Response status: 200
+    ✅ Got text content (190277 characters)
+    Found expected title: "The Haunted Man and the Ghost's Bargain"
+    Found by pattern: "the flickering of the fire upon the"
+    📖 Extracted title: "The Haunted Man and the Ghost's Bargain"
+    👤 Extracted author: "the flickering of the fire upon the"
+    Title comparison:
+      Expected: "The Haunted Man and the Ghost's Bargain" -> "the haunted man and the ghost s bargain"
+      Actual:   "The Haunted Man and the Ghost's Bargain" -> "the haunted man and the ghost s bargain"
+      Match: ✅
+    Author comparison:
+      Expected: "Charles Dickens" -> "charles dickens"
+      Actual:   "the flickering of the fire upon the" -> "the flickering of the fire upon the"
+      Match: ❌
+    Title match: ✅
+    Author match: ❌
+  ❌ Still invalid: Title/author mismatch
+
+🔄 Re-checking: "Agnes Grey" by Charlotte Brontë
+
+🔍 Checking: "Agnes Grey" by Charlotte Brontë (ID: 767)
+  Trying URL 1: https://www.gutenberg.org/files/767/767-0.txt
+    Response status: 200
+    ✅ Got text content (381478 characters)
+    Found expected title: "Agnes Grey"
+    Found by pattern: "ACTON BELL."
+    📖 Extracted title: "Agnes Grey"
+    👤 Extracted author: "ACTON BELL."
+    Title comparison:
+      Expected: "Agnes Grey" -> "agnes grey"
+      Actual:   "Agnes Grey" -> "agnes grey"
+      Match: ✅
+    Author comparison:
+      Expected: "Charlotte Brontë" -> "charlotte bront"
+      Actual:   "ACTON BELL." -> "acton bell"
+      Match: ❌
+    Title match: ✅
+    Author match: ❌
+  ❌ Still invalid: Title/author mismatch
+
+🔄 Re-checking: "Wuthering Heights" by Charlotte Brontë
+
+🔍 Checking: "Wuthering Heights" by Charlotte Brontë (ID: 768)
+  Trying URL 1: https://www.gutenberg.org/files/768/768-0.txt
+    Response status: 200
+    ✅ Got text content (677533 characters)
+    Found expected title: "Wuthering Heights"
+    Found author pattern: "Emily Brontë"
+    📖 Extracted title: "Wuthering Heights"
+    👤 Extracted author: "Emily Brontë"
+    Title comparison:
+      Expected: "Wuthering Heights" -> "wuthering heights"
+      Actual:   "Wuthering Heights" -> "wuthering heights"
+      Match: ✅
+    Author comparison:
+      Expected: "Charlotte Brontë" -> "charlotte bront"
+      Actual:   "Emily Brontë" -> "emily bront"
+      Match: ❌
+    Title match: ✅
+    Author match: ❌
+  ❌ Still invalid: Title/author mismatch
+
+🔄 Re-checking: "Biographical Notes on the Pseudonymous Bells" by Charlotte Brontë
+
+🔍 Checking: "Biographical Notes on the Pseudonymous Bells" by Charlotte Brontë (ID: 771)
+  Trying URL 1: https://www.gutenberg.org/files/771/771-0.txt
+    Response status: 200
+    ✅ Got text content (45904 characters)
+    Found expected author: "Charlotte Brontë"
+    Found title pattern: "Charlotte Brontë's Notes"
+    📖 Extracted title: "Charlotte Brontë's Notes"
+    👤 Extracted author: "Charlotte Brontë"
+    Title comparison:
+      Expected: "Biographical Notes on the Pseudonymous Bells" -> "biographical notes on the pseudonymous bells"
+      Actual:   "Charlotte Brontë's Notes" -> "charlotte bront s notes"
+      Match: ❌
+    Author comparison:
+      Expected: "Charlotte Brontë" -> "charlotte bront"
+      Actual:   "Charlotte Brontë" -> "charlotte bront"
+      Match: ✅
+    Title match: ❌
+    Author match: ✅
+  ❌ Still invalid: Title/author mismatch
+
+🔄 Re-checking: "When the Sleeper Wakes" by H.G. Wells
+
+🔍 Checking: "When the Sleeper Wakes" by H.G. Wells (ID: 775)
+  Trying URL 1: https://www.gutenberg.org/files/775/775-0.txt
+    Response status: 200
+    ✅ Got text content (500810 characters)
+    Found expected title: "When the Sleeper Wakes"
+    Found author pattern: "Herbert George Wells"
+    📖 Extracted title: "When the Sleeper Wakes"
+    👤 Extracted author: "Herbert George Wells"
+    Title comparison:
+      Expected: "When the Sleeper Wakes" -> "when the sleeper wakes"
+      Actual:   "When the Sleeper Wakes" -> "when the sleeper wakes"
+      Match: ✅
+    Author comparison:
+      Expected: "H.G. Wells" -> "h g wells"
+      Actual:   "Herbert George Wells" -> "herbert george wells"
+      Match: ❌
+    Title match: ✅
+    Author match: ❌
+  ❌ Still invalid: Title/author mismatch
+
+🔄 Re-checking: "Speeches: Literary and Social" by Charles Dickens
+
+🔍 Checking: "Speeches: Literary and Social" by Charles Dickens (ID: 824)
+  Trying URL 1: https://www.gutenberg.org/files/824/824-0.txt
+    Response status: 200
+    ✅ Got text content (597243 characters)
+    Found expected author: "Charles Dickens"
+    Found title pattern: "Speeches of Charles Dickens"
+    📖 Extracted title: "Speeches of Charles Dickens"
+    👤 Extracted author: "Charles Dickens"
+    Title comparison:
+      Expected: "Speeches: Literary and Social" -> "speeches literary and social"
+      Actual:   "Speeches of Charles Dickens" -> "speeches of charles dickens"
+      Match: ❌
+    Author comparison:
+      Expected: "Charles Dickens" -> "charles dickens"
+      Actual:   "Charles Dickens" -> "charles dickens"
+      Match: ✅
+    Title match: ❌
+    Author match: ✅
+  ❌ Still invalid: Title/author mismatch
+
+🔄 Re-checking: "The Tenant of Wildfell Hall" by Charlotte Brontë
+
+🔍 Checking: "The Tenant of Wildfell Hall" by Charlotte Brontë (ID: 969)
+  Trying URL 1: https://www.gutenberg.org/files/969/969-0.txt
+    Response status: 200
+    ✅ Got text content (973378 characters)
+    Found expected title: "The Tenant of Wildfell Hall"
+    Found author pattern: "Anne Brontë"
+    📖 Extracted title: "The Tenant of Wildfell Hall"
+    👤 Extracted author: "Anne Brontë"
+    Title comparison:
+      Expected: "The Tenant of Wildfell Hall" -> "the tenant of wildfell hall"
+      Actual:   "The Tenant of Wildfell Hall" -> "the tenant of wildfell hall"
+      Match: ✅
+    Author comparison:
+      Expected: "Charlotte Brontë" -> "charlotte bront"
+      Actual:   "Anne Brontë" -> "anne bront"
+      Match: ❌
+    Title match: ✅
+    Author match: ❌
+  ❌ Still invalid: Title/author mismatch
+
+🔄 Re-checking: "No Thoroughfare" by Charles Dickens
+
+🔍 Checking: "No Thoroughfare" by Charles Dickens (ID: 1423)
+  Trying URL 1: https://www.gutenberg.org/files/1423/1423-0.txt
+    Response status: 200
+    ✅ Got text content (276288 characters)
+    Found expected title: "No Thoroughfare"
+    Found by pattern: "favour from the mothers who relinquish all natural knowledge of them"
+    📖 Extracted title: "No Thoroughfare"
+    👤 Extracted author: "favour from the mothers who relinquish all natural knowledge of them"
+    Title comparison:
+      Expected: "No Thoroughfare" -> "no thoroughfare"
+      Actual:   "No Thoroughfare" -> "no thoroughfare"
+      Match: ✅
+    Author comparison:
+      Expected: "Charles Dickens" -> "charles dickens"
+      Actual:   "favour from the mothers who relinquish all natural knowledge of them" -> "favour from the mothers who relinquish all natural knowledge of them"
+      Match: ❌
+    Title match: ✅
+    Author match: ❌
+  ❌ Still invalid: Title/author mismatch
+
+🔄 Re-checking: "Stories by English Authors: The Orient (Selected by Scribners)" by Kipling
+
+🔍 Checking: "Stories by English Authors: The Orient (Selected by Scribners)" by Kipling (ID: 2035)
+  Trying URL 1: https://www.gutenberg.org/files/2035/2035-0.txt
+    Response status: 200
+    ✅ Got text content (256617 characters)
+    Found expected author: "Kipling"
+    Found title pattern: "Stories by English Authors: Orient"
+    📖 Extracted title: "Stories by English Authors: Orient"
+    👤 Extracted author: "Kipling"
+    Title comparison:
+      Expected: "Stories by English Authors: The Orient (Selected by Scribners)" -> "stories by english authors the orient selected by scribners"
+      Actual:   "Stories by English Authors: Orient" -> "stories by english authors orient"
+      Match: ❌
+    Author comparison:
+      Expected: "Kipling" -> "kipling"
+      Actual:   "Kipling" -> "kipling"
+      Match: ✅
+    Title match: ❌
+    Author match: ✅
+  ❌ Still invalid: Title/author mismatch
+
+🔄 Re-checking: "Kim" by Kipling
+
+🔍 Checking: "Kim" by Kipling (ID: 2226)
+  Trying URL 1: https://www.gutenberg.org/files/2226/2226-0.txt
+    Response status: 200
+    ✅ Got text content (590167 characters)
+    Found expected author: "Kipling"
+    ❌ Could not extract title/author from text
+  Trying URL 2: https://www.gutenberg.org/cache/epub/2226/pg2226.txt
+    Response status: 200
+    ✅ Got text content (609603 characters)
+    Found expected author: "Kipling"
+    ❌ Could not extract title/author from text
+  Trying URL 3: https://www.gutenberg.org/cache/epub/2226/2226-0.txt
+    Response status: 404
+    ❌ HTTP 404
+  ❌ Still invalid: Extraction failure: Could not extract title/author from text
+
+🔄 Re-checking: "The Adventure of the Bruce-Partington Plans" by Doyle
+
+🔍 Checking: "The Adventure of the Bruce-Partington Plans" by Doyle (ID: 2346)
+  Trying URL 1: https://www.gutenberg.org/files/2346/2346-0.txt
+    Response status: 200
+    ✅ Got text content (60582 characters)
+    Found expected title: "The Adventure of the Bruce-Partington Plans"
+    Found by pattern: "Jove! here comes something at last to"
+    📖 Extracted title: "The Adventure of the Bruce-Partington Plans"
+    👤 Extracted author: "Jove! here comes something at last to"
+    Title comparison:
+      Expected: "The Adventure of the Bruce-Partington Plans" -> "the adventure of the bruce partington plans"
+      Actual:   "The Adventure of the Bruce-Partington Plans" -> "the adventure of the bruce partington plans"
+      Match: ✅
+    Author comparison:
+      Expected: "Doyle" -> "doyle"
+      Actual:   "Jove! here comes something at last to" -> "jove here comes something at last to"
+      Match: ❌
+    Title match: ✅
+    Author match: ❌
+  ❌ Still invalid: Title/author mismatch
+
+🔄 Re-checking: "The Gold Bag" by H.G. Wells
+
+🔍 Checking: "The Gold Bag" by H.G. Wells (ID: 2883)
+  Trying URL 1: https://www.gutenberg.org/files/2883/2883-0.txt
+    Response status: 200
+    ✅ Got text content (391105 characters)
+    Found expected title: "The Gold Bag"
+    Found author pattern: "Carolyn Wells"
+    📖 Extracted title: "The Gold Bag"
+    👤 Extracted author: "Carolyn Wells"
+    Title comparison:
+      Expected: "The Gold Bag" -> "the gold bag"
+      Actual:   "The Gold Bag" -> "the gold bag"
+      Match: ✅
+    Author comparison:
+      Expected: "H.G. Wells" -> "h g wells"
+      Actual:   "Carolyn Wells" -> "carolyn wells"
+      Match: ❌
+    Title match: ✅
+    Author match: ❌
+  ❌ Still invalid: Title/author mismatch
+
+🔄 Re-checking: "Memoirs of the Court of St. Cloud (Being secret letters from a gentleman at Paris to a nobleman in London) — Complete" by Goldsmith
+
+🔍 Checking: "Memoirs of the Court of St. Cloud (Being secret letters from a gentleman at Paris to a nobleman in London) — Complete" by Goldsmith (ID: 3899)
+  Trying URL 1: https://www.gutenberg.org/files/3899/3899-0.txt
+    Response status: 200
+    ✅ Got text content (805854 characters)
+    Found expected author: "Goldsmith"
+    Found title pattern: "Memoirs of the Court of St. Cloud, Complete"
+    📖 Extracted title: "Memoirs of the Court of St. Cloud, Complete"
+    👤 Extracted author: "Goldsmith"
+    Title comparison:
+      Expected: "Memoirs of the Court of St. Cloud (Being secret letters from a gentleman at Paris to a nobleman in London) — Complete" -> "memoirs of the court of st cloud being secret letters from a gentleman at paris to a nobleman in london complete"
+      Actual:   "Memoirs of the Court of St. Cloud, Complete" -> "memoirs of the court of st cloud complete"
+      Match: ❌
+    Author comparison:
+      Expected: "Goldsmith" -> "goldsmith"
+      Actual:   "Goldsmith" -> "goldsmith"
+      Match: ✅
+    Title match: ❌
+    Author match: ✅
+  ❌ Still invalid: Title/author mismatch
+
+🔄 Re-checking: "Johnson's Lives of the Poets — Volume 1" by Johnson
+
+🔍 Checking: "Johnson's Lives of the Poets — Volume 1" by Johnson (ID: 4679)
+  Trying URL 1: https://www.gutenberg.org/files/4679/4679-0.txt
+    Response status: 200
+    ✅ Got text content (389767 characters)
+    Found expected author: "Johnson"
+    Found title pattern: "Lives of the English Poets"
+    📖 Extracted title: "Lives of the English Poets"
+    👤 Extracted author: "Johnson"
+    Title comparison:
+      Expected: "Johnson's Lives of the Poets — Volume 1" -> "johnson s lives of the poets volume 1"
+      Actual:   "Lives of the English Poets" -> "lives of the english poets"
+      Match: ❌
+    Author comparison:
+      Expected: "Johnson" -> "johnson"
+      Actual:   "Johnson" -> "johnson"
+      Match: ✅
+    Title match: ❌
+    Author match: ✅
+  ❌ Still invalid: Title/author mismatch
+
+🔄 Re-checking: "Patty's Butterfly Days" by H.G. Wells
+
+🔍 Checking: "Patty's Butterfly Days" by H.G. Wells (ID: 5264)
+  Trying URL 1: https://www.gutenberg.org/files/5264/5264-0.txt
+    Response status: 404
+    ❌ HTTP 404
+  Trying URL 2: https://www.gutenberg.org/cache/epub/5264/pg5264.txt
+    Response status: 200
+    ✅ Got text content (330889 characters)
+    Found expected title: "Patty's Butterfly Days"
+    Found author pattern: "Carolyn Wells"
+    📖 Extracted title: "Patty's Butterfly Days"
+    👤 Extracted author: "Carolyn Wells"
+    Title comparison:
+      Expected: "Patty's Butterfly Days" -> "patty s butterfly days"
+      Actual:   "Patty's Butterfly Days" -> "patty s butterfly days"
+      Match: ✅
+    Author comparison:
+      Expected: "H.G. Wells" -> "h g wells"
+      Actual:   "Carolyn Wells" -> "carolyn wells"
+      Match: ❌
+    Title match: ✅
+    Author match: ❌
+  ❌ Still invalid: Title/author mismatch
+
+🔄 Re-checking: "Marjorie's Vacation" by H.G. Wells
+
+🔍 Checking: "Marjorie's Vacation" by H.G. Wells (ID: 5271)
+  Trying URL 1: https://www.gutenberg.org/files/5271/5271-0.txt
+    Response status: 404
+    ❌ HTTP 404
+  Trying URL 2: https://www.gutenberg.org/cache/epub/5271/pg5271.txt
+    Response status: 200
+    ✅ Got text content (297504 characters)
+    Found expected title: "Marjorie's Vacation"
+    Found author pattern: "Carolyn Wells"
+    📖 Extracted title: "Marjorie's Vacation"
+    👤 Extracted author: "Carolyn Wells"
+    Title comparison:
+      Expected: "Marjorie's Vacation" -> "marjorie s vacation"
+      Actual:   "Marjorie's Vacation" -> "marjorie s vacation"
+      Match: ✅
+    Author comparison:
+      Expected: "H.G. Wells" -> "h g wells"
+      Actual:   "Carolyn Wells" -> "carolyn wells"
+      Match: ❌
+    Title match: ✅
+    Author match: ❌
+  ❌ Still invalid: Title/author mismatch
+
+🔄 Re-checking: "Raspberry Jam" by H.G. Wells
+
+🔍 Checking: "Raspberry Jam" by H.G. Wells (ID: 5335)
+  Trying URL 1: https://www.gutenberg.org/files/5335/5335-0.txt
+    Response status: 200
+    ✅ Got text content (352260 characters)
+    Found expected title: "Raspberry Jam"
+    Found by pattern: "Carolyn Wells"
+    📖 Extracted title: "Raspberry Jam"
+    👤 Extracted author: "Carolyn Wells"
+    Title comparison:
+      Expected: "Raspberry Jam" -> "raspberry jam"
+      Actual:   "Raspberry Jam" -> "raspberry jam"
+      Match: ✅
+    Author comparison:
+      Expected: "H.G. Wells" -> "h g wells"
+      Actual:   "Carolyn Wells" -> "carolyn wells"
+      Match: ❌
+    Title match: ✅
+    Author match: ❌
+  ❌ Still invalid: Title/author mismatch
+
+🔄 Re-checking: "Patty's Suitors" by H.G. Wells
+
+🔍 Checking: "Patty's Suitors" by H.G. Wells (ID: 5631)
+  Trying URL 1: https://www.gutenberg.org/files/5631/5631-0.txt
+    Response status: 404
+    ❌ HTTP 404
+  Trying URL 2: https://www.gutenberg.org/cache/epub/5631/pg5631.txt
+    Response status: 200
+    ✅ Got text content (370940 characters)
+    Found expected title: "Patty's Suitors"
+    Found author pattern: "Carolyn Wells"
+    📖 Extracted title: "Patty's Suitors"
+    👤 Extracted author: "Carolyn Wells"
+    Title comparison:
+      Expected: "Patty's Suitors" -> "patty s suitors"
+      Actual:   "Patty's Suitors" -> "patty s suitors"
+      Match: ✅
+    Author comparison:
+      Expected: "H.G. Wells" -> "h g wells"
+      Actual:   "Carolyn Wells" -> "carolyn wells"
+      Match: ❌
+    Title match: ✅
+    Author match: ❌
+  ❌ Still invalid: Title/author mismatch
+
+🔄 Re-checking: "What Every Woman Knows" by J.M. Barrie
+
+🔍 Checking: "What Every Woman Knows" by J.M. Barrie (ID: 5654)
+  Trying URL 1: https://www.gutenberg.org/files/5654/5654-0.txt
+    Response status: 200
+    ✅ Got text content (167915 characters)
+    Found expected title: "What Every Woman Knows"
+    Found author pattern: "James M. Barrie"
+    📖 Extracted title: "What Every Woman Knows"
+    👤 Extracted author: "James M. Barrie"
+    Title comparison:
+      Expected: "What Every Woman Knows" -> "what every woman knows"
+      Actual:   "What Every Woman Knows" -> "what every woman knows"
+      Match: ✅
+    Author comparison:
+      Expected: "J.M. Barrie" -> "j m barrie"
+      Actual:   "James M. Barrie" -> "james m barrie"
+      Match: ❌
+    Title match: ✅
+    Author match: ❌
+  ❌ Still invalid: Title/author mismatch
+
+🔄 Re-checking: "Patty in Paris" by H.G. Wells
+
+🔍 Checking: "Patty in Paris" by H.G. Wells (ID: 5731)
+  Trying URL 1: https://www.gutenberg.org/files/5731/5731-0.txt
+    Response status: 404
+    ❌ HTTP 404
+  Trying URL 2: https://www.gutenberg.org/cache/epub/5731/pg5731.txt
+    Response status: 200
+    ✅ Got text content (308318 characters)
+    Found expected title: "Patty in Paris"
+    Found author pattern: "Carolyn Wells"
+    📖 Extracted title: "Patty in Paris"
+    👤 Extracted author: "Carolyn Wells"
+    Title comparison:
+      Expected: "Patty in Paris" -> "patty in paris"
+      Actual:   "Patty in Paris" -> "patty in paris"
+      Match: ✅
+    Author comparison:
+      Expected: "H.G. Wells" -> "h g wells"
+      Actual:   "Carolyn Wells" -> "carolyn wells"
+      Match: ❌
+    Title match: ✅
+    Author match: ❌
+  ❌ Still invalid: Title/author mismatch
+
+🔄 Re-checking: "Two Little Women on a Holiday" by H.G. Wells
+
+🔍 Checking: "Two Little Women on a Holiday" by H.G. Wells (ID: 5893)
+  Trying URL 1: https://www.gutenberg.org/files/5893/5893-0.txt
+    Response status: 404
+    ❌ HTTP 404
+  Trying URL 2: https://www.gutenberg.org/cache/epub/5893/pg5893.txt
+    Response status: 200
+    ✅ Got text content (321436 characters)
+    Found expected title: "Two Little Women on a Holiday"
+    Found author pattern: "Carolyn Wells"
+    📖 Extracted title: "Two Little Women on a Holiday"
+    👤 Extracted author: "Carolyn Wells"
+    Title comparison:
+      Expected: "Two Little Women on a Holiday" -> "two little women on a holiday"
+      Actual:   "Two Little Women on a Holiday" -> "two little women on a holiday"
+      Match: ✅
+    Author comparison:
+      Expected: "H.G. Wells" -> "h g wells"
+      Actual:   "Carolyn Wells" -> "carolyn wells"
+      Match: ❌
+    Title match: ✅
+    Author match: ❌
+  ❌ Still invalid: Title/author mismatch
+
+🔄 Re-checking: "Our Nervous Friends — Illustrating the Mastery of Nervousness" by Lewis Carroll
+
+🔍 Checking: "Our Nervous Friends — Illustrating the Mastery of Nervousness" by Lewis Carroll (ID: 5994)
+  Trying URL 1: https://www.gutenberg.org/files/5994/5994-0.txt
+    Response status: 404
+    ❌ HTTP 404
+  Trying URL 2: https://www.gutenberg.org/cache/epub/5994/pg5994.txt
+    Response status: 200
+    ✅ Got text content (399435 characters)
+    Found expected title: "Our Nervous Friends — Illustrating the Mastery of Nervousness"
+    Found author pattern: "Robert S. Carroll"
+    📖 Extracted title: "Our Nervous Friends — Illustrating the Mastery of Nervousness"
+    👤 Extracted author: "Robert S. Carroll"
+    Title comparison:
+      Expected: "Our Nervous Friends — Illustrating the Mastery of Nervousness" -> "our nervous friends illustrating the mastery of nervousness"
+      Actual:   "Our Nervous Friends — Illustrating the Mastery of Nervousness" -> "our nervous friends illustrating the mastery of nervousness"
+      Match: ✅
+    Author comparison:
+      Expected: "Lewis Carroll" -> "lewis carroll"
+      Actual:   "Robert S. Carroll" -> "robert s carroll"
+      Match: ❌
+    Title match: ✅
+    Author match: ❌
+  ❌ Still invalid: Title/author mismatch
+
+🔄 Re-checking: "Maximilian in Mexico: A Woman's Reminiscences of the French Intervention 1862-1867" by Robert Louis Stevenson
+
+🔍 Checking: "Maximilian in Mexico: A Woman's Reminiscences of the French Intervention 1862-1867" by Robert Louis Stevenson (ID: 5997)
+  Trying URL 1: https://www.gutenberg.org/files/5997/5997-0.txt
+    Response status: 404
+    ❌ HTTP 404
+  Trying URL 2: https://www.gutenberg.org/cache/epub/5997/pg5997.txt
+    Response status: 200
+    ✅ Got text content (413917 characters)
+    Found expected title: "Maximilian in Mexico: A Woman's Reminiscences of the French Intervention 1862-1867"
+    Found author pattern: "Sara Yorke Stevenson"
+    📖 Extracted title: "Maximilian in Mexico: A Woman's Reminiscences of the French Intervention 1862-1867"
+    👤 Extracted author: "Sara Yorke Stevenson"
+    Title comparison:
+      Expected: "Maximilian in Mexico: A Woman's Reminiscences of the French Intervention 1862-1867" -> "maximilian in mexico a woman s reminiscences of the french intervention 1862 1867"
+      Actual:   "Maximilian in Mexico: A Woman's Reminiscences of the French Intervention 1862-1867" -> "maximilian in mexico a woman s reminiscences of the french intervention 1862 1867"
+      Match: ✅
+    Author comparison:
+      Expected: "Robert Louis Stevenson" -> "robert louis stevenson"
+      Actual:   "Sara Yorke Stevenson" -> "sara yorke stevenson"
+      Match: ❌
+    Title match: ✅
+    Author match: ❌
+  ❌ Still invalid: Title/author mismatch
+
+🔄 Re-checking: "Vicky Van" by H.G. Wells
+
+🔍 Checking: "Vicky Van" by H.G. Wells (ID: 6159)
+  Trying URL 1: https://www.gutenberg.org/files/6159/6159-0.txt
+    Response status: 404
+    ❌ HTTP 404
+  Trying URL 2: https://www.gutenberg.org/cache/epub/6159/pg6159.txt
+    Response status: 200
+    ✅ Got text content (365251 characters)
+    Found expected title: "Vicky Van"
+    Found author pattern: "Carolyn Wells"
+    📖 Extracted title: "Vicky Van"
+    👤 Extracted author: "Carolyn Wells"
+    Title comparison:
+      Expected: "Vicky Van" -> "vicky van"
+      Actual:   "Vicky Van" -> "vicky van"
+      Match: ✅
+    Author comparison:
+      Expected: "H.G. Wells" -> "h g wells"
+      Actual:   "Carolyn Wells" -> "carolyn wells"
+      Match: ❌
+    Title match: ✅
+    Author match: ❌
+  ❌ Still invalid: Title/author mismatch
+
+🔄 Re-checking: "Ptomaine Street: The Tale of Warble Petticoat" by H.G. Wells
+
+🔍 Checking: "Ptomaine Street: The Tale of Warble Petticoat" by H.G. Wells (ID: 8386)
+  Trying URL 1: https://www.gutenberg.org/files/8386/8386-0.txt
+    Response status: 200
+    ✅ Got text content (149871 characters)
+    Found title pattern: "Ptomaine Street"
+    Found author pattern: "Carolyn Wells"
+    📖 Extracted title: "Ptomaine Street"
+    👤 Extracted author: "Carolyn Wells"
+    Title comparison:
+      Expected: "Ptomaine Street: The Tale of Warble Petticoat" -> "ptomaine street the tale of warble petticoat"
+      Actual:   "Ptomaine Street" -> "ptomaine street"
+      Match: ✅
+    Author comparison:
+      Expected: "H.G. Wells" -> "h g wells"
+      Actual:   "Carolyn Wells" -> "carolyn wells"
+      Match: ❌
+    Title match: ✅
+    Author match: ❌
+  ❌ Still invalid: Title/author mismatch
+
+🔄 Re-checking: "Patty Fairfield" by H.G. Wells
+
+🔍 Checking: "Patty Fairfield" by H.G. Wells (ID: 8456)
+  Trying URL 1: https://www.gutenberg.org/files/8456/8456-0.txt
+    Response status: 404
+    ❌ HTTP 404
+  Trying URL 2: https://www.gutenberg.org/cache/epub/8456/pg8456.txt
+    Response status: 200
+    ✅ Got text content (268026 characters)
+    Found expected title: "Patty Fairfield"
+    Found author pattern: "Carolyn Wells"
+    📖 Extracted title: "Patty Fairfield"
+    👤 Extracted author: "Carolyn Wells"
+    Title comparison:
+      Expected: "Patty Fairfield" -> "patty fairfield"
+      Actual:   "Patty Fairfield" -> "patty fairfield"
+      Match: ✅
+    Author comparison:
+      Expected: "H.G. Wells" -> "h g wells"
+      Actual:   "Carolyn Wells" -> "carolyn wells"
+      Match: ❌
+    Title match: ✅
+    Author match: ❌
+  ❌ Still invalid: Title/author mismatch
+
+🔄 Re-checking: "Marjorie's New Friend" by H.G. Wells
+
+🔍 Checking: "Marjorie's New Friend" by H.G. Wells (ID: 8887)
+  Trying URL 1: https://www.gutenberg.org/files/8887/8887-0.txt
+    Response status: 404
+    ❌ HTTP 404
+  Trying URL 2: https://www.gutenberg.org/cache/epub/8887/pg8887.txt
+    Response status: 200
+    ✅ Got text content (324766 characters)
+    Found expected title: "Marjorie's New Friend"
+    Found author pattern: "Carolyn Wells"
+    📖 Extracted title: "Marjorie's New Friend"
+    👤 Extracted author: "Carolyn Wells"
+    Title comparison:
+      Expected: "Marjorie's New Friend" -> "marjorie s new friend"
+      Actual:   "Marjorie's New Friend" -> "marjorie s new friend"
+      Match: ✅
+    Author comparison:
+      Expected: "H.G. Wells" -> "h g wells"
+      Actual:   "Carolyn Wells" -> "carolyn wells"
+      Match: ❌
+    Title match: ✅
+    Author match: ❌
+  ❌ Still invalid: Title/author mismatch
+
+🔄 Re-checking: "Clarissa Harlowe; or the history of a young lady — Volume 1" by Richardson
+
+🔍 Checking: "Clarissa Harlowe; or the history of a young lady — Volume 1" by Richardson (ID: 9296)
+  Trying URL 1: https://www.gutenberg.org/files/9296/9296-0.txt
+    Response status: 200
+    ✅ Got text content (610547 characters)
+    Found expected author: "Richardson"
+    Found title pattern: "Clarissa, Volume 1 (of 9)"
+    📖 Extracted title: "Clarissa, Volume 1 (of 9)"
+    👤 Extracted author: "Richardson"
+    Title comparison:
+      Expected: "Clarissa Harlowe; or the history of a young lady — Volume 1" -> "clarissa harlowe or the history of a young lady volume 1"
+      Actual:   "Clarissa, Volume 1 (of 9)" -> "clarissa volume 1 of 9"
+      Match: ❌
+    Author comparison:
+      Expected: "Richardson" -> "richardson"
+      Actual:   "Richardson" -> "richardson"
+      Match: ✅
+    Title match: ❌
+    Author match: ✅
+  ❌ Still invalid: Title/author mismatch
+
+🔄 Re-checking: "A Nonsense Anthology" by H.G. Wells
+
+🔍 Checking: "A Nonsense Anthology" by H.G. Wells (ID: 9380)
+  Trying URL 1: https://www.gutenberg.org/files/9380/9380-0.txt
+    Response status: 404
+    ❌ HTTP 404
+  Trying URL 2: https://www.gutenberg.org/cache/epub/9380/pg9380.txt
+    Response status: 200
+    ✅ Got text content (323314 characters)
+    Found expected title: "A Nonsense Anthology"
+    Found by pattern: "Carolyn Wells"
+    📖 Extracted title: "A Nonsense Anthology"
+    👤 Extracted author: "Carolyn Wells"
+    Title comparison:
+      Expected: "A Nonsense Anthology" -> "a nonsense anthology"
+      Actual:   "A Nonsense Anthology" -> "a nonsense anthology"
+      Match: ✅
+    Author comparison:
+      Expected: "H.G. Wells" -> "h g wells"
+      Actual:   "Carolyn Wells" -> "carolyn wells"
+      Match: ❌
+    Title match: ✅
+    Author match: ❌
+  ❌ Still invalid: Title/author mismatch
+
+🔄 Re-checking: "Songs of Two" by Thomas Hardy
+
+🔍 Checking: "Songs of Two" by Thomas Hardy (ID: 9465)
+  Trying URL 1: https://www.gutenberg.org/files/9465/9465-0.txt
+    Response status: 404
+    ❌ HTTP 404
+  Trying URL 2: https://www.gutenberg.org/cache/epub/9465/pg9465.txt
+    Response status: 200
+    ✅ Got text content (38106 characters)
+    Found expected title: "Songs of Two"
+    Found author pattern: "Arthur Sherburne Hardy"
+    📖 Extracted title: "Songs of Two"
+    👤 Extracted author: "Arthur Sherburne Hardy"
+    Title comparison:
+      Expected: "Songs of Two" -> "songs of two"
+      Actual:   "Songs of Two" -> "songs of two"
+      Match: ✅
+    Author comparison:
+      Expected: "Thomas Hardy" -> "thomas hardy"
+      Actual:   "Arthur Sherburne Hardy" -> "arthur sherburne hardy"
+      Match: ❌
+    Title match: ✅
+    Author match: ❌
+  ❌ Still invalid: Title/author mismatch
+
+🔄 Re-checking: "The Mystery of the Boule Cabinet: A Detective Story" by Robert Louis Stevenson
+
+🔍 Checking: "The Mystery of the Boule Cabinet: A Detective Story" by Robert Louis Stevenson (ID: 10067)
+  Trying URL 1: https://www.gutenberg.org/files/10067/10067-0.txt
+    Response status: 200
+    ✅ Got text content (385667 characters)
+    Found BY pattern: "BURTON E. STEVENSON"
+    ❌ Could not extract title/author from text
+  Trying URL 2: https://www.gutenberg.org/cache/epub/10067/pg10067.txt
+    Response status: 200
+    ✅ Got text content (405303 characters)
+    Found expected title: "The Mystery of the Boule Cabinet: A Detective Story"
+    Found author pattern: "Burton Egbert Stevenson"
+    📖 Extracted title: "The Mystery of the Boule Cabinet: A Detective Story"
+    👤 Extracted author: "Burton Egbert Stevenson"
+    Title comparison:
+      Expected: "The Mystery of the Boule Cabinet: A Detective Story" -> "the mystery of the boule cabinet a detective story"
+      Actual:   "The Mystery of the Boule Cabinet: A Detective Story" -> "the mystery of the boule cabinet a detective story"
+      Match: ✅
+    Author comparison:
+      Expected: "Robert Louis Stevenson" -> "robert louis stevenson"
+      Actual:   "Burton Egbert Stevenson" -> "burton egbert stevenson"
+      Match: ❌
+    Title match: ✅
+    Author match: ❌
+  ❌ Still invalid: Title/author mismatch
+
+🔄 Re-checking: "A Soldier of Virginia: A Tale of Colonel Washington and Braddock's Defeat" by Robert Louis Stevenson
+
+🔍 Checking: "A Soldier of Virginia: A Tale of Colonel Washington and Braddock's Defeat" by Robert Louis Stevenson (ID: 10094)
+  Trying URL 1: https://www.gutenberg.org/files/10094/10094-0.txt
+    Response status: 200
+    ✅ Got text content (447909 characters)
+    Found by pattern: "BURTON EGBERT STEVENSON"
+    ❌ Could not extract title/author from text
+  Trying URL 2: https://www.gutenberg.org/cache/epub/10094/pg10094.txt
+    Response status: 200
+    ✅ Got text content (467760 characters)
+    Found expected title: "A Soldier of Virginia: A Tale of Colonel Washington and Braddock's Defeat"
+    Found author pattern: "Burton Egbert Stevenson"
+    📖 Extracted title: "A Soldier of Virginia: A Tale of Colonel Washington and Braddock's Defeat"
+    👤 Extracted author: "Burton Egbert Stevenson"
+    Title comparison:
+      Expected: "A Soldier of Virginia: A Tale of Colonel Washington and Braddock's Defeat" -> "a soldier of virginia a tale of colonel washington and braddock s defeat"
+      Actual:   "A Soldier of Virginia: A Tale of Colonel Washington and Braddock's Defeat" -> "a soldier of virginia a tale of colonel washington and braddock s defeat"
+      Match: ✅
+    Author comparison:
+      Expected: "Robert Louis Stevenson" -> "robert louis stevenson"
+      Actual:   "Burton Egbert Stevenson" -> "burton egbert stevenson"
+      Match: ❌
+    Title match: ✅
+    Author match: ❌
+  ❌ Still invalid: Title/author mismatch
+
+🔄 Re-checking: "Patty at Home" by H.G. Wells
+
+🔍 Checking: "Patty at Home" by H.G. Wells (ID: 10268)
+  Trying URL 1: https://www.gutenberg.org/files/10268/10268-0.txt
+    Response status: 200
+    ✅ Got text content (276953 characters)
+    Found expected title: "Patty at Home"
+    Found by pattern: "CAROLYN WELLS"
+    📖 Extracted title: "Patty at Home"
+    👤 Extracted author: "CAROLYN WELLS"
+    Title comparison:
+      Expected: "Patty at Home" -> "patty at home"
+      Actual:   "Patty at Home" -> "patty at home"
+      Match: ✅
+    Author comparison:
+      Expected: "H.G. Wells" -> "h g wells"
+      Actual:   "CAROLYN WELLS" -> "carolyn wells"
+      Match: ❌
+    Title match: ✅
+    Author match: ❌
+  ❌ Still invalid: Title/author mismatch
+
+🔄 Re-checking: "Bible Stories and Religious Classics" by H.G. Wells
+
+🔍 Checking: "Bible Stories and Religious Classics" by H.G. Wells (ID: 10380)
+  Trying URL 1: https://www.gutenberg.org/files/10380/10380-0.txt
+    Response status: 200
+    ✅ Got text content (892011 characters)
+    Found expected title: "Bible Stories and Religious Classics"
+    Found by pattern: "those who know the Revelation it"
+    📖 Extracted title: "Bible Stories and Religious Classics"
+    👤 Extracted author: "those who know the Revelation it"
+    Title comparison:
+      Expected: "Bible Stories and Religious Classics" -> "bible stories and religious classics"
+      Actual:   "Bible Stories and Religious Classics" -> "bible stories and religious classics"
+      Match: ✅
+    Author comparison:
+      Expected: "H.G. Wells" -> "h g wells"
+      Actual:   "those who know the Revelation it" -> "those who know the revelation it"
+      Match: ❌
+    Title match: ✅
+    Author match: ❌
+  ❌ Still invalid: Title/author mismatch
+
+🔄 Re-checking: "A Few Practical Suggestions" by Society for Pure English; Smith
+
+🔍 Checking: "A Few Practical Suggestions" by Society for Pure English; Smith (ID: 12390)
+  Trying URL 1: https://www.gutenberg.org/files/12390/12390-0.txt
+    Response status: 200
+    ✅ Got text content (41978 characters)
+    Found expected title: "A Few Practical Suggestions"
+    Found by pattern: "[)x]]"
+    📖 Extracted title: "A Few Practical Suggestions"
+    👤 Extracted author: "[)x]]"
+    Title comparison:
+      Expected: "A Few Practical Suggestions" -> "a few practical suggestions"
+      Actual:   "A Few Practical Suggestions" -> "a few practical suggestions"
+      Match: ✅
+    Author comparison:
+      Expected: "Society for Pure English; Smith" -> "society for pure english smith"
+      Actual:   "[)x]]" -> "x"
+      Match: ❌
+    Title match: ✅
+    Author match: ❌
+  ❌ Still invalid: Title/author mismatch
+
+🔄 Re-checking: "The White Devil" by Webster
+
+🔍 Checking: "The White Devil" by Webster (ID: 12915)
+  Trying URL 1: https://www.gutenberg.org/files/12915/12915-0.txt
+    Response status: 200
+    ✅ Got text content (168787 characters)
+    Found expected title: "The White Devil"
+    Found by pattern: "ISABELLA."
+    📖 Extracted title: "The White Devil"
+    👤 Extracted author: "ISABELLA."
+    Title comparison:
+      Expected: "The White Devil" -> "the white devil"
+      Actual:   "The White Devil" -> "the white devil"
+      Match: ✅
+    Author comparison:
+      Expected: "Webster" -> "webster"
+      Actual:   "ISABELLA." -> "isabella"
+      Match: ❌
+    Title match: ✅
+    Author match: ❌
+  ❌ Still invalid: Title/author mismatch
+
+🔄 Re-checking: "The Charm of Oxford" by H.G. Wells
+
+🔍 Checking: "The Charm of Oxford" by H.G. Wells (ID: 13245)
+  Trying URL 1: https://www.gutenberg.org/files/13245/13245-0.txt
+    Response status: 200
+    ✅ Got text content (161619 characters)
+    Found expected title: "The Charm of Oxford"
+    Found by pattern: "Philip H Hitchcock"
+    📖 Extracted title: "The Charm of Oxford"
+    👤 Extracted author: "Philip H Hitchcock"
+    Title comparison:
+      Expected: "The Charm of Oxford" -> "the charm of oxford"
+      Actual:   "The Charm of Oxford" -> "the charm of oxford"
+      Match: ✅
+    Author comparison:
+      Expected: "H.G. Wells" -> "h g wells"
+      Actual:   "Philip H Hitchcock" -> "philip h hitchcock"
+      Match: ❌
+    Title match: ✅
+    Author match: ❌
+  ❌ Still invalid: Title/author mismatch
+
+🔄 Re-checking: "The Gloved Hand" by Robert Louis Stevenson
+
+🔍 Checking: "The Gloved Hand" by Robert Louis Stevenson (ID: 13372)
+  Trying URL 1: https://www.gutenberg.org/files/13372/13372-0.txt
+    Response status: 200
+    ✅ Got text content (394032 characters)
+    Found expected title: "The Gloved Hand"
+    Found by pattern: "BURTON E. STEVENSON"
+    📖 Extracted title: "The Gloved Hand"
+    👤 Extracted author: "BURTON E. STEVENSON"
+    Title comparison:
+      Expected: "The Gloved Hand" -> "the gloved hand"
+      Actual:   "The Gloved Hand" -> "the gloved hand"
+      Match: ✅
+    Author comparison:
+      Expected: "Robert Louis Stevenson" -> "robert louis stevenson"
+      Actual:   "BURTON E. STEVENSON" -> "burton e stevenson"
+      Match: ❌
+    Title match: ✅
+    Author match: ❌
+  ❌ Still invalid: Title/author mismatch
+
+🔄 Re-checking: "Florentine History" by Niccolò Machiavelli
+
+🔍 Checking: "Florentine History" by Niccolò Machiavelli (ID: 2463)
+  Trying URL 1: https://www.gutenberg.org/files/2463/2463-0.txt
+    Response status: 200
+    ✅ Got text content (494140 characters)
+    Found title pattern: "The Prophet of Berkeley Square"
+    Found author pattern: "Robert Hichens"
+    📖 Extracted title: "The Prophet of Berkeley Square"
+    👤 Extracted author: "Robert Hichens"
+    Title comparison:
+      Expected: "Florentine History" -> "florentine history"
+      Actual:   "The Prophet of Berkeley Square" -> "the prophet of berkeley square"
+      Match: ❌
+    Author comparison:
+      Expected: "Niccolò Machiavelli" -> "niccol machiavelli"
+      Actual:   "Robert Hichens" -> "robert hichens"
+      Match: ❌
+    Title match: ❌
+    Author match: ❌
+  ❌ Still invalid: Title/author mismatch
+
+🔄 Re-checking: "Essays of Michel de Montaigne — Complete" by Montaigne
+
+🔍 Checking: "Essays of Michel de Montaigne — Complete" by Montaigne (ID: 3600)
+  Trying URL 1: https://www.gutenberg.org/files/3600/3600-0.txt
+    Response status: 200
+    ✅ Got text content (3085816 characters)
+    Found expected author: "Montaigne"
+    Found title pattern: "The Essays of Montaigne, Complete"
+    📖 Extracted title: "The Essays of Montaigne, Complete"
+    👤 Extracted author: "Montaigne"
+    Title comparison:
+      Expected: "Essays of Michel de Montaigne — Complete" -> "essays of michel de montaigne complete"
+      Actual:   "The Essays of Montaigne, Complete" -> "the essays of montaigne complete"
+      Match: ❌
+    Author comparison:
+      Expected: "Montaigne" -> "montaigne"
+      Actual:   "Montaigne" -> "montaigne"
+      Match: ✅
+    Title match: ❌
+    Author match: ✅
+  ❌ Still invalid: Title/author mismatch
+
+🔄 Re-checking: "The Querist" by Berkeley
+
+🔍 Checking: "The Querist" by Berkeley (ID: 4671)
+  Trying URL 1: https://www.gutenberg.org/files/4671/4671-0.txt
+    Response status: 404
+    ❌ HTTP 404
+  Trying URL 2: https://www.gutenberg.org/cache/epub/4671/pg4671.txt
+    Response status: 200
+    ✅ Got text content (171804 characters)
+    Found title pattern: "The Story of the Pony Express"
+    Found author pattern: "Glenn D. Bradley"
+    📖 Extracted title: "The Story of the Pony Express"
+    👤 Extracted author: "Glenn D. Bradley"
+    Title comparison:
+      Expected: "The Querist" -> "the querist"
+      Actual:   "The Story of the Pony Express" -> "the story of the pony express"
+      Match: ❌
+    Author comparison:
+      Expected: "Berkeley" -> "berkeley"
+      Actual:   "Glenn D. Bradley" -> "glenn d bradley"
+      Match: ❌
+    Title match: ❌
+    Author match: ❌
+  ❌ Still invalid: Title/author mismatch
+
+🔄 Re-checking: "The amateur crime" by Berkeley
+
+🔍 Checking: "The amateur crime" by Berkeley (ID: 72675)
+  Trying URL 1: https://www.gutenberg.org/files/72675/72675-0.txt
+    Response status: 200
+    ✅ Got text content (519194 characters)
+    Found expected title: "The amateur crime"
+    Found by pattern: "A. B. Cox"
+    📖 Extracted title: "The amateur crime"
+    👤 Extracted author: "A. B. Cox"
+    Title comparison:
+      Expected: "The amateur crime" -> "the amateur crime"
+      Actual:   "The amateur crime" -> "the amateur crime"
+      Match: ✅
+    Author comparison:
+      Expected: "Berkeley" -> "berkeley"
+      Actual:   "A. B. Cox" -> "a b cox"
+      Match: ❌
+    Title match: ✅
+    Author match: ❌
+  ❌ Still invalid: Title/author mismatch
+
+🔄 Re-checking: "The Nowadays Girls in the Adirondacks" by Brownell
+
+🔍 Checking: "The Nowadays Girls in the Adirondacks" by Brownell (ID: 76084)
+  Trying URL 1: https://www.gutenberg.org/files/76084/76084-0.txt
+    Response status: 200
+    ✅ Got text content (378175 characters)
+    Found expected title: "The Nowadays Girls in the Adirondacks"
+    Found by pattern: "GERTRUDE CALVERT HALL"
+    📖 Extracted title: "The Nowadays Girls in the Adirondacks"
+    👤 Extracted author: "GERTRUDE CALVERT HALL"
+    Title comparison:
+      Expected: "The Nowadays Girls in the Adirondacks" -> "the nowadays girls in the adirondacks"
+      Actual:   "The Nowadays Girls in the Adirondacks" -> "the nowadays girls in the adirondacks"
+      Match: ✅
+    Author comparison:
+      Expected: "Brownell" -> "brownell"
+      Actual:   "GERTRUDE CALVERT HALL" -> "gertrude calvert hall"
+      Match: ❌
+    Title match: ✅
+    Author match: ❌
+  ❌ Still invalid: Title/author mismatch
+
+🔄 Re-checking: "Solomon's Orbit" by Lewis Carroll
+
+🔍 Checking: "Solomon's Orbit" by Lewis Carroll (ID: 23160)
+  Trying URL 1: https://www.gutenberg.org/files/23160/23160-0.txt
+    Response status: 404
+    ❌ HTTP 404
+  Trying URL 2: https://www.gutenberg.org/cache/epub/23160/pg23160.txt
+    Response status: 200
+    ✅ Got text content (42561 characters)
+    Found expected title: "Solomon's Orbit"
+    Found author pattern: "William Carroll"
+    📖 Extracted title: "Solomon's Orbit"
+    👤 Extracted author: "William Carroll"
+    Title comparison:
+      Expected: "Solomon's Orbit" -> "solomon s orbit"
+      Actual:   "Solomon's Orbit" -> "solomon s orbit"
+      Match: ✅
+    Author comparison:
+      Expected: "Lewis Carroll" -> "lewis carroll"
+      Actual:   "William Carroll" -> "william carroll"
+      Match: ❌
+    Title match: ✅
+    Author match: ❌
+  ❌ Still invalid: Title/author mismatch
+
+🔄 Re-checking: "An Apology for the Life of Mrs. Shamela Andrews" by Fielding
+
+🔍 Checking: "An Apology for the Life of Mrs. Shamela Andrews" by Fielding (ID: 30962)
+  Trying URL 1: https://www.gutenberg.org/files/30962/30962-0.txt
+    Response status: 200
+    ✅ Got text content (105115 characters)
+    Found expected title: "An Apology for the Life of Mrs. Shamela Andrews"
+    Found author pattern: "Conny Keyber"
+    📖 Extracted title: "An Apology for the Life of Mrs. Shamela Andrews"
+    👤 Extracted author: "Conny Keyber"
+    Title comparison:
+      Expected: "An Apology for the Life of Mrs. Shamela Andrews" -> "an apology for the life of mrs shamela andrews"
+      Actual:   "An Apology for the Life of Mrs. Shamela Andrews" -> "an apology for the life of mrs shamela andrews"
+      Match: ✅
+    Author comparison:
+      Expected: "Fielding" -> "fielding"
+      Actual:   "Conny Keyber" -> "conny keyber"
+      Match: ❌
+    Title match: ✅
+    Author match: ❌
+  ❌ Still invalid: Title/author mismatch
+
+🔄 Re-checking: "Little Susan and her lamb" by American Sunday-School Union; Johnson
+
+🔍 Checking: "Little Susan and her lamb" by American Sunday-School Union; Johnson (ID: 62391)
+  Trying URL 1: https://www.gutenberg.org/files/62391/62391-0.txt
+    Response status: 200
+    ✅ Got text content (10349 characters)
+    Found expected title: "Little Susan and her lamb"
+    Found by pattern: "L. Johnson."
+    📖 Extracted title: "Little Susan and her lamb"
+    👤 Extracted author: "L. Johnson."
+    Title comparison:
+      Expected: "Little Susan and her lamb" -> "little susan and her lamb"
+      Actual:   "Little Susan and her lamb" -> "little susan and her lamb"
+      Match: ✅
+    Author comparison:
+      Expected: "American Sunday-School Union; Johnson" -> "american sunday school union johnson"
+      Actual:   "L. Johnson." -> "l johnson"
+      Match: ❌
+    Title match: ✅
+    Author match: ❌
+  ❌ Still invalid: Title/author mismatch
+
+🔄 Re-checking: "A Reading Book in Irish History" by James Joyce
+
+🔍 Checking: "A Reading Book in Irish History" by James Joyce (ID: 33439)
+  Trying URL 1: https://www.gutenberg.org/files/33439/33439-0.txt
+    Response status: 200
+    ✅ Got text content (320158 characters)
+    Found expected title: "A Reading Book in Irish History"
+    Found author pattern: "P. W. Joyce"
+    📖 Extracted title: "A Reading Book in Irish History"
+    👤 Extracted author: "P. W. Joyce"
+    Title comparison:
+      Expected: "A Reading Book in Irish History" -> "a reading book in irish history"
+      Actual:   "A Reading Book in Irish History" -> "a reading book in irish history"
+      Match: ✅
+    Author comparison:
+      Expected: "James Joyce" -> "james joyce"
+      Actual:   "P. W. Joyce" -> "p w joyce"
+      Match: ❌
+    Title match: ✅
+    Author match: ❌
+  ❌ Still invalid: Title/author mismatch
+
+🔄 Re-checking: "Brazil today and tomorrow" by James Joyce
+
+🔍 Checking: "Brazil today and tomorrow" by James Joyce (ID: 73851)
+  Trying URL 1: https://www.gutenberg.org/files/73851/73851-0.txt
+    Response status: 200
+    ✅ Got text content (603136 characters)
+    Found by pattern: "THE MACMILLAN COMPANY."
+    ❌ Could not extract title/author from text
+  Trying URL 2: https://www.gutenberg.org/cache/epub/73851/pg73851.txt
+    Response status: 200
+    ✅ Got text content (622850 characters)
+    Found expected title: "Brazil today and tomorrow"
+    Found author pattern: "L. E. Elliott Joyce"
+    📖 Extracted title: "Brazil today and tomorrow"
+    👤 Extracted author: "L. E. Elliott Joyce"
+    Title comparison:
+      Expected: "Brazil today and tomorrow" -> "brazil today and tomorrow"
+      Actual:   "Brazil today and tomorrow" -> "brazil today and tomorrow"
+      Match: ✅
+    Author comparison:
+      Expected: "James Joyce" -> "james joyce"
+      Actual:   "L. E. Elliott Joyce" -> "l e elliott joyce"
+      Match: ❌
+    Title match: ✅
+    Author match: ❌
+  ❌ Still invalid: Title/author mismatch
+
+🔄 Re-checking: "Chile today and tomorrow" by James Joyce
+
+🔍 Checking: "Chile today and tomorrow" by James Joyce (ID: 74531)
+  Trying URL 1: https://www.gutenberg.org/files/74531/74531-0.txt
+    Response status: 200
+    ✅ Got text content (622630 characters)
+    Found expected title: "Chile today and tomorrow"
+    Found by pattern: "THE MACMILLAN COMPANY"
+    📖 Extracted title: "Chile today and tomorrow"
+    👤 Extracted author: "THE MACMILLAN COMPANY"
+    Title comparison:
+      Expected: "Chile today and tomorrow" -> "chile today and tomorrow"
+      Actual:   "Chile today and tomorrow" -> "chile today and tomorrow"
+      Match: ✅
+    Author comparison:
+      Expected: "James Joyce" -> "james joyce"
+      Actual:   "THE MACMILLAN COMPANY" -> "the macmillan company"
+      Match: ❌
+    Title match: ✅
+    Author match: ❌
+  ❌ Still invalid: Title/author mismatch
+
+🔄 Re-checking: "English As We Speak It in Ireland" by James Joyce
+
+🔍 Checking: "English As We Speak It in Ireland" by James Joyce (ID: 34251)
+  Trying URL 1: https://www.gutenberg.org/files/34251/34251-0.txt
+    Response status: 404
+    ❌ HTTP 404
+  Trying URL 2: https://www.gutenberg.org/cache/epub/34251/pg34251.txt
+    Response status: 200
+    ✅ Got text content (599747 characters)
+    Found expected title: "English As We Speak It in Ireland"
+    Found author pattern: "P. W. Joyce"
+    📖 Extracted title: "English As We Speak It in Ireland"
+    👤 Extracted author: "P. W. Joyce"
+    Title comparison:
+      Expected: "English As We Speak It in Ireland" -> "english as we speak it in ireland"
+      Actual:   "English As We Speak It in Ireland" -> "english as we speak it in ireland"
+      Match: ✅
+    Author comparison:
+      Expected: "James Joyce" -> "james joyce"
+      Actual:   "P. W. Joyce" -> "p w joyce"
+      Match: ❌
+    Title match: ✅
+    Author match: ❌
+  ❌ Still invalid: Title/author mismatch
+
+🔄 Re-checking: "Mexican archæology" by James Joyce
+
+🔍 Checking: "Mexican archæology" by James Joyce (ID: 74836)
+  Trying URL 1: https://www.gutenberg.org/files/74836/74836-0.txt
+    Response status: 200
+    ✅ Got text content (695846 characters)
+    Found by pattern: "the same Author_:"
+    ❌ Could not extract title/author from text
+  Trying URL 2: https://www.gutenberg.org/cache/epub/74836/pg74836.txt
+    Response status: 200
+    ✅ Got text content (715634 characters)
+    Found expected title: "Mexican archæology"
+    Found author pattern: "Thomas Athol Joyce"
+    📖 Extracted title: "Mexican archæology"
+    👤 Extracted author: "Thomas Athol Joyce"
+    Title comparison:
+      Expected: "Mexican archæology" -> "mexican arch ology"
+      Actual:   "Mexican archæology" -> "mexican arch ology"
+      Match: ✅
+    Author comparison:
+      Expected: "James Joyce" -> "james joyce"
+      Actual:   "Thomas Athol Joyce" -> "thomas athol joyce"
+      Match: ❌
+    Title match: ✅
+    Author match: ❌
+  ❌ Still invalid: Title/author mismatch
+
+🔄 Re-checking: "The Story of Ancient Irish Civilization" by James Joyce
+
+🔍 Checking: "The Story of Ancient Irish Civilization" by James Joyce (ID: 41666)
+  Trying URL 1: https://www.gutenberg.org/files/41666/41666-0.txt
+    Response status: 200
+    ✅ Got text content (241945 characters)
+    Found by pattern: "Petrie in his Essay on Tara.]"
+    ❌ Could not extract title/author from text
+  Trying URL 2: https://www.gutenberg.org/cache/epub/41666/pg41666.txt
+    Response status: 200
+    ✅ Got text content (261618 characters)
+    Found expected title: "The Story of Ancient Irish Civilization"
+    Found author pattern: "P. W. Joyce"
+    📖 Extracted title: "The Story of Ancient Irish Civilization"
+    👤 Extracted author: "P. W. Joyce"
+    Title comparison:
+      Expected: "The Story of Ancient Irish Civilization" -> "the story of ancient irish civilization"
+      Actual:   "The Story of Ancient Irish Civilization" -> "the story of ancient irish civilization"
+      Match: ✅
+    Author comparison:
+      Expected: "James Joyce" -> "james joyce"
+      Actual:   "P. W. Joyce" -> "p w joyce"
+      Match: ❌
+    Title match: ✅
+    Author match: ❌
+  ❌ Still invalid: Title/author mismatch
+
+🔄 Re-checking: "Left to Themselves: Being the Ordeal of Philip and Gerald" by Prime-Stevenson
+
+🔍 Checking: "Left to Themselves: Being the Ordeal of Philip and Gerald" by Prime-Stevenson (ID: 57203)
+  Trying URL 1: https://www.gutenberg.org/files/57203/57203-0.txt
+    Response status: 200
+    ✅ Got text content (368347 characters)
+    Found title pattern: "Left to Themselves"
+    Found author pattern: "Edward Irenæus Stevenson"
+    📖 Extracted title: "Left to Themselves"
+    👤 Extracted author: "Edward Irenæus Stevenson"
+    Title comparison:
+      Expected: "Left to Themselves: Being the Ordeal of Philip and Gerald" -> "left to themselves being the ordeal of philip and gerald"
+      Actual:   "Left to Themselves" -> "left to themselves"
+      Match: ✅
+    Author comparison:
+      Expected: "Prime-Stevenson" -> "prime stevenson"
+      Actual:   "Edward Irenæus Stevenson" -> "edward iren us stevenson"
+      Match: ❌
+    Title match: ✅
+    Author match: ❌
+  ❌ Still invalid: Title/author mismatch
+
+🔄 Re-checking: "The Village in the Jungle" by Virginia Woolf
+
+🔍 Checking: "The Village in the Jungle" by Virginia Woolf (ID: 60627)
+  Trying URL 1: https://www.gutenberg.org/files/60627/60627-0.txt
+    Response status: 200
+    ✅ Got text content (369739 characters)
+    Found expected title: "The Village in the Jungle"
+    Found BY pattern: "L. S. WOOLF"
+    📖 Extracted title: "The Village in the Jungle"
+    👤 Extracted author: "L. S. WOOLF"
+    Title comparison:
+      Expected: "The Village in the Jungle" -> "the village in the jungle"
+      Actual:   "The Village in the Jungle" -> "the village in the jungle"
+      Match: ✅
+    Author comparison:
+      Expected: "Virginia Woolf" -> "virginia woolf"
+      Actual:   "L. S. WOOLF" -> "l s woolf"
+      Match: ❌
+    Title match: ✅
+    Author match: ❌
+  ❌ Still invalid: Title/author mismatch
+
+🔄 Re-checking: "A Reversion To Type" by Bacon
+
+🔍 Checking: "A Reversion To Type" by Bacon (ID: 23364)
+  Trying URL 1: https://www.gutenberg.org/files/23364/23364-0.txt
+    Response status: 200
+    ✅ Got text content (51929 characters)
+    Found expected title: "A Reversion To Type"
+    Found author pattern: "Josephine Daskam"
+    📖 Extracted title: "A Reversion To Type"
+    👤 Extracted author: "Josephine Daskam"
+    Title comparison:
+      Expected: "A Reversion To Type" -> "a reversion to type"
+      Actual:   "A Reversion To Type" -> "a reversion to type"
+      Match: ✅
+    Author comparison:
+      Expected: "Bacon" -> "bacon"
+      Actual:   "Josephine Daskam" -> "josephine daskam"
+      Match: ❌
+    Title match: ✅
+    Author match: ❌
+  ❌ Still invalid: Title/author mismatch
+
+🔄 Re-checking: "Poems" by Bacon
+
+🔍 Checking: "Poems" by Bacon (ID: 75489)
+  Trying URL 1: https://www.gutenberg.org/files/75489/75489-0.txt
+    Response status: 200
+    ✅ Got text content (57350 characters)
+    Found expected title: "Poems"
+    Found by pattern: "CHARLES SCRIBNER’S SONS"
+    📖 Extracted title: "Poems"
+    👤 Extracted author: "CHARLES SCRIBNER’S SONS"
+    Title comparison:
+      Expected: "Poems" -> "poems"
+      Actual:   "Poems" -> "poems"
+      Match: ✅
+    Author comparison:
+      Expected: "Bacon" -> "bacon"
+      Actual:   "CHARLES SCRIBNER’S SONS" -> "charles scribner s sons"
+      Match: ❌
+    Title match: ✅
+    Author match: ❌
+  ❌ Still invalid: Title/author mismatch
+
+🔄 Re-checking: "Cottage Poems" by Charlotte Brontë
+
+🔍 Checking: "Cottage Poems" by Charlotte Brontë (ID: 17081)
+  Trying URL 1: https://www.gutenberg.org/files/17081/17081-0.txt
+    Response status: 404
+    ❌ HTTP 404
+  Trying URL 2: https://www.gutenberg.org/cache/epub/17081/pg17081.txt
+    Response status: 200
+    ✅ Got text content (78095 characters)
+    Found expected title: "Cottage Poems"
+    Found author pattern: "Patrick Brontë"
+    📖 Extracted title: "Cottage Poems"
+    👤 Extracted author: "Patrick Brontë"
+    Title comparison:
+      Expected: "Cottage Poems" -> "cottage poems"
+      Actual:   "Cottage Poems" -> "cottage poems"
+      Match: ✅
+    Author comparison:
+      Expected: "Charlotte Brontë" -> "charlotte bront"
+      Actual:   "Patrick Brontë" -> "patrick bront"
+      Match: ❌
+    Title match: ✅
+    Author match: ❌
+  ❌ Still invalid: Title/author mismatch
+
+🔄 Re-checking: "Adam Bede" by T.S. Eliot
+
+🔍 Checking: "Adam Bede" by T.S. Eliot (ID: 507)
+  Trying URL 1: https://www.gutenberg.org/files/507/507-0.txt
+    Response status: 200
+    ✅ Got text content (1195779 characters)
+    Found expected title: "Adam Bede"
+    Found author pattern: "George Eliot [pseudonym of Mary Anne Evans]"
+    📖 Extracted title: "Adam Bede"
+    👤 Extracted author: "George Eliot [pseudonym of Mary Anne Evans]"
+    Title comparison:
+      Expected: "Adam Bede" -> "adam bede"
+      Actual:   "Adam Bede" -> "adam bede"
+      Match: ✅
+    Author comparison:
+      Expected: "T.S. Eliot" -> "t s eliot"
+      Actual:   "George Eliot [pseudonym of Mary Anne Evans]" -> "george eliot pseudonym of mary anne evans"
+      Match: ❌
+    Title match: ✅
+    Author match: ❌
+  ❌ Still invalid: Title/author mismatch
+
+🔄 Re-checking: "Brother Jacob" by T.S. Eliot
+
+🔍 Checking: "Brother Jacob" by T.S. Eliot (ID: 2171)
+  Trying URL 1: https://www.gutenberg.org/files/2171/2171-0.txt
+    Response status: 200
+    ✅ Got text content (115118 characters)
+    Found expected title: "Brother Jacob"
+    Found author pattern: "George Eliot [Mary Anne Evans]"
+    📖 Extracted title: "Brother Jacob"
+    👤 Extracted author: "George Eliot [Mary Anne Evans]"
+    Title comparison:
+      Expected: "Brother Jacob" -> "brother jacob"
+      Actual:   "Brother Jacob" -> "brother jacob"
+      Match: ✅
+    Author comparison:
+      Expected: "T.S. Eliot" -> "t s eliot"
+      Actual:   "George Eliot [Mary Anne Evans]" -> "george eliot mary anne evans"
+      Match: ❌
+    Title match: ✅
+    Author match: ❌
+  ❌ Still invalid: Title/author mismatch
+
+🔄 Re-checking: "Silas Marner" by T.S. Eliot
+
+🔍 Checking: "Silas Marner" by T.S. Eliot (ID: 550)
+  Trying URL 1: https://www.gutenberg.org/files/550/550-0.txt
+    Response status: 200
+    ✅ Got text content (399611 characters)
+    Found expected title: "Silas Marner"
+    Found by pattern: "George Eliot"
+    📖 Extracted title: "Silas Marner"
+    👤 Extracted author: "George Eliot"
+    Title comparison:
+      Expected: "Silas Marner" -> "silas marner"
+      Actual:   "Silas Marner" -> "silas marner"
+      Match: ✅
+    Author comparison:
+      Expected: "T.S. Eliot" -> "t s eliot"
+      Actual:   "George Eliot" -> "george eliot"
+      Match: ❌
+    Title match: ✅
+    Author match: ❌
+  ❌ Still invalid: Title/author mismatch
+
+🔄 Re-checking: "The Lifted Veil" by T.S. Eliot
+
+🔍 Checking: "The Lifted Veil" by T.S. Eliot (ID: 2165)
+  Trying URL 1: https://www.gutenberg.org/files/2165/2165-0.txt
+    Response status: 200
+    ✅ Got text content (120159 characters)
+    Found expected title: "The Lifted Veil"
+    Found author pattern: "George Eliot"
+    📖 Extracted title: "The Lifted Veil"
+    👤 Extracted author: "George Eliot"
+    Title comparison:
+      Expected: "The Lifted Veil" -> "the lifted veil"
+      Actual:   "The Lifted Veil" -> "the lifted veil"
+      Match: ✅
+    Author comparison:
+      Expected: "T.S. Eliot" -> "t s eliot"
+      Actual:   "George Eliot" -> "george eliot"
+      Match: ❌
+    Title match: ✅
+    Author match: ❌
+  ❌ Still invalid: Title/author mismatch
+
+🔄 Re-checking: "The Mill on the Floss" by T.S. Eliot
+
+🔍 Checking: "The Mill on the Floss" by T.S. Eliot (ID: 6688)
+  Trying URL 1: https://www.gutenberg.org/files/6688/6688-0.txt
+    Response status: 200
+    ✅ Got text content (1182417 characters)
+    Found expected title: "The Mill on the Floss"
+    Found author pattern: "George Eliot"
+    📖 Extracted title: "The Mill on the Floss"
+    👤 Extracted author: "George Eliot"
+    Title comparison:
+      Expected: "The Mill on the Floss" -> "the mill on the floss"
+      Actual:   "The Mill on the Floss" -> "the mill on the floss"
+      Match: ✅
+    Author comparison:
+      Expected: "T.S. Eliot" -> "t s eliot"
+      Actual:   "George Eliot" -> "george eliot"
+      Match: ❌
+    Title match: ✅
+    Author match: ❌
+  ❌ Still invalid: Title/author mismatch
+
+🔄 Re-checking: "Tom and Maggie Tulliver" by Anonymous [Adapter]; Eliot
+
+🔍 Checking: "Tom and Maggie Tulliver" by Anonymous [Adapter]; Eliot (ID: 30273)
+  Trying URL 1: https://www.gutenberg.org/files/30273/30273-0.txt
+    Response status: 404
+    ❌ HTTP 404
+  Trying URL 2: https://www.gutenberg.org/cache/epub/30273/pg30273.txt
+    Response status: 200
+    ✅ Got text content (126845 characters)
+    Found expected title: "Tom and Maggie Tulliver"
+    Found author pattern: "George Eliot"
+    📖 Extracted title: "Tom and Maggie Tulliver"
+    👤 Extracted author: "George Eliot"
+    Title comparison:
+      Expected: "Tom and Maggie Tulliver" -> "tom and maggie tulliver"
+      Actual:   "Tom and Maggie Tulliver" -> "tom and maggie tulliver"
+      Match: ✅
+    Author comparison:
+      Expected: "Anonymous [Adapter]; Eliot" -> "anonymous adapter eliot"
+      Actual:   "George Eliot" -> "george eliot"
+      Match: ❌
+    Title match: ✅
+    Author match: ❌
+  ❌ Still invalid: Title/author mismatch
+
+🔄 Re-checking: "Old Celtic Romances" by James Joyce
+
+🔍 Checking: "Old Celtic Romances" by James Joyce (ID: 38041)
+  Trying URL 1: https://www.gutenberg.org/files/38041/38041-0.txt
+    Response status: 404
+    ❌ HTTP 404
+  Trying URL 2: https://www.gutenberg.org/cache/epub/38041/pg38041.txt
+    Response status: 200
+    ✅ Got text content (726803 characters)
+    Found expected title: "Old Celtic Romances"
+    Found by pattern: "The Internet Archive)"
+    📖 Extracted title: "Old Celtic Romances"
+    👤 Extracted author: "The Internet Archive)"
+    Title comparison:
+      Expected: "Old Celtic Romances" -> "old celtic romances"
+      Actual:   "Old Celtic Romances" -> "old celtic romances"
+      Match: ✅
+    Author comparison:
+      Expected: "James Joyce" -> "james joyce"
+      Actual:   "The Internet Archive)" -> "the internet archive"
+      Match: ❌
+    Title match: ✅
+    Author match: ❌
+  ❌ Still invalid: Title/author mismatch
+
+🔄 Re-checking: "London Lyrics" by Locker-Lampson
+
+🔍 Checking: "London Lyrics" by Locker-Lampson (ID: 30185)
+  Trying URL 1: https://www.gutenberg.org/files/30185/30185-0.txt
+    Response status: 200
+    ✅ Got text content (88777 characters)
+    Found expected title: "London Lyrics"
+    Found author pattern: "Frederick Locker"
+    📖 Extracted title: "London Lyrics"
+    👤 Extracted author: "Frederick Locker"
+    Title comparison:
+      Expected: "London Lyrics" -> "london lyrics"
+      Actual:   "London Lyrics" -> "london lyrics"
+      Match: ✅
+    Author comparison:
+      Expected: "Locker-Lampson" -> "locker lampson"
+      Actual:   "Frederick Locker" -> "frederick locker"
+      Match: ❌
+    Title match: ✅
+    Author match: ❌
+  ❌ Still invalid: Title/author mismatch
+
+🔄 Re-checking: "Compulsory manumission" by McDonnell
+
+🔍 Checking: "Compulsory manumission" by McDonnell (ID: 72991)
+  Trying URL 1: https://www.gutenberg.org/files/72991/72991-0.txt
+    Response status: 200
+    ✅ Got text content (119017 characters)
+    Found expected title: "Compulsory manumission"
+    Found by pattern: "_underscores_."
+    📖 Extracted title: "Compulsory manumission"
+    👤 Extracted author: "_underscores_."
+    Title comparison:
+      Expected: "Compulsory manumission" -> "compulsory manumission"
+      Actual:   "Compulsory manumission" -> "compulsory manumission"
+      Match: ✅
+    Author comparison:
+      Expected: "McDonnell" -> "mcdonnell"
+      Actual:   "_underscores_." -> "_underscores_"
+      Match: ❌
+    Title match: ✅
+    Author match: ❌
+  ❌ Still invalid: Title/author mismatch
+
+🔄 Re-checking: "A Course In Wood Turning" by John Milton
+
+🔍 Checking: "A Course In Wood Turning" by John Milton (ID: 15460)
+  Trying URL 1: https://www.gutenberg.org/files/15460/15460-0.txt
+    Response status: 404
+    ❌ HTTP 404
+  Trying URL 2: https://www.gutenberg.org/cache/epub/15460/pg15460.txt
+    Response status: 200
+    ✅ Got text content (101616 characters)
+    Found expected title: "A Course In Wood Turning"
+    Found author pattern: "Archie Seldon Milton"
+    📖 Extracted title: "A Course In Wood Turning"
+    👤 Extracted author: "Archie Seldon Milton"
+    Title comparison:
+      Expected: "A Course In Wood Turning" -> "a course in wood turning"
+      Actual:   "A Course In Wood Turning" -> "a course in wood turning"
+      Match: ✅
+    Author comparison:
+      Expected: "John Milton" -> "john milton"
+      Actual:   "Archie Seldon Milton" -> "archie seldon milton"
+      Match: ❌
+    Title match: ✅
+    Author match: ❌
+  ❌ Still invalid: Title/author mismatch
+
+🔄 Re-checking: "The Writings of Thomas Paine — Volume 4 (1794-1796): The Age of Reason" by Paine
+
+🔍 Checking: "The Writings of Thomas Paine — Volume 4 (1794-1796): The Age of Reason" by Paine (ID: 3743)
+  Trying URL 1: https://www.gutenberg.org/files/3743/3743-0.txt
+    Response status: 200
+    ✅ Got text content (433171 characters)
+    Found expected author: "Paine"
+    Found title pattern: "The Writings of Thomas Paine, Volume IV."
+    📖 Extracted title: "The Writings of Thomas Paine, Volume IV."
+    👤 Extracted author: "Paine"
+    Title comparison:
+      Expected: "The Writings of Thomas Paine — Volume 4 (1794-1796): The Age of Reason" -> "the writings of thomas paine volume 4 1794 1796 the age of reason"
+      Actual:   "The Writings of Thomas Paine, Volume IV." -> "the writings of thomas paine volume iv"
+      Match: ❌
+    Author comparison:
+      Expected: "Paine" -> "paine"
+      Actual:   "Paine" -> "paine"
+      Match: ✅
+    Title match: ❌
+    Author match: ✅
+  ❌ Still invalid: Title/author mismatch
+
+🔄 Re-checking: "A Defence of Poetry and Other Essays" by Mary Shelley
+
+🔍 Checking: "A Defence of Poetry and Other Essays" by Mary Shelley (ID: 5428)
+  Trying URL 1: https://www.gutenberg.org/files/5428/5428-0.txt
+    Response status: 404
+    ❌ HTTP 404
+  Trying URL 2: https://www.gutenberg.org/cache/epub/5428/pg5428.txt
+    Response status: 200
+    ✅ Got text content (192533 characters)
+    Found expected title: "A Defence of Poetry and Other Essays"
+    Found author pattern: "Percy Bysshe Shelley"
+    📖 Extracted title: "A Defence of Poetry and Other Essays"
+    👤 Extracted author: "Percy Bysshe Shelley"
+    Title comparison:
+      Expected: "A Defence of Poetry and Other Essays" -> "a defence of poetry and other essays"
+      Actual:   "A Defence of Poetry and Other Essays" -> "a defence of poetry and other essays"
+      Match: ✅
+    Author comparison:
+      Expected: "Mary Shelley" -> "mary shelley"
+      Actual:   "Percy Bysshe Shelley" -> "percy bysshe shelley"
+      Match: ❌
+    Title match: ✅
+    Author match: ❌
+  ❌ Still invalid: Title/author mismatch
+
+🔄 Re-checking: "Notes to the Complete Poetical Works of Percy Bysshe Shelley" by Mary Shelley
+
+🔍 Checking: "Notes to the Complete Poetical Works of Percy Bysshe Shelley" by Mary Shelley (ID: 4695)
+  Trying URL 1: https://www.gutenberg.org/files/4695/4695-0.txt
+    Response status: 404
+    ❌ HTTP 404
+  Trying URL 2: https://www.gutenberg.org/cache/epub/4695/pg4695.txt
+    Response status: 200
+    ✅ Got text content (163800 characters)
+    Found expected title: "Notes to the Complete Poetical Works of Percy Bysshe Shelley"
+    Found author pattern: "Mary Wollstonecraft Shelley"
+    📖 Extracted title: "Notes to the Complete Poetical Works of Percy Bysshe Shelley"
+    👤 Extracted author: "Mary Wollstonecraft Shelley"
+    Title comparison:
+      Expected: "Notes to the Complete Poetical Works of Percy Bysshe Shelley" -> "notes to the complete poetical works of percy bysshe shelley"
+      Actual:   "Notes to the Complete Poetical Works of Percy Bysshe Shelley" -> "notes to the complete poetical works of percy bysshe shelley"
+      Match: ✅
+    Author comparison:
+      Expected: "Mary Shelley" -> "mary shelley"
+      Actual:   "Mary Wollstonecraft Shelley" -> "mary wollstonecraft shelley"
+      Match: ❌
+    Title match: ✅
+    Author match: ❌
+  ❌ Still invalid: Title/author mismatch
+
+🔄 Re-checking: "Peter Bell the Third" by Mary Shelley
+
+🔍 Checking: "Peter Bell the Third" by Mary Shelley (ID: 4697)
+  Trying URL 1: https://www.gutenberg.org/files/4697/4697-0.txt
+    Response status: 404
+    ❌ HTTP 404
+  Trying URL 2: https://www.gutenberg.org/cache/epub/4697/pg4697.txt
+    Response status: 200
+    ✅ Got text content (60275 characters)
+    Found expected title: "Peter Bell the Third"
+    Found author pattern: "Percy Bysshe Shelley"
+    📖 Extracted title: "Peter Bell the Third"
+    👤 Extracted author: "Percy Bysshe Shelley"
+    Title comparison:
+      Expected: "Peter Bell the Third" -> "peter bell the third"
+      Actual:   "Peter Bell the Third" -> "peter bell the third"
+      Match: ✅
+    Author comparison:
+      Expected: "Mary Shelley" -> "mary shelley"
+      Actual:   "Percy Bysshe Shelley" -> "percy bysshe shelley"
+      Match: ❌
+    Title match: ✅
+    Author match: ❌
+  ❌ Still invalid: Title/author mismatch
+
+🔄 Re-checking: "The Complete Poetical Works of Percy Bysshe Shelley — Complete" by Mary Shelley
+
+🔍 Checking: "The Complete Poetical Works of Percy Bysshe Shelley — Complete" by Mary Shelley (ID: 4800)
+  Trying URL 1: https://www.gutenberg.org/files/4800/4800-0.txt
+    Response status: 200
+    ✅ Got text content (2356541 characters)
+    Found by pattern: "means of which the supplementary points now added"
+    ❌ Could not extract title/author from text
+  Trying URL 2: https://www.gutenberg.org/cache/epub/4800/pg4800.txt
+    Response status: 200
+    ✅ Got text content (2376286 characters)
+    Found expected title: "The Complete Poetical Works of Percy Bysshe Shelley — Complete"
+    Found author pattern: "Percy Bysshe Shelley"
+    📖 Extracted title: "The Complete Poetical Works of Percy Bysshe Shelley — Complete"
+    👤 Extracted author: "Percy Bysshe Shelley"
+    Title comparison:
+      Expected: "The Complete Poetical Works of Percy Bysshe Shelley — Complete" -> "the complete poetical works of percy bysshe shelley complete"
+      Actual:   "The Complete Poetical Works of Percy Bysshe Shelley — Complete" -> "the complete poetical works of percy bysshe shelley complete"
+      Match: ✅
+    Author comparison:
+      Expected: "Mary Shelley" -> "mary shelley"
+      Actual:   "Percy Bysshe Shelley" -> "percy bysshe shelley"
+      Match: ❌
+    Title match: ✅
+    Author match: ❌
+  ❌ Still invalid: Title/author mismatch
+
+🔄 Re-checking: "The Complete Poetical Works of Percy Bysshe Shelley — Volume 1" by Mary Shelley
+
+🔍 Checking: "The Complete Poetical Works of Percy Bysshe Shelley — Volume 1" by Mary Shelley (ID: 4797)
+  Trying URL 1: https://www.gutenberg.org/files/4797/4797-0.txt
+    Response status: 404
+    ❌ HTTP 404
+  Trying URL 2: https://www.gutenberg.org/cache/epub/4797/pg4797.txt
+    Response status: 200
+    ✅ Got text content (1319161 characters)
+    Found expected title: "The Complete Poetical Works of Percy Bysshe Shelley — Volume 1"
+    Found author pattern: "Percy Bysshe Shelley"
+    📖 Extracted title: "The Complete Poetical Works of Percy Bysshe Shelley — Volume 1"
+    👤 Extracted author: "Percy Bysshe Shelley"
+    Title comparison:
+      Expected: "The Complete Poetical Works of Percy Bysshe Shelley — Volume 1" -> "the complete poetical works of percy bysshe shelley volume 1"
+      Actual:   "The Complete Poetical Works of Percy Bysshe Shelley — Volume 1" -> "the complete poetical works of percy bysshe shelley volume 1"
+      Match: ✅
+    Author comparison:
+      Expected: "Mary Shelley" -> "mary shelley"
+      Actual:   "Percy Bysshe Shelley" -> "percy bysshe shelley"
+      Match: ❌
+    Title match: ✅
+    Author match: ❌
+  ❌ Still invalid: Title/author mismatch
+
+🔄 Re-checking: "The Complete Poetical Works of Percy Bysshe Shelley — Volume 2" by Mary Shelley
+
+🔍 Checking: "The Complete Poetical Works of Percy Bysshe Shelley — Volume 2" by Mary Shelley (ID: 4798)
+  Trying URL 1: https://www.gutenberg.org/files/4798/4798-0.txt
+    Response status: 200
+    ✅ Got text content (398113 characters)
+    Found by pattern: "MRS. SHELLEY."
+    ❌ Could not extract title/author from text
+  Trying URL 2: https://www.gutenberg.org/cache/epub/4798/pg4798.txt
+    Response status: 200
+    ✅ Got text content (417857 characters)
+    Found expected title: "The Complete Poetical Works of Percy Bysshe Shelley — Volume 2"
+    Found author pattern: "Percy Bysshe Shelley"
+    📖 Extracted title: "The Complete Poetical Works of Percy Bysshe Shelley — Volume 2"
+    👤 Extracted author: "Percy Bysshe Shelley"
+    Title comparison:
+      Expected: "The Complete Poetical Works of Percy Bysshe Shelley — Volume 2" -> "the complete poetical works of percy bysshe shelley volume 2"
+      Actual:   "The Complete Poetical Works of Percy Bysshe Shelley — Volume 2" -> "the complete poetical works of percy bysshe shelley volume 2"
+      Match: ✅
+    Author comparison:
+      Expected: "Mary Shelley" -> "mary shelley"
+      Actual:   "Percy Bysshe Shelley" -> "percy bysshe shelley"
+      Match: ❌
+    Title match: ✅
+    Author match: ❌
+  ❌ Still invalid: Title/author mismatch
+
+🔄 Re-checking: "The Complete Poetical Works of Percy Bysshe Shelley — Volume 3" by Mary Shelley
+
+🔍 Checking: "The Complete Poetical Works of Percy Bysshe Shelley — Volume 3" by Mary Shelley (ID: 4799)
+  Trying URL 1: https://www.gutenberg.org/files/4799/4799-0.txt
+    Response status: 404
+    ❌ HTTP 404
+  Trying URL 2: https://www.gutenberg.org/cache/epub/4799/pg4799.txt
+    Response status: 200
+    ✅ Got text content (19845 characters)
+    Found expected title: "The Complete Poetical Works of Percy Bysshe Shelley — Volume 3"
+    Found author pattern: "Percy Bysshe Shelley"
+    📖 Extracted title: "The Complete Poetical Works of Percy Bysshe Shelley — Volume 3"
+    👤 Extracted author: "Percy Bysshe Shelley"
+    Title comparison:
+      Expected: "The Complete Poetical Works of Percy Bysshe Shelley — Volume 3" -> "the complete poetical works of percy bysshe shelley volume 3"
+      Actual:   "The Complete Poetical Works of Percy Bysshe Shelley — Volume 3" -> "the complete poetical works of percy bysshe shelley volume 3"
+      Match: ✅
+    Author comparison:
+      Expected: "Mary Shelley" -> "mary shelley"
+      Actual:   "Percy Bysshe Shelley" -> "percy bysshe shelley"
+      Match: ❌
+    Title match: ✅
+    Author match: ❌
+  ❌ Still invalid: Title/author mismatch
+
+🔄 Re-checking: "The Daemon of the World" by Mary Shelley
+
+🔍 Checking: "The Daemon of the World" by Mary Shelley (ID: 4654)
+  Trying URL 1: https://www.gutenberg.org/files/4654/4654-0.txt
+    Response status: 404
+    ❌ HTTP 404
+  Trying URL 2: https://www.gutenberg.org/cache/epub/4654/pg4654.txt
+    Response status: 200
+    ✅ Got text content (51885 characters)
+    Found expected title: "The Daemon of the World"
+    Found author pattern: "Percy Bysshe Shelley"
+    📖 Extracted title: "The Daemon of the World"
+    👤 Extracted author: "Percy Bysshe Shelley"
+    Title comparison:
+      Expected: "The Daemon of the World" -> "the daemon of the world"
+      Actual:   "The Daemon of the World" -> "the daemon of the world"
+      Match: ✅
+    Author comparison:
+      Expected: "Mary Shelley" -> "mary shelley"
+      Actual:   "Percy Bysshe Shelley" -> "percy bysshe shelley"
+      Match: ❌
+    Title match: ✅
+    Author match: ❌
+  ❌ Still invalid: Title/author mismatch
+
+🔄 Re-checking: "The Witch of Atlas" by Mary Shelley
+
+🔍 Checking: "The Witch of Atlas" by Mary Shelley (ID: 4696)
+  Trying URL 1: https://www.gutenberg.org/files/4696/4696-0.txt
+    Response status: 404
+    ❌ HTTP 404
+  Trying URL 2: https://www.gutenberg.org/cache/epub/4696/pg4696.txt
+    Response status: 200
+    ✅ Got text content (54239 characters)
+    Found expected title: "The Witch of Atlas"
+    Found author pattern: "Percy Bysshe Shelley"
+    📖 Extracted title: "The Witch of Atlas"
+    👤 Extracted author: "Percy Bysshe Shelley"
+    Title comparison:
+      Expected: "The Witch of Atlas" -> "the witch of atlas"
+      Actual:   "The Witch of Atlas" -> "the witch of atlas"
+      Match: ✅
+    Author comparison:
+      Expected: "Mary Shelley" -> "mary shelley"
+      Actual:   "Percy Bysshe Shelley" -> "percy bysshe shelley"
+      Match: ❌
+    Title match: ✅
+    Author match: ❌
+  ❌ Still invalid: Title/author mismatch
+
+🔄 Re-checking: "Narrative and Lyric Poems (first series) for use in the Lower School" by Robert Louis Stevenson
+
+🔍 Checking: "Narrative and Lyric Poems (first series) for use in the Lower School" by Robert Louis Stevenson (ID: 13184)
+  Trying URL 1: https://www.gutenberg.org/files/13184/13184-0.txt
+    Response status: 200
+    ✅ Got text content (256343 characters)
+    Found by pattern: "the Department of Education for examination for Junior"
+    ❌ Could not extract title/author from text
+  Trying URL 2: https://www.gutenberg.org/cache/epub/13184/pg13184.txt
+    Response status: 200
+    ✅ Got text content (276076 characters)
+    Found expected title: "Narrative and Lyric Poems (first series) for use in the Lower School"
+    Found by pattern: "Al Haines"
+    📖 Extracted title: "Narrative and Lyric Poems (first series) for use in the Lower School"
+    👤 Extracted author: "Al Haines"
+    Title comparison:
+      Expected: "Narrative and Lyric Poems (first series) for use in the Lower School" -> "narrative and lyric poems first series for use in the lower school"
+      Actual:   "Narrative and Lyric Poems (first series) for use in the Lower School" -> "narrative and lyric poems first series for use in the lower school"
+      Match: ✅
+    Author comparison:
+      Expected: "Robert Louis Stevenson" -> "robert louis stevenson"
+      Actual:   "Al Haines" -> "al haines"
+      Match: ❌
+    Title match: ✅
+    Author match: ❌
+  ❌ Still invalid: Title/author mismatch
+
+🔄 Re-checking: "The Home Book of Verse — Volume 1" by Robert Louis Stevenson
+
+🔍 Checking: "The Home Book of Verse — Volume 1" by Robert Louis Stevenson (ID: 2619)
+  Trying URL 1: https://www.gutenberg.org/files/2619/2619-0.txt
+    Response status: 404
+    ❌ HTTP 404
+  Trying URL 2: https://www.gutenberg.org/cache/epub/2619/pg2619.txt
+    Response status: 200
+    ✅ Got text content (706682 characters)
+    Found expected title: "The Home Book of Verse — Volume 1"
+    Found author pattern: "Burton Egbert Stevenson"
+    📖 Extracted title: "The Home Book of Verse — Volume 1"
+    👤 Extracted author: "Burton Egbert Stevenson"
+    Title comparison:
+      Expected: "The Home Book of Verse — Volume 1" -> "the home book of verse volume 1"
+      Actual:   "The Home Book of Verse — Volume 1" -> "the home book of verse volume 1"
+      Match: ✅
+    Author comparison:
+      Expected: "Robert Louis Stevenson" -> "robert louis stevenson"
+      Actual:   "Burton Egbert Stevenson" -> "burton egbert stevenson"
+      Match: ❌
+    Title match: ✅
+    Author match: ❌
+  ❌ Still invalid: Title/author mismatch
+
+🔄 Re-checking: "The Home Book of Verse — Volume 2" by Robert Louis Stevenson
+
+🔍 Checking: "The Home Book of Verse — Volume 2" by Robert Louis Stevenson (ID: 2620)
+  Trying URL 1: https://www.gutenberg.org/files/2620/2620-0.txt
+    Response status: 404
+    ❌ HTTP 404
+  Trying URL 2: https://www.gutenberg.org/cache/epub/2620/pg2620.txt
+    Response status: 200
+    ✅ Got text content (1014591 characters)
+    Found expected title: "The Home Book of Verse — Volume 2"
+    Found author pattern: "Burton Egbert Stevenson"
+    📖 Extracted title: "The Home Book of Verse — Volume 2"
+    👤 Extracted author: "Burton Egbert Stevenson"
+    Title comparison:
+      Expected: "The Home Book of Verse — Volume 2" -> "the home book of verse volume 2"
+      Actual:   "The Home Book of Verse — Volume 2" -> "the home book of verse volume 2"
+      Match: ✅
+    Author comparison:
+      Expected: "Robert Louis Stevenson" -> "robert louis stevenson"
+      Actual:   "Burton Egbert Stevenson" -> "burton egbert stevenson"
+      Match: ❌
+    Title match: ✅
+    Author match: ❌
+  ❌ Still invalid: Title/author mismatch
+
+🔄 Re-checking: "The Home Book of Verse — Volume 3" by Robert Louis Stevenson
+
+🔍 Checking: "The Home Book of Verse — Volume 3" by Robert Louis Stevenson (ID: 2621)
+  Trying URL 1: https://www.gutenberg.org/files/2621/2621-0.txt
+    Response status: 200
+    ✅ Got text content (630171 characters)
+    Found by pattern: "Burton Egbert Stevenson"
+    ❌ Could not extract title/author from text
+  Trying URL 2: https://www.gutenberg.org/cache/epub/2621/pg2621.txt
+    Response status: 200
+    ✅ Got text content (649791 characters)
+    Found expected title: "The Home Book of Verse — Volume 3"
+    Found author pattern: "Burton Egbert Stevenson"
+    📖 Extracted title: "The Home Book of Verse — Volume 3"
+    👤 Extracted author: "Burton Egbert Stevenson"
+    Title comparison:
+      Expected: "The Home Book of Verse — Volume 3" -> "the home book of verse volume 3"
+      Actual:   "The Home Book of Verse — Volume 3" -> "the home book of verse volume 3"
+      Match: ✅
+    Author comparison:
+      Expected: "Robert Louis Stevenson" -> "robert louis stevenson"
+      Actual:   "Burton Egbert Stevenson" -> "burton egbert stevenson"
+      Match: ❌
+    Title match: ✅
+    Author match: ❌
+  ❌ Still invalid: Title/author mismatch
+
+🔄 Re-checking: "The Home Book of Verse — Volume 4" by Robert Louis Stevenson
+
+🔍 Checking: "The Home Book of Verse — Volume 4" by Robert Louis Stevenson (ID: 2622)
+  Trying URL 1: https://www.gutenberg.org/files/2622/2622-0.txt
+    Response status: 404
+    ❌ HTTP 404
+  Trying URL 2: https://www.gutenberg.org/cache/epub/2622/pg2622.txt
+    Response status: 200
+    ✅ Got text content (448726 characters)
+    Found expected title: "The Home Book of Verse — Volume 4"
+    Found author pattern: "Burton Egbert Stevenson"
+    📖 Extracted title: "The Home Book of Verse — Volume 4"
+    👤 Extracted author: "Burton Egbert Stevenson"
+    Title comparison:
+      Expected: "The Home Book of Verse — Volume 4" -> "the home book of verse volume 4"
+      Actual:   "The Home Book of Verse — Volume 4" -> "the home book of verse volume 4"
+      Match: ✅
+    Author comparison:
+      Expected: "Robert Louis Stevenson" -> "robert louis stevenson"
+      Actual:   "Burton Egbert Stevenson" -> "burton egbert stevenson"
+      Match: ❌
+    Title match: ✅
+    Author match: ❌
+  ❌ Still invalid: Title/author mismatch
+
+🔄 Re-checking: "A Vers de Société Anthology" by H.G. Wells
+
+🔍 Checking: "A Vers de Société Anthology" by H.G. Wells (ID: 48059)
+  Trying URL 1: https://www.gutenberg.org/files/48059/48059-0.txt
+    Response status: 200
+    ✅ Got text content (394745 characters)
+    Found expected title: "A Vers de Société Anthology"
+    Found by pattern: "gratefully made to the publishers for"
+    📖 Extracted title: "A Vers de Société Anthology"
+    👤 Extracted author: "gratefully made to the publishers for"
+    Title comparison:
+      Expected: "A Vers de Société Anthology" -> "a vers de soci t anthology"
+      Actual:   "A Vers de Société Anthology" -> "a vers de soci t anthology"
+      Match: ✅
+    Author comparison:
+      Expected: "H.G. Wells" -> "h g wells"
+      Actual:   "gratefully made to the publishers for" -> "gratefully made to the publishers for"
+      Match: ❌
+    Title match: ✅
+    Author match: ❌
+  ❌ Still invalid: Title/author mismatch
+
+🔄 Re-checking: "Parlous Times: A Novel of Modern Diplomacy" by H.G. Wells
+
+🔍 Checking: "Parlous Times: A Novel of Modern Diplomacy" by H.G. Wells (ID: 34925)
+  Trying URL 1: https://www.gutenberg.org/files/34925/34925-0.txt
+    Response status: 404
+    ❌ HTTP 404
+  Trying URL 2: https://www.gutenberg.org/cache/epub/34925/pg34925.txt
+    Response status: 200
+    ✅ Got text content (581460 characters)
+    Found expected title: "Parlous Times: A Novel of Modern Diplomacy"
+    Found author pattern: "David Dwight Wells"
+    📖 Extracted title: "Parlous Times: A Novel of Modern Diplomacy"
+    👤 Extracted author: "David Dwight Wells"
+    Title comparison:
+      Expected: "Parlous Times: A Novel of Modern Diplomacy" -> "parlous times a novel of modern diplomacy"
+      Actual:   "Parlous Times: A Novel of Modern Diplomacy" -> "parlous times a novel of modern diplomacy"
+      Match: ✅
+    Author comparison:
+      Expected: "H.G. Wells" -> "h g wells"
+      Actual:   "David Dwight Wells" -> "david dwight wells"
+      Match: ❌
+    Title match: ✅
+    Author match: ❌
+  ❌ Still invalid: Title/author mismatch
+
+🔄 Re-checking: "The Book of Humorous Verse" by H.G. Wells
+
+🔍 Checking: "The Book of Humorous Verse" by H.G. Wells (ID: 23972)
+  Trying URL 1: https://www.gutenberg.org/files/23972/23972-0.txt
+    Response status: 404
+    ❌ HTTP 404
+  Trying URL 2: https://www.gutenberg.org/cache/epub/23972/pg23972.txt
+    Response status: 200
+    ✅ Got text content (1434585 characters)
+    Found expected title: "The Book of Humorous Verse"
+    Found by pattern: "enclosing"
+    📖 Extracted title: "The Book of Humorous Verse"
+    👤 Extracted author: "enclosing"
+    Title comparison:
+      Expected: "The Book of Humorous Verse" -> "the book of humorous verse"
+      Actual:   "The Book of Humorous Verse" -> "the book of humorous verse"
+      Match: ✅
+    Author comparison:
+      Expected: "H.G. Wells" -> "h g wells"
+      Actual:   "enclosing" -> "enclosing"
+      Match: ❌
+    Title match: ✅
+    Author match: ❌
+  ❌ Still invalid: Title/author mismatch
+
+🔄 Re-checking: "A Florentine Tragedy; La Sainte Courtisane" by Oscar Wilde
+
+🔍 Checking: "A Florentine Tragedy; La Sainte Courtisane" by Oscar Wilde (ID: 1308)
+  Trying URL 1: https://www.gutenberg.org/files/1308/1308-0.txt
+    Response status: 200
+    ✅ Got text content (86292 characters)
+    Found expected author: "Oscar Wilde"
+    Found title pattern: "Oscar Wilde Miscellaneous"
+    📖 Extracted title: "Oscar Wilde Miscellaneous"
+    👤 Extracted author: "Oscar Wilde"
+    Title comparison:
+      Expected: "A Florentine Tragedy; La Sainte Courtisane" -> "a florentine tragedy la sainte courtisane"
+      Actual:   "Oscar Wilde Miscellaneous" -> "oscar wilde miscellaneous"
+      Match: ❌
+    Author comparison:
+      Expected: "Oscar Wilde" -> "oscar wilde"
+      Actual:   "Oscar Wilde" -> "oscar wilde"
+      Match: ✅
+    Title match: ❌
+    Author match: ✅
+  ❌ Still invalid: Title/author mismatch
+
+🔄 Re-checking: "Poems by Speranza" by Oscar Wilde
+
+🔍 Checking: "Poems by Speranza" by Oscar Wilde (ID: 61742)
+  Trying URL 1: https://www.gutenberg.org/files/61742/61742-0.txt
+    Response status: 200
+    ✅ Got text content (248916 characters)
+    ❌ Could not extract title/author from text
+  Trying URL 2: https://www.gutenberg.org/cache/epub/61742/pg61742.txt
+    Response status: 200
+    ✅ Got text content (268650 characters)
+    Found expected title: "Poems by Speranza"
+    Found author pattern: "Lady Wilde"
+    📖 Extracted title: "Poems by Speranza"
+    👤 Extracted author: "Lady Wilde"
+    Title comparison:
+      Expected: "Poems by Speranza" -> "poems by speranza"
+      Actual:   "Poems by Speranza" -> "poems by speranza"
+      Match: ✅
+    Author comparison:
+      Expected: "Oscar Wilde" -> "oscar wilde"
+      Actual:   "Lady Wilde" -> "lady wilde"
+      Match: ❌
+    Title match: ✅
+    Author match: ❌
+  ❌ Still invalid: Title/author mismatch
+
+🔄 Re-checking: "La mandragola - La Clizia - Belfagor" by Niccolò Machiavelli
+
+🔍 Checking: "La mandragola - La Clizia - Belfagor" by Niccolò Machiavelli (ID: 56498)
+  Trying URL 1: https://www.gutenberg.org/files/56498/56498-0.txt
+    Response status: 200
+    ✅ Got text content (189948 characters)
+    Found expected title: "La mandragola - La Clizia - Belfagor"
+    Found author pattern: "Nicolo Machiavelli"
+    📖 Extracted title: "La mandragola - La Clizia - Belfagor"
+    👤 Extracted author: "Nicolo Machiavelli"
+    Title comparison:
+      Expected: "La mandragola - La Clizia - Belfagor" -> "la mandragola la clizia belfagor"
+      Actual:   "La mandragola - La Clizia - Belfagor" -> "la mandragola la clizia belfagor"
+      Match: ✅
+    Author comparison:
+      Expected: "Niccolò Machiavelli" -> "niccol machiavelli"
+      Actual:   "Nicolo Machiavelli" -> "nicolo machiavelli"
+      Match: ❌
+    Title match: ✅
+    Author match: ❌
+  ❌ Still invalid: Title/author mismatch
+
+🔄 Re-checking: "The Scarlet Letter" by Nathaniel Hawthorne
+
+🔍 Checking: "The Scarlet Letter" by Nathaniel Hawthorne (ID: 25305)
+  Trying URL 1: https://www.gutenberg.org/files/25305/25305-0.txt
+    Response status: 200
+    ✅ Got text content (474035 characters)
+    Found by pattern: "John Cleland"
+    ❌ Could not extract title/author from text
+  Trying URL 2: https://www.gutenberg.org/cache/epub/25305/pg25305.txt
+    Response status: 200
+    ✅ Got text content (493538 characters)
+    Found title pattern: "Memoirs of Fanny Hill"
+    Found author pattern: "John Cleland"
+    📖 Extracted title: "Memoirs of Fanny Hill"
+    👤 Extracted author: "John Cleland"
+    Title comparison:
+      Expected: "The Scarlet Letter" -> "the scarlet letter"
+      Actual:   "Memoirs of Fanny Hill" -> "memoirs of fanny hill"
+      Match: ❌
+    Author comparison:
+      Expected: "Nathaniel Hawthorne" -> "nathaniel hawthorne"
+      Actual:   "John Cleland" -> "john cleland"
+      Match: ❌
+    Title match: ❌
+    Author match: ❌
+  ❌ Still invalid: Title/author mismatch
+
+🔄 Re-checking: "The Call of the Wild" by Jack London
+
+🔍 Checking: "The Call of the Wild" by Jack London (ID: 4306)
+  Trying URL 1: https://www.gutenberg.org/files/4306/4306-0.txt
+    Response status: 404
+    ❌ HTTP 404
+  Trying URL 2: https://www.gutenberg.org/cache/epub/4306/pg4306.txt
+    Response status: 200
+    ✅ Got text content (679038 characters)
+    Found title pattern: "Veranilda"
+    Found author pattern: "George Gissing"
+    📖 Extracted title: "Veranilda"
+    👤 Extracted author: "George Gissing"
+    Title comparison:
+      Expected: "The Call of the Wild" -> "the call of the wild"
+      Actual:   "Veranilda" -> "veranilda"
+      Match: ❌
+    Author comparison:
+      Expected: "Jack London" -> "jack london"
+      Actual:   "George Gissing" -> "george gissing"
+      Match: ❌
+    Title match: ❌
+    Author match: ❌
+  ❌ Still invalid: Title/author mismatch
+
+📊 Re-validation results:
+  ✅ Re-validated: 0 books
+  ❌ Still invalid: 94 books
+  📡 Network failures: 214 books (unchanged)
+
+💾 Updated files saved
+  ✅ Valid books: 1987 total
+  ❌ Invalid books: 308 total
+
+🆕 Processing new books...
+
+📚 Validating shakespeare.json...
+📖 Found 48 books
+📋 Already processed: 48 books
+🔄 To process: 0 books
+🎯 Processing 0 books (limit: 1000)
+
+⏭️  No unprocessed books found in shakespeare.json
+
+📚 Validating english-literature.json...
+📖 Found 751 books
+📋 Already processed: 751 books
+🔄 To process: 0 books
+🎯 Processing 0 books (limit: 1000)
+
+⏭️  No unprocessed books found in english-literature.json
+
+📚 Validating philosophers.json...
+📖 Found 80 books
+📋 Already processed: 80 books
+🔄 To process: 0 books
+🎯 Processing 0 books (limit: 1000)
+
+⏭️  No unprocessed books found in philosophers.json
+
+📚 Validating poetry.json...
+📖 Found 409 books
+📋 Already processed: 409 books
+🔄 To process: 0 books
+🎯 Processing 0 books (limit: 1000)
+
+⏭️  No unprocessed books found in poetry.json
+
+📚 Validating french-literature.json...
+📖 Found 63 books
+📋 Already processed: 63 books
+🔄 To process: 0 books
+🎯 Processing 0 books (limit: 1000)
+
+⏭️  No unprocessed books found in french-literature.json
+
+📚 Validating german-literature.json...
+📖 Found 166 books
+📋 Already processed: 166 books
+🔄 To process: 0 books
+🎯 Processing 0 books (limit: 1000)
+
+⏭️  No unprocessed books found in german-literature.json
+
+📚 Validating italian-literature.json...
+📖 Found 113 books
+📋 Already processed: 113 books
+🔄 To process: 0 books
+🎯 Processing 0 books (limit: 1000)
+
+⏭️  No unprocessed books found in italian-literature.json
+
+📚 Validating spanish-literature.json...
+📖 Found 77 books
+📋 Already processed: 77 books
+🔄 To process: 0 books
+🎯 Processing 0 books (limit: 1000)
+
+⏭️  No unprocessed books found in spanish-literature.json
+
+📚 Validating gutenberg-top.json...
+📖 Found 12 books
+📋 Already processed: 12 books
+🔄 To process: 0 books
+🎯 Processing 0 books (limit: 1000)
+
+⏭️  No unprocessed books found in gutenberg-top.json
+
+🎉 All books have been processed!
+📚 Total valid books: 1987
+❌ Total invalid books: 308
+
+📄 Current run results written to: validation-results.json
+📄 All valid books in: valid-books.json
+📄 All invalid books in: invalid-books.json

@@ -123,22 +123,33 @@ export const convertToHTML = (data: any) => {
     const time = formatTimeOnly(message.timestamp);
     
     if (message.role === 'user') {
-      // Extract the selected text from the user message
-      let selectedText = '';
+      // Check if this is a selected text message (quoted) or a follow-up question
       const quoteMatch = message.content.match(/"([^"]+)"/);
-      if (quoteMatch) {
-        selectedText = quoteMatch[1];
-      }
       
-      return `
-      <div class="message user">
-          <div class="message-bubble">
-              <div class="selected-quote">"${selectedText}"</div>
-          </div>
-          <div class="message-meta">
-              <span class="timestamp">${time}</span>
-          </div>
-      </div>`;
+      if (quoteMatch) {
+        // This is a selected text message - extract the quoted text
+        const selectedText = quoteMatch[1];
+        return `
+        <div class="message user">
+            <div class="message-bubble">
+                <div class="selected-quote">"${selectedText}"</div>
+            </div>
+            <div class="message-meta">
+                <span class="timestamp">${time}</span>
+            </div>
+        </div>`;
+      } else {
+        // This is a follow-up question - display the full content
+        return `
+        <div class="message user">
+            <div class="message-bubble">
+                ${message.content}
+            </div>
+            <div class="message-meta">
+                <span class="timestamp">${time}</span>
+            </div>
+        </div>`;
+      }
     } else {
       const providerClass = message.provider ? message.provider.toLowerCase() : '';
       const providerName = message.provider ? message.provider.toUpperCase() : 'Assistant';
@@ -443,7 +454,18 @@ export const convertToMarkdown = (data: any) => {
     
     if (message.role === 'user') {
       markdown += `### 👤 User (${time})\n\n`;
-      markdown += `${message.content}\n\n`;
+      
+      // Check if this is a selected text message (quoted) or a follow-up question
+      const quoteMatch = message.content.match(/"([^"]+)"/);
+      
+      if (quoteMatch) {
+        // This is a selected text message - extract the quoted text
+        const selectedText = quoteMatch[1];
+        markdown += `> "${selectedText}"\n\n`;
+      } else {
+        // This is a follow-up question - display the full content
+        markdown += `${message.content}\n\n`;
+      }
     } else {
       const provider = message.provider ? message.provider.toUpperCase() : 'Assistant';
       const model = message.model || '';
@@ -541,7 +563,18 @@ export const convertToPlainText = (data: any) => {
     
     if (message.role === 'user') {
       text += `[${time}] USER:\n`;
-      text += `${message.content}\n\n`;
+      
+      // Check if this is a selected text message (quoted) or a follow-up question
+      const quoteMatch = message.content.match(/"([^"]+)"/);
+      
+      if (quoteMatch) {
+        // This is a selected text message - extract the quoted text
+        const selectedText = quoteMatch[1];
+        text += `"${selectedText}"\n\n`;
+      } else {
+        // This is a follow-up question - display the full content
+        text += `${message.content}\n\n`;
+      }
     } else {
       const provider = message.provider ? message.provider.toUpperCase() : 'Assistant';
       const model = message.model || '';

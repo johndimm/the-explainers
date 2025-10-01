@@ -1,0 +1,962 @@
+{
+  "testDate": "2025-09-20T18:58:23.893Z",
+  "statistics": {
+    "total": 65,
+    "success": 27,
+    "no_wikipedia_page": 0,
+    "missing_wikipedia_page": 0,
+    "no_gutenberg_links": 38,
+    "error": 0
+  },
+  "results": [
+    {
+      "title": "Hamlet",
+      "author": "William Shakespeare",
+      "gutenbergId": 1524,
+      "wikipediaLength": 150547,
+      "gutenbergLinks": [
+        "56454",
+        "1524"
+      ],
+      "url": "https://en.wikipedia.org/wiki/Hamlet",
+      "contentPreview": "The Tragedy of Hamlet, Prince of Denmark, often shortened to Hamlet (), is a tragedy written by William Shakespeare sometime between 1599 and 1601. It is Shakespeare's longest play. Set in Denmark, th...",
+      "extlinksCount": 185,
+      "status": "success",
+      "category": "Shakespeare"
+    },
+    {
+      "title": "The Taming of the Shrew",
+      "author": "William Shakespeare",
+      "gutenbergId": 1508,
+      "wikipediaLength": 149082,
+      "gutenbergLinks": [
+        "11929",
+        "12198",
+        "1508"
+      ],
+      "url": "https://en.wikipedia.org/wiki/The%20Taming%20of%20the%20Shrew",
+      "contentPreview": "The Taming of the Shrew is a comedy by William Shakespeare, believed to have been written between 1590 and 1592. The play begins with a framing device, often referred to as the induction, in which a m...",
+      "extlinksCount": 141,
+      "status": "success",
+      "category": "Shakespeare"
+    },
+    {
+      "title": "Julius Caesar",
+      "author": "William Shakespeare",
+      "gutenbergId": 1522,
+      "wikipediaLength": 145393,
+      "gutenbergLinks": [],
+      "url": "https://en.wikipedia.org/wiki/Julius%20Caesar",
+      "contentPreview": "Gaius Julius Caesar (12 or 13 July 100 BC – 15 March 44 BC) was a Roman general and statesman. A member of the First Triumvirate, Caesar led the Roman armies in the Gallic Wars before defeating his po...",
+      "extlinksCount": 182,
+      "status": "no_gutenberg_links",
+      "category": "Shakespeare"
+    },
+    {
+      "title": "Romeo and Juliet",
+      "author": "William Shakespeare",
+      "gutenbergId": 1513,
+      "wikipediaLength": 132549,
+      "gutenbergLinks": [
+        "1513"
+      ],
+      "url": "https://en.wikipedia.org/wiki/Romeo%20and%20Juliet",
+      "contentPreview": "The Tragedy of Romeo and Juliet, often shortened to Romeo and Juliet, is a tragedy written by William Shakespeare about the romance between two young Italians from feuding families. It was among Shake...",
+      "extlinksCount": 169,
+      "status": "success",
+      "category": "Shakespeare"
+    },
+    {
+      "title": "Macbeth",
+      "author": "William Shakespeare",
+      "gutenbergId": 1533,
+      "wikipediaLength": 124303,
+      "gutenbergLinks": [
+        "1533"
+      ],
+      "url": "https://en.wikipedia.org/wiki/Macbeth",
+      "contentPreview": "The Tragedy of Macbeth, often shortened to Macbeth (), is a tragedy by William Shakespeare, estimated to have been first performed in 1606. It dramatises the physically violent and damaging psychologi...",
+      "extlinksCount": 164,
+      "status": "success",
+      "category": "Shakespeare"
+    },
+    {
+      "title": "A Midsummer Night's Dream",
+      "author": "William Shakespeare",
+      "gutenbergId": 1514,
+      "wikipediaLength": 120218,
+      "gutenbergLinks": [
+        "1514"
+      ],
+      "url": "https://en.wikipedia.org/wiki/A%20Midsummer%20Night's%20Dream",
+      "contentPreview": "A Midsummer Night's Dream is a comedy play written by William Shakespeare in about 1595 or 1596. The play is set in Athens, and consists of several subplots that revolve around the marriage of Theseus...",
+      "extlinksCount": 115,
+      "status": "success",
+      "category": "Shakespeare"
+    },
+    {
+      "title": "Antony and Cleopatra",
+      "author": "William Shakespeare",
+      "gutenbergId": 1534,
+      "wikipediaLength": 114974,
+      "gutenbergLinks": [
+        "1534"
+      ],
+      "url": "https://en.wikipedia.org/wiki/Antony%20and%20Cleopatra",
+      "contentPreview": "Antony and Cleopatra is a tragedy by William Shakespeare. The play was first performed around 1607, by the King's Men at either the Blackfriars Theatre or the Globe Theatre. Its first appearance in pr...",
+      "extlinksCount": 98,
+      "status": "success",
+      "category": "Shakespeare"
+    },
+    {
+      "title": "King Lear",
+      "author": "William Shakespeare",
+      "gutenbergId": 1532,
+      "wikipediaLength": 114769,
+      "gutenbergLinks": [
+        "1532"
+      ],
+      "url": "https://en.wikipedia.org/wiki/King%20Lear",
+      "contentPreview": "The Tragedy of King Lear, often shortened to King Lear, is a tragedy written by William Shakespeare in late 1605 or early 1606. Set in pre-Roman Britain, the play depicts the consequences of King Lear...",
+      "extlinksCount": 124,
+      "status": "success",
+      "category": "Shakespeare"
+    },
+    {
+      "title": "The Tempest",
+      "author": "William Shakespeare",
+      "gutenbergId": 1540,
+      "wikipediaLength": 109507,
+      "gutenbergLinks": [
+        "1540"
+      ],
+      "url": "https://en.wikipedia.org/wiki/The%20Tempest",
+      "contentPreview": "The Tempest is a play by William Shakespeare, probably written in 1610–1611, and thought to be one of the last plays that he wrote alone. After the first scene, which takes place on a ship at sea duri...",
+      "extlinksCount": 162,
+      "status": "success",
+      "category": "Shakespeare"
+    },
+    {
+      "title": "Pericles",
+      "author": "William Shakespeare",
+      "gutenbergId": 1537,
+      "wikipediaLength": 95747,
+      "gutenbergLinks": [],
+      "url": "https://en.wikipedia.org/wiki/Pericles",
+      "contentPreview": "Pericles ( ; Ancient Greek: Περικλῆς; c. 495–429 BC) was a Greek statesman and general during the Golden Age of Athens. He was prominent and influential in Ancient Athenian politics, particularly betw...",
+      "extlinksCount": 139,
+      "status": "no_gutenberg_links",
+      "category": "Shakespeare"
+    },
+    {
+      "title": "Cymbeline",
+      "author": "William Shakespeare",
+      "gutenbergId": 1538,
+      "wikipediaLength": 79901,
+      "gutenbergLinks": [],
+      "url": "https://en.wikipedia.org/wiki/Cymbeline",
+      "contentPreview": "Cymbeline (), also known as The Tragedie of Cymbeline or Cymbeline, King of Britain, is a play by William Shakespeare set in Ancient Britain (c. 10–14 AD) and based on legends that formed part of the ...",
+      "extlinksCount": 124,
+      "status": "no_gutenberg_links",
+      "category": "Shakespeare"
+    },
+    {
+      "title": "The Merchant of Venice",
+      "author": "William Shakespeare",
+      "gutenbergId": 1515,
+      "wikipediaLength": 65086,
+      "gutenbergLinks": [
+        "1515"
+      ],
+      "url": "https://en.wikipedia.org/wiki/The%20Merchant%20of%20Venice",
+      "contentPreview": "The Merchant of Venice is a play by William Shakespeare, believed to have been written between 1596 and 1598. A merchant in Venice named Antonio defaults on a large loan taken out on behalf of his dea...",
+      "extlinksCount": 104,
+      "status": "success",
+      "category": "Shakespeare"
+    },
+    {
+      "title": "As You Like It",
+      "author": "William Shakespeare",
+      "gutenbergId": 1523,
+      "wikipediaLength": 61175,
+      "gutenbergLinks": [
+        "1523"
+      ],
+      "url": "https://en.wikipedia.org/wiki/As%20You%20Like%20It",
+      "contentPreview": "As You Like It is a pastoral comedy by William Shakespeare believed to have been written in 1599 and first published in the First Folio in 1623. The play's first performance is uncertain, though a per...",
+      "extlinksCount": 100,
+      "status": "success",
+      "category": "Shakespeare"
+    },
+    {
+      "title": "Twelfth Night",
+      "author": "William Shakespeare",
+      "gutenbergId": 1526,
+      "wikipediaLength": 55787,
+      "gutenbergLinks": [
+        "1526"
+      ],
+      "url": "https://en.wikipedia.org/wiki/Twelfth%20Night",
+      "contentPreview": "Twelfth Night, or What You Will is a romantic comedy by William Shakespeare, believed to have been written around 1601–1602 as a Twelfth Night entertainment for the close of the Christmas season. The ...",
+      "extlinksCount": 80,
+      "status": "success",
+      "category": "Shakespeare"
+    },
+    {
+      "title": "Troilus and Cressida",
+      "author": "William Shakespeare",
+      "gutenbergId": 1528,
+      "wikipediaLength": 52344,
+      "gutenbergLinks": [
+        "1528"
+      ],
+      "url": "https://en.wikipedia.org/wiki/Troilus%20and%20Cressida",
+      "contentPreview": "The Tragedy of Troilus and Cressida, often shortened to Troilus and Cressida ( or ), is a play by William Shakespeare, probably written in 1602.\nAt Troy during the Trojan War, Troilus and Cressida beg...",
+      "extlinksCount": 42,
+      "status": "success",
+      "category": "Shakespeare"
+    },
+    {
+      "title": "Much Ado About Nothing",
+      "author": "William Shakespeare",
+      "gutenbergId": 1519,
+      "wikipediaLength": 50063,
+      "gutenbergLinks": [
+        "1519"
+      ],
+      "url": "https://en.wikipedia.org/wiki/Much%20Ado%20About%20Nothing",
+      "contentPreview": "Much Ado About Nothing is a comedy by William Shakespeare thought to have been written in 1598 and 1599. The play was included in the First Folio, published in 1623.\nThe play is set in Messina and rev...",
+      "extlinksCount": 72,
+      "status": "success",
+      "category": "Shakespeare"
+    },
+    {
+      "title": "Timon of Athens",
+      "author": "William Shakespeare",
+      "gutenbergId": 1536,
+      "wikipediaLength": 48240,
+      "gutenbergLinks": [],
+      "url": "https://en.wikipedia.org/wiki/Timon%20of%20Athens",
+      "contentPreview": "The Life of Tymon of Athens, often shortened to Timon of Athens, is a play written by William Shakespeare and likely also Thomas Middleton in about 1606. It was published in the First Folio in 1623. T...",
+      "extlinksCount": 55,
+      "status": "no_gutenberg_links",
+      "category": "Shakespeare"
+    },
+    {
+      "title": "The Winter's Tale",
+      "author": "William Shakespeare",
+      "gutenbergId": 1539,
+      "wikipediaLength": 47983,
+      "gutenbergLinks": [
+        "1539"
+      ],
+      "url": "https://en.wikipedia.org/wiki/The%20Winter's%20Tale",
+      "contentPreview": "The Winter's Tale is a play by William Shakespeare originally published in the First Folio of 1623. Although it was grouped among the comedies, many modern editors have relabelled the play as one of S...",
+      "extlinksCount": 72,
+      "status": "success",
+      "category": "Shakespeare"
+    },
+    {
+      "title": "Love's Labour's Lost",
+      "author": "William Shakespeare",
+      "gutenbergId": 1510,
+      "wikipediaLength": 41085,
+      "gutenbergLinks": [
+        "1510"
+      ],
+      "url": "https://en.wikipedia.org/wiki/Love's%20Labour's%20Lost",
+      "contentPreview": "Love's Labour's Lost is one of William Shakespeare's early comedies, believed to have been written in the mid-1590s for a performance at the Inns of Court before Queen Elizabeth I. It follows the King...",
+      "extlinksCount": 53,
+      "status": "success",
+      "category": "Shakespeare"
+    },
+    {
+      "title": "Measure for Measure",
+      "author": "William Shakespeare",
+      "gutenbergId": 1530,
+      "wikipediaLength": 38169,
+      "gutenbergLinks": [
+        "1530"
+      ],
+      "url": "https://en.wikipedia.org/wiki/Measure%20for%20Measure",
+      "contentPreview": "Measure for Measure is a play by William Shakespeare, believed to have been written in 1603 or 1604 and first performed in 1604. It was published in the First Folio of 1623.\nThe play centres on the de...",
+      "extlinksCount": 67,
+      "status": "success",
+      "category": "Shakespeare"
+    },
+    {
+      "title": "Coriolanus",
+      "author": "William Shakespeare",
+      "gutenbergId": 1535,
+      "wikipediaLength": 36870,
+      "gutenbergLinks": [
+        "14033",
+        "1535"
+      ],
+      "url": "https://en.wikipedia.org/wiki/Coriolanus",
+      "contentPreview": "Coriolanus ( or ) is a tragedy by William Shakespeare, believed to have been written between 1605 and 1608. The play is based on the life of the legendary Roman leader Gnaeus Marcius Coriolanus. Shake...",
+      "extlinksCount": 60,
+      "status": "success",
+      "category": "Shakespeare"
+    },
+    {
+      "title": "The Comedy of Errors",
+      "author": "William Shakespeare",
+      "gutenbergId": 1504,
+      "wikipediaLength": 36057,
+      "gutenbergLinks": [
+        "1504"
+      ],
+      "url": "https://en.wikipedia.org/wiki/The%20Comedy%20of%20Errors",
+      "contentPreview": "The Comedy of Errors is one of William Shakespeare's earliest plays. It is his shortest and one of his most farcical comedies, with a major part of the humour coming from slapstick and mistaken identi...",
+      "extlinksCount": 53,
+      "status": "success",
+      "category": "Shakespeare"
+    },
+    {
+      "title": "Ion",
+      "author": "Plato",
+      "gutenbergId": "1635",
+      "wikipediaLength": 35495,
+      "gutenbergLinks": [],
+      "url": "https://en.wikipedia.org/wiki/Ion",
+      "contentPreview": "An ion () is an atom or molecule with a net electrical charge. The charge of an electron is considered to be negative by convention and this charge is equal and opposite to the charge of a proton, whi...",
+      "extlinksCount": 50,
+      "status": "no_gutenberg_links",
+      "category": "Plato"
+    },
+    {
+      "title": "Crito",
+      "author": "Plato",
+      "gutenbergId": "1657",
+      "wikipediaLength": 31755,
+      "gutenbergLinks": [],
+      "url": "https://en.wikipedia.org/wiki/Crito",
+      "contentPreview": "Crito ( KRY-toh or  KREE-toh; Ancient Greek: Κρίτων [krítɔːn]) is a dialogue written by the ancient Greek philosopher Plato. It depicts a conversation between Socrates and his wealthy friend Crito of ...",
+      "extlinksCount": 95,
+      "status": "no_gutenberg_links",
+      "category": "Plato"
+    },
+    {
+      "title": "The Merry Wives of Windsor",
+      "author": "William Shakespeare",
+      "gutenbergId": 1517,
+      "wikipediaLength": 31440,
+      "gutenbergLinks": [
+        "1517"
+      ],
+      "url": "https://en.wikipedia.org/wiki/The%20Merry%20Wives%20of%20Windsor",
+      "contentPreview": "The Merry Wives of Windsor or Sir John Falstaff and the Merry Wives of Windsor is a comedy by William Shakespeare first published in 1602, though believed to have been written in or before 1597. The W...",
+      "extlinksCount": 33,
+      "status": "success",
+      "category": "Shakespeare"
+    },
+    {
+      "title": "Phaedo",
+      "author": "Plato",
+      "gutenbergId": "1658",
+      "wikipediaLength": 30162,
+      "gutenbergLinks": [],
+      "url": "https://en.wikipedia.org/wiki/Phaedo",
+      "contentPreview": "Phaedo (; Ancient Greek: Φαίδων, Phaidōn) is a  dialogue written by Plato, in which Socrates discusses the immortality of the soul and the nature of the afterlife with his friends in the hours leading...",
+      "extlinksCount": 40,
+      "status": "no_gutenberg_links",
+      "category": "Plato"
+    },
+    {
+      "title": "Critias",
+      "author": "Plato",
+      "gutenbergId": "1571",
+      "wikipediaLength": 24819,
+      "gutenbergLinks": [],
+      "url": "https://en.wikipedia.org/wiki/Critias",
+      "contentPreview": "Critias (; Ancient Greek: Κριτίας, Kritias; c. 460 – 403 BC) was an ancient Athenian poet, philosopher and political leader. He is known today for being a student of Socrates, a writer of some regard,...",
+      "extlinksCount": 34,
+      "status": "no_gutenberg_links",
+      "category": "Plato"
+    },
+    {
+      "title": "The Phoenix and the Turtle",
+      "author": "William Shakespeare",
+      "gutenbergId": 1525,
+      "wikipediaLength": 21682,
+      "gutenbergLinks": [
+        "1525"
+      ],
+      "url": "https://en.wikipedia.org/wiki/The%20Phoenix%20and%20the%20Turtle",
+      "contentPreview": "The Phoenix and the Turtle (also spelled The Phœnix and the Turtle) is an allegorical poem by William Shakespeare, first published in 1601 as a supplement to a longer work, Love's Martyr, by Robert Ch...",
+      "extlinksCount": 21,
+      "status": "success",
+      "category": "Shakespeare"
+    },
+    {
+      "title": "Euthyphro",
+      "author": "Plato",
+      "gutenbergId": "1642",
+      "wikipediaLength": 20319,
+      "gutenbergLinks": [],
+      "url": "https://en.wikipedia.org/wiki/Euthyphro",
+      "contentPreview": "Euthyphro (; Ancient Greek: Εὐθύφρων, romanized: Euthyphrōn), is a philosophical work by Plato written in the form of a Socratic dialogue set during the weeks before the trial of Socrates in 399 BC. I...",
+      "extlinksCount": 40,
+      "status": "no_gutenberg_links",
+      "category": "Plato"
+    },
+    {
+      "title": "Meno",
+      "author": "Plato",
+      "gutenbergId": "1643",
+      "wikipediaLength": 19793,
+      "gutenbergLinks": [],
+      "url": "https://en.wikipedia.org/wiki/Meno",
+      "contentPreview": "Meno (; Ancient Greek: Μένων, Ménōn) is a Socratic dialogue written by Plato around 385 BC., but set at an earlier date around 402 BC. Meno begins the dialogue by asking Socrates whether virtue (in An...",
+      "extlinksCount": 41,
+      "status": "no_gutenberg_links",
+      "category": "Plato"
+    },
+    {
+      "title": "Protagoras",
+      "author": "Plato",
+      "gutenbergId": "1591",
+      "wikipediaLength": 19519,
+      "gutenbergLinks": [],
+      "url": "https://en.wikipedia.org/wiki/Protagoras",
+      "contentPreview": "Protagoras ( proh-TAG-ər-əs, -⁠ass; Greek: Πρωταγόρας; c. 490 BC – c. 420 BC) was a pre-Socratic Greek philosopher and rhetorical theorist. He is numbered as one of the sophists by Plato. In his dialo...",
+      "extlinksCount": 57,
+      "status": "no_gutenberg_links",
+      "category": "Plato"
+    },
+    {
+      "title": "The Two Noble Kinsmen",
+      "author": "William Shakespeare",
+      "gutenbergId": 1542,
+      "wikipediaLength": 18641,
+      "gutenbergLinks": [
+        "1506"
+      ],
+      "url": "https://en.wikipedia.org/wiki/The%20Two%20Noble%20Kinsmen",
+      "contentPreview": "The Two Noble Kinsmen is a Jacobean tragicomedy, first published in 1634 and attributed jointly to John Fletcher and William Shakespeare. Its plot derives from \"The Knight's Tale\" in Geoffrey Chaucer'...",
+      "extlinksCount": 36,
+      "status": "success",
+      "category": "Shakespeare"
+    },
+    {
+      "title": "Symposium",
+      "author": "Plato",
+      "gutenbergId": "1600",
+      "wikipediaLength": 17841,
+      "gutenbergLinks": [],
+      "url": "https://en.wikipedia.org/wiki/Symposium",
+      "contentPreview": "In Ancient Greece, the symposium (Ancient Greek: συμπόσιον, sympósion, from συμπίνειν, sympínein, 'to drink together') was the part of a banquet that took place after the meal, when drinking for pleas...",
+      "extlinksCount": 37,
+      "status": "no_gutenberg_links",
+      "category": "Plato"
+    },
+    {
+      "title": "All's Well That Ends Well",
+      "author": "William Shakespeare",
+      "gutenbergId": 1529,
+      "wikipediaLength": 17236,
+      "gutenbergLinks": [
+        "1529"
+      ],
+      "url": "https://en.wikipedia.org/wiki/All's%20Well%20That%20Ends%20Well",
+      "contentPreview": "All's Well That Ends Well is a play by William Shakespeare, published in the First Folio in 1623, where it is listed among the comedies. There is a debate about the date of its composition, with possi...",
+      "extlinksCount": 23,
+      "status": "success",
+      "category": "Shakespeare"
+    },
+    {
+      "title": "The Passionate Pilgrim",
+      "author": "William Shakespeare",
+      "gutenbergId": 1544,
+      "wikipediaLength": 16283,
+      "gutenbergLinks": [
+        "1544"
+      ],
+      "url": "https://en.wikipedia.org/wiki/The%20Passionate%20Pilgrim",
+      "contentPreview": "The Passionate Pilgrim (1598 or 1599) is an anthology of 21 poems collected and published by William Jaggard that were attributed to \"W. Shakespeare\" on the title page, only five of which are consider...",
+      "extlinksCount": 20,
+      "status": "success",
+      "category": "Shakespeare"
+    },
+    {
+      "title": "The Rape of Lucrece",
+      "author": "William Shakespeare",
+      "gutenbergId": 1505,
+      "wikipediaLength": 16281,
+      "gutenbergLinks": [
+        "1505"
+      ],
+      "url": "https://en.wikipedia.org/wiki/The%20Rape%20of%20Lucrece",
+      "contentPreview": "The Rape of Lucrece (1594) is a narrative poem by William Shakespeare about the legendary Roman noblewoman Lucretia. In his previous narrative poem, Venus and Adonis (1593), Shakespeare had included a...",
+      "extlinksCount": 20,
+      "status": "success",
+      "category": "Shakespeare"
+    },
+    {
+      "title": "Locrine",
+      "author": "William Shakespeare",
+      "gutenbergId": 1548,
+      "wikipediaLength": 11731,
+      "gutenbergLinks": [
+        "1548"
+      ],
+      "url": "https://en.wikipedia.org/wiki/Locrine",
+      "contentPreview": "Locrine is an Elizabethan play depicting the legendary Trojan founders of the nation of England and of Troynovant (London). The play presents a cluster of complex and unresolved problems for scholars ...",
+      "extlinksCount": 18,
+      "status": "success",
+      "category": "Shakespeare"
+    },
+    {
+      "title": "Lysis",
+      "author": "Plato",
+      "gutenbergId": "1579",
+      "wikipediaLength": 10924,
+      "gutenbergLinks": [],
+      "url": "https://en.wikipedia.org/wiki/Lysis",
+      "contentPreview": "Lysis ( LY-sis; from Greek λῠ́σῐς lýsis 'loosening') is the breaking down of the membrane of a  cell, often by viral, enzymic, or osmotic (that is, \"lytic\"  LIT-ik) mechanisms that compromise its inte...",
+      "extlinksCount": 37,
+      "status": "no_gutenberg_links",
+      "category": "Plato"
+    },
+    {
+      "title": "Mucedorus",
+      "author": "William Shakespeare",
+      "gutenbergId": 1545,
+      "wikipediaLength": 9687,
+      "gutenbergLinks": [
+        "1545"
+      ],
+      "url": "https://en.wikipedia.org/wiki/Mucedorus",
+      "contentPreview": "A Most pleasant Comedie of Mucedorus the Kings Sonne of Valentia, and Amadine the Kinges daughter of Aragon, commonly called Mucedorus, is an Elizabethan romantic comedy, first performed around 1590 a...",
+      "extlinksCount": 6,
+      "status": "success",
+      "category": "Shakespeare"
+    },
+    {
+      "title": "A Lover's Complaint",
+      "author": "William Shakespeare",
+      "gutenbergId": 1543,
+      "wikipediaLength": 8053,
+      "gutenbergLinks": [
+        "1543"
+      ],
+      "url": "https://en.wikipedia.org/wiki/A%20Lover's%20Complaint",
+      "contentPreview": "\"A Lover's Complaint\" is a narrative poem written by William Shakespeare, and published as part of the 1609 quarto of Shakespeare's Sonnets.  It was published by Thomas Thorpe.\n\"A Lover’s Complaint\" i...",
+      "extlinksCount": 11,
+      "status": "success",
+      "category": "Shakespeare"
+    },
+    {
+      "title": "Cratylus",
+      "author": "Plato",
+      "gutenbergId": "1616",
+      "wikipediaLength": 3124,
+      "gutenbergLinks": [],
+      "url": "https://en.wikipedia.org/wiki/Cratylus",
+      "contentPreview": "Cratylus ( KRAT-il-əs; Ancient Greek: Κρατύλος, Kratylos) was an ancient Athenian philosopher from the mid-late 5th century BC, known mostly through his portrayal in Plato's dialogue Cratylus. He was ...",
+      "extlinksCount": 6,
+      "status": "no_gutenberg_links",
+      "category": "Plato"
+    },
+    {
+      "title": "Apology",
+      "author": "Plato",
+      "gutenbergId": "1656",
+      "wikipediaLength": 3044,
+      "gutenbergLinks": [],
+      "url": "https://en.wikipedia.org/wiki/Apology",
+      "contentPreview": "Apology, The Apology, apologize/apologise, apologist, apologetics, or apologetic may refer to:...",
+      "extlinksCount": 0,
+      "status": "no_gutenberg_links",
+      "category": "Plato"
+    },
+    {
+      "title": "Charmides",
+      "author": "Plato",
+      "gutenbergId": "1580",
+      "wikipediaLength": 2330,
+      "gutenbergLinks": [],
+      "url": "https://en.wikipedia.org/wiki/Charmides",
+      "contentPreview": "Charmides (; Ancient Greek: Χαρμίδης), son of Glaucon (who was the grandfather of Plato, and not to be confused with his brother of the same name), born circa 446 BC, was an Athenian statesman. Charmi...",
+      "extlinksCount": 1,
+      "status": "no_gutenberg_links",
+      "category": "Plato"
+    },
+    {
+      "title": "King John",
+      "author": "William Shakespeare",
+      "gutenbergId": 1511,
+      "wikipediaLength": 1834,
+      "gutenbergLinks": [],
+      "url": "https://en.wikipedia.org/wiki/King%20John",
+      "contentPreview": "King John may refer to:\n\n...",
+      "extlinksCount": 0,
+      "status": "no_gutenberg_links",
+      "category": "Shakespeare"
+    },
+    {
+      "title": "Venus and Adonis",
+      "author": "William Shakespeare",
+      "gutenbergId": 1045,
+      "wikipediaLength": 1658,
+      "gutenbergLinks": [],
+      "url": "https://en.wikipedia.org/wiki/Venus%20and%20Adonis",
+      "contentPreview": "Venus and Adonis may refer to:...",
+      "extlinksCount": 0,
+      "status": "no_gutenberg_links",
+      "category": "Shakespeare"
+    },
+    {
+      "title": "Timaeus",
+      "author": "Plato",
+      "gutenbergId": "1572",
+      "wikipediaLength": 905,
+      "gutenbergLinks": [],
+      "url": "https://en.wikipedia.org/wiki/Timaeus",
+      "contentPreview": "Timaeus (or Timaios) is a Greek name. It may refer to:\n\nTimaeus (dialogue), a Socratic dialogue by Plato\nTimaeus of Locri, 5th-century BC Pythagorean philosopher, appearing in Plato's dialogue\nTimaeus...",
+      "extlinksCount": 0,
+      "status": "no_gutenberg_links",
+      "category": "Plato"
+    },
+    {
+      "title": "Euthydemus",
+      "author": "Plato",
+      "gutenbergId": "1598",
+      "wikipediaLength": 762,
+      "gutenbergLinks": [],
+      "url": "https://en.wikipedia.org/wiki/Euthydemus",
+      "contentPreview": "Euthydemus (Ancient Greek: Εὐθύδημος) may refer to:...",
+      "extlinksCount": 0,
+      "status": "no_gutenberg_links",
+      "category": "Plato"
+    },
+    {
+      "title": "Phaedrus",
+      "author": "Plato",
+      "gutenbergId": "1636",
+      "wikipediaLength": 726,
+      "gutenbergLinks": [],
+      "url": "https://en.wikipedia.org/wiki/Phaedrus",
+      "contentPreview": "Phaedrus may refer to:...",
+      "extlinksCount": 0,
+      "status": "no_gutenberg_links",
+      "category": "Plato"
+    },
+    {
+      "title": "Laches",
+      "author": "Plato",
+      "gutenbergId": "1584",
+      "wikipediaLength": 626,
+      "gutenbergLinks": [],
+      "url": "https://en.wikipedia.org/wiki/Laches",
+      "contentPreview": "Laches may refer to:\n\nLaches (equity), an equitable principle in Anglo-American law\nLaches (general) (c. 475 – 418 BC), an Athenian aristocrat\nLaches (dialogue), a Socratic dialogue of Plato\nLaches, B...",
+      "extlinksCount": 0,
+      "status": "no_gutenberg_links",
+      "category": "Plato"
+    },
+    {
+      "title": "King Henry VIII",
+      "author": "William Shakespeare",
+      "gutenbergId": 1541,
+      "wikipediaLength": 120,
+      "gutenbergLinks": [],
+      "url": "https://en.wikipedia.org/wiki/King%20Henry%20VIII",
+      "contentPreview": "...",
+      "extlinksCount": 0,
+      "status": "no_gutenberg_links",
+      "category": "Shakespeare"
+    },
+    {
+      "title": "Sir Thomas More",
+      "author": "William Shakespeare",
+      "gutenbergId": 1547,
+      "wikipediaLength": 110,
+      "gutenbergLinks": [],
+      "url": "https://en.wikipedia.org/wiki/Sir%20Thomas%20More",
+      "contentPreview": "...",
+      "extlinksCount": 0,
+      "status": "no_gutenberg_links",
+      "category": "Shakespeare"
+    },
+    {
+      "title": "Shakespeare's Sonnets",
+      "author": "William Shakespeare",
+      "gutenbergId": 1041,
+      "wikipediaLength": 100,
+      "gutenbergLinks": [],
+      "url": "https://en.wikipedia.org/wiki/Shakespeare's%20Sonnets",
+      "contentPreview": "...",
+      "extlinksCount": 0,
+      "status": "no_gutenberg_links",
+      "category": "Shakespeare"
+    },
+    {
+      "title": "Othello, the Moor of Venice",
+      "author": "William Shakespeare",
+      "gutenbergId": 1531,
+      "wikipediaLength": 73,
+      "gutenbergLinks": [],
+      "url": "https://en.wikipedia.org/wiki/Othello%2C%20the%20Moor%20of%20Venice",
+      "contentPreview": "...",
+      "extlinksCount": 0,
+      "status": "no_gutenberg_links",
+      "category": "Shakespeare"
+    },
+    {
+      "title": "The Republic",
+      "author": "Plato",
+      "gutenbergId": "1497",
+      "wikipediaLength": 52,
+      "gutenbergLinks": [],
+      "url": "https://en.wikipedia.org/wiki/The%20Republic",
+      "contentPreview": "...",
+      "extlinksCount": 0,
+      "status": "no_gutenberg_links",
+      "category": "Plato"
+    },
+    {
+      "title": "Two Gentlemen of Verona",
+      "author": "William Shakespeare",
+      "gutenbergId": 1509,
+      "wikipediaLength": 41,
+      "gutenbergLinks": [],
+      "url": "https://en.wikipedia.org/wiki/Two%20Gentlemen%20of%20Verona",
+      "contentPreview": "...",
+      "extlinksCount": 0,
+      "status": "no_gutenberg_links",
+      "category": "Shakespeare"
+    },
+    {
+      "title": "King Richard III",
+      "author": "William Shakespeare",
+      "gutenbergId": 1503,
+      "wikipediaLength": 36,
+      "gutenbergLinks": [],
+      "url": "https://en.wikipedia.org/wiki/King%20Richard%20III",
+      "contentPreview": "...",
+      "extlinksCount": 0,
+      "status": "no_gutenberg_links",
+      "category": "Shakespeare"
+    },
+    {
+      "title": "King Richard II",
+      "author": "William Shakespeare",
+      "gutenbergId": 1512,
+      "wikipediaLength": 35,
+      "gutenbergLinks": [],
+      "url": "https://en.wikipedia.org/wiki/King%20Richard%20II",
+      "contentPreview": "...",
+      "extlinksCount": 0,
+      "status": "no_gutenberg_links",
+      "category": "Shakespeare"
+    },
+    {
+      "title": "King Henry V",
+      "author": "William Shakespeare",
+      "gutenbergId": 1521,
+      "wikipediaLength": 32,
+      "gutenbergLinks": [],
+      "url": "https://en.wikipedia.org/wiki/King%20Henry%20V",
+      "contentPreview": "...",
+      "extlinksCount": 0,
+      "status": "no_gutenberg_links",
+      "category": "Shakespeare"
+    },
+    {
+      "title": "King Henry IV, Part 1",
+      "author": "William Shakespeare",
+      "gutenbergId": 1516,
+      "wikipediaLength": 30,
+      "gutenbergLinks": [],
+      "url": "https://en.wikipedia.org/wiki/King%20Henry%20IV%2C%20Part%201",
+      "contentPreview": "...",
+      "extlinksCount": 0,
+      "status": "no_gutenberg_links",
+      "category": "Shakespeare"
+    },
+    {
+      "title": "King Henry IV, Part 2",
+      "author": "William Shakespeare",
+      "gutenbergId": 1518,
+      "wikipediaLength": 30,
+      "gutenbergLinks": [],
+      "url": "https://en.wikipedia.org/wiki/King%20Henry%20IV%2C%20Part%202",
+      "contentPreview": "...",
+      "extlinksCount": 0,
+      "status": "no_gutenberg_links",
+      "category": "Shakespeare"
+    },
+    {
+      "title": "King Henry VI, Part 3",
+      "author": "William Shakespeare",
+      "gutenbergId": 1502,
+      "wikipediaLength": 30,
+      "gutenbergLinks": [],
+      "url": "https://en.wikipedia.org/wiki/King%20Henry%20VI%2C%20Part%203",
+      "contentPreview": "...",
+      "extlinksCount": 0,
+      "status": "no_gutenberg_links",
+      "category": "Shakespeare"
+    },
+    {
+      "title": "The Tragedy of Titus Andronicus",
+      "author": "William Shakespeare",
+      "gutenbergId": 1507,
+      "wikipediaLength": 30,
+      "gutenbergLinks": [],
+      "url": "https://en.wikipedia.org/wiki/The%20Tragedy%20of%20Titus%20Andronicus",
+      "contentPreview": "...",
+      "extlinksCount": 0,
+      "status": "no_gutenberg_links",
+      "category": "Shakespeare"
+    },
+    {
+      "title": "King Henry VI, Part 1",
+      "author": "William Shakespeare",
+      "gutenbergId": 1500,
+      "wikipediaLength": 0,
+      "gutenbergLinks": [],
+      "url": "https://en.wikipedia.org/wiki/King%20Henry%20VI%2C%20Part%201",
+      "contentPreview": "...",
+      "extlinksCount": 0,
+      "status": "no_gutenberg_links",
+      "category": "Shakespeare"
+    },
+    {
+      "title": "King Henry VI, Part 2",
+      "author": "William Shakespeare",
+      "gutenbergId": 1501,
+      "wikipediaLength": 0,
+      "gutenbergLinks": [],
+      "url": "https://en.wikipedia.org/wiki/King%20Henry%20VI%2C%20Part%202",
+      "contentPreview": "...",
+      "extlinksCount": 0,
+      "status": "no_gutenberg_links",
+      "category": "Shakespeare"
+    },
+    {
+      "title": "Sonnets To Sundry Notes of Music",
+      "author": "William Shakespeare",
+      "gutenbergId": 1546,
+      "wikipediaLength": 0,
+      "gutenbergLinks": [],
+      "url": "https://en.wikipedia.org/wiki/Sonnets%20To%20Sundry%20Notes%20of%20Music",
+      "contentPreview": "...",
+      "extlinksCount": 0,
+      "status": "no_gutenberg_links",
+      "category": "Shakespeare"
+    }
+  ],
+  "top10ByLength": [
+    {
+      "title": "Hamlet",
+      "author": "William Shakespeare",
+      "category": "Shakespeare",
+      "wikipediaLength": 150547,
+      "status": "success",
+      "gutenbergLinks": [
+        "56454",
+        "1524"
+      ],
+      "extlinksCount": 185
+    },
+    {
+      "title": "The Taming of the Shrew",
+      "author": "William Shakespeare",
+      "category": "Shakespeare",
+      "wikipediaLength": 149082,
+      "status": "success",
+      "gutenbergLinks": [
+        "11929",
+        "12198",
+        "1508"
+      ],
+      "extlinksCount": 141
+    },
+    {
+      "title": "Julius Caesar",
+      "author": "William Shakespeare",
+      "category": "Shakespeare",
+      "wikipediaLength": 145393,
+      "status": "no_gutenberg_links",
+      "gutenbergLinks": [],
+      "extlinksCount": 182
+    },
+    {
+      "title": "Romeo and Juliet",
+      "author": "William Shakespeare",
+      "category": "Shakespeare",
+      "wikipediaLength": 132549,
+      "status": "success",
+      "gutenbergLinks": [
+        "1513"
+      ],
+      "extlinksCount": 169
+    },
+    {
+      "title": "Macbeth",
+      "author": "William Shakespeare",
+      "category": "Shakespeare",
+      "wikipediaLength": 124303,
+      "status": "success",
+      "gutenbergLinks": [
+        "1533"
+      ],
+      "extlinksCount": 164
+    },
+    {
+      "title": "A Midsummer Night's Dream",
+      "author": "William Shakespeare",
+      "category": "Shakespeare",
+      "wikipediaLength": 120218,
+      "status": "success",
+      "gutenbergLinks": [
+        "1514"
+      ],
+      "extlinksCount": 115
+    },
+    {
+      "title": "Antony and Cleopatra",
+      "author": "William Shakespeare",
+      "category": "Shakespeare",
+      "wikipediaLength": 114974,
+      "status": "success",
+      "gutenbergLinks": [
+        "1534"
+      ],
+      "extlinksCount": 98
+    },
+    {
+      "title": "King Lear",
+      "author": "William Shakespeare",
+      "category": "Shakespeare",
+      "wikipediaLength": 114769,
+      "status": "success",
+      "gutenbergLinks": [
+        "1532"
+      ],
+      "extlinksCount": 124
+    },
+    {
+      "title": "The Tempest",
+      "author": "William Shakespeare",
+      "category": "Shakespeare",
+      "wikipediaLength": 109507,
+      "status": "success",
+      "gutenbergLinks": [
+        "1540"
+      ],
+      "extlinksCount": 162
+    },
+    {
+      "title": "Pericles",
+      "author": "William Shakespeare",
+      "category": "Shakespeare",
+      "wikipediaLength": 95747,
+      "status": "no_gutenberg_links",
+      "gutenbergLinks": [],
+      "extlinksCount": 139
+    }
+  ]
+}
