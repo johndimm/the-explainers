@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { log, error } from '../../../utils/log'
+import { log, error } from '@/utils/log'
 
 async function searchYouTube(searchQuery: string) {
   try {
@@ -63,8 +63,7 @@ export async function POST(req: NextRequest) {
   try {
     const { query, bookTitle, author } = await req.json()
     
-    console.log('🎬 YOUTUBE API CALLED:', { query, bookTitle, author })
-    log('youtube','YouTube search request:', { query, bookTitle, author })
+    log('api', '🎬 YOUTUBE API CALLED:', { query, bookTitle, author })
     
     // Use the query as-is from the frontend (it's already been enhanced with context)
     const searchTerms = query

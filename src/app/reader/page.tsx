@@ -37,14 +37,14 @@ function ReaderContent() {
   }, [showMobileMenu])
 
   useEffect(() => {
-    console.log('Reader: Auth state - isLoading:', authLoading, 'isAuthenticated:', isAuthenticated)
+log('ui','Reader: Auth state - isLoading:', authLoading, 'isAuthenticated:', isAuthenticated)
     
     // In local development, bypass authentication loading
     const isLocalDev = process.env.NODE_ENV === 'development' && typeof window !== 'undefined' && window.location.hostname === 'localhost'
     
     // Don't try to load anything until authentication is resolved (unless in local dev)
     if (authLoading && !isLocalDev) {
-      console.log('Reader: Waiting for authentication...')
+log('ui','Reader: Waiting for authentication...')
       return
     }
 
@@ -63,24 +63,24 @@ function ReaderContent() {
       try {
         // Load from database only
         const response = await fetch('/api/user/current-book')
-        console.log('Reader: Current book API response status:', response.status)
+log('ui','Reader: Current book API response status:', response.status)
         
         if (response.ok) {
           const dbBook = await response.json()
-          console.log('Reader: Restoring saved book from database:', dbBook)
+log('ui','Reader: Restoring saved book from database:', dbBook)
           
           if (dbBook.url) {
             handleBookSelect(dbBook.title, dbBook.author, dbBook.url)
             return
           }
         } else {
-          console.log('Reader: No current book found, status:', response.status)
+log('ui','Reader: No current book found, status:', response.status)
         }
       } catch (error) {
-        console.error('Reader: Error loading current book from database:', error)
+        log('ui','Reader: Error loading current book from database:', error)
       }
       
-      console.log('Reader: Redirecting to library - no current book found')
+log('ui','Reader: Redirecting to library - no current book found')
       router.push('/library')
     }
 
@@ -100,7 +100,7 @@ function ReaderContent() {
         body: JSON.stringify(newBook)
       })
     } catch (error) {
-      console.error('Error saving current book to database:', error)
+      log('ui','Error saving current book to database:', error)
     }
     
     // Dispatch custom event to notify header of the change
@@ -153,7 +153,7 @@ function ReaderContent() {
       })
       setBookText(text)
     } catch (error) {
-      console.error('Error loading book:', error)
+      log('ui','Error loading book:', error)
       alert('Failed to load book. Please try again.')
     } finally {
       setLoading(false)

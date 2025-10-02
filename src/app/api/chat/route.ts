@@ -51,7 +51,7 @@ async function callOpenAI(messages: ChatMessage[], responseLength: string, model
 
     return completion.choices[0]?.message?.content || 'No response'
   } catch (error) {
-    console.error('OpenAI API error:', error)
+    log('api','OpenAI API error:', error)
     throw error
   }
 }
@@ -77,7 +77,7 @@ async function callAnthropic(messages: ChatMessage[], responseLength: string, mo
 
     return response.content[0]?.type === 'text' ? response.content[0].text : 'No response'
   } catch (error: any) {
-    console.error('Anthropic API error:', error)
+    log('api','Anthropic API error:', error)
     
     // Handle specific error cases
     if (error.message?.includes('model') && error.message?.includes('not found')) {
@@ -174,8 +174,8 @@ export async function POST(request: NextRequest) {
     })
 
   } catch (error) {
-    console.error('Chat API error for provider:', provider)
-    console.error('Full error details:', error)
+    log('api','Chat API error for provider:', provider)
+    log('api','Full error details:', error)
     return NextResponse.json(
       { error: `Failed to process chat request with ${provider}: ${error}` }, 
       { status: 500 }

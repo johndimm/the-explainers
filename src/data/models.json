@@ -110,19 +110,29 @@
     ],
     "gemini": [
       {
+        "id": "gemini-2.5-pro",
+        "name": "Gemini 2.5 Pro",
+        "description": "Latest stable Gemini Pro model - most capable"
+      },
+      {
+        "id": "gemini-2.5-flash",
+        "name": "Gemini 2.5 Flash",
+        "description": "Latest stable Gemini Flash model - fast and efficient"
+      },
+      {
         "id": "gemini-2.0-flash",
         "name": "Gemini 2.0 Flash",
-        "description": "Latest generation - fastest and most efficient"
+        "description": "Stable Gemini 2.0 Flash model"
       },
       {
-        "id": "gemini-1.5-pro",
-        "name": "Gemini 1.5 Pro",
-        "description": "Most capable model - advanced reasoning"
+        "id": "gemini-pro-latest",
+        "name": "Gemini Pro Latest",
+        "description": "Latest release of Gemini Pro"
       },
       {
-        "id": "gemini-1.5-flash",
-        "name": "Gemini 1.5 Flash",
-        "description": "Fast and efficient - good balance of speed and quality"
+        "id": "gemini-flash-latest",
+        "name": "Gemini Flash Latest",
+        "description": "Latest release of Gemini Flash"
       }
     ],
     "custom": [
@@ -133,11 +143,11 @@
       }
     ]
   },
-  "defaults": {
-    "gemini": "gemini-1.5-flash",
-    "anthropic": "claude-sonnet-4-20250514",
-    "openai": "gpt-4o",
-    "deepseek": "deepseek-v3",
-    "custom": "custom"
-  }
+    "defaults": {
+      "gemini": "gemini-2.5-flash",
+      "anthropic": "claude-sonnet-4-20250514",
+      "openai": "gpt-4o",
+      "deepseek": "deepseek-chat",
+      "custom": "custom"
+    }
 }

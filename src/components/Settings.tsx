@@ -9,6 +9,7 @@ import responseLengths from '../data/response-lengths.json'
 import fontFamilies from '../data/font-families.json'
 import readingModes from '../data/reading-modes.json'
 import defaultSettings from '../data/default-settings.json'
+import { log } from '../utils/log'
 
 // Derive all types from JSON data
 export type LLMProvider = typeof models.providers[number]['id']
@@ -64,7 +65,7 @@ const Settings: React.FC<SettingsProps> = ({ isOpen, onClose, settings, onSettin
   const router = useRouter()
 
   useEffect(() => {
-    console.log('Settings: settings prop changed to:', settings)
+log('ui','Settings: settings prop changed to:', settings)
     
     // Always migrate old Claude models to default model from JSON
     let migratedSettings = { ...settings }
@@ -72,7 +73,7 @@ const Settings: React.FC<SettingsProps> = ({ isOpen, onClose, settings, onSettin
         (settings.llmModel === 'claude-3-sonnet-20240229' || settings.llmModel === 'claude-3-5-sonnet')) {
       const defaultModel = (models as any).defaults.anthropic
       migratedSettings.llmModel = defaultModel as LLMModel
-      console.log(`Settings: Migrated old Claude model to ${defaultModel}`)
+log('ui',`Settings: Migrated old Claude model to ${defaultModel}`)
       onSettingsChange(migratedSettings)
       return // Don't set local settings yet, wait for the updated settings to come back
     }
@@ -102,11 +103,11 @@ const Settings: React.FC<SettingsProps> = ({ isOpen, onClose, settings, onSettin
   // Auto-save when settings change
   useEffect(() => {
     if (JSON.stringify(localSettings) !== JSON.stringify(settings)) {
-      console.log('Settings: Local settings changed, will auto-save in 500ms')
-      console.log('Settings: Local settings:', localSettings)
-      console.log('Settings: Current global settings:', settings)
+log('ui','Settings: Local settings changed, will auto-save in 500ms')
+log('ui','Settings: Local settings:', localSettings)
+log('ui','Settings: Current global settings:', settings)
       const timeoutId = setTimeout(() => {
-        console.log('Settings: Auto-saving settings:', localSettings)
+log('ui','Settings: Auto-saving settings:', localSettings)
         onSettingsChange(localSettings)
       }, 500) // Debounce auto-save by 500ms
       
@@ -126,7 +127,7 @@ const Settings: React.FC<SettingsProps> = ({ isOpen, onClose, settings, onSettin
     if (localSettings.llmProvider === 'anthropic' && 
         (localSettings.llmModel === 'claude-3-sonnet-20240229' || localSettings.llmModel === 'claude-3-5-sonnet')) {
       const migratedModel = (models as any).defaults.anthropic as LLMModel
-      console.log(`Settings: Force migrating deprecated Claude model ${localSettings.llmModel} to ${migratedModel}`)
+log('ui',`Settings: Force migrating deprecated Claude model ${localSettings.llmModel} to ${migratedModel}`)
       setLocalSettings(prev => ({ ...prev, llmModel: migratedModel }))
       onSettingsChange({ ...localSettings, llmModel: migratedModel })
     }
@@ -138,7 +139,7 @@ const Settings: React.FC<SettingsProps> = ({ isOpen, onClose, settings, onSettin
   // Log current provider/model selection for debugging
   useEffect(() => {
     const currentModel = providerModels[localSettings.llmProvider] || localSettings.llmModel || getModelOptions(localSettings.llmProvider)[0].id as LLMModel
-    console.log('Settings selection:', { provider: localSettings.llmProvider, model: currentModel })
+log('ui','Settings selection:', { provider: localSettings.llmProvider, model: currentModel })
   }, [localSettings.llmProvider, localSettings.llmModel, providerModels])
 
   // Ensure every provider always has a valid selected model in state/localStorage

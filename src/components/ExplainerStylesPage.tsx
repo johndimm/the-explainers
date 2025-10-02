@@ -1,4 +1,5 @@
 'use client'
+import { log } from '../utils/log'
 
 import React, { useState, useEffect, useMemo } from 'react'
 import { useRouter } from 'next/navigation'
@@ -76,7 +77,7 @@ const ExplainerStylesPage: React.FC<ExplainerStylesPageProps> = ({
   }, [])
 
   const handleStyleSelect = (style: ExplanationStyle) => {
-    console.log('ExplainerStylesPage: Style selected:', style)
+log('ui','ExplainerStylesPage: Style selected:', style)
     onStyleChange(style)
     // Don't redirect - let user stay on the page to see their selection
   }

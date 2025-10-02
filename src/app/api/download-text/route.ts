@@ -49,7 +49,7 @@ export async function GET(request: NextRequest) {
       })
       
     } catch (error) {
-      console.error('Error reading book file:', error)
+      log('api','Error reading book file:', error)
       return NextResponse.json(
         { error: 'Failed to read book file' }, 
         { status: 500 }
@@ -57,7 +57,7 @@ export async function GET(request: NextRequest) {
     }
     
   } catch (error) {
-    console.error('Error in GET download-text:', error)
+    log('api','Error in GET download-text:', error)
     return NextResponse.json(
       { error: 'Failed to process request' }, 
       { status: 500 }
@@ -121,7 +121,7 @@ export async function POST(request: NextRequest) {
     })
     
   } catch (error) {
-    console.error('Error downloading text:', error)
+    log('api','Error downloading text:', error)
     return NextResponse.json(
       { error: 'Failed to download text from URL' }, 
       { status: 500 }

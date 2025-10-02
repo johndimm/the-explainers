@@ -76,10 +76,10 @@ export const SettingsProvider: React.FC<SettingsProviderProps> = ({ children }) 
           // No settings found, use defaults
           log('SettingsContext: No settings found, using defaults')
         } else {
-          console.error('SettingsContext: Error loading settings:', response.statusText)
+          log('ui','SettingsContext: Error loading settings:', response.statusText)
         }
       } catch (error) {
-        console.error('SettingsContext: Error loading settings:', error)
+        log('ui','SettingsContext: Error loading settings:', error)
       }
     }
 
@@ -89,8 +89,8 @@ export const SettingsProvider: React.FC<SettingsProviderProps> = ({ children }) 
   // Use default settings for non-authenticated users
 
   const updateSettings = async (newSettings: SettingsData) => {
-    console.log('SettingsContext: updateSettings called with:', newSettings)
-    console.log('SettingsContext: Previous settings:', settings)
+log('ui','SettingsContext: updateSettings called with:', newSettings)
+log('ui','SettingsContext: Previous settings:', settings)
     setSettings(newSettings)
     
     // Settings saved to database only
@@ -98,7 +98,7 @@ export const SettingsProvider: React.FC<SettingsProviderProps> = ({ children }) 
     // Save to database if authenticated
     if (session?.user?.email) {
       try {
-        console.log('SettingsContext: Saving to database for user:', session.user.email)
+log('ui','SettingsContext: Saving to database for user:', session.user.email)
               await fetch('/api/user/settings', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
@@ -117,9 +117,9 @@ export const SettingsProvider: React.FC<SettingsProviderProps> = ({ children }) 
                   custom_model_name: newSettings.customModelName
                 })
               })
-        console.log('SettingsContext: Successfully saved to database')
+log('ui','SettingsContext: Successfully saved to database')
       } catch (error) {
-        console.error('Error saving settings to database:', error)
+        log('ui','Error saving settings to database:', error)
       }
     }
   }

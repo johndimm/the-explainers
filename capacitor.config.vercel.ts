@@ -6,7 +6,7 @@ const config: CapacitorConfig = {
   webDir: 'out',
   server: {
     androidScheme: 'https',
-    url: 'https://the-explainers.vercel.app',
+    url: 'https://the-explainers-android.vercel.app',
     cleartext: true
   },
   plugins: {

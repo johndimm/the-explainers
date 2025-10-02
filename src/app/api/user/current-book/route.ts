@@ -2,16 +2,17 @@ import { NextRequest, NextResponse } from 'next/server'
 import { getServerSession } from 'next-auth'
 import { authOptions } from '@/lib/auth'
 import { getUserCurrentBook, createOrUpdateUserCurrentBook } from '@/lib/database'
+import { log } from '@/utils/log'
 
 export async function GET(request: NextRequest) {
   try {
     const session = await getServerSession(authOptions)
-    console.log('Current book API - session:', session ? 'exists' : 'null')
-    console.log('Current book API - user email:', session?.user?.email)
+    log('api', 'Current book API - session:', session ? 'exists' : 'null')
+    log('api', 'Current book API - user email:', session?.user?.email)
     
     // In development, if no session, try to get the current book for the default user
     if (process.env.NODE_ENV === 'development' && !session?.user?.email) {
-      console.log('Current book API - development mode, trying default user')
+      log('api', 'Current book API - development mode, trying default user')
       const currentBook = await getUserCurrentBook('dev-user@example.com')
       if (currentBook) {
         return NextResponse.json(currentBook)
@@ -20,7 +21,7 @@ export async function GET(request: NextRequest) {
     }
     
     if (!session?.user?.email) {
-      console.log('Current book API - no user email, returning 401')
+      log('api', 'Current book API - no user email, returning 401')
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
     }
 
@@ -32,7 +33,7 @@ export async function GET(request: NextRequest) {
 
     return NextResponse.json(currentBook)
   } catch (error) {
-    console.error('Error fetching user current book:', error)
+    log('ui','Error fetching user current book:', error)
     return NextResponse.json({ error: 'Internal server error' }, { status: 500 })
   }
 }
@@ -64,7 +65,7 @@ export async function POST(request: NextRequest) {
 
     return NextResponse.json(currentBook)
   } catch (error) {
-    console.error('Error creating/updating user current book:', error)
+    log('ui','Error creating/updating user current book:', error)
     return NextResponse.json({ error: 'Internal server error' }, { status: 500 })
   }
 }

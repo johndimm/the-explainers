@@ -43,7 +43,7 @@ function CreditsContent() {
           setCurrentBook({ title: book.title || '', author: book.author || '' })
         }
       } catch (error) {
-        console.error('Error loading current book:', error)
+        log('ui','Error loading current book:', error)
       }
     }
     loadCurrentBook()

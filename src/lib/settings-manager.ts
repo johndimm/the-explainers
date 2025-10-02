@@ -1,4 +1,5 @@
 import models from '../data/models.json'
+import { log } from '../utils/log'
 
 // Centralized settings management with migration
 export class SettingsManager {
@@ -22,7 +23,7 @@ export class SettingsManager {
       if (settings.llmProvider === 'anthropic' && 
           (settings.llmModel === 'claude-3-sonnet-20240229' || settings.llmModel === 'claude-3-5-sonnet')) {
         const defaultModel = (models as any).defaults.anthropic
-        console.log(`SettingsManager: Migrating old Claude model to ${defaultModel}`)
+log('ui',`SettingsManager: Migrating old Claude model to ${defaultModel}`)
         return {
           ...settings,
           llmModel: defaultModel

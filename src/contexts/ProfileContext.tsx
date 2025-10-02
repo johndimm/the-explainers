@@ -134,11 +134,11 @@ export const ProfileProvider: React.FC<ProfileProviderProps> = ({ children }) =>
               body: JSON.stringify(newProfile)
             })
           } catch (error) {
-            console.error('Error saving default profile to database:', error)
+            log('ui','Error saving default profile to database:', error)
           }
         }
       } catch (error) {
-        console.error('ProfileContext: Error loading from database:', error)
+        log('ui','ProfileContext: Error loading from database:', error)
         // Fallback to default profile
         const newProfile = { ...DEFAULT_PROFILE, firstLogin: new Date() }
         setProfile(newProfile)
@@ -163,10 +163,10 @@ export const ProfileProvider: React.FC<ProfileProviderProps> = ({ children }) =>
       if (response.ok) {
         log('ProfileContext: Profile updated in database')
       } else {
-        console.error('ProfileContext: Failed to update profile in database')
+        log('ui','ProfileContext: Failed to update profile in database')
       }
     } catch (error) {
-      console.error('ProfileContext: Error updating profile in database:', error)
+      log('ui','ProfileContext: Error updating profile in database:', error)
     }
   }
 
@@ -186,7 +186,7 @@ export const ProfileProvider: React.FC<ProfileProviderProps> = ({ children }) =>
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(newProfile)
-      }).catch(error => console.error('Error saving profile to database:', error))
+      }).catch(error => log('ui','Error saving profile to database:', error))
       
       return newProfile
     })
@@ -369,7 +369,7 @@ export const ProfileProvider: React.FC<ProfileProviderProps> = ({ children }) =>
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(dbProfile)
-      }).catch(error => console.error('Error saving profile to database:', error))
+      }).catch(error => log('ui','Error saving profile to database:', error))
       
       return newProfile
     })
@@ -413,7 +413,7 @@ export const ProfileProvider: React.FC<ProfileProviderProps> = ({ children }) =>
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(dbProfile)
-      }).catch(error => console.error('Error saving profile to database:', error))
+      }).catch(error => log('ui','Error saving profile to database:', error))
       
       return newProfile
     })
@@ -447,7 +447,7 @@ export const ProfileProvider: React.FC<ProfileProviderProps> = ({ children }) =>
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(dbProfile)
-      }).catch(error => console.error('Error saving profile to database:', error))
+      }).catch(error => log('ui','Error saving profile to database:', error))
       
       return newProfile
     })
@@ -479,7 +479,7 @@ export const ProfileProvider: React.FC<ProfileProviderProps> = ({ children }) =>
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(dbProfile)
-      }).catch(error => console.error('Error saving profile to database:', error))
+      }).catch(error => log('ui','Error saving profile to database:', error))
       
       return newProfile
     })
@@ -526,7 +526,7 @@ export const ProfileProvider: React.FC<ProfileProviderProps> = ({ children }) =>
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(dbProfile)
-      }).catch(error => console.error('Error saving profile to database:', error))
+      }).catch(error => log('ui','Error saving profile to database:', error))
       
       return newProfile
     })

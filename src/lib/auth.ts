@@ -67,13 +67,13 @@ export const authOptions: AuthOptions = {
   // Add events for debugging
   events: {
     signOut: async (message) => {
-      console.log('NextAuth signOut event:', message)
+log('auth','NextAuth signOut event:', message)
     },
     session: async (message) => {
-      console.log('NextAuth session event:', message)
+log('auth','NextAuth session event:', message)
     },
     signIn: async (message) => {
-      console.log('NextAuth signIn event:', message)
+log('auth','NextAuth signIn event:', message)
     }
   },
   // Mobile-specific configuration

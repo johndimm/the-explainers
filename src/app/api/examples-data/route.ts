@@ -1,4 +1,5 @@
 import { NextResponse } from 'next/server'
+import { log } from '@/utils/log'
 import { readFileSync } from 'fs'
 import { join } from 'path'
 
@@ -10,7 +11,7 @@ export async function GET() {
     
     return NextResponse.json(examplesData)
   } catch (error) {
-    console.error('Error reading examples data:', error)
+    log('api','Error reading examples data:', error)
     return NextResponse.json(
       { error: 'Failed to load examples data' },
       { status: 500 }

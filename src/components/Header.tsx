@@ -4,6 +4,7 @@ import React, { useEffect, useRef, useState } from 'react'
 import { useRouter, usePathname } from 'next/navigation'
 import { useAuth } from '@/contexts/AuthContext'
 import { getCurrentBook } from '@/utils/currentBookStorage'
+import { log } from '@/utils/log'
 
 export default function Header() {
   const router = useRouter()
@@ -106,14 +107,14 @@ export default function Header() {
     const updateSubtitle = async () => {
       try {
         const currentBook = await getCurrentBook()
-        console.log('Header: Current book loaded:', currentBook)
+log('ui','Header: Current book loaded:', currentBook)
         if (currentBook && currentBook.title && currentBook.author) {
           setSubtitle(`${currentBook.title} by ${currentBook.author}`)
         } else {
           setSubtitle('understand difficult texts')
         }
       } catch (error) {
-        console.error('Error loading current book for header:', error)
+        log('ui', 'Error loading current book for header:', error)
         setSubtitle('understand difficult texts')
       }
     }
@@ -330,7 +331,7 @@ export default function Header() {
             onClick={(e) => {
               e.preventDefault()
               e.stopPropagation()
-              console.log('Hamburger clicked, current state:', showMobileMenu)
+log('ui','Hamburger clicked, current state:', showMobileMenu)
               setShowMobileMenu(!showMobileMenu)
             }}
             style={{ 
@@ -360,7 +361,7 @@ export default function Header() {
                 maxHeight: '80vh',
                 overflowY: 'auto'
               }}
-              onLoad={() => console.log('Mobile menu div loaded')}
+              onLoad={() => log('ui', 'Mobile menu div loaded')}
             >
               <button onClick={() => { router.push('/reader'); setShowMobileMenu(false) }} style={{ display: 'block', width: '100%', padding: '12px 16px', background: 'none', border: 'none', textAlign: 'left', cursor: 'pointer', borderBottom: '1px solid #f0f0f0' }}>📖 Reader</button>
               <button onClick={() => { router.push('/chat'); setShowMobileMenu(false) }} style={{ display: 'block', width: '100%', padding: '12px 16px', background: 'none', border: 'none', textAlign: 'left', cursor: 'pointer', borderBottom: '1px solid #f0f0f0' }}>💬 Chat</button>

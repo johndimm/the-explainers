@@ -231,16 +231,16 @@ export function generateCharacterMapForText(fullText: string): CharacterMapResul
  * Log character map to console in readable format
  */
 export function logCharacterMap(characterMap: CharacterMapResult): void {
-  console.log('🎭 CHARACTER MAP GENERATED:')
-  console.log('=' .repeat(80))
+log('character-map','🎭 CHARACTER MAP GENERATED:')
+log('character-map','=' .repeat(80))
   
   characterMap.entries.forEach((entry, index) => {
     const charactersStr = entry.characters.length > 0 
       ? `[${entry.characters.join(', ')}]` 
       : '[]'
-    console.log(`${entry.offset} ${entry.act} ${entry.scene} ${charactersStr}`)
+log('character-map',`${entry.offset} ${entry.act} ${entry.scene} ${charactersStr}`)
   })
   
-  console.log('=' .repeat(80))
-  console.log(`Total entries: ${characterMap.entries.length}`)
+log('character-map','=' .repeat(80))
+log('character-map',`Total entries: ${characterMap.entries.length}`)
 }

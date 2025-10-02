@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
+import { log } from '@/utils/log'
 import { getServerSession } from 'next-auth'
 import { authOptions } from '@/lib/auth'
 import { getUserSettings, createOrUpdateUserSettings } from '@/lib/database'
@@ -19,7 +20,7 @@ export async function GET(request: NextRequest) {
 
     return NextResponse.json(settings)
   } catch (error) {
-    console.error('Error fetching user settings:', error)
+    log('api','Error fetching user settings:', error)
     return NextResponse.json({ error: 'Internal server error' }, { status: 500 })
   }
 }
@@ -40,7 +41,7 @@ export async function POST(request: NextRequest) {
 
     return NextResponse.json(settings)
   } catch (error) {
-    console.error('Error creating/updating user settings:', error)
+    log('api','Error creating/updating user settings:', error)
     return NextResponse.json({ error: 'Internal server error' }, { status: 500 })
   }
 }

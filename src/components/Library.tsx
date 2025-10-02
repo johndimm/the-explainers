@@ -1,4 +1,5 @@
 'use client'
+import { log } from '../utils/log'
 
 import React, { useState, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
@@ -129,7 +130,7 @@ const Library: React.FC<LibraryProps> = ({ onBookSelect, onBackToCurrentBook }) 
       const loadedCategories = await Promise.all(categoryPromises)
       setCategories(loadedCategories)
     } catch (error) {
-      console.error('Error loading library data:', error)
+      log('ui','Error loading library data:', error)
     } finally {
       setLoading(false)
     }

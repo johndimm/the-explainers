@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
+import { log } from '@/utils/log'
 import { generateCharacterMapFromText, formatCharacterMapAsText, exportCharacterMapAsJSON } from '@/utils/characterMapGenerator';
 
 export async function POST(request: NextRequest) {
@@ -33,7 +34,7 @@ export async function POST(request: NextRequest) {
       );
     }
   } catch (error) {
-    console.error('Error generating character map:', error);
+    log('ui','Error generating character map:', error);
     return NextResponse.json(
       { error: 'Failed to generate character map' },
       { status: 500 }

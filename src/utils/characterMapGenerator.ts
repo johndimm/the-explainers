@@ -1,3 +1,5 @@
+import { log } from './log'
+
 /**
  * Character Map Generator for Shakespeare and similar dramatic texts
  * 
@@ -208,7 +210,7 @@ export function extractSpeakerExits(text: string): StructureEntry[] {
     currentOffset += line.length + 1;
   }
 
-  console.log(`DEBUG: Found ${foundExits} exit patterns, created ${entries.length} speaker exits`);
+log('character-map',`DEBUG: Found ${foundExits} exit patterns, created ${entries.length} speaker exits`);
   return entries;
 }
 

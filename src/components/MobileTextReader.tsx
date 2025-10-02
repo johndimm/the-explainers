@@ -316,9 +316,9 @@ const MobileTextReader: React.FC<ReaderCommonProps> = ({ text, bookTitle = 'Rome
   }
 
   const handleExplain = () => {
-    console.log('🔍 HANDLE EXPLAIN DEBUG (MOBILE):')
-    console.log('selectedText state:', JSON.stringify(selectedText))
-    console.log('selectedText length:', selectedText?.length)
+log('ui','🔍 HANDLE EXPLAIN DEBUG (MOBILE):')
+log('ui','selectedText state:', JSON.stringify(selectedText))
+log('ui','selectedText length:', selectedText?.length)
     const context = extractContextInfo(selectedText, text, bookTitle, author)
     const chatData = { selectedText, contextInfo: context, bookTitle, author }
     setChatContext(chatData)
@@ -587,14 +587,14 @@ const MobileTextReader: React.FC<ReaderCommonProps> = ({ text, bookTitle = 'Rome
 
     const handleHeaderSearchNext = (event: CustomEvent) => {
       if (event.detail.type === 'text') {
-        console.log('MobileTextReader: Next search result')
+log('ui','MobileTextReader: Next search result')
         nextSearchResult()
       }
     }
 
     const handleHeaderSearchPrev = (event: CustomEvent) => {
       if (event.detail.type === 'text') {
-        console.log('MobileTextReader: Previous search result')
+log('ui','MobileTextReader: Previous search result')
         prevSearchResult()
       }
     }

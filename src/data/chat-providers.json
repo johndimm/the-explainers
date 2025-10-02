@@ -1,6 +1,0 @@
-[
-  { "value": "gemini", "name": "Google Gemini" },
-  { "value": "anthropic", "name": "Anthropic Claude" },
-  { "value": "openai", "name": "OpenAI" },
-  { "value": "deepseek", "name": "DeepSeek" }
-]

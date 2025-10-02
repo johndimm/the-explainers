@@ -1,4 +1,5 @@
 import { Pool } from 'pg'
+import { log } from '../utils/log'
 
 // Create a connection pool
 export const pool = new Pool({
@@ -151,9 +152,9 @@ export async function initializeDatabase() {
       CREATE INDEX IF NOT EXISTS idx_user_bookmarks_email ON user_bookmarks(email)
     `)
 
-    console.log('Database tables initialized successfully')
+log('api','Database tables initialized successfully')
   } catch (error) {
-    console.error('Error initializing database:', error)
+    log('ui','Error initializing database:', error)
     throw error
   } finally {
     client.release()
@@ -193,7 +194,7 @@ export async function getUserProfile(email: string): Promise<UserProfile | null>
       updated_at: row.updated_at
     }
   } catch (error) {
-    console.error('Error getting user profile:', error)
+    log('ui','Error getting user profile:', error)
     throw error
   } finally {
     client.release()
@@ -266,7 +267,7 @@ export async function createOrUpdateUserProfile(profile: Partial<UserProfile> & 
       updated_at: row.updated_at
     }
   } catch (error) {
-    console.error('Error creating/updating user profile:', error)
+    log('ui','Error creating/updating user profile:', error)
     throw error
   } finally {
     client.release()
@@ -365,8 +366,8 @@ export async function updateUserProfileFields(email: string, updates: Partial<Us
       RETURNING *
     `
     
-    console.log('Partial update query:', query)
-    console.log('Values:', values)
+log('api','Partial update query:', query)
+log('api','Values:', values)
     
     const result = await client.query(query, values)
     
@@ -393,7 +394,7 @@ export async function updateUserProfileFields(email: string, updates: Partial<Us
       updated_at: row.updated_at
     }
   } catch (error) {
-    console.error('Error partially updating user profile:', error)
+    log('ui','Error partially updating user profile:', error)
     throw error
   } finally {
     client.release()
@@ -432,7 +433,7 @@ export async function getUserSettings(email: string): Promise<UserSettings | nul
       updated_at: row.updated_at
     }
   } catch (error) {
-    console.error('Error getting user settings:', error)
+    log('ui','Error getting user settings:', error)
     throw error
   } finally {
     client.release()
@@ -501,7 +502,7 @@ export async function createOrUpdateUserSettings(settings: Partial<UserSettings>
       updated_at: row.updated_at
     }
   } catch (error) {
-    console.error('Error creating/updating user settings:', error)
+    log('ui','Error creating/updating user settings:', error)
     throw error
   } finally {
     client.release()
@@ -531,7 +532,7 @@ export async function getUserCurrentBook(email: string): Promise<UserCurrentBook
       updated_at: row.updated_at
     }
   } catch (error) {
-    console.error('Error getting user current book:', error)
+    log('ui','Error getting user current book:', error)
     throw error
   } finally {
     client.release()
@@ -563,7 +564,7 @@ export async function createOrUpdateUserCurrentBook(book: UserCurrentBook): Prom
       updated_at: row.updated_at
     }
   } catch (error) {
-    console.error('Error creating/updating user current book:', error)
+    log('ui','Error creating/updating user current book:', error)
     throw error
   } finally {
     client.release()
@@ -593,7 +594,7 @@ export async function getUserBookmark(email: string, bookTitle: string, bookAuth
       updated_at: row.updated_at
     }
   } catch (error) {
-    console.error('Error getting user bookmark:', error)
+    log('ui','Error getting user bookmark:', error)
     throw error
   } finally {
     client.release()
@@ -630,7 +631,7 @@ export async function createOrUpdateUserBookmark(bookmark: UserBookmark): Promis
       updated_at: row.updated_at
     }
   } catch (error) {
-    console.error('Error creating/updating user bookmark:', error)
+    log('ui','Error creating/updating user bookmark:', error)
     throw error
   } finally {
     client.release()
@@ -654,7 +655,7 @@ export async function getAllUserBookmarks(email: string): Promise<UserBookmark[]
       updated_at: row.updated_at
     }))
   } catch (error) {
-    console.error('Error getting all user bookmarks:', error)
+    log('ui','Error getting all user bookmarks:', error)
     throw error
   } finally {
     client.release()
@@ -670,9 +671,9 @@ export async function clearUserData(email: string): Promise<void> {
     await client.query('DELETE FROM user_settings WHERE email = $1', [email])
     await client.query('DELETE FROM user_current_books WHERE email = $1', [email])
     await client.query('DELETE FROM user_bookmarks WHERE email = $1', [email])
-    console.log(`Cleared all data for user: ${email}`)
+log('api',`Cleared all data for user: ${email}`)
   } catch (error) {
-    console.error('Error clearing user data:', error)
+    log('ui','Error clearing user data:', error)
     throw error
   } finally {
     client.release()

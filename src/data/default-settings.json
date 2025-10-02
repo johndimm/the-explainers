@@ -1,6 +1,6 @@
 {
   "llmProvider": "gemini",
-  "llmModel": "gemini-1.5-flash",
+  "llmModel": "gemini-2.5-flash",
   "responseLength": "brief",
   "textFont": "serif",
   "chatFont": "sans-serif",

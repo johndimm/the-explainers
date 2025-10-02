@@ -1,4 +1,5 @@
 'use client'
+import { log } from '@/utils/log'
 
 import ExplainerStylesPage from '@/components/ExplainerStylesPage'
 import { useSettings } from '@/contexts/SettingsContext'
@@ -10,7 +11,7 @@ function StylesContent() {
     <ExplainerStylesPage
       selectedStyle={settings.explanationStyle}
       onStyleChange={(style) => {
-        console.log('ExplainersPage: Style change requested:', style, 'Current settings:', settings)
+log('ui','ExplainersPage: Style change requested:', style, 'Current settings:', settings)
         updateSettings({ ...settings, explanationStyle: style })
       }}
     />

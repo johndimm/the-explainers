@@ -273,11 +273,11 @@ const extractDramatisPersonae = (fullText: string): Set<string> => {
 }
 
 export const extractContextInfo = (selectedText: string, fullText: string, bookTitle?: string, author?: string) => {
-  console.log('🔍 EXTRACT CONTEXT INFO DEBUG:')
-  console.log('Selected text:', JSON.stringify(selectedText))
-  console.log('Selected text length:', selectedText.length)
-  console.log('Full text length:', fullText.length)
-  console.log('First 200 chars of full text:', JSON.stringify(fullText.substring(0, 200)))
+log('debug', '🔍 EXTRACT CONTEXT INFO DEBUG:')
+log('debug', 'Selected text:', JSON.stringify(selectedText))
+log('debug', 'Selected text length:', selectedText.length)
+log('debug', 'Full text length:', fullText.length)
+log('debug', 'First 200 chars of full text:', JSON.stringify(fullText.substring(0, 200)))
   
   // Search for Olivia's actual quote in the text with different line break formats
   const oliviaQuote1 = "There is no slander in an allowed fool"
@@ -288,32 +288,32 @@ export const extractContextInfo = (selectedText: string, fullText: string, bookT
   const oliviaIndex2 = fullText.indexOf(oliviaQuote2)
   const oliviaIndex3 = fullText.indexOf(oliviaQuote3)
   
-  console.log('🔍 SEARCHING FOR OLIVIA QUOTE WITH DIFFERENT LINE BREAKS:')
-  console.log('Quote 1 (no breaks):', oliviaIndex1)
-  console.log('Quote 2 (\\r\\n):', oliviaIndex2)
-  console.log('Quote 3 (\\n):', oliviaIndex3)
+log('🔍 SEARCHING FOR OLIVIA QUOTE WITH DIFFERENT LINE BREAKS:')
+log('debug', 'Quote 1 (no breaks):', oliviaIndex1)
+log('debug', 'Quote 2 (\\r\\n):', oliviaIndex2)
+log('debug', 'Quote 3 (\\n):', oliviaIndex3)
   
   const foundIndex = Math.max(oliviaIndex1, oliviaIndex2, oliviaIndex3)
   if (foundIndex !== -1) {
     const oliviaContext = fullText.substring(Math.max(0, foundIndex - 200), foundIndex + 200)
-    console.log('Olivia context (400 chars around quote):', JSON.stringify(oliviaContext))
+log('debug', 'Olivia context (400 chars around quote):', JSON.stringify(oliviaContext))
   }
   
   // Normalize line breaks in selected text to match stored text format
   const normalizedSelectedText = selectedText.replace(/\n/g, '\r\n')
-  console.log('Normalized selected text:', JSON.stringify(normalizedSelectedText))
+log('debug', 'Normalized selected text:', JSON.stringify(normalizedSelectedText))
   
   // Try to find the selected text in the original text (both formats)
   let selectedIndex = fullText.indexOf(selectedText)
   let normalizedIndex = fullText.indexOf(normalizedSelectedText)
   
-  console.log('Original text index:', selectedIndex)
-  console.log('Normalized text index:', normalizedIndex)
+log('debug', 'Original text index:', selectedIndex)
+log('debug', 'Normalized text index:', normalizedIndex)
   
   // Use the normalized version if it's found
   if (normalizedIndex !== -1) {
     selectedIndex = normalizedIndex
-    console.log('Using normalized text index:', selectedIndex)
+log('debug', 'Using normalized text index:', selectedIndex)
   }
   
   // If found, check if it's preceded by OLIVIA to make sure we found the right occurrence
@@ -321,18 +321,18 @@ export const extractContextInfo = (selectedText: string, fullText: string, bookT
     const textBeforeFound = fullText.substring(Math.max(0, selectedIndex - 100), selectedIndex)
     const hasOliviaBefore = /OLIVIA\.?\s*$/m.test(textBeforeFound.split('\n').slice(-3).join('\n'))
     
-    console.log('Text before first occurrence (last 100 chars):', JSON.stringify(textBeforeFound))
-    console.log('Has OLIVIA before first occurrence:', hasOliviaBefore)
+log('debug', 'Text before first occurrence (last 100 chars):', JSON.stringify(textBeforeFound))
+log('debug', 'Has OLIVIA before first occurrence:', hasOliviaBefore)
     
     if (!hasOliviaBefore) {
       // This is not Olivia's speech, search for the next occurrence
-      console.log('First occurrence is not Olivia, searching for next occurrence...')
+log('debug', 'First occurrence is not Olivia, searching for next occurrence...')
       let searchStart = selectedIndex + 1
       let occurrenceCount = 1
       while (true) {
         const nextIndex = fullText.indexOf(selectedText, searchStart)
         if (nextIndex === -1) {
-          console.log(`No more occurrences found after ${occurrenceCount} attempts`)
+log(`No more occurrences found after ${occurrenceCount} attempts`)
           break
         }
         
@@ -340,50 +340,50 @@ export const extractContextInfo = (selectedText: string, fullText: string, bookT
         const textBeforeNext = fullText.substring(Math.max(0, nextIndex - 100), nextIndex)
         const hasOliviaBeforeNext = /OLIVIA\.?\s*$/m.test(textBeforeNext.split('\n').slice(-3).join('\n'))
         
-        console.log(`Occurrence ${occurrenceCount} at index ${nextIndex}:`, JSON.stringify(textBeforeNext))
-        console.log(`Has OLIVIA before occurrence ${occurrenceCount}:`, hasOliviaBeforeNext)
+log('debug', `Occurrence ${occurrenceCount} at index ${nextIndex}:`, JSON.stringify(textBeforeNext))
+log('debug', `Has OLIVIA before occurrence ${occurrenceCount}:`, hasOliviaBeforeNext)
         
         if (hasOliviaBeforeNext) {
           selectedIndex = nextIndex
-          console.log(`✅ FOUND CORRECT OCCURRENCE at index ${selectedIndex}`)
+log(`✅ FOUND CORRECT OCCURRENCE at index ${selectedIndex}`)
           break
         }
         searchStart = nextIndex + 1
       }
     } else {
-      console.log('✅ First occurrence is correct (has OLIVIA before)')
+log('✅ First occurrence is correct (has OLIVIA before)')
     }
   }
   
   if (selectedIndex === -1) {
-    console.log('❌ SELECTED TEXT NOT FOUND - TRYING FALLBACK LOGIC')
+log('❌ SELECTED TEXT NOT FOUND - TRYING FALLBACK LOGIC')
     // If not found, try with minimal character encoding fixes
     const normalizedSelectedText = normalizeText(selectedText)
     const normalizedFullText = normalizeText(fullText)
     
     selectedIndex = normalizedFullText.indexOf(normalizedSelectedText)
-    console.log('Normalized text search index:', selectedIndex)
+log('debug', 'Normalized text search index:', selectedIndex)
     
     if (selectedIndex === -1) {
-      console.log('❌ NORMALIZED TEXT ALSO NOT FOUND - TRYING FLEXIBLE SEARCH')
+log('❌ NORMALIZED TEXT ALSO NOT FOUND - TRYING FLEXIBLE SEARCH')
       // If still not found, try a flexible search with first few words
       const words = normalizedSelectedText.split(/\s+/)
       if (words.length > 0) {
         const searchText = words.slice(0, Math.min(3, words.length)).join(' ')
-        console.log('Trying flexible search with:', JSON.stringify(searchText))
+log('debug', 'Trying flexible search with:', JSON.stringify(searchText))
         const flexibleIndex = normalizedFullText.indexOf(searchText)
-        console.log('Flexible search index:', flexibleIndex)
+log('debug', 'Flexible search index:', flexibleIndex)
         if (flexibleIndex !== -1) {
           // Found a partial match, use the original text for context extraction
           const originalIndex = fullText.indexOf(searchText)
-          console.log('Original text index for partial match:', originalIndex)
+log('debug', 'Original text index for partial match:', originalIndex)
           if (originalIndex !== -1) {
-            console.log('🚨 USING FALLBACK LOGIC - THIS IS WRONG!')
+log('🚨 USING FALLBACK LOGIC - THIS IS WRONG!')
             return extractContextFromIndex(originalIndex, selectedText.length, fullText, bookTitle, author)
           }
         }
       }
-      console.log('❌ ALL FALLBACK ATTEMPTS FAILED')
+log('❌ ALL FALLBACK ATTEMPTS FAILED')
       return null
     }
     
@@ -410,7 +410,7 @@ const getCharactersOnStageAtPosition = (position: number, fullText: string): str
                        (fullText.includes('Enter ') || fullText.includes('_Enter_') || fullText.includes('[Enter'))
   
   if (!isShakespeare) {
-    log('character-map', `⚠️ Not a Shakespeare play - no character tracking`)
+    log('debug', 'character-map', `⚠️ Not a Shakespeare play - no character tracking`)
     return []
   }
   
@@ -419,35 +419,35 @@ const getCharactersOnStageAtPosition = (position: number, fullText: string): str
   let characterMap = characterMapCache.get(playKey)
   
   if (!characterMap) {
-    log('character-map', `🔍 Generating character map for play using 2-scan approach`)
+    log('debug', 'character-map', `🔍 Generating character map for play using 2-scan approach`)
     characterMap = buildCharacterMap(fullText, playKey)
     characterMapCache.set(playKey, characterMap)
     
     // Log the character map to console  
-    log('character-map', `🎭 Character map generated with ${characterMap.length} entries`)
+    log('debug', 'character-map', `🎭 Character map generated with ${characterMap.length} entries`)
     characterMap.forEach((entry, index) => {
-      log('character-map', `  ${index + 1}. Position ${entry.position}: [${entry.characters.join(', ')}]${entry.act ? ` (ACT ${entry.act})` : ''}${entry.scene ? ` (SCENE ${entry.scene})` : ''}`)
+      log('debug', 'character-map', `  ${index + 1}. Position ${entry.position}: [${entry.characters.join(', ')}]${entry.act ? ` (ACT ${entry.act})` : ''}${entry.scene ? ` (SCENE ${entry.scene})` : ''}`)
     })
   } else {
-    log('character-map', `🔍 Using cached character map with ${characterMap.length} entries`)
+    log('debug', 'character-map', `🔍 Using cached character map with ${characterMap.length} entries`)
   }
   
   // Find the most recent character state before this position
   let currentCharacters: string[] = []
   
-  log('character-map', `🔍 Looking up position ${position} in character map with ${characterMap.length} entries`)
+  log('debug', 'character-map', `🔍 Looking up position ${position} in character map with ${characterMap.length} entries`)
   
   // More efficient: work backwards from the end to find the right entry
   for (let i = characterMap.length - 1; i >= 0; i--) {
     const entry = characterMap[i]
     if (entry.position <= position) {
       currentCharacters = entry.characters
-      log('character-map', `🔍 ✅ Found entry at position ${entry.position}: [${entry.characters.join(', ')}]`)
+      log('debug', 'character-map', `🔍 ✅ Found entry at position ${entry.position}: [${entry.characters.join(', ')}]`)
       break
     }
   }
   
-  log('character-map', `🔍 Final characters at position ${position}: [${currentCharacters.join(', ')}]`)
+  log('debug', 'character-map', `🔍 Final characters at position ${position}: [${currentCharacters.join(', ')}]`)
   return currentCharacters
 }
 
@@ -483,10 +483,10 @@ const getCharacterMapEntryAtPosition = (position: number, fullText: string): {po
   }
   
   if (lastEntry) {
-    console.log('🔍 Character map entry at position', position, ':', lastEntry)
-    console.log('🔍 Act/Scene from character map:', lastEntry.act, lastEntry.scene)
+log('debug', '🔍 Character map entry at position', position, ':', lastEntry)
+log('debug', '🔍 Act/Scene from character map:', lastEntry.act, lastEntry.scene)
   } else {
-    console.log('🔍 No character map entry found before position', position)
+log('debug', '🔍 No character map entry found before position', position)
   }
   
   return lastEntry
@@ -501,24 +501,24 @@ export const buildCharacterMapForText = (fullText: string) => {
                        (fullText.includes('Enter ') || fullText.includes('_Enter_') || fullText.includes('[Enter'))
   
   if (isShakespeare && !characterMapCache.has(playKey)) {
-    log('character-map', `🎭 Building character map for Shakespeare play using 2-scan approach`)
+    log('debug', 'character-map', `🎭 Building character map for Shakespeare play using 2-scan approach`)
     const characterMap = buildCharacterMap(fullText, playKey)
     characterMapCache.set(playKey, characterMap)
     
     // Log the character map to console when file is loaded
-    log('character-map', `🎭 Character map built with ${characterMap.length} entries`)
+    log('debug', 'character-map', `🎭 Character map built with ${characterMap.length} entries`)
     
     // Print the character map in the user's format
-    console.log('CHARACTER MAP (Runtime Generated):')
-    console.log('=====================================')
+log('CHARACTER MAP (Runtime Generated):')
+log('=====================================')
     characterMap.forEach((entry, index) => {
       const actScene = entry.act && entry.scene ? `ACT ${entry.act} SCENE ${entry.scene}` : 
                        entry.act ? `ACT ${entry.act}` : 
                        entry.scene ? `SCENE ${entry.scene}` : 'UNKNOWN'
-      console.log(`${entry.position} ${actScene} [${entry.characters.join(', ')}]`)
+log('debug', `${entry.position} ${actScene} [${entry.characters.join(', ')}]`)
     })
-    console.log('=====================================')
-    console.log(`Total entries: ${characterMap.length}`)
+log('=====================================')
+log(`Total entries: ${characterMap.length}`)
   }
 }
 
@@ -562,7 +562,7 @@ const buildCharacterMap = (fullText: string, playKey: string) => {
   
   // Debug: Test the specific exeunt text
   const testExeunt = '[_Exeunt Othello, Lodovico and Attendants._]'
-  console.log('🔍 TESTING EXEUNT REGEX:', {
+log('debug', '🔍 TESTING EXEUNT REGEX:', {
     pattern: EXEUNTS.toString(),
     testText: testExeunt,
     matches: EXEUNTS.test(testExeunt)
@@ -571,7 +571,7 @@ const buildCharacterMap = (fullText: string, playKey: string) => {
   // Debug: Test all patterns
   const testEnter = 'Enter Othello, Iago, and Attendants'
   const testExit = '[_Exit Othello._]'
-  console.log('🔍 TESTING ALL PATTERNS:', {
+log('debug', '🔍 TESTING ALL PATTERNS:', {
     ENTERS: { pattern: ENTERS.toString(), test: testEnter, matches: ENTERS.test(testEnter) },
     EXITS: { pattern: EXITS.toString(), test: testExit, matches: EXITS.test(testExit) },
     EXEUNTS: { pattern: EXEUNTS.toString(), test: testExeunt, matches: EXEUNTS.test(testExeunt) }
@@ -583,11 +583,11 @@ const buildCharacterMap = (fullText: string, playKey: string) => {
     
     // Check for ACT
     if (ACTS.test(line)) {
-      console.log('🔍 ACT LINE DETECTED:', line.trim())
+log('debug', '🔍 ACT LINE DETECTED:', line.trim())
       const actMatch = line.match(/ACT ([IV]+)\.?/)
       if (actMatch) {
         currentAct = actMatch[1]
-        console.log('🔍 Found ACT event:', currentAct, 'at line:', i, 'offset:', lineOffset)
+log('debug', '🔍 Found ACT event:', currentAct, 'at line:', i, 'offset:', lineOffset)
         structuralEvents.push({
           offset: lineOffset,
           type: 'ACT',
@@ -595,7 +595,7 @@ const buildCharacterMap = (fullText: string, playKey: string) => {
           act: currentAct
         })
       } else {
-        console.log('🔍 ACT line but no match:', line.trim())
+log('debug', '🔍 ACT line but no match:', line.trim())
       }
     }
     // Check for SCENE
@@ -644,7 +644,7 @@ const buildCharacterMap = (fullText: string, playKey: string) => {
     }
     // Check for Exeunt (all exit)
     else if (EXEUNTS.test(line)) {
-      console.log('🔍 EXEUNT DETECTED:', line.trim(), 'at offset:', lineOffset)
+log('debug', '🔍 EXEUNT DETECTED:', line.trim(), 'at offset:', lineOffset)
       
       // Parse characters from Exeunt stage direction
       let exeuntCharacters: string[] = []
@@ -655,14 +655,14 @@ const buildCharacterMap = (fullText: string, playKey: string) => {
         const match = line.match(/\[_Exeunt\s+([^\]]+)_\]/i)
         if (match) {
           exeuntCharacters = parseCharacterList(match[1])
-          console.log('🔍 EXEUNT CHARACTERS PARSED:', exeuntCharacters)
+log('debug', '🔍 EXEUNT CHARACTERS PARSED:', exeuntCharacters)
         }
       } else {
         // Check for other formats like "Exeunt Othello, Lodovico"
         const match = line.match(/Exeunt\s+(.+)/i)
         if (match) {
           exeuntCharacters = parseCharacterList(match[1])
-          console.log('🔍 EXEUNT CHARACTERS PARSED:', exeuntCharacters)
+log('debug', '🔍 EXEUNT CHARACTERS PARSED:', exeuntCharacters)
         }
       }
       
@@ -674,7 +674,7 @@ const buildCharacterMap = (fullText: string, playKey: string) => {
         scene: currentScene,
         characters: exeuntCharacters // Specific characters to exit, or empty if all exit
       })
-      console.log('🔍 EXEUNT ADDED TO STRUCTURAL EVENTS, total count:', structuralEvents.length, 'characters:', exeuntCharacters)
+log('debug', '🔍 EXEUNT ADDED TO STRUCTURAL EVENTS, total count:', structuralEvents.length, 'characters:', exeuntCharacters)
     }
     
     position += line.length + 1 // +1 for newline
@@ -752,22 +752,22 @@ const buildCharacterMap = (fullText: string, playKey: string) => {
     if (JSON.stringify(sortedCharacters) !== JSON.stringify(lastCharacterState)) {
       const entry = {position, characters: sortedCharacters, act: mapCurrentAct, scene: mapCurrentScene}
       characterMap.push(entry)
-      console.log('🔍 Character map: Adding entry:', entry, 'currentAct:', mapCurrentAct, 'currentScene:', mapCurrentScene)
+log('debug', '🔍 Character map: Adding entry:', entry, 'currentAct:', mapCurrentAct, 'currentScene:', mapCurrentScene)
       lastCharacterState = sortedCharacters
     } else {
-      console.log('🔍 Character map: Skipping entry (no change):', {position, characters: sortedCharacters, act: mapCurrentAct, scene: mapCurrentScene})
+log('debug', '🔍 Character map: Skipping entry (no change):', {position, characters: sortedCharacters, act: mapCurrentAct, scene: mapCurrentScene})
     }
   }
   
-  console.log('🔍 PROCESSING ALL EVENTS:', allEvents.length, 'events')
+log('debug', '🔍 PROCESSING ALL EVENTS:', allEvents.length, 'events')
   
   for (const event of allEvents) {
-    console.log('🔍 PROCESSING EVENT:', event.type, 'at offset:', event.offset, 'content:', event.content)
+log('debug', '🔍 PROCESSING EVENT:', event.type, 'at offset:', event.offset, 'content:', event.content)
     
     switch (event.type) {
       case 'ACT':
         mapCurrentAct = event.act || ''
-        console.log('🔍 Character map: Processing ACT event:', event.act, 'at offset:', event.offset)
+log('debug', '🔍 Character map: Processing ACT event:', event.act, 'at offset:', event.offset)
         // Just update the current act state - no need for special handling
         break
         
@@ -794,30 +794,30 @@ const buildCharacterMap = (fullText: string, playKey: string) => {
         
       case 'EXEUNT':
         // Handle Exeunt - remove specific characters or all if none specified
-        console.log('🔍 EXEUNT EVENT: Characters to exit:', event.characters, 'current count:', currentCharacters.size, 'before exit:', Array.from(currentCharacters))
+log('debug', '🔍 EXEUNT EVENT: Characters to exit:', event.characters, 'current count:', currentCharacters.size, 'before exit:', Array.from(currentCharacters))
         
         if (event.characters && event.characters.length > 0) {
           // Remove only the specified characters
           event.characters.forEach(char => currentCharacters.delete(char))
-          console.log('🔍 EXEUNT EVENT: Removed specific characters, remaining:', Array.from(currentCharacters))
+log('debug', '🔍 EXEUNT EVENT: Removed specific characters, remaining:', Array.from(currentCharacters))
         } else {
           // No specific characters mentioned - all characters exit
           currentCharacters.clear()
-          console.log('🔍 EXEUNT EVENT: No specific characters, cleared all, remaining:', Array.from(currentCharacters))
+log('debug', '🔍 EXEUNT EVENT: No specific characters, cleared all, remaining:', Array.from(currentCharacters))
         }
         
         addEntryIfChanged(event.offset, Array.from(currentCharacters))
-        console.log('🔍 EXEUNT EVENT: After addEntryIfChanged, character map length:', characterMap.length)
+log('debug', '🔍 EXEUNT EVENT: After addEntryIfChanged, character map length:', characterMap.length)
         break
     }
   }
   
-  log('character-map', `🎭 Built character map with ${characterMap.length} entries using 2-scan approach`)
+  log('debug', 'character-map', `🎭 Built character map with ${characterMap.length} entries using 2-scan approach`)
   
   // Debug: Log the final character map
-  console.log('🔍 FINAL CHARACTER MAP:', characterMap)
-  console.log('🔍 STRUCTURAL EVENTS COUNT:', structuralEvents.length)
-  console.log('🔍 SAMPLE STRUCTURAL EVENTS:', structuralEvents.slice(0, 10))
+log('debug', '🔍 FINAL CHARACTER MAP:', characterMap)
+log('debug', '🔍 STRUCTURAL EVENTS COUNT:', structuralEvents.length)
+log('debug', '🔍 SAMPLE STRUCTURAL EVENTS:', structuralEvents.slice(0, 10))
   
   return characterMap
 }
@@ -907,20 +907,20 @@ const extractContextFromIndex = (selectedIndex: number, selectedLength: number, 
   const textBeforeSelection = fullText.substring(0, selectedIndex)
   const selectedText = fullText.substring(selectedIndex, selectedIndex + selectedLength)
 
-  console.log('🔍 CONTEXT EXTRACTION DEBUG:')
-  console.log('Selected index:', selectedIndex)
-  console.log('Selected length:', selectedLength)
-  console.log('Selected text:', JSON.stringify(selectedText))
-  console.log('Text before selection (last 200 chars):', JSON.stringify(textBeforeSelection.slice(-200)))
-  console.log('Text before selection (last 500 chars):', JSON.stringify(textBeforeSelection.slice(-500)))
+log('🔍 CONTEXT EXTRACTION DEBUG:')
+log('debug', 'Selected index:', selectedIndex)
+log('debug', 'Selected length:', selectedLength)
+log('debug', 'Selected text:', JSON.stringify(selectedText))
+log('debug', 'Text before selection (last 200 chars):', JSON.stringify(textBeforeSelection.slice(-200)))
+log('debug', 'Text before selection (last 500 chars):', JSON.stringify(textBeforeSelection.slice(-500)))
   
   // Show the context that should end with the selected text
   const contextEnding = fullText.substring(Math.max(0, selectedIndex - 300), selectedIndex + selectedLength)
-  console.log('🔍 CONTEXT ENDING WITH SELECTED TEXT (last 300 chars + selection):', JSON.stringify(contextEnding))
+log('debug', '🔍 CONTEXT ENDING WITH SELECTED TEXT (last 300 chars + selection):', JSON.stringify(contextEnding))
   
   // Show what comes after the selected text
   const contextAfter = fullText.substring(selectedIndex + selectedLength, selectedIndex + selectedLength + 100)
-  console.log('🔍 CONTEXT AFTER SELECTED TEXT (next 100 chars):', JSON.stringify(contextAfter))
+log('debug', '🔍 CONTEXT AFTER SELECTED TEXT (next 100 chars):', JSON.stringify(contextAfter))
 
   let act: string | null = null
   let scene: string | null = null
@@ -940,18 +940,18 @@ const extractContextFromIndex = (selectedIndex: number, selectedLength: number, 
   if (actMatches) {
     const lastActMatch = actMatches[actMatches.length - 1]
     act = lastActMatch.replace(/\bACT\s+/i, '').replace(/\.$/, '').trim()
-    console.log('🔍 Regex-based Act detection found:', act)
+log('debug', '🔍 Regex-based Act detection found:', act)
   } else {
-    console.log('🔍 No Act found by regex detection')
+log('🔍 No Act found by regex detection')
   }
 
   const sceneMatches = contextForActScene.match(/\bSCENE\s+([IVXLCDM]+|\d+)\.?\b/gi)
   if (sceneMatches) {
     const lastSceneMatch = sceneMatches[sceneMatches.length - 1]
     scene = lastSceneMatch.replace(/\bSCENE\s+/i, '').replace(/\.$/, '').trim()
-    console.log('🔍 Regex-based Scene detection found:', scene)
+log('debug', '🔍 Regex-based Scene detection found:', scene)
   } else {
-    console.log('🔍 No Scene found by regex detection')
+log('🔍 No Scene found by regex detection')
   }
   
 
@@ -1004,7 +1004,7 @@ const extractContextFromIndex = (selectedIndex: number, selectedLength: number, 
                  bookTitle?.toLowerCase().includes('king james')
   
   if (isBible) {
-    console.log('🔍 Detected Bible content, looking for book and verse')
+log('debug', '🔍 Detected Bible content, looking for book and verse')
     
     // Look for Bible book titles (e.g., "The Book of Joshua", "Genesis", "Matthew")
     const bookTitleMatches = searchText.match(/(?:The\s+)?(?:Book\s+of\s+)?([A-Z][a-z]+(?:\s+[A-Z][a-z]+)*)\s*$/gm)
@@ -1015,7 +1015,7 @@ const extractContextFromIndex = (selectedIndex: number, selectedLength: number, 
         const line = beforeLines[i].trim()
         if (line.match(/^(?:The\s+)?(?:Book\s+of\s+)?([A-Z][a-z]+(?:\s+[A-Z][a-z]+)*)\s*$/)) {
           bibleBook = line.replace(/^(?:The\s+)?(?:Book\s+of\s+)?/, '').trim()
-          console.log('🔍 Bible book found:', bibleBook)
+log('debug', '🔍 Bible book found:', bibleBook)
           break
         }
       }
@@ -1030,7 +1030,7 @@ const extractContextFromIndex = (selectedIndex: number, selectedLength: number, 
       if (beforeVerseMatches) {
         const lastVerse = beforeVerseMatches[beforeVerseMatches.length - 1]
         bibleVerse = lastVerse
-        console.log('🔍 Bible verse found:', bibleVerse)
+log('debug', '🔍 Bible verse found:', bibleVerse)
       }
     }
   }
@@ -1051,9 +1051,9 @@ const extractContextFromIndex = (selectedIndex: number, selectedLength: number, 
     }
   }
   
-  console.log('🔍 SPEAKER DETECTION:')
-  console.log('Speaker found:', speaker)
-  console.log('Speaker starts at line:', speakerStartIndex)
+log('🔍 SPEAKER DETECTION:')
+log('debug', 'Speaker found:', speaker)
+log('debug', 'Speaker starts at line:', speakerStartIndex)
   
   // Extract the complete speech from this speaker
   let completeSpeech = ''
@@ -1074,9 +1074,9 @@ const extractContextFromIndex = (selectedIndex: number, selectedLength: number, 
     completeSpeech = speechLines.join(' ')
   }
   
-  console.log('🔍 COMPLETE SPEECH:')
-  console.log('Complete speech length:', completeSpeech.length)
-  console.log('Complete speech preview:', completeSpeech.substring(0, 200) + '...')
+log('🔍 COMPLETE SPEECH:')
+log('debug', 'Complete speech length:', completeSpeech.length)
+log('debug', 'Complete speech preview:', completeSpeech.substring(0, 200) + '...')
 
   // Check if this is a Shakespeare play by looking for ACT/SCENE markers
   const isShakespearePlay = fullText.includes('ACT') && fullText.includes('SCENE') && 
@@ -1084,9 +1084,9 @@ const extractContextFromIndex = (selectedIndex: number, selectedLength: number, 
   
   if (isShakespearePlay) {
     // For Shakespeare plays, use character map lookup
-    console.log('🔍 Shakespeare play detected - looking up characters at selectedIndex:', selectedIndex)
+log('debug', '🔍 Shakespeare play detected - looking up characters at selectedIndex:', selectedIndex)
     charactersOnStage = getCharactersOnStageAtPosition(selectedIndex, fullText)
-    console.log('🔍 Characters on stage from character map:', charactersOnStage)
+log('debug', '🔍 Characters on stage from character map:', charactersOnStage)
     
     // Also get act/scene from character map lookup
     const characterMapEntry = getCharacterMapEntryAtPosition(selectedIndex, fullText)
@@ -1094,8 +1094,8 @@ const extractContextFromIndex = (selectedIndex: number, selectedLength: number, 
       // Only override if character map has act/scene info, otherwise keep regex-based detection
       if (characterMapEntry.act) act = characterMapEntry.act
       if (characterMapEntry.scene) scene = characterMapEntry.scene
-      console.log('🔍 Act/Scene from character map:', characterMapEntry.act, characterMapEntry.scene)
-      console.log('🔍 Final Act/Scene after character map:', act, scene)
+log('debug', '🔍 Act/Scene from character map:', characterMapEntry.act, characterMapEntry.scene)
+log('debug', '🔍 Final Act/Scene after character map:', act, scene)
     }
   }
 
@@ -1130,34 +1130,34 @@ export const useBookmarkRestoreAndSave = (
   const { data: session } = useSession()
 
   useEffect(() => {
-    console.log('🔍 BOOKMARK RESTORE EFFECT TRIGGERED:', { textLength: text?.length, bookTitle, author, disableBookmarkSaving })
+log('debug', '🔍 BOOKMARK RESTORE EFFECT TRIGGERED:', { textLength: text?.length, bookTitle, author, disableBookmarkSaving })
     const loadBookmark = async () => {
       if (!text || text.length < 100) {
-        console.log('🔍 Skipping bookmark load - text too short:', text?.length)
+log('debug', '🔍 Skipping bookmark load - text too short:', text?.length)
         return
       }
       const title = bookTitle || 'Untitled'
       const auth = author || 'Unknown'
-      console.log('🔍 Loading bookmark for:', title, 'by', auth)
+log('debug', '🔍 Loading bookmark for:', title, 'by', auth)
 
 
       // Wait for content to be fully rendered before attempting restoration
       const restorePosition = (position: number, source: string) => {
-        console.log('🔍 RESTORE POSITION:', { position, source, textReaderRef: textReaderRef.current })
+log('debug', '🔍 RESTORE POSITION:', { position, source, textReaderRef: textReaderRef.current })
         // Use a longer delay and wait for scrollHeight to be available
         const attemptRestore = (attempts = 0) => {
           if (attempts > 20) {
-            console.log('❌ Failed to restore position after 20 attempts')
+log('❌ Failed to restore position after 20 attempts')
             return // Give up after 20 attempts
           }
           
           if (textReaderRef.current && textReaderRef.current.scrollHeight > 0) {
             const maxScroll = textReaderRef.current.scrollHeight - textReaderRef.current.clientHeight
             const safePosition = Math.min(position, maxScroll)
-            console.log('✅ Restoring position:', { position, maxScroll, safePosition, scrollHeight: textReaderRef.current.scrollHeight })
+log('debug', '✅ Restoring position:', { position, maxScroll, safePosition, scrollHeight: textReaderRef.current.scrollHeight })
             textReaderRef.current.scrollTop = safePosition
           } else {
-            console.log(`⏳ Attempt ${attempts + 1}: Waiting for content to load...`)
+log(`⏳ Attempt ${attempts + 1}: Waiting for content to load...`)
             setTimeout(() => attemptRestore(attempts + 1), 200) // Increased delay between attempts
           }
         }
@@ -1174,28 +1174,28 @@ export const useBookmarkRestoreAndSave = (
       if (userEmail) {
         try {
           const response = await fetch(`/api/user/bookmark?bookTitle=${encodeURIComponent(title)}&bookAuthor=${encodeURIComponent(auth)}`)
-          log('bookmark', 'Bookmark API response status:', response.status)
+          log('debug', 'bookmark', 'Bookmark API response status:', response.status)
           
           if (response.ok) {
             const bookmark = await response.json()
-            log('bookmark', 'Bookmark found in database:', bookmark)
+            log('debug', 'bookmark', 'Bookmark found in database:', bookmark)
             const position = bookmark.scroll_position
-            console.log('🔍 Bookmark loaded from database:', { position, bookmark })
+log('debug', '🔍 Bookmark loaded from database:', { position, bookmark })
             restorePosition(position, 'database')
             return
           } else {
-            log('bookmark', 'No bookmark found in database (404)')
-            console.log('❌ No bookmark found in database (404)')
+            log('debug', 'bookmark', 'No bookmark found in database (404)')
+log('❌ No bookmark found in database (404)')
           }
         } catch (error) {
-          log('bookmark', 'Error loading bookmark from database:', error)
+          log('debug', 'bookmark', 'Error loading bookmark from database:', error)
         }
       } else {
-        log('bookmark', 'No session found and not in development mode, skipping bookmark restoration')
+        log('debug', 'bookmark', 'No session found and not in development mode, skipping bookmark restoration')
       }
 
       // No saved bookmark found in database - scroll past Project Gutenberg header for new books
-      log('bookmark', 'No bookmark found in database, checking for Project Gutenberg header')
+      log('debug', 'bookmark', 'No bookmark found in database, checking for Project Gutenberg header')
         setTimeout(() => {
           if (textReaderRef.current) {
           // Find the start of book marker and scroll past it
@@ -1210,7 +1210,7 @@ export const useBookmarkRestoreAndSave = (
           for (const marker of markers) {
             startIndex = text.indexOf(marker)
             if (startIndex !== -1) {
-              log('bookmark', 'Found Project Gutenberg marker:', marker, 'at position:', startIndex)
+              log('debug', 'bookmark', 'Found Project Gutenberg marker:', marker, 'at position:', startIndex)
               break
             }
           }
@@ -1219,10 +1219,10 @@ export const useBookmarkRestoreAndSave = (
             // Calculate scroll position to the marker
             const textPercentage = startIndex / text.length
             const targetPosition = textPercentage * textReaderRef.current.scrollHeight
-            log('bookmark', 'Scrolling to marker position:', targetPosition, 'textPercentage:', textPercentage)
+            log('debug', 'bookmark', 'Scrolling to marker position:', targetPosition, 'textPercentage:', textPercentage)
             textReaderRef.current.scrollTop = Math.max(0, targetPosition)
           } else {
-            log('bookmark', 'No Project Gutenberg marker found in text or content not ready')
+            log('debug', 'bookmark', 'No Project Gutenberg marker found in text or content not ready')
           }
         }
       }, 300) // Longer delay for Project Gutenberg header scrolling
@@ -1232,14 +1232,14 @@ export const useBookmarkRestoreAndSave = (
   }, [text, bookTitle, author, session?.user?.email])
 
   useEffect(() => {
-    log('bookmark', 'Setting up scroll effect, textReaderRef:', textReaderRef.current)
+    log('debug', 'bookmark', 'Setting up scroll effect, textReaderRef:', textReaderRef.current)
     
     const handleScroll = () => {
-      log('bookmark', 'Scroll event fired!')
+      log('debug', 'bookmark', 'Scroll event fired!')
       
       // Skip bookmark saving if disabled (e.g., during chat operations)
       if (disableBookmarkSaving) {
-        log('bookmark', 'Bookmark saving disabled, skipping')
+        log('debug', 'bookmark', 'Bookmark saving disabled, skipping')
         return
       }
       
@@ -1247,12 +1247,12 @@ export const useBookmarkRestoreAndSave = (
       let scrollPosition = 0
       if (textReaderRef.current) {
         scrollPosition = textReaderRef.current.scrollTop
-        log('bookmark', 'Using element scroll position:', scrollPosition)
+        log('debug', 'bookmark', 'Using element scroll position:', scrollPosition)
       } else {
-        log('bookmark', 'No textReaderRef element found')
+        log('debug', 'bookmark', 'No textReaderRef element found')
       }
       
-      log('bookmark', 'Scroll detected, position:', scrollPosition)
+      log('debug', 'bookmark', 'Scroll detected, position:', scrollPosition)
       if (scrollTimeoutRef.current) clearTimeout(scrollTimeoutRef.current)
       scrollTimeoutRef.current = setTimeout(async () => {
         const title = bookTitle || 'Untitled'
@@ -1262,12 +1262,12 @@ export const useBookmarkRestoreAndSave = (
         const isLocalDev = process.env.NODE_ENV === 'development' && typeof window !== 'undefined' && window.location.hostname === 'localhost'
         const userEmail = session?.user?.email || (isLocalDev ? 'dev-user@example.com' : null)
         
-        log('bookmark', `Session email: ${session?.user?.email}, isLocalDev: ${isLocalDev}, userEmail: ${userEmail}`)
+        log('debug', 'bookmark', `Session email: ${session?.user?.email}, isLocalDev: ${isLocalDev}, userEmail: ${userEmail}`)
         
         if (userEmail) {
           try {
-            log('bookmark', `Saving bookmark: ${title} by ${auth} at position ${scrollPosition}`)
-            console.log('🔍 SAVING BOOKMARK:', { title, auth, scrollPosition })
+            log('debug', 'bookmark', `Saving bookmark: ${title} by ${auth} at position ${scrollPosition}`)
+log('debug', '🔍 SAVING BOOKMARK:', { title, auth, scrollPosition })
               const response = await fetch('/api/user/bookmark', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
@@ -1279,19 +1279,19 @@ export const useBookmarkRestoreAndSave = (
               })
             
             if (response.ok) {
-              log('bookmark', `Bookmark saved successfully: ${title} by ${auth} at position ${scrollPosition}`)
-              console.log('✅ Bookmark saved successfully')
+              log('debug', 'bookmark', `Bookmark saved successfully: ${title} by ${auth} at position ${scrollPosition}`)
+log('✅ Bookmark saved successfully')
             } else {
-              log('bookmark', `Failed to save bookmark: ${response.status} ${response.statusText}`)
-              console.log('❌ Failed to save bookmark:', response.status, response.statusText)
+              log('debug', 'bookmark', `Failed to save bookmark: ${response.status} ${response.statusText}`)
+log('debug', '❌ Failed to save bookmark:', response.status, response.statusText)
             }
           } catch (error) {
-            log('bookmark', 'Error saving bookmark to database:', error)
-            console.log('❌ Error saving bookmark:', error)
+            log('debug', 'bookmark', 'Error saving bookmark to database:', error)
+log('debug', '❌ Error saving bookmark:', error)
           }
         } else {
-          log('bookmark', 'No session and not in dev mode, skipping bookmark save')
-          console.log('❌ No session, skipping bookmark save')
+          log('debug', 'bookmark', 'No session and not in dev mode, skipping bookmark save')
+log('debug', '❌ No session, skipping bookmark save')
         }
 
         // Bookmark saved to database
@@ -1299,20 +1299,20 @@ export const useBookmarkRestoreAndSave = (
     }
 
     // Try both window scroll and element scroll
-    log('bookmark', 'Setting up scroll handlers for both window and element')
+    log('debug', 'bookmark', 'Setting up scroll handlers for both window and element')
     
     const setupScrollHandlers = () => {
       // Window scroll (most likely)
       window.addEventListener('scroll', handleScroll)
-      log('bookmark', 'Window scroll handler attached')
+      log('debug', 'bookmark', 'Window scroll handler attached')
       
       // Element scroll (if element is scrollable)
     const el = textReaderRef.current
       if (el) {
         el.addEventListener('scroll', handleScroll)
-        log('bookmark', 'Element scroll handler attached')
+        log('debug', 'bookmark', 'Element scroll handler attached')
       } else {
-        log('bookmark', 'No textReaderRef element found for scroll handler')
+        log('debug', 'bookmark', 'No textReaderRef element found for scroll handler')
       }
     }
     
@@ -1396,7 +1396,7 @@ export const useSearchCore = (
           setTimeout(async () => {
             if (textReaderRef.current) {
               const scrollPosition = textReaderRef.current.scrollTop
-              console.log('🔍 Saving bookmark after search navigation to position:', scrollPosition)
+log('debug', '🔍 Saving bookmark after search navigation to position:', scrollPosition)
               
               // Trigger the scroll event to save bookmark
               const scrollEvent = new Event('scroll')
@@ -1417,7 +1417,7 @@ export const useSearchCore = (
           
           // Save bookmark after scrolling to search result
           setTimeout(() => {
-            console.log('🔍 Saving bookmark after search navigation (scroll mode)')
+log('🔍 Saving bookmark after search navigation (scroll mode)')
             // Trigger the scroll event to save bookmark
             const scrollEvent = new Event('scroll')
             window.dispatchEvent(scrollEvent)

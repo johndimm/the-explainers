@@ -1,4 +1,5 @@
 'use client'
+import { log } from '../utils/log'
 
 import React, { useState, useEffect } from 'react'
 import { checkPersonWikipediaPage, checkBookWikipediaPage } from '@/utils/wikipediaStatic'
@@ -39,7 +40,7 @@ export const WikipediaLink: React.FC<WikipediaLinkProps> = ({
         }
         setWikipediaResult(result)
       } catch (error) {
-        console.error('Error checking Wikipedia:', error)
+        log('ui','Error checking Wikipedia:', error)
         setWikipediaResult({ exists: false })
       } finally {
         setIsLoading(false)

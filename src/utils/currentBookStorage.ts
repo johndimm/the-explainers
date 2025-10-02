@@ -1,4 +1,5 @@
 import { useSession } from 'next-auth/react'
+import { log } from './log'
 
 export interface CurrentBook {
   title: string
@@ -21,7 +22,7 @@ export const getCurrentBook = async (): Promise<CurrentBook | null> => {
     // 404 is expected when no current book exists or no user session
     // Don't log this as an error
   } catch (error) {
-    console.error('Error loading current book from database:', error)
+    log('ui','Error loading current book from database:', error)
   }
 
   return null
@@ -36,7 +37,7 @@ export const setCurrentBook = async (book: CurrentBook): Promise<void> => {
       body: JSON.stringify(book)
     })
   } catch (error) {
-    console.error('Error saving current book to database:', error)
+    log('ui','Error saving current book to database:', error)
   }
 
   // Dispatch custom event to notify components of the change

@@ -75,7 +75,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
         redirect: true
       })
     } catch (error) {
-      console.error('Sign in error:', error)
+      log('ui','Sign in error:', error)
     } finally {
       setIsLoading(false)
     }
@@ -92,7 +92,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
       await update()
       log('Session updated')
     } catch (error) {
-      console.error('Sign out error:', error)
+      log('ui','Sign out error:', error)
     } finally {
       log('Sign out finally block')
       setIsLoading(false)

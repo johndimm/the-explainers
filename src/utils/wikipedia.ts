@@ -1,4 +1,5 @@
 // Utility functions for Wikipedia integration
+import { log } from './log'
 
 export interface WikipediaResult {
   exists: boolean
@@ -66,7 +67,7 @@ export async function checkWikipediaPage(searchTerm: string): Promise<WikipediaR
       }
     }
   } catch (error) {
-    console.error('Error checking Wikipedia page:', error)
+    log('ui','Error checking Wikipedia page:', error)
   }
 
   // No Wikipedia page found

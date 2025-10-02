@@ -1,3 +1,5 @@
+import { log } from './log'
+
 export const formatTimestamp = (timestamp: string) => {
   const date = new Date(timestamp);
   return date.toLocaleString('en-US', {
@@ -318,14 +320,14 @@ export const convertToHTML = (data: any) => {
             <div class="context-info">
                 ${(() => {
                   // Debug: Log the context info to see what we're working with
-                  console.log('🔍 HTML CONVERTER - Full Context Info:', JSON.stringify(data.contextInfo, null, 2));
-                  console.log('🔍 HTML CONVERTER - Act:', data.contextInfo.act);
-                  console.log('🔍 HTML CONVERTER - Scene:', data.contextInfo.scene);
-                  console.log('🔍 HTML CONVERTER - Speaker:', data.contextInfo.speaker);
-                  console.log('🔍 HTML CONVERTER - Characters on Stage:', data.contextInfo.charactersOnStage);
-                  console.log('🔍 HTML CONVERTER - Chapter:', data.contextInfo.chapter);
-                  console.log('🔍 HTML CONVERTER - Book Title:', data.bookTitle);
-                  console.log('🔍 HTML CONVERTER - Author:', data.author);
+log('debug','🔍 HTML CONVERTER - Full Context Info:', JSON.stringify(data.contextInfo, null, 2));
+log('debug','🔍 HTML CONVERTER - Act:', data.contextInfo.act);
+log('debug','🔍 HTML CONVERTER - Scene:', data.contextInfo.scene);
+log('debug','🔍 HTML CONVERTER - Speaker:', data.contextInfo.speaker);
+log('debug','🔍 HTML CONVERTER - Characters on Stage:', data.contextInfo.charactersOnStage);
+log('debug','🔍 HTML CONVERTER - Chapter:', data.contextInfo.chapter);
+log('debug','🔍 HTML CONVERTER - Book Title:', data.bookTitle);
+log('debug','🔍 HTML CONVERTER - Author:', data.author);
                   
                   // Check if this is Shakespeare content by author or book title
                   const isShakespeare = data.author?.toLowerCase().includes('shakespeare') || 
@@ -337,8 +339,8 @@ export const convertToHTML = (data: any) => {
                                  data.bookTitle?.toLowerCase().includes('bible') ||
                                  data.bookTitle?.toLowerCase().includes('king james');
                   
-                  console.log('🔍 HTML CONVERTER - Is Shakespeare:', isShakespeare);
-                  console.log('🔍 HTML CONVERTER - Is Bible:', isBible);
+log('debug','🔍 HTML CONVERTER - Is Shakespeare:', isShakespeare);
+log('debug','🔍 HTML CONVERTER - Is Bible:', isBible);
                   
                   if (isShakespeare) {
                     // For Shakespeare: Act, Scene, Speaker, Characters on Stage
@@ -401,12 +403,12 @@ export const convertToMarkdown = (data: any) => {
     markdown += `**Context:**\n`;
     
     // Debug: Log the context info to see what we're working with
-    console.log('🔍 MARKDOWN CONVERTER - Context Info:', data.contextInfo);
-    console.log('🔍 MARKDOWN CONVERTER - Act:', data.contextInfo.act);
-    console.log('🔍 MARKDOWN CONVERTER - Scene:', data.contextInfo.scene);
-    console.log('🔍 MARKDOWN CONVERTER - Chapter:', data.contextInfo.chapter);
-    console.log('🔍 MARKDOWN CONVERTER - Book Title:', data.bookTitle);
-    console.log('🔍 MARKDOWN CONVERTER - Author:', data.author);
+log('debug','🔍 MARKDOWN CONVERTER - Context Info:', data.contextInfo);
+log('debug','🔍 MARKDOWN CONVERTER - Act:', data.contextInfo.act);
+log('debug','🔍 MARKDOWN CONVERTER - Scene:', data.contextInfo.scene);
+log('debug','🔍 MARKDOWN CONVERTER - Chapter:', data.contextInfo.chapter);
+log('debug','🔍 MARKDOWN CONVERTER - Book Title:', data.bookTitle);
+log('debug','🔍 MARKDOWN CONVERTER - Author:', data.author);
     
     // Check if this is Shakespeare content by author or book title
     const isShakespeare = data.author?.toLowerCase().includes('shakespeare') || 
@@ -418,8 +420,8 @@ export const convertToMarkdown = (data: any) => {
                    data.bookTitle?.toLowerCase().includes('bible') ||
                    data.bookTitle?.toLowerCase().includes('king james');
     
-    console.log('🔍 MARKDOWN CONVERTER - Is Shakespeare:', isShakespeare);
-    console.log('🔍 MARKDOWN CONVERTER - Is Bible:', isBible);
+log('debug','🔍 MARKDOWN CONVERTER - Is Shakespeare:', isShakespeare);
+log('debug','🔍 MARKDOWN CONVERTER - Is Bible:', isBible);
     
     if (isShakespeare) {
       // For Shakespeare: Act, Scene, Speaker, Characters on Stage
@@ -509,12 +511,12 @@ export const convertToPlainText = (data: any) => {
     text += `CONTEXT:\n`;
     
     // Debug: Log the context info to see what we're working with
-    console.log('🔍 TEXT CONVERTER - Context Info:', data.contextInfo);
-    console.log('🔍 TEXT CONVERTER - Act:', data.contextInfo.act);
-    console.log('🔍 TEXT CONVERTER - Scene:', data.contextInfo.scene);
-    console.log('🔍 TEXT CONVERTER - Chapter:', data.contextInfo.chapter);
-    console.log('🔍 TEXT CONVERTER - Book Title:', data.bookTitle);
-    console.log('🔍 TEXT CONVERTER - Author:', data.author);
+log('debug','🔍 TEXT CONVERTER - Context Info:', data.contextInfo);
+log('debug','🔍 TEXT CONVERTER - Act:', data.contextInfo.act);
+log('debug','🔍 TEXT CONVERTER - Scene:', data.contextInfo.scene);
+log('debug','🔍 TEXT CONVERTER - Chapter:', data.contextInfo.chapter);
+log('debug','🔍 TEXT CONVERTER - Book Title:', data.bookTitle);
+log('debug','🔍 TEXT CONVERTER - Author:', data.author);
     
     // Check if this is Shakespeare content by author or book title
     const isShakespeare = data.author?.toLowerCase().includes('shakespeare') || 
@@ -526,8 +528,8 @@ export const convertToPlainText = (data: any) => {
                    data.bookTitle?.toLowerCase().includes('bible') ||
                    data.bookTitle?.toLowerCase().includes('king james');
     
-    console.log('🔍 TEXT CONVERTER - Is Shakespeare:', isShakespeare);
-    console.log('🔍 TEXT CONVERTER - Is Bible:', isBible);
+log('debug','🔍 TEXT CONVERTER - Is Shakespeare:', isShakespeare);
+log('debug','🔍 TEXT CONVERTER - Is Bible:', isBible);
     
     if (isShakespeare) {
       // For Shakespeare: Act, Scene, Speaker, Characters on Stage

@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
+import { log } from '@/utils/log'
 import { getServerSession } from 'next-auth'
 import { authOptions } from '@/lib/auth'
 import { createOrUpdateUserProfile, createOrUpdateUserSettings, createOrUpdateUserCurrentBook, createOrUpdateUserBookmark } from '@/lib/database'
@@ -41,7 +42,7 @@ export async function POST(request: NextRequest) {
         })
         results.profile = migratedProfile
       } catch (error) {
-        console.error('Error migrating profile:', error)
+        log('api','Error migrating profile:', error)
       }
     }
 
@@ -62,7 +63,7 @@ export async function POST(request: NextRequest) {
         })
         results.settings = migratedSettings
       } catch (error) {
-        console.error('Error migrating settings:', error)
+        log('api','Error migrating settings:', error)
       }
     }
 
@@ -77,7 +78,7 @@ export async function POST(request: NextRequest) {
         })
         results.currentBook = migratedCurrentBook
       } catch (error) {
-        console.error('Error migrating current book:', error)
+        log('api','Error migrating current book:', error)
       }
     }
 
@@ -93,7 +94,7 @@ export async function POST(request: NextRequest) {
           })
           results.bookmarks.push(migratedBookmark)
         } catch (error) {
-          console.error('Error migrating bookmark:', error)
+          log('api','Error migrating bookmark:', error)
         }
       }
     }
@@ -103,7 +104,7 @@ export async function POST(request: NextRequest) {
       results
     })
   } catch (error) {
-    console.error('Error during migration:', error)
+    log('api','Error during migration:', error)
     return NextResponse.json({ error: 'Migration failed' }, { status: 500 })
   }
 }

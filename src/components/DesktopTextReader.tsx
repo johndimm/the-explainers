@@ -47,7 +47,7 @@ const DesktopTextReader: React.FC<ReaderCommonProps> = ({ text, bookTitle = 'Rom
         log('desktop', 'DesktopTextReader: global mouseup selection', { text: t, length: t.length, hasSelection: !!selection })
         
         if (t.length > 0) {
-          console.log('🔍 SETTING SELECTED TEXT (DESKTOP):', JSON.stringify(t))
+log('ui','🔍 SETTING SELECTED TEXT (DESKTOP):', JSON.stringify(t))
           setSelectedText(t)
           setShowConfirmDialog(true)
         } else {
@@ -132,9 +132,9 @@ const DesktopTextReader: React.FC<ReaderCommonProps> = ({ text, bookTitle = 'Rom
   }
 
   const handleExplain = () => {
-    console.log('🔍 HANDLE EXPLAIN DEBUG:')
-    console.log('selectedText state:', JSON.stringify(selectedText))
-    console.log('selectedText length:', selectedText?.length)
+log('ui','🔍 HANDLE EXPLAIN DEBUG:')
+log('ui','selectedText state:', JSON.stringify(selectedText))
+log('ui','selectedText length:', selectedText?.length)
     const context = extractContextInfo(selectedText, text, bookTitle, author)
     const chatData = { selectedText, contextInfo: context, bookTitle, author }
     setChatContext(chatData)
@@ -215,9 +215,9 @@ const DesktopTextReader: React.FC<ReaderCommonProps> = ({ text, bookTitle = 'Rom
   // Listen for header search events
   React.useEffect(() => {
     const handleHeaderSearch = (event: CustomEvent) => {
-      console.log('DesktopTextReader: Received headerSearch event:', event.detail)
+log('ui','DesktopTextReader: Received headerSearch event:', event.detail)
       if (event.detail.type === 'text') {
-        console.log('DesktopTextReader: Processing text search for:', event.detail.query)
+log('ui','DesktopTextReader: Processing text search for:', event.detail.query)
         setSearchQuery(event.detail.query)
         handleSearch(event.detail.query)
       }
@@ -225,14 +225,14 @@ const DesktopTextReader: React.FC<ReaderCommonProps> = ({ text, bookTitle = 'Rom
 
     const handleHeaderSearchNext = (event: CustomEvent) => {
       if (event.detail.type === 'text') {
-        console.log('DesktopTextReader: Next search result')
+log('ui','DesktopTextReader: Next search result')
         nextSearchResult()
       }
     }
 
     const handleHeaderSearchPrev = (event: CustomEvent) => {
       if (event.detail.type === 'text') {
-        console.log('DesktopTextReader: Previous search result')
+log('ui','DesktopTextReader: Previous search result')
         prevSearchResult()
       }
     }

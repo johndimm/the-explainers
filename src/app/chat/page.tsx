@@ -35,7 +35,7 @@ function ChatContent() {
         // Don't clear it immediately - let it persist for refreshes
         // It will be cleared when navigating to a new selection
       } catch (error) {
-        console.error('Error parsing chat context:', error)
+        log('ui','Error parsing chat context:', error)
       }
     }
   }, [])

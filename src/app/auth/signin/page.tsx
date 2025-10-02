@@ -1,4 +1,5 @@
 'use client'
+import { log } from '@/utils/log'
 
 import { signIn, getSession } from 'next-auth/react'
 import { useRouter } from 'next/navigation'
@@ -8,12 +9,17 @@ export default function SignIn() {
   const router = useRouter()
   const [isLoading, setIsLoading] = useState(false)
   const [isIOS, setIsIOS] = useState(false)
+  const [hasStoredContext, setHasStoredContext] = useState(false)
 
   useEffect(() => {
     // Detect iOS devices
     const userAgent = navigator.userAgent || navigator.vendor || (window as any).opera
     const isIOSDevice = /iPad|iPhone|iPod/.test(userAgent)
     setIsIOS(isIOSDevice)
+    
+    // Check if there's stored chat context
+    const storedContext = sessionStorage.getItem('chatContext')
+    setHasStoredContext(!!storedContext)
   }, [])
 
   const handleGoogleSignIn = async () => {
@@ -24,7 +30,7 @@ export default function SignIn() {
         redirect: true
       })
     } catch (error) {
-      console.error('Sign in error:', error)
+      log('ui','Sign in error:', error)
       setIsLoading(false)
     }
   }
@@ -48,7 +54,7 @@ export default function SignIn() {
         redirect: true
       })
     } catch (error) {
-      console.error('iOS Sign in error:', error)
+      log('ui','iOS Sign in error:', error)
       setIsLoading(false)
     }
   }
@@ -95,6 +101,25 @@ export default function SignIn() {
         }}>
           Sign in to access the AI chat feature
         </p>
+        
+        {hasStoredContext && (
+          <div style={{
+            background: '#e0f2fe',
+            border: '1px solid #0288d1',
+            borderRadius: '8px',
+            padding: '12px',
+            marginBottom: '24px',
+            fontSize: '14px',
+            color: '#01579b'
+          }}>
+            <div style={{ fontWeight: '600', marginBottom: '4px' }}>
+              📝 Your selected text is saved
+            </div>
+            <div>
+              After signing in, you'll be taken directly to chat with your selected text ready to explain.
+            </div>
+          </div>
+        )}
         
         <div style={{
           background: '#f8f9fa',

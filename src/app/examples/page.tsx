@@ -1,4 +1,5 @@
 'use client'
+import { log } from '@/utils/log'
 
 import { useState, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
@@ -29,10 +30,10 @@ export default function ExamplesPage() {
           const examplesData = await response.json()
           setExamples(examplesData)
         } else {
-          console.error('Failed to load examples data:', response.status)
+          log('ui','Failed to load examples data:', response.status)
         }
       } catch (error) {
-        console.error('Error loading examples data:', error)
+        log('ui','Error loading examples data:', error)
       } finally {
         setLoading(false)
       }

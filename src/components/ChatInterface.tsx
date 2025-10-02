@@ -132,9 +132,9 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ selectedText, contextInfo
   }
 
   const saveChatHistory = (format: 'json' | 'html' | 'markdown' | 'text' = 'json') => {
-    console.log('🔍 SAVE CHAT HISTORY:', { format, messagesLength: messages.length })
+    log('ui', '🔍 SAVE CHAT HISTORY:', { format, messagesLength: messages.length })
     if (messages.length === 0) {
-      console.log('❌ No messages to save')
+      log('ui', '❌ No messages to save')
       return
     }
     
@@ -181,7 +181,7 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ selectedText, contextInfo
         extension = 'json';
     }
     
-    console.log('🔍 Creating download:', { contentLength: content.length, mimeType, extension })
+    log('ui', '🔍 Creating download:', { contentLength: content.length, mimeType, extension })
     
     const blob = new Blob([content], { type: mimeType })
     const url = URL.createObjectURL(blob)
@@ -189,7 +189,7 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ selectedText, contextInfo
     a.href = url
     a.download = `chat-history-${bookTitle.replace(/[^a-z0-9]/gi, '-')}-${new Date().toISOString().split('T')[0]}.${extension}`
     
-    console.log('🔍 Download filename:', a.download)
+    log('ui', '🔍 Download filename:', a.download)
     
     document.body.appendChild(a)
     a.click()
@@ -197,7 +197,7 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ selectedText, contextInfo
     URL.revokeObjectURL(url)
     setSaveFormatDropdownOpen(false)
     
-    console.log('✅ Download triggered successfully')
+    log('ui', '✅ Download triggered successfully')
   }
 
   const clearChatHistory = () => {
@@ -355,10 +355,10 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ selectedText, contextInfo
     // Only scroll if we have messages AND the count increased (new message added)
     if (currentMessageCount > 0 && currentMessageCount > prevMessageCount && messages[messages.length - 1].role === 'assistant') {
       // Only scroll when a new assistant message is added
-      console.log('Chat: New assistant message detected, scrolling to bottom')
+      log('ui', 'Chat: New assistant message detected, scrolling to bottom')
       setTimeout(() => scrollToLatestResponse(), 100)
     } else if (currentMessageCount > 0 && currentMessageCount === prevMessageCount) {
-      console.log('Chat: Message count unchanged, not scrolling (prev:', prevMessageCount, 'current:', currentMessageCount, ')')
+      log('ui', 'Chat: Message count unchanged, not scrolling (prev:', prevMessageCount, 'current:', currentMessageCount, ')')
     }
     
     // Update the previous count
@@ -376,7 +376,7 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ selectedText, contextInfo
           timestamp: new Date(msg.timestamp)
         })))
       } catch (error) {
-        console.error('Error loading chat history:', error)
+        log('ui','Error loading chat history:', error)
       }
     }
   }, [isPageMode])
@@ -442,7 +442,7 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ selectedText, contextInfo
               sessionStorage.removeItem('chatContext')
             }
           } catch (error) {
-            console.error('Error parsing chat context:', error)
+            log('ui','Error parsing chat context:', error)
           }
         }
         // If no context data, just show the quote (user clicked "chat" in hamburger)
@@ -568,7 +568,7 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ selectedText, contextInfo
   // Print current provider + model whenever selection changes
   useEffect(() => {
     const model = resolveModelFor(selectedProvider, settings.llmModel)
-    console.log('Chat selection:', { provider: selectedProvider, model })
+    log('ui', 'Chat selection:', { provider: selectedProvider, model })
   }, [selectedProvider, settings.llmModel])
 
 
@@ -586,7 +586,7 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ selectedText, contextInfo
     }
 
     const selectedModel = chooseModelForProvider ? chooseModelForProvider(selectedProvider, settings.llmModel) : resolveModelFor(selectedProvider, settings.llmModel)
-    console.log('ChatInterface: Selected model for API call:', { provider: selectedProvider, model: selectedModel, settingsModel: settings.llmModel })
+    log('ui', 'ChatInterface: Selected model for API call:', { provider: selectedProvider, model: selectedModel, settingsModel: settings.llmModel })
     const response = await fetch('/api/chat', {
       method: 'POST',
       headers: {
@@ -710,7 +710,7 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ selectedText, contextInfo
     // Check prompt size and truncate if too large to prevent expensive API calls
     const MAX_PROMPT_LENGTH = 8000 // Reasonable limit for most LLMs
     if (prompt.length > MAX_PROMPT_LENGTH) {
-      console.log('🔍 PROMPT TOO LARGE:', prompt.length, 'characters, truncating to', MAX_PROMPT_LENGTH)
+      log('debug', '🔍 PROMPT TOO LARGE:', prompt.length, 'characters, truncating to', MAX_PROMPT_LENGTH)
       
       // Try to truncate at a reasonable point (end of context info)
       const contextEndIndex = prompt.indexOf('\n- Focus primarily on explaining')
@@ -827,7 +827,7 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ selectedText, contextInfo
       // If no videos found, do nothing (no error message)
       
     } catch (error) {
-      console.error('Auto video search error (ignored):', error)
+      log('ui','Auto video search error (ignored):', error)
       // Silently ignore errors - don't interrupt the user experience
     }
   }
@@ -872,6 +872,17 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ selectedText, contextInfo
       
       if (!session?.user?.email && !isLocalDev) {
         log('ChatInterface: canUseExplanation returned false - not authenticated, redirecting to sign-in')
+        // Preserve the chat context when redirecting to sign-in
+        if (selectedText && contextInfo) {
+          const contextToStore = {
+            selectedText,
+            contextInfo,
+            bookTitle,
+            author
+          }
+          sessionStorage.setItem('chatContext', JSON.stringify(contextToStore))
+          log('ChatInterface: Stored chatContext before redirecting to sign-in:', contextToStore)
+        }
         router.push('/auth/signin')
       } else {
         log('ChatInterface: canUseExplanation returned false - authenticated but no credits, redirecting to credits')
@@ -940,7 +951,7 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ selectedText, contextInfo
       }, 500)
       
     } catch (error) {
-      console.error('Error calling LLM:', error)
+      log('ui','Error calling LLM:', error)
       const errorMessage: Message = {
         id: (Date.now() + 1).toString(),
         content: 'Sorry, I encountered an error while trying to re-explain this text. Please try again.',
@@ -983,6 +994,17 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ selectedText, contextInfo
       
       if (!session?.user?.email && !isLocalDev) {
         log('ChatInterface: canUseExplanation returned false - not authenticated, redirecting to sign-in')
+        // Preserve the chat context when redirecting to sign-in
+        if (selectedText && contextInfo) {
+          const contextToStore = {
+            selectedText,
+            contextInfo,
+            bookTitle,
+            author
+          }
+          sessionStorage.setItem('chatContext', JSON.stringify(contextToStore))
+          log('ChatInterface: Stored chatContext before redirecting to sign-in:', contextToStore)
+        }
         router.push('/auth/signin')
       } else {
         log('ChatInterface: canUseExplanation returned false - authenticated but no credits, redirecting to credits')
@@ -1047,7 +1069,7 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ selectedText, contextInfo
       }
       setMessages(prev => [...prev, assistantMessage])
     } catch (error) {
-      console.error('Error calling LLM:', error)
+      log('ui','Error calling LLM:', error)
       const errorMessage: Message = {
         id: (Date.now() + 3).toString(),
         content: 'Sorry, I encountered an error while trying to explain this text. Please try again.',
@@ -1093,7 +1115,7 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ selectedText, contextInfo
       }
       setMessages(prev => [...prev, assistantMessage])
     } catch (error) {
-      console.error('Error calling LLM:', error)
+      log('ui','Error calling LLM:', error)
       const errorMessage: Message = {
         id: (Date.now() + 1).toString(),
         content: 'Sorry, I encountered an error while processing your message. Please try again.',
@@ -1534,7 +1556,7 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ selectedText, contextInfo
                     onChange={(e) => {
                       e.stopPropagation()
                       const newLength = e.target.value as ResponseLength
-                      console.log('🔍 Brief radio clicked:', { newLength, currentResponseLength, settingsResponseLength: settings.responseLength })
+                      log('ui', '🔍 Brief radio clicked:', { newLength, currentResponseLength, settingsResponseLength: settings.responseLength })
                       setCurrentResponseLength(newLength)
                       // Persist as new default and mark as changed
                       onSettingsChange({
@@ -1556,7 +1578,7 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ selectedText, contextInfo
                     onChange={(e) => {
                       e.stopPropagation()
                       const newLength = e.target.value as ResponseLength
-                      console.log('🔍 Medium radio clicked:', { newLength, currentResponseLength, settingsResponseLength: settings.responseLength })
+                      log('ui', '🔍 Medium radio clicked:', { newLength, currentResponseLength, settingsResponseLength: settings.responseLength })
                       setCurrentResponseLength(newLength)
                       onSettingsChange({
                         ...settings,
@@ -1577,7 +1599,7 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ selectedText, contextInfo
                     onChange={(e) => {
                       e.stopPropagation()
                       const newLength = e.target.value as ResponseLength
-                      console.log('🔍 Long radio clicked:', { newLength, currentResponseLength, settingsResponseLength: settings.responseLength })
+                      log('ui', '🔍 Long radio clicked:', { newLength, currentResponseLength, settingsResponseLength: settings.responseLength })
                       setCurrentResponseLength(newLength)
                       onSettingsChange({
                         ...settings,
@@ -1615,7 +1637,7 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ selectedText, contextInfo
                 <div className={styles.saveDropdownContent} style={{ backgroundColor: '#ffffff !important', color: '#111827 !important' }}>
                   <button 
                     onClick={() => {
-                      console.log('🔍 JSON SAVE CLICKED')
+                      log('ui', '🔍 JSON SAVE CLICKED')
                       saveChatHistory('json')
                       setSaveFormatDropdownOpen(false)
                     }}
@@ -1626,7 +1648,7 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ selectedText, contextInfo
                   </button>
                   <button 
                     onClick={() => {
-                      console.log('🔍 HTML SAVE CLICKED')
+                      log('ui', '🔍 HTML SAVE CLICKED')
                       saveChatHistory('html')
                       setSaveFormatDropdownOpen(false)
                     }}
@@ -1637,7 +1659,7 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ selectedText, contextInfo
                   </button>
                   <button 
                     onClick={() => {
-                      console.log('🔍 MARKDOWN SAVE CLICKED')
+                      log('ui', '🔍 MARKDOWN SAVE CLICKED')
                       saveChatHistory('markdown')
                       setSaveFormatDropdownOpen(false)
                     }}
@@ -1648,7 +1670,7 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ selectedText, contextInfo
                   </button>
                   <button 
                     onClick={() => {
-                      console.log('🔍 TEXT SAVE CLICKED')
+                      log('ui', '🔍 TEXT SAVE CLICKED')
                       saveChatHistory('text')
                       setSaveFormatDropdownOpen(false)
                     }}

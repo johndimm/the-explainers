@@ -21,8 +21,25 @@ export default function AuthCallback() {
         await new Promise(resolve => setTimeout(resolve, 1000))
         
         if (status === 'authenticated' && session?.user) {
-          log('AuthCallback: Authentication successful, redirecting to chat')
-          router.push('/chat')
+          log('AuthCallback: Authentication successful, checking for stored context')
+          
+          // Check if there's a chatContext stored (user was trying to chat with selected text)
+          const storedContext = sessionStorage.getItem('chatContext')
+          if (storedContext) {
+            log('AuthCallback: Found stored chatContext, redirecting to chat')
+            router.push('/chat')
+          } else {
+            // Check if there's a callback URL in the URL params
+            const urlParams = new URLSearchParams(window.location.search)
+            const callbackUrl = urlParams.get('callbackUrl')
+            if (callbackUrl && callbackUrl !== '/chat') {
+              log('AuthCallback: Redirecting to callback URL:', callbackUrl)
+              router.push(callbackUrl)
+            } else {
+              log('AuthCallback: No specific context, redirecting to chat')
+              router.push('/chat')
+            }
+          }
         } else if (status === 'unauthenticated') {
           log('AuthCallback: Authentication failed, redirecting to sign-in')
           router.push('/auth/signin')

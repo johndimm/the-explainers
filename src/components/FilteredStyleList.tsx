@@ -1,4 +1,5 @@
 'use client'
+import { log } from '../utils/log'
 
 import React from 'react'
 import { ExplanationStyle } from './Settings'
@@ -62,7 +63,7 @@ export const FilteredStyleList: React.FC<FilteredStyleListProps> = ({
                 alt={style.name}
                 className={stylesCss.stylePhoto}
                 onError={(e) => { 
-                  console.warn(`Failed to load image for ${style.value}:`, getPhotoSrc(style.value))
+                  log('ui',`Failed to load image for ${style.value}:`, getPhotoSrc(style.value))
                   e.currentTarget.style.display = 'none'
                   // Show a placeholder icon when image fails to load
                   const placeholder = document.createElement('div')

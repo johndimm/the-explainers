@@ -33,7 +33,7 @@ const TextReader: React.FC<TextReaderProps> = (props) => {
       component: isMobile ? 'MobileTextReader' : 'DesktopTextReader'
     }
     
-    console.log('🔍 MOBILE DETECTION:', debugInfo)
+log('ui','🔍 MOBILE DETECTION:', debugInfo)
     log('TextReader detection:', debugInfo)
   }
   
