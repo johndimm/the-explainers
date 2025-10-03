@@ -5,6 +5,7 @@ import { useRouter } from 'next/navigation'
 import { useAuth } from '@/contexts/AuthContext'
 import { getCurrentBook } from '@/utils/currentBookStorage'
 import { log } from '@/utils/log'
+import { useTheme } from '@/hooks/useTheme'
 
 function HomeContent() {
   const router = useRouter()

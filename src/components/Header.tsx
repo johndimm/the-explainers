@@ -5,11 +5,13 @@ import { useRouter, usePathname } from 'next/navigation'
 import { useAuth } from '@/contexts/AuthContext'
 import { getCurrentBook } from '@/utils/currentBookStorage'
 import { log } from '@/utils/log'
+import { useTheme } from '@/hooks/useTheme'
 
 export default function Header() {
   const router = useRouter()
   const pathname = usePathname()
   const { user, isAuthenticated, isLoading, signIn, signOut: handleSignOut } = useAuth()
+  const { isSinglePlay, playTitle, playAuthor, themeColor, appName } = useTheme()
   const [showMobileMenu, setShowMobileMenu] = useState(false)
   const menuRef = useRef<HTMLDivElement>(null)
   const headerRef = useRef<HTMLElement>(null)
@@ -103,19 +105,25 @@ export default function Header() {
   }, [subtitle, pathname, showMobileMenu])
 
   useEffect(() => {
-    // Update subtitle based on current book from database
+    // Update subtitle based on single play mode or current book from database
     const updateSubtitle = async () => {
       try {
-        const currentBook = await getCurrentBook()
-log('ui','Header: Current book loaded:', currentBook)
-        if (currentBook && currentBook.title && currentBook.author) {
-          setSubtitle(`${currentBook.title} by ${currentBook.author}`)
+        if (isSinglePlay) {
+          // In single play mode, always show the play title
+          setSubtitle(`${playTitle} by ${playAuthor}`)
         } else {
-          setSubtitle('understand difficult texts')
+          // In full mode, check for current book
+          const currentBook = await getCurrentBook()
+          log('ui','Header: Current book loaded:', currentBook)
+          if (currentBook && currentBook.title && currentBook.author) {
+            setSubtitle(`${currentBook.title} by ${currentBook.author}`)
+          } else {
+            setSubtitle('understand difficult texts')
+          }
         }
       } catch (error) {
         log('ui', 'Error loading current book for header:', error)
-        setSubtitle('understand difficult texts')
+        setSubtitle(isSinglePlay ? `${playTitle} by ${playAuthor}` : 'understand difficult texts')
       }
     }
 
@@ -365,7 +373,9 @@ log('ui','Hamburger clicked, current state:', showMobileMenu)
             >
               <button onClick={() => { router.push('/reader'); setShowMobileMenu(false) }} style={{ display: 'block', width: '100%', padding: '12px 16px', background: 'none', border: 'none', textAlign: 'left', cursor: 'pointer', borderBottom: '1px solid #f0f0f0' }}>📖 Reader</button>
               <button onClick={() => { router.push('/chat'); setShowMobileMenu(false) }} style={{ display: 'block', width: '100%', padding: '12px 16px', background: 'none', border: 'none', textAlign: 'left', cursor: 'pointer', borderBottom: '1px solid #f0f0f0' }}>💬 Chat</button>
-              <button onClick={() => { router.push('/library'); setShowMobileMenu(false) }} style={{ display: 'block', width: '100%', padding: '12px 16px', background: 'none', border: 'none', textAlign: 'left', cursor: 'pointer', borderBottom: '1px solid #f0f0f0' }}>📚 Library</button>
+              {!isSinglePlay && (
+                <button onClick={() => { router.push('/library'); setShowMobileMenu(false) }} style={{ display: 'block', width: '100%', padding: '12px 16px', background: 'none', border: 'none', textAlign: 'left', cursor: 'pointer', borderBottom: '1px solid #f0f0f0' }}>📚 Library</button>
+              )}
 
               <button onClick={() => { router.push('/explainers'); setShowMobileMenu(false) }} style={{ display: 'block', width: '100%', padding: '12px 16px', background: 'none', border: 'none', textAlign: 'left', cursor: 'pointer', borderBottom: '1px solid #f0f0f0' }}>🎭 Explainers</button>
               <button onClick={() => { router.push('/credits'); setShowMobileMenu(false) }} style={{ display: 'block', width: '100%', padding: '12px 16px', background: 'none', border: 'none', textAlign: 'left', cursor: 'pointer', borderBottom: '1px solid #f0f0f0' }}>💳 Credits</button>
