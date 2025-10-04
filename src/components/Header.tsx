@@ -7,6 +7,7 @@ import { getCurrentBook } from '@/utils/currentBookStorage'
 import { log } from '@/utils/log'
 import { useTheme } from '@/hooks/useTheme'
 import PlayIcon from './PlayIcon'
+import { calculateUpgradePricing, isEligibleForUpgrade, getUpgradePricingText } from '@/utils/upgradePricing'
 
 export default function Header() {
   const router = useRouter()
@@ -22,6 +23,8 @@ export default function Header() {
   const [currentSearchIndex, setCurrentSearchIndex] = useState(0)
   const [totalSearchResults, setTotalSearchResults] = useState(0)
   const [showSignOutConfirm, setShowSignOutConfirm] = useState(false)
+  const [ownedPlays, setOwnedPlays] = useState([])
+  const [upgradePricing, setUpgradePricing] = useState(null)
 
   // Determine search context based on current page
   const getSearchContext = () => {
@@ -145,6 +148,27 @@ export default function Header() {
       window.removeEventListener('currentBookChanged', handleBookChange as EventListener)
     }
   }, [])
+
+  // Fetch user's owned plays and calculate upgrade pricing
+  useEffect(() => {
+    const fetchOwnership = async () => {
+      if (!isAuthenticated || isSinglePlay) return
+
+      try {
+        const response = await fetch('/api/user/upgrade')
+        if (response.ok) {
+          const data = await response.json()
+          setOwnedPlays(data.ownedPlays || [])
+          const pricing = calculateUpgradePricing(data.ownedPlays || [])
+          setUpgradePricing(pricing)
+        }
+      } catch (error) {
+        log('ui', 'Error fetching ownership:', error)
+      }
+    }
+
+    fetchOwnership()
+  }, [isAuthenticated, isSinglePlay])
 
   // Listen for search result updates from text readers
   useEffect(() => {
@@ -384,6 +408,31 @@ log('ui','Hamburger clicked, current state:', showMobileMenu)
               <button onClick={() => { router.push('/guide'); setShowMobileMenu(false) }} style={{ display: 'block', width: '100%', padding: '12px 16px', background: 'none', border: 'none', textAlign: 'left', cursor: 'pointer', borderBottom: '1px solid #f0f0f0', color: '#333' }}>📖 User Guide</button>
               <button onClick={() => { router.push('/about'); setShowMobileMenu(false) }} style={{ display: 'block', width: '100%', padding: '12px 16px', background: 'none', border: 'none', textAlign: 'left', cursor: 'pointer', borderBottom: '1px solid #f0f0f0', color: '#333' }}>ℹ️ About</button>
               <button onClick={() => { router.push('/examples'); setShowMobileMenu(false) }} style={{ display: 'block', width: '100%', padding: '12px 16px', background: 'none', border: 'none', textAlign: 'left', cursor: 'pointer', borderBottom: '1px solid #f0f0f0', color: '#333' }}>📚 Examples</button>
+              
+              {/* Upgrade option */}
+              {!isSinglePlay && upgradePricing && isEligibleForUpgrade(ownedPlays) && (
+                <button 
+                  onClick={() => { 
+                    // TODO: Handle upgrade purchase
+                    alert(`Upgrade to Complete Collection for $${upgradePricing.upgradePrice}!`)
+                    setShowMobileMenu(false) 
+                  }} 
+                  style={{ 
+                    display: 'block', 
+                    width: '100%', 
+                    padding: '12px 16px', 
+                    background: 'linear-gradient(135deg, #8B5CF6, #7C3AED)', 
+                    border: 'none', 
+                    textAlign: 'left', 
+                    cursor: 'pointer', 
+                    borderBottom: '1px solid #f0f0f0', 
+                    color: '#fff',
+                    fontWeight: 'bold'
+                  }}
+                >
+                  ⭐ Upgrade to Complete Collection - ${upgradePricing.upgradePrice}
+                </button>
+              )}
               
               {/* Auth buttons */}
               <div style={{ borderTop: '1px solid #e0e0e0', marginTop: '8px', paddingTop: '8px' }}>
