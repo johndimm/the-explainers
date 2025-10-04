@@ -11,10 +11,14 @@
     "build:pwa": "next build",
     "build:native": "BUILD_NATIVE=true next build",
     "setup:android": "npx cap add android",
-    "setup:ios": "npx cap add ios", 
+    "setup:ios": "npx cap add ios",
     "build:android": "npm run build:native && npx cap sync android && cd android && ./gradlew assembleDebug",
     "build:android:dev": "./scripts/build-dev.sh",
     "build:android:vercel": "./scripts/build-vercel.sh",
+    "build:romeo-and-juliet": "./scripts/build-romeo-and-juliet.sh",
+    "build:full-app": "./scripts/build-full-app.sh",
+    "build:web:romeo-and-juliet": "cp src/config/romeo-and-juliet.ts src/config/app-config.ts && cp capacitor.config.romeo-and-juliet.ts capacitor.config.ts && npm run build",
+    "build:web:full-app": "cp capacitor.config.full-app.ts capacitor.config.ts && npm run build",
     "build:ios": "npm run build:native && npm run setup:ios && npx cap sync ios && npx cap build ios",
     "open:android": "npx cap open android",
     "open:ios": "npx cap open ios",
@@ -45,5 +49,10 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "typescript": "^5.9.2"
+  },
+  "devDependencies": {
+    "canvas": "^3.2.0",
+    "sharp": "^0.34.4",
+    "svg2png": "^4.1.1"
   }
 }

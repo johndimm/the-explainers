@@ -194,21 +194,225 @@ log('ui','Reader: Redirecting to library - no current book found')
     }
   }
 
-  if (loading) {
-    return <div>Loading{currentBook.title ? ` ${currentBook.title}` : ''}...</div>
-  }
-
+  // Show test interface instead of normal content
+  console.log('READER PAGE: Rendering test interface')
   return (
-    <div>
-      <div style={{ minHeight: 'calc(100vh - 40px)' }}>
-        <TextReader 
-          text={bookText} 
-          bookTitle={currentBook.title}
-          author={currentBook.author}
-          settings={settings}
-          profile={profile}
-          onSettingsChange={updateSettings}
-        />
+    <div style={{
+      minHeight: '100vh',
+      padding: '20px',
+      background: 'linear-gradient(135deg, #8B5CF6, #7C3AED)',
+      fontFamily: 'system-ui, -apple-system, sans-serif'
+    }}>
+      <div style={{
+        maxWidth: '600px',
+        margin: '0 auto',
+        background: 'white',
+        borderRadius: '20px',
+        padding: '30px',
+        boxShadow: '0 20px 40px rgba(0, 0, 0, 0.1)'
+      }}>
+        <div style={{
+          textAlign: 'center',
+          marginBottom: '30px'
+        }}>
+          <div style={{
+            fontSize: '48px',
+            marginBottom: '20px'
+          }}>
+            🔧
+          </div>
+          
+          <h1 style={{
+            margin: '0 0 8px 0',
+            fontSize: '24px',
+            fontWeight: '700',
+            color: '#1a1a1a'
+          }}>
+            OAuth Test Interface
+          </h1>
+          
+          <p style={{
+            margin: '0 0 0 0',
+            color: '#666',
+            fontSize: '16px',
+            lineHeight: '1.5'
+          }}>
+            Test OAuth and window.open functionality
+          </p>
+        </div>
+        
+        <div style={{
+          display: 'grid',
+          gap: '12px',
+          marginBottom: '30px'
+        }}>
+          <button
+            onClick={() => {
+              const productionUrl = 'https://romeo-and-juliet-explained.vercel.app'
+              const authUrl = `${productionUrl}/api/auth/signin/google?callbackUrl=${encodeURIComponent(productionUrl + '/test-callback')}`
+              console.log('Testing Production OAuth with URL:', authUrl)
+              try {
+                window.open(authUrl, '_system')
+              } catch (error) {
+                console.error('Production OAuth failed:', error)
+                alert('Production OAuth failed: ' + (error instanceof Error ? error.message : String(error)))
+              }
+            }}
+            style={{
+              width: '100%',
+              padding: '12px 20px',
+              background: '#4285f4',
+              color: 'white',
+              border: 'none',
+              borderRadius: '8px',
+              fontSize: '14px',
+              fontWeight: '500',
+              cursor: 'pointer'
+            }}
+          >
+            Test Production OAuth
+          </button>
+          
+          <button
+            onClick={() => {
+              const localUrl = window.location.origin
+              const authUrl = `${localUrl}/api/auth/signin/google?callbackUrl=${encodeURIComponent(localUrl + '/test-callback')}`
+              console.log('Testing Local OAuth with URL:', authUrl)
+              try {
+                window.open(authUrl, '_system')
+              } catch (error) {
+                console.error('Local OAuth failed:', error)
+                alert('Local OAuth failed: ' + (error instanceof Error ? error.message : String(error)))
+              }
+            }}
+            style={{
+              width: '100%',
+              padding: '12px 20px',
+              background: '#8B5CF6',
+              color: 'white',
+              border: 'none',
+              borderRadius: '8px',
+              fontSize: '14px',
+              fontWeight: '500',
+              cursor: 'pointer'
+            }}
+          >
+            Test Local OAuth
+          </button>
+          
+          <button
+            onClick={() => {
+              console.log('Testing window.open with Google')
+              try {
+                window.open('https://www.google.com', '_system')
+              } catch (error) {
+                console.error('window.open failed:', error)
+                alert('window.open failed: ' + (error instanceof Error ? error.message : String(error)))
+              }
+            }}
+            style={{
+              width: '100%',
+              padding: '12px 20px',
+              background: '#10b981',
+              color: 'white',
+              border: 'none',
+              borderRadius: '8px',
+              fontSize: '14px',
+              fontWeight: '500',
+              cursor: 'pointer'
+            }}
+          >
+            Test window.open (Google)
+          </button>
+          
+          <button
+            onClick={() => {
+              console.log('Testing window.location.href with Google')
+              try {
+                window.location.href = 'https://www.google.com'
+              } catch (error) {
+                console.error('window.location.href failed:', error)
+                alert('window.location.href failed: ' + (error instanceof Error ? error.message : String(error)))
+              }
+            }}
+            style={{
+              width: '100%',
+              padding: '12px 20px',
+              background: '#f59e0b',
+              color: 'white',
+              border: 'none',
+              borderRadius: '8px',
+              fontSize: '14px',
+              fontWeight: '500',
+              cursor: 'pointer'
+            }}
+          >
+            Test location.href (Google)
+          </button>
+        </div>
+        
+        <div style={{
+          background: '#f8f9fa',
+          border: '1px solid #e9ecef',
+          borderRadius: '12px',
+          padding: '20px',
+          marginBottom: '20px'
+        }}>
+          <h3 style={{
+            margin: '0 0 15px 0',
+            fontSize: '18px',
+            fontWeight: '600',
+            color: '#495057'
+          }}>
+            Debug Information
+          </h3>
+          
+          <div style={{
+            fontSize: '11px',
+            fontFamily: 'monospace',
+            color: '#666',
+            lineHeight: '1.4',
+            background: '#fff',
+            padding: '15px',
+            borderRadius: '8px',
+            overflow: 'auto',
+            maxHeight: '300px'
+          }}>
+            <div><strong>Platform:</strong> {typeof window !== 'undefined' && (window as any).Capacitor ? (window as any).Capacitor.getPlatform() : 'Web'}</div>
+            <div><strong>Is Capacitor:</strong> {typeof window !== 'undefined' && !!(window as any).Capacitor ? 'Yes' : 'No'}</div>
+            <div><strong>URL:</strong> {typeof window !== 'undefined' ? window.location.href : 'Loading...'}</div>
+            <div><strong>Origin:</strong> {typeof window !== 'undefined' ? window.location.origin : 'Loading...'}</div>
+            <div><strong>User Agent:</strong> {typeof window !== 'undefined' ? navigator.userAgent : 'Loading...'}</div>
+            <div><strong>Timestamp:</strong> {new Date().toISOString()}</div>
+          </div>
+        </div>
+        
+        <div style={{
+          display: 'flex',
+          gap: '12px',
+          justifyContent: 'center'
+        }}>
+          <button
+            onClick={() => {
+              // Restore normal reader functionality
+              setLoading(false)
+              setBookText('This is a test of the reader functionality. The OAuth test interface has been replaced with normal reader content.')
+              setCurrentBook({ title: 'Test Book', author: 'Test Author' })
+            }}
+            style={{
+              padding: '10px 20px',
+              background: 'none',
+              border: '2px solid #8B5CF6',
+              color: '#8B5CF6',
+              borderRadius: '8px',
+              fontSize: '14px',
+              fontWeight: '500',
+              cursor: 'pointer'
+            }}
+          >
+            Show Normal Reader
+          </button>
+        </div>
       </div>
     </div>
   )

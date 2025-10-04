@@ -2,10 +2,11 @@ import type { Metadata, Viewport } from 'next'
 import './globals.css'
 import ClientLayout from './ClientLayout'
 import Providers from '@/components/Providers'
+import { APP_CONFIG } from '@/config/app-config'
 
 export const metadata: Metadata = {
-  title: 'The Explainers',
-  description: 'Understand difficult texts with AI-powered explanations',
+  title: APP_CONFIG.appName,
+  description: APP_CONFIG.appDescription,
   manifest: '/manifest.json',
   icons: {
     icon: [
@@ -20,7 +21,7 @@ export const metadata: Metadata = {
   appleWebApp: {
     capable: true,
     statusBarStyle: 'default',
-    title: 'The Explainers'
+    title: APP_CONFIG.appName
   },
   other: {
     'mobile-web-app-capable': 'yes'
@@ -30,14 +31,14 @@ export const metadata: Metadata = {
   },
   openGraph: {
     type: 'website',
-    siteName: 'The Explainers',
-    title: 'The Explainers',
-    description: 'Understand difficult texts with AI-powered explanations',
+    siteName: APP_CONFIG.appName,
+    title: APP_CONFIG.appName,
+    description: APP_CONFIG.appDescription,
   },
   twitter: {
     card: 'summary',
-    title: 'The Explainers',
-    description: 'Understand difficult texts with AI-powered explanations',
+    title: APP_CONFIG.appName,
+    description: APP_CONFIG.appDescription,
   }
 }
 

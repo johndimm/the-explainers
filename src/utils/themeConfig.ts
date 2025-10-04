@@ -1,3 +1,6 @@
+import { APP_CONFIG } from '@/config/app-config'
+import { AppConfig } from '@/config/types'
+
 export interface ThemeConfig {
   type: 'tragedy' | 'comedy' | 'history' | 'romance'
   color: string
@@ -63,33 +66,33 @@ const THEME_CONFIGS: Record<string, ThemeConfig> = {
   }
 }
 
-// Get theme configuration based on environment variables
+// Get theme configuration based on app config
 export function getThemeConfig(): ThemeConfig {
-  const themeType = (process.env.NEXT_PUBLIC_THEME_TYPE || process.env.THEME_TYPE) as keyof typeof THEME_CONFIGS || 'tragedy'
+  const themeType = APP_CONFIG.themeType
   return THEME_CONFIGS[themeType] || THEME_CONFIGS.tragedy
 }
 
 // Get single play configuration
 export function getSinglePlayConfig(): SinglePlayConfig {
   return {
-    isEnabled: (process.env.NEXT_PUBLIC_SINGLE_PLAY_MODE || process.env.SINGLE_PLAY_MODE) === 'true',
-    playTitle: process.env.NEXT_PUBLIC_PLAY_TITLE || process.env.PLAY_TITLE || 'Romeo and Juliet',
-    playAuthor: process.env.NEXT_PUBLIC_PLAY_AUTHOR || process.env.PLAY_AUTHOR || 'William Shakespeare',
-    playFilename: process.env.NEXT_PUBLIC_PLAY_FILENAME || process.env.PLAY_FILENAME || 'romeo-and-juliet.txt',
-    isShakespeare: (process.env.NEXT_PUBLIC_IS_SHAKESPEARE || process.env.IS_SHAKESPEARE) === 'true',
-    themeType: (process.env.NEXT_PUBLIC_THEME_TYPE || process.env.THEME_TYPE as any) || 'tragedy',
-    appName: process.env.NEXT_PUBLIC_APP_NAME || process.env.APP_NAME || 'Romeo and Juliet Explained',
-    appDescription: process.env.NEXT_PUBLIC_APP_DESCRIPTION || process.env.APP_DESCRIPTION || 'Understand Romeo and Juliet with AI-powered explanations',
-    appUrl: process.env.NEXT_PUBLIC_APP_URL || process.env.APP_URL || 'romeo-and-juliet-explained.vercel.app',
-    appIconText: process.env.NEXT_PUBLIC_APP_ICON_TEXT || process.env.APP_ICON_TEXT || 'R&J',
-    guideTitle: process.env.NEXT_PUBLIC_GUIDE_TITLE || process.env.GUIDE_TITLE || 'Understanding Romeo and Juliet',
-    guideSubtitle: process.env.NEXT_PUBLIC_GUIDE_SUBTITLE || process.env.GUIDE_SUBTITLE || 'Your guide to Shakespeare\'s timeless tragedy'
+    isEnabled: APP_CONFIG.isSinglePlay,
+    playTitle: APP_CONFIG.playTitle,
+    playAuthor: APP_CONFIG.playAuthor,
+    playFilename: APP_CONFIG.playFilename,
+    isShakespeare: APP_CONFIG.isShakespeare,
+    themeType: APP_CONFIG.themeType,
+    appName: APP_CONFIG.appName,
+    appDescription: APP_CONFIG.appDescription,
+    appUrl: APP_CONFIG.appUrl,
+    appIconText: APP_CONFIG.appIconText,
+    guideTitle: APP_CONFIG.guideTitle,
+    guideSubtitle: APP_CONFIG.guideSubtitle
   }
 }
 
 // Check if we're in single play mode
 export function isSinglePlayMode(): boolean {
-  return (process.env.NEXT_PUBLIC_SINGLE_PLAY_MODE || process.env.SINGLE_PLAY_MODE) === 'true'
+  return APP_CONFIG.isSinglePlay
 }
 
 // Get the current theme

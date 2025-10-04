@@ -70,21 +70,56 @@ function getThemeIconElements(theme: ThemeConfig) {
 function getDecorativeElements(theme: ThemeConfig) {
   switch (theme.type) {
     case 'tragedy':
-      return {
-        crown: {
-          type: 'path',
-          d: 'M256,80 L200,120 L150,100 L100,120 L50,100 L50,200 L462,200 L462,100 L412,120 L362,100 L312,120 L256,80 Z',
-          fill: theme.color,
-          opacity: 0.3
-        },
-        sword: {
-          type: 'rect',
-          x: 240,
-          y: 180,
-          width: 32,
-          height: 120,
-          fill: theme.color,
-          opacity: 0.2
+      // Check if this is specifically Romeo and Juliet
+      if (theme.color === '#8B5CF6') { // Romeo and Juliet purple
+        return {
+          balcony: {
+            type: 'path',
+            d: 'M150,200 L150,180 L200,180 L200,200 L200,220 L150,220 Z M312,200 L312,180 L362,180 L362,200 L362,220 L312,220 Z',
+            fill: theme.color,
+            opacity: 0.3
+          },
+          crossedSwords: [
+            {
+              type: 'path',
+              d: 'M200,160 L200,240 M196,160 L204,160 M196,240 L204,240',
+              stroke: theme.color,
+              strokeWidth: 6,
+              opacity: 0.4
+            },
+            {
+              type: 'path',
+              d: 'M312,160 L312,240 M308,160 L316,160 M308,240 L316,240',
+              stroke: theme.color,
+              strokeWidth: 6,
+              opacity: 0.4
+            }
+          ],
+          heart: {
+            type: 'path',
+            d: 'M256,200 C256,180, 240,160, 220,160 C200,160, 180,180, 180,200 C180,220, 200,240, 256,280 C312,240, 332,220, 332,200 C332,180, 312,160, 292,160 C272,160, 256,180, 256,200 Z',
+            fill: theme.color,
+            opacity: 0.2
+          }
+        }
+      } else {
+        // Generic tragedy elements
+        return {
+          crown: {
+            type: 'path',
+            d: 'M256,80 L200,120 L150,100 L100,120 L50,100 L50,200 L462,200 L462,100 L412,120 L362,100 L312,120 L256,80 Z',
+            fill: theme.color,
+            opacity: 0.3
+          },
+          sword: {
+            type: 'rect',
+            x: 240,
+            y: 180,
+            width: 32,
+            height: 120,
+            fill: theme.color,
+            opacity: 0.2
+          }
         }
       }
     

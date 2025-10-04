@@ -14,50 +14,152 @@ function HomeContent() {
   const [isChecking, setIsChecking] = useState(true)
 
   useEffect(() => {
-    const checkAndRedirect = async () => {
-      try {
-        // Wait for auth to be ready
-        if (isLoading) return
-
-        if (isSinglePlay) {
-          // In single play mode, always redirect to reader with the single play
-          log('ui', 'Home: Single play mode, redirecting to reader:', playTitle)
-          router.push('/reader')
-          return
-        }
-
-        // In full mode, check for current book (getCurrentBook handles auth internally)
-        const currentBook = await getCurrentBook()
-        
-        if (currentBook && currentBook.title && currentBook.author) {
-          log('ui', 'Home: Found current book, redirecting to reader:', currentBook.title)
-          router.push('/reader')
-          return
-        }
-        
-        // No current book found, redirect to library
-        log('ui', 'Home: No current book found, redirecting to library')
-        router.push('/library')
-      } catch (error) {
-        log('ui', 'Home: Error checking current book:', error)
-        // Fallback to library on error (or reader in single play mode)
-        router.push(isSinglePlay ? '/reader' : '/library')
-      } finally {
-        setIsChecking(false)
-      }
-    }
-
-    checkAndRedirect()
-  }, [router, isLoading, isSinglePlay, playTitle])
+    // Redirect to debug test page immediately
+    console.log('MAIN PAGE: Redirecting to debug-test')
+    router.push('/debug-test')
+  }, [router])
 
   // Show loading while checking
   if (isChecking || isLoading) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-white">
-        <div className="card text-center">
-          <div className="card-body">
-            <div className="w-8 h-8 border-4 border-gray-200 border-t-purple-600 rounded-full animate-spin mx-auto mb-4" />
-            <p className="m-0 text-gray-600">Loading...</p>
+      <div style={{
+        minHeight: '100vh',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        background: 'linear-gradient(135deg, #8B5CF6, #7C3AED)',
+        padding: '20px',
+        fontFamily: 'system-ui, -apple-system, sans-serif'
+      }}>
+        <div style={{
+          background: 'white',
+          borderRadius: '20px',
+          padding: '40px',
+          boxShadow: '0 20px 40px rgba(0, 0, 0, 0.1)',
+          maxWidth: '400px',
+          width: '100%',
+          textAlign: 'center'
+        }}>
+          <div style={{
+            fontSize: '64px',
+            marginBottom: '20px'
+          }}>
+            🎭
+          </div>
+          
+          <h1 style={{
+            margin: '0 0 8px 0',
+            fontSize: '28px',
+            fontWeight: '700',
+            color: '#1a1a1a'
+          }}>
+            Romeo and Juliet Explained
+          </h1>
+          
+          <p style={{
+            margin: '0 0 32px 0',
+            color: '#666',
+            fontSize: '16px',
+            lineHeight: '1.5'
+          }}>
+            Loading...
+          </p>
+          
+          <div style={{
+            display: 'flex',
+            flexDirection: 'column',
+            gap: '12px'
+          }}>
+            <button
+              onClick={() => {
+                // Test OAuth with production URL
+                const productionUrl = 'https://romeo-and-juliet-explained.vercel.app'
+                const authUrl = `${productionUrl}/api/auth/signin/google?callbackUrl=${encodeURIComponent(productionUrl + '/test-callback')}`
+                
+                console.log('Attempting OAuth with URL:', authUrl)
+                
+                try {
+                  window.open(authUrl, '_system')
+                } catch (error) {
+                  console.error('OAuth failed:', error)
+                  alert('Failed to open OAuth URL: ' + (error instanceof Error ? error.message : String(error)))
+                }
+              }}
+              style={{
+                width: '100%',
+                padding: '12px 20px',
+                background: '#4285f4',
+                color: 'white',
+                border: 'none',
+                borderRadius: '8px',
+                fontSize: '14px',
+                fontWeight: '500',
+                cursor: 'pointer'
+              }}
+            >
+              Test OAuth (Production)
+            </button>
+            
+            <button
+              onClick={() => {
+                // Test OAuth with local URL
+                const localUrl = window.location.origin
+                const authUrl = `${localUrl}/api/auth/signin/google?callbackUrl=${encodeURIComponent(localUrl + '/test-callback')}`
+                
+                console.log('Attempting local OAuth with URL:', authUrl)
+                
+                try {
+                  window.open(authUrl, '_system')
+                } catch (error) {
+                  console.error('Local OAuth failed:', error)
+                  alert('Failed to open local OAuth URL: ' + (error instanceof Error ? error.message : String(error)))
+                }
+              }}
+              style={{
+                width: '100%',
+                padding: '12px 20px',
+                background: '#8B5CF6',
+                color: 'white',
+                border: 'none',
+                borderRadius: '8px',
+                fontSize: '14px',
+                fontWeight: '500',
+                cursor: 'pointer'
+              }}
+            >
+              Test OAuth (Local)
+            </button>
+            
+            <button
+              onClick={() => router.push('/reader')}
+              style={{
+                width: '100%',
+                padding: '12px 20px',
+                background: '#6B7280',
+                color: 'white',
+                border: 'none',
+                borderRadius: '8px',
+                fontSize: '14px',
+                fontWeight: '500',
+                cursor: 'pointer'
+              }}
+            >
+              Go to Reader
+            </button>
+          </div>
+          
+          <div style={{
+            marginTop: '20px',
+            padding: '16px',
+            background: '#f8f9fa',
+            borderRadius: '8px',
+            fontSize: '12px',
+            color: '#666',
+            lineHeight: '1.4'
+          }}>
+            <div><strong>Platform:</strong> {typeof window !== 'undefined' && (window as any).Capacitor ? (window as any).Capacitor.getPlatform() : 'Web'}</div>
+            <div><strong>Is Capacitor:</strong> {typeof window !== 'undefined' && !!(window as any).Capacitor ? 'Yes' : 'No'}</div>
+            <div><strong>URL:</strong> {typeof window !== 'undefined' ? window.location.href : 'Loading...'}</div>
           </div>
         </div>
       </div>
@@ -65,8 +167,89 @@ function HomeContent() {
   }
 
   return (
-    <div>
-      {/* This should not render as we always redirect */}
+    <div style={{
+      minHeight: '100vh',
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+      background: 'linear-gradient(135deg, #8B5CF6, #7C3AED)',
+      padding: '20px',
+      fontFamily: 'system-ui, -apple-system, sans-serif'
+    }}>
+      <div style={{
+        background: 'white',
+        borderRadius: '20px',
+        padding: '40px',
+        boxShadow: '0 20px 40px rgba(0, 0, 0, 0.1)',
+        maxWidth: '400px',
+        width: '100%',
+        textAlign: 'center'
+      }}>
+        <div style={{
+          fontSize: '64px',
+          marginBottom: '20px'
+        }}>
+          🎭
+        </div>
+        
+        <h1 style={{
+          margin: '0 0 8px 0',
+          fontSize: '28px',
+          fontWeight: '700',
+          color: '#1a1a1a'
+        }}>
+          Romeo and Juliet Explained
+        </h1>
+        
+        <p style={{
+          margin: '0 0 32px 0',
+          color: '#666',
+          fontSize: '16px',
+          lineHeight: '1.5'
+        }}>
+          Loading...
+        </p>
+        
+        <div style={{
+          display: 'flex',
+          flexDirection: 'column',
+          gap: '12px'
+        }}>
+          <button
+            onClick={() => router.push('/mobile-test')}
+            style={{
+              width: '100%',
+              padding: '12px 20px',
+              background: '#6B7280',
+              color: 'white',
+              border: 'none',
+              borderRadius: '8px',
+              fontSize: '14px',
+              fontWeight: '500',
+              cursor: 'pointer'
+            }}
+          >
+            Test Mobile OAuth
+          </button>
+          
+          <button
+            onClick={() => router.push('/reader')}
+            style={{
+              width: '100%',
+              padding: '12px 20px',
+              background: '#8B5CF6',
+              color: 'white',
+              border: 'none',
+              borderRadius: '8px',
+              fontSize: '14px',
+              fontWeight: '500',
+              cursor: 'pointer'
+            }}
+          >
+            Go to Reader
+          </button>
+        </div>
+      </div>
     </div>
   )
 }

@@ -35,6 +35,13 @@ export const authOptions: AuthOptions = {
       // Handle mobile redirects properly
       log('NextAuth redirect callback:', { url, baseUrl })
       
+      // For mobile apps, always redirect to the reader page
+      if (baseUrl.includes('localhost') || baseUrl.includes('capacitor://') || baseUrl.includes('android-app://')) {
+        const readerUrl = `${baseUrl}/reader`
+        log('NextAuth redirect: mobile app ->', readerUrl)
+        return readerUrl
+      }
+      
       // If it's a relative URL, make it absolute
       if (url.startsWith("/")) {
         const redirectUrl = `${baseUrl}${url}`

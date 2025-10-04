@@ -4,6 +4,7 @@ import { log } from '@/utils/log'
 import { signIn, getSession } from 'next-auth/react'
 import { useRouter } from 'next/navigation'
 import { useEffect, useState } from 'react'
+import { Capacitor } from '@capacitor/core'
 
 export default function SignIn() {
   const router = useRouter()
@@ -25,10 +26,24 @@ export default function SignIn() {
   const handleGoogleSignIn = async () => {
     setIsLoading(true)
     try {
-      await signIn('google', { 
-        callbackUrl: '/chat',
-        redirect: true
-      })
+      // For mobile, bypass Capacitor's webview entirely
+      if (Capacitor.isNativePlatform()) {
+        const baseUrl = 'https://romeo-and-juliet-explained.vercel.app'
+        const redirectUrl = `${baseUrl}/auth/callback`
+        const googleAuthUrl = `${baseUrl}/api/auth/signin/google?callbackUrl=${encodeURIComponent(redirectUrl)}`
+        
+        // Open in external browser (bypasses Capacitor webview)
+        window.open(googleAuthUrl, '_system')
+        
+        // Show instructions to user
+        alert('Please complete sign-in in the browser that opened, then return to this app.')
+      } else {
+        // For web, use regular NextAuth
+        await signIn('google', { 
+          callbackUrl: '/chat',
+          redirect: true
+        })
+      }
     } catch (error) {
       log('ui','Sign in error:', error)
       setIsLoading(false)
