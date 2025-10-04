@@ -7,7 +7,7 @@ import { getCurrentBook } from '@/utils/currentBookStorage'
 import { log } from '@/utils/log'
 import { useTheme } from '@/hooks/useTheme'
 import PlayIcon from './PlayIcon'
-import { calculateUpgradePricing, isEligibleForUpgrade, getUpgradePricingText } from '@/utils/upgradePricing'
+import { calculateUpgradePricing, isEligibleForUpgrade, getUpgradePricingText, UpgradePricing, PlayOwnership } from '@/utils/upgradePricing'
 
 export default function Header() {
   const router = useRouter()
@@ -23,8 +23,8 @@ export default function Header() {
   const [currentSearchIndex, setCurrentSearchIndex] = useState(0)
   const [totalSearchResults, setTotalSearchResults] = useState(0)
   const [showSignOutConfirm, setShowSignOutConfirm] = useState(false)
-  const [ownedPlays, setOwnedPlays] = useState([])
-  const [upgradePricing, setUpgradePricing] = useState(null)
+  const [ownedPlays, setOwnedPlays] = useState<PlayOwnership[]>([])
+  const [upgradePricing, setUpgradePricing] = useState<UpgradePricing | null>(null)
 
   // Determine search context based on current page
   const getSearchContext = () => {
