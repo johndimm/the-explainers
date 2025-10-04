@@ -1235,26 +1235,25 @@ log('❌ No bookmark found in database (404)')
     log('debug', 'bookmark', 'Setting up scroll effect, textReaderRef:', textReaderRef.current)
     
     const handleScroll = () => {
-      log('debug', 'bookmark', 'Scroll event fired!')
-      
       // Skip bookmark saving if disabled (e.g., during chat operations)
       if (disableBookmarkSaving) {
-        log('debug', 'bookmark', 'Bookmark saving disabled, skipping')
         return
       }
       
-      // Get scroll position from the scrollable element
-      let scrollPosition = 0
-      if (textReaderRef.current) {
-        scrollPosition = textReaderRef.current.scrollTop
-        log('debug', 'bookmark', 'Using element scroll position:', scrollPosition)
-      } else {
-        log('debug', 'bookmark', 'No textReaderRef element found')
-      }
-      
-      log('debug', 'bookmark', 'Scroll detected, position:', scrollPosition)
+      // Debounce scroll events to reduce performance impact
       if (scrollTimeoutRef.current) clearTimeout(scrollTimeoutRef.current)
       scrollTimeoutRef.current = setTimeout(async () => {
+        // Get scroll position from the scrollable element
+        let scrollPosition = 0
+        if (textReaderRef.current) {
+          scrollPosition = textReaderRef.current.scrollTop
+          log('debug', 'bookmark', 'Using element scroll position:', scrollPosition)
+        } else {
+          log('debug', 'bookmark', 'No textReaderRef element found')
+          return
+        }
+        
+        log('debug', 'bookmark', 'Scroll detected, position:', scrollPosition)
         const title = bookTitle || 'Untitled'
         const auth = author || 'Unknown'
 

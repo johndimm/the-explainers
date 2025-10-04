@@ -10,6 +10,7 @@ import { useTheme } from '@/hooks/useTheme'
 function HomeContent() {
   const router = useRouter()
   const { isAuthenticated, isLoading } = useAuth()
+  const { isSinglePlay, playTitle, playAuthor, playFilename } = useTheme()
   const [isChecking, setIsChecking] = useState(true)
 
   useEffect(() => {
@@ -18,7 +19,14 @@ function HomeContent() {
         // Wait for auth to be ready
         if (isLoading) return
 
-        // Check for current book (getCurrentBook handles auth internally)
+        if (isSinglePlay) {
+          // In single play mode, always redirect to reader with the single play
+          log('ui', 'Home: Single play mode, redirecting to reader:', playTitle)
+          router.push('/reader')
+          return
+        }
+
+        // In full mode, check for current book (getCurrentBook handles auth internally)
         const currentBook = await getCurrentBook()
         
         if (currentBook && currentBook.title && currentBook.author) {
@@ -32,15 +40,15 @@ function HomeContent() {
         router.push('/library')
       } catch (error) {
         log('ui', 'Home: Error checking current book:', error)
-        // Fallback to library on error
-        router.push('/library')
+        // Fallback to library on error (or reader in single play mode)
+        router.push(isSinglePlay ? '/reader' : '/library')
       } finally {
         setIsChecking(false)
       }
     }
 
     checkAndRedirect()
-  }, [router, isLoading])
+  }, [router, isLoading, isSinglePlay, playTitle])
 
   // Show loading while checking
   if (isChecking || isLoading) {

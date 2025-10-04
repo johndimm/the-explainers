@@ -7,6 +7,9 @@ import { useProfile } from '@/contexts/ProfileContext'
 import { useAuth } from '@/contexts/AuthContext'
 import { useRouter, useSearchParams } from 'next/navigation'
 import { log } from '@/utils/log'
+import { useTheme } from '@/hooks/useTheme'
+import { loadSinglePlayText } from '@/utils/singlePlayLoader'
+import { getSinglePlayConfig } from '@/utils/themeConfig'
 
 function ReaderContent() {
   const [bookText, setBookText] = useState('')
@@ -17,6 +20,7 @@ function ReaderContent() {
   const { settings, updateSettings } = useSettings()
   const { profile } = useProfile()
   const { isAuthenticated, isLoading: authLoading } = useAuth()
+  const { isSinglePlay, playTitle, playAuthor, playFilename } = useTheme()
   const router = useRouter()
   const searchParams = useSearchParams()
 
@@ -38,6 +42,7 @@ function ReaderContent() {
 
   useEffect(() => {
 log('ui','Reader: Auth state - isLoading:', authLoading, 'isAuthenticated:', isAuthenticated)
+log('ui','Reader: Single play mode:', isSinglePlay, 'playTitle:', playTitle)
     
     // In local development, bypass authentication loading
     const isLocalDev = process.env.NODE_ENV === 'development' && typeof window !== 'undefined' && window.location.hostname === 'localhost'
@@ -55,6 +60,12 @@ log('ui','Reader: Waiting for authentication...')
 
     if (title && author && url) {
       handleBookSelect(title, author, decodeURIComponent(url))
+      return
+    }
+
+    // Handle single play mode
+    if (isSinglePlay) {
+      loadSinglePlay()
       return
     }
 
@@ -85,7 +96,30 @@ log('ui','Reader: Redirecting to library - no current book found')
     }
 
     loadCurrentBook()
-  }, [searchParams, router, authLoading])
+  }, [searchParams, router, authLoading, isSinglePlay, playTitle, playAuthor, playFilename])
+
+  const loadSinglePlay = async () => {
+    setLoading(true)
+    setCurrentBook({ title: playTitle, author: playAuthor })
+    
+    try {
+      const singlePlayConfig = getSinglePlayConfig()
+      const playTextData = await loadSinglePlayText(singlePlayConfig)
+      
+      log('ui', 'Reader: Loaded single play text:', {
+        title: playTitle,
+        textLength: playTextData.text.length,
+        firstChars: playTextData.text.substring(0, 100)
+      })
+      
+      setBookText(playTextData.text)
+    } catch (error) {
+      log('ui', 'Reader: Error loading single play:', error)
+      alert('Failed to load the play. Please try again.')
+    } finally {
+      setLoading(false)
+    }
+  }
 
   const handleBookSelect = async (title: string, author: string, url: string) => {
     setLoading(true)

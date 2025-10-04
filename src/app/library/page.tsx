@@ -8,10 +8,12 @@ import { useAuth } from '@/contexts/AuthContext'
 import { getCurrentBook } from '@/utils/currentBookStorage'
 import { useEffect, useState } from 'react'
 import { log } from '@/utils/log'
+import { useTheme } from '@/hooks/useTheme'
 
 function LibraryContent() {
   const router = useRouter()
   const { isAuthenticated, isLoading } = useAuth()
+  const { isSinglePlay } = useTheme()
   const [isChecking, setIsChecking] = useState(true)
 
   useEffect(() => {
@@ -19,6 +21,13 @@ function LibraryContent() {
       try {
         // Wait for auth to be ready
         if (isLoading) return
+
+        // In single play mode, redirect to reader
+        if (isSinglePlay) {
+          log('ui', 'Library: Single play mode, redirecting to reader')
+          router.push('/reader')
+          return
+        }
 
         // Check for current book (getCurrentBook handles auth internally)
         log('ui', 'Library: Checking for current book...')
@@ -40,7 +49,7 @@ function LibraryContent() {
     }
 
     checkCurrentBook()
-  }, [router, isLoading])
+  }, [router, isLoading, isSinglePlay])
 
   const handleBookSelect = (title: string, author: string, url: string) => {
     // Navigate to reader with book data

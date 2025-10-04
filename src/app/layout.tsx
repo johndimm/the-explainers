@@ -22,6 +22,9 @@ export const metadata: Metadata = {
     statusBarStyle: 'default',
     title: 'The Explainers'
   },
+  other: {
+    'mobile-web-app-capable': 'yes'
+  },
   formatDetection: {
     telephone: false,
   },
