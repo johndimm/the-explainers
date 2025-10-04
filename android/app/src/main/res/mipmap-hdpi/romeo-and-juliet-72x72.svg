@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="72" height="72" viewBox="0 0 72 72" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bgGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#F8F7FF;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#8B5CF6;stop-opacity:0.1" />
+    </linearGradient>
+    <filter id="shadow" x="-50%" y="-50%" width="200%" height="200%">
+      <feDropShadow dx="2" dy="2" stdDeviation="3" flood-color="#8B5CF6" flood-opacity="0.3"/>
+    </filter>
+  </defs>
+  
+  <!-- Background circle -->
+  <circle cx="36" cy="36" r="28" 
+          fill="url(#bgGradient)" 
+          stroke="#8B5CF6" 
+          stroke-width="2"/>
+  
+  <!-- Balcony elements (scaled) -->
+  <rect x="33.1875" y="34.59375" 
+        width="2.8125" height="1.40625" 
+        fill="#8B5CF6" opacity="0.3"/>
+  <rect x="37.40625" y="34.59375" 
+        width="2.8125" height="1.40625" 
+        fill="#8B5CF6" opacity="0.3"/>
+  
+  <!-- Crossed swords (scaled) -->
+  <line x1="33.890625" y1="33.890625" 
+        x2="38.109375" y2="38.109375" 
+        stroke="#8B5CF6" stroke-width="1.125" opacity="0.4"/>
+  <line x1="38.109375" y1="33.890625" 
+        x2="33.890625" y2="38.109375" 
+        stroke="#8B5CF6" stroke-width="1.125" opacity="0.4"/>
+  
+  <!-- Heart (scaled) -->
+  <path d="M36,36.87890625 
+           C34.2421875,35.12109375, 
+             35.12109375,34.2421875, 
+             36,35.12109375
+           C36.87890625,34.2421875, 
+             37.7578125,35.12109375, 
+             36,36.87890625 Z" 
+        fill="#8B5CF6" opacity="0.2"/>
+  
+  <!-- Main text -->
+  <text x="36" y="43.199999999999996" 
+        text-anchor="middle" 
+        font-family="serif" 
+        font-size="28" 
+        font-weight="bold" 
+        fill="#8B5CF6"
+        filter="url(#shadow)">
+    R&amp;J
+  </text>
+  
+  <!-- Shakespeare attribution (only for larger icons) -->
+  
+</svg>

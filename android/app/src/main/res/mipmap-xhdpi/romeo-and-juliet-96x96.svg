@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="96" height="96" viewBox="0 0 96 96" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bgGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#F8F7FF;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#8B5CF6;stop-opacity:0.1" />
+    </linearGradient>
+    <filter id="shadow" x="-50%" y="-50%" width="200%" height="200%">
+      <feDropShadow dx="2" dy="2" stdDeviation="3" flood-color="#8B5CF6" flood-opacity="0.3"/>
+    </filter>
+  </defs>
+  
+  <!-- Background circle -->
+  <circle cx="48" cy="48" r="40" 
+          fill="url(#bgGradient)" 
+          stroke="#8B5CF6" 
+          stroke-width="2"/>
+  
+  <!-- Balcony elements (scaled) -->
+  <rect x="44.25" y="46.125" 
+        width="3.75" height="1.875" 
+        fill="#8B5CF6" opacity="0.3"/>
+  <rect x="49.875" y="46.125" 
+        width="3.75" height="1.875" 
+        fill="#8B5CF6" opacity="0.3"/>
+  
+  <!-- Crossed swords (scaled) -->
+  <line x1="45.1875" y1="45.1875" 
+        x2="50.8125" y2="50.8125" 
+        stroke="#8B5CF6" stroke-width="1.5" opacity="0.4"/>
+  <line x1="50.8125" y1="45.1875" 
+        x2="45.1875" y2="50.8125" 
+        stroke="#8B5CF6" stroke-width="1.5" opacity="0.4"/>
+  
+  <!-- Heart (scaled) -->
+  <path d="M48,49.171875 
+           C45.65625,46.828125, 
+             46.828125,45.65625, 
+             48,46.828125
+           C49.171875,45.65625, 
+             50.34375,46.828125, 
+             48,49.171875 Z" 
+        fill="#8B5CF6" opacity="0.2"/>
+  
+  <!-- Main text -->
+  <text x="48" y="57.599999999999994" 
+        text-anchor="middle" 
+        font-family="serif" 
+        font-size="38" 
+        font-weight="bold" 
+        fill="#8B5CF6"
+        filter="url(#shadow)">
+    R&amp;J
+  </text>
+  
+  <!-- Shakespeare attribution (only for larger icons) -->
+  <text x="48" y="88" 
+        text-anchor="middle" 
+        font-family="serif" 
+        font-size="6" 
+        fill="#8B5CF6"
+        opacity="0.7">
+    Shakespeare
+  </text>
+</svg>

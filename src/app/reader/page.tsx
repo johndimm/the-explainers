@@ -196,19 +196,12 @@ log('ui','Reader: Redirecting to library - no current book found')
 
   return (
     <TextReader
-      bookText={bookText}
-      currentBook={currentBook}
-      loading={loading}
-      onBookChange={handleBookSelect}
-      onTextChange={setBookText}
-      onLoadingChange={setLoading}
-      showMobileMenu={showMobileMenu}
-      setShowMobileMenu={setShowMobileMenu}
-      menuRef={menuRef}
+      text={bookText}
+      bookTitle={currentBook.title}
+      author={currentBook.author}
       settings={settings}
-      updateSettings={updateSettings}
       profile={profile}
-      isAuthenticated={isAuthenticated}
+      onSettingsChange={updateSettings}
     />
   )
 }
