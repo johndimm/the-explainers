@@ -14,10 +14,17 @@ function HomeContent() {
   const [isChecking, setIsChecking] = useState(true)
 
   useEffect(() => {
-    // Redirect to debug test page immediately
-    console.log('MAIN PAGE: Redirecting to debug-test')
-    router.push('/debug-test')
-  }, [router])
+    if (isSinglePlay) {
+      // For single play mode, go directly to reader
+      router.push('/reader')
+    } else if (currentBook) {
+      // If there's a current book, go to reader
+      router.push('/reader')
+    } else {
+      // Otherwise, go to library
+      router.push('/library')
+    }
+  }, [isSinglePlay, currentBook, router])
 
   // Show loading while checking
   if (isChecking || isLoading) {
