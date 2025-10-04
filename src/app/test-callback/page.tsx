@@ -1,9 +1,9 @@
 'use client'
 
 import { useSearchParams } from 'next/navigation'
-import { useEffect, useState } from 'react'
+import { useEffect, useState, Suspense } from 'react'
 
-export default function TestCallback() {
+function TestCallbackContent() {
   const searchParams = useSearchParams()
   const [callbackData, setCallbackData] = useState<any>(null)
 
@@ -209,5 +209,38 @@ export default function TestCallback() {
         </div>
       </div>
     </div>
+  )
+}
+
+export default function TestCallback() {
+  return (
+    <Suspense fallback={
+      <div style={{
+        minHeight: '100vh',
+        padding: '20px',
+        background: '#f5f5f5',
+        fontFamily: 'system-ui, -apple-system, sans-serif',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center'
+      }}>
+        <div style={{
+          background: 'white',
+          borderRadius: '12px',
+          padding: '30px',
+          boxShadow: '0 4px 12px rgba(0, 0, 0, 0.1)',
+          textAlign: 'center'
+        }}>
+          <h1 style={{ margin: '0 0 20px 0', fontSize: '24px', fontWeight: '700', color: '#1a1a1a' }}>
+            Loading Callback Data...
+          </h1>
+          <div style={{ fontSize: '16px', color: '#666' }}>
+            Please wait while we process the OAuth callback.
+          </div>
+        </div>
+      </div>
+    }>
+      <TestCallbackContent />
+    </Suspense>
   )
 }

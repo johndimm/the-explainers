@@ -5,8 +5,8 @@ import { useState, useEffect } from 'react'
 
 export default function SignInTestPage() {
   const [session, setSession] = useState<any>(null)
-  const [error, setError] = useState(null)
-  const [debugInfo, setDebugInfo] = useState({})
+  const [error, setError] = useState<string | null>(null)
+  const [debugInfo, setDebugInfo] = useState<any>({})
 
   useEffect(() => {
     // Get current session
@@ -44,7 +44,7 @@ export default function SignInTestPage() {
         setSession(await getSession())
       }
     } catch (err) {
-      setError(err.message)
+      setError(err instanceof Error ? err.message : String(err))
     }
   }
 
