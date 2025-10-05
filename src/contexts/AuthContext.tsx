@@ -67,16 +67,78 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   const isAuthenticated = !!user
 
   const handleSignIn = async () => {
+    log('AuthContext: handleSignIn called')
     setIsLoading(true)
     try {
-      // Force account selection and proper redirect on mobile
-      await signIn('google', { 
-        callbackUrl: window.location.href,
-        redirect: true
+      // Check if we're in a mobile/Capacitor environment
+      const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent)
+      const isCapacitor = typeof window !== 'undefined' && !!(window as any).Capacitor
+      
+      // Also check for Capacitor platform method (more reliable)
+      const hasCapacitorPlatform = typeof window !== 'undefined' && 
+        (window as any).Capacitor && 
+        typeof (window as any).Capacitor.getPlatform === 'function'
+      
+      const isCapacitorEnvironment = isCapacitor || hasCapacitorPlatform
+      
+      log('AuthContext: Environment check:', { 
+        isMobile, 
+        isCapacitor, 
+        hasCapacitorPlatform,
+        isCapacitorEnvironment,
+        userAgent: navigator.userAgent,
+        hasCapacitor: !!(window as any).Capacitor
       })
+      
+      if (isMobile || isCapacitorEnvironment) {
+        // For mobile/Capacitor, use window.open with _system to bypass webview
+        const baseUrl = process.env.NEXT_PUBLIC_APP_URL || 'https://romeo-and-juliet-explained.vercel.app'
+        const redirectUrl = `${baseUrl}/reader`
+        const googleAuthUrl = `${baseUrl}/api/auth/signin/google?callbackUrl=${encodeURIComponent(redirectUrl)}`
+        
+        log('AuthContext: Mobile/Capacitor detected, using window.open')
+        log('AuthContext: OAuth URL:', googleAuthUrl)
+        
+        try {
+          window.open(googleAuthUrl, '_system')
+          log('AuthContext: window.open succeeded')
+          
+          // Show instructions to user
+          alert('Please complete sign-in in the browser that opened, then return to this app.')
+        } catch (openError) {
+          log('AuthContext: window.open failed:', openError)
+          alert('Failed to open browser: ' + (openError instanceof Error ? openError.message : String(openError)))
+        }
+      } else {
+        log('AuthContext: Web environment detected, trying NextAuth first')
+        try {
+          // For web, use regular NextAuth
+          await signIn('google', { 
+            callbackUrl: window.location.href,
+            redirect: true
+          })
+        } catch (nextAuthError) {
+          log('AuthContext: NextAuth failed, falling back to window.open:', nextAuthError)
+          // Fallback to window.open if NextAuth fails
+          const baseUrl = process.env.NEXT_PUBLIC_APP_URL || 'https://romeo-and-juliet-explained.vercel.app'
+          const redirectUrl = `${baseUrl}/reader`
+          const googleAuthUrl = `${baseUrl}/api/auth/signin/google?callbackUrl=${encodeURIComponent(redirectUrl)}`
+          
+          try {
+            window.open(googleAuthUrl, '_system')
+            log('AuthContext: Fallback window.open succeeded')
+            alert('Please complete sign-in in the browser that opened, then return to this app.')
+          } catch (openError) {
+            log('AuthContext: Fallback window.open failed:', openError)
+            alert('Failed to open browser: ' + (openError instanceof Error ? openError.message : String(openError)))
+          }
+        }
+      }
     } catch (error) {
       log('ui','Sign in error:', error)
+      alert('Sign in failed: ' + (error instanceof Error ? error.message : String(error)))
     } finally {
+      log('AuthContext: handleSignIn finally block')
       setIsLoading(false)
     }
   }

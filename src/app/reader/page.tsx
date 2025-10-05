@@ -6,7 +6,6 @@ import { useSettings } from '@/contexts/SettingsContext'
 import { useProfile } from '@/contexts/ProfileContext'
 import { useAuth } from '@/contexts/AuthContext'
 import { useRouter, useSearchParams } from 'next/navigation'
-import { log } from '@/utils/log'
 import { useTheme } from '@/hooks/useTheme'
 import { loadSinglePlayText } from '@/utils/singlePlayLoader'
 import { getSinglePlayConfig } from '@/utils/themeConfig'
@@ -41,15 +40,11 @@ function ReaderContent() {
   }, [showMobileMenu])
 
   useEffect(() => {
-log('ui','Reader: Auth state - isLoading:', authLoading, 'isAuthenticated:', isAuthenticated)
-log('ui','Reader: Single play mode:', isSinglePlay, 'playTitle:', playTitle)
-    
     // In local development, bypass authentication loading
     const isLocalDev = process.env.NODE_ENV === 'development' && typeof window !== 'undefined' && window.location.hostname === 'localhost'
     
     // Don't try to load anything until authentication is resolved (unless in local dev)
     if (authLoading && !isLocalDev) {
-log('ui','Reader: Waiting for authentication...')
       return
     }
 
@@ -74,24 +69,19 @@ log('ui','Reader: Waiting for authentication...')
       try {
         // Load from database only
         const response = await fetch('/api/user/current-book')
-log('ui','Reader: Current book API response status:', response.status)
         
         if (response.ok) {
           const dbBook = await response.json()
-log('ui','Reader: Restoring saved book from database:', dbBook)
           
           if (dbBook.url) {
             handleBookSelect(dbBook.title, dbBook.author, dbBook.url)
             return
           }
-        } else {
-log('ui','Reader: No current book found, status:', response.status)
         }
       } catch (error) {
-        log('ui','Reader: Error loading current book from database:', error)
+        // Silent error handling
       }
       
-log('ui','Reader: Redirecting to library - no current book found')
       router.push('/library')
     }
 
@@ -106,15 +96,8 @@ log('ui','Reader: Redirecting to library - no current book found')
       const singlePlayConfig = getSinglePlayConfig()
       const playTextData = await loadSinglePlayText(singlePlayConfig)
       
-      log('ui', 'Reader: Loaded single play text:', {
-        title: playTitle,
-        textLength: playTextData.text.length,
-        firstChars: playTextData.text.substring(0, 100)
-      })
-      
       setBookText(playTextData.text)
     } catch (error) {
-      log('ui', 'Reader: Error loading single play:', error)
       alert('Failed to load the play. Please try again.')
     } finally {
       setLoading(false)
@@ -134,7 +117,7 @@ log('ui','Reader: Redirecting to library - no current book found')
         body: JSON.stringify(newBook)
       })
     } catch (error) {
-      log('ui','Error saving current book to database:', error)
+      // Silent error handling
     }
     
     // Dispatch custom event to notify header of the change
@@ -179,15 +162,8 @@ log('ui','Reader: Redirecting to library - no current book found')
         }
       }
       
-      log('Setting book text:', {
-        textLength: text.length,
-        firstChars: text.substring(0, 100),
-        hasNewlines: text.includes('\n'),
-        newlineCount: (text.match(/\n/g) || []).length
-      })
       setBookText(text)
     } catch (error) {
-      log('ui','Error loading book:', error)
       alert('Failed to load book. Please try again.')
     } finally {
       setLoading(false)
