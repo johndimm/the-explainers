@@ -68,6 +68,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   const isAuthenticated = !!user
 
   const handleSignIn = async () => {
+    alert('handleSignIn called!')
     log('AuthContext: handleSignIn called')
     setIsLoading(true)
     try {
@@ -80,8 +81,19 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
         (window as any).Capacitor && 
         typeof (window as any).Capacitor.getPlatform === 'function'
       
-      // Force mobile detection for Capacitor apps - this is the key fix!
-      const isCapacitorEnvironment = isCapacitor || hasCapacitorPlatform || isMobile
+      // Check for Capacitor-specific properties
+      const hasCapacitorPlugins = typeof window !== 'undefined' && 
+        (window as any).Capacitor && 
+        (window as any).Capacitor.Plugins
+      
+      // Check for Capacitor webview indicators
+      const isCapacitorWebview = typeof window !== 'undefined' && 
+        (window as any).Capacitor && 
+        (window as any).Capacitor.isNativePlatform && 
+        (window as any).Capacitor.isNativePlatform()
+      
+      // Force mobile detection for Capacitor apps - be very aggressive!
+      const isCapacitorEnvironment = isCapacitor || hasCapacitorPlatform || hasCapacitorPlugins || isCapacitorWebview || isMobile
       
       log('AuthContext: Environment check:', { 
         isMobile, 
@@ -110,9 +122,12 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
           log('AuthContext: Manual OAuth URL:', googleAuthUrl)
           alert('OAuth URL: ' + googleAuthUrl)
           
-          // Navigate directly to the OAuth URL within the app
-          window.location.href = googleAuthUrl
-          log('AuthContext: Navigated to OAuth URL within app')
+          // Add a delay to ensure alerts are seen before redirect
+          setTimeout(() => {
+            // Navigate directly to the OAuth URL within the app
+            window.location.href = googleAuthUrl
+            log('AuthContext: Navigated to OAuth URL within app')
+          }, 2000) // 2 second delay
         } catch (error) {
           log('AuthContext: Manual OAuth failed:', error)
           alert('Sign in failed: ' + (error instanceof Error ? error.message : String(error)))

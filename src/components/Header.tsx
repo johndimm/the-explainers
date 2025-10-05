@@ -184,10 +184,12 @@ export default function Header() {
   }, [])
 
   const handleAuthAction = async () => {
+    alert('handleAuthAction called!')
     if (isAuthenticated) {
       setShowSignOutConfirm(true)
       // Keep menu open to show confirmation
     } else {
+      alert('About to call signIn()')
       await signIn()
       setShowMobileMenu(false)
     }
