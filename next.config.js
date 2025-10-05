@@ -1,9 +1,9 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
-  // Enable static export for native builds
+  // For Capacitor builds, use regular build (not static export)
+  // Static export doesn't work with API routes
   ...(process.env.BUILD_NATIVE === 'true' && {
-    output: 'export',
     trailingSlash: true,
     images: {
       unoptimized: true

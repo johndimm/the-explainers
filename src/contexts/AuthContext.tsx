@@ -40,6 +40,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     }
   }, [status, session, isLocalDev])
 
+
   // Force session refresh on mobile after OAuth redirect
   useEffect(() => {
     const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent)
@@ -79,7 +80,8 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
         (window as any).Capacitor && 
         typeof (window as any).Capacitor.getPlatform === 'function'
       
-      const isCapacitorEnvironment = isCapacitor || hasCapacitorPlatform
+      // Force mobile detection for Capacitor apps - this is the key fix!
+      const isCapacitorEnvironment = isCapacitor || hasCapacitorPlatform || isMobile
       
       log('AuthContext: Environment check:', { 
         isMobile, 
@@ -90,48 +92,43 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
         hasCapacitor: !!(window as any).Capacitor
       })
       
+      // Debug: Show the actual detection results
+      alert(`Mobile: ${isMobile}, Capacitor: ${isCapacitor}, Platform: ${hasCapacitorPlatform}, Final: ${isCapacitorEnvironment}`)
+      alert(`User Agent: ${navigator.userAgent}`)
+      
+      // For Capacitor, construct OAuth URL manually to avoid NextAuth browser issues
       if (isMobile || isCapacitorEnvironment) {
-        // For mobile/Capacitor, use window.open with _system to bypass webview
-        const baseUrl = process.env.NEXT_PUBLIC_APP_URL || 'https://romeo-and-juliet-explained.vercel.app'
-        const redirectUrl = `${baseUrl}/reader`
-        const googleAuthUrl = `${baseUrl}/api/auth/signin/google?callbackUrl=${encodeURIComponent(redirectUrl)}`
-        
-        log('AuthContext: Mobile/Capacitor detected, using window.open')
-        log('AuthContext: OAuth URL:', googleAuthUrl)
+        log('AuthContext: Mobile/Capacitor detected - constructing OAuth URL manually')
+        alert('Mobile/Capacitor detected - using manual OAuth URL')
         
         try {
-          window.open(googleAuthUrl, '_system')
-          log('AuthContext: window.open succeeded')
+          // Construct the OAuth URL manually instead of using NextAuth
+          const baseUrl = process.env.NEXT_PUBLIC_APP_URL || 'https://romeo-and-juliet-explained.vercel.app'
+          const callbackUrl = `${baseUrl}/reader` // Redirect back to reader after OAuth
+          const googleAuthUrl = `${baseUrl}/api/auth/signin/google?callbackUrl=${encodeURIComponent(callbackUrl)}`
           
-          // Show instructions to user
-          alert('Please complete sign-in in the browser that opened, then return to this app.')
-        } catch (openError) {
-          log('AuthContext: window.open failed:', openError)
-          alert('Failed to open browser: ' + (openError instanceof Error ? openError.message : String(openError)))
+          log('AuthContext: Manual OAuth URL:', googleAuthUrl)
+          alert('OAuth URL: ' + googleAuthUrl)
+          
+          // Navigate directly to the OAuth URL within the app
+          window.location.href = googleAuthUrl
+          log('AuthContext: Navigated to OAuth URL within app')
+        } catch (error) {
+          log('AuthContext: Manual OAuth failed:', error)
+          alert('Sign in failed: ' + (error instanceof Error ? error.message : String(error)))
         }
       } else {
-        log('AuthContext: Web environment detected, trying NextAuth first')
+        // For web, use normal NextAuth
+        log('AuthContext: Web environment - using normal NextAuth')
+        alert('Web environment detected - using NextAuth')
         try {
-          // For web, use regular NextAuth
           await signIn('google', { 
             callbackUrl: window.location.href,
             redirect: true
           })
-        } catch (nextAuthError) {
-          log('AuthContext: NextAuth failed, falling back to window.open:', nextAuthError)
-          // Fallback to window.open if NextAuth fails
-          const baseUrl = process.env.NEXT_PUBLIC_APP_URL || 'https://romeo-and-juliet-explained.vercel.app'
-          const redirectUrl = `${baseUrl}/reader`
-          const googleAuthUrl = `${baseUrl}/api/auth/signin/google?callbackUrl=${encodeURIComponent(redirectUrl)}`
-          
-          try {
-            window.open(googleAuthUrl, '_system')
-            log('AuthContext: Fallback window.open succeeded')
-            alert('Please complete sign-in in the browser that opened, then return to this app.')
-          } catch (openError) {
-            log('AuthContext: Fallback window.open failed:', openError)
-            alert('Failed to open browser: ' + (openError instanceof Error ? openError.message : String(openError)))
-          }
+        } catch (error) {
+          log('AuthContext: NextAuth failed:', error)
+          alert('Sign in failed: ' + (error instanceof Error ? error.message : String(error)))
         }
       }
     } catch (error) {

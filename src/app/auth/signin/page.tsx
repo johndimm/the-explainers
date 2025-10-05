@@ -26,17 +26,14 @@ export default function SignIn() {
   const handleGoogleSignIn = async () => {
     setIsLoading(true)
     try {
-      // For mobile, bypass Capacitor's webview entirely
+      // For mobile, stay within the app webview
       if (Capacitor.isNativePlatform()) {
         const baseUrl = 'https://romeo-and-juliet-explained.vercel.app'
         const redirectUrl = `${baseUrl}/auth/callback`
         const googleAuthUrl = `${baseUrl}/api/auth/signin/google?callbackUrl=${encodeURIComponent(redirectUrl)}`
         
-        // Open in external browser (bypasses Capacitor webview)
-        window.open(googleAuthUrl, '_system')
-        
-        // Show instructions to user
-        alert('Please complete sign-in in the browser that opened, then return to this app.')
+        // Navigate within the app webview (don't open external browser)
+        window.location.href = googleAuthUrl
       } else {
         // For web, use regular NextAuth
         await signIn('google', { 
