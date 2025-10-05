@@ -1,7 +1,7 @@
 'use client'
 
 import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react'
-import { useSession } from 'next-auth/react'
+import { useAuth } from './AuthContext'
 import { SettingsData, LLMProvider, LLMModel, ResponseLength, FontFamily, ReadingMode, ExplanationStyle } from '../components/Settings'
 import { log } from '../utils/log'
 import models from '../data/models.json'
@@ -33,22 +33,15 @@ interface SettingsProviderProps {
 }
 
 export const SettingsProvider: React.FC<SettingsProviderProps> = ({ children }) => {
-  const { data: session, status } = useSession()
+  const { userAgent } = useAuth()
   const [settings, setSettings] = useState<SettingsData>(DEFAULT_SETTINGS)
   const [isSettingsOpen, setIsSettingsOpen] = useState(false)
 
-  // Load settings from database when user is authenticated
+  // Load settings from database
   useEffect(() => {
     const loadSettings = async () => {
-      if (status === 'loading') return
-      
-      if (!session?.user?.email) {
-        // Not authenticated, use default settings
-        return
-      }
-
       try {
-        log('SettingsContext: Loading settings from database for:', session.user.email)
+        log('SettingsContext: Loading settings from database for userAgent:', userAgent)
         const response = await fetch('/api/user/settings')
         
         if (response.ok) {
@@ -58,7 +51,7 @@ export const SettingsProvider: React.FC<SettingsProviderProps> = ({ children }) 
           // Convert database settings to SettingsData format
           const convertedSettings: SettingsData = {
             llmProvider: dbSettings.llm_provider as LLMProvider,
-            llmModel: dbSettings.llm_model as LLMModel || (models as any).defaults.gemini, // Default if not set
+            llmModel: dbSettings.llm_model as LLMModel || (models as any).defaults.gemini,
             responseLength: dbSettings.response_length as ResponseLength,
             textFont: dbSettings.text_font as FontFamily,
             chatFont: dbSettings.chat_font as FontFamily,
@@ -72,11 +65,8 @@ export const SettingsProvider: React.FC<SettingsProviderProps> = ({ children }) 
           }
           
           setSettings(convertedSettings)
-        } else if (response.status === 404) {
-          // No settings found, use defaults
-          log('SettingsContext: No settings found, using defaults')
         } else {
-          log('ui','SettingsContext: Error loading settings:', response.statusText)
+          log('SettingsContext: Using default settings')
         }
       } catch (error) {
         log('ui','SettingsContext: Error loading settings:', error)
@@ -84,43 +74,36 @@ export const SettingsProvider: React.FC<SettingsProviderProps> = ({ children }) 
     }
 
     loadSettings()
-  }, [session, status])
-
-  // Use default settings for non-authenticated users
+  }, [userAgent])
 
   const updateSettings = async (newSettings: SettingsData) => {
-log('ui','SettingsContext: updateSettings called with:', newSettings)
-log('ui','SettingsContext: Previous settings:', settings)
+    log('ui','SettingsContext: updateSettings called with:', newSettings)
     setSettings(newSettings)
     
-    // Settings saved to database only
-    
-    // Save to database if authenticated
-    if (session?.user?.email) {
-      try {
-log('ui','SettingsContext: Saving to database for user:', session.user.email)
-              await fetch('/api/user/settings', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({
-                  llm_provider: newSettings.llmProvider,
-                  llm_model: newSettings.llmModel,
-                  response_length: newSettings.responseLength,
-                  text_font: newSettings.textFont,
-                  chat_font: newSettings.chatFont,
-                  text_font_size: newSettings.textFontSize,
-                  chat_font_size: newSettings.chatFontSize,
-                  reading_mode: newSettings.readingMode,
-                  explanation_style: newSettings.explanationStyle,
-                  custom_api_key: newSettings.customApiKey,
-                  custom_api_url: newSettings.customApiUrl,
-                  custom_model_name: newSettings.customModelName
-                })
-              })
-log('ui','SettingsContext: Successfully saved to database')
-      } catch (error) {
-        log('ui','Error saving settings to database:', error)
-      }
+    // Save to database
+    try {
+      log('ui','SettingsContext: Saving to database for userAgent:', userAgent)
+      await fetch('/api/user/settings', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          llm_provider: newSettings.llmProvider,
+          llm_model: newSettings.llmModel,
+          response_length: newSettings.responseLength,
+          text_font: newSettings.textFont,
+          chat_font: newSettings.chatFont,
+          text_font_size: newSettings.textFontSize,
+          chat_font_size: newSettings.chatFontSize,
+          reading_mode: newSettings.readingMode,
+          explanation_style: newSettings.explanationStyle,
+          custom_api_key: newSettings.customApiKey,
+          custom_api_url: newSettings.customApiUrl,
+          custom_model_name: newSettings.customModelName
+        })
+      })
+      log('ui','SettingsContext: Successfully saved to database')
+    } catch (error) {
+      log('ui','Error saving settings to database:', error)
     }
   }
 

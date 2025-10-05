@@ -1,7 +1,7 @@
 'use client'
 
 import React, { useEffect, useRef, useState } from 'react'
-import { useSession } from 'next-auth/react'
+import { useAuth } from '@/contexts/AuthContext'
 import { log } from '../utils/log'
 
 // Shared types pulled from existing components
@@ -1127,7 +1127,7 @@ export const useBookmarkRestoreAndSave = (
   disableBookmarkSaving: boolean = false
 ) => {
   const scrollTimeoutRef = useRef<NodeJS.Timeout | null>(null)
-  const { data: session } = useSession()
+  const { user } = useAuth()
 
   useEffect(() => {
 log('debug', '🔍 BOOKMARK RESTORE EFFECT TRIGGERED:', { textLength: text?.length, bookTitle, author, disableBookmarkSaving })
@@ -1169,7 +1169,7 @@ log(`⏳ Attempt ${attempts + 1}: Waiting for content to load...`)
       // Wait a bit for session to be fully loaded
       await new Promise(resolve => setTimeout(resolve, 100))
       
-      const userEmail = session?.user?.email || (process.env.NODE_ENV === 'development' ? 'dev-user@example.com' : null)
+      const userEmail = user?.userAgent || (process.env.NODE_ENV === 'development' ? 'dev-user@example.com' : null)
       
       if (userEmail) {
         try {
@@ -1229,7 +1229,7 @@ log('❌ No bookmark found in database (404)')
     }
 
     loadBookmark()
-  }, [text, bookTitle, author, session?.user?.email])
+  }, [text, bookTitle, author, user?.userAgent])
 
   useEffect(() => {
     log('debug', 'bookmark', 'Setting up scroll effect, textReaderRef:', textReaderRef.current)
@@ -1259,9 +1259,9 @@ log('❌ No bookmark found in database (404)')
 
         // Save to database if user is authenticated or in development mode
         const isLocalDev = process.env.NODE_ENV === 'development' && typeof window !== 'undefined' && window.location.hostname === 'localhost'
-        const userEmail = session?.user?.email || (isLocalDev ? 'dev-user@example.com' : null)
+        const userEmail = user?.userAgent || (isLocalDev ? 'dev-user@example.com' : null)
         
-        log('debug', 'bookmark', `Session email: ${session?.user?.email}, isLocalDev: ${isLocalDev}, userEmail: ${userEmail}`)
+        log('debug', 'bookmark', `User agent: ${user?.userAgent}, isLocalDev: ${isLocalDev}, userEmail: ${userEmail}`)
         
         if (userEmail) {
           try {
@@ -1325,7 +1325,7 @@ log('debug', '❌ No session, skipping bookmark save')
       }
       if (scrollTimeoutRef.current) clearTimeout(scrollTimeoutRef.current)
     }
-  }, [bookTitle, author, text, textReaderRef, session])
+  }, [bookTitle, author, text, textReaderRef, user])
 }
 
 

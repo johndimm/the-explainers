@@ -2,7 +2,7 @@
 
 import React, { useState, useRef, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
-import { useSession } from 'next-auth/react'
+import { useAuth } from '@/contexts/AuthContext'
 import styles from './ChatInterface.module.css'
 import { SettingsData, LLMProvider, ResponseLength, ExplanationStyle, LLMModel } from './Settings'
 import { ProfileData } from './Profile'
@@ -51,7 +51,7 @@ interface ChatInterfaceProps {
 
 const ChatInterface: React.FC<ChatInterfaceProps> = ({ selectedText, contextInfo, settings, profile, onClose, onSettingsChange, bookTitle, author, isPageMode = false }) => {
   const router = useRouter()
-  const { data: session } = useSession()
+  const { user } = useAuth()
   const [messages, setMessages] = useState<Message[]>([])
   const [inputValue, setInputValue] = useState('')
   const [isLoading, setIsLoading] = useState(false)
@@ -870,7 +870,7 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ selectedText, contextInfo
       // Check if user is authenticated to determine redirect destination
       const isLocalDev = process.env.NODE_ENV === 'development' && typeof window !== 'undefined' && window.location.hostname === 'localhost'
       
-      if (!session?.user?.email && !isLocalDev) {
+      if (!user?.userAgent && !isLocalDev) {
         log('ChatInterface: canUseExplanation returned false - not authenticated, redirecting to sign-in')
         // Preserve the chat context when redirecting to sign-in
         if (selectedText && contextInfo) {
@@ -992,7 +992,7 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ selectedText, contextInfo
       // Check if user is authenticated to determine redirect destination
       const isLocalDev = process.env.NODE_ENV === 'development' && typeof window !== 'undefined' && window.location.hostname === 'localhost'
       
-      if (!session?.user?.email && !isLocalDev) {
+      if (!user?.userAgent && !isLocalDev) {
         log('ChatInterface: canUseExplanation returned false - not authenticated, redirecting to sign-in')
         // Preserve the chat context when redirecting to sign-in
         if (selectedText && contextInfo) {

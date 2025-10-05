@@ -1,4 +1,4 @@
-import { useSession } from 'next-auth/react'
+import { useAuth } from '@/contexts/AuthContext'
 import { log } from './log'
 
 export interface CurrentBook {
@@ -48,10 +48,9 @@ export const setCurrentBook = async (book: CurrentBook): Promise<void> => {
 
 // Hook for easy current book management
 export const useCurrentBook = () => {
-  const { data: session, status } = useSession()
+  const { user } = useAuth()
 
   const loadCurrentBook = async (): Promise<CurrentBook | null> => {
-    if (status === 'loading') return null
     return await getCurrentBook()
   }
 

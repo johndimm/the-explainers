@@ -12,7 +12,7 @@ import { calculateUpgradePricing, isEligibleForUpgrade, getUpgradePricingText, U
 export default function Header() {
   const router = useRouter()
   const pathname = usePathname()
-  const { user, isAuthenticated, isLoading, signIn, signOut: handleSignOut } = useAuth()
+  const { user, isAuthenticated, isLoading } = useAuth()
   const { isSinglePlay, playTitle, playAuthor, themeColor, appName } = useTheme()
   const [showMobileMenu, setShowMobileMenu] = useState(false)
   const menuRef = useRef<HTMLDivElement>(null)
@@ -22,7 +22,6 @@ export default function Header() {
   const [showSearch, setShowSearch] = useState(false)
   const [currentSearchIndex, setCurrentSearchIndex] = useState(0)
   const [totalSearchResults, setTotalSearchResults] = useState(0)
-  const [showSignOutConfirm, setShowSignOutConfirm] = useState(false)
   const [ownedPlays, setOwnedPlays] = useState<PlayOwnership[]>([])
   const [upgradePricing, setUpgradePricing] = useState<UpgradePricing | null>(null)
 
@@ -183,28 +182,6 @@ export default function Header() {
     return () => window.removeEventListener('searchResultUpdate', handleSearchResultUpdate as EventListener)
   }, [])
 
-  const handleAuthAction = async () => {
-    alert('handleAuthAction called!')
-    if (isAuthenticated) {
-      setShowSignOutConfirm(true)
-      // Keep menu open to show confirmation
-    } else {
-      alert('About to call signIn()')
-      await signIn()
-      setShowMobileMenu(false)
-    }
-  }
-
-  const handleConfirmSignOut = async () => {
-    setShowSignOutConfirm(false)
-    setShowMobileMenu(false)
-    await handleSignOut()
-  }
-
-  const handleCancelSignOut = () => {
-    setShowSignOutConfirm(false)
-    setShowMobileMenu(false)
-  }
 
   return (
     <header 
@@ -405,7 +382,6 @@ log('ui','Hamburger clicked, current state:', showMobileMenu)
               )}
 
               <button onClick={() => { router.push('/explainers'); setShowMobileMenu(false) }} style={{ display: 'block', width: '100%', padding: '12px 16px', background: 'none', border: 'none', textAlign: 'left', cursor: 'pointer', borderBottom: '1px solid #f0f0f0', color: '#333' }}>🎭 Explainers</button>
-              <button onClick={() => { router.push('/profile'); setShowMobileMenu(false) }} style={{ display: 'block', width: '100%', padding: '12px 16px', background: 'none', border: 'none', textAlign: 'left', cursor: 'pointer', borderBottom: '1px solid #f0f0f0', color: '#333' }}>👤 Profile</button>
               <button onClick={() => { router.push('/settings'); setShowMobileMenu(false) }} style={{ display: 'block', width: '100%', padding: '12px 16px', background: 'none', border: 'none', textAlign: 'left', cursor: 'pointer', borderBottom: '1px solid #f0f0f0', color: '#333' }}>⚙️ Settings</button>
               <button onClick={() => { router.push('/guide'); setShowMobileMenu(false) }} style={{ display: 'block', width: '100%', padding: '12px 16px', background: 'none', border: 'none', textAlign: 'left', cursor: 'pointer', borderBottom: '1px solid #f0f0f0', color: '#333' }}>📖 User Guide</button>
               <button onClick={() => { router.push('/about'); setShowMobileMenu(false) }} style={{ display: 'block', width: '100%', padding: '12px 16px', background: 'none', border: 'none', textAlign: 'left', cursor: 'pointer', borderBottom: '1px solid #f0f0f0', color: '#333' }}>ℹ️ About</button>
@@ -436,107 +412,6 @@ log('ui','Hamburger clicked, current state:', showMobileMenu)
                 </button>
               )}
               
-              {/* Auth buttons */}
-              <div style={{ borderTop: '1px solid #e0e0e0', marginTop: '8px', paddingTop: '8px' }}>
-                {isAuthenticated ? (
-                  <>
-                    <div style={{ padding: '8px 16px', fontSize: '12px', color: '#666', borderBottom: '1px solid #f0f0f0' }}>
-                      {user?.image && (
-                        <img 
-                          src={user.image} 
-                          alt={user.name || 'User'} 
-                          style={{ 
-                            width: '20px', 
-                            height: '20px', 
-                            borderRadius: '50%', 
-                            marginRight: '8px',
-                            verticalAlign: 'middle'
-                          }} 
-                        />
-                      )}
-                      {user?.email}
-                    </div>
-{!showSignOutConfirm ? (
-                      <button 
-                        onClick={handleAuthAction}
-                        disabled={isLoading}
-                        style={{ 
-                          display: 'block', 
-                          width: '100%', 
-                          padding: '12px 16px', 
-                          background: 'none', 
-                          border: 'none', 
-                          textAlign: 'left', 
-                          cursor: isLoading ? 'not-allowed' : 'pointer',
-                          color: '#dc3545',
-                          opacity: isLoading ? 0.6 : 1
-                        }}
-                      >
-                        {isLoading ? 'Signing out...' : '🚪 Sign Out'}
-                      </button>
-                    ) : (
-                      <div style={{ padding: '12px 16px', borderTop: '1px solid #f0f0f0' }}>
-                        <div style={{ marginBottom: '8px', fontSize: '14px', fontWeight: 'bold', color: '#333' }}>
-                          Sign Out
-                        </div>
-                        <div style={{ marginBottom: '12px', fontSize: '12px', color: '#666' }}>
-                          Are you sure you want to sign out?
-                        </div>
-                        <div style={{ display: 'flex', gap: '8px' }}>
-                          <button
-                            onClick={handleCancelSignOut}
-                            style={{
-                              flex: 1,
-                              padding: '6px 12px',
-                              fontSize: '12px',
-                              border: '1px solid #ddd',
-                              background: '#fff',
-                              borderRadius: '4px',
-                              cursor: 'pointer',
-                              color: '#333'
-                            }}
-                          >
-                            Cancel
-                          </button>
-                          <button
-                            onClick={handleConfirmSignOut}
-                            style={{
-                              flex: 1,
-                              padding: '6px 12px',
-                              fontSize: '12px',
-                              border: 'none',
-                              background: '#dc3545',
-                              borderRadius: '4px',
-                              cursor: 'pointer',
-                              color: '#fff'
-                            }}
-                          >
-                            Sign Out
-                          </button>
-                        </div>
-                      </div>
-                    )}
-                  </>
-                ) : (
-                  <button 
-                    onClick={handleAuthAction}
-                    disabled={isLoading}
-                    style={{ 
-                      display: 'block', 
-                      width: '100%', 
-                      padding: '12px 16px', 
-                      background: 'none', 
-                      border: 'none', 
-                      textAlign: 'left', 
-                      cursor: isLoading ? 'not-allowed' : 'pointer',
-                      color: '#4285f4',
-                      opacity: isLoading ? 0.6 : 1
-                    }}
-                  >
-                    {isLoading ? 'Signing in...' : '🔑 Sign In'}
-                  </button>
-                )}
-              </div>
             </div>
           )}
         </div>

@@ -1,25 +1,16 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { getServerSession } from 'next-auth'
-import { authOptions } from '@/lib/auth'
 
 export async function POST(request: NextRequest) {
   try {
-    const session = await getServerSession(authOptions)
-    
-    if (!session?.user?.email) {
-      return NextResponse.json({ error: 'Not authenticated' }, { status: 401 })
-    }
-
+    const userAgent = request.headers.get('user-agent') || 'unknown'
     const { upgradeType } = await request.json()
     
     if (upgradeType !== 'complete_collection') {
       return NextResponse.json({ error: 'Invalid upgrade type' }, { status: 400 })
     }
 
-    // TODO: Integrate with actual payment processing (Stripe, Apple Pay, etc.)
-    // For now, we'll simulate the upgrade
-    
-    // Update user's ownership to include all Shakespeare plays
+    // In this simplified version, we just return success
+    // No actual payment processing or database operations needed
     const allShakespearePlays = [
       'romeo-and-juliet',
       'hamlet',
@@ -60,13 +51,11 @@ export async function POST(request: NextRequest) {
       'troilus-and-cressida'
     ]
 
-    // TODO: Save to database
-    // await saveUserOwnership(session.user.email, allShakespearePlays)
-
     return NextResponse.json({
       success: true,
       message: 'Upgrade successful! You now have access to all Shakespeare plays.',
-      ownedPlays: allShakespearePlays
+      ownedPlays: allShakespearePlays,
+      user_agent: userAgent
     })
 
   } catch (error) {
@@ -77,21 +66,17 @@ export async function POST(request: NextRequest) {
 
 export async function GET(request: NextRequest) {
   try {
-    const session = await getServerSession(authOptions)
+    const userAgent = request.headers.get('user-agent') || 'unknown'
     
-    if (!session?.user?.email) {
-      return NextResponse.json({ error: 'Not authenticated' }, { status: 401 })
-    }
-
-    // TODO: Get user's current ownership from database
-    // For now, return mock data
+    // Return mock ownership data (no authentication required)
     const mockOwnedPlays = [
       { playId: 'romeo-and-juliet', playTitle: 'Romeo and Juliet', purchaseDate: '2024-01-01' },
       { playId: 'hamlet', playTitle: 'Hamlet', purchaseDate: '2024-01-02' }
     ]
 
     return NextResponse.json({
-      ownedPlays: mockOwnedPlays
+      ownedPlays: mockOwnedPlays,
+      user_agent: userAgent
     })
 
   } catch (error) {

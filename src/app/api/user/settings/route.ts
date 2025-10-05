@@ -1,24 +1,28 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { log } from '@/utils/log'
-import { getServerSession } from 'next-auth'
-import { authOptions } from '@/lib/auth'
-import { getUserSettings, createOrUpdateUserSettings } from '@/lib/database'
 
 export async function GET(request: NextRequest) {
   try {
-    const session = await getServerSession(authOptions)
+    const userAgent = request.headers.get('user-agent') || 'unknown'
     
-    if (!session?.user?.email) {
-      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
+    // Return default settings for all users (no authentication required)
+    const defaultSettings = {
+      user_agent: userAgent,
+      llm_provider: 'gemini',
+      llm_model: 'gemini-1.5-flash',
+      response_length: 'medium',
+      text_font: 'serif',
+      chat_font: 'sans-serif',
+      reading_mode: 'scroll',
+      explanation_style: 'conversational',
+      custom_api_key: '',
+      custom_api_url: '',
+      custom_model_name: '',
+      created_at: new Date(),
+      updated_at: new Date()
     }
-
-    const settings = await getUserSettings(session.user.email)
     
-    if (!settings) {
-      return NextResponse.json({ error: 'Settings not found' }, { status: 404 })
-    }
-
-    return NextResponse.json(settings)
+    return NextResponse.json(defaultSettings)
   } catch (error) {
     log('api','Error fetching user settings:', error)
     return NextResponse.json({ error: 'Internal server error' }, { status: 500 })
@@ -27,32 +31,31 @@ export async function GET(request: NextRequest) {
 
 export async function POST(request: NextRequest) {
   try {
-    const session = await getServerSession(authOptions)
+    const userAgent = request.headers.get('user-agent') || 'unknown'
     
-    if (!session?.user?.email) {
-      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
+    // In this simplified version, we just return the default settings
+    // No actual database operations needed
+    log('Settings API: Simplified mode - returning default settings for userAgent:', userAgent)
+    
+    const defaultSettings = {
+      user_agent: userAgent,
+      llm_provider: 'gemini',
+      llm_model: 'gemini-1.5-flash',
+      response_length: 'medium',
+      text_font: 'serif',
+      chat_font: 'sans-serif',
+      reading_mode: 'scroll',
+      explanation_style: 'conversational',
+      custom_api_key: '',
+      custom_api_url: '',
+      custom_model_name: '',
+      created_at: new Date(),
+      updated_at: new Date()
     }
-
-    const body = await request.json()
-    const settings = await createOrUpdateUserSettings({
-      email: session.user.email,
-      ...body
-    })
-
-    return NextResponse.json(settings)
+    
+    return NextResponse.json(defaultSettings)
   } catch (error) {
     log('api','Error creating/updating user settings:', error)
     return NextResponse.json({ error: 'Internal server error' }, { status: 500 })
   }
 }
-
-
-
-
-
-
-
-
-
-
-

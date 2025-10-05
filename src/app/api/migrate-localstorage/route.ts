@@ -1,16 +1,11 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { log } from '@/utils/log'
-import { getServerSession } from 'next-auth'
-import { authOptions } from '@/lib/auth'
+// No authentication needed
 import { createOrUpdateUserProfile, createOrUpdateUserSettings, createOrUpdateUserCurrentBook, createOrUpdateUserBookmark } from '@/lib/database'
 
 export async function POST(request: NextRequest) {
   try {
-    const session = await getServerSession(authOptions)
-    
-    if (!session?.user?.email) {
-      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
-    }
+    const userAgent = request.headers.get('user-agent') || 'unknown'
 
     const body = await request.json()
     const { profileData, settingsData, currentBookData, bookmarksData } = body
@@ -26,7 +21,7 @@ export async function POST(request: NextRequest) {
     if (profileData) {
       try {
         const migratedProfile = await createOrUpdateUserProfile({
-          email: session.user.email,
+          user_agent: userAgent,
           age: profileData.age,
           language: profileData.language,
           education_level: profileData.educationLevel,
@@ -50,7 +45,7 @@ export async function POST(request: NextRequest) {
     if (settingsData) {
       try {
         const migratedSettings = await createOrUpdateUserSettings({
-          email: session.user.email,
+          user_agent: userAgent,
           llm_provider: settingsData.llmProvider,
           response_length: settingsData.responseLength,
           text_font: settingsData.textFont,
@@ -71,7 +66,7 @@ export async function POST(request: NextRequest) {
     if (currentBookData) {
       try {
         const migratedCurrentBook = await createOrUpdateUserCurrentBook({
-          email: session.user.email,
+          user_agent: userAgent,
           title: currentBookData.title,
           author: currentBookData.author,
           url: currentBookData.url
@@ -87,7 +82,7 @@ export async function POST(request: NextRequest) {
       for (const bookmark of bookmarksData) {
         try {
           const migratedBookmark = await createOrUpdateUserBookmark({
-            email: session.user.email,
+            user_agent: userAgent,
             book_title: bookmark.bookTitle,
             book_author: bookmark.bookAuthor,
             scroll_position: bookmark.scrollPosition
