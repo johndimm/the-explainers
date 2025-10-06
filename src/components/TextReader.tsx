@@ -51,6 +51,7 @@ const TextReader: React.FC<TextReaderProps> = (props) => {
     )
   }
   
+  console.log('🔍 TEXTREADER: Rendering component', { isMobile, component: isMobile ? 'MobileTextReader' : 'DesktopTextReader' })
   return isMobile ? <MobileTextReader {...props} /> : <DesktopTextReader {...props} />
 }
 

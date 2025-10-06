@@ -9,6 +9,7 @@ import { log } from '../utils/log'
 
 const DesktopTextReader: React.FC<ReaderCommonProps> = ({ text, bookTitle = 'Romeo and Juliet', author = 'William Shakespeare', settings, profile, onSettingsChange }) => {
   log('desktop', 'DesktopTextReader rendering with text length:', text?.length)
+  console.log('🔍 DESKTOP: DesktopTextReader component rendered!')
   const router = useRouter()
   const textReaderRef = useRef<HTMLDivElement>(null)
   const textContentRef = useRef<HTMLDivElement>(null)
@@ -262,9 +263,32 @@ log('ui','DesktopTextReader: Previous search result')
   }, [currentSearchIndex, searchResults.length])
 
   return (
-    <div ref={textReaderRef} className={styles.textReader}>
+    <>
+      {/* Debug Panel - fixed above text */}
+      <div style={{ 
+        position: 'fixed',
+        top: '0',
+        left: '0',
+        right: '0',
+        background: '#e0f0ff', 
+        border: '1px solid #0066cc', 
+        padding: '10px',
+        fontSize: '12px',
+        fontFamily: 'monospace',
+        zIndex: 1000,
+        maxHeight: '150px',
+        overflow: 'auto'
+      }}>
+        <div><strong>🔍 DESKTOP DEBUG PANEL</strong></div>
+        <div>Component: DesktopTextReader</div>
+        <div>Text Length: {text?.length || 'No text'}</div>
+        <div>Book: {bookTitle}</div>
+        <div>Author: {author}</div>
+        <div>User Agent: {typeof window !== 'undefined' ? navigator.userAgent : 'Server'}</div>
+      </div>
 
-      <div
+      <div ref={textReaderRef} className={styles.textReader} style={{ marginTop: '160px' }}>
+        <div
         ref={textContentRef}
         className={styles.textContent}
         style={{ 

@@ -9,6 +9,7 @@ import { log, warn } from '../utils/log'
 
 const MobileTextReader: React.FC<ReaderCommonProps> = ({ text, bookTitle = 'Romeo and Juliet', author = 'William Shakespeare', settings, profile, onSettingsChange }) => {
   log('mobile','mobile', 'MobileTextReader rendering with text length:', text?.length)
+  console.log('🔍 MOBILE: MobileTextReader component rendered!')
   const router = useRouter()
   const textReaderRef = useRef<HTMLDivElement>(null)
   const textContentRef = useRef<HTMLDivElement>(null)
@@ -18,9 +19,11 @@ const MobileTextReader: React.FC<ReaderCommonProps> = ({ text, bookTitle = 'Rome
   const [isInSelectionMode, setIsInSelectionMode] = useState(false)
   const longPressTimer = useRef<NodeJS.Timeout | null>(null)
   const [debugMessage, setDebugMessage] = useState('')
+  const [debugLogs, setDebugLogs] = useState<string[]>([])
   const [showChatModal, setShowChatModal] = useState(false)
   const [chatContext, setChatContext] = useState<any>(null)
   const [isRestoringPosition, setIsRestoringPosition] = useState(false)
+  const [allowScrollHandling, setAllowScrollHandling] = useState(false)
   
   // Page calculation state for scroll navigation
   const [pageMap, setPageMap] = useState<PageMap>({ pages: [], pageRanges: [] })
@@ -165,23 +168,46 @@ const MobileTextReader: React.FC<ReaderCommonProps> = ({ text, bookTitle = 'Rome
     setCurrentFontSize(settings.textFontSize)
   }, [settings.textFontSize])
 
+  // Simple approach: disable all scroll handling for first few seconds on mobile or Capacitor
+  useEffect(() => {
+    const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)
+    const isCapacitor = (window as any).Capacitor && (window as any).Capacitor.isNativePlatform()
+    const isMobileOrCapacitor = isMobile || isCapacitor
+    
+    if (isMobileOrCapacitor) {
+      // Longer delay for Capacitor apps (native apps)
+      const delay = isCapacitor ? 8000 : 5000
+      console.log('🔍 MOBILE: Disabling scroll handling for first', delay, 'ms. Mobile:', isMobile, 'Capacitor:', isCapacitor)
+      
+      const timer = setTimeout(() => {
+        setAllowScrollHandling(true)
+        console.log('🔍 MOBILE: Enabling scroll handling after', delay, 'ms')
+      }, delay)
+      return () => clearTimeout(timer)
+    } else {
+      setAllowScrollHandling(true)
+    }
+  }, [])
+
   // Consolidated scroll handler for both navigation buttons and page tracking
   useEffect(() => {
-    // Don't set up scroll handler if we're restoring position
-    if (isRestoringPosition) {
-      console.log('🔍 MOBILE: Skipping scroll handler setup during position restoration')
+    // Simple check: only set up scroll handler if allowed
+    if (!allowScrollHandling) {
+      console.log('🔍 MOBILE: Scroll handling disabled')
       return
     }
     
-    // Add delay to ensure bookmark restoration happens first
-    const setupScrollHandler = () => {
-      console.log('🔍 MOBILE: Setting up consolidated scroll handler after delay')
-      const handleScroll = () => {
-        // Skip scroll handling if we're restoring position
-        if (isRestoringPosition) {
-          console.log('🔍 MOBILE: Skipping scroll handler during position restoration')
-          return
-        }
+    console.log('🔍 MOBILE: Setting up scroll handler')
+    const handleScroll = () => {
+      // Skip scroll handling if not allowed
+      if (!allowScrollHandling) {
+      console.log('🔍 MOBILE: Skipping scroll handler - not allowed')
+      setDebugLogs(prev => [...prev.slice(-9), `Scroll: Skipped (not allowed)`])
+      return
+    }
+    
+    console.log('🔍 MOBILE: Scroll handler triggered')
+    setDebugLogs(prev => [...prev.slice(-9), `Scroll: Handler triggered at ${new Date().toLocaleTimeString()}`])
         
         const now = Date.now()
         const textReader = textReaderRef.current
@@ -246,24 +272,32 @@ const MobileTextReader: React.FC<ReaderCommonProps> = ({ text, bookTitle = 'Rome
         }, waitTime) // Wait 1-2 seconds after scrolling stops
       }
 
-      const textReader = textReaderRef.current
-      if (textReader) {
-        textReader.addEventListener('scroll', handleScroll)
-        return () => {
-          textReader.removeEventListener('scroll', handleScroll)
-          if (scrollTimeoutRef.current) {
-            clearTimeout(scrollTimeoutRef.current)
-          }
+    const textReader = textReaderRef.current
+    if (textReader) {
+      textReader.addEventListener('scroll', handleScroll)
+      return () => {
+        textReader.removeEventListener('scroll', handleScroll)
+        if (scrollTimeoutRef.current) {
+          clearTimeout(scrollTimeoutRef.current)
         }
       }
     }
-
-    // Delay setup to allow bookmark restoration to complete first
-    const timeoutId = setTimeout(setupScrollHandler, 2000) // Increased delay
-    return () => clearTimeout(timeoutId)
-  }, [pageMap, currentPage, settings.textFont, isRestoringPosition])
+  }, [allowScrollHandling, pageMap, currentPage, settings.textFont])
 
   useBookmarkRestoreAndSave(textReaderRef, text, bookTitle, author, showChatModal, setIsRestoringPosition)
+  
+  // Debug bookmark saving
+  useEffect(() => {
+    const debugInfo = {
+      showChatModal,
+      disableBookmarkSaving: showChatModal,
+      textLength: text?.length,
+      bookTitle,
+      author
+    }
+    console.log('🔍 MOBILE: Bookmark saving debug:', debugInfo)
+    setDebugLogs(prev => [...prev.slice(-9), `Bookmark debug: ${JSON.stringify(debugInfo)}`])
+  }, [showChatModal, text, bookTitle, author])
   
   // Calculate pages for scroll navigation and build character map
   useEffect(() => {
@@ -812,9 +846,43 @@ log('ui','MobileTextReader: Previous search result')
   }
 
   return (
-    <div ref={textReaderRef} className={styles.textReader}>
+    <>
+      {/* Debug Panel - fixed above text */}
+      <div style={{ 
+        position: 'fixed',
+        top: '0',
+        left: '0',
+        right: '0',
+        background: '#f0f0f0', 
+        border: '1px solid #ccc', 
+        padding: '10px',
+        fontSize: '12px',
+        fontFamily: 'monospace',
+        zIndex: 1000,
+        maxHeight: '150px',
+        overflow: 'auto'
+      }}>
+        <div><strong>🔍 MOBILE DEBUG PANEL</strong></div>
+        <div>Component: MobileTextReader</div>
+        <div>Text Length: {text?.length || 'No text'}</div>
+        <div>Book: {bookTitle}</div>
+        <div>Author: {author}</div>
+        <div><strong>Debug Logs:</strong></div>
+        {debugLogs.map((log, i) => (
+          <div key={i} style={{ marginBottom: '2px', wordBreak: 'break-all' }}>{log}</div>
+        ))}
+        <div style={{ marginTop: '5px' }}>
+          <button 
+            onClick={() => setDebugLogs([])}
+            style={{ padding: '2px 6px', fontSize: '10px' }}
+          >
+            Clear
+          </button>
+        </div>
+      </div>
 
-      <div
+      <div ref={textReaderRef} className={styles.textReader} style={{ marginTop: '160px' }}>
+        <div
         ref={textContentRef}
         className={styles.textContent}
         onTouchStart={handleTouchStart}

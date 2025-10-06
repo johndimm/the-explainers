@@ -1145,11 +1145,13 @@ log('debug', '🔍 Loading bookmark for:', title, 'by', auth)
       // Wait for content to be fully rendered before attempting restoration
       const restorePosition = (position: number, source: string) => {
         const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)
-        console.log('🔍 MOBILE RESTORE POSITION START:', { position, source, isMobile, userAgent: navigator.userAgent })
+        const isCapacitor = (window as any).Capacitor && (window as any).Capacitor.isNativePlatform()
+        const isMobileOrCapacitor = isMobile || isCapacitor
+        console.log('🔍 MOBILE RESTORE POSITION START:', { position, source, isMobile, isCapacitor, isMobileOrCapacitor, userAgent: navigator.userAgent })
         log('debug', '🔍 RESTORE POSITION:', { position, source, textReaderRef: textReaderRef.current, isMobile })
         
-        // Set restoring state for mobile
-        if (isMobile && setIsRestoringPosition) {
+        // Set restoring state for mobile or Capacitor (simplified)
+        if (isMobileOrCapacitor && setIsRestoringPosition) {
           setIsRestoringPosition(true)
           console.log('🔍 MOBILE: Set isRestoringPosition to true')
         }
@@ -1220,11 +1222,8 @@ log('debug', '🔍 Loading bookmark for:', title, 'by', auth)
                     // Position was restored successfully
                     console.log('✅ MOBILE: Position successfully restored')
                     if (isMobile && setIsRestoringPosition) {
-                      // Add a delay before clearing the restoration state to ensure position is stable
-                      setTimeout(() => {
-                        setIsRestoringPosition(false)
-                        console.log('🔍 MOBILE: Set isRestoringPosition to false (success)')
-                      }, 500)
+                      setIsRestoringPosition(false)
+                      console.log('🔍 MOBILE: Set isRestoringPosition to false (success)')
                     }
                   }
                 }
@@ -1245,9 +1244,9 @@ log('debug', '🔍 Loading bookmark for:', title, 'by', auth)
           }
         }
         
-        // Use longer delay for mobile to ensure all mobile handlers are set up
-        const initialDelay = isMobile ? 2000 : 500
-        console.log('🔍 MOBILE: Setting initial delay:', { initialDelay, isMobile })
+        // Use longer delay for mobile or Capacitor to ensure all handlers are set up
+        const initialDelay = isMobileOrCapacitor ? 2000 : 500
+        console.log('🔍 MOBILE: Setting initial delay:', { initialDelay, isMobile, isCapacitor, isMobileOrCapacitor })
         setTimeout(() => attemptRestore(), initialDelay)
       }
 
@@ -1256,6 +1255,14 @@ log('debug', '🔍 Loading bookmark for:', title, 'by', auth)
       await new Promise(resolve => setTimeout(resolve, 100))
       
       const userEmail = user?.userAgent || (process.env.NODE_ENV === 'development' ? 'dev-user@example.com' : null)
+      console.log('🔍 MOBILE: Bookmark loading check:', { 
+        userEmail, 
+        userAgent: user?.userAgent,
+        navigatorUserAgent: navigator.userAgent,
+        isDev: process.env.NODE_ENV === 'development',
+        title,
+        auth
+      })
       
       if (userEmail) {
         try {
@@ -1277,6 +1284,11 @@ log('❌ No bookmark found in database (404)')
           log('debug', 'bookmark', 'Error loading bookmark from database:', error)
         }
       } else {
+        console.log('🔍 MOBILE: No userEmail found, skipping bookmark restoration', {
+          userAgent: user?.userAgent,
+          navigatorUserAgent: navigator.userAgent,
+          isDev: process.env.NODE_ENV === 'development'
+        })
         log('debug', 'bookmark', 'No session found and not in development mode, skipping bookmark restoration')
       }
 
@@ -1321,10 +1333,14 @@ log('❌ No bookmark found in database (404)')
     log('debug', 'bookmark', 'Setting up scroll effect, textReaderRef:', textReaderRef.current)
     
     const handleScroll = () => {
+      console.log('🔍 BOOKMARK: Scroll handler called', { disableBookmarkSaving, textReaderRef: !!textReaderRef.current })
       // Skip bookmark saving if disabled (e.g., during chat operations)
       if (disableBookmarkSaving) {
+        console.log('🔍 BOOKMARK: Skipping bookmark save - disabled')
         return
       }
+      
+      console.log('🔍 BOOKMARK: Proceeding with bookmark save logic')
       
       // Debounce scroll events to reduce performance impact
       if (scrollTimeoutRef.current) clearTimeout(scrollTimeoutRef.current)
@@ -1366,10 +1382,10 @@ log('debug', '🔍 SAVING BOOKMARK:', { title, auth, scrollPosition })
             
             if (response.ok) {
               log('debug', 'bookmark', `Bookmark saved successfully: ${title} by ${auth} at position ${scrollPosition}`)
-log('✅ Bookmark saved successfully')
+              console.log('✅ BOOKMARK: Saved successfully to database')
             } else {
               log('debug', 'bookmark', `Failed to save bookmark: ${response.status} ${response.statusText}`)
-log('debug', '❌ Failed to save bookmark:', response.status, response.statusText)
+              console.log('❌ BOOKMARK: Failed to save:', response.status, response.statusText)
             }
           } catch (error) {
             log('debug', 'bookmark', 'Error saving bookmark to database:', error)
@@ -1388,17 +1404,21 @@ log('debug', '❌ No session, skipping bookmark save')
     log('debug', 'bookmark', 'Setting up scroll handlers for both window and element')
     
     const setupScrollHandlers = () => {
+      console.log('🔍 BOOKMARK: Setting up scroll handlers')
       // Window scroll (most likely)
       window.addEventListener('scroll', handleScroll)
       log('debug', 'bookmark', 'Window scroll handler attached')
+      console.log('🔍 BOOKMARK: Window scroll handler attached')
       
       // Element scroll (if element is scrollable)
     const el = textReaderRef.current
       if (el) {
         el.addEventListener('scroll', handleScroll)
         log('debug', 'bookmark', 'Element scroll handler attached')
+        console.log('🔍 BOOKMARK: Element scroll handler attached')
       } else {
         log('debug', 'bookmark', 'No textReaderRef element found for scroll handler')
+        console.log('🔍 BOOKMARK: No textReaderRef element found')
       }
     }
     
