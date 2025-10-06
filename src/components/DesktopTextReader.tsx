@@ -378,6 +378,7 @@ log('ui','DesktopTextReader: Previous search result')
         />
       )}
     </div>
+    </>
   )
 }
 

@@ -1031,6 +1031,7 @@ log('ui','MobileTextReader: Previous search result')
         />
       )}
     </div>
+    </>
   )
 }
 
