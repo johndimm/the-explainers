@@ -32,7 +32,7 @@ const deepseekOpenai = new OpenAI({
   baseURL: 'https://api.deepseek.com',
 })
 
-const gemini = new GoogleGenerativeAI(process.env.GEMINI_API_KEY || 'AIzaSyAxH3d0iZwo53-ez5ZXhcvQJv7vzCsICw0')
+const gemini = new GoogleGenerativeAI(process.env.GEMINI_API_KEY || '')
 
 async function callOpenAI(messages: ChatMessage[], responseLength: string, model: string = (modelsData as any).defaults.openai, style?: string): Promise<string> {
   const maxTokens = responseLength === 'brief' ? 200 : responseLength === 'medium' ? 500 : 1200
