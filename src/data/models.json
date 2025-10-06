@@ -120,19 +120,14 @@
         "description": "Latest stable Gemini Flash model - fast and efficient"
       },
       {
-        "id": "gemini-2.0-flash",
-        "name": "Gemini 2.0 Flash",
-        "description": "Stable Gemini 2.0 Flash model"
+        "id": "gemini-flash-latest",
+        "name": "Gemini Flash Latest",
+        "description": "Latest Gemini Flash model"
       },
       {
         "id": "gemini-pro-latest",
         "name": "Gemini Pro Latest",
-        "description": "Latest release of Gemini Pro"
-      },
-      {
-        "id": "gemini-flash-latest",
-        "name": "Gemini Flash Latest",
-        "description": "Latest release of Gemini Flash"
+        "description": "Latest Gemini Pro model"
       }
     ],
     "custom": [
@@ -145,7 +140,7 @@
   },
     "defaults": {
       "gemini": "gemini-2.5-flash",
-      "anthropic": "claude-sonnet-4-20250514",
+      "anthropic": "claude-sonnet-4-20250514", 
       "openai": "gpt-4o",
       "deepseek": "deepseek-chat",
       "custom": "custom"

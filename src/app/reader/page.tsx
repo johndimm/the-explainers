@@ -93,11 +93,20 @@ function ReaderContent() {
     setCurrentBook({ title: playTitle, author: playAuthor })
     
     try {
+      console.log('🔍 Loading single play...')
       const singlePlayConfig = getSinglePlayConfig()
+      console.log('🔍 Single play config:', singlePlayConfig)
+      
       const playTextData = await loadSinglePlayText(singlePlayConfig)
+      console.log('🔍 Play text data:', { 
+        title: playTextData.title, 
+        author: playTextData.author, 
+        textLength: playTextData.text?.length 
+      })
       
       setBookText(playTextData.text)
     } catch (error) {
+      console.error('❌ Error loading single play:', error)
       alert('Failed to load the play. Please try again.')
     } finally {
       setLoading(false)
@@ -168,6 +177,21 @@ function ReaderContent() {
     } finally {
       setLoading(false)
     }
+  }
+
+  if (loading) {
+    return (
+      <div style={{ 
+        display: 'flex', 
+        justifyContent: 'center', 
+        alignItems: 'center', 
+        height: '100vh',
+        fontSize: '18px',
+        color: '#666'
+      }}>
+        Loading {currentBook.title || 'text'}...
+      </div>
+    )
   }
 
   return (

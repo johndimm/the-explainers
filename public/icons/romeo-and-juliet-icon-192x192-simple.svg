@@ -1,0 +1,42 @@
+<svg width="192" height="192" viewBox="0 0 192 192" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background circle with purple gradient -->
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#8B5CF6;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#7C3AED;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Background circle -->
+  <circle cx="96" cy="96" r="90" fill="url(#bg)"/>
+  
+  <!-- Heart symbol -->
+  <path d="M96,140 C96,120 80,100 60,100 C40,100 24,120 24,140 C24,160 40,180 96,220 C152,180 168,160 168,140 C168,120 152,100 132,100 C112,100 96,120 96,140 Z" 
+        fill="white" opacity="0.9"/>
+  
+  <!-- Crossed swords -->
+  <line x1="60" y1="80" x2="60" y2="120" stroke="white" stroke-width="4" opacity="0.8"/>
+  <line x1="132" y1="80" x2="132" y2="120" stroke="white" stroke-width="4" opacity="0.8"/>
+  <line x1="50" y1="80" x2="70" y2="80" stroke="white" stroke-width="3" opacity="0.8"/>
+  <line x1="122" y1="80" x2="142" y2="80" stroke="white" stroke-width="3" opacity="0.8"/>
+  
+  <!-- Main text -->
+  <text x="96" y="110" 
+        text-anchor="middle" 
+        font-family="serif" 
+        font-size="48" 
+        font-weight="bold" 
+        fill="white">
+    R&J
+  </text>
+  
+  <!-- Subtitle -->
+  <text x="96" y="160" 
+        text-anchor="middle" 
+        font-family="serif" 
+        font-size="16" 
+        fill="white" 
+        opacity="0.8">
+    Explained
+  </text>
+</svg>

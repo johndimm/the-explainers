@@ -12,14 +12,18 @@ export interface PlayText {
  */
 export async function loadSinglePlayText(config: SinglePlayConfig): Promise<PlayText> {
   try {
+    console.log('🔍 Loading single play text:', config.playFilename)
     // Load text from public/public-domain-texts directory
     const response = await fetch(`/public-domain-texts/${config.playFilename}`)
+    
+    console.log('🔍 Fetch response status:', response.status)
     
     if (!response.ok) {
       throw new Error(`Failed to load play text: ${response.status} ${response.statusText}`)
     }
     
     const text = await response.text()
+    console.log('🔍 Loaded text length:', text.length)
     
     return {
       title: config.playTitle,

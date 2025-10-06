@@ -587,6 +587,13 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ selectedText, contextInfo
 
     const selectedModel = chooseModelForProvider ? chooseModelForProvider(selectedProvider, settings.llmModel) : resolveModelFor(selectedProvider, settings.llmModel)
     log('ui', 'ChatInterface: Selected model for API call:', { provider: selectedProvider, model: selectedModel, settingsModel: settings.llmModel })
+    console.log('Mobile API Call Debug:', { 
+      provider: selectedProvider, 
+      model: selectedModel, 
+      settingsModel: settings.llmModel,
+      userAgent: navigator.userAgent,
+      isMobile: /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)
+    })
     const response = await fetch('/api/chat', {
       method: 'POST',
       headers: {
@@ -952,9 +959,10 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ selectedText, contextInfo
       
     } catch (error) {
       log('ui','Error calling LLM:', error)
+      console.error('Mobile LLM Error (re-explain):', error)
       const errorMessage: Message = {
         id: (Date.now() + 1).toString(),
-        content: 'Sorry, I encountered an error while trying to re-explain this text. Please try again.',
+        content: `Sorry, I encountered an error while trying to re-explain this text. Please try again. Error: ${error instanceof Error ? error.message : String(error)}`,
         role: 'assistant',
         timestamp: new Date(),
         provider: selectedProvider,
@@ -1070,9 +1078,10 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ selectedText, contextInfo
       setMessages(prev => [...prev, assistantMessage])
     } catch (error) {
       log('ui','Error calling LLM:', error)
+      console.error('Mobile LLM Error (explain):', error)
       const errorMessage: Message = {
         id: (Date.now() + 3).toString(),
-        content: 'Sorry, I encountered an error while trying to explain this text. Please try again.',
+        content: `Sorry, I encountered an error while trying to explain this text. Please try again. Error: ${error instanceof Error ? error.message : String(error)}`,
         role: 'assistant',
         timestamp: new Date(),
         provider: selectedProvider,
@@ -1116,9 +1125,10 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ selectedText, contextInfo
       setMessages(prev => [...prev, assistantMessage])
     } catch (error) {
       log('ui','Error calling LLM:', error)
+      console.error('Mobile LLM Error (message):', error)
       const errorMessage: Message = {
         id: (Date.now() + 1).toString(),
-        content: 'Sorry, I encountered an error while processing your message. Please try again.',
+        content: `Sorry, I encountered an error while processing your message. Please try again. Error: ${error instanceof Error ? error.message : String(error)}`,
         role: 'assistant',
         timestamp: new Date(),
         provider: selectedProvider,

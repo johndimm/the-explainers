@@ -9,7 +9,7 @@ export async function GET(request: NextRequest) {
     const defaultSettings = {
       user_agent: userAgent,
       llm_provider: 'gemini',
-      llm_model: 'gemini-1.5-flash',
+      llm_model: 'gemini-2.5-flash',
       response_length: 'medium',
       text_font: 'serif',
       chat_font: 'sans-serif',
@@ -40,7 +40,7 @@ export async function POST(request: NextRequest) {
     const defaultSettings = {
       user_agent: userAgent,
       llm_provider: 'gemini',
-      llm_model: 'gemini-1.5-flash',
+      llm_model: 'gemini-2.5-flash',
       response_length: 'medium',
       text_font: 'serif',
       chat_font: 'sans-serif',

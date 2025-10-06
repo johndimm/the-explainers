@@ -20,6 +20,7 @@ const MobileTextReader: React.FC<ReaderCommonProps> = ({ text, bookTitle = 'Rome
   const [debugMessage, setDebugMessage] = useState('')
   const [showChatModal, setShowChatModal] = useState(false)
   const [chatContext, setChatContext] = useState<any>(null)
+  const [isRestoringPosition, setIsRestoringPosition] = useState(false)
   
   // Page calculation state for scroll navigation
   const [pageMap, setPageMap] = useState<PageMap>({ pages: [], pageRanges: [] })
@@ -164,53 +165,105 @@ const MobileTextReader: React.FC<ReaderCommonProps> = ({ text, bookTitle = 'Rome
     setCurrentFontSize(settings.textFontSize)
   }, [settings.textFontSize])
 
-  // Handle scroll events to hide/show navigation buttons and prevent unwanted vibrations
+  // Consolidated scroll handler for both navigation buttons and page tracking
   useEffect(() => {
-    const handleScroll = () => {
-      const now = Date.now()
-      const textReader = textReaderRef.current
-      
-      if (textReader) {
-        // Calculate scroll velocity
-        const currentPosition = textReader.scrollTop
-        const timeDelta = now - lastScrollTime.current
-        if (timeDelta > 0) {
-          scrollVelocityRef.current = Math.abs(currentPosition - lastScrollPosition.current) / timeDelta
-        }
-        lastScrollPosition.current = currentPosition
-      }
-      
-      lastScrollTime.current = now
-      setIsScrolling(true)
-      
-      // Clear existing timeout
-      if (scrollTimeoutRef.current) {
-        clearTimeout(scrollTimeoutRef.current)
-      }
-      
-      // Wait longer if scroll velocity was high (momentum scrolling)
-      const waitTime = scrollVelocityRef.current > 1 ? 2000 : 1000
-      
-      // Show buttons again after scrolling stops
-      scrollTimeoutRef.current = setTimeout(() => {
-        setIsScrolling(false)
-        scrollVelocityRef.current = 0
-      }, waitTime) // Wait 1-2 seconds after scrolling stops
+    // Don't set up scroll handler if we're restoring position
+    if (isRestoringPosition) {
+      console.log('🔍 MOBILE: Skipping scroll handler setup during position restoration')
+      return
     }
-
-    const textReader = textReaderRef.current
-    if (textReader) {
-      textReader.addEventListener('scroll', handleScroll)
-      return () => {
-        textReader.removeEventListener('scroll', handleScroll)
+    
+    // Add delay to ensure bookmark restoration happens first
+    const setupScrollHandler = () => {
+      console.log('🔍 MOBILE: Setting up consolidated scroll handler after delay')
+      const handleScroll = () => {
+        // Skip scroll handling if we're restoring position
+        if (isRestoringPosition) {
+          console.log('🔍 MOBILE: Skipping scroll handler during position restoration')
+          return
+        }
+        
+        const now = Date.now()
+        const textReader = textReaderRef.current
+        
+        if (textReader) {
+          const scrollTop = textReader.scrollTop
+          
+          // Calculate scroll velocity for navigation buttons
+          const timeDelta = now - lastScrollTime.current
+          if (timeDelta > 0) {
+            scrollVelocityRef.current = Math.abs(scrollTop - lastScrollPosition.current) / timeDelta
+          }
+          lastScrollPosition.current = scrollTop
+          
+          // Log scroll events to see if they're interfering
+          console.log('🔍 MOBILE: Scroll event:', { 
+            scrollTop, 
+            velocity: scrollVelocityRef.current,
+            timeDelta,
+            currentPage,
+            isRestoringPosition
+          })
+          
+          // Page tracking logic (only if pageMap is available)
+          if (pageMap.pageRanges.length > 0) {
+            const lineHeight = parseInt(getComputedStyle(textReader).lineHeight) || 24
+            
+            // Calculate which page we're currently viewing based on scroll position
+            const currentLine = Math.floor(scrollTop / lineHeight)
+            const currentCharPosition = currentLine * (estimateCharsPerLine(textReader.clientWidth, parseInt(getComputedStyle(textReader).fontSize) || 16, settings.textFont))
+            
+            // Find which page contains this position
+            let newCurrentPage = 0
+            for (let i = 0; i < pageMap.pageRanges.length; i++) {
+              if (currentCharPosition >= pageMap.pageRanges[i].start && currentCharPosition < pageMap.pageRanges[i].end) {
+                newCurrentPage = i
+                break
+              }
+            }
+            
+            if (newCurrentPage !== currentPage) {
+              setCurrentPage(newCurrentPage)
+            }
+          }
+        }
+        
+        lastScrollTime.current = now
+        setIsScrolling(true)
+        
+        // Clear existing timeout
         if (scrollTimeoutRef.current) {
           clearTimeout(scrollTimeoutRef.current)
         }
+        
+        // Wait longer if scroll velocity was high (momentum scrolling)
+        const waitTime = scrollVelocityRef.current > 1 ? 2000 : 1000
+        
+        // Show buttons again after scrolling stops
+        scrollTimeoutRef.current = setTimeout(() => {
+          setIsScrolling(false)
+          scrollVelocityRef.current = 0
+        }, waitTime) // Wait 1-2 seconds after scrolling stops
+      }
+
+      const textReader = textReaderRef.current
+      if (textReader) {
+        textReader.addEventListener('scroll', handleScroll)
+        return () => {
+          textReader.removeEventListener('scroll', handleScroll)
+          if (scrollTimeoutRef.current) {
+            clearTimeout(scrollTimeoutRef.current)
+          }
+        }
       }
     }
-  }, [])
 
-  useBookmarkRestoreAndSave(textReaderRef, text, bookTitle, author, showChatModal)
+    // Delay setup to allow bookmark restoration to complete first
+    const timeoutId = setTimeout(setupScrollHandler, 2000) // Increased delay
+    return () => clearTimeout(timeoutId)
+  }, [pageMap, currentPage, settings.textFont, isRestoringPosition])
+
+  useBookmarkRestoreAndSave(textReaderRef, text, bookTitle, author, showChatModal, setIsRestoringPosition)
   
   // Calculate pages for scroll navigation and build character map
   useEffect(() => {
@@ -230,36 +283,6 @@ const MobileTextReader: React.FC<ReaderCommonProps> = ({ text, bookTitle = 'Rome
     }
   }, [text, settings.textFont, pageHeight])
 
-  // Track scroll position and update currentPage accordingly
-  useEffect(() => {
-    const textReader = textReaderRef.current
-    if (!textReader || pageMap.pageRanges.length === 0) return
-
-    const handleScroll = () => {
-      const scrollTop = textReader.scrollTop
-      const lineHeight = parseInt(getComputedStyle(textReader).lineHeight) || 24
-      
-      // Calculate which page we're currently viewing based on scroll position
-      const currentLine = Math.floor(scrollTop / lineHeight)
-      const currentCharPosition = currentLine * (estimateCharsPerLine(textReader.clientWidth, parseInt(getComputedStyle(textReader).fontSize) || 16, settings.textFont))
-      
-      // Find which page contains this position
-      let newCurrentPage = 0
-      for (let i = 0; i < pageMap.pageRanges.length; i++) {
-        if (currentCharPosition >= pageMap.pageRanges[i].start && currentCharPosition < pageMap.pageRanges[i].end) {
-          newCurrentPage = i
-          break
-        }
-      }
-      
-      if (newCurrentPage !== currentPage) {
-        setCurrentPage(newCurrentPage)
-      }
-    }
-
-    textReader.addEventListener('scroll', handleScroll)
-    return () => textReader.removeEventListener('scroll', handleScroll)
-  }, [pageMap.pageRanges, currentPage, settings.textFont])
 
   // Add global selection change listener for text selection detection
   useEffect(() => {
@@ -854,7 +877,7 @@ log('ui','MobileTextReader: Previous search result')
             justifyContent: 'flex-end',
             flexShrink: 0
           }}>
-            <button onClick={handleCancel} style={{ padding: '8px 16px', border: '1px solid #ccc', borderRadius: '4px', background: 'white', cursor: 'pointer' }}>Cancel</button>
+            <button onClick={handleCancel} style={{ padding: '8px 16px', border: '1px solid #ccc', borderRadius: '4px', background: 'white', color: '#333', cursor: 'pointer' }}>Cancel</button>
             <button onClick={handleExplain} style={{ padding: '8px 16px', border: 'none', borderRadius: '4px', background: '#007bff', color: 'white', cursor: 'pointer' }}>Explain</button>
           </div>
         </div>

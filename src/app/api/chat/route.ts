@@ -3,7 +3,7 @@ import OpenAI from 'openai'
 import Anthropic from '@anthropic-ai/sdk'
 import { GoogleGenerativeAI } from '@google/generative-ai'
 import { log } from '@/utils/log'
-import models from '@/data/models.json'
+import modelsData from '@/data/models.json'
 
 export interface ChatMessage {
   role: 'user' | 'assistant'
@@ -32,9 +32,9 @@ const deepseekOpenai = new OpenAI({
   baseURL: 'https://api.deepseek.com',
 })
 
-const gemini = new GoogleGenerativeAI(process.env.GEMINI_API_KEY || '')
+const gemini = new GoogleGenerativeAI(process.env.GEMINI_API_KEY || 'AIzaSyAxH3d0iZwo53-ez5ZXhcvQJv7vzCsICw0')
 
-async function callOpenAI(messages: ChatMessage[], responseLength: string, model: string = (models as any).defaults.openai, style?: string): Promise<string> {
+async function callOpenAI(messages: ChatMessage[], responseLength: string, model: string = (modelsData as any).defaults.openai, style?: string): Promise<string> {
   const maxTokens = responseLength === 'brief' ? 200 : responseLength === 'medium' ? 500 : 1200
   
   try {
@@ -56,7 +56,7 @@ async function callOpenAI(messages: ChatMessage[], responseLength: string, model
   }
 }
 
-async function callAnthropic(messages: ChatMessage[], responseLength: string, model: string = (models as any).defaults.anthropic, style?: string): Promise<string> {
+async function callAnthropic(messages: ChatMessage[], responseLength: string, model: string = (modelsData as any).defaults.anthropic, style?: string): Promise<string> {
   const maxTokens = responseLength === 'brief' ? 200 : responseLength === 'medium' ? 500 : 1200
   
   const systemMessage = messages.find(m => m.role === 'user')?.content.includes('Please explain this text:') 
@@ -89,7 +89,7 @@ async function callAnthropic(messages: ChatMessage[], responseLength: string, mo
     }
     
     if (error.message?.includes('inference profile')) {
-      throw new Error(`Model "${model}" requires special setup. Please try a different Claude model like "${(models as any).defaults.anthropic}".`)
+      throw new Error(`Model "${model}" requires special setup. Please try a different Claude model like "${(modelsData as any).defaults.anthropic}".`)
     }
     
     // Generic error
@@ -97,7 +97,7 @@ async function callAnthropic(messages: ChatMessage[], responseLength: string, mo
   }
 }
 
-async function callDeepSeek(messages: ChatMessage[], responseLength: string, model: string = (models as any).defaults.deepseek, style?: string): Promise<string> {
+async function callDeepSeek(messages: ChatMessage[], responseLength: string, model: string = (modelsData as any).defaults.deepseek, style?: string): Promise<string> {
   const maxTokens = responseLength === 'brief' ? 200 : responseLength === 'medium' ? 500 : 2000
   
   const completion = await deepseekOpenai.chat.completions.create({
@@ -113,61 +113,120 @@ async function callDeepSeek(messages: ChatMessage[], responseLength: string, mod
   return completion.choices[0]?.message?.content || 'No response'
 }
 
-async function callGemini(messages: ChatMessage[], responseLength: string, modelName: string = (models as any).defaults.gemini, style?: string): Promise<string> {
-  const maxTokens = responseLength === 'brief' ? 200 : responseLength === 'medium' ? 500 : 1200
+async function callGemini(messages: ChatMessage[], responseLength: string, modelName: string = (modelsData as any).defaults.gemini, style?: string): Promise<string> {
+  const maxTokens = responseLength === 'brief' ? 1000 : responseLength === 'medium' ? 2000 : 4000
   
-  const model = gemini.getGenerativeModel({ 
-    model: modelName,
-    generationConfig: {
-      maxOutputTokens: maxTokens,
-    }
-  })
-  
-  // Start chat session with conversation history
-  const chat = model.startChat({
-    history: messages.slice(0, -1).map(msg => ({
-      role: msg.role === 'user' ? 'user' : 'model',
-      parts: [{ text: msg.content }]
-    }))
-  })
-  
-  const lastUserMessage = messages[messages.length - 1]?.content || ''
-  const result = await chat.sendMessage(lastUserMessage)
-  const response = await result.response
-  return response.text()
+  try {
+    console.log('🔍 Gemini model name:', modelName)
+    log('api','Gemini API call:', { modelName, maxTokens, messageCount: messages.length })
+    
+    const model = gemini.getGenerativeModel({ 
+      model: modelName,
+      generationConfig: {
+        maxOutputTokens: maxTokens,
+      }
+    })
+    
+    // Combine all messages into a single prompt
+    const prompt = messages.map(msg => `${msg.role}: ${msg.content}`).join('\n\n')
+    log('api','Gemini sending prompt:', prompt.substring(0, 100) + '...')
+    
+    const result = await model.generateContent(prompt)
+    console.log('🔍 Gemini result:', result)
+    
+    const response = await result.response
+    console.log('🔍 Gemini response:', response)
+    
+    const text = response.text()
+    console.log('🔍 Gemini text:', text)
+    console.log('🔍 Gemini text length:', text.length)
+    
+    log('api','Gemini response received:', text.substring(0, 100) + '...')
+    return text
+  } catch (error) {
+    log('api','Gemini API error:', error)
+    log('api','Gemini error details:', {
+      message: error instanceof Error ? error.message : String(error),
+      name: error instanceof Error ? error.name : 'Unknown',
+      stack: error instanceof Error ? error.stack : undefined
+    })
+    throw error
+  }
 }
 
 export async function POST(request: NextRequest) {
   let provider: string = 'unknown'
   
   try {
+    // Check API keys availability
+    const apiKeys = {
+      openai: !!process.env.OPENAI_API_KEY,
+      anthropic: !!process.env.ANTHROPIC_API_KEY,
+      deepseek: !!process.env.DEEPSEEK_API_KEY,
+      gemini: !!process.env.GEMINI_API_KEY
+    }
+    
+    log('api','API Keys status:', apiKeys)
+    log('api','Environment check:', {
+      NODE_ENV: process.env.NODE_ENV,
+      GEMINI_API_KEY_LENGTH: process.env.GEMINI_API_KEY ? process.env.GEMINI_API_KEY.length : 0,
+      GEMINI_API_KEY_PREFIX: process.env.GEMINI_API_KEY ? process.env.GEMINI_API_KEY.substring(0, 10) + '...' : 'undefined'
+    })
+    
     const body: ChatRequest = await request.json()
     const { messages, responseLength, style, selectedText, model } = body
     provider = body.provider
 
+    log('api','Chat API request:', { 
+      provider, 
+      model, 
+      responseLength, 
+      messageCount: messages?.length,
+      userAgent: request.headers.get('user-agent')?.substring(0, 50) + '...'
+    })
+
     if (!messages || messages.length === 0) {
       return NextResponse.json({ error: 'No messages provided' }, { status: 400 })
+    }
+
+    // Check if we have the required API key
+    if (provider === 'openai' && !process.env.OPENAI_API_KEY) {
+      return NextResponse.json({ error: 'OpenAI API key not configured' }, { status: 500 })
+    }
+    if (provider === 'anthropic' && !process.env.ANTHROPIC_API_KEY) {
+      return NextResponse.json({ error: 'Anthropic API key not configured' }, { status: 500 })
+    }
+    if (provider === 'deepseek' && !process.env.DEEPSEEK_API_KEY) {
+      return NextResponse.json({ error: 'DeepSeek API key not configured' }, { status: 500 })
+    }
+    if (provider === 'gemini' && !process.env.GEMINI_API_KEY) {
+      return NextResponse.json({ error: 'Gemini API key not configured' }, { status: 500 })
     }
 
     let response: string
 
     switch (provider) {
       case 'openai':
+        log('api','Calling OpenAI...')
         response = await callOpenAI(messages, responseLength, model, style)
         break
       case 'anthropic':
+        log('api','Calling Anthropic...')
         response = await callAnthropic(messages, responseLength, model, style)
         break
       case 'deepseek':
+        log('api','Calling DeepSeek...')
         response = await callDeepSeek(messages, responseLength, model, style)
         break
       case 'gemini':
+        log('api','Calling Gemini...')
         response = await callGemini(messages, responseLength, model, style)
         break
       default:
         return NextResponse.json({ error: 'Invalid provider' }, { status: 400 })
     }
 
+    log('api','Chat API success:', { provider, responseLength: response.length })
     return NextResponse.json({ 
       message: response,
       provider: provider
@@ -176,8 +235,23 @@ export async function POST(request: NextRequest) {
   } catch (error) {
     log('api','Chat API error for provider:', provider)
     log('api','Full error details:', error)
+    
+    // More specific error handling
+    let errorMessage = 'Sorry, I encountered an error...'
+    if (error instanceof Error) {
+      if (error.message.includes('API key')) {
+        errorMessage = 'API key error. Please check your configuration.'
+      } else if (error.message.includes('model')) {
+        errorMessage = 'Model not available. Please try a different model.'
+      } else if (error.message.includes('rate limit')) {
+        errorMessage = 'Rate limit exceeded. Please try again later.'
+      } else {
+        errorMessage = `Error: ${error.message}`
+      }
+    }
+    
     return NextResponse.json(
-      { error: `Failed to process chat request with ${provider}: ${error}` }, 
+      { error: errorMessage }, 
       { status: 500 }
     )
   }

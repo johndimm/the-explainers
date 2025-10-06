@@ -1124,7 +1124,8 @@ export const useBookmarkRestoreAndSave = (
   text: string,
   bookTitle?: string,
   author?: string,
-  disableBookmarkSaving: boolean = false
+  disableBookmarkSaving: boolean = false,
+  setIsRestoringPosition?: (restoring: boolean) => void
 ) => {
   const scrollTimeoutRef = useRef<NodeJS.Timeout | null>(null)
   const { user } = useAuth()
@@ -1143,26 +1144,111 @@ log('debug', '🔍 Loading bookmark for:', title, 'by', auth)
 
       // Wait for content to be fully rendered before attempting restoration
       const restorePosition = (position: number, source: string) => {
-log('debug', '🔍 RESTORE POSITION:', { position, source, textReaderRef: textReaderRef.current })
+        const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)
+        console.log('🔍 MOBILE RESTORE POSITION START:', { position, source, isMobile, userAgent: navigator.userAgent })
+        log('debug', '🔍 RESTORE POSITION:', { position, source, textReaderRef: textReaderRef.current, isMobile })
+        
+        // Set restoring state for mobile
+        if (isMobile && setIsRestoringPosition) {
+          setIsRestoringPosition(true)
+          console.log('🔍 MOBILE: Set isRestoringPosition to true')
+        }
+        
         // Use a longer delay and wait for scrollHeight to be available
         const attemptRestore = (attempts = 0) => {
           if (attempts > 20) {
-log('❌ Failed to restore position after 20 attempts')
+            console.log('❌ MOBILE: Failed to restore position after 20 attempts')
+            log('❌ Failed to restore position after 20 attempts')
+            // Clear restoring state
+            if (isMobile && setIsRestoringPosition) {
+              setIsRestoringPosition(false)
+              console.log('🔍 MOBILE: Set isRestoringPosition to false (failed)')
+            }
             return // Give up after 20 attempts
           }
           
           if (textReaderRef.current && textReaderRef.current.scrollHeight > 0) {
             const maxScroll = textReaderRef.current.scrollHeight - textReaderRef.current.clientHeight
             const safePosition = Math.min(position, maxScroll)
-log('debug', '✅ Restoring position:', { position, maxScroll, safePosition, scrollHeight: textReaderRef.current.scrollHeight })
+            console.log('🔍 MOBILE: Attempting restore:', { 
+              attempt: attempts + 1, 
+              position, 
+              maxScroll, 
+              safePosition, 
+              scrollHeight: textReaderRef.current.scrollHeight,
+              clientHeight: textReaderRef.current.clientHeight,
+              currentScrollTop: textReaderRef.current.scrollTop
+            })
+            log('debug', '✅ Restoring position:', { position, maxScroll, safePosition, scrollHeight: textReaderRef.current.scrollHeight, isMobile })
             textReaderRef.current.scrollTop = safePosition
+            
+            // For mobile, add additional verification after a short delay
+            if (isMobile) {
+              setTimeout(() => {
+                if (textReaderRef.current) {
+                  const actualPosition = textReaderRef.current.scrollTop
+                  console.log('🔍 MOBILE: Position verification:', { 
+                    expected: safePosition, 
+                    actual: actualPosition, 
+                    difference: Math.abs(actualPosition - safePosition),
+                    wasReset: Math.abs(actualPosition - safePosition) > 50
+                  })
+                  log('debug', '🔍 Mobile position verification:', { expected: safePosition, actual: actualPosition, difference: Math.abs(actualPosition - safePosition) })
+                  if (Math.abs(actualPosition - safePosition) > 50) {
+                    console.log('🔍 MOBILE: Position was reset, restoring again...')
+                    log('debug', '🔍 Mobile position was reset, restoring again...')
+                    textReaderRef.current.scrollTop = safePosition
+                    
+                    // Try one more time after another delay
+                    setTimeout(() => {
+                      if (textReaderRef.current) {
+                        const finalPosition = textReaderRef.current.scrollTop
+                        console.log('🔍 MOBILE: Final position check:', { expected: safePosition, final: finalPosition })
+                        if (Math.abs(finalPosition - safePosition) > 50) {
+                          console.log('❌ MOBILE: Position still not restored after multiple attempts')
+                        } else {
+                          console.log('✅ MOBILE: Position successfully restored')
+                        }
+                        // Clear restoring state after final attempt
+                        if (isMobile && setIsRestoringPosition) {
+                          setIsRestoringPosition(false)
+                          console.log('🔍 MOBILE: Set isRestoringPosition to false (final)')
+                        }
+                      }
+                    }, 200)
+                  } else {
+                    // Position was restored successfully
+                    console.log('✅ MOBILE: Position successfully restored')
+                    if (isMobile && setIsRestoringPosition) {
+                      // Add a delay before clearing the restoration state to ensure position is stable
+                      setTimeout(() => {
+                        setIsRestoringPosition(false)
+                        console.log('🔍 MOBILE: Set isRestoringPosition to false (success)')
+                      }, 500)
+                    }
+                  }
+                }
+              }, 100)
+            } else {
+              // Clear restoring state for non-mobile
+              if (setIsRestoringPosition) {
+                setIsRestoringPosition(false)
+              }
+            }
           } else {
-log(`⏳ Attempt ${attempts + 1}: Waiting for content to load...`)
+            console.log(`⏳ MOBILE: Attempt ${attempts + 1}: Waiting for content to load...`, {
+              textReaderRef: !!textReaderRef.current,
+              scrollHeight: textReaderRef.current?.scrollHeight || 0
+            })
+            log(`⏳ Attempt ${attempts + 1}: Waiting for content to load...`)
             setTimeout(() => attemptRestore(attempts + 1), 200) // Increased delay between attempts
           }
         }
         
-        setTimeout(() => attemptRestore(), 500) // Increased initial delay
+        // Use longer delay for mobile to ensure all mobile handlers are set up
+        const initialDelay = isMobile ? 2000 : 500
+        console.log('🔍 MOBILE: Setting initial delay:', { initialDelay, isMobile })
+        setTimeout(() => attemptRestore(), initialDelay)
       }
 
       // Try to load from database first if user is authenticated or in development
@@ -1253,7 +1339,8 @@ log('❌ No bookmark found in database (404)')
           return
         }
         
-        log('debug', 'bookmark', 'Scroll detected, position:', scrollPosition)
+        const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)
+        log('debug', 'bookmark', 'Scroll detected, position:', scrollPosition, 'isMobile:', isMobile)
         const title = bookTitle || 'Untitled'
         const auth = author || 'Unknown'
 
@@ -1261,7 +1348,7 @@ log('❌ No bookmark found in database (404)')
         const isLocalDev = process.env.NODE_ENV === 'development' && typeof window !== 'undefined' && window.location.hostname === 'localhost'
         const userEmail = user?.userAgent || (isLocalDev ? 'dev-user@example.com' : null)
         
-        log('debug', 'bookmark', `User agent: ${user?.userAgent}, isLocalDev: ${isLocalDev}, userEmail: ${userEmail}`)
+        log('debug', 'bookmark', `User agent: ${user?.userAgent}, isLocalDev: ${isLocalDev}, userEmail: ${userEmail}, isMobile: ${isMobile}`)
         
         if (userEmail) {
           try {
