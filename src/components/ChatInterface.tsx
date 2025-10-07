@@ -12,6 +12,7 @@ import models from '../data/models.json'
 import { log } from '../utils/log'
 import { convertToHTML, convertToMarkdown, convertToPlainText } from '../utils/chatConverters'
 import { getDeviceId } from '../utils/deviceId'
+import { API_BASE_URL } from '../utils/apiConfig'
 
 interface Message {
   id: string
@@ -595,8 +596,7 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ selectedText, contextInfo
       userId: getDeviceId(),
       isMobile: /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)
     })
-    const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || ''
-    const response = await fetch(`${baseUrl}/api/chat`, {
+    const response = await fetch(`${API_BASE_URL}/api/chat`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -799,8 +799,7 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ selectedText, contextInfo
         finalQuery: searchQuery
       })
       
-      const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || ''
-      const response = await fetch(`${baseUrl}/api/youtube-search`, {
+      const response = await fetch(`${API_BASE_URL}/api/youtube-search`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ 

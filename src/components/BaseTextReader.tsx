@@ -4,6 +4,7 @@ import React, { useEffect, useRef, useState } from 'react'
 import { useAuth } from '@/contexts/AuthContext'
 import { log } from '../utils/log'
 import { getDeviceId } from '@/utils/deviceId'
+import { API_BASE_URL } from '@/utils/apiConfig'
 
 // Shared types pulled from existing components
 import { SettingsData } from './Settings'
@@ -1268,9 +1269,8 @@ log('debug', '🔍 Loading bookmark for:', title, 'by', auth)
       
       if (userEmail) {
         try {
-          const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || ''
           console.log('🔍 BOOKMARK: Using device ID:', deviceId)
-          const response = await fetch(`${baseUrl}/api/user/bookmark?bookTitle=${encodeURIComponent(title)}&bookAuthor=${encodeURIComponent(auth)}&userId=${encodeURIComponent(deviceId)}`)
+          const response = await fetch(`${API_BASE_URL}/api/user/bookmark?bookTitle=${encodeURIComponent(title)}&bookAuthor=${encodeURIComponent(auth)}&userId=${encodeURIComponent(deviceId)}`)
           log('debug', 'bookmark', 'Bookmark API response status:', response.status)
           
           if (response.ok) {
@@ -1383,8 +1383,7 @@ log('❌ No bookmark found in database (404)')
             const deviceId = getDeviceId()
             log('debug', 'bookmark', `Saving bookmark: ${title} by ${auth} at position ${scrollPosition}`)
             log('debug', '🔍 SAVING BOOKMARK:', { title, auth, scrollPosition, deviceId })
-              const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || ''
-              const response = await fetch(`${baseUrl}/api/user/bookmark`, {
+              const response = await fetch(`${API_BASE_URL}/api/user/bookmark`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
