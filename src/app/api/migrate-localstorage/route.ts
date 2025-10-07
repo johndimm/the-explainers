@@ -5,10 +5,12 @@ import { createOrUpdateUserProfile, createOrUpdateUserSettings, createOrUpdateUs
 
 export async function POST(request: NextRequest) {
   try {
-    const userAgent = request.headers.get('user-agent') || 'unknown'
-
     const body = await request.json()
-    const { profileData, settingsData, currentBookData, bookmarksData } = body
+    const { profileData, settingsData, currentBookData, bookmarksData, userId } = body
+
+    if (!userId) {
+      return NextResponse.json({ error: 'User ID is required' }, { status: 400 })
+    }
 
     const results = {
       profile: null as any,
@@ -21,7 +23,7 @@ export async function POST(request: NextRequest) {
     if (profileData) {
       try {
         const migratedProfile = await createOrUpdateUserProfile({
-          user_agent: userAgent,
+          user_id: userId,
           age: profileData.age,
           language: profileData.language,
           education_level: profileData.educationLevel,
@@ -45,7 +47,7 @@ export async function POST(request: NextRequest) {
     if (settingsData) {
       try {
         const migratedSettings = await createOrUpdateUserSettings({
-          user_agent: userAgent,
+          user_id: userId,
           llm_provider: settingsData.llmProvider,
           response_length: settingsData.responseLength,
           text_font: settingsData.textFont,
@@ -66,7 +68,7 @@ export async function POST(request: NextRequest) {
     if (currentBookData) {
       try {
         const migratedCurrentBook = await createOrUpdateUserCurrentBook({
-          user_agent: userAgent,
+          user_id: userId,
           title: currentBookData.title,
           author: currentBookData.author,
           url: currentBookData.url
@@ -82,7 +84,7 @@ export async function POST(request: NextRequest) {
       for (const bookmark of bookmarksData) {
         try {
           const migratedBookmark = await createOrUpdateUserBookmark({
-            user_agent: userAgent,
+            user_id: userId,
             book_title: bookmark.bookTitle,
             book_author: bookmark.bookAuthor,
             scroll_position: bookmark.scrollPosition

@@ -3,6 +3,7 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { useAuth } from '@/contexts/AuthContext'
 import { log } from '../utils/log'
+import { getDeviceId } from '@/utils/deviceId'
 
 // Shared types pulled from existing components
 import { SettingsData } from './Settings'
@@ -1254,7 +1255,8 @@ log('debug', '🔍 Loading bookmark for:', title, 'by', auth)
       // Wait a bit for session to be fully loaded
       await new Promise(resolve => setTimeout(resolve, 100))
       
-      const userEmail = user?.userAgent || (process.env.NODE_ENV === 'development' ? 'dev-user@example.com' : null)
+        const userEmail = user?.userAgent || (process.env.NODE_ENV === 'development' ? 'dev-user@example.com' : null)
+        const deviceId = getDeviceId()
       console.log('🔍 MOBILE: Bookmark loading check:', { 
         userEmail, 
         userAgent: user?.userAgent,
@@ -1266,7 +1268,9 @@ log('debug', '🔍 Loading bookmark for:', title, 'by', auth)
       
       if (userEmail) {
         try {
-          const response = await fetch(`/api/user/bookmark?bookTitle=${encodeURIComponent(title)}&bookAuthor=${encodeURIComponent(auth)}`)
+          const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || ''
+          console.log('🔍 BOOKMARK: Using device ID:', deviceId)
+          const response = await fetch(`${baseUrl}/api/user/bookmark?bookTitle=${encodeURIComponent(title)}&bookAuthor=${encodeURIComponent(auth)}&userId=${encodeURIComponent(deviceId)}`)
           log('debug', 'bookmark', 'Bookmark API response status:', response.status)
           
           if (response.ok) {
@@ -1333,7 +1337,12 @@ log('❌ No bookmark found in database (404)')
     log('debug', 'bookmark', 'Setting up scroll effect, textReaderRef:', textReaderRef.current)
     
     const handleScroll = () => {
-      console.log('🔍 BOOKMARK: Scroll handler called', { disableBookmarkSaving, textReaderRef: !!textReaderRef.current })
+      console.log('🔍 BOOKMARK: Scroll handler called', { 
+        disableBookmarkSaving, 
+        textReaderRef: !!textReaderRef.current,
+        scrollTop: textReaderRef.current?.scrollTop || 'no element',
+        timestamp: new Date().toLocaleTimeString()
+      })
       // Skip bookmark saving if disabled (e.g., during chat operations)
       if (disableBookmarkSaving) {
         console.log('🔍 BOOKMARK: Skipping bookmark save - disabled')
@@ -1341,12 +1350,15 @@ log('❌ No bookmark found in database (404)')
       }
       
       console.log('🔍 BOOKMARK: Proceeding with bookmark save logic')
+      console.log('🔍 BOOKMARK: User agent:', navigator.userAgent)
+      console.log('🔍 BOOKMARK: Base URL:', process.env.NEXT_PUBLIC_BASE_URL)
       
       // Debounce scroll events to reduce performance impact
       if (scrollTimeoutRef.current) clearTimeout(scrollTimeoutRef.current)
       scrollTimeoutRef.current = setTimeout(async () => {
         // Get scroll position from the scrollable element
         let scrollPosition = 0
+        console.log('🔍 BOOKMARK: Inside scroll timeout, getting scroll position')
         if (textReaderRef.current) {
           scrollPosition = textReaderRef.current.scrollTop
           log('debug', 'bookmark', 'Using element scroll position:', scrollPosition)
@@ -1368,15 +1380,18 @@ log('❌ No bookmark found in database (404)')
         
         if (userEmail) {
           try {
+            const deviceId = getDeviceId()
             log('debug', 'bookmark', `Saving bookmark: ${title} by ${auth} at position ${scrollPosition}`)
-log('debug', '🔍 SAVING BOOKMARK:', { title, auth, scrollPosition })
-              const response = await fetch('/api/user/bookmark', {
+            log('debug', '🔍 SAVING BOOKMARK:', { title, auth, scrollPosition, deviceId })
+              const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || ''
+              const response = await fetch(`${baseUrl}/api/user/bookmark`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
                   bookTitle: title,
                   bookAuthor: auth,
-                  scrollPosition: Math.round(scrollPosition) // Round to integer for database compatibility
+                  scrollPosition: Math.round(scrollPosition), // Round to integer for database compatibility
+                  userId: deviceId
                 })
               })
             
@@ -1405,6 +1420,9 @@ log('debug', '❌ No session, skipping bookmark save')
     
     const setupScrollHandlers = () => {
       console.log('🔍 BOOKMARK: Setting up scroll handlers')
+      console.log('🔍 BOOKMARK: textReaderRef.current:', !!textReaderRef.current)
+      console.log('🔍 BOOKMARK: disableBookmarkSaving:', disableBookmarkSaving)
+      
       // Window scroll (most likely)
       window.addEventListener('scroll', handleScroll)
       log('debug', 'bookmark', 'Window scroll handler attached')
@@ -1416,6 +1434,7 @@ log('debug', '❌ No session, skipping bookmark save')
         el.addEventListener('scroll', handleScroll)
         log('debug', 'bookmark', 'Element scroll handler attached')
         console.log('🔍 BOOKMARK: Element scroll handler attached')
+        console.log('🔍 BOOKMARK: Element scrollable:', el.scrollHeight > el.clientHeight)
       } else {
         log('debug', 'bookmark', 'No textReaderRef element found for scroll handler')
         console.log('🔍 BOOKMARK: No textReaderRef element found')

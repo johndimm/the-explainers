@@ -4,11 +4,16 @@ import { log } from '@/utils/log'
 
 export async function GET(request: NextRequest) {
   try {
-    const userAgent = request.headers.get('user-agent') || 'unknown'
+    const { searchParams } = new URL(request.url)
+    const userId = searchParams.get('userId')
+    
+    if (!userId) {
+      return NextResponse.json({ error: 'User ID is required' }, { status: 400 })
+    }
     
     // Return mock profile for all users (no authentication required)
     const mockProfile = {
-      user_agent: userAgent,
+      user_id: userId,
       age: null,
       language: 'english',
       education_level: 'high-school',
@@ -34,14 +39,19 @@ export async function GET(request: NextRequest) {
 
 export async function POST(request: NextRequest) {
   try {
-    const userAgent = request.headers.get('user-agent') || 'unknown'
+    const body = await request.json()
+    const { userId } = body
+    
+    if (!userId) {
+      return NextResponse.json({ error: 'User ID is required' }, { status: 400 })
+    }
     
     // In this simplified version, we just return the mock profile
     // No actual database operations needed
-    log('Profile API: Simplified mode - returning mock profile for userAgent:', userAgent)
+    log('Profile API: Simplified mode - returning mock profile for userId:', userId)
     
     const mockProfile = {
-      user_agent: userAgent,
+      user_id: userId,
       age: null,
       language: 'english',
       education_level: 'high-school',

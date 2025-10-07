@@ -299,6 +299,17 @@ const MobileTextReader: React.FC<ReaderCommonProps> = ({ text, bookTitle = 'Rome
     setDebugLogs(prev => [...prev.slice(-9), `Bookmark debug: ${JSON.stringify(debugInfo)}`])
   }, [showChatModal, text, bookTitle, author])
   
+  // Test scroll detection
+  useEffect(() => {
+    const testScrollHandler = () => {
+      console.log('🔍 MOBILE: TEST SCROLL DETECTED!')
+      setDebugLogs(prev => [...prev.slice(-9), `TEST: Scroll detected at ${new Date().toLocaleTimeString()}`])
+    }
+    
+    window.addEventListener('scroll', testScrollHandler)
+    return () => window.removeEventListener('scroll', testScrollHandler)
+  }, [])
+  
   // Calculate pages for scroll navigation and build character map
   useEffect(() => {
     if (textReaderRef.current && text) {

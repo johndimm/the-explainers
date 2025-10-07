@@ -2,8 +2,12 @@ import { NextRequest, NextResponse } from 'next/server'
 
 export async function POST(request: NextRequest) {
   try {
-    const userAgent = request.headers.get('user-agent') || 'unknown'
-    const { upgradeType } = await request.json()
+    const body = await request.json()
+    const { upgradeType, userId } = body
+    
+    if (!userId) {
+      return NextResponse.json({ error: 'User ID is required' }, { status: 400 })
+    }
     
     if (upgradeType !== 'complete_collection') {
       return NextResponse.json({ error: 'Invalid upgrade type' }, { status: 400 })
@@ -55,7 +59,7 @@ export async function POST(request: NextRequest) {
       success: true,
       message: 'Upgrade successful! You now have access to all Shakespeare plays.',
       ownedPlays: allShakespearePlays,
-      user_agent: userAgent
+      user_id: userId
     })
 
   } catch (error) {
@@ -66,7 +70,12 @@ export async function POST(request: NextRequest) {
 
 export async function GET(request: NextRequest) {
   try {
-    const userAgent = request.headers.get('user-agent') || 'unknown'
+    const { searchParams } = new URL(request.url)
+    const userId = searchParams.get('userId')
+    
+    if (!userId) {
+      return NextResponse.json({ error: 'User ID is required' }, { status: 400 })
+    }
     
     // Return mock ownership data (no authentication required)
     const mockOwnedPlays = [
@@ -76,7 +85,7 @@ export async function GET(request: NextRequest) {
 
     return NextResponse.json({
       ownedPlays: mockOwnedPlays,
-      user_agent: userAgent
+      user_id: userId
     })
 
   } catch (error) {

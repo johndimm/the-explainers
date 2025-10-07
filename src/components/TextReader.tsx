@@ -6,6 +6,7 @@ import DesktopTextReader from './DesktopTextReader'
 import { SettingsData } from './Settings'
 import { ProfileData } from './Profile'
 import { log, warn } from '../utils/log'
+import { getDeviceId } from '../utils/deviceId'
 
 interface TextReaderProps {
   text: string
@@ -28,7 +29,7 @@ const TextReader: React.FC<TextReaderProps> = (props) => {
     if (typeof window !== 'undefined') {
       const debugInfo = {
         isMobile,
-        userAgent: navigator.userAgent,
+        userId: getDeviceId(),
         maxTouchPoints: navigator.maxTouchPoints,
         hasTouchPoints: navigator.maxTouchPoints > 0,
         isMobileUserAgent: /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent),

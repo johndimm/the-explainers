@@ -154,7 +154,8 @@ export default function Header() {
       if (!isAuthenticated || isSinglePlay) return
 
       try {
-        const response = await fetch('/api/user/upgrade')
+        const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || ''
+        const response = await fetch(`${baseUrl}/api/user/upgrade`)
         if (response.ok) {
           const data = await response.json()
           setOwnedPlays(data.ownedPlays || [])

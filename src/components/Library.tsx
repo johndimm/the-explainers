@@ -102,7 +102,8 @@ const Library: React.FC<LibraryProps> = ({ onBookSelect, onBackToCurrentBook }) 
   const loadLibraryData = async () => {
     try {
       const categoryPromises = CATEGORY_FILES.map(async (filename) => {
-        const response = await fetch(`/api/library/${filename}`)
+        const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || ''
+        const response = await fetch(`${baseUrl}/api/library/${filename}`)
         const data = await response.json()
         const books: Book[] = data.books
         const categoryName = data.categoryName
@@ -165,7 +166,8 @@ const Library: React.FC<LibraryProps> = ({ onBookSelect, onBackToCurrentBook }) 
       return book.directUrl
     }
     if (book.localPath) {
-      return `/api/download-text?path=${encodeURIComponent(book.localPath)}`
+      const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || ''
+      return `${baseUrl}/api/download-text?path=${encodeURIComponent(book.localPath)}`
     }
     // For books without localPath or directUrl, construct Project Gutenberg URL
     // Use the correct Gutenberg cache URL format

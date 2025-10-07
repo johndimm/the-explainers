@@ -9,7 +9,7 @@ export const pool = new Pool({
 
 // Database schema types
 export interface UserProfile {
-  user_agent: string
+  user_id: string
   age: number | null
   language: string
   education_level: string
@@ -27,7 +27,7 @@ export interface UserProfile {
 }
 
 export interface UserSettings {
-  user_agent: string
+  user_id: string
   llm_provider: string
   response_length: string
   text_font: string
@@ -44,7 +44,7 @@ export interface UserSettings {
 }
 
 export interface UserCurrentBook {
-  user_agent: string
+  user_id: string
   title: string
   author: string
   url: string
@@ -52,7 +52,7 @@ export interface UserCurrentBook {
 }
 
 export interface UserBookmark {
-  user_agent: string
+  user_id: string
   book_title: string
   book_author: string
   scroll_position: number
@@ -73,7 +73,7 @@ export async function initializeDatabase() {
     // Create user_profiles table
     await client.query(`
       CREATE TABLE user_profiles (
-        user_agent VARCHAR(255) PRIMARY KEY,
+        user_id VARCHAR(255) PRIMARY KEY,
         age INTEGER,
         language VARCHAR(50) DEFAULT 'english',
         education_level VARCHAR(50) DEFAULT 'high-school',
@@ -94,7 +94,7 @@ export async function initializeDatabase() {
     // Create user_settings table
     await client.query(`
       CREATE TABLE user_settings (
-        user_agent VARCHAR(255) PRIMARY KEY,
+        user_id VARCHAR(255) PRIMARY KEY,
         llm_provider VARCHAR(50) DEFAULT 'gemini',
         response_length VARCHAR(20) DEFAULT 'brief',
         text_font VARCHAR(20) DEFAULT 'serif',
@@ -114,7 +114,7 @@ export async function initializeDatabase() {
     // Create user_current_books table
     await client.query(`
       CREATE TABLE user_current_books (
-        user_agent VARCHAR(255) PRIMARY KEY,
+        user_id VARCHAR(255) PRIMARY KEY,
         title TEXT NOT NULL,
         author TEXT NOT NULL,
         url TEXT NOT NULL,
@@ -125,12 +125,12 @@ export async function initializeDatabase() {
     // Create user_bookmarks table
     await client.query(`
       CREATE TABLE user_bookmarks (
-        user_agent VARCHAR(255),
+        user_id VARCHAR(255),
         book_title TEXT NOT NULL,
         book_author TEXT NOT NULL,
         scroll_position INTEGER NOT NULL DEFAULT 0,
         updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-        PRIMARY KEY (user_agent, book_title, book_author)
+        PRIMARY KEY (user_id, book_title, book_author)
       )
     `)
 
@@ -146,16 +146,16 @@ export async function initializeDatabase() {
 
     // Create indexes for better performance
     await client.query(`
-      CREATE INDEX IF NOT EXISTS idx_user_profiles_user_agent ON user_profiles(user_agent)
+      CREATE INDEX IF NOT EXISTS idx_user_profiles_user_id ON user_profiles(user_id)
     `)
     await client.query(`
-      CREATE INDEX IF NOT EXISTS idx_user_settings_user_agent ON user_settings(user_agent)
+      CREATE INDEX IF NOT EXISTS idx_user_settings_user_id ON user_settings(user_id)
     `)
     await client.query(`
-      CREATE INDEX IF NOT EXISTS idx_user_current_books_user_agent ON user_current_books(user_agent)
+      CREATE INDEX IF NOT EXISTS idx_user_current_books_user_id ON user_current_books(user_id)
     `)
     await client.query(`
-      CREATE INDEX IF NOT EXISTS idx_user_bookmarks_user_agent ON user_bookmarks(user_agent)
+      CREATE INDEX IF NOT EXISTS idx_user_bookmarks_user_id ON user_bookmarks(user_id)
     `)
 
 log('api','Database tables initialized successfully')
@@ -168,13 +168,13 @@ log('api','Database tables initialized successfully')
 }
 
 // Profile operations
-export async function getUserProfile(user_agent: string): Promise<UserProfile | null> {
+export async function getUserProfile(user_id: string): Promise<UserProfile | null> {
   const client = await pool.connect()
   
   try {
     const result = await client.query(
-      'SELECT * FROM user_profiles WHERE user_agent = $1',
-      [user_agent]
+      'SELECT * FROM user_profiles WHERE user_id = $1',
+      [user_id]
     )
     
     if (result.rows.length === 0) {
@@ -183,7 +183,7 @@ export async function getUserProfile(user_agent: string): Promise<UserProfile | 
     
     const row = result.rows[0]
     return {
-      user_agent: row.user_agent,
+      user_id: row.user_id,
       age: row.age,
       language: row.language,
       education_level: row.education_level,
@@ -207,21 +207,21 @@ export async function getUserProfile(user_agent: string): Promise<UserProfile | 
   }
 }
 
-export async function createOrUpdateUserProfile(profile: Partial<UserProfile> & { user_agent: string }): Promise<UserProfile> {
+export async function createOrUpdateUserProfile(profile: Partial<UserProfile> & { user_id: string }): Promise<UserProfile> {
   const client = await pool.connect()
   
   try {
     const now = new Date()
     const result = await client.query(`
       INSERT INTO user_profiles (
-        user_agent, age, language, education_level, first_login, total_explanations,
+        user_id, age, language, education_level, first_login, total_explanations,
         today_explanations, available_credits, book_explanations, purchased_books,
         purchased_book_details, has_unlimited_access, unlimited_access_expiry,
         created_at, updated_at
       ) VALUES (
         $1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15
       )
-      ON CONFLICT (user_agent) DO UPDATE SET
+      ON CONFLICT (user_id) DO UPDATE SET
         age = EXCLUDED.age,
         language = EXCLUDED.language,
         education_level = EXCLUDED.education_level,
@@ -237,7 +237,7 @@ export async function createOrUpdateUserProfile(profile: Partial<UserProfile> & 
         updated_at = EXCLUDED.updated_at
       RETURNING *
     `, [
-      profile.user_agent,
+      profile.user_id,
       profile.age || null,
       profile.language || 'english',
       profile.education_level || 'high-school',
@@ -256,7 +256,7 @@ export async function createOrUpdateUserProfile(profile: Partial<UserProfile> & 
     
     const row = result.rows[0]
     return {
-      user_agent: row.user_agent,
+      user_id: row.user_id,
       age: row.age,
       language: row.language,
       education_level: row.education_level,
@@ -281,7 +281,7 @@ export async function createOrUpdateUserProfile(profile: Partial<UserProfile> & 
 }
 
 // Partial update function for specific fields only
-export async function updateUserProfileFields(user_agent: string, updates: Partial<UserProfile>): Promise<UserProfile> {
+export async function updateUserProfileFields(user_id: string, updates: Partial<UserProfile>): Promise<UserProfile> {
   const client = await pool.connect()
   
   try {
@@ -357,8 +357,8 @@ export async function updateUserProfileFields(user_agent: string, updates: Parti
     values.push(now)
     paramCount++
     
-    // Add user_agent as the last parameter
-    values.push(user_agent)
+    // Add user_id as the last parameter
+    values.push(user_id)
     
     if (fields.length === 1) {
       // Only updated_at was set, no actual fields to update
@@ -368,7 +368,7 @@ export async function updateUserProfileFields(user_agent: string, updates: Parti
     const query = `
       UPDATE user_profiles 
       SET ${fields.join(', ')}
-      WHERE user_agent = $${paramCount}
+      WHERE user_id = $${paramCount}
       RETURNING *
     `
     
@@ -383,7 +383,7 @@ log('api','Values:', values)
     
     const row = result.rows[0]
     return {
-      user_agent: row.user_agent,
+      user_id: row.user_id,
       age: row.age,
       language: row.language,
       education_level: row.education_level,
@@ -408,13 +408,13 @@ log('api','Values:', values)
 }
 
 // Settings operations
-export async function getUserSettings(user_agent: string): Promise<UserSettings | null> {
+export async function getUserSettings(user_id: string): Promise<UserSettings | null> {
   const client = await pool.connect()
   
   try {
     const result = await client.query(
-      'SELECT * FROM user_settings WHERE user_agent = $1',
-      [user_agent]
+      'SELECT * FROM user_settings WHERE user_id = $1',
+      [user_id]
     )
     
     if (result.rows.length === 0) {
@@ -423,7 +423,7 @@ export async function getUserSettings(user_agent: string): Promise<UserSettings 
     
     const row = result.rows[0]
     return {
-      user_agent: row.user_agent,
+      user_id: row.user_id,
       llm_provider: row.llm_provider,
       response_length: row.response_length,
       text_font: row.text_font,
@@ -446,20 +446,20 @@ export async function getUserSettings(user_agent: string): Promise<UserSettings 
   }
 }
 
-export async function createOrUpdateUserSettings(settings: Partial<UserSettings> & { user_agent: string }): Promise<UserSettings> {
+export async function createOrUpdateUserSettings(settings: Partial<UserSettings> & { user_id: string }): Promise<UserSettings> {
   const client = await pool.connect()
   
   try {
     const now = new Date()
     const result = await client.query(`
       INSERT INTO user_settings (
-        user_agent, llm_provider, response_length, text_font, chat_font,
+        user_id, llm_provider, response_length, text_font, chat_font,
         text_font_size, chat_font_size, reading_mode, explanation_style, 
         custom_api_key, custom_api_url, custom_model_name, created_at, updated_at
       ) VALUES (
         $1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14
       )
-      ON CONFLICT (user_agent) DO UPDATE SET
+      ON CONFLICT (user_id) DO UPDATE SET
         llm_provider = EXCLUDED.llm_provider,
         response_length = EXCLUDED.response_length,
         text_font = EXCLUDED.text_font,
@@ -474,7 +474,7 @@ export async function createOrUpdateUserSettings(settings: Partial<UserSettings>
         updated_at = EXCLUDED.updated_at
       RETURNING *
     `, [
-      settings.user_agent,
+      settings.user_id,
       settings.llm_provider || 'gemini',
       settings.response_length || 'brief',
       settings.text_font || 'serif',
@@ -492,7 +492,7 @@ export async function createOrUpdateUserSettings(settings: Partial<UserSettings>
     
     const row = result.rows[0]
     return {
-      user_agent: row.user_agent,
+      user_id: row.user_id,
       llm_provider: row.llm_provider,
       response_length: row.response_length,
       text_font: row.text_font,
@@ -516,13 +516,13 @@ export async function createOrUpdateUserSettings(settings: Partial<UserSettings>
 }
 
 // Current book operations
-export async function getUserCurrentBook(user_agent: string): Promise<UserCurrentBook | null> {
+export async function getUserCurrentBook(user_id: string): Promise<UserCurrentBook | null> {
   const client = await pool.connect()
   
   try {
     const result = await client.query(
-      'SELECT * FROM user_current_books WHERE user_agent = $1',
-      [user_agent]
+      'SELECT * FROM user_current_books WHERE user_id = $1',
+      [user_id]
     )
     
     if (result.rows.length === 0) {
@@ -531,7 +531,7 @@ export async function getUserCurrentBook(user_agent: string): Promise<UserCurren
     
     const row = result.rows[0]
     return {
-      user_agent: row.user_agent,
+      user_id: row.user_id,
       title: row.title,
       author: row.author,
       url: row.url,
@@ -551,19 +551,19 @@ export async function createOrUpdateUserCurrentBook(book: UserCurrentBook): Prom
   try {
     const now = new Date()
     const result = await client.query(`
-      INSERT INTO user_current_books (user_agent, title, author, url, updated_at)
+      INSERT INTO user_current_books (user_id, title, author, url, updated_at)
       VALUES ($1, $2, $3, $4, $5)
-      ON CONFLICT (user_agent) DO UPDATE SET
+      ON CONFLICT (user_id) DO UPDATE SET
         title = EXCLUDED.title,
         author = EXCLUDED.author,
         url = EXCLUDED.url,
         updated_at = EXCLUDED.updated_at
       RETURNING *
-    `, [book.user_agent, book.title, book.author, book.url, now])
+    `, [book.user_id, book.title, book.author, book.url, now])
     
     const row = result.rows[0]
     return {
-      user_agent: row.user_agent,
+      user_id: row.user_id,
       title: row.title,
       author: row.author,
       url: row.url,
@@ -578,13 +578,13 @@ export async function createOrUpdateUserCurrentBook(book: UserCurrentBook): Prom
 }
 
 // Bookmark operations
-export async function getUserBookmark(user_agent: string, bookTitle: string, bookAuthor: string): Promise<UserBookmark | null> {
+export async function getUserBookmark(user_id: string, bookTitle: string, bookAuthor: string): Promise<UserBookmark | null> {
   const client = await pool.connect()
   
   try {
     const result = await client.query(
-      'SELECT * FROM user_bookmarks WHERE user_agent = $1 AND book_title = $2 AND book_author = $3',
-      [user_agent, bookTitle, bookAuthor]
+      'SELECT * FROM user_bookmarks WHERE user_id = $1 AND book_title = $2 AND book_author = $3',
+      [user_id, bookTitle, bookAuthor]
     )
     
     if (result.rows.length === 0) {
@@ -593,7 +593,7 @@ export async function getUserBookmark(user_agent: string, bookTitle: string, boo
     
     const row = result.rows[0]
     return {
-      user_agent: row.user_agent,
+      user_id: row.user_id,
       book_title: row.book_title,
       book_author: row.book_author,
       scroll_position: row.scroll_position,
@@ -613,14 +613,14 @@ export async function createOrUpdateUserBookmark(bookmark: UserBookmark): Promis
   try {
     const now = new Date()
     const query = `
-      INSERT INTO user_bookmarks (user_agent, book_title, book_author, scroll_position, updated_at)
+      INSERT INTO user_bookmarks (user_id, book_title, book_author, scroll_position, updated_at)
       VALUES ($1, $2, $3, $4, $5)
-      ON CONFLICT (user_agent, book_title, book_author) DO UPDATE SET
+      ON CONFLICT (user_id, book_title, book_author) DO UPDATE SET
         scroll_position = EXCLUDED.scroll_position,
         updated_at = EXCLUDED.updated_at
       RETURNING *
     `
-    const params = [bookmark.user_agent, bookmark.book_title, bookmark.book_author, bookmark.scroll_position, now]
+    const params = [bookmark.user_id, bookmark.book_title, bookmark.book_author, bookmark.scroll_position, now]
     
     const result = await client.query(query, params)
     
@@ -630,7 +630,7 @@ export async function createOrUpdateUserBookmark(bookmark: UserBookmark): Promis
     
     const row = result.rows[0]
     return {
-      user_agent: row.user_agent,
+      user_id: row.user_id,
       book_title: row.book_title,
       book_author: row.book_author,
       scroll_position: row.scroll_position,
@@ -644,17 +644,17 @@ export async function createOrUpdateUserBookmark(bookmark: UserBookmark): Promis
   }
 }
 
-export async function getAllUserBookmarks(user_agent: string): Promise<UserBookmark[]> {
+export async function getAllUserBookmarks(user_id: string): Promise<UserBookmark[]> {
   const client = await pool.connect()
   
   try {
     const result = await client.query(
-      'SELECT * FROM user_bookmarks WHERE user_agent = $1 ORDER BY updated_at DESC',
-      [user_agent]
+      'SELECT * FROM user_bookmarks WHERE user_id = $1 ORDER BY updated_at DESC',
+      [user_id]
     )
     
     return result.rows.map(row => ({
-      user_agent: row.user_agent,
+      user_id: row.user_id,
       book_title: row.book_title,
       book_author: row.book_author,
       scroll_position: row.scroll_position,
@@ -669,15 +669,15 @@ export async function getAllUserBookmarks(user_agent: string): Promise<UserBookm
 }
 
 // Utility function to clear all data for a user (for testing)
-export async function clearUserData(user_agent: string): Promise<void> {
+export async function clearUserData(user_id: string): Promise<void> {
   const client = await pool.connect()
   
   try {
-    await client.query('DELETE FROM user_profiles WHERE user_agent = $1', [user_agent])
-    await client.query('DELETE FROM user_settings WHERE user_agent = $1', [user_agent])
-    await client.query('DELETE FROM user_current_books WHERE user_agent = $1', [user_agent])
-    await client.query('DELETE FROM user_bookmarks WHERE user_agent = $1', [user_agent])
-log('api',`Cleared all data for user: ${user_agent}`)
+    await client.query('DELETE FROM user_profiles WHERE user_id = $1', [user_id])
+    await client.query('DELETE FROM user_settings WHERE user_id = $1', [user_id])
+    await client.query('DELETE FROM user_current_books WHERE user_id = $1', [user_id])
+    await client.query('DELETE FROM user_bookmarks WHERE user_id = $1', [user_id])
+log('api',`Cleared all data for user: ${user_id}`)
   } catch (error) {
     log('ui','Error clearing user data:', error)
     throw error

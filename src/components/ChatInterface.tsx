@@ -11,6 +11,7 @@ import explainers from '../data/explainers.json'
 import models from '../data/models.json'
 import { log } from '../utils/log'
 import { convertToHTML, convertToMarkdown, convertToPlainText } from '../utils/chatConverters'
+import { getDeviceId } from '../utils/deviceId'
 
 interface Message {
   id: string
@@ -591,10 +592,11 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ selectedText, contextInfo
       provider: selectedProvider, 
       model: selectedModel, 
       settingsModel: settings.llmModel,
-      userAgent: navigator.userAgent,
+      userId: getDeviceId(),
       isMobile: /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)
     })
-    const response = await fetch('/api/chat', {
+    const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || ''
+    const response = await fetch(`${baseUrl}/api/chat`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -797,7 +799,8 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ selectedText, contextInfo
         finalQuery: searchQuery
       })
       
-      const response = await fetch('/api/youtube-search', {
+      const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || ''
+      const response = await fetch(`${baseUrl}/api/youtube-search`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ 

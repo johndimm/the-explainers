@@ -3,11 +3,16 @@ import { log } from '@/utils/log'
 
 export async function GET(request: NextRequest) {
   try {
-    const userAgent = request.headers.get('user-agent') || 'unknown'
+    const { searchParams } = new URL(request.url)
+    const userId = searchParams.get('userId')
+    
+    if (!userId) {
+      return NextResponse.json({ error: 'User ID is required' }, { status: 400 })
+    }
     
     // Return default settings for all users (no authentication required)
     const defaultSettings = {
-      user_agent: userAgent,
+      user_id: userId,
       llm_provider: 'gemini',
       llm_model: 'gemini-2.5-flash',
       response_length: 'medium',
@@ -31,14 +36,19 @@ export async function GET(request: NextRequest) {
 
 export async function POST(request: NextRequest) {
   try {
-    const userAgent = request.headers.get('user-agent') || 'unknown'
+    const body = await request.json()
+    const { userId } = body
+    
+    if (!userId) {
+      return NextResponse.json({ error: 'User ID is required' }, { status: 400 })
+    }
     
     // In this simplified version, we just return the default settings
     // No actual database operations needed
-    log('Settings API: Simplified mode - returning default settings for userAgent:', userAgent)
+    log('Settings API: Simplified mode - returning default settings for userId:', userId)
     
     const defaultSettings = {
-      user_agent: userAgent,
+      user_id: userId,
       llm_provider: 'gemini',
       llm_model: 'gemini-2.5-flash',
       response_length: 'medium',
