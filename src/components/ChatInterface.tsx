@@ -72,8 +72,6 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ selectedText, contextInfo
   const [shareDropdownOpen, setShareDropdownOpen] = useState<string | null>(null)
   const [saveFormatDropdownOpen, setSaveFormatDropdownOpen] = useState(false)
   const [showClearConfirm, setShowClearConfirm] = useState(false)
-  const [showDebugPanel, setShowDebugPanel] = useState(false)
-  const [debugLogs, setDebugLogs] = useState<string[]>([])
   const latestResponseRef = useRef<HTMLDivElement>(null)
   const messagesContainerRef = useRef<HTMLDivElement>(null)
   const inputRef = useRef<HTMLInputElement>(null)
@@ -617,16 +615,10 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ selectedText, contextInfo
 
     console.log('📤 Sending chat request:', apiCallInfo)
     
-    // Add to debug logs
-    console.log('🔍 Adding request to debug logs')
-    setDebugLogs(prev => {
-      const newLogs = [...prev, `📤 Chat API Call: ${apiCallInfo.method} ${apiCallInfo.url}`, `📤 Body: ${JSON.stringify(apiCallInfo.body, null, 2)}`]
-      console.log('🔍 Debug logs after request:', newLogs)
-      return newLogs
-    })
 
-    console.log('🔍 About to make fetch request to:', `${API_BASE_URL}/api/chat`)
-    console.log('🔍 Request body:', JSON.stringify(requestBody, null, 2))
+    // Debug logging disabled - uncomment for troubleshooting
+    // console.log('🔍 About to make fetch request to:', `${API_BASE_URL}/api/chat`)
+    // console.log('🔍 Request body:', JSON.stringify(requestBody, null, 2))
     
     let response
     try {
@@ -637,11 +629,9 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ selectedText, contextInfo
         },
         body: JSON.stringify(requestBody),
       })
-      console.log('🔍 Fetch request completed, response:', response)
+      // console.log('🔍 Fetch request completed, response:', response)
     } catch (fetchError) {
       console.error('🔍 Fetch request failed with error:', fetchError)
-      const errorMessage = fetchError instanceof Error ? fetchError.message : String(fetchError)
-      setDebugLogs(prev => [...prev, `❌ Fetch Error: ${errorMessage}`])
       throw fetchError
     }
 
@@ -654,13 +644,6 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ selectedText, contextInfo
 
     console.log('📥 Chat response:', responseInfo)
     
-    // Add response to debug logs
-    console.log('🔍 Adding response to debug logs')
-    setDebugLogs(prev => {
-      const newLogs = [...prev, `📥 Response: ${responseInfo.status} ${responseInfo.statusText} (${responseInfo.ok ? 'OK' : 'ERROR'})`]
-      console.log('🔍 Debug logs after response:', newLogs)
-      return newLogs
-    })
 
     if (!response.ok) {
       const errorText = await response.text()
@@ -669,25 +652,11 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ selectedText, contextInfo
         statusText: response.statusText,
         error: errorText
       })
-      setDebugLogs(prev => [...prev, `❌ Error Status: ${response.status} ${response.statusText}`])
-      setDebugLogs(prev => [...prev, `❌ Error Headers: ${JSON.stringify(Object.fromEntries(response.headers.entries()), null, 2)}`])
-      setDebugLogs(prev => [...prev, `❌ Error Body: ${errorText}`])
       throw new Error(`HTTP error! status: ${response.status}`)
     }
 
     const data = await response.json()
     
-    // Add detailed success to debug logs
-    console.log('🔍 Adding success response to debug logs')
-    setDebugLogs(prev => {
-      const newLogs = [...prev, 
-        `📥 Response Headers: ${JSON.stringify(Object.fromEntries(response.headers.entries()), null, 2)}`,
-        `📥 Response Data: ${JSON.stringify(data, null, 2)}`,
-        `✅ Success: ${data.message ? data.message.substring(0, 100) + '...' : 'No message in response'}`
-      ]
-      console.log('🔍 Debug logs after success:', newLogs)
-      return newLogs
-    })
     console.log('✅ Chat API success:', data)
     
     return data.message
@@ -1509,32 +1478,6 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ selectedText, contextInfo
             </div>
           </div>
           <div className={styles.headerControls}>
-            {/* Debug Button */}
-            <button
-              onClick={() => {
-                console.log('🔍 Debug button clicked, current state:', showDebugPanel)
-                setShowDebugPanel(!showDebugPanel)
-                if (!showDebugPanel) {
-                  // Add a test log when opening debug panel
-                  setDebugLogs(prev => [...prev, `🔍 Debug panel opened at ${new Date().toISOString()}`])
-                }
-              }}
-              style={{
-                position: 'absolute',
-                top: '10px',
-                right: '80px',
-                background: '#8b5cf6',
-                color: 'white',
-                border: 'none',
-                borderRadius: '4px',
-                padding: '4px 8px',
-                fontSize: '12px',
-                cursor: 'pointer',
-                zIndex: 1000
-              }}
-            >
-              🔍 Debug
-            </button>
             
             {/* Dropdowns Row */}
             <div className={styles.dropdownsRow}>
@@ -2254,116 +2197,6 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ selectedText, contextInfo
         </div>
       )}
 
-      {/* Debug Panel */}
-      {showDebugPanel && (
-        <div style={{
-          position: 'fixed',
-          top: '50px',
-          right: '10px',
-          width: '300px',
-          maxHeight: '400px',
-          background: 'white',
-          border: '2px solid #8b5cf6',
-          borderRadius: '8px',
-          padding: '10px',
-          zIndex: 1001,
-          overflow: 'auto',
-          fontSize: '12px',
-          boxShadow: '0 4px 12px rgba(0,0,0,0.3)'
-        }}>
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '10px' }}>
-            <div><strong>🔍 CHAT DEBUG PANEL</strong></div>
-            <button
-              onClick={(e) => {
-                console.log('🔍 Debug panel close button clicked')
-                e.preventDefault()
-                e.stopPropagation()
-                setShowDebugPanel(false)
-              }}
-              style={{
-                background: '#ef4444',
-                color: 'white',
-                border: 'none',
-                borderRadius: '4px',
-                padding: '6px 12px',
-                cursor: 'pointer',
-                fontSize: '12px',
-                fontWeight: 'bold',
-                minWidth: '60px',
-                zIndex: 1002
-              }}
-            >
-              ✕ Close
-            </button>
-          </div>
-          <div>Device ID: {getDeviceId()}</div>
-          <div>API URL: {API_BASE_URL}</div>
-          <div style={{ marginBottom: '10px' }}>
-            <button
-              onClick={async () => {
-                console.log('🔍 Testing network connectivity...')
-                setDebugLogs(prev => [...prev, `🔍 Testing network connectivity to ${API_BASE_URL}...`])
-                try {
-                  const testResponse = await fetch(`${API_BASE_URL}/api/chat`, {
-                    method: 'OPTIONS'
-                  })
-                  console.log('🔍 Network test result:', testResponse)
-                  setDebugLogs(prev => [...prev, `✅ Network test successful: ${testResponse.status} ${testResponse.statusText}`])
-                } catch (error) {
-                  console.error('🔍 Network test failed:', error)
-                  const errorMessage = error instanceof Error ? error.message : String(error)
-                  setDebugLogs(prev => [...prev, `❌ Network test failed: ${errorMessage}`])
-                }
-              }}
-              style={{
-                background: '#10b981',
-                color: 'white',
-                border: 'none',
-                borderRadius: '4px',
-                padding: '4px 8px',
-                cursor: 'pointer',
-                fontSize: '10px',
-                marginRight: '5px'
-              }}
-            >
-              Test Network
-            </button>
-            <button
-              onClick={() => setDebugLogs([])}
-              style={{
-                background: '#6b7280',
-                color: 'white',
-                border: 'none',
-                borderRadius: '4px',
-                padding: '4px 8px',
-                cursor: 'pointer',
-                fontSize: '10px'
-              }}
-            >
-              Clear Logs
-            </button>
-          </div>
-          <div><strong>Debug Logs:</strong></div>
-          {debugLogs.map((log, i) => (
-            <div key={i} style={{ marginBottom: '2px', wordBreak: 'break-all' }}>{log}</div>
-          ))}
-          <div style={{ marginTop: '5px' }}>
-            <button 
-              onClick={() => setDebugLogs([])}
-              style={{ 
-                padding: '4px 8px', 
-                border: '1px solid #ccc', 
-                borderRadius: '4px', 
-                background: 'white', 
-                cursor: 'pointer',
-                fontSize: '10px'
-              }}
-            >
-              Clear Logs
-            </button>
-          </div>
-        </div>
-      )}
     </div>
   )
 }

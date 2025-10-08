@@ -167,9 +167,10 @@ async function callGemini(messages: ChatMessage[], responseLength: string, model
 }
 
 export async function POST(request: NextRequest) {
-  console.log('🔍 CHAT API CALLED - Request received at:', new Date().toISOString())
-  console.log('🔍 CHAT API - Request URL:', request.url)
-  console.log('🔍 CHAT API - Request headers:', Object.fromEntries(request.headers.entries()))
+  // Debug logging disabled - uncomment for troubleshooting
+  // console.log('🔍 CHAT API CALLED - Request received at:', new Date().toISOString())
+  // console.log('🔍 CHAT API - Request URL:', request.url)
+  // console.log('🔍 CHAT API - Request headers:', Object.fromEntries(request.headers.entries()))
   
   let provider: string = 'unknown'
   
@@ -182,7 +183,7 @@ export async function POST(request: NextRequest) {
       gemini: !!process.env.GEMINI_API_KEY
     }
     
-    console.log('🔍 CHAT API - API Keys status:', apiKeys)
+    // console.log('🔍 CHAT API - API Keys status:', apiKeys)
     log('api','API Keys status:', apiKeys)
     log('api','Environment check:', {
       NODE_ENV: process.env.NODE_ENV,
@@ -191,18 +192,18 @@ export async function POST(request: NextRequest) {
     })
     
     const body: ChatRequest = await request.json()
-    console.log('🔍 CHAT API - Request body:', JSON.stringify(body, null, 2))
+    // console.log('🔍 CHAT API - Request body:', JSON.stringify(body, null, 2))
     
     const { messages, responseLength, style, selectedText, model } = body
     provider = body.provider
 
-    console.log('🔍 CHAT API - Parsed request:', { 
-      provider, 
-      model, 
-      responseLength, 
-      messageCount: messages?.length,
-      userAgent: request.headers.get('user-agent')?.substring(0, 50) + '...'
-    })
+    // console.log('🔍 CHAT API - Parsed request:', { 
+    //   provider, 
+    //   model, 
+    //   responseLength, 
+    //   messageCount: messages?.length,
+    //   userAgent: request.headers.get('user-agent')?.substring(0, 50) + '...'
+    // })
     
     log('api','Chat API request:', { 
       provider, 
@@ -254,11 +255,11 @@ export async function POST(request: NextRequest) {
     }
 
     log('api','Chat API success:', { provider, responseLength: response.length })
-    console.log('🔍 CHAT API - Success response:', { 
-      message: response.substring(0, 100) + '...',
-      provider: provider,
-      messageLength: response.length
-    })
+    // console.log('🔍 CHAT API - Success response:', { 
+    //   message: response.substring(0, 100) + '...',
+    //   provider: provider,
+    //   messageLength: response.length
+    // })
     
     return NextResponse.json({ 
       message: response,

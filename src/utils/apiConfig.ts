@@ -4,7 +4,7 @@
  */
 
 function getApiBaseUrl(): string {
-  // Use Vercel for mobile testing
+  // Use Vercel for testing updated server with CORS headers
   return 'https://romeo-and-juliet-explained.vercel.app'
 }
 

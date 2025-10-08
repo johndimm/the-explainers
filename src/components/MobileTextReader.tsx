@@ -860,44 +860,7 @@ log('ui','MobileTextReader: Previous search result')
 
   return (
     <>
-      {/* Debug Panel - fixed above text */}
-      <div style={{ 
-        position: 'fixed',
-        top: '0',
-        left: '0',
-        right: '0',
-        background: '#f0f0f0', 
-        border: '1px solid #ccc', 
-        padding: '10px',
-        fontSize: '12px',
-        fontFamily: 'monospace',
-        zIndex: 1000,
-        maxHeight: '150px',
-        overflow: 'auto'
-      }}>
-        <div><strong>🔍 MOBILE DEBUG PANEL</strong></div>
-        <div>Component: MobileTextReader</div>
-        <div>Text Length: {text?.length || 'No text'}</div>
-        <div>Book: {bookTitle}</div>
-        <div>Author: {author}</div>
-        <div><strong>Device Info:</strong></div>
-        <div>Device ID: {getDeviceId()}</div>
-        <div>API URL: {API_BASE_URL}</div>
-        <div><strong>Debug Logs:</strong></div>
-        {debugLogs.map((log, i) => (
-          <div key={i} style={{ marginBottom: '2px', wordBreak: 'break-all' }}>{log}</div>
-        ))}
-        <div style={{ marginTop: '5px' }}>
-          <button 
-            onClick={() => setDebugLogs([])}
-            style={{ padding: '2px 6px', fontSize: '10px' }}
-          >
-            Clear
-          </button>
-        </div>
-      </div>
-
-      <div ref={textReaderRef} className={styles.textReader} style={{ marginTop: '160px' }}>
+      <div ref={textReaderRef} className={styles.textReader}>
         <div
         ref={textContentRef}
         className={styles.textContent}

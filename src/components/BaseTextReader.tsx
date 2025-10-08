@@ -1255,31 +1255,32 @@ log('debug', '🔍 Loading bookmark for:', title, 'by', auth)
 
       // Always try to load bookmark using device ID (no authentication required)
       const deviceId = getDeviceId()
-      console.log('🔍 BOOKMARK RESTORE: Loading bookmark with device ID:', deviceId)
-      console.log('🔍 BOOKMARK RESTORE: Book title:', title)
-      console.log('🔍 BOOKMARK RESTORE: Book author:', auth)
-      console.log('🔍 BOOKMARK RESTORE: API URL:', `${API_BASE_URL}/api/user/bookmark?bookTitle=${encodeURIComponent(title)}&bookAuthor=${encodeURIComponent(auth)}&userId=${encodeURIComponent(deviceId)}`)
+      // Debug logging disabled - uncomment for troubleshooting
+      // console.log('🔍 BOOKMARK RESTORE: Loading bookmark with device ID:', deviceId)
+      // console.log('🔍 BOOKMARK RESTORE: Book title:', title)
+      // console.log('🔍 BOOKMARK RESTORE: Book author:', auth)
+      // console.log('🔍 BOOKMARK RESTORE: API URL:', `${API_BASE_URL}/api/user/bookmark?bookTitle=${encodeURIComponent(title)}&bookAuthor=${encodeURIComponent(auth)}&userId=${encodeURIComponent(deviceId)}`)
       log('debug', '🔍 BOOKMARK: Loading bookmark with device ID:', deviceId)
       
       try {
         const response = await fetch(`${API_BASE_URL}/api/user/bookmark?bookTitle=${encodeURIComponent(title)}&bookAuthor=${encodeURIComponent(auth)}&userId=${encodeURIComponent(deviceId)}`)
-        console.log('🔍 BOOKMARK RESTORE: API response status:', response.status)
-        console.log('🔍 BOOKMARK RESTORE: API response ok:', response.ok)
+        // console.log('🔍 BOOKMARK RESTORE: API response status:', response.status)
+        // console.log('🔍 BOOKMARK RESTORE: API response ok:', response.ok)
         log('debug', 'bookmark', 'Bookmark API response status:', response.status)
         
         if (response.ok) {
           const bookmark = await response.json()
-          console.log('🔍 BOOKMARK RESTORE: Bookmark found in database:', bookmark)
-          console.log('🔍 BOOKMARK RESTORE: Bookmark scroll position:', bookmark.scroll_position)
+          // console.log('🔍 BOOKMARK RESTORE: Bookmark found in database:', bookmark)
+          // console.log('🔍 BOOKMARK RESTORE: Bookmark scroll position:', bookmark.scroll_position)
           log('debug', 'bookmark', 'Bookmark found in database:', bookmark)
           const position = bookmark.scroll_position
-          console.log('🔍 BOOKMARK RESTORE: About to restore position:', position)
+          // console.log('🔍 BOOKMARK RESTORE: About to restore position:', position)
           log('debug', '🔍 Bookmark loaded from database:', { position, bookmark })
           restorePosition(position, 'database')
           return
         } else {
           const errorText = await response.text()
-          console.log('🔍 BOOKMARK RESTORE: No bookmark found in database (404) - Response:', errorText)
+          // console.log('🔍 BOOKMARK RESTORE: No bookmark found in database (404) - Response:', errorText)
           log('debug', 'bookmark', 'No bookmark found in database (404)')
         }
       } catch (error) {

@@ -264,30 +264,7 @@ log('ui','DesktopTextReader: Previous search result')
 
   return (
     <>
-      {/* Debug Panel - fixed above text */}
-      <div style={{ 
-        position: 'fixed',
-        top: '0',
-        left: '0',
-        right: '0',
-        background: '#e0f0ff', 
-        border: '1px solid #0066cc', 
-        padding: '10px',
-        fontSize: '12px',
-        fontFamily: 'monospace',
-        zIndex: 1000,
-        maxHeight: '150px',
-        overflow: 'auto'
-      }}>
-        <div><strong>🔍 DESKTOP DEBUG PANEL</strong></div>
-        <div>Component: DesktopTextReader</div>
-        <div>Text Length: {text?.length || 'No text'}</div>
-        <div>Book: {bookTitle}</div>
-        <div>Author: {author}</div>
-        <div>User Agent: {typeof window !== 'undefined' ? navigator.userAgent : 'Server'}</div>
-      </div>
-
-      <div ref={textReaderRef} className={styles.textReader} style={{ marginTop: '160px' }}>
+      <div ref={textReaderRef} className={styles.textReader}>
         <div
         ref={textContentRef}
         className={styles.textContent}

@@ -1,6 +1,18 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { log, error } from '@/utils/log'
 
+// CORS headers for development
+const corsHeaders = {
+  'Access-Control-Allow-Origin': '*',
+  'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS',
+  'Access-Control-Allow-Headers': 'Content-Type, Authorization',
+}
+
+// Handle preflight requests
+export async function OPTIONS() {
+  return new NextResponse(null, { status: 200, headers: corsHeaders })
+}
+
 async function searchYouTube(searchQuery: string) {
   try {
     const searchUrl = `https://www.youtube.com/results?search_query=${encodeURIComponent(searchQuery)}`
@@ -196,7 +208,7 @@ export async function POST(req: NextRequest) {
       success: true,
       query: searchTerms,
       videos: videos.slice(0, 1) // Return the highest-scored result
-    })
+    }, { headers: corsHeaders })
     
   } catch (err) {
     error('YouTube search error:', err instanceof Error ? err.message : String(err))
@@ -206,7 +218,7 @@ export async function POST(req: NextRequest) {
         error: 'Failed to search YouTube',
         videos: []
       },
-      { status: 500 }
+      { status: 500, headers: corsHeaders }
     )
   }
 }
