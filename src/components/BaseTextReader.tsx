@@ -1235,7 +1235,8 @@ log('debug', '🔍 Loading bookmark for:', title, 'by', auth)
         }
         
         // Use longer delay for mobile or Capacitor to ensure all handlers are set up
-        const initialDelay = isMobileOrCapacitor ? 2000 : 500
+        // On mobile, wait longer to ensure scroll handling is enabled first
+        const initialDelay = isMobileOrCapacitor ? 6000 : 500
         console.log('🔍 MOBILE: Setting initial delay:', { initialDelay, isMobile, isCapacitor, isMobileOrCapacitor })
         setTimeout(() => attemptRestore(), initialDelay)
       }

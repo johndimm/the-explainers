@@ -136,6 +136,117 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ selectedText, contextInfo
     })
   }
 
+  // Mobile-specific save function using improved web download
+  const saveToMobileDevice = (content: string, filename: string) => {
+    try {
+      log('ui', '🔍 Saving to mobile device:', { filename, contentLength: content.length })
+      
+      // Create a more mobile-friendly download approach
+      const blob = new Blob([content], { type: 'text/plain;charset=utf-8' })
+      const url = URL.createObjectURL(blob)
+      
+      // Create a temporary link with mobile-friendly attributes
+      const a = document.createElement('a')
+      a.href = url
+      a.download = filename
+      a.style.display = 'none'
+      a.setAttribute('download', filename)
+      a.setAttribute('target', '_blank')
+      
+      // Add to DOM temporarily
+      document.body.appendChild(a)
+      
+      // Trigger download with multiple methods for better mobile compatibility
+      try {
+        a.click()
+      } catch (clickError) {
+        log('ui', '❌ Click failed, trying dispatchEvent:', clickError)
+        const clickEvent = new MouseEvent('click', {
+          view: window,
+          bubbles: true,
+          cancelable: true,
+          button: 0
+        })
+        a.dispatchEvent(clickEvent)
+      }
+      
+      // Clean up
+      setTimeout(() => {
+        if (document.body.contains(a)) {
+          document.body.removeChild(a)
+        }
+        URL.revokeObjectURL(url)
+      }, 1000)
+      
+      log('ui', '✅ Mobile download triggered successfully')
+      alert(`Chat saved as ${filename}`)
+      
+    } catch (error) {
+      log('ui', '❌ Mobile save error:', error)
+      // Fallback to clipboard
+      saveToClipboard(content, filename)
+    }
+  }
+
+  // Clipboard fallback for mobile
+  const saveToClipboard = (content: string, filename: string) => {
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(content).then(() => {
+        log('ui', '✅ Content copied to clipboard')
+        alert(`Chat copied to clipboard! You can paste it into a text editor and save as ${filename}`)
+      }).catch((error) => {
+        log('ui', '❌ Clipboard error:', error)
+        alert('Save failed. Please try again or copy the content manually.')
+      })
+    } else {
+      // Final fallback - show content in a modal
+      const modal = document.createElement('div')
+      modal.style.cssText = `
+        position: fixed; top: 0; left: 0; width: 100%; height: 100%; 
+        background: rgba(0,0,0,0.8); z-index: 10000; display: flex; 
+        align-items: center; justify-content: center; padding: 20px;
+      `
+      modal.innerHTML = `
+        <div style="background: white; padding: 20px; border-radius: 8px; max-width: 90%; max-height: 90%; overflow: auto;">
+          <h3>Chat Content (${filename})</h3>
+          <p>Please copy this content and save it manually:</p>
+          <textarea readonly style="width: 100%; height: 300px; font-family: monospace; font-size: 12px;">${content}</textarea>
+          <button onclick="this.parentElement.parentElement.remove()" style="margin-top: 10px; padding: 10px 20px;">Close</button>
+        </div>
+      `
+      document.body.appendChild(modal)
+    }
+  }
+
+  // Web browser save function (fallback)
+  const saveToWebBrowser = (content: string, filename: string) => {
+    try {
+      log('ui', '🔍 Saving to web browser:', { filename })
+      
+      const blob = new Blob([content], { type: 'text/plain' })
+      const url = URL.createObjectURL(blob)
+      const a = document.createElement('a')
+      a.href = url
+      a.download = filename
+      a.style.display = 'none'
+      
+      document.body.appendChild(a)
+      a.click()
+      
+      setTimeout(() => {
+        if (document.body.contains(a)) {
+          document.body.removeChild(a)
+        }
+        URL.revokeObjectURL(url)
+      }, 100)
+      
+      log('ui', '✅ Web download triggered successfully')
+    } catch (error) {
+      log('ui', '❌ Web save error:', error)
+      alert('Save failed. Please try again.')
+    }
+  }
+
   const saveChatHistory = (format: 'json' | 'html' | 'markdown' | 'text' = 'json') => {
     log('ui', '🔍 SAVE CHAT HISTORY:', { format, messagesLength: messages.length })
     if (messages.length === 0) {
@@ -161,79 +272,40 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ selectedText, contextInfo
     }
     
     let content: string;
-    let mimeType: string;
     let extension: string;
     
     switch (format) {
       case 'html':
         content = convertToHTML(chatData);
-        mimeType = 'text/html';
         extension = 'html';
         break;
       case 'markdown':
         content = convertToMarkdown(chatData);
-        mimeType = 'text/markdown';
         extension = 'md';
         break;
       case 'text':
         content = convertToPlainText(chatData);
-        mimeType = 'text/plain';
         extension = 'txt';
         break;
       default:
         content = JSON.stringify(chatData, null, 2);
-        mimeType = 'application/json';
         extension = 'json';
     }
     
-    log('ui', '🔍 Creating download:', { contentLength: content.length, mimeType, extension })
+    const filename = `chat-history-${bookTitle.replace(/[^a-z0-9]/gi, '-')}-${new Date().toISOString().split('T')[0]}.${extension}`
     
-    const blob = new Blob([content], { type: mimeType })
-    const url = URL.createObjectURL(blob)
-    const a = document.createElement('a')
-    a.href = url
-    a.download = `chat-history-${bookTitle.replace(/[^a-z0-9]/gi, '-')}-${new Date().toISOString().split('T')[0]}.${extension}`
+    // Check if we're in a Capacitor app (mobile native)
+    const isCapacitor = (window as any).Capacitor && (window as any).Capacitor.isNativePlatform()
+    const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)
     
-    // Add mobile-friendly attributes
-    a.style.display = 'none'
-    a.setAttribute('target', '_blank')
+    log('ui', '🔍 Save context:', { isCapacitor, isMobile, filename })
     
-    log('ui', '🔍 Download filename:', a.download)
-    
-    // For mobile compatibility, ensure the click happens in the same event loop
-    try {
-      document.body.appendChild(a)
-      
-      // Use both click() and dispatchEvent for better mobile compatibility
-      a.click()
-      
-      // Also dispatch a click event for mobile browsers that might need it
-      const clickEvent = new MouseEvent('click', {
-        view: window,
-        bubbles: true,
-        cancelable: true
-      })
-      a.dispatchEvent(clickEvent)
-      
-      // Clean up after a short delay to ensure download starts
-      setTimeout(() => {
-        if (document.body.contains(a)) {
-          document.body.removeChild(a)
-        }
-        URL.revokeObjectURL(url)
-      }, 100)
-      
-      log('ui', '✅ Download triggered successfully')
-    } catch (error) {
-      log('ui', '❌ Download error:', error)
-      // Fallback: try to open in new tab for mobile
-      try {
-        window.open(url, '_blank')
-        setTimeout(() => URL.revokeObjectURL(url), 1000)
-      } catch (fallbackError) {
-        log('ui', '❌ Fallback download also failed:', fallbackError)
-        alert('Download failed. Please try again or copy the content manually.')
-      }
+    if (isCapacitor || isMobile) {
+      // Use mobile-optimized save for both native apps and mobile browsers
+      saveToMobileDevice(content, filename)
+    } else {
+      // Desktop - use standard web download
+      saveToWebBrowser(content, filename)
     }
     
     setSaveFormatDropdownOpen(false)
