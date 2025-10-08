@@ -1,5 +1,5 @@
 // List of enabled log labels - only these will show in console
-const ENABLED_LABELS = []
+const ENABLED_LABELS: string[] = []
 
 // Disable all console.log calls
 if (typeof console !== 'undefined') {

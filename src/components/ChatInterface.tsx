@@ -194,15 +194,49 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ selectedText, contextInfo
     a.href = url
     a.download = `chat-history-${bookTitle.replace(/[^a-z0-9]/gi, '-')}-${new Date().toISOString().split('T')[0]}.${extension}`
     
+    // Add mobile-friendly attributes
+    a.style.display = 'none'
+    a.setAttribute('target', '_blank')
+    
     log('ui', '🔍 Download filename:', a.download)
     
-    document.body.appendChild(a)
-    a.click()
-    document.body.removeChild(a)
-    URL.revokeObjectURL(url)
-    setSaveFormatDropdownOpen(false)
+    // For mobile compatibility, ensure the click happens in the same event loop
+    try {
+      document.body.appendChild(a)
+      
+      // Use both click() and dispatchEvent for better mobile compatibility
+      a.click()
+      
+      // Also dispatch a click event for mobile browsers that might need it
+      const clickEvent = new MouseEvent('click', {
+        view: window,
+        bubbles: true,
+        cancelable: true
+      })
+      a.dispatchEvent(clickEvent)
+      
+      // Clean up after a short delay to ensure download starts
+      setTimeout(() => {
+        if (document.body.contains(a)) {
+          document.body.removeChild(a)
+        }
+        URL.revokeObjectURL(url)
+      }, 100)
+      
+      log('ui', '✅ Download triggered successfully')
+    } catch (error) {
+      log('ui', '❌ Download error:', error)
+      // Fallback: try to open in new tab for mobile
+      try {
+        window.open(url, '_blank')
+        setTimeout(() => URL.revokeObjectURL(url), 1000)
+      } catch (fallbackError) {
+        log('ui', '❌ Fallback download also failed:', fallbackError)
+        alert('Download failed. Please try again or copy the content manually.')
+      }
+    }
     
-    log('ui', '✅ Download triggered successfully')
+    setSaveFormatDropdownOpen(false)
   }
 
   const clearChatHistory = () => {
@@ -397,7 +431,7 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ selectedText, contextInfo
   useEffect(() => {
     if (!saveFormatDropdownOpen) return
 
-    const handleClickOutside = (event: MouseEvent) => {
+    const handleClickOutside = (event: MouseEvent | TouchEvent) => {
       if (!saveDropdownRef.current) return
       const target = event.target as Node
       if (!saveDropdownRef.current.contains(target)) {
@@ -414,12 +448,14 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ selectedText, contextInfo
     // Delay binding to avoid closing from the same click that opened it
     const timeoutId = setTimeout(() => {
       document.addEventListener('mousedown', handleClickOutside)
+      document.addEventListener('touchstart', handleClickOutside)
       document.addEventListener('keydown', handleKeyDown)
     }, 0)
 
     return () => {
       clearTimeout(timeoutId)
       document.removeEventListener('mousedown', handleClickOutside)
+      document.removeEventListener('touchstart', handleClickOutside)
       document.removeEventListener('keydown', handleKeyDown)
     }
   }, [saveFormatDropdownOpen])
