@@ -1,39 +1,7 @@
 <svg width="512" height="512" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
-  <defs>
-    <linearGradient id="bgGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" style="stop-color:#F8F7FF;stop-opacity:1" />
-      <stop offset="100%" style="stop-color:#8B5CF6;stop-opacity:0.1" />
-    </linearGradient>
-  </defs>
-  
-  <!-- Background circle -->
-  <circle cx="256" cy="256" r="246" 
-          fill="url(#bgGradient)" 
-          stroke="#8B5CF6" 
-          stroke-width="8"/>
-  
-  <!-- Heart symbol -->
-  <path d="M256,320 C256,300 240,280 220,280 C200,280 180,300 180,320 C180,340 200,360 256,400 C312,360 332,340 332,320 C332,300 312,280 292,280 C272,280 256,300 256,320 Z" 
-        fill="#8B5CF6" 
-        opacity="0.3"/>
-  
-  <!-- Main text -->
-  <text x="256" y="320" 
-        text-anchor="middle" 
-        font-family="serif" 
-        font-size="192" 
-        font-weight="bold" 
-        fill="#8B5CF6">
-    R&J
-  </text>
-  
-  <!-- Shakespeare attribution -->
-  <text x="256" y="420" 
-        text-anchor="middle" 
-        font-family="serif" 
-        font-size="36" 
-        fill="#8B5CF6"
-        opacity="0.7">
-    Shakespeare
-  </text>
+  <!-- Use the ChatGPT-generated AI Romeo and Juliet icon -->
+  <image href="/icons/AI Romeo and Juliet Icon.png" 
+         x="0" y="0" 
+         width="512" height="512" 
+         preserveAspectRatio="xMidYMid meet"/>
 </svg>
