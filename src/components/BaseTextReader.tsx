@@ -1127,7 +1127,8 @@ export const useBookmarkRestoreAndSave = (
   author?: string,
   disableBookmarkSaving: boolean = false,
   setIsRestoringPosition?: (restoring: boolean) => void,
-  setDebugLogs?: (logs: string[] | ((prev: string[]) => string[])) => void
+  setDebugLogs?: (logs: string[] | ((prev: string[]) => string[])) => void,
+  allowScrollHandling?: boolean
 ) => {
   const scrollTimeoutRef = useRef<NodeJS.Timeout | null>(null)
 
@@ -1157,6 +1158,8 @@ log('debug', '🔍 Loading bookmark for:', title, 'by', auth)
         
         // Use a longer delay and wait for scrollHeight to be available
         const attemptRestore = (attempts = 0) => {
+          
+          
           if (attempts > 20) {
             log('❌ Failed to restore position after 20 attempts')
             // Clear restoring state
@@ -1179,15 +1182,8 @@ log('debug', '🔍 Loading bookmark for:', title, 'by', auth)
               setTimeout(() => {
                 if (textReaderRef.current) {
                   const actualPosition = textReaderRef.current.scrollTop
-                  console.log('🔍 MOBILE: Position verification:', { 
-                    expected: safePosition, 
-                    actual: actualPosition, 
-                    difference: Math.abs(actualPosition - safePosition),
-                    wasReset: Math.abs(actualPosition - safePosition) > 50
-                  })
                   log('debug', '🔍 Mobile position verification:', { expected: safePosition, actual: actualPosition, difference: Math.abs(actualPosition - safePosition) })
                   if (Math.abs(actualPosition - safePosition) > 50) {
-                    console.log('🔍 MOBILE: Position was reset, restoring again...')
                     log('debug', '🔍 Mobile position was reset, restoring again...')
                     textReaderRef.current.scrollTop = safePosition
                     
@@ -1195,25 +1191,16 @@ log('debug', '🔍 Loading bookmark for:', title, 'by', auth)
                     setTimeout(() => {
                       if (textReaderRef.current) {
                         const finalPosition = textReaderRef.current.scrollTop
-                        console.log('🔍 MOBILE: Final position check:', { expected: safePosition, final: finalPosition })
-                        if (Math.abs(finalPosition - safePosition) > 50) {
-                          console.log('❌ MOBILE: Position still not restored after multiple attempts')
-                        } else {
-                          console.log('✅ MOBILE: Position successfully restored')
-                        }
                         // Clear restoring state after final attempt
                         if (isMobile && setIsRestoringPosition) {
                           setIsRestoringPosition(false)
-                          console.log('🔍 MOBILE: Set isRestoringPosition to false (final)')
                         }
                       }
                     }, 200)
                   } else {
                     // Position was restored successfully
-                    console.log('✅ MOBILE: Position successfully restored')
                     if (isMobile && setIsRestoringPosition) {
                       setIsRestoringPosition(false)
-                      console.log('🔍 MOBILE: Set isRestoringPosition to false (success)')
                     }
                   }
                 }
@@ -1226,18 +1213,13 @@ log('debug', '🔍 Loading bookmark for:', title, 'by', auth)
             }
             })
           } else {
-            console.log(`⏳ MOBILE: Attempt ${attempts + 1}: Waiting for content to load...`, {
-              textReaderRef: !!textReaderRef.current
-            })
             log(`⏳ Attempt ${attempts + 1}: Waiting for content to load...`)
             setTimeout(() => attemptRestore(attempts + 1), 200) // Increased delay between attempts
           }
         }
         
         // Use longer delay for mobile or Capacitor to ensure all handlers are set up
-        // On mobile, wait longer to ensure scroll handling is enabled first
-        const initialDelay = isMobileOrCapacitor ? 6000 : 500
-        console.log('🔍 MOBILE: Setting initial delay:', { initialDelay, isMobile, isCapacitor, isMobileOrCapacitor })
+        const initialDelay = isMobileOrCapacitor ? 3000 : 500
         setTimeout(() => attemptRestore(), initialDelay)
       }
 
@@ -1252,8 +1234,6 @@ log('debug', '🔍 Loading bookmark for:', title, 'by', auth)
       
       try {
         const response = await fetch(`${API_BASE_URL}/api/user/bookmark?bookTitle=${encodeURIComponent(title)}&bookAuthor=${encodeURIComponent(auth)}&userId=${encodeURIComponent(deviceId)}`)
-        // console.log('🔍 BOOKMARK RESTORE: API response status:', response.status)
-        // console.log('🔍 BOOKMARK RESTORE: API response ok:', response.ok)
         log('debug', 'bookmark', 'Bookmark API response status:', response.status)
         
         if (response.ok) {
@@ -1364,7 +1344,6 @@ log('debug', '🔍 Loading bookmark for:', title, 'by', auth)
               timestamp: new Date().toISOString()
             }
             
-            console.log('📤 Sending bookmark request:', apiCallInfo)
             
             // Add to debug logs if available
             if (typeof setDebugLogs === 'function') {
@@ -1385,7 +1364,6 @@ log('debug', '🔍 Loading bookmark for:', title, 'by', auth)
               timestamp: new Date().toISOString()
             }
             
-            console.log('📥 Bookmark response:', responseInfo)
             
             // Add response to debug logs
             if (typeof setDebugLogs === 'function') {
@@ -1394,7 +1372,6 @@ log('debug', '🔍 Loading bookmark for:', title, 'by', auth)
             
             if (response.ok) {
               const result = await response.json()
-              console.log('✅ BOOKMARK: Saved successfully to database:', result)
               log('debug', 'bookmark', `Bookmark saved successfully: ${title} by ${auth} at position ${scrollPosition}`)
               
               // Add success to debug logs
@@ -1409,7 +1386,6 @@ log('debug', '🔍 Loading bookmark for:', title, 'by', auth)
                 error: errorText
               })
               log('debug', 'bookmark', `Failed to save bookmark: ${response.status} ${response.statusText}`)
-              console.log('❌ BOOKMARK: Failed to save:', response.status, response.statusText)
               
               // Add error to debug logs
               if (typeof setDebugLogs === 'function') {

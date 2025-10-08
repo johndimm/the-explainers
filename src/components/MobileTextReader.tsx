@@ -11,7 +11,6 @@ import { log, warn } from '../utils/log'
 
 const MobileTextReader: React.FC<ReaderCommonProps> = ({ text, bookTitle = 'Romeo and Juliet', author = 'William Shakespeare', settings, profile, onSettingsChange }) => {
   log('mobile','mobile', 'MobileTextReader rendering with text length:', text?.length)
-  console.log('🔍 MOBILE: MobileTextReader component rendered!')
   const router = useRouter()
   const textReaderRef = useRef<HTMLDivElement>(null)
   const textContentRef = useRef<HTMLDivElement>(null)
@@ -189,11 +188,9 @@ const MobileTextReader: React.FC<ReaderCommonProps> = ({ text, bookTitle = 'Rome
     if (isMobileOrCapacitor) {
       // Longer delay for Capacitor apps (native apps)
       const delay = isCapacitor ? 8000 : 5000
-      console.log('🔍 MOBILE: Disabling scroll handling for first', delay, 'ms. Mobile:', isMobile, 'Capacitor:', isCapacitor)
       
       const timer = setTimeout(() => {
         setAllowScrollHandling(true)
-        console.log('🔍 MOBILE: Enabling scroll handling after', delay, 'ms')
       }, delay)
       return () => clearTimeout(timer)
     } else {
@@ -205,15 +202,13 @@ const MobileTextReader: React.FC<ReaderCommonProps> = ({ text, bookTitle = 'Rome
   useEffect(() => {
     // Simple check: only set up scroll handler if allowed
     if (!allowScrollHandling) {
-      console.log('🔍 MOBILE: Scroll handling disabled')
       return
     }
     
-    console.log('🔍 MOBILE: Setting up scroll handler')
     const handleScroll = () => {
-      // Skip scroll handling if not allowed
-      if (!allowScrollHandling) {
-        setDebugLogs(prev => [...prev.slice(-9), `Scroll: Skipped (not allowed)`])
+      // Skip scroll handling if not allowed or if we're restoring position
+      if (!allowScrollHandling || isRestoringPosition) {
+        setDebugLogs(prev => [...prev.slice(-9), `Scroll: Skipped (not allowed or restoring)`])
         return
       }
       
@@ -287,7 +282,7 @@ const MobileTextReader: React.FC<ReaderCommonProps> = ({ text, bookTitle = 'Rome
         }
       }
     }
-  }, [allowScrollHandling, pageMap, currentPage, settings.textFont])
+  }, [allowScrollHandling, pageMap, currentPage, settings.textFont, isRestoringPosition])
 
   useBookmarkRestoreAndSave(textReaderRef, text, bookTitle, author, showChatModal, setIsRestoringPosition, setDebugLogs)
   
@@ -300,14 +295,12 @@ const MobileTextReader: React.FC<ReaderCommonProps> = ({ text, bookTitle = 'Rome
       bookTitle,
       author
     }
-    console.log('🔍 MOBILE: Bookmark saving debug:', debugInfo)
     setDebugLogs(prev => [...prev.slice(-9), `Bookmark debug: ${JSON.stringify(debugInfo)}`])
   }, [showChatModal, text, bookTitle, author])
   
   // Test scroll detection
   useEffect(() => {
     const testScrollHandler = () => {
-      console.log('🔍 MOBILE: TEST SCROLL DETECTED!')
       setDebugLogs(prev => [...prev.slice(-9), `TEST: Scroll detected at ${new Date().toLocaleTimeString()}`])
     }
     
