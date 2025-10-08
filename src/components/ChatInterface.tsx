@@ -640,7 +640,8 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ selectedText, contextInfo
       console.log('🔍 Fetch request completed, response:', response)
     } catch (fetchError) {
       console.error('🔍 Fetch request failed with error:', fetchError)
-      setDebugLogs(prev => [...prev, `❌ Fetch Error: ${fetchError.message || fetchError}`])
+      const errorMessage = fetchError instanceof Error ? fetchError.message : String(fetchError)
+      setDebugLogs(prev => [...prev, `❌ Fetch Error: ${errorMessage}`])
       throw fetchError
     }
 
@@ -2310,7 +2311,8 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ selectedText, contextInfo
                   setDebugLogs(prev => [...prev, `✅ Network test successful: ${testResponse.status} ${testResponse.statusText}`])
                 } catch (error) {
                   console.error('🔍 Network test failed:', error)
-                  setDebugLogs(prev => [...prev, `❌ Network test failed: ${error.message || error}`])
+                  const errorMessage = error instanceof Error ? error.message : String(error)
+                  setDebugLogs(prev => [...prev, `❌ Network test failed: ${errorMessage}`])
                 }
               }}
               style={{
