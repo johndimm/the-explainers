@@ -1,7 +1,7 @@
 'use client'
 
 import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react'
-import { useAuth } from './AuthContext'
+import { getDeviceId } from '../utils/deviceId'
 import { ProfileData, Language, EducationLevel } from '../components/Profile'
 import { log } from '../utils/log'
 
@@ -43,21 +43,23 @@ interface ProfileProviderProps {
 }
 
 export const ProfileProvider: React.FC<ProfileProviderProps> = ({ children }) => {
-  const { userAgent } = useAuth()
   const [profile, setProfile] = useState<ProfileData>(DEFAULT_PROFILE)
   const [isProfileOpen, setIsProfileOpen] = useState(false)
   const [isHydrated, setIsHydrated] = useState(false)
+  
+  // Get device ID for consistency
+  const userId = getDeviceId()
 
   useEffect(() => {
     const loadProfile = async () => {
       // Always use the default profile (no authentication required)
-      log('ProfileContext: Using default profile for userAgent:', userAgent)
+      log('ProfileContext: Using default profile for userId:', userId)
       setProfile(DEFAULT_PROFILE)
       setIsHydrated(true)
     }
 
     loadProfile()
-  }, [userAgent])
+  }, [userId])
 
   const updateProfile = async (newProfile: ProfileData) => {
     log('ProfileContext: updateProfile called with:', newProfile)

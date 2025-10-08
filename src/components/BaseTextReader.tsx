@@ -1,7 +1,6 @@
 'use client'
 
 import React, { useEffect, useRef, useState } from 'react'
-import { useAuth } from '@/contexts/AuthContext'
 import { log } from '../utils/log'
 import { getDeviceId } from '@/utils/deviceId'
 import { API_BASE_URL } from '@/utils/apiConfig'
@@ -1131,7 +1130,6 @@ export const useBookmarkRestoreAndSave = (
   setDebugLogs?: (logs: string[] | ((prev: string[]) => string[])) => void
 ) => {
   const scrollTimeoutRef = useRef<NodeJS.Timeout | null>(null)
-  const { user } = useAuth()
 
   useEffect(() => {
 log('debug', '🔍 BOOKMARK RESTORE EFFECT TRIGGERED:', { textLength: text?.length, bookTitle, author, disableBookmarkSaving })
@@ -1150,42 +1148,31 @@ log('debug', '🔍 Loading bookmark for:', title, 'by', auth)
         const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)
         const isCapacitor = (window as any).Capacitor && (window as any).Capacitor.isNativePlatform()
         const isMobileOrCapacitor = isMobile || isCapacitor
-        console.log('🔍 MOBILE RESTORE POSITION START:', { position, source, isMobile, isCapacitor, isMobileOrCapacitor, userAgent: navigator.userAgent })
         log('debug', '🔍 RESTORE POSITION:', { position, source, textReaderRef: textReaderRef.current, isMobile })
         
         // Set restoring state for mobile or Capacitor (simplified)
         if (isMobileOrCapacitor && setIsRestoringPosition) {
           setIsRestoringPosition(true)
-          console.log('🔍 MOBILE: Set isRestoringPosition to true')
         }
         
         // Use a longer delay and wait for scrollHeight to be available
         const attemptRestore = (attempts = 0) => {
           if (attempts > 20) {
-            console.log('❌ MOBILE: Failed to restore position after 20 attempts')
             log('❌ Failed to restore position after 20 attempts')
             // Clear restoring state
             if (isMobile && setIsRestoringPosition) {
               setIsRestoringPosition(false)
-              console.log('🔍 MOBILE: Set isRestoringPosition to false (failed)')
             }
             return // Give up after 20 attempts
           }
           
           if (textReaderRef.current && textReaderRef.current.scrollHeight > 0) {
-            const maxScroll = textReaderRef.current.scrollHeight - textReaderRef.current.clientHeight
-            const safePosition = Math.min(position, maxScroll)
-            console.log('🔍 MOBILE: Attempting restore:', { 
-              attempt: attempts + 1, 
-              position, 
-              maxScroll, 
-              safePosition, 
-              scrollHeight: textReaderRef.current.scrollHeight,
-              clientHeight: textReaderRef.current.clientHeight,
-              currentScrollTop: textReaderRef.current.scrollTop
-            })
-            log('debug', '✅ Restoring position:', { position, maxScroll, safePosition, scrollHeight: textReaderRef.current.scrollHeight, isMobile })
-            textReaderRef.current.scrollTop = safePosition
+            // Use requestAnimationFrame to avoid forced reflow
+            requestAnimationFrame(() => {
+              const maxScroll = textReaderRef.current!.scrollHeight - textReaderRef.current!.clientHeight
+              const safePosition = Math.min(position, maxScroll)
+              log('debug', '✅ Restoring position:', { position, maxScroll, safePosition, isMobile })
+              textReaderRef.current!.scrollTop = safePosition
             
             // For mobile, add additional verification after a short delay
             if (isMobile) {
@@ -1237,10 +1224,10 @@ log('debug', '🔍 Loading bookmark for:', title, 'by', auth)
                 setIsRestoringPosition(false)
               }
             }
+            })
           } else {
             console.log(`⏳ MOBILE: Attempt ${attempts + 1}: Waiting for content to load...`, {
-              textReaderRef: !!textReaderRef.current,
-              scrollHeight: textReaderRef.current?.scrollHeight || 0
+              textReaderRef: !!textReaderRef.current
             })
             log(`⏳ Attempt ${attempts + 1}: Waiting for content to load...`)
             setTimeout(() => attemptRestore(attempts + 1), 200) // Increased delay between attempts
@@ -1312,9 +1299,12 @@ log('debug', '🔍 Loading bookmark for:', title, 'by', auth)
           if (startIndex !== -1 && textReaderRef.current.scrollHeight > 0) {
             // Calculate scroll position to the marker
             const textPercentage = startIndex / text.length
-            const targetPosition = textPercentage * textReaderRef.current.scrollHeight
-            log('debug', 'bookmark', 'Scrolling to marker position:', targetPosition, 'textPercentage:', textPercentage)
-            textReaderRef.current.scrollTop = Math.max(0, targetPosition)
+            // Use requestAnimationFrame to avoid forced reflow
+            requestAnimationFrame(() => {
+              const targetPosition = textPercentage * textReaderRef.current!.scrollHeight
+              log('debug', 'bookmark', 'Scrolling to marker position:', targetPosition, 'textPercentage:', textPercentage)
+              textReaderRef.current!.scrollTop = Math.max(0, targetPosition)
+            })
           } else {
             log('debug', 'bookmark', 'No Project Gutenberg marker found in text or content not ready')
           }
@@ -1323,64 +1313,47 @@ log('debug', '🔍 Loading bookmark for:', title, 'by', auth)
     }
 
     loadBookmark()
-  }, [text, bookTitle, author, user?.userAgent])
+  }, [text, bookTitle, author])
 
   useEffect(() => {
     log('debug', 'bookmark', 'Setting up scroll effect, textReaderRef:', textReaderRef.current)
     
     const handleScroll = () => {
-      console.log('🔍 BOOKMARK: Scroll handler called', { 
-        disableBookmarkSaving, 
-        textReaderRef: !!textReaderRef.current,
-        scrollTop: textReaderRef.current?.scrollTop || 'no element',
-        timestamp: new Date().toLocaleTimeString()
-      })
       // Skip bookmark saving if disabled (e.g., during chat operations)
       if (disableBookmarkSaving) {
-        console.log('🔍 BOOKMARK: Skipping bookmark save - disabled')
         return
       }
       
-      console.log('🔍 BOOKMARK: Proceeding with bookmark save logic')
-      console.log('🔍 BOOKMARK: User agent:', navigator.userAgent)
-      console.log('🔍 BOOKMARK: Base URL:', process.env.NEXT_PUBLIC_BASE_URL)
+      // Store scroll position immediately to avoid forced reflow
+      let scrollPosition = 0
+      if (textReaderRef.current) {
+        scrollPosition = textReaderRef.current.scrollTop
+      } else {
+        return
+      }
       
       // Debounce scroll events to reduce performance impact
       if (scrollTimeoutRef.current) clearTimeout(scrollTimeoutRef.current)
-      scrollTimeoutRef.current = setTimeout(async () => {
-        // Get scroll position from the scrollable element
-        let scrollPosition = 0
-        console.log('🔍 BOOKMARK: Inside scroll timeout, getting scroll position')
-        if (textReaderRef.current) {
-          scrollPosition = textReaderRef.current.scrollTop
-          log('debug', 'bookmark', 'Using element scroll position:', scrollPosition)
-        } else {
-          log('debug', 'bookmark', 'No textReaderRef element found')
-          return
-        }
-        
-        const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)
-        log('debug', 'bookmark', 'Scroll detected, position:', scrollPosition, 'isMobile:', isMobile)
-        const title = bookTitle || 'Untitled'
-        const auth = author || 'Unknown'
-
-        // Save to database if user is authenticated or in development mode
-        const isLocalDev = process.env.NODE_ENV === 'development' && typeof window !== 'undefined' && window.location.hostname === 'localhost'
-        const userEmail = user?.userAgent || (isLocalDev ? 'dev-user@example.com' : null)
-        
-        log('debug', 'bookmark', `User agent: ${user?.userAgent}, isLocalDev: ${isLocalDev}, userEmail: ${userEmail}, isMobile: ${isMobile}`)
-        
-        if (userEmail) {
-          try {
-            const deviceId = getDeviceId()
-            log('debug', 'bookmark', `Saving bookmark: ${title} by ${auth} at position ${scrollPosition}`)
-            log('debug', '🔍 SAVING BOOKMARK:', { title, auth, scrollPosition, deviceId, apiUrl: API_BASE_URL })
+      scrollTimeoutRef.current = setTimeout(() => {
+        // Use requestAnimationFrame to avoid forced reflow
+        requestAnimationFrame(() => {
+          // Store values for async bookmark saving
+          const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)
+          const title = bookTitle || 'Untitled'
+          const auth = author || 'Unknown'
+          const userId = getDeviceId()
+          
+          // Move async bookmark saving outside of requestAnimationFrame
+          if (userId) {
+            // Use setTimeout to defer the async operation
+            setTimeout(async () => {
+              try {
             
             const requestBody = {
               bookTitle: title,
               bookAuthor: auth,
               scrollPosition: Math.round(scrollPosition),
-              userId: deviceId
+              userId: userId
             }
             
             const apiCallInfo = {
@@ -1444,14 +1417,14 @@ log('debug', '🔍 Loading bookmark for:', title, 'by', auth)
             }
           } catch (error) {
             log('debug', 'bookmark', 'Error saving bookmark to database:', error)
-log('debug', '❌ Error saving bookmark:', error)
+            log('debug', '❌ Error saving bookmark:', error)
           }
-        } else {
-          log('debug', 'bookmark', 'No session and not in dev mode, skipping bookmark save')
-log('debug', '❌ No session, skipping bookmark save')
-        }
-
-        // Bookmark saved to database
+            }, 0) // Use 0ms timeout to defer async operation
+          } else {
+            log('debug', 'bookmark', 'No session and not in dev mode, skipping bookmark save')
+            log('debug', '❌ No session, skipping bookmark save')
+          }
+        })
       }, 500)
     }
 
@@ -1459,25 +1432,18 @@ log('debug', '❌ No session, skipping bookmark save')
     log('debug', 'bookmark', 'Setting up scroll handlers for both window and element')
     
     const setupScrollHandlers = () => {
-      console.log('🔍 BOOKMARK: Setting up scroll handlers')
-      console.log('🔍 BOOKMARK: textReaderRef.current:', !!textReaderRef.current)
-      console.log('🔍 BOOKMARK: disableBookmarkSaving:', disableBookmarkSaving)
       
       // Window scroll (most likely)
-      window.addEventListener('scroll', handleScroll)
+      window.addEventListener('scroll', handleScroll, { passive: true })
       log('debug', 'bookmark', 'Window scroll handler attached')
-      console.log('🔍 BOOKMARK: Window scroll handler attached')
       
       // Element scroll (if element is scrollable)
     const el = textReaderRef.current
       if (el) {
-        el.addEventListener('scroll', handleScroll)
+        el.addEventListener('scroll', handleScroll, { passive: true })
         log('debug', 'bookmark', 'Element scroll handler attached')
-        console.log('🔍 BOOKMARK: Element scroll handler attached')
-        console.log('🔍 BOOKMARK: Element scrollable:', el.scrollHeight > el.clientHeight)
       } else {
         log('debug', 'bookmark', 'No textReaderRef element found for scroll handler')
-        console.log('🔍 BOOKMARK: No textReaderRef element found')
       }
     }
     
@@ -1491,7 +1457,7 @@ log('debug', '❌ No session, skipping bookmark save')
       }
       if (scrollTimeoutRef.current) clearTimeout(scrollTimeoutRef.current)
     }
-  }, [bookTitle, author, text, textReaderRef, user])
+  }, [bookTitle, author, text, textReaderRef])
 }
 
 
@@ -1577,16 +1543,19 @@ log('debug', '🔍 Saving bookmark after search navigation to position:', scroll
         const scrollContainer = textReaderRef.current
         if (scrollContainer) {
           const textPercentage = result.index / text.length
-          const targetPosition = textPercentage * scrollContainer.scrollHeight * 0.8
-          scrollContainer.scrollTop = Math.max(0, targetPosition - 200)
-          
-          // Save bookmark after scrolling to search result
-          setTimeout(() => {
+          // Use requestAnimationFrame to avoid forced reflow
+          requestAnimationFrame(() => {
+            const targetPosition = textPercentage * scrollContainer.scrollHeight * 0.8
+            scrollContainer.scrollTop = Math.max(0, targetPosition - 200)
+            
+            // Save bookmark after scrolling to search result
+            setTimeout(() => {
 log('🔍 Saving bookmark after search navigation (scroll mode)')
-            // Trigger the scroll event to save bookmark
-            const scrollEvent = new Event('scroll')
-            window.dispatchEvent(scrollEvent)
-          }, 500)
+              // Trigger the scroll event to save bookmark
+              const scrollEvent = new Event('scroll')
+              window.dispatchEvent(scrollEvent)
+            }, 500)
+          })
         }
       }
     }, 100)

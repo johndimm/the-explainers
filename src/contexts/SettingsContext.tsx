@@ -1,7 +1,7 @@
 'use client'
 
 import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react'
-import { useAuth } from './AuthContext'
+import { getDeviceId } from '../utils/deviceId'
 import { SettingsData, LLMProvider, LLMModel, ResponseLength, FontFamily, ReadingMode, ExplanationStyle } from '../components/Settings'
 import { log } from '../utils/log'
 import models from '../data/models.json'
@@ -33,16 +33,18 @@ interface SettingsProviderProps {
 }
 
 export const SettingsProvider: React.FC<SettingsProviderProps> = ({ children }) => {
-  const { userAgent } = useAuth()
   const [settings, setSettings] = useState<SettingsData>(DEFAULT_SETTINGS)
   const [isSettingsOpen, setIsSettingsOpen] = useState(false)
+  
+  // Get device ID for API calls
+  const userId = getDeviceId()
 
   // Load settings from database
   useEffect(() => {
     const loadSettings = async () => {
       try {
-        log('SettingsContext: Loading settings from database for userAgent:', userAgent)
-        const response = await fetch('/api/user/settings')
+        log('SettingsContext: Loading settings from database for userId:', userId)
+        const response = await fetch(`/api/user/settings?userId=${encodeURIComponent(userId)}`)
         
         if (response.ok) {
           const dbSettings = await response.json()
@@ -74,7 +76,7 @@ export const SettingsProvider: React.FC<SettingsProviderProps> = ({ children }) 
     }
 
     loadSettings()
-  }, [userAgent])
+  }, [userId])
 
   const updateSettings = async (newSettings: SettingsData) => {
     log('ui','SettingsContext: updateSettings called with:', newSettings)
@@ -82,11 +84,12 @@ export const SettingsProvider: React.FC<SettingsProviderProps> = ({ children }) 
     
     // Save to database
     try {
-      log('ui','SettingsContext: Saving to database for userAgent:', userAgent)
+      log('ui','SettingsContext: Saving to database for userId:', userId)
       await fetch('/api/user/settings', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
+          userId: userId,
           llm_provider: newSettings.llmProvider,
           llm_model: newSettings.llmModel,
           response_length: newSettings.responseLength,

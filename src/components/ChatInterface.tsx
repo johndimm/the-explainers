@@ -130,7 +130,10 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ selectedText, contextInfo
   }
 
   const scrollToLatestResponse = () => {
-    latestResponseRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+    // Use requestAnimationFrame to avoid forced reflow
+    requestAnimationFrame(() => {
+      latestResponseRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+    })
   }
 
   const saveChatHistory = (format: 'json' | 'html' | 'markdown' | 'text' = 'json') => {

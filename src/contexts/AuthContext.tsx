@@ -5,7 +5,6 @@ import React, { createContext, useContext, ReactNode } from 'react'
 interface AuthContextType {
   isAuthenticated: boolean
   user: any
-  userAgent: string
   isLoading: boolean
 }
 
@@ -24,13 +23,9 @@ interface AuthProviderProps {
 }
 
 export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
-  // Use navigator.userAgent as the unique identifier
-  const userAgent = typeof window !== 'undefined' ? navigator.userAgent : ''
-
   const value: AuthContextType = {
     isAuthenticated: true, // Always authenticated since no auth required
-    user: { userAgent }, // Mock user object with userAgent
-    userAgent,
+    user: {}, // Mock user object
     isLoading: false
   }
 

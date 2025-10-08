@@ -33,6 +33,16 @@ const MobileTextReader: React.FC<ReaderCommonProps> = ({ text, bookTitle = 'Rome
   const [showPrevButton, setShowPrevButton] = useState(false)
   const pageHeight = 600 // Default page height in pixels
   
+  // Cache computed styles to avoid forced reflow
+  const [cachedStyles, setCachedStyles] = useState<{
+    fontSize: number
+    lineHeight: number
+    clientWidth: number
+  } | null>(null)
+  
+  // Store scroll position to avoid reading it during scroll events
+  const scrollPositionRef = useRef(0)
+  
   // Device detection - only for iPhone-specific fallbacks
   const isIPhone = /iPhone|iPod/.test(navigator.userAgent)
   const isAndroid = /Android/.test(navigator.userAgent)
@@ -203,43 +213,52 @@ const MobileTextReader: React.FC<ReaderCommonProps> = ({ text, bookTitle = 'Rome
     const handleScroll = () => {
       // Skip scroll handling if not allowed
       if (!allowScrollHandling) {
-      console.log('🔍 MOBILE: Skipping scroll handler - not allowed')
-      setDebugLogs(prev => [...prev.slice(-9), `Scroll: Skipped (not allowed)`])
-      return
-    }
-    
-    console.log('🔍 MOBILE: Scroll handler triggered')
-    setDebugLogs(prev => [...prev.slice(-9), `Scroll: Handler triggered at ${new Date().toLocaleTimeString()}`])
+        setDebugLogs(prev => [...prev.slice(-9), `Scroll: Skipped (not allowed)`])
+        return
+      }
+      
+      setDebugLogs(prev => [...prev.slice(-9), `Scroll: Handler triggered at ${new Date().toLocaleTimeString()}`])
+      
+      // Store scroll position without reading layout properties
+      const now = Date.now()
+      const textReader = textReaderRef.current
+      
+      if (textReader) {
+        // Store scroll position for later use
+        scrollPositionRef.current = textReader.scrollTop
         
-        const now = Date.now()
-        const textReader = textReaderRef.current
+        // Calculate scroll velocity for navigation buttons
+        const timeDelta = now - lastScrollTime.current
+        if (timeDelta > 0) {
+          scrollVelocityRef.current = Math.abs(scrollPositionRef.current - lastScrollPosition.current) / timeDelta
+        }
+        lastScrollPosition.current = scrollPositionRef.current
+        lastScrollTime.current = now
+      }
+      
+      setIsScrolling(true)
+      
+      // Clear existing timeout
+      if (scrollTimeoutRef.current) {
+        clearTimeout(scrollTimeoutRef.current)
+      }
+      
+      // Wait longer if scroll velocity was high (momentum scrolling)
+      const waitTime = scrollVelocityRef.current > 1 ? 2000 : 1000
+      
+      // Show buttons again after scrolling stops
+      scrollTimeoutRef.current = setTimeout(() => {
+        setIsScrolling(false)
+        scrollVelocityRef.current = 0
         
-        if (textReader) {
-          const scrollTop = textReader.scrollTop
-          
-          // Calculate scroll velocity for navigation buttons
-          const timeDelta = now - lastScrollTime.current
-          if (timeDelta > 0) {
-            scrollVelocityRef.current = Math.abs(scrollTop - lastScrollPosition.current) / timeDelta
-          }
-          lastScrollPosition.current = scrollTop
-          
-          // Log scroll events to see if they're interfering
-          console.log('🔍 MOBILE: Scroll event:', { 
-            scrollTop, 
-            velocity: scrollVelocityRef.current,
-            timeDelta,
-            currentPage,
-            isRestoringPosition
-          })
-          
-          // Page tracking logic (only if pageMap is available)
-          if (pageMap.pageRanges.length > 0) {
-            const lineHeight = parseInt(getComputedStyle(textReader).lineHeight) || 24
+        // Use requestAnimationFrame for page calculations after scrolling stops
+        requestAnimationFrame(() => {
+          if (pageMap.pageRanges.length > 0 && cachedStyles) {
+            const lineHeight = cachedStyles.lineHeight
             
             // Calculate which page we're currently viewing based on scroll position
-            const currentLine = Math.floor(scrollTop / lineHeight)
-            const currentCharPosition = currentLine * (estimateCharsPerLine(textReader.clientWidth, parseInt(getComputedStyle(textReader).fontSize) || 16, settings.textFont))
+            const currentLine = Math.floor(scrollPositionRef.current / lineHeight)
+            const currentCharPosition = currentLine * (estimateCharsPerLine(cachedStyles.clientWidth, cachedStyles.fontSize, settings.textFont))
             
             // Find which page contains this position
             let newCurrentPage = 0
@@ -254,29 +273,13 @@ const MobileTextReader: React.FC<ReaderCommonProps> = ({ text, bookTitle = 'Rome
               setCurrentPage(newCurrentPage)
             }
           }
-        }
-        
-        lastScrollTime.current = now
-        setIsScrolling(true)
-        
-        // Clear existing timeout
-        if (scrollTimeoutRef.current) {
-          clearTimeout(scrollTimeoutRef.current)
-        }
-        
-        // Wait longer if scroll velocity was high (momentum scrolling)
-        const waitTime = scrollVelocityRef.current > 1 ? 2000 : 1000
-        
-        // Show buttons again after scrolling stops
-        scrollTimeoutRef.current = setTimeout(() => {
-          setIsScrolling(false)
-          scrollVelocityRef.current = 0
-        }, waitTime) // Wait 1-2 seconds after scrolling stops
-      }
+        })
+      }, waitTime) // Wait 1-2 seconds after scrolling stops
+    }
 
     const textReader = textReaderRef.current
     if (textReader) {
-      textReader.addEventListener('scroll', handleScroll)
+      textReader.addEventListener('scroll', handleScroll, { passive: true })
       return () => {
         textReader.removeEventListener('scroll', handleScroll)
         if (scrollTimeoutRef.current) {
@@ -308,22 +311,34 @@ const MobileTextReader: React.FC<ReaderCommonProps> = ({ text, bookTitle = 'Rome
       setDebugLogs(prev => [...prev.slice(-9), `TEST: Scroll detected at ${new Date().toLocaleTimeString()}`])
     }
     
-    window.addEventListener('scroll', testScrollHandler)
+    window.addEventListener('scroll', testScrollHandler, { passive: true })
     return () => window.removeEventListener('scroll', testScrollHandler)
   }, [])
   
-  // Calculate pages for scroll navigation and build character map
+  // Cache computed styles to avoid forced reflow
   useEffect(() => {
-    if (textReaderRef.current && text) {
+    if (textReaderRef.current) {
       const containerWidth = textReaderRef.current.clientWidth
       const fontSize = parseInt(getComputedStyle(textReaderRef.current).fontSize) || 16
       const lineHeight = parseInt(getComputedStyle(textReaderRef.current).lineHeight) || 24
-      const charsPerLine = estimateCharsPerLine(containerWidth, fontSize, settings.textFont)
       
-      const calculatedPageMap = calculatePageContent(text, pageHeight, lineHeight, charsPerLine)
+      setCachedStyles({
+        fontSize,
+        lineHeight,
+        clientWidth: containerWidth
+      })
+    }
+  }, [settings.textFont])
+
+  // Calculate pages for scroll navigation and build character map
+  useEffect(() => {
+    if (textReaderRef.current && text && cachedStyles) {
+      const charsPerLine = estimateCharsPerLine(cachedStyles.clientWidth, cachedStyles.fontSize, settings.textFont)
+      
+      const calculatedPageMap = calculatePageContent(text, pageHeight, cachedStyles.lineHeight, charsPerLine)
       setPageMap(calculatedPageMap)
       setCurrentPage(0)
-      log('mobile','MobileTextReader: calculated pages for scroll navigation', { pageCount: calculatedPageMap.pages.length, charsPerLine, lineHeight })
+      log('mobile','MobileTextReader: calculated pages for scroll navigation', { pageCount: calculatedPageMap.pages.length, charsPerLine, lineHeight: cachedStyles.lineHeight })
       
       // Build character map for Shakespeare plays
       buildCharacterMapForText(text)
@@ -598,11 +613,14 @@ log('ui','selectedText length:', selectedText?.length)
       // Use a smaller scroll distance to avoid skipping content
       if (textReaderRef.current) {
         const currentScrollTop = textReaderRef.current.scrollTop
-        const viewportHeight = textReaderRef.current.clientHeight
-        
-        textReaderRef.current.scrollTo({
-          top: currentScrollTop + viewportHeight - 170, // Scroll by text reader height minus overlap
-          behavior: 'smooth'
+        // Use requestAnimationFrame to avoid forced reflow
+        requestAnimationFrame(() => {
+          const viewportHeight = textReaderRef.current!.clientHeight
+          
+          textReaderRef.current!.scrollTo({
+            top: currentScrollTop + viewportHeight - 170, // Scroll by text reader height minus overlap
+            behavior: 'smooth'
+          })
         })
       }
     }
@@ -616,11 +634,14 @@ log('ui','selectedText length:', selectedText?.length)
       // Use a smaller scroll distance to avoid skipping content
       if (textReaderRef.current) {
         const currentScrollTop = textReaderRef.current.scrollTop
-        const viewportHeight = textReaderRef.current.clientHeight
-        
-        textReaderRef.current.scrollTo({
-          top: Math.max(0, currentScrollTop - viewportHeight + 170), // Scroll by text reader height minus overlap
-          behavior: 'smooth'
+        // Use requestAnimationFrame to avoid forced reflow
+        requestAnimationFrame(() => {
+          const viewportHeight = textReaderRef.current!.clientHeight
+          
+          textReaderRef.current!.scrollTo({
+            top: Math.max(0, currentScrollTop - viewportHeight + 170), // Scroll by text reader height minus overlap
+            behavior: 'smooth'
+          })
         })
       }
     }

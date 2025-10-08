@@ -1,13 +1,25 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { log } from '@/utils/log'
 
+// CORS headers for development
+const corsHeaders = {
+  'Access-Control-Allow-Origin': '*',
+  'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS',
+  'Access-Control-Allow-Headers': 'Content-Type, Authorization',
+}
+
+// Handle preflight requests
+export async function OPTIONS() {
+  return new NextResponse(null, { status: 200, headers: corsHeaders })
+}
+
 export async function GET(request: NextRequest) {
   try {
     const { searchParams } = new URL(request.url)
     const userId = searchParams.get('userId')
     
     if (!userId) {
-      return NextResponse.json({ error: 'User ID is required' }, { status: 400 })
+      return NextResponse.json({ error: 'User ID is required' }, { status: 400, headers: corsHeaders })
     }
     
     // Return default settings for all users (no authentication required)
@@ -27,10 +39,10 @@ export async function GET(request: NextRequest) {
       updated_at: new Date()
     }
     
-    return NextResponse.json(defaultSettings)
+    return NextResponse.json(defaultSettings, { headers: corsHeaders })
   } catch (error) {
     log('api','Error fetching user settings:', error)
-    return NextResponse.json({ error: 'Internal server error' }, { status: 500 })
+    return NextResponse.json({ error: 'Internal server error' }, { status: 500, headers: corsHeaders })
   }
 }
 
@@ -40,7 +52,7 @@ export async function POST(request: NextRequest) {
     const { userId } = body
     
     if (!userId) {
-      return NextResponse.json({ error: 'User ID is required' }, { status: 400 })
+      return NextResponse.json({ error: 'User ID is required' }, { status: 400, headers: corsHeaders })
     }
     
     // In this simplified version, we just return the default settings
@@ -63,9 +75,9 @@ export async function POST(request: NextRequest) {
       updated_at: new Date()
     }
     
-    return NextResponse.json(defaultSettings)
+    return NextResponse.json(defaultSettings, { headers: corsHeaders })
   } catch (error) {
     log('api','Error creating/updating user settings:', error)
-    return NextResponse.json({ error: 'Internal server error' }, { status: 500 })
+    return NextResponse.json({ error: 'Internal server error' }, { status: 500, headers: corsHeaders })
   }
 }

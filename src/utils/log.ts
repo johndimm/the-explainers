@@ -1,5 +1,10 @@
 // List of enabled log labels - only these will show in console
-const ENABLED_LABELS = ['prompt']
+const ENABLED_LABELS = []
+
+// Disable all console.log calls
+if (typeof console !== 'undefined') {
+  console.log = () => {}
+}
 
 export const log = (label: string, ...args: unknown[]) => {
   if (typeof console !== 'undefined' && console.log) {

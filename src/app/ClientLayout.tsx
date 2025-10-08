@@ -1,5 +1,8 @@
 'use client'
 
+// Import log early to disable console.log
+import '@/utils/log'
+
 import { SettingsProvider } from '@/contexts/SettingsContext'
 import { ProfileProvider } from '@/contexts/ProfileContext'
 import { AuthProvider } from '@/contexts/AuthContext'
