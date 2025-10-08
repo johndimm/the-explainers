@@ -4,6 +4,8 @@ import React, { useRef, useState, useEffect } from 'react'
 import styles from './TextReader.module.css'
 import ChatInterface from './ChatInterface'
 import { ReaderCommonProps, useBookmarkRestoreAndSave, useSearchCore, extractContextInfo, calculatePageContent, estimateCharsPerLine, PageMap, buildCharacterMapForText } from './BaseTextReader'
+import { getDeviceId } from '../utils/deviceId'
+import { API_BASE_URL } from '../utils/apiConfig'
 import { useRouter } from 'next/navigation'
 import { log, warn } from '../utils/log'
 
@@ -284,7 +286,7 @@ const MobileTextReader: React.FC<ReaderCommonProps> = ({ text, bookTitle = 'Rome
     }
   }, [allowScrollHandling, pageMap, currentPage, settings.textFont])
 
-  useBookmarkRestoreAndSave(textReaderRef, text, bookTitle, author, showChatModal, setIsRestoringPosition)
+  useBookmarkRestoreAndSave(textReaderRef, text, bookTitle, author, showChatModal, setIsRestoringPosition, setDebugLogs)
   
   // Debug bookmark saving
   useEffect(() => {
@@ -878,6 +880,9 @@ log('ui','MobileTextReader: Previous search result')
         <div>Text Length: {text?.length || 'No text'}</div>
         <div>Book: {bookTitle}</div>
         <div>Author: {author}</div>
+        <div><strong>Device Info:</strong></div>
+        <div>Device ID: {getDeviceId()}</div>
+        <div>API URL: {API_BASE_URL}</div>
         <div><strong>Debug Logs:</strong></div>
         {debugLogs.map((log, i) => (
           <div key={i} style={{ marginBottom: '2px', wordBreak: 'break-all' }}>{log}</div>

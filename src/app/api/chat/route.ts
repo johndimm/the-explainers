@@ -5,6 +5,18 @@ import { GoogleGenerativeAI } from '@google/generative-ai'
 import { log } from '@/utils/log'
 import modelsData from '@/data/models.json'
 
+// CORS headers for development
+const corsHeaders = {
+  'Access-Control-Allow-Origin': '*',
+  'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS',
+  'Access-Control-Allow-Headers': 'Content-Type, Authorization',
+}
+
+// Handle preflight requests
+export async function OPTIONS() {
+  return new NextResponse(null, { status: 200, headers: corsHeaders })
+}
+
 export interface ChatMessage {
   role: 'user' | 'assistant'
   content: string
@@ -155,6 +167,10 @@ async function callGemini(messages: ChatMessage[], responseLength: string, model
 }
 
 export async function POST(request: NextRequest) {
+  console.log('🔍 CHAT API CALLED - Request received at:', new Date().toISOString())
+  console.log('🔍 CHAT API - Request URL:', request.url)
+  console.log('🔍 CHAT API - Request headers:', Object.fromEntries(request.headers.entries()))
+  
   let provider: string = 'unknown'
   
   try {
@@ -166,6 +182,7 @@ export async function POST(request: NextRequest) {
       gemini: !!process.env.GEMINI_API_KEY
     }
     
+    console.log('🔍 CHAT API - API Keys status:', apiKeys)
     log('api','API Keys status:', apiKeys)
     log('api','Environment check:', {
       NODE_ENV: process.env.NODE_ENV,
@@ -174,9 +191,19 @@ export async function POST(request: NextRequest) {
     })
     
     const body: ChatRequest = await request.json()
+    console.log('🔍 CHAT API - Request body:', JSON.stringify(body, null, 2))
+    
     const { messages, responseLength, style, selectedText, model } = body
     provider = body.provider
 
+    console.log('🔍 CHAT API - Parsed request:', { 
+      provider, 
+      model, 
+      responseLength, 
+      messageCount: messages?.length,
+      userAgent: request.headers.get('user-agent')?.substring(0, 50) + '...'
+    })
+    
     log('api','Chat API request:', { 
       provider, 
       model, 
@@ -186,21 +213,21 @@ export async function POST(request: NextRequest) {
     })
 
     if (!messages || messages.length === 0) {
-      return NextResponse.json({ error: 'No messages provided' }, { status: 400 })
+      return NextResponse.json({ error: 'No messages provided' }, { status: 400, headers: corsHeaders })
     }
 
     // Check if we have the required API key
     if (provider === 'openai' && !process.env.OPENAI_API_KEY) {
-      return NextResponse.json({ error: 'OpenAI API key not configured' }, { status: 500 })
+      return NextResponse.json({ error: 'OpenAI API key not configured' }, { status: 500, headers: corsHeaders })
     }
     if (provider === 'anthropic' && !process.env.ANTHROPIC_API_KEY) {
-      return NextResponse.json({ error: 'Anthropic API key not configured' }, { status: 500 })
+      return NextResponse.json({ error: 'Anthropic API key not configured' }, { status: 500, headers: corsHeaders })
     }
     if (provider === 'deepseek' && !process.env.DEEPSEEK_API_KEY) {
-      return NextResponse.json({ error: 'DeepSeek API key not configured' }, { status: 500 })
+      return NextResponse.json({ error: 'DeepSeek API key not configured' }, { status: 500, headers: corsHeaders })
     }
     if (provider === 'gemini' && !process.env.GEMINI_API_KEY) {
-      return NextResponse.json({ error: 'Gemini API key not configured' }, { status: 500 })
+      return NextResponse.json({ error: 'Gemini API key not configured' }, { status: 500, headers: corsHeaders })
     }
 
     let response: string
@@ -223,14 +250,20 @@ export async function POST(request: NextRequest) {
         response = await callGemini(messages, responseLength, model, style)
         break
       default:
-        return NextResponse.json({ error: 'Invalid provider' }, { status: 400 })
+        return NextResponse.json({ error: 'Invalid provider' }, { status: 400, headers: corsHeaders })
     }
 
     log('api','Chat API success:', { provider, responseLength: response.length })
+    console.log('🔍 CHAT API - Success response:', { 
+      message: response.substring(0, 100) + '...',
+      provider: provider,
+      messageLength: response.length
+    })
+    
     return NextResponse.json({ 
       message: response,
       provider: provider
-    })
+    }, { headers: corsHeaders })
 
   } catch (error) {
     log('api','Chat API error for provider:', provider)
@@ -252,7 +285,7 @@ export async function POST(request: NextRequest) {
     
     return NextResponse.json(
       { error: errorMessage }, 
-      { status: 500 }
+      { status: 500, headers: corsHeaders }
     )
   }
 }

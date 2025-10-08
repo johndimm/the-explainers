@@ -33,8 +33,13 @@ function generateDeviceId(): string {
  * Stores the ID in localStorage so it persists across sessions
  */
 export function getDeviceId(): string {
+  console.log('🔍 getDeviceId called - window:', typeof window, 'localStorage:', typeof localStorage)
+  console.log('🔍 User agent:', navigator.userAgent)
+  console.log('🔍 Is mobile:', /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent))
+  
   if (typeof window === 'undefined') {
     // Server-side: return a placeholder that will be replaced
+    console.log('🔍 Server-side, returning placeholder')
     return 'server-side-placeholder'
   }
 
@@ -42,20 +47,39 @@ export function getDeviceId(): string {
     // Check if localStorage is available
     if (typeof localStorage === 'undefined') {
       console.warn('localStorage not available, generating temporary device ID')
-      return generateDeviceId()
+      const tempId = generateDeviceId()
+      console.log('🆔 Generated temporary device ID (no localStorage):', tempId)
+      return tempId
+    }
+
+    // Test localStorage functionality
+    try {
+      const testKey = 'test_storage_' + Date.now()
+      localStorage.setItem(testKey, 'test')
+      const testValue = localStorage.getItem(testKey)
+      localStorage.removeItem(testKey)
+      console.log('🔍 localStorage test:', testValue === 'test' ? 'PASSED' : 'FAILED')
+    } catch (testError) {
+      console.warn('❌ localStorage test failed:', testError)
     }
 
     // Try to get existing device ID from localStorage
     let deviceId = localStorage.getItem(DEVICE_ID_KEY)
+    console.log('🔍 Retrieved from localStorage:', deviceId)
+    console.log('🔍 All localStorage keys:', Object.keys(localStorage))
     
     if (!deviceId) {
       // Generate new unique device ID
       deviceId = generateDeviceId()
+      console.log('🆔 Generated new device ID:', deviceId)
       try {
         localStorage.setItem(DEVICE_ID_KEY, deviceId)
-        console.log('🆔 Generated new device ID:', deviceId)
+        console.log('✅ Stored device ID in localStorage')
+        // Verify it was stored
+        const verifyId = localStorage.getItem(DEVICE_ID_KEY)
+        console.log('🔍 Verification - stored ID:', verifyId, 'matches:', verifyId === deviceId)
       } catch (storageError) {
-        console.warn('Failed to store device ID in localStorage:', storageError)
+        console.warn('❌ Failed to store device ID in localStorage:', storageError)
       }
     } else {
       console.log('🆔 Using existing device ID:', deviceId)
@@ -64,8 +88,10 @@ export function getDeviceId(): string {
     return deviceId
   } catch (error) {
     // If localStorage fails, generate a temporary ID
-    console.warn('Failed to access localStorage, using temporary device ID:', error)
-    return generateDeviceId()
+    console.warn('❌ Failed to access localStorage, using temporary device ID:', error)
+    const tempId = generateDeviceId()
+    console.log('🆔 Generated temporary device ID (error):', tempId)
+    return tempId
   }
 }
 

@@ -1127,7 +1127,8 @@ export const useBookmarkRestoreAndSave = (
   bookTitle?: string,
   author?: string,
   disableBookmarkSaving: boolean = false,
-  setIsRestoringPosition?: (restoring: boolean) => void
+  setIsRestoringPosition?: (restoring: boolean) => void,
+  setDebugLogs?: (logs: string[] | ((prev: string[]) => string[])) => void
 ) => {
   const scrollTimeoutRef = useRef<NodeJS.Timeout | null>(null)
   const { user } = useAuth()
@@ -1252,48 +1253,38 @@ log('debug', '🔍 Loading bookmark for:', title, 'by', auth)
         setTimeout(() => attemptRestore(), initialDelay)
       }
 
-      // Try to load from database first if user is authenticated or in development
-      // Wait a bit for session to be fully loaded
-      await new Promise(resolve => setTimeout(resolve, 100))
+      // Always try to load bookmark using device ID (no authentication required)
+      const deviceId = getDeviceId()
+      console.log('🔍 BOOKMARK RESTORE: Loading bookmark with device ID:', deviceId)
+      console.log('🔍 BOOKMARK RESTORE: Book title:', title)
+      console.log('🔍 BOOKMARK RESTORE: Book author:', auth)
+      console.log('🔍 BOOKMARK RESTORE: API URL:', `${API_BASE_URL}/api/user/bookmark?bookTitle=${encodeURIComponent(title)}&bookAuthor=${encodeURIComponent(auth)}&userId=${encodeURIComponent(deviceId)}`)
+      log('debug', '🔍 BOOKMARK: Loading bookmark with device ID:', deviceId)
       
-        const userEmail = user?.userAgent || (process.env.NODE_ENV === 'development' ? 'dev-user@example.com' : null)
-        const deviceId = getDeviceId()
-      console.log('🔍 MOBILE: Bookmark loading check:', { 
-        userEmail, 
-        userAgent: user?.userAgent,
-        navigatorUserAgent: navigator.userAgent,
-        isDev: process.env.NODE_ENV === 'development',
-        title,
-        auth
-      })
-      
-      if (userEmail) {
-        try {
-          console.log('🔍 BOOKMARK: Using device ID:', deviceId)
-          const response = await fetch(`${API_BASE_URL}/api/user/bookmark?bookTitle=${encodeURIComponent(title)}&bookAuthor=${encodeURIComponent(auth)}&userId=${encodeURIComponent(deviceId)}`)
-          log('debug', 'bookmark', 'Bookmark API response status:', response.status)
-          
-          if (response.ok) {
-            const bookmark = await response.json()
-            log('debug', 'bookmark', 'Bookmark found in database:', bookmark)
-            const position = bookmark.scroll_position
-log('debug', '🔍 Bookmark loaded from database:', { position, bookmark })
-            restorePosition(position, 'database')
-            return
-          } else {
-            log('debug', 'bookmark', 'No bookmark found in database (404)')
-log('❌ No bookmark found in database (404)')
-          }
-        } catch (error) {
-          log('debug', 'bookmark', 'Error loading bookmark from database:', error)
+      try {
+        const response = await fetch(`${API_BASE_URL}/api/user/bookmark?bookTitle=${encodeURIComponent(title)}&bookAuthor=${encodeURIComponent(auth)}&userId=${encodeURIComponent(deviceId)}`)
+        console.log('🔍 BOOKMARK RESTORE: API response status:', response.status)
+        console.log('🔍 BOOKMARK RESTORE: API response ok:', response.ok)
+        log('debug', 'bookmark', 'Bookmark API response status:', response.status)
+        
+        if (response.ok) {
+          const bookmark = await response.json()
+          console.log('🔍 BOOKMARK RESTORE: Bookmark found in database:', bookmark)
+          console.log('🔍 BOOKMARK RESTORE: Bookmark scroll position:', bookmark.scroll_position)
+          log('debug', 'bookmark', 'Bookmark found in database:', bookmark)
+          const position = bookmark.scroll_position
+          console.log('🔍 BOOKMARK RESTORE: About to restore position:', position)
+          log('debug', '🔍 Bookmark loaded from database:', { position, bookmark })
+          restorePosition(position, 'database')
+          return
+        } else {
+          const errorText = await response.text()
+          console.log('🔍 BOOKMARK RESTORE: No bookmark found in database (404) - Response:', errorText)
+          log('debug', 'bookmark', 'No bookmark found in database (404)')
         }
-      } else {
-        console.log('🔍 MOBILE: No userEmail found, skipping bookmark restoration', {
-          userAgent: user?.userAgent,
-          navigatorUserAgent: navigator.userAgent,
-          isDev: process.env.NODE_ENV === 'development'
-        })
-        log('debug', 'bookmark', 'No session found and not in development mode, skipping bookmark restoration')
+      } catch (error) {
+        console.error('🔍 BOOKMARK RESTORE: Error loading bookmark from database:', error)
+        log('debug', 'bookmark', 'Error loading bookmark from database:', error)
       }
 
       // No saved bookmark found in database - scroll past Project Gutenberg header for new books
@@ -1382,24 +1373,73 @@ log('❌ No bookmark found in database (404)')
           try {
             const deviceId = getDeviceId()
             log('debug', 'bookmark', `Saving bookmark: ${title} by ${auth} at position ${scrollPosition}`)
-            log('debug', '🔍 SAVING BOOKMARK:', { title, auth, scrollPosition, deviceId })
-              const response = await fetch(`${API_BASE_URL}/api/user/bookmark`, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({
-                  bookTitle: title,
-                  bookAuthor: auth,
-                  scrollPosition: Math.round(scrollPosition), // Round to integer for database compatibility
-                  userId: deviceId
-                })
-              })
+            log('debug', '🔍 SAVING BOOKMARK:', { title, auth, scrollPosition, deviceId, apiUrl: API_BASE_URL })
+            
+            const requestBody = {
+              bookTitle: title,
+              bookAuthor: auth,
+              scrollPosition: Math.round(scrollPosition),
+              userId: deviceId
+            }
+            
+            const apiCallInfo = {
+              url: `${API_BASE_URL}/api/user/bookmark`,
+              method: 'POST',
+              body: requestBody,
+              timestamp: new Date().toISOString()
+            }
+            
+            console.log('📤 Sending bookmark request:', apiCallInfo)
+            
+            // Add to debug logs if available
+            if (typeof setDebugLogs === 'function') {
+              setDebugLogs(prev => [...prev, `📤 API Call: ${apiCallInfo.method} ${apiCallInfo.url}`])
+              setDebugLogs(prev => [...prev, `📤 Body: ${JSON.stringify(apiCallInfo.body, null, 2)}`])
+            }
+            
+            const response = await fetch(`${API_BASE_URL}/api/user/bookmark`, {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify(requestBody)
+            })
+            
+            const responseInfo = {
+              status: response.status,
+              statusText: response.statusText,
+              ok: response.ok,
+              timestamp: new Date().toISOString()
+            }
+            
+            console.log('📥 Bookmark response:', responseInfo)
+            
+            // Add response to debug logs
+            if (typeof setDebugLogs === 'function') {
+              setDebugLogs(prev => [...prev, `📥 Response: ${responseInfo.status} ${responseInfo.statusText} (${responseInfo.ok ? 'OK' : 'ERROR'})`])
+            }
             
             if (response.ok) {
+              const result = await response.json()
+              console.log('✅ BOOKMARK: Saved successfully to database:', result)
               log('debug', 'bookmark', `Bookmark saved successfully: ${title} by ${auth} at position ${scrollPosition}`)
-              console.log('✅ BOOKMARK: Saved successfully to database')
+              
+              // Add success to debug logs
+              if (typeof setDebugLogs === 'function') {
+                setDebugLogs(prev => [...prev, `✅ Success: ${JSON.stringify(result, null, 2)}`])
+              }
             } else {
+              const errorText = await response.text()
+              console.error('❌ BOOKMARK: Failed to save:', {
+                status: response.status,
+                statusText: response.statusText,
+                error: errorText
+              })
               log('debug', 'bookmark', `Failed to save bookmark: ${response.status} ${response.statusText}`)
               console.log('❌ BOOKMARK: Failed to save:', response.status, response.statusText)
+              
+              // Add error to debug logs
+              if (typeof setDebugLogs === 'function') {
+                setDebugLogs(prev => [...prev, `❌ Error: ${response.status} ${response.statusText} - ${errorText}`])
+              }
             }
           } catch (error) {
             log('debug', 'bookmark', 'Error saving bookmark to database:', error)
