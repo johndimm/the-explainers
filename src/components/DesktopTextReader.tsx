@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useRef, useState } from 'react'
+import React, { useRef, useState, useEffect } from 'react'
 import styles from './TextReader.module.css'
 import ChatInterface from './ChatInterface'
 import { ReaderCommonProps, useBookmarkRestoreAndSave, useSearchCore, extractContextInfo, calculatePageContent, estimateCharsPerLine, PageMap, buildCharacterMapForText } from './BaseTextReader'
@@ -8,8 +8,9 @@ import { useRouter } from 'next/navigation'
 import { log } from '../utils/log'
 
 const DesktopTextReader: React.FC<ReaderCommonProps> = ({ text, bookTitle = 'Romeo and Juliet', author = 'William Shakespeare', settings, profile, onSettingsChange }) => {
+  console.log('🔍 DESKTOP: Component rendered!')
   log('desktop', 'DesktopTextReader rendering with text length:', text?.length)
-  console.log('🔍 DESKTOP: DesktopTextReader component rendered!')
+  log('desktop', 'DesktopTextReader component rendered!')
   const router = useRouter()
   const textReaderRef = useRef<HTMLDivElement>(null)
   const textContentRef = useRef<HTMLDivElement>(null)
@@ -33,7 +34,123 @@ const DesktopTextReader: React.FC<ReaderCommonProps> = ({ text, bookTitle = 'Rom
   // Store scroll position to avoid reading it during scroll events
   const scrollPositionRef = useRef(0)
 
-  useBookmarkRestoreAndSave(textReaderRef, text, bookTitle, author, showChatModal)
+  // Font size state for keyboard controls
+  const [currentFontSize, setCurrentFontSize] = useState(settings.textFontSize)
+  console.log('🔍 DESKTOP: Initial font size setup', { 
+    settingsFontSize: settings.textFontSize, 
+    currentFontSize 
+  })
+
+  // Update font size when settings change
+  useEffect(() => {
+    console.log('🔍 DESKTOP: Settings changed, updating currentFontSize', { 
+      from: currentFontSize, 
+      to: settings.textFontSize 
+    })
+    setCurrentFontSize(settings.textFontSize)
+  }, [settings.textFontSize])
+
+  // Save bookmark when font size changes
+  useEffect(() => {
+    log('desktop', 'Font size change effect triggered', { 
+      currentFontSize, 
+      settingsFontSize: settings.textFontSize,
+      areDifferent: currentFontSize !== settings.textFontSize
+    })
+    console.log('🔍 DESKTOP: Font size change effect triggered', { 
+      currentFontSize, 
+      settingsFontSize: settings.textFontSize,
+      areDifferent: currentFontSize !== settings.textFontSize
+    })
+    if (currentFontSize !== settings.textFontSize) {
+      log('desktop', 'Font sizes are different, triggering bookmark save')
+      console.log('🔍 DESKTOP: Font sizes are different, triggering bookmark save')
+      // Trigger a bookmark save when font size changes
+      const timeoutId = setTimeout(() => {
+        if (textReaderRef.current) {
+          const scrollPosition = textReaderRef.current.scrollTop
+          log('desktop', 'Triggering scroll to save bookmark', { scrollPosition })
+          console.log('🔍 DESKTOP: Triggering scroll to save bookmark', { scrollPosition })
+          // This will trigger the scroll handler which saves the bookmark
+          textReaderRef.current.scrollTop = scrollPosition + 1
+          textReaderRef.current.scrollTop = scrollPosition
+          log('desktop', 'Scroll triggered for bookmark save')
+          console.log('🔍 DESKTOP: Scroll triggered for bookmark save')
+        }
+      }, 100)
+      return () => clearTimeout(timeoutId)
+    }
+  }, [currentFontSize, settings.textFontSize])
+
+  // Keyboard shortcuts for font size
+  useEffect(() => {
+    console.log('🔍 DESKTOP: Setting up keyboard shortcuts for font size')
+    const handleKeyDown = (e: KeyboardEvent) => {
+      console.log('🔍 DESKTOP: Key pressed', { 
+        key: e.key, 
+        ctrlKey: e.ctrlKey, 
+        metaKey: e.metaKey,
+        currentFontSize 
+      })
+      
+      // Test: log every key press
+      if (e.key === '=' || e.key === '+' || e.key === '-') {
+        console.log('🔍 DESKTOP: Plus/Minus key detected!', e.key)
+      }
+      // Ctrl/Cmd + Plus to increase font size
+      if ((e.ctrlKey || e.metaKey) && (e.key === '+' || e.key === '=')) {
+        e.preventDefault()
+        const newFontSize = Math.min(currentFontSize + 1, 24)
+        log('desktop', 'Font size increase requested', { currentFontSize, newFontSize })
+        console.log('🔍 DESKTOP: Font size increase requested', { currentFontSize, newFontSize })
+        if (newFontSize !== currentFontSize) {
+          log('desktop', 'Updating font size', { from: currentFontSize, to: newFontSize })
+          console.log('🔍 DESKTOP: Updating font size', { from: currentFontSize, to: newFontSize })
+          setCurrentFontSize(newFontSize)
+          onSettingsChange({
+            ...settings,
+            textFontSize: newFontSize
+          })
+          log('desktop', 'Font size updated and settings changed')
+          console.log('🔍 DESKTOP: Font size updated and settings changed')
+        }
+      }
+      // Ctrl/Cmd + Minus to decrease font size
+      else if ((e.ctrlKey || e.metaKey) && e.key === '-') {
+        e.preventDefault()
+        const newFontSize = Math.max(currentFontSize - 1, 12)
+        log('desktop', 'Font size decrease requested', { currentFontSize, newFontSize })
+        console.log('🔍 DESKTOP: Font size decrease requested', { currentFontSize, newFontSize })
+        if (newFontSize !== currentFontSize) {
+          log('desktop', 'Updating font size', { from: currentFontSize, to: newFontSize })
+          console.log('🔍 DESKTOP: Updating font size', { from: currentFontSize, to: newFontSize })
+          setCurrentFontSize(newFontSize)
+          onSettingsChange({
+            ...settings,
+            textFontSize: newFontSize
+          })
+          log('desktop', 'Font size updated and settings changed')
+          console.log('🔍 DESKTOP: Font size updated and settings changed')
+        }
+      }
+    }
+
+    // Try both document and textReaderRef
+    document.addEventListener('keydown', handleKeyDown)
+    if (textReaderRef.current) {
+      textReaderRef.current.addEventListener('keydown', handleKeyDown)
+    }
+    
+    return () => {
+      document.removeEventListener('keydown', handleKeyDown)
+      if (textReaderRef.current) {
+        textReaderRef.current.removeEventListener('keydown', handleKeyDown)
+      }
+    }
+  }, [currentFontSize, settings, onSettingsChange])
+
+  log('desktop', ' Calling useBookmarkRestoreAndSave with currentFontSize:', currentFontSize)
+  useBookmarkRestoreAndSave(textReaderRef, text, bookTitle, author, false, undefined, undefined, undefined, settings, onSettingsChange, currentFontSize)
   
   // Global mouse up listener to catch selections that extend outside the text content
   React.useEffect(() => {
@@ -90,7 +207,7 @@ log('ui','🔍 SETTING SELECTED TEXT (DESKTOP):', JSON.stringify(t))
   // Calculate pages for scroll navigation and build character map
   React.useEffect(() => {
     if (textReaderRef.current && text && cachedStyles) {
-      const charsPerLine = estimateCharsPerLine(cachedStyles.clientWidth, cachedStyles.fontSize, settings.textFont)
+      const charsPerLine = estimateCharsPerLine(cachedStyles.clientWidth, currentFontSize, settings.textFont)
       
       const calculatedPageMap = calculatePageContent(text, pageHeight, cachedStyles.lineHeight, charsPerLine)
       setPageMap(calculatedPageMap)
@@ -100,7 +217,7 @@ log('ui','🔍 SETTING SELECTED TEXT (DESKTOP):', JSON.stringify(t))
       // Build character map for Shakespeare plays
       buildCharacterMapForText(text)
     }
-  }, [text, settings.textFont, pageHeight])
+  }, [text, settings.textFont, pageHeight, currentFontSize])
 
   // Track scroll position and update currentPage accordingly
   React.useEffect(() => {
@@ -126,7 +243,7 @@ log('ui','🔍 SETTING SELECTED TEXT (DESKTOP):', JSON.stringify(t))
             
             // Calculate which page we're currently viewing based on scroll position
             const currentLine = Math.floor(scrollPositionRef.current / lineHeight)
-            const currentCharPosition = currentLine * (estimateCharsPerLine(cachedStyles.clientWidth, cachedStyles.fontSize, settings.textFont))
+            const currentCharPosition = currentLine * (estimateCharsPerLine(cachedStyles.clientWidth, currentFontSize, settings.textFont))
           
           // Find which page contains this position
           let newCurrentPage = 0
@@ -299,7 +416,46 @@ log('ui','DesktopTextReader: Previous search result')
 
   return (
     <>
-      <div ref={textReaderRef} className={styles.textReader}>
+      
+      <div 
+        ref={textReaderRef} 
+        className={styles.textReader}
+        tabIndex={0}
+        onKeyDown={(e) => {
+          console.log('🔍 DESKTOP: Direct keydown on textReader', { 
+            key: e.key, 
+            ctrlKey: e.ctrlKey, 
+            metaKey: e.metaKey 
+          })
+          
+          // Ctrl/Cmd + Plus to increase font size
+          if ((e.ctrlKey || e.metaKey) && (e.key === '+' || e.key === '=')) {
+            e.preventDefault()
+            const newFontSize = Math.min(currentFontSize + 1, 24)
+            console.log('🔍 DESKTOP: Font size increase via direct handler', { currentFontSize, newFontSize })
+            if (newFontSize !== currentFontSize) {
+              setCurrentFontSize(newFontSize)
+              onSettingsChange({
+                ...settings,
+                textFontSize: newFontSize
+              })
+            }
+          }
+          // Ctrl/Cmd + Minus to decrease font size
+          else if ((e.ctrlKey || e.metaKey) && e.key === '-') {
+            e.preventDefault()
+            const newFontSize = Math.max(currentFontSize - 1, 12)
+            console.log('🔍 DESKTOP: Font size decrease via direct handler', { currentFontSize, newFontSize })
+            if (newFontSize !== currentFontSize) {
+              setCurrentFontSize(newFontSize)
+              onSettingsChange({
+                ...settings,
+                textFontSize: newFontSize
+              })
+            }
+          }
+        }}
+      >
         <div
         ref={textContentRef}
         className={styles.textContent}
@@ -307,7 +463,7 @@ log('ui','DesktopTextReader: Previous search result')
           userSelect: 'text', 
           fontFamily: settings.textFont, 
           position: 'relative',
-          '--text-font-size': `${settings.textFontSize}px`
+          '--text-font-size': `${currentFontSize}px`
         } as React.CSSProperties}
       >
 

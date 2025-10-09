@@ -284,7 +284,7 @@ const MobileTextReader: React.FC<ReaderCommonProps> = ({ text, bookTitle = 'Rome
     }
   }, [allowScrollHandling, pageMap, currentPage, settings.textFont, isRestoringPosition])
 
-  useBookmarkRestoreAndSave(textReaderRef, text, bookTitle, author, showChatModal, setIsRestoringPosition, setDebugLogs)
+  useBookmarkRestoreAndSave(textReaderRef, text, bookTitle, author, false, setIsRestoringPosition, setDebugLogs, undefined, settings, onSettingsChange, currentFontSize)
   
   // Debug bookmark saving
   useEffect(() => {

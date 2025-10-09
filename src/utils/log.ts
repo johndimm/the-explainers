@@ -1,5 +1,5 @@
 // List of enabled log labels - only these will show in console
-const ENABLED_LABELS: string[] = ['debug', 'mobile', 'bookmark', 'ui']
+const ENABLED_LABELS: string[] = ['debug', 'mobile', 'bookmark', 'ui', 'desktop']
 
 // Mobile console element reference
 let mobileConsoleElement: HTMLDivElement | null = null

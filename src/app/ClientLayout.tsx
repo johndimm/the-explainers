@@ -43,7 +43,7 @@ export default function ClientLayout({ children }: { children: React.ReactNode }
               {children}
             </main>
             {/* Mobile Console - only show on mobile */}
-            {false && isMobile && (
+            {isMobile && (
               <div 
                 ref={mobileConsoleRef}
                 style={{

@@ -1128,7 +1128,10 @@ export const useBookmarkRestoreAndSave = (
   disableBookmarkSaving: boolean = false,
   setIsRestoringPosition?: (restoring: boolean) => void,
   setDebugLogs?: (logs: string[] | ((prev: string[]) => string[])) => void,
-  allowScrollHandling?: boolean
+  allowScrollHandling?: boolean,
+  settings?: any,
+  onSettingsChange?: (settings: any) => void,
+  currentFontSize?: number
 ) => {
   const scrollTimeoutRef = useRef<NodeJS.Timeout | null>(null)
 
@@ -1242,9 +1245,23 @@ log('debug', '🔍 Loading bookmark for:', title, 'by', auth)
           // console.log('🔍 BOOKMARK RESTORE: Bookmark scroll position:', bookmark.scroll_position)
           log('debug', 'bookmark', 'Bookmark found in database:', bookmark)
           const position = bookmark.scroll_position
+          const fontSize = bookmark.font_size
           // console.log('🔍 BOOKMARK RESTORE: About to restore position:', position)
-          log('debug', '🔍 Bookmark loaded from database:', { position, bookmark })
+          log('debug', '🔍 Bookmark loaded from database:', { position, fontSize, bookmark })
           restorePosition(position, 'database')
+          
+          // Restore font size if available
+          log('debug', '🔍 Font size restoration check:', { fontSize, hasSettings: !!settings, hasOnSettingsChange: !!onSettingsChange })
+          if (fontSize && settings && onSettingsChange) {
+            log('debug', '🔍 Restoring font size from', settings.textFontSize, 'to', fontSize)
+            onSettingsChange({
+              ...settings,
+              textFontSize: fontSize
+            })
+            log('debug', '🔍 Font size restored successfully:', fontSize)
+          } else {
+            log('debug', '🔍 Font size NOT restored:', { fontSize, hasSettings: !!settings, hasOnSettingsChange: !!onSettingsChange })
+          }
           return
         } else {
           const errorText = await response.text()
@@ -1300,8 +1317,12 @@ log('debug', '🔍 Loading bookmark for:', title, 'by', auth)
     log('debug', 'bookmark', 'Setting up scroll effect, textReaderRef:', textReaderRef.current)
     
     const handleScroll = () => {
+      console.log('🔍 SCROLL HANDLER CALLED!')
+      log('debug', 'SCROLL HANDLER CALLED - disableBookmarkSaving:', disableBookmarkSaving)
+      console.log('🔍 SCROLL HANDLER CALLED - disableBookmarkSaving:', disableBookmarkSaving)
       // Skip bookmark saving if disabled (e.g., during chat operations)
       if (disableBookmarkSaving) {
+        log('debug', 'SCROLL HANDLER - Skipping due to disableBookmarkSaving')
         return
       }
       
@@ -1330,12 +1351,45 @@ log('debug', '🔍 Loading bookmark for:', title, 'by', auth)
             setTimeout(async () => {
               try {
             
+            // Use settings.textFontSize as the primary source since currentFontSize might be undefined
+            const finalFontSize = settings?.textFontSize ?? 18
+            console.log('🔍 DESKTOP: SAVING BOOKMARK: Font size =', finalFontSize)
+            console.log('🔍 DESKTOP: Testing log function')
+            log('desktop', 'SAVING BOOKMARK: Font size =', finalFontSize)
+            console.log('🔍 DESKTOP: After log function call')
+            log('debug', 'BOOKMARK SAVE: Using settings font size', {
+              settingsFontSize: settings?.textFontSize,
+              finalFontSize
+            })
+            
             const requestBody = {
               bookTitle: title,
               bookAuthor: auth,
               scrollPosition: Math.round(scrollPosition),
+              fontSize: finalFontSize,
               userId: userId
             }
+            alert(`API REQUEST: ${JSON.stringify(requestBody)}`)
+            log('debug', 'SAVING BOOKMARK - Full debug info:', {
+              requestBody,
+              currentFontSize,
+              settingsFontSize: settings?.textFontSize,
+              hasCurrentFontSize: currentFontSize !== undefined,
+              finalFontSize: currentFontSize ?? settings?.textFontSize ?? 18
+            })
+            console.log('🔍 SAVING BOOKMARK - Full debug info:', {
+              requestBody,
+              currentFontSize,
+              settingsFontSize: settings?.textFontSize,
+              hasCurrentFontSize: currentFontSize !== undefined,
+              finalFontSize: currentFontSize ?? settings?.textFontSize ?? 18
+            })
+            log('debug', '🔍 Saving bookmark with font size:', { 
+              fontSize: requestBody.fontSize, 
+              currentFontSize, 
+              settingsFontSize: settings?.textFontSize,
+              hasCurrentFontSize: currentFontSize !== undefined
+            })
             
             const apiCallInfo = {
               url: `${API_BASE_URL}/api/user/bookmark`,
@@ -1356,6 +1410,10 @@ log('debug', '🔍 Loading bookmark for:', title, 'by', auth)
               headers: { 'Content-Type': 'application/json' },
               body: JSON.stringify(requestBody)
             })
+            
+            console.log('🔍 API RESPONSE STATUS:', response.status)
+            const responseText = await response.text()
+            console.log('🔍 API RESPONSE BODY:', responseText)
             
             const responseInfo = {
               status: response.status,

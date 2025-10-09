@@ -56,6 +56,7 @@ export interface UserBookmark {
   book_title: string
   book_author: string
   scroll_position: number
+  font_size?: number | null
   updated_at?: Date
 }
 
@@ -122,13 +123,15 @@ export async function initializeDatabase() {
       )
     `)
 
-    // Create user_bookmarks table
+    // Always drop and recreate user_bookmarks table to include font_size
+    await client.query(`DROP TABLE IF EXISTS user_bookmarks CASCADE`)
     await client.query(`
       CREATE TABLE user_bookmarks (
         user_id VARCHAR(255),
         book_title TEXT NOT NULL,
         book_author TEXT NOT NULL,
         scroll_position INTEGER NOT NULL DEFAULT 0,
+        font_size INTEGER DEFAULT NULL,
         updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
         PRIMARY KEY (user_id, book_title, book_author)
       )
@@ -143,6 +146,8 @@ export async function initializeDatabase() {
       ALTER TABLE user_settings 
       ADD COLUMN IF NOT EXISTS chat_font_size INTEGER DEFAULT 16
     `)
+
+
 
     // Create indexes for better performance
     await client.query(`
@@ -597,6 +602,7 @@ export async function getUserBookmark(user_id: string, bookTitle: string, bookAu
       book_title: row.book_title,
       book_author: row.book_author,
       scroll_position: row.scroll_position,
+      font_size: row.font_size,
       updated_at: row.updated_at
     }
   } catch (error) {
@@ -613,14 +619,15 @@ export async function createOrUpdateUserBookmark(bookmark: UserBookmark): Promis
   try {
     const now = new Date()
     const query = `
-      INSERT INTO user_bookmarks (user_id, book_title, book_author, scroll_position, updated_at)
-      VALUES ($1, $2, $3, $4, $5)
+      INSERT INTO user_bookmarks (user_id, book_title, book_author, scroll_position, font_size, updated_at)
+      VALUES ($1, $2, $3, $4, $5, $6)
       ON CONFLICT (user_id, book_title, book_author) DO UPDATE SET
         scroll_position = EXCLUDED.scroll_position,
+        font_size = EXCLUDED.font_size,
         updated_at = EXCLUDED.updated_at
       RETURNING *
     `
-    const params = [bookmark.user_id, bookmark.book_title, bookmark.book_author, bookmark.scroll_position, now]
+    const params = [bookmark.user_id, bookmark.book_title, bookmark.book_author, bookmark.scroll_position, bookmark.font_size, now]
     
     const result = await client.query(query, params)
     
@@ -634,6 +641,7 @@ export async function createOrUpdateUserBookmark(bookmark: UserBookmark): Promis
       book_title: row.book_title,
       book_author: row.book_author,
       scroll_position: row.scroll_position,
+      font_size: row.font_size,
       updated_at: row.updated_at
     }
   } catch (error) {
@@ -658,6 +666,7 @@ export async function getAllUserBookmarks(user_id: string): Promise<UserBookmark
       book_title: row.book_title,
       book_author: row.book_author,
       scroll_position: row.scroll_position,
+      font_size: row.font_size,
       updated_at: row.updated_at
     }))
   } catch (error) {

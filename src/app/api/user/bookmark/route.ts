@@ -53,6 +53,7 @@ export async function GET(request: NextRequest) {
         book_title: bookTitle,
         book_author: bookAuthor,
         scroll_position: 0,
+        font_size: null,
         bookmark_exists: false,
         created_at: new Date(),
         updated_at: new Date()
@@ -75,9 +76,9 @@ export async function POST(request: NextRequest) {
     const body = await request.json()
     console.log('🔍 BOOKMARK POST - Request body:', JSON.stringify(body, null, 2))
     
-    const { bookTitle, bookAuthor, scrollPosition, userId } = body
+    const { bookTitle, bookAuthor, scrollPosition, fontSize, userId } = body
     
-    console.log('🔍 BOOKMARK POST - Parsed data:', { bookTitle, bookAuthor, scrollPosition, userId })
+    console.log('🔍 BOOKMARK POST - Parsed data:', { bookTitle, bookAuthor, scrollPosition, fontSize, userId })
     
     if (!bookTitle || !bookAuthor || scrollPosition === undefined) {
       console.log('🔍 BOOKMARK POST - Missing required fields')
@@ -93,7 +94,8 @@ export async function POST(request: NextRequest) {
       user_id: userId,
       book_title: bookTitle,
       book_author: bookAuthor,
-      scroll_position: Math.round(scrollPosition)
+      scroll_position: Math.round(scrollPosition),
+      font_size: fontSize !== undefined ? Math.round(fontSize) : null
     }
     
     console.log('🔍 BOOKMARK POST - Saving bookmark:', bookmarkData)

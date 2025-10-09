@@ -21,7 +21,11 @@ const TextReader: React.FC<TextReaderProps> = (props) => {
   // Memoize mobile detection to avoid reflow on every render
   const isMobile = React.useMemo(() => {
     if (typeof window === 'undefined') return false
-    return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)
+    const userAgent = navigator.userAgent
+    console.log('🔍 MOBILE DETECTION: User agent:', userAgent)
+    const isMobileDevice = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(userAgent)
+    console.log('🔍 MOBILE DETECTION: Is mobile?', isMobileDevice)
+    return isMobileDevice
   }, [])
   
   // Debug logging to help troubleshoot (only once)
