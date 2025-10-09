@@ -1131,7 +1131,7 @@ export const useBookmarkRestoreAndSave = (
   allowScrollHandling?: boolean,
   settings?: any,
   onSettingsChange?: (settings: any) => void,
-  currentFontSize?: number
+  currentFontSizeParam?: number
 ) => {
   const scrollTimeoutRef = useRef<NodeJS.Timeout | null>(null)
 
@@ -1351,12 +1351,15 @@ log('debug', '🔍 Loading bookmark for:', title, 'by', auth)
             setTimeout(async () => {
               try {
             
-            // Use settings.textFontSize as the primary source since currentFontSize might be undefined
-            const finalFontSize = settings?.textFontSize ?? 18
-            console.log('🔍 DESKTOP: SAVING BOOKMARK: Font size =', finalFontSize)
-            console.log('🔍 DESKTOP: Testing log function')
-            log('desktop', 'SAVING BOOKMARK: Font size =', finalFontSize)
-            console.log('🔍 DESKTOP: After log function call')
+            // Use currentFontSize if available, otherwise fall back to settings
+            const finalFontSize = currentFontSizeParam ?? settings?.textFontSize ?? 18
+            console.log('🔍 FONT SIZE DEBUG:', { 
+              currentFontSizeParam, 
+              settingsFontSize: settings?.textFontSize, 
+              finalFontSize,
+              paramUndefined: currentFontSizeParam === undefined,
+              settingsUndefined: settings === undefined
+            })
             log('debug', 'BOOKMARK SAVE: Using settings font size', {
               settingsFontSize: settings?.textFontSize,
               finalFontSize
@@ -1369,26 +1372,25 @@ log('debug', '🔍 Loading bookmark for:', title, 'by', auth)
               fontSize: finalFontSize,
               userId: userId
             }
-            alert(`API REQUEST: ${JSON.stringify(requestBody)}`)
             log('debug', 'SAVING BOOKMARK - Full debug info:', {
               requestBody,
-              currentFontSize,
+              currentFontSizeParam,
               settingsFontSize: settings?.textFontSize,
-              hasCurrentFontSize: currentFontSize !== undefined,
-              finalFontSize: currentFontSize ?? settings?.textFontSize ?? 18
+              hasCurrentFontSize: currentFontSizeParam !== undefined,
+              finalFontSize: currentFontSizeParam ?? settings?.textFontSize ?? 18
             })
             console.log('🔍 SAVING BOOKMARK - Full debug info:', {
               requestBody,
-              currentFontSize,
+              currentFontSizeParam,
               settingsFontSize: settings?.textFontSize,
-              hasCurrentFontSize: currentFontSize !== undefined,
-              finalFontSize: currentFontSize ?? settings?.textFontSize ?? 18
+              hasCurrentFontSize: currentFontSizeParam !== undefined,
+              finalFontSize: currentFontSizeParam ?? settings?.textFontSize ?? 18
             })
             log('debug', '🔍 Saving bookmark with font size:', { 
               fontSize: requestBody.fontSize, 
-              currentFontSize, 
+              currentFontSizeParam, 
               settingsFontSize: settings?.textFontSize,
-              hasCurrentFontSize: currentFontSize !== undefined
+              hasCurrentFontSize: currentFontSizeParam !== undefined
             })
             
             const apiCallInfo = {
@@ -1414,6 +1416,15 @@ log('debug', '🔍 Loading bookmark for:', title, 'by', auth)
             console.log('🔍 API RESPONSE STATUS:', response.status)
             const responseText = await response.text()
             console.log('🔍 API RESPONSE BODY:', responseText)
+            
+            // Parse the response text as JSON
+            let responseData
+            try {
+              responseData = JSON.parse(responseText)
+            } catch (e) {
+              console.error('Failed to parse response as JSON:', e)
+              responseData = { error: 'Invalid JSON response' }
+            }
             
             const responseInfo = {
               status: response.status,

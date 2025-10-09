@@ -43,10 +43,7 @@ const DesktopTextReader: React.FC<ReaderCommonProps> = ({ text, bookTitle = 'Rom
 
   // Update font size when settings change
   useEffect(() => {
-    console.log('🔍 DESKTOP: Settings changed, updating currentFontSize', { 
-      from: currentFontSize, 
-      to: settings.textFontSize 
-    })
+    console.log('🔍 SETTINGS CHANGED:', { from: currentFontSize, to: settings.textFontSize })
     setCurrentFontSize(settings.textFontSize)
   }, [settings.textFontSize])
 

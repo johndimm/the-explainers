@@ -45,10 +45,7 @@ const appendToMobileConsole = (message: string) => {
   }
 }
 
-// Disable all console.log calls
-if (typeof console !== 'undefined') {
-  console.log = () => {}
-}
+// Console logging is enabled for debugging
 
 // Safe stringify function that handles circular references and React elements
 const safeStringify = (arg: unknown): string => {
@@ -91,18 +88,15 @@ const safeStringify = (arg: unknown): string => {
 }
 
 export const log = (label: string, ...args: unknown[]) => {
-  const message = `[${label.toUpperCase()}] ${args.map(safeStringify).join(' ')}`
+  // Always log to console
+  if (typeof console !== 'undefined') {
+    console.log(`[${label.toUpperCase()}]`, ...args)
+  }
   
   // Show in mobile console if on mobile
   if (isMobile()) {
+    const message = `[${label.toUpperCase()}] ${args.map(safeStringify).join(' ')}`
     appendToMobileConsole(message)
-  }
-  
-  // Also show in regular console if label is enabled
-  if (typeof console !== 'undefined' && console.log) {
-    if (ENABLED_LABELS.includes(label.toLowerCase())) {
-      console.log(`[${label.toUpperCase()}]`, ...args)
-    }
   }
 }
 
