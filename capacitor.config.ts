@@ -1,7 +1,7 @@
 import { CapacitorConfig } from '@capacitor/cli';
 
 const config: CapacitorConfig = {
-  appId: 'com.explainers.romeo-and-juliet',
+  appId: 'com.explainers.romeoandjuliet',
   appName: 'Romeo and Juliet Explained',
   webDir: 'out',
   server: {

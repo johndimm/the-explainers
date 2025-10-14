@@ -167,6 +167,7 @@ const MobileTextReader: React.FC<ReaderCommonProps> = ({ text, bookTitle = 'Rome
   
   // Font size state for pinch-to-zoom
   const [currentFontSize, setCurrentFontSize] = useState(settings.textFontSize)
+  const currentFontSizeRef = useRef(settings.textFontSize)
   
   const [isScrolling, setIsScrolling] = useState(false)
   const scrollTimeoutRef = useRef<NodeJS.Timeout | null>(null)
@@ -177,6 +178,7 @@ const MobileTextReader: React.FC<ReaderCommonProps> = ({ text, bookTitle = 'Rome
   // Update font size when settings change
   useEffect(() => {
     setCurrentFontSize(settings.textFontSize)
+    currentFontSizeRef.current = settings.textFontSize
   }, [settings.textFontSize])
 
   // Simple approach: disable all scroll handling for first few seconds on mobile or Capacitor
@@ -284,7 +286,7 @@ const MobileTextReader: React.FC<ReaderCommonProps> = ({ text, bookTitle = 'Rome
     }
   }, [allowScrollHandling, pageMap, currentPage, settings.textFont, isRestoringPosition])
 
-  useBookmarkRestoreAndSave(textReaderRef, text, bookTitle, author, false, setIsRestoringPosition, setDebugLogs, undefined, settings, onSettingsChange, currentFontSize)
+  useBookmarkRestoreAndSave(textReaderRef, text, bookTitle, author, false, setIsRestoringPosition, setDebugLogs, undefined, settings, onSettingsChange, () => currentFontSizeRef.current)
   
   // Debug bookmark saving
   useEffect(() => {
@@ -564,6 +566,7 @@ log('ui','selectedText length:', selectedText?.length)
         const newFontSize = Math.max(12, Math.min(32, initialFontSize * scale))
         log('mobile','Setting font size to:', newFontSize)
         setCurrentFontSize(newFontSize)
+        currentFontSizeRef.current = newFontSize
         
         // Save the new font size to the database
         onSettingsChange({

@@ -274,11 +274,11 @@ const extractDramatisPersonae = (fullText: string): Set<string> => {
 }
 
 export const extractContextInfo = (selectedText: string, fullText: string, bookTitle?: string, author?: string) => {
-log('debug', '🔍 EXTRACT CONTEXT INFO DEBUG:')
-log('debug', 'Selected text:', JSON.stringify(selectedText))
-log('debug', 'Selected text length:', selectedText.length)
-log('debug', 'Full text length:', fullText.length)
-log('debug', 'First 200 chars of full text:', JSON.stringify(fullText.substring(0, 200)))
+  // log('debug', '🔍 EXTRACT CONTEXT INFO DEBUG:')
+  // log('debug', 'Selected text:', JSON.stringify(selectedText))
+  // log('debug', 'Selected text length:', selectedText.length)
+  // log('debug', 'Full text length:', fullText.length)
+  // log('debug', 'First 200 chars of full text:', JSON.stringify(fullText.substring(0, 200)))
   
   // Search for Olivia's actual quote in the text with different line break formats
   const oliviaQuote1 = "There is no slander in an allowed fool"
@@ -289,32 +289,32 @@ log('debug', 'First 200 chars of full text:', JSON.stringify(fullText.substring(
   const oliviaIndex2 = fullText.indexOf(oliviaQuote2)
   const oliviaIndex3 = fullText.indexOf(oliviaQuote3)
   
-log('🔍 SEARCHING FOR OLIVIA QUOTE WITH DIFFERENT LINE BREAKS:')
-log('debug', 'Quote 1 (no breaks):', oliviaIndex1)
-log('debug', 'Quote 2 (\\r\\n):', oliviaIndex2)
-log('debug', 'Quote 3 (\\n):', oliviaIndex3)
+// log('🔍 SEARCHING FOR OLIVIA QUOTE WITH DIFFERENT LINE BREAKS:')
+  // log('debug', 'Quote 1 (no breaks):', oliviaIndex1)
+  // log('debug', 'Quote 2 (\\r\\n):', oliviaIndex2)
+  // log('debug', 'Quote 3 (\\n):', oliviaIndex3)
   
   const foundIndex = Math.max(oliviaIndex1, oliviaIndex2, oliviaIndex3)
   if (foundIndex !== -1) {
     const oliviaContext = fullText.substring(Math.max(0, foundIndex - 200), foundIndex + 200)
-log('debug', 'Olivia context (400 chars around quote):', JSON.stringify(oliviaContext))
+// log('debug', 'Olivia context (400 chars around quote):', JSON.stringify(oliviaContext))
   }
   
   // Normalize line breaks in selected text to match stored text format
   const normalizedSelectedText = selectedText.replace(/\n/g, '\r\n')
-log('debug', 'Normalized selected text:', JSON.stringify(normalizedSelectedText))
+// log('debug', 'Normalized selected text:', JSON.stringify(normalizedSelectedText))
   
   // Try to find the selected text in the original text (both formats)
   let selectedIndex = fullText.indexOf(selectedText)
   let normalizedIndex = fullText.indexOf(normalizedSelectedText)
   
-log('debug', 'Original text index:', selectedIndex)
-log('debug', 'Normalized text index:', normalizedIndex)
+// log('debug', 'Original text index:', selectedIndex)
+// log('debug', 'Normalized text index:', normalizedIndex)
   
   // Use the normalized version if it's found
   if (normalizedIndex !== -1) {
     selectedIndex = normalizedIndex
-log('debug', 'Using normalized text index:', selectedIndex)
+// log('debug', 'Using normalized text index:', selectedIndex)
   }
   
   // If found, check if it's preceded by OLIVIA to make sure we found the right occurrence
@@ -322,8 +322,8 @@ log('debug', 'Using normalized text index:', selectedIndex)
     const textBeforeFound = fullText.substring(Math.max(0, selectedIndex - 100), selectedIndex)
     const hasOliviaBefore = /OLIVIA\.?\s*$/m.test(textBeforeFound.split('\n').slice(-3).join('\n'))
     
-log('debug', 'Text before first occurrence (last 100 chars):', JSON.stringify(textBeforeFound))
-log('debug', 'Has OLIVIA before first occurrence:', hasOliviaBefore)
+    // log('debug', 'Text before first occurrence (last 100 chars):', JSON.stringify(textBeforeFound))
+    // log('debug', 'Has OLIVIA before first occurrence:', hasOliviaBefore)
     
     if (!hasOliviaBefore) {
       // This is not Olivia's speech, search for the next occurrence
@@ -1131,7 +1131,7 @@ export const useBookmarkRestoreAndSave = (
   allowScrollHandling?: boolean,
   settings?: any,
   onSettingsChange?: (settings: any) => void,
-  currentFontSizeParam?: number
+  getCurrentFontSize?: () => number
 ) => {
   const scrollTimeoutRef = useRef<NodeJS.Timeout | null>(null)
 
@@ -1229,10 +1229,10 @@ log('debug', '🔍 Loading bookmark for:', title, 'by', auth)
       // Always try to load bookmark using device ID (no authentication required)
       const deviceId = getDeviceId()
       // Debug logging disabled - uncomment for troubleshooting
-      // console.log('🔍 BOOKMARK RESTORE: Loading bookmark with device ID:', deviceId)
-      // console.log('🔍 BOOKMARK RESTORE: Book title:', title)
-      // console.log('🔍 BOOKMARK RESTORE: Book author:', auth)
-      // console.log('🔍 BOOKMARK RESTORE: API URL:', `${API_BASE_URL}/api/user/bookmark?bookTitle=${encodeURIComponent(title)}&bookAuthor=${encodeURIComponent(auth)}&userId=${encodeURIComponent(deviceId)}`)
+      // // console.log('🔍 BOOKMARK RESTORE: Loading bookmark with device ID:', deviceId)
+      // // console.log('🔍 BOOKMARK RESTORE: Book title:', title)
+      // // console.log('🔍 BOOKMARK RESTORE: Book author:', auth)
+      // // console.log('🔍 BOOKMARK RESTORE: API URL:', `${API_BASE_URL}/api/user/bookmark?bookTitle=${encodeURIComponent(title)}&bookAuthor=${encodeURIComponent(auth)}&userId=${encodeURIComponent(deviceId)}`)
       log('debug', '🔍 BOOKMARK: Loading bookmark with device ID:', deviceId)
       
       try {
@@ -1241,12 +1241,12 @@ log('debug', '🔍 Loading bookmark for:', title, 'by', auth)
         
         if (response.ok) {
           const bookmark = await response.json()
-          // console.log('🔍 BOOKMARK RESTORE: Bookmark found in database:', bookmark)
-          // console.log('🔍 BOOKMARK RESTORE: Bookmark scroll position:', bookmark.scroll_position)
+          // // console.log('🔍 BOOKMARK RESTORE: Bookmark found in database:', bookmark)
+          // // console.log('🔍 BOOKMARK RESTORE: Bookmark scroll position:', bookmark.scroll_position)
           log('debug', 'bookmark', 'Bookmark found in database:', bookmark)
           const position = bookmark.scroll_position
           const fontSize = bookmark.font_size
-          // console.log('🔍 BOOKMARK RESTORE: About to restore position:', position)
+          // // console.log('🔍 BOOKMARK RESTORE: About to restore position:', position)
           log('debug', '🔍 Bookmark loaded from database:', { position, fontSize, bookmark })
           restorePosition(position, 'database')
           
@@ -1265,11 +1265,11 @@ log('debug', '🔍 Loading bookmark for:', title, 'by', auth)
           return
         } else {
           const errorText = await response.text()
-          // console.log('🔍 BOOKMARK RESTORE: No bookmark found in database (404) - Response:', errorText)
+          // // console.log('🔍 BOOKMARK RESTORE: No bookmark found in database (404) - Response:', errorText)
           log('debug', 'bookmark', 'No bookmark found in database (404)')
         }
       } catch (error) {
-        console.error('🔍 BOOKMARK RESTORE: Error loading bookmark from database:', error)
+        // console.error('🔍 BOOKMARK RESTORE: Error loading bookmark from database:', error)
         log('debug', 'bookmark', 'Error loading bookmark from database:', error)
       }
 
@@ -1317,9 +1317,10 @@ log('debug', '🔍 Loading bookmark for:', title, 'by', auth)
     log('debug', 'bookmark', 'Setting up scroll effect, textReaderRef:', textReaderRef.current)
     
     const handleScroll = () => {
-      console.log('🔍 SCROLL HANDLER CALLED!')
-      log('debug', 'SCROLL HANDLER CALLED - disableBookmarkSaving:', disableBookmarkSaving)
-      console.log('🔍 SCROLL HANDLER CALLED - disableBookmarkSaving:', disableBookmarkSaving)
+      // Debug logging disabled
+      // // console.log('🔍 SCROLL HANDLER CALLED!')
+      // log('debug', 'SCROLL HANDLER CALLED - disableBookmarkSaving:', disableBookmarkSaving)
+      // // console.log('🔍 SCROLL HANDLER CALLED - disableBookmarkSaving:', disableBookmarkSaving)
       // Skip bookmark saving if disabled (e.g., during chat operations)
       if (disableBookmarkSaving) {
         log('debug', 'SCROLL HANDLER - Skipping due to disableBookmarkSaving')
@@ -1352,14 +1353,12 @@ log('debug', '🔍 Loading bookmark for:', title, 'by', auth)
               try {
             
             // Use currentFontSize if available, otherwise fall back to settings
-            const finalFontSize = currentFontSizeParam ?? settings?.textFontSize ?? 18
-            console.log('🔍 FONT SIZE DEBUG:', { 
-              currentFontSizeParam, 
-              settingsFontSize: settings?.textFontSize, 
-              finalFontSize,
-              paramUndefined: currentFontSizeParam === undefined,
-              settingsUndefined: settings === undefined
-            })
+            const finalFontSize = getCurrentFontSize?.() ?? settings?.textFontSize ?? 18
+            // console.log('🔍 FONT SIZE DEBUG:', { 
+            //   getCurrentFontSize: getCurrentFontSize?.(),
+            //   settingsFontSize: settings?.textFontSize, 
+            //   finalFontSize
+            // })
             log('debug', 'BOOKMARK SAVE: Using settings font size', {
               settingsFontSize: settings?.textFontSize,
               finalFontSize
@@ -1374,23 +1373,23 @@ log('debug', '🔍 Loading bookmark for:', title, 'by', auth)
             }
             log('debug', 'SAVING BOOKMARK - Full debug info:', {
               requestBody,
-              currentFontSizeParam,
+              getCurrentFontSize: getCurrentFontSize?.(),
               settingsFontSize: settings?.textFontSize,
-              hasCurrentFontSize: currentFontSizeParam !== undefined,
-              finalFontSize: currentFontSizeParam ?? settings?.textFontSize ?? 18
+              hasCurrentFontSize: getCurrentFontSize !== undefined,
+              finalFontSize: getCurrentFontSize?.() ?? settings?.textFontSize ?? 18
             })
-            console.log('🔍 SAVING BOOKMARK - Full debug info:', {
-              requestBody,
-              currentFontSizeParam,
-              settingsFontSize: settings?.textFontSize,
-              hasCurrentFontSize: currentFontSizeParam !== undefined,
-              finalFontSize: currentFontSizeParam ?? settings?.textFontSize ?? 18
-            })
+            // console.log('🔍 SAVING BOOKMARK - Full debug info:', {
+            //   requestBody,
+            //   getCurrentFontSize: getCurrentFontSize?.(),
+            //   settingsFontSize: settings?.textFontSize,
+            //   hasCurrentFontSize: getCurrentFontSize !== undefined,
+            //   finalFontSize: getCurrentFontSize?.() ?? settings?.textFontSize ?? 18
+            // })
             log('debug', '🔍 Saving bookmark with font size:', { 
               fontSize: requestBody.fontSize, 
-              currentFontSizeParam, 
+              getCurrentFontSize: getCurrentFontSize?.(),
               settingsFontSize: settings?.textFontSize,
-              hasCurrentFontSize: currentFontSizeParam !== undefined
+              hasCurrentFontSize: getCurrentFontSize !== undefined
             })
             
             const apiCallInfo = {
@@ -1413,16 +1412,17 @@ log('debug', '🔍 Loading bookmark for:', title, 'by', auth)
               body: JSON.stringify(requestBody)
             })
             
-            console.log('🔍 API RESPONSE STATUS:', response.status)
+            // console.log('🔍 API REQUEST BODY:', JSON.stringify(requestBody, null, 2))
+            // console.log('🔍 API RESPONSE STATUS:', response.status)
             const responseText = await response.text()
-            console.log('🔍 API RESPONSE BODY:', responseText)
+            // console.log('🔍 API RESPONSE BODY:', responseText)
             
             // Parse the response text as JSON
             let responseData
             try {
               responseData = JSON.parse(responseText)
             } catch (e) {
-              console.error('Failed to parse response as JSON:', e)
+              // console.error('Failed to parse response as JSON:', e)
               responseData = { error: 'Invalid JSON response' }
             }
             
@@ -1440,7 +1440,7 @@ log('debug', '🔍 Loading bookmark for:', title, 'by', auth)
             }
             
             if (response.ok) {
-              const result = await response.json()
+              const result = responseData
               log('debug', 'bookmark', `Bookmark saved successfully: ${title} by ${auth} at position ${scrollPosition}`)
               
               // Add success to debug logs
@@ -1448,12 +1448,12 @@ log('debug', '🔍 Loading bookmark for:', title, 'by', auth)
                 setDebugLogs(prev => [...prev, `✅ Success: ${JSON.stringify(result, null, 2)}`])
               }
             } else {
-              const errorText = await response.text()
-              console.error('❌ BOOKMARK: Failed to save:', {
-                status: response.status,
-                statusText: response.statusText,
-                error: errorText
-              })
+              const errorText = responseText
+              // console.error('❌ BOOKMARK: Failed to save:', {
+              //   status: response.status,
+              //   statusText: response.statusText,
+              //   error: errorText
+              // })
               log('debug', 'bookmark', `Failed to save bookmark: ${response.status} ${response.statusText}`)
               
               // Add error to debug logs

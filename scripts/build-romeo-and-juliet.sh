@@ -23,6 +23,21 @@ node scripts/update-android-icons.js
 # Prepare icons for conversion
 node scripts/prepare-icon-conversion.js
 
+# Generate transparent foreground PNGs with R&J monogram to avoid white halos
+node scripts/generate-android-foregrounds.js
+
+# If a custom icon exists, prefer it and overwrite foregrounds
+if [ -f "public/icons/Romeo and Juliet Explained.jpg" ] || [ -f "public/icons/Romeo and Juliet Icon Explained.png" ] || [ -f "public/icons/custom-app-icon.png" ] || [ -f "public/icons/shakespeare-ai.png" ]; then
+  echo "Using provided custom icon for Android foreground and PWA icons..."
+  if [ -f "public/icons/Romeo and Juliet Explained.jpg" ]; then
+    node scripts/generate-android-custom-icon.js "public/icons/Romeo and Juliet Explained.jpg"
+  elif [ -f "public/icons/Romeo and Juliet Icon Explained.png" ]; then
+    node scripts/generate-android-custom-icon.js "public/icons/Romeo and Juliet Icon Explained.png"
+  else
+    node scripts/generate-android-custom-icon.js
+  fi
+fi
+
 # Copy Romeo and Juliet manifest
 cp public/manifest.json public/manifest.json.backup
 cat > public/manifest.json << 'EOF'

@@ -1,84 +1,47 @@
 <?xml version="1.0" encoding="utf-8"?>
 <vector xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:aapt="http://schemas.android.com/aapt"
     android:width="108dp"
     android:height="108dp"
     android:viewportHeight="108"
     android:viewportWidth="108">
-    
-    <!-- Safe zone is 66dp (center 66% of 108dp canvas) -->
-    <!-- Content should be within 21dp to 87dp from edges -->
     
     <!-- Background circle with dark red color -->
     <path
         android:fillColor="#8B1538"
         android:pathData="M54,54m-36,0a36,36 0,1 1,72 0a36,36 0,1 1,-72 0" />
     
-    <!-- Romeo profile (left side) - detailed black silhouette -->
+    <!-- Romeo profile (left side) - smaller to fit safe zone -->
     <path
         android:fillColor="#000000"
-        android:pathData="M25,35 L25,75 L30,75 L30,70 L35,70 L35,65 L30,65 L30,60 L35,60 L35,55 L30,55 L30,50 L35,50 L35,45 L30,45 L30,40 L35,40 L35,35 L30,35 L30,30 L25,30 Z" />
+        android:pathData="M35,35 C35,30 39,26 44,26 C49,26 53,30 53,35 C53,40 49,44 44,44 C39,44 35,40 35,35 Z" />
     
-    <!-- Romeo's hair detail -->
+    <!-- Romeo's body - smaller -->
     <path
         android:fillColor="#000000"
-        android:pathData="M25,30 Q20,25 15,30 Q20,35 25,30" />
+        android:pathData="M40,44 L40,70 L48,70 L48,44 Z" />
     
-    <!-- Romeo's nose detail -->
+    <!-- Juliet profile (right side) - smaller -->
     <path
-        android:fillColor="#000000"
-        android:pathData="M30,45 L32,45 L32,50 L30,50 Z" />
+        android:fillColor="#FFFFFF"
+        android:pathData="M55,35 C55,30 59,26 64,26 C69,26 73,30 73,35 C73,40 69,44 64,44 C59,44 55,40 55,35 Z" />
     
-    <!-- Juliet profile (right side) - detailed cream outline -->
+    <!-- Juliet's body - smaller -->
     <path
-        android:fillColor="#00000000"
-        android:strokeColor="#F5F5DC"
-        android:strokeWidth="2"
-        android:pathData="M83,35 L83,75 L78,75 L78,70 L73,70 L73,65 L78,65 L78,60 L73,60 L73,55 L78,55 L78,50 L73,50 L73,45 L78,45 L78,40 L73,40 L73,35 L78,35 L78,30 L83,30 Z" />
+        android:fillColor="#FFFFFF"
+        android:pathData="M60,44 L60,70 L68,70 L68,44 Z" />
     
-    <!-- Juliet's flowing hair -->
+    <!-- Heart between them - smaller -->
     <path
-        android:fillColor="#00000000"
-        android:strokeColor="#F5F5DC"
-        android:strokeWidth="2"
-        android:pathData="M83,30 Q90,25 95,30 Q90,35 83,30" />
-    <path
-        android:fillColor="#00000000"
-        android:strokeColor="#F5F5DC"
-        android:strokeWidth="2"
-        android:pathData="M83,35 Q88,32 90,35 Q88,38 83,35" />
+        android:fillColor="#FFFFFF"
+        android:pathData="M54,70 C54,60 44,55 39,55 C34,55 29,60 29,70 C29,80 39,90 54,100 C69,90 79,80 79,70 C79,60 74,55 69,55 C64,55 54,60 54,70 Z" />
     
-    <!-- Juliet's facial features -->
+    <!-- Romeo's eye - smaller -->
     <path
-        android:fillColor="#00000000"
-        android:strokeColor="#F5F5DC"
-        android:strokeWidth="1"
-        android:pathData="M80,50 Q81,49 82,50" />
-    <path
-        android:fillColor="#00000000"
-        android:strokeColor="#F5F5DC"
-        android:strokeWidth="1"
-        android:pathData="M80,55 Q81,54 82,55" />
+        android:fillColor="#FFFFFF"
+        android:pathData="M41,32 C41,31 42,30 43,30 C44,30 45,31 45,32 C45,33 44,34 43,34 C42,34 41,33 41,32 Z" />
     
-    <!-- Juliet's nose detail -->
+    <!-- Juliet's eye - smaller -->
     <path
-        android:fillColor="#00000000"
-        android:strokeColor="#F5F5DC"
-        android:strokeWidth="1"
-        android:pathData="M78,45 L80,45 L80,50 L78,50" />
-    
-    <!-- Heart between them - more prominent -->
-    <path
-        android:fillColor="#F5F5DC"
-        android:pathData="M54,70 C54,65 50,60 45,60 C40,60 36,65 36,70 C36,75 40,80 54,90 C68,80 72,75 72,70 C72,65 68,60 63,60 C58,60 54,65 54,70 Z" />
-    
-    <!-- Additional romantic details -->
-    <path
-        android:fillColor="#F5F5DC"
-        android:fillAlpha="0.3"
-        android:pathData="M45,65 Q50,60 55,65 Q50,70 45,65" />
-    <path
-        android:fillColor="#F5F5DC"
-        android:fillAlpha="0.3"
-        android:pathData="M55,65 Q60,60 65,65 Q60,70 55,65" />
+        android:fillColor="#8B1538"
+        android:pathData="M61,32 C61,31 62,30 63,30 C64,30 65,31 65,32 C65,33 64,34 63,34 C62,34 61,33 61,32 Z" />
 </vector>

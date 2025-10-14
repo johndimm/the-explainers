@@ -12,5 +12,5 @@ export const API_BASE_URL = getApiBaseUrl()
 
 // Log the API URL being used
 if (typeof window !== 'undefined') {
-  console.log('🌐 API Base URL:', API_BASE_URL)
+  // console.log('🌐 API Base URL:', API_BASE_URL)
 }

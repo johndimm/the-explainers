@@ -26,19 +26,20 @@
             justify-content: center;
             position: relative;
         }
+        :root { --adaptive-bg: #7A1F2B; }
         .circle {
             border-radius: 50%;
-            background: #FFF8F0;
+            background: var(--adaptive-bg);
             overflow: hidden;
         }
         .square {
             border-radius: 20px;
-            background: #FFF8F0;
+            background: var(--adaptive-bg);
             overflow: hidden;
         }
         .squircle {
             border-radius: 30px;
-            background: #FFF8F0;
+            background: var(--adaptive-bg);
             overflow: hidden;
         }
         .icon-content {
@@ -75,26 +76,33 @@
         <img src="love-in-profile-original.png" alt="Original Love in Profile Icon" style="width: 100%; height: auto;">
     </div>
     
+    <h2>📱 NEW Foreground (transparent) + Dark Red Background</h2>
+    <div class="original-image">
+        <div style="width: 108px; height:108px; background: var(--adaptive-bg); border-radius: 24px; display:flex; align-items:center; justify-content:center;">
+          <img src="android/app/src/main/res/mipmap-hdpi/ic_launcher_foreground.png" alt="Foreground" style="width:100%; height:100%; object-fit:contain;">
+        </div>
+    </div>
+    
+    <h2>🎯 NEW Icon in Different Launcher Shapes</h2>
     <div class="icon-container">
         <div class="icon-shape circle">
-            <img src="android-icons/ic_launcher_192.png" alt="Circle Icon" class="icon-content">
+            <img src="android/app/src/main/res/mipmap-hdpi/ic_launcher_foreground.png" alt="Circle Icon" class="icon-content">
         </div>
         
         <div class="icon-shape square">
-            <img src="android-icons/ic_launcher_192.png" alt="Square Icon" class="icon-content">
+            <img src="android/app/src/main/res/mipmap-hdpi/ic_launcher_foreground.png" alt="Square Icon" class="icon-content">
         </div>
         
         <div class="icon-shape squircle">
-            <img src="android-icons/ic_launcher_192.png" alt="Squircle Icon" class="icon-content">
+            <img src="android/app/src/main/res/mipmap-hdpi/ic_launcher_foreground.png" alt="Squircle Icon" class="icon-content">
         </div>
     </div>
     
     <div class="description">
-        <strong>Source:</strong> ChatGPT "Love in Profile" design<br>
-        <strong>Format:</strong> High-quality bitmap PNG files<br>
-        <strong>Colors:</strong> Dark red background (#8B1538), cream accents (#F5F5DC), black Romeo silhouette<br>
-        <strong>Theme:</strong> Romantic Romeo & Juliet with facing profiles and heart symbol<br>
-        <strong>Compatibility:</strong> Works perfectly in all Android launcher shapes
+        <strong>✅ Foreground is transparent:</strong> no white halo in launchers.<br>
+        <strong>Background:</strong> Dark red #7A1F2B (adaptive icon background).<br>
+        <strong>Foreground:</strong> Monogram "R&J" in white with subtle shadow.<br>
+        <strong>Preview above:</strong> Combined background + foreground at 108×108 and common shapes.
     </div>
 </body>
 </html>

@@ -22,9 +22,10 @@ const TextReader: React.FC<TextReaderProps> = (props) => {
   const isMobile = React.useMemo(() => {
     if (typeof window === 'undefined') return false
     const userAgent = navigator.userAgent
-    console.log('🔍 MOBILE DETECTION: User agent:', userAgent)
+    // Debug logging disabled
+    // // console.log('🔍 MOBILE DETECTION: User agent:', userAgent)
     const isMobileDevice = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(userAgent)
-    console.log('🔍 MOBILE DETECTION: Is mobile?', isMobileDevice)
+    // // console.log('🔍 MOBILE DETECTION: Is mobile?', isMobileDevice)
     return isMobileDevice
   }, [])
   
@@ -56,7 +57,8 @@ const TextReader: React.FC<TextReaderProps> = (props) => {
     )
   }
   
-  console.log('🔍 TEXTREADER: Rendering component', { isMobile, component: isMobile ? 'MobileTextReader' : 'DesktopTextReader' })
+  // Debug logging disabled
+  // // console.log('🔍 TEXTREADER: Rendering component', { isMobile, component: isMobile ? 'MobileTextReader' : 'DesktopTextReader' })
   return isMobile ? <MobileTextReader {...props} /> : <DesktopTextReader {...props} />
 }
 

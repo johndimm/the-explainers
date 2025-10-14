@@ -17,6 +17,7 @@
     "build:android:vercel": "./scripts/build-vercel.sh",
     "build:romeo-and-juliet": "./scripts/build-romeo-and-juliet.sh",
     "build:full-app": "./scripts/build-full-app.sh",
+    "icon:custom": "node scripts/generate-android-custom-icon.js",
     "build:web:romeo-and-juliet": "cp src/config/romeo-and-juliet.ts src/config/app-config.ts && cp capacitor.config.romeo-and-juliet.ts capacitor.config.ts && npm run build",
     "build:web:full-app": "cp capacitor.config.full-app.ts capacitor.config.ts && npm run build",
     "build:ios": "npm run build:native && npm run setup:ios && npx cap sync ios && npx cap build ios",

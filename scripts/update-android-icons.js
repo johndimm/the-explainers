@@ -131,7 +131,7 @@ function updateBackgroundColor() {
     // Update with Romeo and Juliet purple background
     const newBackground = `<?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="ic_launcher_background">#F8F7FF</color>
+    <color name="ic_launcher_background">#192531</color>
 </resources>`;
     
     fs.writeFileSync(backgroundFile, newBackground);

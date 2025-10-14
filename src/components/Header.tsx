@@ -387,6 +387,7 @@ log('ui','Hamburger clicked, current state:', showMobileMenu)
               <button onClick={() => { router.push('/guide'); setShowMobileMenu(false) }} style={{ display: 'block', width: '100%', padding: '12px 16px', background: 'none', border: 'none', textAlign: 'left', cursor: 'pointer', borderBottom: '1px solid #f0f0f0', color: '#333' }}>📖 User Guide</button>
               <button onClick={() => { router.push('/about'); setShowMobileMenu(false) }} style={{ display: 'block', width: '100%', padding: '12px 16px', background: 'none', border: 'none', textAlign: 'left', cursor: 'pointer', borderBottom: '1px solid #f0f0f0', color: '#333' }}>ℹ️ About</button>
               <button onClick={() => { router.push('/examples'); setShowMobileMenu(false) }} style={{ display: 'block', width: '100%', padding: '12px 16px', background: 'none', border: 'none', textAlign: 'left', cursor: 'pointer', borderBottom: '1px solid #f0f0f0', color: '#333' }}>📚 Examples</button>
+              <button onClick={() => { router.push('/icon-preview'); setShowMobileMenu(false) }} style={{ display: 'block', width: '100%', padding: '12px 16px', background: 'none', border: 'none', textAlign: 'left', cursor: 'pointer', borderBottom: '1px solid #f0f0f0', color: '#333' }}>🖼️ Icon Preview</button>
               
               {/* Upgrade option */}
               {!isSinglePlay && upgradePricing && isEligibleForUpgrade(ownedPlays) && (

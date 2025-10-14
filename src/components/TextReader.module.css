@@ -2,7 +2,8 @@
   width: 100%;
   height: calc(100vh - 60px);
   overflow-y: auto;
-  padding: 0 20px 20px 20px;
+  /* Add space for the mobile console header if present */
+  padding: 0 20px calc(20px + var(--mobile-console-header-height, 0px)) 20px;
   background: #fafafa;
   background-image: 
     radial-gradient(circle at 20% 80%, rgba(120, 119, 198, 0.1) 0%, transparent 50%),
@@ -38,7 +39,8 @@
 /* Mobile optimizations */
 @media (max-width: 768px) {
   .textReader {
-    padding: 0 12px 12px 12px;
+    /* Ensure bottom padding accounts for console header on mobile */
+    padding: 0 12px calc(12px + var(--mobile-console-header-height, 0px)) 12px;
   }
   
   .textContent {

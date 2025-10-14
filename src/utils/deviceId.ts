@@ -66,12 +66,14 @@ export function getDeviceId(): string {
 
     // Try to get existing device ID from localStorage
     let deviceId = localStorage.getItem(DEVICE_ID_KEY)
+    // Debug logging disabled
     // console.log('🔍 Retrieved from localStorage:', deviceId)
     // console.log('🔍 All localStorage keys:', Object.keys(localStorage))
     
     if (!deviceId) {
       // Generate new unique device ID
       deviceId = generateDeviceId()
+      // Debug logging disabled
       // console.log('🆔 Generated new device ID:', deviceId)
       try {
         localStorage.setItem(DEVICE_ID_KEY, deviceId)
@@ -83,6 +85,7 @@ export function getDeviceId(): string {
         console.warn('❌ Failed to store device ID in localStorage:', storageError)
       }
     } else {
+      // Debug logging disabled
       // console.log('🆔 Using existing device ID:', deviceId)
     }
     

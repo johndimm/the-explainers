@@ -564,13 +564,6 @@
     width: auto;
   }
   
-  .clearButton {
-    font-size: 8px;
-    padding: 3px 5px;
-    min-width: 50px;
-    max-width: 70px;
-    width: auto;
-  }
   
   .ratingButton {
     font-size: 8px;

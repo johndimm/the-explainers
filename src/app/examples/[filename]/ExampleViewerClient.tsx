@@ -5,7 +5,8 @@ import { useParams, useRouter } from 'next/navigation'
 import PageLayout from '@/components/PageLayout'
 
 export default function ExampleViewerClient() {
-  const params = useParams()
+  // Params may be null before hydration; type defensively
+  const params = useParams() as { filename?: string } | null
   const router = useRouter()
   const [htmlContent, setHtmlContent] = useState<string>('')
   const [loading, setLoading] = useState(true)
@@ -14,7 +15,8 @@ export default function ExampleViewerClient() {
   useEffect(() => {
     const loadExample = async () => {
       try {
-        const filename = params.filename as string
+        const raw = params?.filename
+        const filename = Array.isArray(raw) ? raw[0] : raw
         if (!filename) {
           setError('No filename provided')
           setLoading(false)
@@ -42,7 +44,7 @@ export default function ExampleViewerClient() {
     }
 
     loadExample()
-  }, [params.filename])
+  }, [params?.filename])
 
   if (loading) {
     return (

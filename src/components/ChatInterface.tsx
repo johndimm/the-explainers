@@ -1,6 +1,7 @@
 'use client'
 
 import React, { useState, useRef, useEffect } from 'react'
+import { flushSync } from 'react-dom'
 import { useRouter } from 'next/navigation'
 import { useAuth } from '@/contexts/AuthContext'
 import styles from './ChatInterface.module.css'
@@ -316,10 +317,8 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ selectedText, contextInfo
     setOriginalSelectedText('')
     setShowFullHistory(false)
     
-    // Clear from sessionStorage if in page mode
-    if (isPageMode) {
-      sessionStorage.removeItem('chatHistory')
-    }
+    // Clear from sessionStorage
+    sessionStorage.removeItem('chatHistory')
     
     setShowClearConfirm(false)
     log('Chat history cleared')
@@ -423,10 +422,51 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ selectedText, contextInfo
       }
     }
     
-    // If we found a user message, show it and all assistant messages that follow
-    // This allows multiple re-explanations of the same quote to all be visible
+    // Debug logging for chat history issues
+    log('chat-history', '🔍 getDisplayedMessages debug:', {
+      totalMessages: messages.length,
+      lastUserMessageIndex,
+      showFullHistory
+    })
+    
+    // If we found a user message, show only the last complete exchange
+    // (the last user message and the assistant response that follows it)
     if (lastUserMessageIndex >= 0) {
-      return messages.slice(lastUserMessageIndex)
+      // Find the last assistant message after the last user message
+      let lastAssistantMessageIndex = -1
+      for (let i = lastUserMessageIndex + 1; i < messages.length; i++) {
+        if (messages[i].role === 'assistant') {
+          lastAssistantMessageIndex = i
+        }
+      }
+      
+      // Debug logging - disabled for cleaner console
+      // if (process.env.NODE_ENV === 'development') {
+      //   console.log('🔍 getDisplayedMessages exchange debug:', {
+      //     lastUserMessageIndex,
+      //     lastAssistantMessageIndex,
+      //     sliceFrom: lastUserMessageIndex,
+      //     sliceTo: lastAssistantMessageIndex + 1
+      //   })
+      // }
+      
+      // If we found an assistant message after the user message, show the complete exchange
+      if (lastAssistantMessageIndex >= 0) {
+        const result = messages.slice(lastUserMessageIndex, lastAssistantMessageIndex + 1)
+        // Debug logging - disabled for cleaner console
+        // if (process.env.NODE_ENV === 'development') {
+        //   console.log('🔍 getDisplayedMessages result:', result.map((msg, i) => ({ index: i, role: msg.role, content: msg.content.substring(0, 30) + '...' })))
+        // }
+        return result
+      } else {
+        // If no assistant message found after user message, just show the user message
+        const result = messages.slice(lastUserMessageIndex, lastUserMessageIndex + 1)
+        // Debug logging - disabled for cleaner console
+        // if (process.env.NODE_ENV === 'development') {
+        //   console.log('🔍 getDisplayedMessages result (no assistant):', result.map((msg, i) => ({ index: i, role: msg.role, content: msg.content.substring(0, 30) + '...' })))
+        // }
+        return result
+      }
     }
     
     // Fallback to showing all messages if no user message found
@@ -434,7 +474,7 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ selectedText, contextInfo
   }
 
   const getHiddenMessageCount = () => {
-    if (showFullHistory || messages.length <= 2) {
+    if (messages.length <= 2) {
       return 0
     }
     
@@ -447,9 +487,34 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ selectedText, contextInfo
       }
     }
     
-    // If we found a user message, calculate how many messages are hidden before it
+    // Debug logging for chat history issues
+    const userMessages = messages.filter(m => m.role === 'user')
+    log('chat-history', '🔍 USER MESSAGE DEBUG:', {
+      totalMessages: messages.length,
+      userMessageCount: userMessages.length,
+      lastUserMessageIndex,
+      userIndices: messages.map((msg, i) => msg.role === 'user' ? i : -1).filter(i => i !== -1)
+    })
+    
+    // If we found a user message, calculate how many messages are hidden before the last exchange
     if (lastUserMessageIndex >= 0) {
-      return lastUserMessageIndex
+      // Find the last assistant message after the last user message
+      let lastAssistantMessageIndex = -1
+      for (let i = lastUserMessageIndex + 1; i < messages.length; i++) {
+        if (messages[i].role === 'assistant') {
+          lastAssistantMessageIndex = i
+        }
+      }
+      
+      // Calculate how many messages are hidden
+      if (lastAssistantMessageIndex >= 0) {
+        // Complete exchange found
+        // Hide all messages before the last user message
+        return lastUserMessageIndex
+      } else {
+        // No assistant message after user message: show only the user message
+        return lastUserMessageIndex
+      }
     }
     
     // Fallback: no messages are hidden
@@ -479,7 +544,7 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ selectedText, contextInfo
   // Load chat history from sessionStorage
   useEffect(() => {
     const savedMessages = sessionStorage.getItem('chatHistory')
-    if (savedMessages && isPageMode) {
+    if (savedMessages) {
       try {
         const parsedMessages = JSON.parse(savedMessages)
         setMessages(parsedMessages.map((msg: any) => ({
@@ -490,14 +555,17 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ selectedText, contextInfo
         log('ui','Error loading chat history:', error)
       }
     }
-  }, [isPageMode])
+  }, [])
 
   // Save chat history to sessionStorage
   useEffect(() => {
-    if (isPageMode && messages.length > 0) {
+    if (messages.length > 0) {
+      log('chat-history', '💾 Saving to sessionStorage:', messages.length, 'messages')
+      log('chat-history', '💾 User messages in array:', messages.filter(m => m.role === 'user').length)
+      log('chat-history', '💾 Messages array:', messages.map(m => ({ role: m.role, content: m.content.substring(0, 20) + '...' })))
       sessionStorage.setItem('chatHistory', JSON.stringify(messages))
     }
-  }, [messages, isPageMode])
+  }, [messages])
 
   // Close save dropdown on outside click or Escape
   useEffect(() => {
@@ -537,20 +605,20 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ selectedText, contextInfo
       setOriginalSelectedText(selectedText)
       initializedRef.current = true
       
-      // For modal mode (isPageMode = false), always auto-explain
-      // For page mode, check if we have context data (meaning user clicked "explain" button)
+      // Determine if we should auto-explain
+      let shouldAutoExplain = false
+      
       if (!isPageMode) {
         // Modal mode - always auto-explain
-        handleExplainText(selectedText)
+        shouldAutoExplain = true
       } else {
-        // Page mode - check for stored context
+        // Page mode - check for stored context (user clicked "explain" button)
         const storedContext = sessionStorage.getItem('chatContext')
         if (storedContext) {
           try {
             const parsedContext = JSON.parse(storedContext)
             if (parsedContext.selectedText === selectedText) {
-              // User clicked "explain" button - auto-explain
-              handleExplainText(selectedText)
+              shouldAutoExplain = true
               // Clear the context data so it's not used again
               sessionStorage.removeItem('chatContext')
             }
@@ -559,6 +627,11 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ selectedText, contextInfo
           }
         }
         // If no context data, just show the quote (user clicked "chat" in hamburger)
+      }
+      
+      // Single call to handleExplainText
+      if (shouldAutoExplain) {
+        handleExplainText(selectedText)
       }
     }
   }, [selectedText, isPageMode])
@@ -700,13 +773,7 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ selectedText, contextInfo
 
     const selectedModel = chooseModelForProvider ? chooseModelForProvider(selectedProvider, settings.llmModel) : resolveModelFor(selectedProvider, settings.llmModel)
     log('ui', 'ChatInterface: Selected model for API call:', { provider: selectedProvider, model: selectedModel, settingsModel: settings.llmModel })
-    console.log('Mobile API Call Debug:', { 
-      provider: selectedProvider, 
-      model: selectedModel, 
-      settingsModel: settings.llmModel,
-      userId: getDeviceId(),
-      isMobile: /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)
-    })
+    // Debug logging disabled
     const requestBody = {
       messages: messages.map(m => ({ role: m.role, content: m.content })),
       provider: selectedProvider,
@@ -724,7 +791,7 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ selectedText, contextInfo
       timestamp: new Date().toISOString()
     }
 
-    console.log('📤 Sending chat request:', apiCallInfo)
+    // console.log('📤 Sending chat request:', apiCallInfo)
     
 
     // Debug logging disabled - uncomment for troubleshooting
@@ -740,9 +807,9 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ selectedText, contextInfo
         },
         body: JSON.stringify(requestBody),
       })
-      // console.log('🔍 Fetch request completed, response:', response)
+      // Debug logging disabled
     } catch (fetchError) {
-      console.error('🔍 Fetch request failed with error:', fetchError)
+      // Debug logging disabled
       throw fetchError
     }
 
@@ -753,22 +820,18 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ selectedText, contextInfo
       timestamp: new Date().toISOString()
     }
 
-    console.log('📥 Chat response:', responseInfo)
+    // console.log('📥 Chat response:', responseInfo)
     
 
     if (!response.ok) {
       const errorText = await response.text()
-      console.error('❌ Chat API failed:', {
-        status: response.status,
-        statusText: response.statusText,
-        error: errorText
-      })
+      // Debug logging disabled
       throw new Error(`HTTP error! status: ${response.status}`)
     }
 
     const data = await response.json()
     
-    console.log('✅ Chat API success:', data)
+    // console.log('✅ Chat API success:', data)
     
     return data.message
   }
@@ -1145,13 +1208,25 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ selectedText, contextInfo
     }
   }
 
+  const processingRef = useRef<string | null>(null)
+
   const handleExplainText = async (text: string) => {
     const useCustomLLM = selectedProvider === 'custom'
     
-    log('ChatInterface: handleExplainText called')
-    log('ChatInterface: current profile state:', profile)
-    log('ChatInterface: bookTitle:', bookTitle, 'author:', author)
-    log('ChatInterface: useCustomLLM:', useCustomLLM)
+    // Prevent duplicate calls with the same text using a ref
+    if (processingRef.current === text) {
+      log('chat-history', '🚫 Duplicate call prevented for:', text)
+      return
+    }
+    
+    // Also prevent if we're already processing any text
+    if (processingRef.current !== null) {
+      log('chat-history', '🚫 Already processing text:', processingRef.current, 'blocking:', text)
+      return
+    }
+    
+    processingRef.current = text
+    log('chat-history', '🚀 handleExplainText proceeding with:', text, 'ref set to:', processingRef.current)
     
     // Check if user can use explanation
     if (!canUseExplanation(bookTitle, author, useCustomLLM)) {
@@ -1206,7 +1281,10 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ selectedText, contextInfo
       timestamp: new Date()
     }
 
-    setMessages(prev => [...prev, userMessage])
+       // Force immediate state update to prevent batching issues
+       flushSync(() => {
+         setMessages(prev => [...prev, userMessage])
+       })
     setIsLoading(true)
 
     try {
@@ -1250,6 +1328,7 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ selectedText, contextInfo
     } finally {
       setIsLoading(false)
       if (hasChanges) setHasChanges(false)
+      processingRef.current = null
     }
   }
 
@@ -1297,6 +1376,7 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ selectedText, contextInfo
     } finally {
       setIsLoading(false)
       if (hasChanges) setHasChanges(false)
+      processingRef.current = null
     }
   }
 
@@ -1881,6 +1961,12 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ selectedText, contextInfo
               </button>
             </div>
           )}
+          {/* Debug info */}
+          {process.env.NODE_ENV === 'development' && (
+            <div style={{ fontSize: '12px', color: '#666', textAlign: 'center', marginBottom: '8px' }}>
+              Debug: showFullHistory={showFullHistory.toString()}, hiddenCount={getHiddenMessageCount()}, totalMessages={messages.length}
+            </div>
+          )}
           {showFullHistory && getHiddenMessageCount() > 0 && (
             <div style={{ textAlign: 'center', marginBottom: '16px' }}>
               <button 
@@ -2260,20 +2346,34 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ selectedText, contextInfo
 
       {/* Clear History Confirmation Dialog */}
       {showClearConfirm && (
-        <div style={{ 
-          position: 'fixed', 
-          top: '50%', 
-          left: '50%', 
-          transform: 'translate(-50%, -50%)', 
-          background: 'white', 
-          border: '1px solid #ccc', 
-          borderRadius: '8px', 
-          padding: '20px', 
-          boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)', 
-          zIndex: 1001,
-          maxWidth: '400px',
-          textAlign: 'center'
-        }}>
+        <>
+          {/* Backdrop */}
+          <div style={{
+            position: 'fixed',
+            top: 0,
+            left: 0,
+            width: '100%',
+            height: '100%',
+            background: 'rgba(0, 0, 0, 0.5)',
+            zIndex: 10000
+          }} />
+          {/* Dialog */}
+          <div style={{ 
+            position: 'fixed', 
+            top: '50vh', 
+            left: '50vw', 
+            transform: 'translate(-50%, -50%)', 
+            background: 'white', 
+            border: '1px solid #ccc', 
+            borderRadius: '8px', 
+            padding: '20px', 
+            boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)', 
+            zIndex: 10001,
+            maxWidth: '400px',
+            textAlign: 'center',
+            maxHeight: '80vh',
+            overflow: 'auto'
+          }}>
           <h3 style={{ margin: '0 0 12px 0', color: '#d32f2f' }}>Clear Chat History?</h3>
           <p style={{ margin: '0 0 20px 0', color: '#666' }}>
             This will permanently delete all {messages.length} messages in this conversation. This action cannot be undone.
@@ -2305,7 +2405,8 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ selectedText, contextInfo
               🗑️ Clear All
             </button>
           </div>
-        </div>
+          </div>
+        </>
       )}
 
     </div>

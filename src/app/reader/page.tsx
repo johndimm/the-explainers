@@ -48,10 +48,10 @@ function ReaderContent() {
       return
     }
 
-    // Check URL parameters for book selection
-    const title = searchParams.get('title')
-    const author = searchParams.get('author') 
-    const url = searchParams.get('url')
+    // Check URL parameters for book selection (guard for possible null)
+    const title = searchParams?.get('title') || ''
+    const author = searchParams?.get('author') || ''
+    const url = searchParams?.get('url') || ''
 
     if (title && author && url) {
       handleBookSelect(title, author, decodeURIComponent(url))
@@ -93,20 +93,20 @@ function ReaderContent() {
     setCurrentBook({ title: playTitle, author: playAuthor })
     
     try {
-      console.log('🔍 Loading single play...')
+      // console.log('🔍 Loading single play...')
       const singlePlayConfig = getSinglePlayConfig()
-      console.log('🔍 Single play config:', singlePlayConfig)
+      // console.log('🔍 Single play config:', singlePlayConfig)
       
       const playTextData = await loadSinglePlayText(singlePlayConfig)
-      console.log('🔍 Play text data:', { 
-        title: playTextData.title, 
-        author: playTextData.author, 
-        textLength: playTextData.text?.length 
-      })
+      // console.log('🔍 Play text data:', { 
+      //   title: playTextData.title, 
+      //   author: playTextData.author, 
+      //   textLength: playTextData.text?.length 
+      // })
       
       setBookText(playTextData.text)
     } catch (error) {
-      console.error('❌ Error loading single play:', error)
+      // console.error('❌ Error loading single play:', error)
       alert('Failed to load the play. Please try again.')
     } finally {
       setLoading(false)

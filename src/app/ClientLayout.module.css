@@ -20,7 +20,8 @@
     padding-top: max(calc(var(--app-header-height, 64px) + 8px), 88px);
     padding-left: 12px;
     padding-right: 12px;
-    padding-bottom: 72px; /* tighter sides on phones */
+    /* Keep content close to the bottom; body padding and reader styles handle the console offset */
+    padding-bottom: 12px;
   }
 }
 
