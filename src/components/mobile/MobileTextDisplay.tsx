@@ -1,38 +1,29 @@
 import React from 'react'
 import styles from '../TextReader.module.css'
-import { PageMap } from '../../utils/pageUtils'
 
 interface MobileTextDisplayProps {
   text: string
-  pageMap: PageMap
-  currentPage: number
   fontSize: number
   isInSelectionMode: boolean
   onTouchStart: (e: React.TouchEvent) => void
   onTouchMove: (e: React.TouchEvent) => void
   onTouchEnd: (e: React.TouchEvent) => void
   onTextSelection: () => void
-  renderTextWithSearchHighlight: (text: string) => React.ReactNode
   textReaderRef: React.RefObject<HTMLDivElement>
   textContentRef: React.RefObject<HTMLDivElement>
 }
 
 export const MobileTextDisplay: React.FC<MobileTextDisplayProps> = ({
   text,
-  pageMap,
-  currentPage,
   fontSize,
   isInSelectionMode,
   onTouchStart,
   onTouchMove,
   onTouchEnd,
   onTextSelection,
-  renderTextWithSearchHighlight,
   textReaderRef,
   textContentRef
 }) => {
-  const currentPageText = pageMap.pages[currentPage] || ''
-  const displayText = renderTextWithSearchHighlight(currentPageText)
 
   return (
     <div
@@ -54,7 +45,7 @@ export const MobileTextDisplay: React.FC<MobileTextDisplayProps> = ({
           WebkitUserSelect: isInSelectionMode ? 'text' : 'none'
         }}
       >
-        {displayText}
+        {text}
       </div>
     </div>
   )

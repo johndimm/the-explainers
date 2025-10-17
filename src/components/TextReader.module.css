@@ -61,3 +61,69 @@
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   font-weight: 500;
 }
+
+/* Chat modal styles */
+.chatModal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 10000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.chatModalContent {
+  background: white;
+  border-radius: 8px;
+  width: 90%;
+  max-width: 800px;
+  height: 80%;
+  max-height: 600px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+
+.closeChatButton {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: #dc3545;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  cursor: pointer;
+  z-index: 10001;
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Mobile search adjustments */
+@media (max-width: 768px) {
+  .mobileSearchBar {
+    position: fixed;
+    top: 10px;
+    left: 10px;
+    right: 10px;
+    width: auto;
+  }
+
+  .searchInput {
+    min-width: 150px;
+    flex: 1;
+  }
+
+  .chatModalContent {
+    width: 95%;
+    height: 90%;
+  }
+}
+

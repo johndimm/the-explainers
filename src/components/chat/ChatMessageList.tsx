@@ -40,7 +40,10 @@ export const ChatMessageList: React.FC<ChatMessageListProps> = ({
         
         <div className={styles.messageMeta}>
           <span className={styles.messageTime}>
-            {message.timestamp.toLocaleTimeString()}
+            {message.timestamp instanceof Date 
+              ? message.timestamp.toLocaleTimeString()
+              : new Date(message.timestamp).toLocaleTimeString()
+            }
           </span>
           
           {message.provider && message.provider !== 'error' && (

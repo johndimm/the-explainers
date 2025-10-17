@@ -8,12 +8,7 @@ import { SettingsData } from './Settings'
 import { ProfileData } from './Profile'
 import { PageMap, calculatePageContent, findPageForPosition } from '../utils/pageUtils'
 import { extractContextInfo as extractContext, ContextInfo } from '../utils/contextUtils'
-import { 
-  performSearch, 
-  scrollToSearchResult, 
-  renderTextWithSearchHighlight,
-  SearchResult 
-} from '../utils/searchUtils'
+// Search functionality removed - using header search only
 
 export interface ReaderCommonProps {
   text: string
@@ -57,7 +52,7 @@ export const useBookmarkRestoreAndSave = (
 
     try {
       const deviceId = getDeviceId()
-      const response = await fetch(`${API_BASE_URL}/api/bookmarks`, {
+      const response = await fetch(`/api/user/bookmark`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -82,7 +77,7 @@ export const useBookmarkRestoreAndSave = (
 
     try {
       const deviceId = getDeviceId()
-      const response = await fetch(`${API_BASE_URL}/api/bookmarks?bookTitle=${encodeURIComponent(bookTitle)}&bookAuthor=${encodeURIComponent(author)}&userId=${deviceId}`)
+      const response = await fetch(`${API_BASE_URL}/api/user/bookmark?bookTitle=${encodeURIComponent(bookTitle)}&bookAuthor=${encodeURIComponent(author)}&userId=${deviceId}`)
       
       if (response.ok) {
         const data = await response.json()
@@ -110,65 +105,7 @@ export const useBookmarkRestoreAndSave = (
   }
 }
 
-// Search functionality hook
-export const useSearchCore = (
-  text: string,
-  textReaderRef: React.RefObject<HTMLDivElement | null>,
-  textContentRef: React.RefObject<HTMLDivElement | null>,
-  onNavigateToPage?: (pageNum: number) => void,
-  pageMap?: PageMap
-) => {
-  const [searchQuery, setSearchQuery] = useState('')
-  const [searchResults, setSearchResults] = useState<SearchResult[]>([])
-  const [currentSearchIndex, setCurrentSearchIndex] = useState(-1)
-
-  const handleSearch = (query: string) => {
-    const results = performSearch(text, query)
-    setSearchResults(results)
-    setCurrentSearchIndex(results.length > 0 ? 0 : -1)
-
-    if (results.length > 0) {
-      scrollToSearchResult(0, results, text, textContentRef, textReaderRef, onNavigateToPage, pageMap)
-    }
-  }
-
-  const nextSearchResult = () => {
-    if (searchResults.length === 0) return
-    const newIndex = (currentSearchIndex + 1) % searchResults.length
-    setCurrentSearchIndex(newIndex)
-    scrollToSearchResult(newIndex, searchResults, text, textContentRef, textReaderRef, onNavigateToPage, pageMap)
-  }
-
-  const prevSearchResult = () => {
-    if (searchResults.length === 0) return
-    const newIndex = currentSearchIndex <= 0 ? searchResults.length - 1 : currentSearchIndex - 1
-    setCurrentSearchIndex(newIndex)
-    scrollToSearchResult(newIndex, searchResults, text, textContentRef, textReaderRef, onNavigateToPage, pageMap)
-  }
-
-  const renderTextWithHighlight = (textToRender: string) => {
-    return renderTextWithSearchHighlight(textToRender, searchQuery, searchResults, currentSearchIndex)
-  }
-
-  const clearSearch = () => {
-    setSearchQuery('')
-    setSearchResults([])
-    setCurrentSearchIndex(-1)
-  }
-
-  return {
-    searchQuery,
-    setSearchQuery,
-    searchResults,
-    currentSearchIndex,
-    setCurrentSearchIndex,
-    handleSearch,
-    nextSearchResult,
-    prevSearchResult,
-    renderTextWithSearchHighlight: renderTextWithHighlight,
-    clearSearch
-  }
-}
+// Search functionality removed - using header search only
 
 // Main context extraction function
 export const extractContextInfo = (selectedText: string, fullText: string, bookTitle?: string, author?: string): ContextInfo | null => {
@@ -179,4 +116,4 @@ export const extractContextInfo = (selectedText: string, fullText: string, bookT
 export type { SettingsData, ProfileData }
 export type { PageMap } from '../utils/pageUtils'
 export type { ContextInfo } from '../utils/contextUtils'
-export type { SearchResult } from '../utils/searchUtils'
+// SearchResult type removed - using header search only

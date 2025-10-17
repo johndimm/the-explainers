@@ -1,0 +1,15 @@
+{
+    "keep": {
+        "days": true,
+        "amount": 14
+    },
+    "auditLog": "/Users/johndimm/Projects/the-explainers/logs/.aa020b8b2fdae60c284900ccc44a24b76331e3ea-audit.json",
+    "files": [
+        {
+            "date": 1760648622031,
+            "name": "/Users/johndimm/Projects/the-explainers/logs/mcp-puppeteer-2025-10-16.log",
+            "hash": "920b958e76df5559b91fb292761e8c6fe7a16cbbade6e83e4db07669ef7f61f6"
+        }
+    ],
+    "hashType": "sha256"
+}

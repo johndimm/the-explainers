@@ -3,6 +3,10 @@ export interface TouchPosition {
   y: number
 }
 
+export interface PinchPosition extends TouchPosition {
+  distance: number
+}
+
 export interface CachedStyles {
   fontSize: number
   lineHeight: number

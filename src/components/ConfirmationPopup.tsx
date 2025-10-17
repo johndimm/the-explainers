@@ -114,9 +114,11 @@ const ConfirmationPopup: React.FC<ConfirmationPopupProps> = ({
         </h3>
         
         {/* Message */}
-        <p className="text-gray-600 mb-6">
-          {message}
-        </p>
+        <div className="text-gray-600 mb-6 max-h-32 overflow-y-auto border border-gray-200 rounded p-3 bg-gray-50">
+          <p className="whitespace-pre-wrap">
+            {message}
+          </p>
+        </div>
         
         {/* Buttons */}
         <div className="flex justify-end space-x-3">

@@ -3,20 +3,18 @@
 import React, { useRef, useState, useEffect } from 'react'
 import styles from './TextReader.module.css'
 import ChatInterface from './ChatInterface'
-import { ReaderCommonProps, useBookmarkRestoreAndSave, useSearchCore } from './BaseTextReader'
-import { MobileSearchBar } from './mobile/MobileSearchBar'
-import { MobilePageNavigation } from './mobile/MobilePageNavigation'
+import { ReaderCommonProps, useBookmarkRestoreAndSave, extractContextInfo } from './BaseTextReader'
 import { MobileTextDisplay } from './mobile/MobileTextDisplay'
+import ConfirmationPopup from './ConfirmationPopup'
 import { 
   detectDevice, 
-  calculateMobilePageContent, 
   handleTouchStart, 
   handleTouchMove, 
   handleTouchEnd,
   handleTextSelection,
-  TouchPosition 
+  TouchPosition,
+  PinchPosition 
 } from '../utils/mobileUtils'
-import { PageMap } from '../utils/pageUtils'
 import { log } from '../utils/log'
 
 const MobileTextReader: React.FC<ReaderCommonProps> = ({ 
@@ -36,64 +34,55 @@ const MobileTextReader: React.FC<ReaderCommonProps> = ({
   
   // State
   const [selectedText, setSelectedText] = useState('')
-  const [touchStartPos, setTouchStartPos] = useState<TouchPosition | null>(null)
+  const [touchStartPos, setTouchStartPos] = useState<TouchPosition | PinchPosition | null>(null)
   const [isInSelectionMode, setIsInSelectionMode] = useState(false)
+  const [showConfirmation, setShowConfirmation] = useState(false)
   const [showChatModal, setShowChatModal] = useState(false)
   const [chatContext, setChatContext] = useState<any>(null)
   
-  // Page navigation state
-  const [pageMap, setPageMap] = useState<PageMap>({ pages: [], pageRanges: [] })
-  const [currentPage, setCurrentPage] = useState(0)
   const [fontSize, setFontSize] = useState(settings.textFontSize)
   
   // Device detection
   const { isIPhone, isAndroid } = detectDevice()
   
-  // Bookmark and search hooks
+  // Bookmark hook
   const { saveBookmark, loadBookmark } = useBookmarkRestoreAndSave(
     text.length, 
     bookTitle, 
     author
   )
-  
-  const {
-    searchQuery,
-    setSearchQuery,
-    searchResults,
-    currentSearchIndex,
-    handleSearch,
-    nextSearchResult,
-    prevSearchResult,
-    renderTextWithSearchHighlight,
-    clearSearch
-  } = useSearchCore(text, textReaderRef, textContentRef)
 
-  // Calculate page content when text or settings change
-  useEffect(() => {
-    if (text && textReaderRef.current) {
-      const containerWidth = textReaderRef.current.clientWidth || 320
-      const pageHeight = 600
-      const lineHeight = fontSize * 1.5
-      
-      const newPageMap = calculateMobilePageContent(text, pageHeight, fontSize, lineHeight, containerWidth)
-      setPageMap(newPageMap)
-    }
-  }, [text, fontSize])
+  // Load bookmark on mount - temporarily disabled
+  // useEffect(() => {
+  //   const restoreBookmark = async () => {
+  //     const bookmark = await loadBookmark()
+  //     if (bookmark) {
+  //       setFontSize(bookmark.fontSize)
+  //       // Restore scroll position
+  //       if (textReaderRef.current) {
+  //         textReaderRef.current.scrollTop = bookmark.position
+  //       }
+  //     }
+  //   }
+  //   
+  //   restoreBookmark()
+  // }, [text, loadBookmark])
 
-  // Load bookmark on mount
-  useEffect(() => {
-    const restoreBookmark = async () => {
-      const bookmark = await loadBookmark()
-      if (bookmark) {
-        setFontSize(bookmark.fontSize)
-        // Navigate to the page containing the bookmark position
-        const targetPage = Math.floor((bookmark.position / text.length) * pageMap.pages.length)
-        setCurrentPage(Math.max(0, Math.min(targetPage, pageMap.pages.length - 1)))
-      }
-    }
-    
-    restoreBookmark()
-  }, [text, pageMap.pages.length, loadBookmark])
+  // Save bookmark on scroll - temporarily disabled
+  // useEffect(() => {
+  //   const handleScroll = () => {
+  //     if (textReaderRef.current) {
+  //       const scrollTop = textReaderRef.current.scrollTop
+  //       saveBookmark(scrollTop, fontSize)
+  //     }
+  //   }
+
+  //   const textReader = textReaderRef.current
+  //   if (textReader) {
+  //     textReader.addEventListener('scroll', handleScroll, { passive: true })
+  //     return () => textReader.removeEventListener('scroll', handleScroll)
+  //   }
+  // }, [saveBookmark, fontSize])
 
   // Touch event handlers
   const handleTouchStartEvent = (e: React.TouchEvent) => {
@@ -102,6 +91,29 @@ const MobileTextReader: React.FC<ReaderCommonProps> = ({
 
   const handleTouchMoveEvent = (e: React.TouchEvent) => {
     handleTouchMove(e, touchStartPos, isInSelectionMode, setIsInSelectionMode, longPressTimer)
+    
+    // Handle pinch-to-zoom for font size
+    if (e.touches.length === 2) {
+      const touch1 = e.touches[0]
+      const touch2 = e.touches[1]
+      const distance = Math.sqrt(
+        Math.pow(touch2.clientX - touch1.clientX, 2) + 
+        Math.pow(touch2.clientY - touch1.clientY, 2)
+      )
+      
+      if (touchStartPos && 'distance' in touchStartPos) {
+        const scale = distance / (touchStartPos as PinchPosition).distance
+        if (scale > 1.1) {
+          handleFontSizeChange(fontSize + 1)
+          setTouchStartPos({ x: touch1.clientX, y: touch1.clientY, distance })
+        } else if (scale < 0.9) {
+          handleFontSizeChange(fontSize - 1)
+          setTouchStartPos({ x: touch1.clientX, y: touch1.clientY, distance })
+        }
+      } else if (touchStartPos) {
+        setTouchStartPos({ x: touch1.clientX, y: touch1.clientY, distance })
+      }
+    }
   }
 
   const handleTouchEndEvent = (e: React.TouchEvent) => {
@@ -109,26 +121,31 @@ const MobileTextReader: React.FC<ReaderCommonProps> = ({
   }
 
   const handleTextSelectionEvent = () => {
-    handleTextSelection(
-      textReaderRef,
-      setSelectedText,
-      setShowChatModal,
-      setChatContext,
-      () => null // Context extraction will be handled by ChatInterface
-    )
+    const selection = window.getSelection()
+    if (!selection || selection.toString().trim() === '') return
+    
+    const selectedText = selection.toString().trim()
+    if (selectedText.length === 0) return
+    
+    setSelectedText(selectedText)
+    setShowConfirmation(true)
   }
 
-  // Page navigation handlers
-  const handlePreviousPage = () => {
-    if (currentPage > 0) {
-      setCurrentPage(currentPage - 1)
+  // Handle confirmation to explain
+  const handleConfirmExplain = () => {
+    // Extract context information
+    if (textReaderRef.current) {
+      const contextInfo = extractContextInfo(
+        selectedText,
+        textReaderRef.current.textContent || '',
+        bookTitle,
+        author
+      )
+      setChatContext(contextInfo)
     }
-  }
-
-  const handleNextPage = () => {
-    if (currentPage < pageMap.pages.length - 1) {
-      setCurrentPage(currentPage + 1)
-    }
+    
+    setShowConfirmation(false)
+    setShowChatModal(true)
   }
 
   // Font size adjustment
@@ -137,42 +154,18 @@ const MobileTextReader: React.FC<ReaderCommonProps> = ({
     onSettingsChange({ ...settings, textFontSize: newFontSize })
   }
 
-  const showPrevButton = currentPage > 0
-  const showNextButton = currentPage < pageMap.pages.length - 1
+
 
   return (
     <div className={styles.mobileReaderContainer}>
-      <MobileSearchBar
-        searchQuery={searchQuery}
-        onSearchChange={setSearchQuery}
-        onSearch={() => handleSearch(searchQuery)}
-        searchResults={searchResults}
-        currentSearchIndex={currentSearchIndex}
-        onNextSearch={nextSearchResult}
-        onPrevSearch={prevSearchResult}
-        onClearSearch={clearSearch}
-      />
-      
-      <MobilePageNavigation
-        currentPage={currentPage}
-        totalPages={pageMap.pages.length}
-        onPreviousPage={handlePreviousPage}
-        onNextPage={handleNextPage}
-        showPrevButton={showPrevButton}
-        showNextButton={showNextButton}
-      />
-      
       <MobileTextDisplay
         text={text}
-        pageMap={pageMap}
-        currentPage={currentPage}
         fontSize={fontSize}
         isInSelectionMode={isInSelectionMode}
         onTouchStart={handleTouchStartEvent}
         onTouchMove={handleTouchMoveEvent}
         onTouchEnd={handleTouchEndEvent}
         onTextSelection={handleTextSelectionEvent}
-        renderTextWithSearchHighlight={renderTextWithSearchHighlight}
         textReaderRef={textReaderRef}
         textContentRef={textContentRef}
       />
@@ -194,7 +187,7 @@ const MobileTextReader: React.FC<ReaderCommonProps> = ({
           A+
         </button>
       </div>
-      
+
       {showChatModal && (
         <div className={styles.chatModal}>
           <div className={styles.chatModalContent}>
@@ -204,17 +197,33 @@ const MobileTextReader: React.FC<ReaderCommonProps> = ({
             >
               ×
             </button>
-            <ChatInterface
+        <ChatInterface
               selectedText={selectedText}
               bookTitle={bookTitle}
               author={author}
               isPageMode={false}
               settings={settings}
               onSettingsChange={onSettingsChange}
+              contextInfo={chatContext}
+              profile={profile}
+              onClose={() => setShowChatModal(false)}
             />
           </div>
         </div>
       )}
+
+      {/* Confirmation Popup */}
+      <ConfirmationPopup
+        isOpen={showConfirmation}
+        title="Explain Selected Text"
+        message={`"${selectedText}"`}
+        confirmText="Explain"
+        cancelText="Cancel"
+        onConfirm={handleConfirmExplain}
+        onCancel={() => setShowConfirmation(false)}
+        type="info"
+        variant="modal"
+      />
     </div>
   )
 }

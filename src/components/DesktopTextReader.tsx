@@ -3,12 +3,11 @@
 import React, { useRef, useState, useEffect } from 'react'
 import styles from './TextReader.module.css'
 import ChatInterface from './ChatInterface'
-import { ReaderCommonProps, useBookmarkRestoreAndSave, useSearchCore } from './BaseTextReader'
-import { DesktopSearchBar } from './desktop/DesktopSearchBar'
+import { ReaderCommonProps, useBookmarkRestoreAndSave, extractContextInfo } from './BaseTextReader'
 import { DesktopTextDisplay } from './desktop/DesktopTextDisplay'
-import { DesktopControls } from './desktop/DesktopControls'
 import { PageMap, calculatePageContent } from '../utils/pageUtils'
 import { log } from '../utils/log'
+import ConfirmationPopup from './ConfirmationPopup'
 
 const DesktopTextReader: React.FC<ReaderCommonProps> = ({ 
   text, 
@@ -24,65 +23,90 @@ const DesktopTextReader: React.FC<ReaderCommonProps> = ({
   
   // State
   const [selectedText, setSelectedText] = useState('')
+  const [showConfirmation, setShowConfirmation] = useState(false)
   const [showChatModal, setShowChatModal] = useState(false)
   const [chatContext, setChatContext] = useState<any>(null)
   const [fontSize, setFontSize] = useState(settings.textFontSize)
   
-  // Page navigation state
-  const [pageMap, setPageMap] = useState<PageMap>({ pages: [], pageRanges: [] })
-  const [currentPage, setCurrentPage] = useState(0)
-  const pageHeight = 600
-  
-  // Bookmark and search hooks
+  // Bookmark hook
   const { saveBookmark, loadBookmark } = useBookmarkRestoreAndSave(
     text.length, 
     bookTitle, 
     author
   )
-  
-  const {
-    searchQuery,
-    setSearchQuery,
-    searchResults,
-    currentSearchIndex,
-    handleSearch,
-    nextSearchResult,
-    prevSearchResult,
-    renderTextWithSearchHighlight,
-    clearSearch
-  } = useSearchCore(text, textReaderRef, textContentRef)
 
   // Update font size when settings change
   useEffect(() => {
     setFontSize(settings.textFontSize)
   }, [settings.textFontSize])
 
-  // Calculate page content when text or font size changes
-  useEffect(() => {
-    if (text && textReaderRef.current) {
-      const containerWidth = textReaderRef.current.clientWidth || 800
-      const lineHeight = fontSize * 1.5
-      const charsPerLine = Math.floor(containerWidth / (fontSize * 0.6))
-      
-      const newPageMap = calculatePageContent(text, pageHeight, lineHeight, charsPerLine)
-      setPageMap(newPageMap)
-    }
-  }, [text, fontSize])
+  // Load bookmark on mount - temporarily disabled
+  // useEffect(() => {
+  //   const restoreBookmark = async () => {
+  //     const bookmark = await loadBookmark()
+  //     if (bookmark) {
+  //       setFontSize(bookmark.fontSize)
+  //       // Restore scroll position
+  //       if (textReaderRef.current) {
+  //         textReaderRef.current.scrollTop = bookmark.position
+  //       }
+  //     }
+  //   }
+  //   
+  //   restoreBookmark()
+  // }, [text, loadBookmark])
 
-  // Load bookmark on mount
+  // Save bookmark on scroll - temporarily disabled
+  // useEffect(() => {
+  //   const handleScroll = () => {
+  //     if (textReaderRef.current) {
+  //       const scrollTop = textReaderRef.current.scrollTop
+  //       saveBookmark(scrollTop, fontSize)
+  //     }
+  //   }
+
+  //   const textReader = textReaderRef.current
+  //   if (textReader) {
+  //   textReader.addEventListener('scroll', handleScroll, { passive: true })
+  //     return () => textReader.removeEventListener('scroll', handleScroll)
+  //   }
+  // }, [saveBookmark, fontSize])
+
+  // Listen for text selection events from the global handler
   useEffect(() => {
-    const restoreBookmark = async () => {
-      const bookmark = await loadBookmark()
-      if (bookmark) {
-        setFontSize(bookmark.fontSize)
-        // Navigate to the page containing the bookmark position
-        const targetPage = Math.floor((bookmark.position / text.length) * pageMap.pages.length)
-        setCurrentPage(Math.max(0, Math.min(targetPage, pageMap.pages.length - 1)))
+    const handleTextSelected = (event: CustomEvent) => {
+      const selectedText = event.detail.text;
+      if (selectedText && selectedText.length > 0) {
+        setSelectedText(selectedText);
+        setShowConfirmation(true);
       }
-    }
+    };
+
+    document.addEventListener('textSelected', handleTextSelected as EventListener);
     
-    restoreBookmark()
-  }, [text, pageMap.pages.length, loadBookmark])
+    return () => {
+      document.removeEventListener('textSelected', handleTextSelected as EventListener);
+    };
+  }, [])
+
+  // Font size handlers for keyboard shortcuts
+  const handleFontSizeChange = (newFontSize: number) => {
+    const clampedSize = Math.max(12, Math.min(24, newFontSize))
+    setFontSize(clampedSize)
+    onSettingsChange({ ...settings, textFontSize: clampedSize })
+  }
+
+  const handleIncreaseFont = () => {
+    handleFontSizeChange(fontSize + 2)
+  }
+
+  const handleDecreaseFont = () => {
+    handleFontSizeChange(fontSize - 2)
+  }
+
+  const handleResetFont = () => {
+    handleFontSizeChange(18)
+  }
 
   // Keyboard shortcuts
   useEffect(() => {
@@ -103,22 +127,6 @@ const DesktopTextReader: React.FC<ReaderCommonProps> = ({
             e.preventDefault()
             handleResetFont()
             break
-          case 'f':
-            e.preventDefault()
-            // Focus search input
-            const searchInput = document.querySelector('input[type="text"]') as HTMLInputElement
-            searchInput?.focus()
-            break
-        }
-      }
-      
-      // Search navigation
-      if (e.key === 'F3' || (e.shiftKey && e.key === 'F3')) {
-        e.preventDefault()
-        if (e.shiftKey) {
-          prevSearchResult()
-        } else {
-          nextSearchResult()
         }
       }
     }
@@ -127,24 +135,6 @@ const DesktopTextReader: React.FC<ReaderCommonProps> = ({
     return () => document.removeEventListener('keydown', handleKeyDown)
   }, [fontSize])
 
-  // Font size handlers
-  const handleFontSizeChange = (newFontSize: number) => {
-    const clampedSize = Math.max(12, Math.min(24, newFontSize))
-    setFontSize(clampedSize)
-    onSettingsChange({ ...settings, textFontSize: clampedSize })
-  }
-
-  const handleIncreaseFont = () => {
-    handleFontSizeChange(fontSize + 2)
-  }
-
-  const handleDecreaseFont = () => {
-    handleFontSizeChange(fontSize - 2)
-  }
-
-  const handleResetFont = () => {
-    handleFontSizeChange(18)
-  }
 
   // Text selection handler
   const handleTextSelection = () => {
@@ -155,37 +145,32 @@ const DesktopTextReader: React.FC<ReaderCommonProps> = ({
     if (selectedText.length === 0) return
     
     setSelectedText(selectedText)
+    setShowConfirmation(true)
+  }
+
+  // Handle confirmation to explain
+  const handleConfirmExplain = () => {
+    // Extract context information
+    if (textReaderRef.current) {
+      const contextInfo = extractContextInfo(
+        selectedText,
+        textReaderRef.current.textContent || '',
+        bookTitle,
+        author
+      )
+      setChatContext(contextInfo)
+    }
+    
+    setShowConfirmation(false)
     setShowChatModal(true)
   }
 
   return (
     <div className={styles.desktopReaderContainer}>
-      <DesktopSearchBar
-        searchQuery={searchQuery}
-        onSearchChange={setSearchQuery}
-        onSearch={() => handleSearch(searchQuery)}
-        searchResults={searchResults}
-        currentSearchIndex={currentSearchIndex}
-        onNextSearch={nextSearchResult}
-        onPrevSearch={prevSearchResult}
-        onClearSearch={clearSearch}
-      />
-      
-      <DesktopControls
-        fontSize={fontSize}
-        onFontSizeChange={handleFontSizeChange}
-        onIncreaseFont={handleIncreaseFont}
-        onDecreaseFont={handleDecreaseFont}
-        onResetFont={handleResetFont}
-      />
-      
       <DesktopTextDisplay
         text={text}
-        pageMap={pageMap}
-        currentPage={currentPage}
         fontSize={fontSize}
         onTextSelection={handleTextSelection}
-        renderTextWithSearchHighlight={renderTextWithSearchHighlight}
         textReaderRef={textReaderRef}
         textContentRef={textContentRef}
       />
@@ -206,10 +191,26 @@ const DesktopTextReader: React.FC<ReaderCommonProps> = ({
               isPageMode={false}
               settings={settings}
               onSettingsChange={onSettingsChange}
+              contextInfo={chatContext}
+              profile={profile}
+              onClose={() => setShowChatModal(false)}
             />
           </div>
         </div>
       )}
+
+      {/* Confirmation Popup */}
+      <ConfirmationPopup
+        isOpen={showConfirmation}
+        title="Explain Selected Text"
+        message={`"${selectedText}"`}
+        confirmText="Explain"
+        cancelText="Cancel"
+        onConfirm={handleConfirmExplain}
+        onCancel={() => setShowConfirmation(false)}
+        type="info"
+        variant="modal"
+      />
     </div>
   )
 }

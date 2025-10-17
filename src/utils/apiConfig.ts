@@ -4,7 +4,10 @@
  */
 
 function getApiBaseUrl(): string {
-  // Use Vercel for testing updated server with CORS headers
+  // Use localhost for development, Vercel for production
+  if (typeof window !== 'undefined' && window.location.hostname === 'localhost') {
+    return 'http://localhost:3000'
+  }
   return 'https://romeo-and-juliet-explained.vercel.app'
 }
 

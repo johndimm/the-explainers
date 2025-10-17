@@ -87,7 +87,14 @@ export const saveMessagesToStorage = (messages: Message[]): void => {
 export const loadMessagesFromStorage = (): Message[] => {
   try {
     const stored = sessionStorage.getItem('chatHistory')
-    return stored ? JSON.parse(stored) : []
+    if (!stored) return []
+    
+    const messages = JSON.parse(stored)
+    // Convert timestamp strings back to Date objects
+    return messages.map((message: any) => ({
+      ...message,
+      timestamp: new Date(message.timestamp)
+    }))
   } catch {
     return []
   }
